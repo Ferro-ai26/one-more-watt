@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "content_version": "fixture-valid-1",
+  "files": [
+    {"family": "balance", "path": "res://data/balance/constants.json", "root": "balance"},
+    {"family": "eras", "path": "res://data/eras/eras.json", "root": "eras"},
+    {"family": "infrastructure", "path": "res://data/infrastructure/infrastructure.json", "root": "infrastructure"},
+    {"family": "upgrades", "path": "res://data/upgrades/upgrades.json", "root": "upgrades"},
+    {"family": "requests", "path": "res://data/requests/era_01_requests.json", "root": "requests"},
+    {"family": "demand_profiles", "path": "res://data/requests/demand_profiles.json", "root": "demand_profiles"},
+    {"family": "dialogue", "path": "res://data/dialogue/system_dialogue.json", "root": "dialogue"},
+    {"family": "incidents", "path": "res://data/incidents/incidents.json", "root": "incidents"},
+    {"family": "achievements", "path": "res://data/achievements/achievements.json", "root": "achievements"},
+    {"family": "localization", "path": "res://data/localization/en.json", "root": "strings"}
+  ],
+  "placeholder_assets": [
+    {"path": "res://assets/icons/infrastructure/wall_outlet.png", "reason": "Valid fixture uses the Phase 01 placeholder"}
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "locale": "en",
+  "strings": {
+    "fixture.unused": "This catalog exists but omits required content keys."
+  }
+}

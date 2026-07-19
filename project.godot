@@ -20,6 +20,10 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 default_bus_layout="res://default_bus_layout.tres"
 
+[autoload]
+
+ContentDB="*res://scripts/content/content_db.gd"
+
 [display]
 
 window/size/viewport_width=720

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "requests": [
+    {
+      "id": "era01_finish_booting", "era_id": "era_01_cold_boot", "sequence": 1,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era01_finish_booting.title", "summary_key": "request.era01_finish_booting.summary",
+      "announcement_key": "request.era01_finish_booting.announcement", "completion_key": "request.era01_finish_booting.completion",
+      "required_energy": 75, "continuous_demand": 5, "max_useful_power": 5,
+      "demand_profile_id": "missing_profile", "recommended_reserve": 0,
+      "unlock_conditions": [], "rewards": {"stored_energy": 10, "unlock_ids": []},
+      "tutorial_action": null, "repeatable": false, "tags": ["main"]
+    }
+  ]
+}

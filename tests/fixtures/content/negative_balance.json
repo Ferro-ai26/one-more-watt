@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "balance": [
+    {
+      "id": "prototype_balance",
+      "simulation_step_seconds": -0.25,
+      "underpower_efficiency_floor": 0.05,
+      "starting_grid": {"generation_rate": 5, "transmission_capacity": 8, "reserve_capacity": 10, "stored_energy": 0},
+      "stored_energy_efficiency": {"era_01_cold_boot": 1.0},
+      "milestone_sets": {"standard_high_volume": [{"owned": 10, "multiplier": 2.0}]}
+    }
+  ]
+}

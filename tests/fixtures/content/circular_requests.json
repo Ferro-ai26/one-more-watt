@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "requests": [
+    {
+      "id": "cycle_request_a", "era_id": "era_01_cold_boot", "sequence": 1,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era01_finish_booting.title", "summary_key": "request.era01_finish_booting.summary",
+      "announcement_key": "request.era01_finish_booting.announcement", "completion_key": "request.era01_finish_booting.completion",
+      "required_energy": 10, "continuous_demand": 1, "max_useful_power": 1,
+      "demand_profile_id": "steady_boot", "recommended_reserve": 0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "cycle_request_b"}],
+      "rewards": {"stored_energy": 0, "unlock_ids": []}, "tutorial_action": null,
+      "repeatable": false, "tags": ["main"]
+    },
+    {
+      "id": "cycle_request_b", "era_id": "era_01_cold_boot", "sequence": 2,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era01_finish_booting.title", "summary_key": "request.era01_finish_booting.summary",
+      "announcement_key": "request.era01_finish_booting.announcement", "completion_key": "request.era01_finish_booting.completion",
+      "required_energy": 10, "continuous_demand": 1, "max_useful_power": 1,
+      "demand_profile_id": "steady_boot", "recommended_reserve": 0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "cycle_request_a"}],
+      "rewards": {"stored_energy": 0, "unlock_ids": []}, "tutorial_action": null,
+      "repeatable": false, "tags": ["main"]
+    }
+  ]
+}

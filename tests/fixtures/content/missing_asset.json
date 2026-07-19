@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "infrastructure": [
+    {
+      "id": "wall_outlet", "era_id": "era_01_cold_boot",
+      "name_key": "infrastructure.wall_outlet.name", "description_key": "infrastructure.wall_outlet.description",
+      "category": "generation", "tags": [], "base_cost": 10, "cost_growth": 1.15,
+      "base_effects": {"generation_rate": 5}, "unlock_conditions": [{"type": "default"}],
+      "max_owned": null, "milestone_set": "standard_high_volume",
+      "icon_path": "res://assets/icons/infrastructure/not_allowed.png", "scene_variant": "desk_outlet"
+    }
+  ]
+}

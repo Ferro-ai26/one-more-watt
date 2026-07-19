@@ -2,6 +2,20 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 01 content-shell verification — 2026-07-19
+
+- Build/commit: Uncommitted Phase 01 working tree based on `d48e01d`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Main scene loaded canonical content without parser, resource, or validation errors.
+- [x] Captures at 360 × 640, 393 × 873, and 480 × 800 were visually inspected without clipping.
+- [x] Shell showed content `v0.1.0`, schema `1`, two eras, one infrastructure, one upgrade, and one request.
+- [x] Shell showed localized sample `Finish Booting • 75 energy`, matching source JSON.
+- [ ] Physical Android safe-area and system-inset behavior verified (device/export unavailable).
+
+Notes: Gameplay checks below remain inapplicable because Phase 01 adds trusted definitions, not playable systems. Xvfb cannot control V-Sync; this is a host limitation rather than a project warning in headless validation.
+
 ## Phase 00 shell verification — 2026-07-19
 
 - Build/commit: Uncommitted Phase 00 working tree

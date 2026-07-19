@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "eras": [
+    {
+      "id": "era_01_cold_boot",
+      "number": 1,
+      "name_key": "era.01.name",
+      "scale_key": "era.01.scale",
+      "description_key": "era.01.description",
+      "unlock_conditions": [],
+      "infrastructure_ids": ["wall_outlet"],
+      "request_ids": ["era01_finish_booting"],
+      "visual_state_id": "desk_initial",
+      "unit_display_floor": "W"
+    },
+    {
+      "id": "era_02_bedroom_assistant",
+      "number": 2,
+      "name_key": "era.02.name",
+      "scale_key": "era.02.scale",
+      "description_key": "era.02.description",
+      "unlock_conditions": [],
+      "infrastructure_ids": [],
+      "request_ids": [],
+      "visual_state_id": "bedroom_initial",
+      "unit_display_floor": "W"
+    }
+  ]
+}

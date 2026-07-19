@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "incidents": [
+    {
+      "id": "helpful_cool_breeze",
+      "trigger": {"type": "request_completed", "target_id": "era01_finish_booting"},
+      "duration_seconds": 5,
+      "modifiers": [
+        {"operation": "multiply", "target": "request_efficiency", "value": 1.05}
+      ],
+      "dialogue_keys": ["incident.helpful_cool_breeze.start"],
+      "severity": "cosmetic",
+      "offline_allowed": false
+    }
+  ]
+}

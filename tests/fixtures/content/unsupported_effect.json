@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "upgrades": [
+    {
+      "id": "dedicated_circuit_research", "era_id": "era_02_bedroom_assistant",
+      "name_key": "upgrade.dedicated_circuit.name", "description_key": "upgrade.dedicated_circuit.description",
+      "cost": {"stored_energy": 7500}, "unlock_conditions": [],
+      "effects": [{"operation": "divide", "target": "transmission_capacity", "value": 2}],
+      "permanent": false, "max_level": 1
+    }
+  ]
+}

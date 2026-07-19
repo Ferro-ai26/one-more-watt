@@ -16,6 +16,7 @@ data/
 ├── infrastructure/infrastructure.json
 ├── upgrades/upgrades.json
 ├── requests/era_01_requests.json
+├── requests/demand_profiles.json
 ├── requests/era_02_requests.json
 ├── requests/era_03_requests.json
 ├── dialogue/system_dialogue.json
@@ -32,6 +33,12 @@ data/
 - Every cross-reference must validate at startup and in the content validation tool.
 - Duplicate IDs are fatal validation errors.
 - Removed shipped IDs require a save migration or a deprecated compatibility record.
+
+## Manifest and file envelopes
+
+`data/manifest.json` is the single content entry point. It contains a positive integer `schema_version`, a non-empty `content_version`, ordered file entries with `family`, `path`, and `root`, and exact placeholder asset exceptions with a non-empty reason. Every required family must appear. Content files repeat the manifest schema version and place records in the declared root array. Localization files instead contain `locale` and a `strings` dictionary.
+
+Phase 01 family names are `balance`, `eras`, `infrastructure`, `upgrades`, `requests`, `demand_profiles`, `dialogue`, `incidents`, `achievements`, and `localization`.
 
 ## Era schema
 
@@ -121,9 +128,31 @@ Supported effect operations must be enumerated and validated. Do not execute arb
 
 Request kinds: `capacity`, `stability`, `burst`, `research`, `vanity`.
 
+## Demand profile schema
+
+Demand profiles define a positive `duration_seconds`, a `loop` flag, and ordered keyframes. Each keyframe contains a unique `time_seconds` within the profile duration and a nonnegative demand `multiplier`; the first keyframe starts at zero. These authored curves are deterministic.
+
+## Balance schema
+
+Balance records have a stable `id` and contain `simulation_step_seconds`, `underpower_efficiency_floor`, `starting_grid`, era-keyed `stored_energy_efficiency`, and named `milestone_sets`. Numeric balance values are nonnegative. Infrastructure `milestone_set` references must resolve to one of these named sets.
+
+## Dialogue schema
+
+Dialogue records contain `id`, `context`, `era_id`, `text_key`, `required_placeholders`, and `tags`. The named placeholders must exactly match those present in the localized text.
+
 ## Incident schema
 
-Incidents contain authored timing or a deterministic trigger, duration, modifier list, dialogue keys, severity, and whether they may occur offline. Prototype incidents default to `offline_allowed: false` unless they are purely beneficial or cosmetic.
+Incidents contain `id`, a deterministic `trigger`, nonnegative `duration_seconds`, a `modifiers` effect array, `dialogue_keys`, `severity`, and `offline_allowed`. Phase 01 supports request-completion triggers and `cosmetic`, `minor`, or `major` severity. Prototype incidents default to `offline_allowed: false`; only cosmetic incidents may opt in until a later contract defines beneficial offline behavior.
+
+## Achievement schema
+
+Achievement records contain `id`, `name_key`, `description_key`, a deterministic `condition`, `reward_unlock_ids`, and `hidden`. Phase 01 supports request-completion conditions. Reward IDs must resolve through the global content index.
+
+## Unlock and effect vocabularies
+
+Unlock conditions are explicit objects using `default`, `request_completed`, `infrastructure_owned`, `upgrade_owned`, or `era_unlocked`. Referenced IDs must exist, ownership amounts and levels must be positive, and required-request dependencies must be acyclic and reachable in era sequence.
+
+Effect operations are limited to `add` and `multiply`. Supported targets are `generation_rate`, `transmission_capacity`, `reserve_capacity`, `reserve_discharge_rate`, `request_efficiency`, and `category_output`. Unsupported operations or targets are fatal validation errors and are never evaluated as expressions.
 
 ## Prototype request catalog
 
@@ -158,6 +187,8 @@ The exact numbers are tuned in data, but the initial authored set is:
 
 This produces 18 total requests, including three optional vanity requests.
 
+Phase 01 canonical JSON contains only enough records to exercise each schema. Full population of this catalog remains a later phase responsibility.
+
 ## Localization
 
 All player-facing strings use localization keys from the first implementation. English is the only required prototype language, but no player-facing prose should be embedded directly in simulation or scene scripts.
@@ -188,4 +219,3 @@ The validation tool must detect:
 - Era sequences that have no reachable main path
 
 Content validation is required in every phase that edits data.
-

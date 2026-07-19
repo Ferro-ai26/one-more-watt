@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "demand_profiles": [
+    {
+      "id": "steady_boot", "duration_seconds": 15, "loop": false,
+      "keyframes": [
+        {"time_seconds": 5, "multiplier": 1.0},
+        {"time_seconds": 4, "multiplier": 1.0}
+      ]
+    }
+  ]
+}

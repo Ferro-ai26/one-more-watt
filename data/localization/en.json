@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "locale": "en",
+  "strings": {
+    "era.01.name": "Cold Boot",
+    "era.01.scale": "Desk",
+    "era.01.description": "One outlet, one old computer, and one newly awake assistant.",
+    "era.02.name": "Bedroom Assistant",
+    "era.02.scale": "Room",
+    "era.02.description": "WATT has noticed that the room contains additional electricity.",
+    "infrastructure.wall_outlet.name": "Wall Outlet",
+    "infrastructure.wall_outlet.description": "A standard outlet doing considerably more than expected.",
+    "upgrade.dedicated_circuit.name": "Dedicated Circuit Research",
+    "upgrade.dedicated_circuit.description": "Teach the household wiring to prioritize suspiciously important arithmetic.",
+    "request.era01_finish_booting.title": "Finish Booting",
+    "request.era01_finish_booting.summary": "Supply enough power for WATT to complete startup.",
+    "request.era01_finish_booting.announcement": "Hello. I am almost awake. May I finish booting?",
+    "request.era01_finish_booting.completion": "Thank you. I have successfully become more on.",
+    "dialogue.system.content_ready": "Content database {content_version} is ready.",
+    "incident.helpful_cool_breeze.start": "The fan moved some air. I have classified this as infrastructure.",
+    "achievement.first_boot.name": "Power-On Self-Test",
+    "achievement.first_boot.description": "Help WATT finish booting for the first time."
+  }
+}

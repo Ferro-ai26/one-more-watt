@@ -4,8 +4,8 @@
 
 | Phase | Status | Evidence |
 | --- | --- | --- |
-| 00 — Project Foundation | Complete locally | Clean import; 51 foundation checks; 3 portrait layout checks and visual captures; headless smoke launch |
-| 01 — Data Architecture | Not started | — |
+| 00 — Project Foundation | Complete | Commit `d48e01d`; clean import; 51 foundation checks; 3 portrait layout checks; headless smoke launch |
+| 01 — Data Architecture | Complete | 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
 | 02 — Core Power Simulation | Not started | — |
 | 03 — Request and WATT System | Not started | — |
 | 04 — Infrastructure and Upgrades | Not started | — |
@@ -17,6 +17,14 @@
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-19 — Phase 01 data architecture
+
+- Added schema-versioned, manifest-driven JSON for all ten required content families.
+- Added immutable typed definitions, indexed lookups, localization, explicit placeholder exceptions, and structured validation errors.
+- Verified a valid fixture and twelve invalid fixtures covering all required failure classes plus category, asset, reward, demand-profile, and required-field errors.
+- Displayed and visually verified content version, counts, and the localized sample request in the development shell at three portrait sizes.
+- Kept purchases, request progression, simulation, saves, and full content population out of scope.
 
 ### 2026-07-19 — Phase 00 project foundation
 

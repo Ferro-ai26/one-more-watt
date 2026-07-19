@@ -64,6 +64,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: This stable engine and matching export templates are installed and operational on the ARM64 development host, and GL Compatibility is the conservative mobile baseline.
 - Consequences: Keep the project on this exact engine line during an active phase. Any upgrade requires an accepted decision and full regression pass; Android export still requires an approved package identifier and complete SDK.
 
+## DEC-011 — Manifest-driven JSON schema version 1
+
+- Status: Proposed
+- Date: 2026-07-19
+- Decision: Use `data/manifest.json` as the single content entry point, JSON as source of truth, schema version 1, exact placeholder-asset exceptions, typed immutable runtime definitions, and only enumerated effect/unlock vocabularies.
+- Reason: The Phase 01 contract requires deterministic validation, stable cross-file IDs, safe effects, and a content version without committing later phases to generated Godot resources.
+- Consequences: Schema changes require a manifest/schema version decision; unknown content operations and undeclared missing assets fail closed. Full prototype population remains separate from the schema exercise records.
+
 ## Proposed decision template
 
 ```markdown

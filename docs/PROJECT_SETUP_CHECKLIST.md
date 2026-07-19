@@ -33,11 +33,11 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 
 ## Build commands
 
-- Content validation: `godot4 --headless --path . --script res://tests/validate_foundation.gd`
-- Unit tests: Not yet applicable; Phase 00 contains no simulation/domain logic
+- Content validation: `./tools/validate_content.sh`
+- Unit tests: `godot4 --headless --path . --script res://tests/content/test_invalid_content.gd`
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
-- Full Phase 00 validation: `./tools/validate.sh`
+- Full repository validation: `./tools/validate.sh`
 - Debug APK export: Pending package identifier, SDK platform installation, and export preset
 - Release AAB export: Phase 16; not configured
 

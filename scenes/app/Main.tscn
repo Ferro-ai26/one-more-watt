@@ -93,7 +93,33 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.66, 0.72, 0.82, 1)
 theme_override_font_sizes/font_size = 18
-text = "PHASE 00  •  NOT YET PLAYABLE"
+text = "PHASE 01  •  NOT YET PLAYABLE"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContentVersionLabel" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19, 0.73, 1, 1)
+theme_override_font_sizes/font_size = 17
+text = "Content unavailable"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ContentCountsLabel" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "No content loaded"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SampleRequestLabel" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+theme_override_font_sizes/font_size = 18
+text = "No sample request loaded"
 horizontal_alignment = 1
 autowrap_mode = 2
 

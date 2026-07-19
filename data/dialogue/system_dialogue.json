@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "dialogue": [
+    {
+      "id": "content_ready",
+      "context": "system",
+      "era_id": "era_01_cold_boot",
+      "text_key": "dialogue.system.content_ready",
+      "required_placeholders": ["content_version"],
+      "tags": ["debug"]
+    }
+  ]
+}

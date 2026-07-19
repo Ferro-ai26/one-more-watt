@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "achievements": [
+    {
+      "id": "first_boot",
+      "name_key": "achievement.first_boot.name",
+      "description_key": "achievement.first_boot.description",
+      "condition": {"type": "request_completed", "target_id": "era01_finish_booting"},
+      "reward_unlock_ids": [],
+      "hidden": false
+    }
+  ]
+}

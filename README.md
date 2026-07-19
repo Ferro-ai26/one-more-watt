@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 00 has established the Godot project foundation. With Godot 4.6.2 available as `godot4`, run the complete foundation check from this directory:
+Phase 01 has established the Godot project foundation and validated content architecture. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-The project currently launches a responsive development shell only. Gameplay remains intentionally out of scope until its later phase contracts are activated.
+Run content validation alone with `./tools/validate_content.sh`. The project currently launches a responsive development shell that reports loaded content; gameplay remains intentionally out of scope until its later phase contracts are activated.
 
 ## Scope policy
 
