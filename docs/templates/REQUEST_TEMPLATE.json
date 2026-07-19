@@ -1,0 +1,22 @@
+{
+  "id": "era00_request_id",
+  "era_id": "era_00",
+  "sequence": 0,
+  "kind": "capacity",
+  "required": true,
+  "title_key": "request.era00_request_id.title",
+  "summary_key": "request.era00_request_id.summary",
+  "announcement_key": "request.era00_request_id.announcement",
+  "completion_key": "request.era00_request_id.completion",
+  "required_energy": 1,
+  "continuous_demand": 1,
+  "max_useful_power": 1,
+  "demand_profile_id": "steady",
+  "recommended_reserve": 0,
+  "unlock_conditions": [],
+  "rewards": {"stored_energy": 0, "unlock_ids": []},
+  "tutorial_action": null,
+  "repeatable": false,
+  "tags": []
+}
+

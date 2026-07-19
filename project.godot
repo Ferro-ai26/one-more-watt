@@ -1,0 +1,52 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="ONE MORE WATT"
+config/description="Android-first character-driven incremental power-grid game"
+config/version="0.0.1-dev"
+run/main_scene="res://scenes/app/Main.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[audio]
+
+default_bus_layout="res://default_bus_layout.tres"
+
+[display]
+
+window/size/viewport_width=720
+window/size/viewport_height=1280
+window/size/window_width_override=360
+window/size/window_height_override=640
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=1
+
+[input]
+
+app_back={
+"deadzone": 0.5,
+"events": []
+}
+app_confirm={
+"deadzone": 0.5,
+"events": []
+}
+app_toggle_debug={
+"deadzone": 0.5,
+"events": []
+}
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.027, 0.035, 0.055, 1)

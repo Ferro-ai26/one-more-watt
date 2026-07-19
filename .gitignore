@@ -1,0 +1,31 @@
+# Godot-generated import and editor state
+.godot/
+.import/
+
+# Local environment and Android tooling
+.env
+.env.*
+local.properties
+android/.gradle/
+android/build/
+
+# Build and export output
+build/
+exports/
+*.apk
+*.aab
+*.pck
+
+# Signing material and credentials
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+
+# OS and editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

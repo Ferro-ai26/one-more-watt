@@ -1,0 +1,110 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/core/app_bootstrap.gd" id="1_bootstrap"]
+[ext_resource type="Script" path="res://scripts/ui/safe_area_root.gd" id="2_safe_area"]
+[ext_resource type="Theme" path="res://assets/themes/base_theme.tres" id="3_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBox_shell"]
+bg_color = Color(0.055, 0.075, 0.12, 0.96)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.19, 0.73, 1, 0.72)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+content_margin_left = 28.0
+content_margin_top = 32.0
+content_margin_right = 28.0
+content_margin_bottom = 32.0
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_theme")
+script = ExtResource("1_bootstrap")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.027, 0.035, 0.055, 1)
+mouse_filter = 2
+
+[node name="SafeArea" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+script = ExtResource("2_safe_area")
+
+[node name="Center" type="CenterContainer" parent="SafeArea"]
+layout_mode = 2
+
+[node name="DevelopmentShell" type="PanelContainer" parent="SafeArea/Center"]
+custom_minimum_size = Vector2(300, 360)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBox_shell")
+
+[node name="Content" type="VBoxContainer" parent="SafeArea/Center/DevelopmentShell"]
+layout_mode = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Eyebrow" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19, 0.73, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "GRID OPERATOR CONSOLE"
+horizontal_alignment = 1
+
+[node name="Title" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+theme_override_font_sizes/font_size = 36
+text = "ONE MORE WATT"
+horizontal_alignment = 1
+
+[node name="Divider" type="HSeparator" parent="SafeArea/Center/DevelopmentShell/Content"]
+layout_mode = 2
+
+[node name="Status" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+layout_mode = 2
+text = "Development foundation online"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Phase" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.66, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 18
+text = "PHASE 00  •  NOT YET PLAYABLE"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Spacer" type="Control" parent="SafeArea/Center/DevelopmentShell/Content"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="SafeArea/Center/DevelopmentShell/Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.48, 0.56, 0.68, 1)
+theme_override_font_sizes/font_size = 16
+text = "Development shell"
+horizontal_alignment = 1
