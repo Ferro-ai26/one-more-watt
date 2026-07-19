@@ -5,11 +5,12 @@ Active phase: Phase 01 — Data Architecture
 
 ## Current state
 
-Phase 01 is implemented and validated in the working tree. A manifest-driven repository loads immutable typed definitions for every required family, validates all authored references and constraints, and exposes content/schema versions. The shell displays canonical counts and a localized sample request. No gameplay simulation exists.
+Phase 01 is implemented, validated, committed as `9e632d6`, and pushed to `origin/main`. A manifest-driven repository loads immutable typed definitions for every required family, validates all authored references and constraints, and exposes content/schema versions. The shell displays canonical counts and a localized sample request. No gameplay simulation exists.
 
 ## Completed
 
 - Committed and pushed Phase 00 as `d48e01d` to `origin/main`.
+- Committed and pushed the Phase 01 implementation as `9e632d6` to `origin/main`.
 - Added `data/manifest.json` with schema version `1`, content version `0.1.0`, ten required families, and an exact placeholder-asset exception.
 - Added minimal cross-referenced records for balance, two eras, infrastructure, upgrade, request, demand profile, dialogue, incident, achievement, and English localization.
 - Added immutable typed definitions, structured validation issues, `ContentRepository`, and the `ContentDB` autoload.

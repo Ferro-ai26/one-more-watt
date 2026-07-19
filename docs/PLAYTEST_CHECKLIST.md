@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 01 content-shell verification — 2026-07-19
 
-- Build/commit: Uncommitted Phase 01 working tree based on `d48e01d`
+- Build/commit: `9e632d6`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex

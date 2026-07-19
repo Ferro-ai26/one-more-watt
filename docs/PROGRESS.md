@@ -5,7 +5,7 @@
 | Phase | Status | Evidence |
 | --- | --- | --- |
 | 00 — Project Foundation | Complete | Commit `d48e01d`; clean import; 51 foundation checks; 3 portrait layout checks; headless smoke launch |
-| 01 — Data Architecture | Complete | 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
+| 01 — Data Architecture | Complete | Commit `9e632d6`; 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
 | 02 — Core Power Simulation | Not started | — |
 | 03 — Request and WATT System | Not started | — |
 | 04 — Infrastructure and Upgrades | Not started | — |
