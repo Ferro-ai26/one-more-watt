@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 02 grid-debug verification — 2026-07-19
 
-- Build/commit: Uncommitted Phase 02 working tree based on `c9e7389`
+- Build/commit: `96bb219`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex

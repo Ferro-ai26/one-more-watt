@@ -5,10 +5,11 @@ Active phase: Phase 02 — Core Power Simulation
 
 ## Current state
 
-Phase 02 is implemented and validated in the working tree. The request-agnostic grid core deterministically simulates Generation, Transmission, Reserve, allocation, Stored Energy, stability, and brownout transitions at a fixed 0.25-second step. A scrollable debug panel exposes controlled scenarios and time advancement. Authored request lifecycle behavior remains absent.
+Phase 02 is implemented, validated, committed as `96bb219`, and pushed to `origin/main`. The request-agnostic grid core deterministically simulates Generation, Transmission, Reserve, allocation, Stored Energy, stability, and brownout transitions at a fixed 0.25-second step. A scrollable debug panel exposes controlled scenarios and time advancement. Authored request lifecycle behavior remains absent.
 
 ## Completed
 
+- Committed and pushed the Phase 02 implementation as `96bb219` to `origin/main`.
 - Added invariant-safe `GridState`, pure step calculations, typed step results, domain events, and a fixed-step `GridSimulation` coordinator.
 - Added infrastructure aggregate rebuilding from stable IDs and immutable content definitions.
 - Added balance-driven Expand Grid, Balanced, and Feed WATT shares plus Reserve charge/discharge rates; content version is now `0.2.0`.
