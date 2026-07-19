@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "content_version": "0.1.0",
+  "content_version": "0.2.0",
   "files": [
     {"family": "balance", "path": "res://data/balance/constants.json", "root": "balance"},
     {"family": "eras", "path": "res://data/eras/eras.json", "root": "eras"},

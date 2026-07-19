@@ -2,6 +2,24 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 02 grid-debug verification — 2026-07-19
+
+- Build/commit: Uncommitted Phase 02 working tree based on `c9e7389`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Generation-limited scenario showed 5 delivered from 5 Generation / 12 Transmission and labeled Generation limiting.
+- [x] Transmission-limited scenario showed 6 deliverable from 15 Generation / 6 Transmission and labeled Transmission limiting.
+- [x] Reserve-protected scenario served a 14 load from 10 deliverable plus 4 Reserve with no brownout.
+- [x] Brownout scenario served 10 of 20 load, showed 10 unmet, Stability 30, and emitted `brownout_started`.
+- [x] Recover control lowered demand, cleared the brownout, and emitted `brownout_ended`.
+- [x] Allocation controls changed displayed WATT and Stored Energy rates.
+- [x] One- and ten-second controls advanced deterministic simulation time exactly.
+- [x] Debug labels remained readable at 393 × 873; general shell layout passed 360 × 640, 393 × 873, and 480 × 800.
+- [ ] Physical Android touch and safe-area behavior verified (device/export unavailable).
+
+Notes: The panel is a Phase 02 diagnostic surface, not the final game UI. Xvfb cannot control V-Sync; headless project validation is warning-free.
+
 ## Phase 01 content-shell verification — 2026-07-19
 
 - Build/commit: `9e632d6`

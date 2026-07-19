@@ -1,0 +1,153 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/grid_debug_panel.gd" id="1_debug"]
+
+[node name="GridDebugPanel" type="VBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_debug")
+
+[node name="Heading" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19, 0.73, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "GRID SIMULATION DEBUG"
+horizontal_alignment = 1
+
+[node name="MetricsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Simulation loading"
+horizontal_alignment = 1
+
+[node name="FlowLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Flow unavailable"
+horizontal_alignment = 1
+
+[node name="GridStatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+theme_override_font_sizes/font_size = 16
+text = "SIMULATION LOADING"
+horizontal_alignment = 1
+
+[node name="GridEventLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.66, 0.72, 0.82, 1)
+theme_override_font_sizes/font_size = 14
+text = "No event"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ScenariosLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "SCENARIOS"
+
+[node name="Scenarios" type="GridContainer" parent="."]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="GenerationLimitedButton" type="Button" parent="Scenarios"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Generation Limited"
+
+[node name="TransmissionLimitedButton" type="Button" parent="Scenarios"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Transmission Limited"
+
+[node name="ReserveProtectedButton" type="Button" parent="Scenarios"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Reserve Protected"
+
+[node name="BrownoutButton" type="Button" parent="Scenarios"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Brownout"
+
+[node name="AllocationLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "ALLOCATION"
+
+[node name="Allocation" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ExpandGridButton" type="Button" parent="Allocation"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "Expand"
+
+[node name="BalancedButton" type="Button" parent="Allocation"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "Balanced"
+
+[node name="FeedWattButton" type="Button" parent="Allocation"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "Feed WATT"
+
+[node name="TimeControls" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="AdvanceOneButton" type="Button" parent="TimeControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "+1 sec"
+
+[node name="AdvanceTenButton" type="Button" parent="TimeControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "+10 sec"
+
+[node name="RecoverButton" type="Button" parent="TimeControls"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 13
+text = "Recover"

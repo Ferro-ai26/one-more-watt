@@ -155,8 +155,9 @@ func _validate_records(records: Dictionary, placeholder_assets: Dictionary, issu
 func _validate_family_record(family: String, record: Dictionary, path: String, record_id: String, placeholder_assets: Dictionary, issues: Array[ContentValidationIssue]) -> void:
 	match family:
 		"balance":
-			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "stored_energy_efficiency": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
+			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "allocation_modes": "dictionary", "stored_energy_efficiency": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
 			_validate_nonnegative_tree(record, path, record_id, issues)
+			_validate_allocation_modes(record.get("allocation_modes", {}), path, record_id, issues)
 		"eras":
 			_require_fields(record, {"number": "integer", "name_key": "string", "scale_key": "string", "description_key": "string", "unlock_conditions": "array", "infrastructure_ids": "array", "request_ids": "array", "visual_state_id": "string", "unit_display_floor": "string"}, path, record_id, issues)
 			if int(record.get("number", 0)) <= 0:
@@ -454,6 +455,21 @@ func _validate_effects(value: Variant, path: String, record_id: String, issues: 
 		_validate_enum(effect.get("target"), EFFECT_TARGETS, "UNSUPPORTED_EFFECT_TARGET", path, record_id, "effect target", issues)
 		if _is_number(effect.get("value")) and float(effect.get("value")) < 0.0:
 			_add_issue(issues, "NEGATIVE_VALUE", path, record_id, "effect value must be nonnegative")
+
+
+func _validate_allocation_modes(value: Variant, path: String, record_id: String, issues: Array[ContentValidationIssue]) -> void:
+	if not value is Dictionary:
+		return
+	for mode: String in ["expand_grid", "balanced", "feed_watt"]:
+		if not value.has(mode) or not value[mode] is Dictionary:
+			_add_issue(issues, "MISSING_ALLOCATION_MODE", path, record_id, "allocation mode '%s' is required" % mode)
+			continue
+		var shares: Dictionary = value[mode]
+		_require_fields(shares, {"grid_share": "number", "watt_share": "number"}, path, record_id, issues)
+		var grid_share := float(shares.get("grid_share", -1.0))
+		var watt_share := float(shares.get("watt_share", -1.0))
+		if grid_share < 0.0 or watt_share < 0.0 or not is_equal_approx(grid_share + watt_share, 1.0):
+			_add_issue(issues, "INVALID_ALLOCATION_MODE", path, record_id, "allocation shares for '%s' must be nonnegative and total 1" % mode)
 
 
 func _validate_base_effects(value: Variant, path: String, record_id: String, issues: Array[ContentValidationIssue]) -> void:

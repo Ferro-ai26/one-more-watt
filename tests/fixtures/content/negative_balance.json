@@ -5,7 +5,12 @@
       "id": "prototype_balance",
       "simulation_step_seconds": -0.25,
       "underpower_efficiency_floor": 0.05,
-      "starting_grid": {"generation_rate": 5, "transmission_capacity": 8, "reserve_capacity": 10, "stored_energy": 0},
+      "starting_grid": {"generation_rate": 5, "transmission_capacity": 8, "reserve_capacity": 10, "reserve_charge_rate": 5, "reserve_discharge_rate": 5, "stored_energy": 0},
+      "allocation_modes": {
+        "expand_grid": {"grid_share": 0.8, "watt_share": 0.2},
+        "balanced": {"grid_share": 0.5, "watt_share": 0.5},
+        "feed_watt": {"grid_share": 0.1, "watt_share": 0.9}
+      },
       "stored_energy_efficiency": {"era_01_cold_boot": 1.0},
       "milestone_sets": {"standard_high_volume": [{"owned": 10, "multiplier": 2.0}]}
     }

@@ -137,6 +137,8 @@ Avoid per-frame signals for values that have not changed.
 - Large elapsed durations use event-boundary aggregation rather than millions of fixed steps.
 - Limit catch-up work per rendered frame; offline calculation occurs before returning control.
 
+The Phase 02 active simulator rejects non-finite or negative deltas and bounds one direct active-time call to one hour. Larger offline intervals belong to the later event-boundary offline simulator rather than the fixed-step active loop.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.
@@ -207,4 +209,3 @@ The prototype requires no account, network connection, contact access, location,
 ## Extension rules
 
 Adding an era should require data and presentation assets, not new core simulation architecture. Add a new system only when the existing Generation/Transmission/Reserve/request model cannot express a meaningful planned decision.
-

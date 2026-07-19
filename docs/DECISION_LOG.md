@@ -72,6 +72,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The Phase 01 contract requires deterministic validation, stable cross-file IDs, safe effects, and a content version without committing later phases to generated Godot resources.
 - Consequences: Schema changes require a manifest/schema version decision; unknown content operations and undeclared missing assets fail closed. Full prototype population remains separate from the schema exercise records.
 
+## DEC-012 — Load-first standalone grid boundary
+
+- Status: Proposed
+- Date: 2026-07-19
+- Decision: Keep Phase 02 request-agnostic. Deliverable power and Reserve serve a generic external load first; remaining surplus is split by the selected allocation mode. Eligible grid share charges Reserve before conversion to Stored Energy, while the WATT share is exposed for the Phase 03 request layer.
+- Reason: This preserves the documented Reserve equations, prevents simultaneous Reserve charge/discharge, and avoids embedding request lifecycle assumptions in `GridCalculator`.
+- Consequences: Phase 03 owns the mapping from authored continuous demand and useful WATT power to request progress, but it must consume the existing grid outputs rather than rewriting the core flow equations.
+
 ## Proposed decision template
 
 ```markdown

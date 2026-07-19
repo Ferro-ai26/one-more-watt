@@ -39,11 +39,15 @@ deficit = max(0, active_demand - deliverable_power)
 
 Reserve has four values: capacity, stored amount, maximum charge rate, and maximum discharge rate.
 
+The standalone grid simulator accepts a generic `demand_rate`; it does not know about request states or request kinds. Deliverable power serves this load first, Reserve covers any remaining deficit, and an unmet remainder creates a brownout. Phase 03 supplies request-derived demand without changing these grid equations.
+
 ### Stored Energy
 
 Stored Energy is the ordinary construction currency. It represents long-term surplus captured by the grid and is separate from short-duration Reserve.
 
 Only the share of surplus assigned to grid expansion becomes Stored Energy. Request-dedicated power does not simultaneously generate construction currency.
+
+For the Phase 02 core, power remaining after load service is allocation-eligible surplus. WATT receives its selected share. The grid share charges Reserve first, limited by capacity and charge rate; any eligible grid power remaining then becomes Stored Energy at the current era efficiency.
 
 ## Allocation modes
 
@@ -225,4 +229,3 @@ Offline simulation follows `SAVE_AND_OFFLINE_SPEC.md`. It uses the same determin
 - Locked content cannot be purchased.
 - Offline progress cannot exceed its configured cap.
 - A missing content reference fails validation rather than silently substituting an item.
-

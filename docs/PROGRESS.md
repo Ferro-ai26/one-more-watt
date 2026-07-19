@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | 00 — Project Foundation | Complete | Commit `d48e01d`; clean import; 51 foundation checks; 3 portrait layout checks; headless smoke launch |
 | 01 — Data Architecture | Complete | Commit `9e632d6`; 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
-| 02 — Core Power Simulation | Not started | — |
+| 02 — Core Power Simulation | Complete | 178 simulation checks; 18 debug-panel checks; four scenario captures; headless smoke launch |
 | 03 — Request and WATT System | Not started | — |
 | 04 — Infrastructure and Upgrades | Not started | — |
 | 05 — Main UI and Feedback | Not started | — |
@@ -17,6 +17,14 @@
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-19 — Phase 02 core power simulation
+
+- Added deterministic fixed-step Generation, Transmission, Reserve, allocation, Stored Energy, brownout, and Stability calculations independent of scenes and request definitions.
+- Added balance-driven allocation shares and Reserve rates, content version `0.2.0`, and infrastructure aggregate rebuilding.
+- Verified 178 equation/invariant checks, including seeded repeatability and large-delta equivalence.
+- Added and visually verified a portrait debug panel for Generation, Transmission, Reserve protection, brownout, recovery, allocation, and time advancement.
+- Kept the authored request lifecycle and all Phase 03 behavior out of scope.
 
 ### 2026-07-19 — Phase 01 data architecture
 

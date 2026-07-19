@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 01 validation found no new content-architecture defects. The existing Android setup dependency remains open.
+Phase 02 validation found no new simulation defects. The existing Android setup dependency remains open.
 
 ### ISSUE-001 — Android export configuration unavailable
 

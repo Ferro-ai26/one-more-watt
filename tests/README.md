@@ -14,4 +14,10 @@ Run only deterministic content validation with:
 ./tools/validate_content.sh
 ```
 
+Run the standalone grid equation and invariant suite with:
+
+```bash
+./tools/test_simulation.sh
+```
+
 Later phases may add a dedicated unit-test framework under `tests/unit/`; this script remains the repository-level validation entry point.

@@ -134,7 +134,7 @@ Demand profiles define a positive `duration_seconds`, a `loop` flag, and ordered
 
 ## Balance schema
 
-Balance records have a stable `id` and contain `simulation_step_seconds`, `underpower_efficiency_floor`, `starting_grid`, era-keyed `stored_energy_efficiency`, and named `milestone_sets`. Numeric balance values are nonnegative. Infrastructure `milestone_set` references must resolve to one of these named sets.
+Balance records have a stable `id` and contain `simulation_step_seconds`, `underpower_efficiency_floor`, `starting_grid`, three required `allocation_modes`, era-keyed `stored_energy_efficiency`, and named `milestone_sets`. Each allocation mode supplies nonnegative `grid_share` and `watt_share` values totaling 1. Numeric balance values are nonnegative. Infrastructure `milestone_set` references must resolve to one of these named sets.
 
 ## Dialogue schema
 
