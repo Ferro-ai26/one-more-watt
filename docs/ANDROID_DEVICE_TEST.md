@@ -1,5 +1,38 @@
 # Android Device Tests
 
+## Phase 13 Eras 1–3 production-skin test — In progress
+
+### First tested artifact
+
+- Expected source commit: `1dcb9cf2bc5809cf23f445389c971b909dfea8f9`
+- Package: `com.ferroai.onemorewatt`
+- Version reported by tester: `v0.10.0-dev`
+- Settings build suffix reported by tester: Not supplied
+- APK: `build/android/one_more_watt_phase13_debug.apk`
+- Host-recorded SHA-256: `c4940b483d4b5dfbe77c4f155958dc4428449c9e8483fed553ff6a5d87eceee8`
+
+### Device evidence
+
+- Tester/date: User; 2026-07-20
+- Manufacturer/exact model: Motorola Moto G (2025)
+- Android version/API: Not supplied
+- Physical display/density: 720 × 1604; 280 dpi
+- Navigation mode and cutout/system-bar notes: Not supplied
+- Settings `EFFECTIVE UI` line: Not supplied. Expected from the reported metrics is approximately 411 × 917 at 1.75×, but this calculation is not observed device evidence.
+- Screenshot/video identifiers: Not supplied
+
+### First-pass result
+
+- [ ] APK hash independently matched on the transfer device. Not reported.
+- [x] Install and cold launch succeeded.
+- [ ] Settings showed the exact expected version and build suffix. Version passed; build suffix was not reported.
+- [ ] Build and Upgrades scroll vertically by touch. Failed: neither drawer could scroll (`ISSUE-009`).
+- [ ] Reports and all scrollable modals scroll vertically by touch. Not yet verified.
+- [ ] Every affordable Build/Upgrade purchase applies on the first tap without a conditional confirmation. The tested artifact showed a cost-threshold confirmation only some of the time; the tester directed removal under `DEC-031`.
+- [ ] Remaining early onboarding, full Eras 1–3 route, state feedback, touch comfort, physical font rasterization, text-size modes, reduced motion, safe areas, Android Back, brownout/recovery, lifecycle/save/offline behavior, audio focus/repetition, haptics, GPU behavior, heat, and battery checks.
+
+The replacement Phase 13 artifact must be installed before continuing. Retest Build, Upgrades, Reports, and Settings scrolling first; then continue the remaining items. Do not promote this partial pass to Phase 13 completion, and do not begin Phase 14.
+
 ## Phase 10 targeted stabilization retest — Deferred to Phase 14
 
 This preserved checklist records the exact revised artifact and the device checks that were not performed in Phase 10. The user explicitly accepted the Phase 10 limitation and transferred the Moto verification requirement to Phase 14. Unchecked items below remain unverified; none are promoted to passing evidence.

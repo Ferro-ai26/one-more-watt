@@ -87,15 +87,17 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 
 	_check(main.select_tab("build"), "%s Build navigation works" % test_size)
 	await process_frame
+	var screen_scroll := main.find_child("ScreenScroll", true, false) as ScrollContainer
+	_check_scroll_contract(screen_scroll, "%s Build" % test_size)
 	_check(shell.get_combined_minimum_size().x <= test_size.x, "%s Build tab does not widen the shell" % test_size)
 	var wall_card := main.screen_content.find_child("WallOutletCard", true, false) as ShopItemCard
 	_check(wall_card != null, "%s reusable infrastructure card renders" % test_size)
 	_check(wall_card != null and Rect2(Vector2.ZERO, Vector2(test_size)).intersects(wall_card.get_global_rect()), "%s compact secondary header leaves the first Build card visible" % test_size)
 	_check("PREDICTED" in wall_card.effect_label.text and "+5.0" in wall_card.effect_label.text, "%s purchase effect is visible before buying" % test_size)
 	var old_generation := main.session.requests.grid.state.generation_rate
+	main.session.settings.confirm_large_purchases = true # Legacy save value must no longer alter purchase flow.
 	await _press(wall_card.buy_button)
-	if main.navigation.top_modal() == "purchase_confirmation":
-		await _press(main.modal_content.find_child("ConfirmPurchaseButton", true, false) as Button)
+	_check(main.navigation.top_modal() != "purchase_confirmation", "%s affordable purchase is immediate without a conditional confirmation" % test_size)
 	_check(int(main.session.economy.state.owned["wall_outlet"]) == 2, "%s purchase increments ownership" % test_size)
 	_check(main.session.requests.grid.state.generation_rate > old_generation, "%s purchase changes the live grid" % test_size)
 	if _capture_layouts:
@@ -103,12 +105,14 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 
 	_check(main.select_tab("upgrades"), "%s Upgrades navigation works" % test_size)
 	await process_frame
+	_check_scroll_contract(screen_scroll, "%s Upgrades" % test_size)
 	_check(shell.get_combined_minimum_size().x <= test_size.x, "%s Upgrades tab does not widen the shell" % test_size)
 	_check(main.screen_content.find_child("OutletCalibrationCard", true, false) is ShopItemCard, "%s reusable upgrade card renders" % test_size)
 	if _capture_layouts:
 		await _capture(viewport, test_size, "upgrades")
 	_check(main.select_tab("reports"), "%s Reports navigation works" % test_size)
 	await process_frame
+	_check_scroll_contract(screen_scroll, "%s Reports" % test_size)
 	_check(shell.get_combined_minimum_size().x <= test_size.x, "%s Reports tab does not widen the shell" % test_size)
 	_check(main.screen_content.find_child("Era01FinishBootingReportButton", true, false) is Button, "%s report archive exposes completed report" % test_size)
 	if _capture_layouts:
@@ -117,6 +121,9 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 
 	main.open_settings_modal()
 	await process_frame
+	var modal_scroll := main.find_child("ModalScroll", true, false) as ScrollContainer
+	_check_scroll_contract(modal_scroll, "%s Settings modal" % test_size)
+	_check(main.modal_content.find_child("ConfirmLargeCheck", true, false) == null, "%s Settings no longer exposes obsolete purchase confirmation" % test_size)
 	_check(_modal_text(main).contains("v0.10.0-dev") and _modal_text(main).contains("BUILD phase10-dev"), "%s settings expose build provenance" % test_size)
 	var diagnostic := main.modal_content.find_child("DiagnosticButton", true, false) as Button
 	await _press(diagnostic)
@@ -148,6 +155,17 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 			_check(button.custom_minimum_size.y >= 48.0, "%s visible button %s keeps 48px target" % [test_size, button.name])
 	viewport.queue_free()
 	await process_frame
+
+
+func _check_scroll_contract(scroll: ScrollContainer, context: String) -> void:
+	_check(scroll != null, "%s has a scroll container" % context)
+	if scroll == null:
+		return
+	_check(scroll.horizontal_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED, "%s rejects accidental horizontal scrolling" % context)
+	_check(scroll.vertical_scroll_mode == ScrollContainer.SCROLL_MODE_AUTO, "%s enables vertical scrolling" % context)
+	_check(scroll.scroll_deadzone == 8, "%s uses an explicit touch drag deadzone" % context)
+	_check(scroll.mouse_filter == Control.MOUSE_FILTER_STOP and scroll.mouse_force_pass_scroll_events, "%s owns and forwards scroll gestures" % context)
+	_check(bool(scroll.get_meta("touch_drag_enabled", false)), "%s carries the shared touch-scroll contract" % context)
 
 
 func _modal_text(main: MainUI) -> String:

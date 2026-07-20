@@ -4,6 +4,7 @@ extends Control
 const SHOP_CARD_SCENE := preload("res://scenes/components/ShopItemCard.tscn")
 const VITAL_CARD_SCENE := preload("res://scenes/components/VitalCard.tscn")
 const ERA_ENVIRONMENT_SCENE := preload("res://scenes/components/EraEnvironmentView.tscn")
+const TOUCH_SCROLL_CONTAINER_SCRIPT := preload("res://scripts/ui/touch_scroll_container.gd")
 
 var session := GameSession.new()
 var view_model: MainViewModel
@@ -12,7 +13,6 @@ var persistence: PersistenceController
 var _refresh_accumulator := 0.0
 var _last_report_modal_id := ""
 var _last_era_transition_modal_id := ""
-var _pending_purchase: Dictionary = {}
 var _feedback_tween: Tween
 
 var status_era_label: Label
@@ -37,11 +37,13 @@ var allocation_buttons: Dictionary = {}
 var screen_title_label: Label
 var drawer_context_label: Label
 var screen_panel: PanelContainer
+var screen_scroll: ScrollContainer
 var screen_content: VBoxContainer
 var nav_buttons: Dictionary = {}
 var feedback_label: Label
 var modal_overlay: ColorRect
 var modal_title: Label
+var modal_scroll: ScrollContainer
 var modal_content: VBoxContainer
 var feedback_audio: FeedbackAudio
 var ui_scale_diagnostics: Dictionary = {}
@@ -103,6 +105,7 @@ func _process(delta: float) -> void:
 
 
 func select_tab(tab: String) -> bool:
+	var tab_changed := navigation.current_tab != tab
 	if not navigation.select_tab(tab):
 		return false
 	if feedback_audio != null and tab != "grid":
@@ -111,6 +114,8 @@ func select_tab(tab: String) -> bool:
 		(nav_buttons[key] as Button).button_pressed = str(key) == tab
 	_apply_tab_density()
 	_rebuild_screen()
+	if tab_changed and screen_scroll != null:
+		screen_scroll.scroll_vertical = 0
 	return true
 
 
@@ -204,6 +209,7 @@ func open_settings_modal() -> void:
 	reduced.custom_minimum_size.y = 48
 	reduced.add_theme_font_size_override("font_size", 18)
 	reduced.text = "Reduced motion"
+	reduced.mouse_filter = Control.MOUSE_FILTER_PASS
 	reduced.button_pressed = session.settings.reduced_motion
 	reduced.toggled.connect(func(value: bool) -> void: session.settings.reduced_motion = value; _settings_changed())
 	modal_content.add_child(reduced)
@@ -218,17 +224,10 @@ func open_settings_modal() -> void:
 	haptics.custom_minimum_size.y = 48
 	haptics.add_theme_font_size_override("font_size", 18)
 	haptics.text = "Haptics"
+	haptics.mouse_filter = Control.MOUSE_FILTER_PASS
 	haptics.button_pressed = session.settings.haptics_enabled
 	haptics.toggled.connect(func(value: bool) -> void: session.settings.haptics_enabled = value; _settings_changed())
 	modal_content.add_child(haptics)
-	var confirm := CheckButton.new()
-	confirm.name = "ConfirmLargeCheck"
-	confirm.custom_minimum_size.y = 48
-	confirm.add_theme_font_size_override("font_size", 18)
-	confirm.text = "Confirm large purchases"
-	confirm.button_pressed = session.settings.confirm_large_purchases
-	confirm.toggled.connect(func(value: bool) -> void: session.settings.confirm_large_purchases = value; _settings_changed())
-	modal_content.add_child(confirm)
 	for volume_data: Dictionary in [
 		{"label": "Master", "field": "master_volume"},
 		{"label": "Music", "field": "music_volume"},
@@ -270,6 +269,8 @@ func close_top_modal() -> void:
 	if navigation.pop_modal().is_empty():
 		return
 	modal_overlay.visible = false
+	modal_scroll.set_process_input(false)
+	screen_scroll.set_process_input(true)
 	modal_overlay.color = SkinTokens.COLOR_MODAL_SCRIM
 	if environment_view != null:
 		environment_view.finish_capstone_pullback()
@@ -499,16 +500,16 @@ func _build_interface() -> void:
 	drawer_context_label.name = "DrawerContextLabel"
 	drawer_context_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	drawer_header.add_child(drawer_context_label)
-	var scroll := ScrollContainer.new()
-	scroll.name = "ScreenScroll"
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	screen_layout.add_child(scroll)
+	screen_scroll = TOUCH_SCROLL_CONTAINER_SCRIPT.new() as ScrollContainer
+	screen_scroll.name = "ScreenScroll"
+	_configure_touch_scroll(screen_scroll)
+	screen_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	screen_layout.add_child(screen_scroll)
 	screen_content = VBoxContainer.new()
 	screen_content.name = "ScreenContent"
 	screen_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	screen_content.add_theme_constant_override("separation", 7)
-	scroll.add_child(screen_content)
+	screen_scroll.add_child(screen_content)
 
 	var navigation_bar := HBoxContainer.new()
 	navigation_bar.name = "PrimaryNavigation"
@@ -556,15 +557,17 @@ func _build_modal_layer() -> void:
 	modal_title.name = "ModalTitle"
 	modal_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	modal_layout.add_child(modal_title)
-	var scroll := ScrollContainer.new()
-	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	modal_layout.add_child(scroll)
+	modal_scroll = TOUCH_SCROLL_CONTAINER_SCRIPT.new() as ScrollContainer
+	modal_scroll.name = "ModalScroll"
+	_configure_touch_scroll(modal_scroll)
+	modal_scroll.set_process_input(false)
+	modal_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	modal_layout.add_child(modal_scroll)
 	modal_content = VBoxContainer.new()
 	modal_content.name = "ModalContent"
 	modal_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	modal_content.add_theme_constant_override("separation", 8)
-	scroll.add_child(modal_content)
+	modal_scroll.add_child(modal_content)
 
 
 func _refresh_all(rebuild_screen: bool) -> void:
@@ -680,6 +683,7 @@ func _build_grid_screen() -> void:
 		automation.text = "Protect Reserve below %.0f%%" % (session.economy.state.reserve_threshold_ratio * 100.0)
 		automation.custom_minimum_size.y = 48
 		automation.add_theme_font_size_override("font_size", 18)
+		automation.mouse_filter = Control.MOUSE_FILTER_PASS
 		automation.button_pressed = session.economy.state.reserve_automation_enabled
 		automation.toggled.connect(func(enabled: bool) -> void:
 			session.configure_reserve_automation(enabled, session.economy.state.reserve_threshold_ratio)
@@ -729,23 +733,7 @@ func _request_purchase(content_id: String, family: String) -> void:
 	var preview := session.preview_infrastructure(content_id) if family == "infrastructure" else session.preview_upgrade(content_id)
 	if not preview.can_purchase():
 		return
-	if session.settings.confirm_large_purchases and preview.cost >= session.requests.grid.state.stored_energy * 0.5:
-		_pending_purchase = {"id": content_id, "family": family}
-		_open_modal("purchase_confirmation", "CONFIRM PURCHASE")
-		_add_modal_label("Spend %s?\nThe predicted effect shown on the card will be applied immediately." % NumberFormatter.format_energy(preview.cost, session.settings.number_notation), 18, SkinTokens.COLOR_IVORY)
-		var confirm := _button("Confirm Purchase", "ConfirmPurchaseButton")
-		confirm.pressed.connect(_confirm_pending_purchase)
-		modal_content.add_child(confirm)
-		_add_modal_back_button("Cancel")
-		return
 	_apply_purchase(content_id, family)
-
-
-func _confirm_pending_purchase() -> void:
-	var pending := _pending_purchase.duplicate()
-	_pending_purchase.clear()
-	close_top_modal()
-	_apply_purchase(str(pending.get("id", "")), str(pending.get("family", "")))
 
 
 func _apply_purchase(content_id: String, family: String) -> void:
@@ -783,9 +771,12 @@ func _open_modal(modal_id: String, title: String) -> void:
 		close_top_modal()
 	navigation.push_modal(modal_id)
 	_clear_children(modal_content)
+	modal_scroll.scroll_vertical = 0
 	modal_title.text = title
 	modal_overlay.color = SkinTokens.COLOR_MODAL_SCRIM
 	modal_overlay.visible = true
+	screen_scroll.set_process_input(false)
+	modal_scroll.set_process_input(true)
 
 
 func _add_modal_label(text: String, font_size: int, color: Color) -> void:
@@ -985,6 +976,15 @@ static func _watt_expression(request_status: String, brownout: bool) -> String:
 		_: return "pleased"
 
 
+static func _configure_touch_scroll(scroll: ScrollContainer) -> void:
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	scroll.scroll_deadzone = 8
+	scroll.mouse_filter = Control.MOUSE_FILTER_STOP
+	scroll.mouse_force_pass_scroll_events = true
+	scroll.set_meta("touch_drag_enabled", true)
+
+
 static func _clear_children(parent: Node) -> void:
 	for child: Node in parent.get_children():
 		parent.remove_child(child)
@@ -997,6 +997,7 @@ static func _button(text: String, name: String) -> Button:
 	button.text = text
 	button.custom_minimum_size.y = 48
 	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	button.mouse_filter = Control.MOUSE_FILTER_PASS
 	return button
 
 
@@ -1005,4 +1006,5 @@ static func _label(text: String, font_size: int, color: Color) -> Label:
 	label.text = text
 	label.add_theme_font_size_override("font_size", font_size)
 	label.add_theme_color_override("font_color", color)
+	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	return label

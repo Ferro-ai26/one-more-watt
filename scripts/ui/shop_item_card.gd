@@ -20,6 +20,13 @@ var _resting_state := "default"
 
 
 func _ready() -> void:
+	# Decorative card surfaces must not swallow a phone drag before the parent
+	# ScrollContainer sees it. The buy control remains tappable and passes the
+	# gesture upward when the movement becomes a scroll.
+	mouse_filter = Control.MOUSE_FILTER_PASS
+	for child_value: Variant in find_children("*", "Control", true, false):
+		var child := child_value as Control
+		child.mouse_filter = Control.MOUSE_FILTER_PASS if child is BaseButton else Control.MOUSE_FILTER_IGNORE
 	buy_button.pressed.connect(func() -> void: purchase_requested.emit(content_id, family))
 	buy_button.button_down.connect(func() -> void: set_visual_state("pressed"))
 	buy_button.button_up.connect(func() -> void: set_visual_state(_resting_state))

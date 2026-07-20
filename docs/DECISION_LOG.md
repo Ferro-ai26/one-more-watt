@@ -226,6 +226,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The user authorized Phase 13 while explicitly distinguishing functional skin-system proof from the approved visual target. Preserving that distinction prevents a temporary implementation baseline from silently overriding the locked Cheerful Electrical Doomsday composition or consuming the later final-art mandate.
 - Consequences: Phase 13 improves all existing Eras 1–3 screens and state feedback without broad final-art polish, gameplay/save changes, generated concept integration, or Era 4 work. Asset provenance and release audits must continue identifying the unresolved painted environment/WATT/infrastructure replacement. Phase 14 requires separate authorization.
 
+## DEC-031 — Make scrolling touch-first and purchases immediate
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Route every player-facing scrollable screen and modal through one explicit phone-drag contract. Make all affordable Build and Upgrade purchases apply on the first tap; remove the conditional large-purchase confirmation and its Settings control.
+- Reason: The first Phase 13 Moto G (2025) pass found that card surfaces prevented Build and Upgrades from scrolling, and the cost-threshold confirmation appeared only for some purchases. The tester explicitly directed that scrolling work everywhere and that the inconsistent interruption be removed.
+- Consequences: Build, Upgrades, Reports, Settings, and other modal content share vertical touch-drag behavior while interactive controls remain tappable. Existing purchase costs, affordability rules, rewards, feedback, and saves are unchanged. The legacy `confirm_large_purchases` save field remains readable/writable for compatibility but no longer controls runtime UI; no migration or new currency is introduced. The replacement APK requires physical-device retest before Phase 13 can close.
+
 ## Proposed decision template
 
 ```markdown

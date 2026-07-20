@@ -12,7 +12,23 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
-Phase 13 opened no new gameplay/save defect. Its project-original code-native Eras 1–3 layer replaces the Phase 12 composition scaffold with distinct world-first Desk, Room, and House dioramas, contextual drawers, expressions, state effects, glyphs, reports, and transition presentation. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
+Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one concrete interaction defect: Build and Upgrades could not be scrolled by touch. `ISSUE-009` has a host-verified fix and awaits replacement-APK retest. The tester also directed removal of the conditional large-purchase confirmation; that accepted interaction change is recorded in `DEC-031`. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
+
+### ISSUE-009 — Build and Upgrades do not scroll by touch on Moto G (2025)
+
+- Status: Fix Implemented — Device Retest Required
+- Severity: Major
+- First seen build/commit: Phase 13 APK from `1dcb9cf`, Motorola Moto G (2025), 2026-07-20
+- Affected phase: Phase 13 physical-phone verification
+- Reproduction:
+  1. Install and cold-launch the Phase 13 debug APK on the Moto G (2025), reported at 720 × 1604 and 280 dpi.
+  2. Open Build or Upgrades.
+  3. Drag upward over the connection/upgrade cards to reach content below the fold.
+- Expected: Every player-facing list and modal scrolls vertically by touch while its buttons remain tappable.
+- Actual: Build and Upgrades remain at the top and content below the fold cannot be reached.
+- Evidence/log: Direct tester report; `docs/ANDROID_DEVICE_TEST.md`. Source inspection found scroll containers but no explicit shared touch path, while card/control surfaces could intercept the gesture.
+- Workaround: None practical on the affected APK.
+- Fix verification: Added `TouchScrollContainer` for the shared screen and modal paths, explicit vertical/deadzone/pass settings, drag-safe card/control filters, and synthetic touch-drag tests for an overflowing Build drawer and Settings modal. Host UI/Phase 13 tests pass. Install the replacement commit-tied APK and repeat Build, Upgrades, Reports, and Settings scrolling before marking fixed.
 
 ### ISSUE-007 — Production environment and WATT art remain explicit fallbacks
 
@@ -29,9 +45,9 @@ Phase 13 opened no new gameplay/save defect. Its project-original code-native Er
 - Workaround: Continue using the explicit code-native presentation layer for development and verification.
 - Fix verification: A later explicitly authorized gold-standard visual-production pass must replace the five required fallback entries with provenance-recorded production assets, pass release-scope inventory validation, and receive contextual phone review. Phase 13 must not silently close this issue.
 
-### ISSUE-008 — Phase 13 physical-phone playtest is unavailable on the current host
+### ISSUE-008 — Phase 13 physical-phone playtest requires external completion
 
-- Status: Needs External Verification
+- Status: Partial External Pass — Retest In Progress
 - Severity: Blocker for Phase 13 closure; not a known runtime defect
 - First seen build/commit: Phase 13 working tree, 2026-07-20
 - Affected phase: Phase 13 manual verification gate
@@ -39,10 +55,10 @@ Phase 13 opened no new gameplay/save defect. Its project-original code-native Er
   1. Run `adb devices -l` on the current ARM64 VPS.
   2. Observe that no device or emulator is attached.
 - Expected: Run the complete Phase 13 Eras 1–3 skin on a physical Android phone and record screenshots, touch comfort, font rasterization, sound repetition/audio focus, haptics, GPU behavior, heat, and battery.
-- Actual: All host automation, five portrait layouts, graphical captures, visual inspection, and static APK measurement pass, but the physical-device checks cannot run and are not claimed.
+- Actual: The user confirmed install/cold launch on a Motorola Moto G (2025), app version `v0.10.0-dev`, and a 720 × 1604 / 280 dpi display. The pass found `ISSUE-009` before the full route was completed. Android/API, exact Settings build suffix, effective UI line, screenshots, safe areas, font comfort, lifecycle, audio, haptics, GPU, heat, battery, and the rest of the playthrough remain unverified.
 - Evidence/log: `docs/phase_13/VISUAL_QA_RECORD.md`, `docs/PLAYTEST_CHECKLIST.md`, and `docs/CURRENT_HANDOFF.md`.
 - Workaround: Host 320 × 568 and 393 × 873 evidence validates composition/layout only; it does not substitute for physical-device behavior.
-- Fix verification: Attach a representative Android phone, export a clean commit-tied APK, execute the preserved checklist, and record truthful device evidence before closing Phase 13. Phase 14 remains separately gated.
+- Fix verification: Retest the replacement clean commit-tied APK on the same phone, then complete and record the preserved checklist before closing Phase 13. Phase 14 remains separately gated.
 
 ### ISSUE-004 — Phone presentation appears too small
 

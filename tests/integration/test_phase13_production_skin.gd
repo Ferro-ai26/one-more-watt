@@ -117,6 +117,14 @@ func _test_live_world_composition() -> void:
 	_check(main.screen_content.find_child("ContextBuildInstruction", true, false) is Label, "Build drawer explains authored world installation")
 	var wall := main.screen_content.find_child("WallOutletCard", true, false) as ShopItemCard
 	_check(wall != null and wall.glyph.category == "generation", "compact Build connection carries a semantic project-original icon")
+	var drawer_scroll := main.find_child("ScreenScroll", true, false) as ScrollContainer
+	_check(drawer_scroll != null and bool(drawer_scroll.get_meta("touch_drag_enabled", false)), "Build uses the shared touch-scroll contract")
+	_check(wall.mouse_filter == Control.MOUSE_FILTER_PASS and wall.name_label.mouse_filter == Control.MOUSE_FILTER_IGNORE, "card surfaces pass phone drags to the drawer")
+	_check(wall.buy_button.mouse_filter == Control.MOUSE_FILTER_PASS, "purchase button remains tappable without trapping the scroll route")
+	var scroll_limit := drawer_scroll.get_v_scroll_bar().max_value - drawer_scroll.get_v_scroll_bar().page
+	_check(scroll_limit > 0.0, "representative Build drawer has reachable content below the fold")
+	await _drag_up(viewport, drawer_scroll.get_global_rect().position + Vector2(12.0, 36.0), 120.0)
+	_check(drawer_scroll.scroll_vertical > 0, "an upward phone drag scrolls the Build drawer")
 	_check(main.feedback_audio.last_played == "drawer_open", "drawer interaction has restrained essential audio feedback")
 	if _capture:
 		await _save_capture(viewport, "build_drawer_393x873.png")
@@ -166,6 +174,14 @@ func _test_smallest_layout_capture() -> void:
 	await process_frame
 	_check(main.get_node("SafeArea/AppShell").size.y <= 568.0, "smallest supported Build drawer stays inside 320×568")
 	_check(float(main.environment_frame.get_meta("world_first_ratio", 0.0)) >= 0.35, "smallest supported Build still preserves the live world")
+	main.open_settings_modal()
+	await process_frame
+	var settings_scroll := main.find_child("ModalScroll", true, false) as ScrollContainer
+	var settings_limit := settings_scroll.get_v_scroll_bar().max_value - settings_scroll.get_v_scroll_bar().page
+	_check(settings_limit > 0.0, "smallest supported Settings modal has reachable content below the fold")
+	await _drag_up(viewport, settings_scroll.get_global_rect().position + Vector2(12.0, 36.0), 120.0)
+	_check(settings_scroll.scroll_vertical > 0, "an upward phone drag scrolls modal content")
+	main.close_top_modal()
 	if _capture:
 		await _save_capture(viewport, "build_drawer_320x568.png")
 	viewport.queue_free()
@@ -177,6 +193,28 @@ func _all_text(root: Node) -> String:
 	for label_value: Variant in root.find_children("*", "Label", true, false):
 		parts.append((label_value as Label).text)
 	return "\n".join(parts)
+
+
+func _drag_up(viewport: SubViewport, start: Vector2, distance: float) -> void:
+	var touch := InputEventScreenTouch.new()
+	touch.index = 0
+	touch.position = start
+	touch.pressed = true
+	viewport.push_input(touch, true)
+	await process_frame
+	var drag := InputEventScreenDrag.new()
+	drag.index = 0
+	drag.position = start - Vector2(0.0, distance)
+	drag.relative = Vector2(0.0, -distance)
+	drag.screen_relative = drag.relative
+	viewport.push_input(drag, true)
+	await process_frame
+	var release := InputEventScreenTouch.new()
+	release.index = 0
+	release.position = drag.position
+	release.pressed = false
+	viewport.push_input(release, true)
+	await process_frame
 
 
 func _save_capture(viewport: SubViewport, filename: String) -> void:

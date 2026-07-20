@@ -17,10 +17,18 @@
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
-| 13 — Eras 1–3 Production Skin | Implementation complete — physical phone verification outstanding | DEC-030; distinct code-native Desk/Room/House dioramas, contextual drawers, WATT expressions, state effects, 12 host captures, full regression; ISSUE-007 and ISSUE-008 explicit |
+| 13 — Eras 1–3 Production Skin | Device retest in progress — touch fix implemented | DEC-030/031; first Moto G (2025) pass confirmed launch and found drawer scrolling; shared touch-scroll fix and immediate purchases implemented; ISSUE-007/008/009 explicit |
 | 14–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 13 first Moto pass and touch follow-up
+
+- The clean Phase 13 APK installed and cold-launched on a Motorola Moto G (2025). The tester reported app version `v0.10.0-dev` and physical display `720 × 1604` at `280 dpi`; Android/API, Settings build suffix, effective logical UI line, navigation/cutout notes, and screenshots remain unreported.
+- Device use found that the Build and Upgrades drawers could not be scrolled by touch. The shared Godot containers existed, but child card surfaces could intercept a drag; `ISSUE-009` records the concrete reproduction.
+- Added a reusable touch-scroll container for every main screen and modal, explicit vertical/deadzone/event-pass settings, drag-safe shop cards and controls, tab/modal scroll reset, and synthetic phone-drag regression coverage for both drawer and modal paths.
+- Removed the conditional large-purchase confirmation from runtime and Settings under `DEC-031`. Affordable purchases now apply immediately; the legacy serialized setting remains readable so existing saves require no migration.
+- Phase 13 remains open for a replacement-APK retest and the remainder of the physical checklist. Phase 14 remains unauthorized and was not started.
 
 ### 2026-07-20 — Phase 13 implementation complete; phone gate remains
 

@@ -2,6 +2,25 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 13 Moto G (2025) pass — 2026-07-20, partial/fix required
+
+- Expected source/artifact: commit `1dcb9cf2bc5809cf23f445389c971b909dfea8f9`; `build/android/one_more_watt_phase13_debug.apk`; SHA-256 `c4940b483d4b5dfbe77c4f155958dc4428449c9e8483fed553ff6a5d87eceee8`
+- Device: Motorola Moto G (2025), 720 × 1604 physical display, reported 280 dpi
+- Tester: User
+- [x] APK installed and cold-launched.
+- [x] Settings/app reported version `v0.10.0-dev`.
+- [ ] Exact Settings build suffix confirmed. Not supplied in the report.
+- [ ] Android version/API, navigation mode, cutout/system-bar notes, and screenshots recorded.
+- [ ] Settings `EFFECTIVE UI` logical dimensions and scale recorded. The supplied physical metrics imply an expected 411 × 917 / 1.75× result, but that is not treated as observed evidence.
+- [ ] Build and Upgrades scroll by touch. Failed on this APK: neither drawer could scroll (`ISSUE-009`).
+- [ ] Reports and every scrollable modal scroll by touch. Not reached before the fix request.
+- [x] Conditional large-purchase confirmation identified and explicitly rejected by the tester; removal is accepted under `DEC-031`.
+- [ ] Remaining full Eras 1–3 route, required visual states, font/touch comfort, safe areas, Android Back, lifecycle/save/offline behavior, sound/audio focus, haptics, GPU behavior, heat, and battery.
+
+Result: partial device evidence only. Install/cold launch and physical display/version are confirmed, but Phase 13 remains open. Retest the replacement APK's Build, Upgrades, Reports, and Settings scrolling first, then continue the checklist. Phase 14 did not begin.
+
+Host follow-up after the finding: the full repository suite passed, synthetic phone drags moved both an overflowing Build drawer and Settings modal, and a 461-check graphical capture run passed across 35 states/five portrait sizes. The changed 320 × 568 Build/Settings and 393 × 873 Settings captures were manually inspected. This does not substitute for the required replacement-APK retest.
+
 ## Phase 13 production-skin host pass — 2026-07-20
 
 - Build/commit: Phase 12 baseline `ae61a94`; Phase 13 working tree during review
