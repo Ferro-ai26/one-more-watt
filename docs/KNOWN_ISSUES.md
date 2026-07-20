@@ -28,7 +28,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 - Actual: Build and Upgrades remain at the top and content below the fold cannot be reached.
 - Evidence/log: Direct tester report; `docs/ANDROID_DEVICE_TEST.md`. Source inspection found scroll containers but no explicit shared touch path, while card/control surfaces could intercept the gesture.
 - Workaround: None practical on the affected APK.
-- Fix verification: Added `TouchScrollContainer` for the shared screen and modal paths, explicit vertical/deadzone/pass settings, drag-safe card/control filters, and synthetic touch-drag tests for an overflowing Build drawer and Settings modal. Host UI/Phase 13 tests pass. Install the replacement commit-tied APK and repeat Build, Upgrades, Reports, and Settings scrolling before marking fixed.
+- Fix verification: Added `TouchScrollContainer` for the shared screen and modal paths, explicit vertical/deadzone/pass settings, drag-safe card/control filters, and synthetic touch-drag tests for an overflowing Build drawer and Settings modal. Full host regression passes. Replacement commit `738732d`, APK SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`. Repeat Build, Upgrades, Reports, and Settings scrolling on the Moto before marking fixed.
 
 ### ISSUE-007 — Production environment and WATT art remain explicit fallbacks
 

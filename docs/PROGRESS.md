@@ -28,6 +28,7 @@
 - Device use found that the Build and Upgrades drawers could not be scrolled by touch. The shared Godot containers existed, but child card surfaces could intercept a drag; `ISSUE-009` records the concrete reproduction.
 - Added a reusable touch-scroll container for every main screen and modal, explicit vertical/deadzone/event-pass settings, drag-safe shop cards and controls, tab/modal scroll reset, and synthetic phone-drag regression coverage for both drawer and modal paths.
 - Removed the conditional large-purchase confirmation from runtime and Settings under `DEC-031`. Affordable purchases now apply immediately; the legacy serialized setting remains readable so existing saves require no migration.
+- Full validation passed with 426 Main-UI and 51 Phase 13 checks; a 461-check graphical run passed across 35 states/five sizes and the changed Build/Settings captures were inspected. Clean replacement APK commit `738732d` is 55,939,625 bytes with SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`; static inspection passes.
 - Phase 13 remains open for a replacement-APK retest and the remainder of the physical checklist. Phase 14 remains unauthorized and was not started.
 
 ### 2026-07-20 — Phase 13 implementation complete; phone gate remains

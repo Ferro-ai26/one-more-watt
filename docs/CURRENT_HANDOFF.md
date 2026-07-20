@@ -48,6 +48,7 @@ A first external Phase 13 pass installed and cold-launched the clean commit-`1dc
 - Follow-up `./tools/test_ui.sh`: passed 48 UI-system, 426 Main-UI, 81 Phase 12 skin, and 51 Phase 13 checks, including real synthetic touch drags on overflowing screen and modal content and immediate purchase behavior with a legacy confirmation preference enabled.
 - Follow-up `./tools/validate.sh`: passed every repository suite and headless smoke launch; 908 balance/reachability and 111 UI/performance checks remain green. Performance measured 1,396.6 ms for 25 Build rebuilds, 489.2 ms for 500 refreshes, and 294 nodes.
 - Follow-up graphical layout capture: passed 461 checks across 35 states at five portrait sizes. Manually inspected the changed 320 × 568 Build/Settings and 393 × 873 Settings captures; scrolling affordance, removed confirmation toggle, world-first drawer, and horizontal fit remain correct.
+- Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed; it has not yet run on the Moto.
 
 ## Manual verification
 

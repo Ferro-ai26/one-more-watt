@@ -21,6 +21,8 @@ Result: partial device evidence only. Install/cold launch and physical display/v
 
 Host follow-up after the finding: the full repository suite passed, synthetic phone drags moved both an overflowing Build drawer and Settings modal, and a 461-check graphical capture run passed across 35 states/five portrait sizes. The changed 320 × 568 Build/Settings and 393 × 873 Settings captures were manually inspected. This does not substitute for the required replacement-APK retest.
 
+Replacement retest artifact: commit `738732d`, Settings build `738732db1f9b`, `build/android/one_more_watt_phase13_debug.apk`, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`. Static export inspection passes; physical retest remains unchecked.
+
 ## Phase 13 production-skin host pass — 2026-07-20
 
 - Build/commit: Phase 12 baseline `ae61a94`; Phase 13 working tree during review

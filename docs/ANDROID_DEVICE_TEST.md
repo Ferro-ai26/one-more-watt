@@ -33,6 +33,25 @@
 
 The replacement Phase 13 artifact must be installed before continuing. Retest Build, Upgrades, Reports, and Settings scrolling first; then continue the remaining items. Do not promote this partial pass to Phase 13 completion, and do not begin Phase 14.
 
+### Replacement artifact for retest
+
+- Source commit: `738732db1f9bf3086d06e2b2d913eb0f559d561c`
+- Settings version/build: `0.10.0-dev` / `738732db1f9b`
+- APK: `build/android/one_more_watt_phase13_debug.apk`
+- SHA-256: `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`
+- Size: 55,939,625 bytes
+- Static inspection: package `com.ferroai.onemorewatt`; API 24/35; arm64-v8a and x86_64; `VIBRATE` only; v2/v3 signatures pass; embedded build identifier passes
+
+Install without clearing the existing save:
+
+```bash
+adb install -r build/android/one_more_watt_phase13_debug.apk
+adb shell am force-stop com.ferroai.onemorewatt
+adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 1
+```
+
+After launch, confirm Settings shows build `738732db1f9b`. Then drag upward through Build, Upgrades, Reports, and Settings; make an affordable purchase and confirm it applies immediately without a purchase modal.
+
 ## Phase 10 targeted stabilization retest — Deferred to Phase 14
 
 This preserved checklist records the exact revised artifact and the device checks that were not performed in Phase 10. The user explicitly accepted the Phase 10 limitation and transferred the Moto verification requirement to Phase 14. Unchecked items below remain unverified; none are promoted to passing evidence.
