@@ -14,16 +14,19 @@ func _run() -> void:
 	viewport.disable_3d = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	get_root().add_child(viewport)
-	var packed := load("res://scenes/app/Main.tscn") as PackedScene
-	_check(packed != null, "main scene loads")
+	var packed := load("res://scenes/debug/EconomyDebugPanel.tscn") as PackedScene
+	_check(packed != null, "economy debug scene loads")
 	if packed == null:
 		_finish(viewport)
 		return
-	var main := packed.instantiate() as Control
-	viewport.add_child(main)
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	viewport.add_child(scroll)
+	var panel := packed.instantiate() as EconomyDebugPanel
+	scroll.add_child(panel)
 	await process_frame
 	await process_frame
-	var panel := main.get_node("SafeArea/DevelopmentShell/ContentScroll/Content/EconomyDebugPanel") as EconomyDebugPanel
 	_check(panel != null, "economy debug panel instantiates")
 	if panel == null:
 		_finish(viewport)
@@ -53,7 +56,7 @@ func _run() -> void:
 		_check(is_equal_approx(float(panel.economy.get_derived_values()[case["key"]]), expected), "%s result matches preview" % case["id"])
 		_check("MATCHED" in panel.transaction_label.text, "%s shows preview/result confirmation" % case["id"])
 	if capture_layouts:
-		await _capture(viewport, main, "core_purchases", true)
+		await _capture(viewport, scroll, "core_purchases", true)
 
 	await _press(_button(panel, "MilestoneButton"))
 	var milestone_preview := panel.economy.preview_infrastructure("wall_outlet")
@@ -63,7 +66,7 @@ func _run() -> void:
 	_check(is_equal_approx(panel.economy.grid.state.generation_rate, 100.0), "tenth purchase applies milestone effect")
 	_check("milestone_reached" in panel.events_label.text and "MATCHED" in panel.transaction_label.text, "milestone event and matching prediction are visible")
 	if capture_layouts:
-		await _capture(viewport, main, "milestone", true)
+		await _capture(viewport, scroll, "milestone", true)
 
 	await _press(_button(panel, "LeveledUpgradeButton"))
 	var upgrade_preview := panel.economy.preview_upgrade("outlet_calibration")
@@ -73,7 +76,7 @@ func _run() -> void:
 	_check(is_equal_approx(panel.economy.grid.state.generation_rate, predicted_generation), "upgrade result matches preview")
 	_check("MATCHED" in panel.transaction_label.text, "upgrade shows preview/result confirmation")
 	if capture_layouts:
-		await _capture(viewport, main, "upgrade", true)
+		await _capture(viewport, scroll, "upgrade", true)
 
 	await _press(_button(panel, "SeedFundsButton"))
 	await _press(_button(panel, "UnlockButton"))
@@ -87,7 +90,7 @@ func _run() -> void:
 	await _press(_button(panel, "DisableAutomationButton"))
 	_check(not panel.economy.state.reserve_automation_enabled, "automation disable control is respected")
 	if capture_layouts:
-		await _capture(viewport, main, "automation", true)
+		await _capture(viewport, scroll, "automation", true)
 
 	for button_value: Variant in panel.find_children("*", "Button", true, false):
 		var button := button_value as Button
@@ -104,8 +107,7 @@ func _press(button: Button) -> void:
 	await process_frame
 
 
-func _capture(viewport: SubViewport, main: Control, name: String, bottom: bool) -> void:
-	var scroll := main.get_node("SafeArea/DevelopmentShell/ContentScroll") as ScrollContainer
+func _capture(viewport: SubViewport, scroll: ScrollContainer, name: String, bottom: bool) -> void:
 	scroll.scroll_vertical = 100000 if bottom else 0
 	await process_frame
 	await process_frame

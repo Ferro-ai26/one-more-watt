@@ -1,50 +1,50 @@
 # Current Handoff
 
 Updated: 2026-07-20
-Active phase: Phase 04 — Infrastructure and Upgrades
+Active phase: Phase 05 — Main UI and Feedback
 
 ## Current state
 
-Phase 04 is implemented, validated, committed as `ca56a35`, and pushed to `origin/main`. A deterministic economy coordinator now turns Stored Energy, stable-ID ownership, upgrade levels, milestones, and automation settings into grid values through one shared preview/purchase/rebuild path. Canonical content version `0.4.0` includes all 18 Eras 1–3 infrastructure definitions and three representative upgrades. The active phase is complete; Phase 05 remains gated on explicit user authorization.
+Phase 05 is implemented and validated in the working tree. The former development shell is now a responsive production-structured online interface connecting WATT requests, the deterministic grid, purchases/upgrades, allocation, and reports without exposing debug controls. Content version is `0.5.0`. The active phase is complete; Phase 06 persistence/offline work remains gated on explicit user authorization.
 
 ## Completed
 
-- Committed and pushed the Phase 04 implementation as `ca56a35` to `origin/main`.
-- Added exact floored next and bulk pricing with atomic infrastructure and upgrade purchase commands.
-- Added locked, unaffordable, affordable, and maxed previews with missing currency, unmet conditions, exact costs, and predicted derived-grid deltas.
-- Added explicit starting ownership, milestone threshold tracking/events, one-time and leveled upgrades, and direct/category/tag/global multiplier groups.
-- Added a rebuild boundary that derives grid values from baseline hardware, ownership, passive effects, milestones, and upgrades without double-counting the starting Wall Outlet.
-- Added disabled-by-default low-Reserve throttling with an explicit normalized threshold and no automated spending.
-- Expanded canonical content to version `0.4.0` with three eras, all 18 specified infrastructure definitions, and three representative upgrades.
-- Added a portrait diagnostic shop exercising core categories, unlocks, affordability, milestone crossing, upgrades, and automation through domain previews rather than UI balance constants.
+- Added a thin `GameSession` that synchronizes shared Stored Energy and economy-derived grid values across the existing request and economy domains at explicit command boundaries.
+- Added `MainViewModel` snapshots whose request forecasts, costs, effects, and reports come directly from domain calculators.
+- Built the fixed portrait hierarchy: top status, persistent WATT/request focal panel, Generation/Transmission/Reserve vital cards, allocation control, lower screen region, and Grid/Build/Upgrades/Reports navigation.
+- Added reusable shop and vital cards, request authorization, large-purchase confirmation, performance reports, report archive, modal/back handling, explicit bottleneck text, and placeholder environmental state.
+- Added centralized engineering/scientific number and W/kW/MW unit formatting.
+- Added runtime reduced-motion, three text sizes, notation, haptics, large-purchase confirmation, named audio-bus controls, diagnostics, credits/version, and safe feedback hooks.
+- Increased the first request reward from 10 to 12 Stored Energy so it funds the exact next Wall Outlet cost, and bumped canonical content to `0.5.0`.
+- Kept all three diagnostic panels independently testable after removing them from the main scene.
 
 ## Next action
 
-Review the Phase 04 evidence and proposed `DEC-014`. Do not begin Phase 05 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
+Review the Phase 05 evidence and proposed `DEC-015`. Do not begin Phase 06 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
 
 ## Known blockers
 
 - Android package identifier and publisher identity are not yet supplied.
 - The local Android SDK has tools but no installed platform package, so Android export is not supportable yet.
-- Physical Android safe-area, touch, and device behavior remain unverified.
-- No Phase 04 implementation blocker remains.
+- Physical Android safe-area, touch, haptic, and audio-device behavior remain unverified.
+- No Phase 05 implementation blocker remains.
 
 ## Test evidence
 
-- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 30 content/API checks, 12 invalid fixtures, 178 grid checks, 143 request-domain checks, 93 economy checks, three portrait layouts, 18 grid-panel checks, 58 request-panel checks, 42 economy-panel checks, and headless smoke launch.
-- `./tools/test_economy.sh` — passed independently with 93 checks covering every Era 1–3 infrastructure interpretation, exact costs, atomicity, unlocks, milestones, stacking, max levels, rebuild equivalence, and automation boundaries.
-- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_economy_debug_panel.gd -- --capture-layouts` — passed with 46 checks and four captures.
-- Core-category purchases, the tenth-item milestone, an upgrade, and low-Reserve automation at 393 × 873 were visually inspected. Each purchase reported that its preview matched the resulting grid; milestone and purchase events were distinct and readable.
-- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 04.
+- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 30 content/API checks, 12 invalid fixtures, 178 grid checks, 143 request-domain checks, 93 economy checks, 40 UI/domain checks, 154 headless main-interface checks, three portrait layouts, 18 grid-panel checks, 58 request-panel checks, 42 economy-panel checks, and headless smoke launch.
+- `./tools/test_ui.sh` — passed independently with 40 number-formatting/navigation/settings/session/view-model checks and 154 main-interface checks covering the online loop at all three portrait sizes.
+- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_main_ui.gd -- --capture-layouts` — passed with 175 checks and 21 captures.
+- Authorization, report, brownout, Build, Upgrades, Reports archive, and Settings states at 360 × 640, 393 × 873, and 480 × 800 were visually inspected. One detected 360-pixel report-row overflow was fixed, guarded with per-tab width assertions, recaptured, and re-inspected.
+- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 05.
 
 ## Files changed
 
-- Economy domain: state, preview, event, unlock evaluator, calculator, coordinator, and generalized infrastructure aggregator under `scripts/simulation/`
-- Content: all Eras 1–3 infrastructure, three upgrades, era membership, localization, milestone/starting-ownership balance, validator extensions, and manifest content version `0.4.0`
-- Debug presentation: `scenes/debug/EconomyDebugPanel.tscn`, `scripts/ui/economy_debug_panel.gd`, and the Phase 04 main development shell
-- Tests/tools: economy unit and panel integration suites, `tools/test_economy.sh`, responsive/prior-panel regression adjustments, and the full validator
-- Documentation: economy/rebuild boundaries, content schema, proposed decision, README, active phase, and all required living documents
+- Online/UI state: `scripts/core/game_session.gd`, `scripts/ui/main_view_model.gd`, navigation, runtime settings, number formatter, and feedback hooks
+- Main presentation: `scenes/app/Main.tscn`, `scripts/ui/main_ui.gd`, and reusable ShopItemCard/VitalCard scenes and scripts
+- Content: manifest `0.5.0` and first-request reward tuning
+- Tests/tools: Phase 05 unit/integration suites, `tools/test_ui.sh`, responsive/prior-panel regression adjustments, and the full validator
+- Documentation: UI/architecture/art-feedback/balance baselines, proposed decision, README, active phase, and all required living documents
 
 ## Remaining acceptance criteria
 
-All Phase 04 acceptance criteria pass locally. Production main navigation, finished shop presentation, persistence, offline progress, full Era 1–3 request population, automated spending, Eras 4+, monetization, and physical Android verification remain intentionally out of scope.
+All Phase 05 acceptance criteria pass locally. Save serialization, settings persistence across launches, offline progress/reports, final art/music, full Eras 1–3 content population, landscape-specific layout, production store assets, and physical Android verification remain intentionally out of scope.

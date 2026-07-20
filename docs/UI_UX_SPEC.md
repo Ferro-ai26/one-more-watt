@@ -211,3 +211,10 @@ The tap target must have animation, sound, and a visible numeric response. Autom
 - Does WATT remain visually central?
 - Is every warning actionable?
 
+## Phase 05 implementation baseline
+
+The production-structured prototype shell keeps its top status, WATT/request focal panel, three vital cards, allocation control, and primary navigation visible as one portrait hierarchy. Grid, Build, Upgrades, and Reports replace only the lower scrollable screen region, so WATT remains present during routine purchasing.
+
+Request authorization and performance reports use one blocking modal layer with explicit action/back controls. The application back action closes the top modal first, then returns a secondary tab to Grid. Infrastructure and upgrade cards consume economy previews directly and show ownership/level, availability, exact next cost, missing currency or lock reason, and predicted effect before issuing a command.
+
+Runtime accessibility state covers reduced motion, three text scales, engineering/scientific notation, haptics, and large-purchase confirmation. Audio controls map to the existing Master, Music, SFX, and UI buses. These settings intentionally remain in memory until Phase 06 defines persistence.

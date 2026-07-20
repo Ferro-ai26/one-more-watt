@@ -1,0 +1,661 @@
+class_name MainUI
+extends Control
+
+const SHOP_CARD_SCENE := preload("res://scenes/components/ShopItemCard.tscn")
+const VITAL_CARD_SCENE := preload("res://scenes/components/VitalCard.tscn")
+
+var session := GameSession.new()
+var view_model: MainViewModel
+var navigation := NavigationState.new()
+var _refresh_accumulator := 0.0
+var _last_report_modal_id := ""
+var _pending_purchase: Dictionary = {}
+
+var status_era_label: Label
+var status_energy_label: Label
+var status_power_label: Label
+var watt_core: Label
+var environment_label: Label
+var dialogue_label: Label
+var request_title_label: Label
+var request_meta_label: Label
+var request_progress: ProgressBar
+var forecast_label: Label
+var request_action_button: Button
+var vital_cards: Dictionary = {}
+var allocation_label: Label
+var allocation_buttons: Dictionary = {}
+var screen_title_label: Label
+var screen_content: VBoxContainer
+var nav_buttons: Dictionary = {}
+var feedback_label: Label
+var modal_overlay: ColorRect
+var modal_title: Label
+var modal_content: VBoxContainer
+
+
+func _ready() -> void:
+	_build_interface()
+	var content_db := get_node_or_null("/root/ContentDB")
+	if content_db == null or not bool(content_db.call("is_loaded")):
+		_show_content_error()
+		return
+	var repository: ContentRepository = content_db.get("repository")
+	if not session.configure(repository):
+		_show_content_error()
+		return
+	view_model = MainViewModel.new(session)
+	session.feedback.feedback_requested.connect(_on_feedback)
+	select_tab("grid")
+	_refresh_all(true)
+	set_process(true)
+	print("ONE MORE WATT Phase 05 main interface ready")
+	if "--smoke-test" in OS.get_cmdline_user_args():
+		get_tree().quit(0)
+
+
+func _process(delta: float) -> void:
+	if session.requests.get_active_state() != null and navigation.modal_depth() == 0:
+		session.advance_time(minf(delta, 0.25))
+	_refresh_accumulator += delta
+	if _refresh_accumulator >= 0.2:
+		_refresh_accumulator = 0.0
+		_refresh_all(false)
+	if not session.last_report_id.is_empty() and session.last_report_id != _last_report_modal_id and navigation.modal_depth() == 0:
+		open_report_modal(session.last_report_id)
+
+
+func select_tab(tab: String) -> bool:
+	if not navigation.select_tab(tab):
+		return false
+	for key: Variant in nav_buttons:
+		(nav_buttons[key] as Button).button_pressed = str(key) == tab
+	_rebuild_screen()
+	return true
+
+
+func handle_back() -> bool:
+	if navigation.modal_depth() > 0:
+		close_top_modal()
+		return true
+	if navigation.current_tab != "grid":
+		select_tab("grid")
+		return true
+	return false
+
+
+func open_request_modal() -> void:
+	var request := view_model.request_snapshot()
+	if request.get("status") == RequestRunState.COMPLETED:
+		open_report_modal(str(request["id"]))
+		return
+	if request.get("status") != RequestRunState.ANNOUNCED:
+		return
+	_open_modal("request_detail", "REQUEST FORECAST")
+	_add_modal_label(str(request["title"]), 24, Color(1.0, 0.89, 0.35))
+	_add_modal_label(str(request["dialogue"]), 18, Color(0.84, 0.92, 1.0))
+	_add_modal_label("LOAD %s  •  PEAK %s\nRESERVE %s  •  SERVICE %.0f%%\nESTIMATE %s  •  BOTTLENECK %s\nREWARD %s" % [
+		NumberFormatter.format_power(float(request["continuous_demand"]), session.settings.number_notation),
+		NumberFormatter.format_power(float(request["peak"]), session.settings.number_notation),
+		NumberFormatter.format_energy(float(request["recommended_reserve"]), session.settings.number_notation),
+		float(request["service_ratio"]) * 100.0,
+		NumberFormatter.format_duration(float(request["estimated_seconds"])),
+		str(request["bottleneck"]).to_upper(),
+		NumberFormatter.format_energy(float(request["reward"]), session.settings.number_notation),
+	], 17, Color.WHITE)
+	if bool(request["underprepared"]):
+		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, Color(1.0, 0.62, 0.3))
+	var authorize := _button("Authorize Request", "AuthorizeButton")
+	authorize.pressed.connect(_authorize_from_modal)
+	modal_content.add_child(authorize)
+	_add_modal_back_button()
+
+
+func open_report_modal(request_id: String) -> void:
+	var report := session.requests.get_report(request_id)
+	if report == null:
+		return
+	_last_report_modal_id = request_id
+	_open_modal("performance_report", "PERFORMANCE REPORT")
+	var data := view_model.report_snapshot(report)
+	_add_modal_label("GRADE %s  •  %.1f" % [data["grade"], data["score"]], 32, Color(1.0, 0.89, 0.35))
+	_add_modal_label(str(data["title"]), 22, Color(0.3, 0.78, 1.0))
+	_add_modal_label("TIME %s  •  SERVICE %.1f%%\nPEAK %s / %s SERVED\nBROWNOUT %s  •  EARNED %s\nUNLOCKS %s" % [
+		NumberFormatter.format_duration(float(data["completion_seconds"])),
+		float(data["service_ratio"]) * 100.0,
+		NumberFormatter.format_power(float(data["peak_demand"]), session.settings.number_notation),
+		NumberFormatter.format_power(float(data["peak_served"]), session.settings.number_notation),
+		NumberFormatter.format_duration(float(data["brownout_seconds"])),
+		NumberFormatter.format_energy(float(data["stored_energy"]), session.settings.number_notation),
+		"None" if (data["unlock_ids"] as Array).is_empty() else ", ".join(data["unlock_ids"]),
+	], 17, Color.WHITE)
+	_add_modal_label(str(data["completion"]), 18, Color(0.75, 0.9, 1.0))
+	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, Color(0.62, 0.94, 0.72))
+	var report_state := session.requests.get_request_state(request_id)
+	var acknowledge := _button("Continue" if report_state.status == RequestRunState.COMPLETED else "Back to Reports", "AcknowledgeButton")
+	acknowledge.pressed.connect(func() -> void:
+		if report_state.status == RequestRunState.COMPLETED:
+			session.acknowledge_report(request_id)
+		close_top_modal()
+		_refresh_all(true)
+	)
+	modal_content.add_child(acknowledge)
+
+
+func open_settings_modal() -> void:
+	_open_modal("settings", "SETTINGS + ACCESSIBILITY")
+	var reduced := CheckButton.new()
+	reduced.name = "ReducedMotionCheck"
+	reduced.custom_minimum_size.y = 48
+	reduced.text = "Reduced motion"
+	reduced.button_pressed = session.settings.reduced_motion
+	reduced.toggled.connect(func(value: bool) -> void: session.settings.reduced_motion = value)
+	modal_content.add_child(reduced)
+	var text_size := _button(_text_size_label(), "TextSizeButton")
+	text_size.pressed.connect(_cycle_text_size)
+	modal_content.add_child(text_size)
+	var notation := _button(_notation_label(), "NotationButton")
+	notation.pressed.connect(_toggle_notation)
+	modal_content.add_child(notation)
+	var haptics := CheckButton.new()
+	haptics.name = "HapticsCheck"
+	haptics.custom_minimum_size.y = 48
+	haptics.text = "Haptics"
+	haptics.button_pressed = session.settings.haptics_enabled
+	haptics.toggled.connect(func(value: bool) -> void: session.settings.haptics_enabled = value)
+	modal_content.add_child(haptics)
+	var confirm := CheckButton.new()
+	confirm.name = "ConfirmLargeCheck"
+	confirm.custom_minimum_size.y = 48
+	confirm.text = "Confirm large purchases"
+	confirm.button_pressed = session.settings.confirm_large_purchases
+	confirm.toggled.connect(func(value: bool) -> void: session.settings.confirm_large_purchases = value)
+	modal_content.add_child(confirm)
+	for volume_data: Dictionary in [
+		{"label": "Master", "field": "master_volume"},
+		{"label": "Music", "field": "music_volume"},
+		{"label": "Effects", "field": "effects_volume"},
+		{"label": "Text sound", "field": "text_sound_volume"},
+	]:
+		var volume_button := _button("%s volume • %.0f%%" % [volume_data["label"], float(session.settings.get(volume_data["field"])) * 100.0], "%sVolumeButton" % volume_data["label"].replace(" ", ""))
+		volume_button.pressed.connect(_cycle_volume.bind(volume_button, str(volume_data["field"]), str(volume_data["label"])))
+		modal_content.add_child(volume_button)
+	var diagnostic := _button("Show diagnostic summary", "DiagnosticButton")
+	diagnostic.pressed.connect(func() -> void: diagnostic.text = "Online session • content %s • no save yet" % session.repository.get_content_version())
+	modal_content.add_child(diagnostic)
+	_add_modal_label("ONE MORE WATT • v%s\nPrototype by Ferro AI" % ProjectSettings.get_setting("application/config/version", "unknown"), 15, Color(0.6, 0.68, 0.8))
+	_add_modal_back_button("Close Settings")
+
+
+func close_top_modal() -> void:
+	if navigation.pop_modal().is_empty():
+		return
+	modal_overlay.visible = false
+	_clear_children(modal_content)
+
+
+func refresh_now(rebuild_screen: bool = false) -> void:
+	_refresh_all(rebuild_screen)
+
+
+func _build_interface() -> void:
+	set_process(false)
+	var shell := get_node("SafeArea/AppShell") as PanelContainer
+	var layout := VBoxContainer.new()
+	layout.name = "MainLayout"
+	layout.add_theme_constant_override("separation", 5)
+	shell.add_child(layout)
+
+	var status := HBoxContainer.new()
+	status.name = "StatusBand"
+	status.custom_minimum_size.y = 42
+	layout.add_child(status)
+	status_era_label = _label("COLD BOOT", 14, Color(0.3, 0.78, 1.0))
+	status_era_label.name = "EraLabel"
+	status_era_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status.add_child(status_era_label)
+	status_energy_label = _label("0 SE", 16, Color(1.0, 0.89, 0.35))
+	status_energy_label.name = "StoredEnergyLabel"
+	status_energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	status_energy_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status.add_child(status_energy_label)
+	status_power_label = _label("5 W", 14, Color(0.74, 0.9, 1.0))
+	status_power_label.name = "AggregatePowerLabel"
+	status_power_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	status_power_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status.add_child(status_power_label)
+	var settings_button := _button("⚙", "SettingsButton")
+	settings_button.custom_minimum_size = Vector2(48, 48)
+	settings_button.add_theme_font_size_override("font_size", 18)
+	settings_button.tooltip_text = "Settings"
+	settings_button.pressed.connect(open_settings_modal)
+	status.add_child(settings_button)
+
+	var focal := PanelContainer.new()
+	focal.name = "WattRequestPanel"
+	focal.custom_minimum_size.y = 154
+	focal.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.105, 0.16), Color(0.19, 0.73, 1.0), 12, 10))
+	layout.add_child(focal)
+	var focal_row := HBoxContainer.new()
+	focal_row.add_theme_constant_override("separation", 10)
+	focal.add_child(focal_row)
+	var watt_column := VBoxContainer.new()
+	watt_column.custom_minimum_size.x = 76
+	focal_row.add_child(watt_column)
+	watt_core = _label("◉‿◉", 26, Color(0.25, 0.88, 1.0))
+	watt_core.name = "WattCore"
+	watt_core.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	watt_column.add_child(watt_core)
+	environment_label = _label("OLD MONITOR\n1 OUTLET", 11, Color(0.58, 0.67, 0.78))
+	environment_label.name = "EnvironmentLabel"
+	environment_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	watt_column.add_child(environment_label)
+	var request_column := VBoxContainer.new()
+	request_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	request_column.add_theme_constant_override("separation", 2)
+	focal_row.add_child(request_column)
+	dialogue_label = _label("WATT is booting.", 16, Color(0.84, 0.92, 1.0))
+	dialogue_label.name = "DialogueLabel"
+	dialogue_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	dialogue_label.max_lines_visible = 2
+	request_column.add_child(dialogue_label)
+	request_title_label = _label("Finish Booting", 19, Color(1.0, 0.89, 0.35))
+	request_title_label.name = "RequestTitleLabel"
+	request_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	request_column.add_child(request_title_label)
+	request_meta_label = _label("CAPACITY • ANNOUNCED", 12, Color(0.55, 0.75, 0.92))
+	request_meta_label.name = "RequestMetaLabel"
+	request_column.add_child(request_meta_label)
+	request_progress = ProgressBar.new()
+	request_progress.name = "RequestProgress"
+	request_progress.custom_minimum_size.y = 12
+	request_progress.show_percentage = false
+	request_column.add_child(request_progress)
+	forecast_label = _label("Forecast ready", 12, Color(0.65, 0.75, 0.86))
+	forecast_label.name = "ForecastLabel"
+	forecast_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	request_column.add_child(forecast_label)
+	request_action_button = _button("Review Request", "RequestActionButton")
+	request_action_button.custom_minimum_size.y = 48
+	request_action_button.add_theme_font_size_override("font_size", 16)
+	request_action_button.pressed.connect(open_request_modal)
+	request_column.add_child(request_action_button)
+
+	var vital_grid := HBoxContainer.new()
+	vital_grid.name = "VitalCards"
+	vital_grid.add_theme_constant_override("separation", 5)
+	layout.add_child(vital_grid)
+	for vital_id: String in ["generation", "transmission", "reserve"]:
+		var card := VITAL_CARD_SCENE.instantiate() as VitalCard
+		card.name = "%sVitalCard" % vital_id.capitalize()
+		vital_grid.add_child(card)
+		vital_cards[vital_id] = card
+
+	var allocation_box := VBoxContainer.new()
+	allocation_box.name = "AllocationControl"
+	allocation_box.add_theme_constant_override("separation", 1)
+	layout.add_child(allocation_box)
+	var allocation_row := HBoxContainer.new()
+	allocation_box.add_child(allocation_row)
+	for data: Dictionary in [
+		{"id": "expand_grid", "label": "Expand Grid"},
+		{"id": "balanced", "label": "Balanced"},
+		{"id": "feed_watt", "label": "Feed WATT"},
+	]:
+		var button := _button(str(data["label"]), "%sAllocationButton" % str(data["id"]).to_pascal_case())
+		button.toggle_mode = true
+		button.custom_minimum_size.y = 48
+		button.add_theme_font_size_override("font_size", 13)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.pressed.connect(_set_allocation.bind(str(data["id"])))
+		allocation_row.add_child(button)
+		allocation_buttons[data["id"]] = button
+	allocation_label = _label("Balanced", 12, Color(0.62, 0.82, 0.94))
+	allocation_label.name = "AllocationSummaryLabel"
+	allocation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	allocation_box.add_child(allocation_label)
+
+	var screen_panel := PanelContainer.new()
+	screen_panel.name = "ScreenPanel"
+	screen_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	screen_panel.add_theme_stylebox_override("panel", _panel_style(Color(0.04, 0.055, 0.09), Color(0.14, 0.24, 0.36), 10, 7))
+	layout.add_child(screen_panel)
+	var screen_layout := VBoxContainer.new()
+	screen_panel.add_child(screen_layout)
+	screen_title_label = _label("GRID", 14, Color(0.3, 0.78, 1.0))
+	screen_title_label.name = "ScreenTitleLabel"
+	screen_layout.add_child(screen_title_label)
+	var scroll := ScrollContainer.new()
+	scroll.name = "ScreenScroll"
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	screen_layout.add_child(scroll)
+	screen_content = VBoxContainer.new()
+	screen_content.name = "ScreenContent"
+	screen_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	screen_content.add_theme_constant_override("separation", 7)
+	scroll.add_child(screen_content)
+
+	var navigation_bar := HBoxContainer.new()
+	navigation_bar.name = "PrimaryNavigation"
+	layout.add_child(navigation_bar)
+	for tab: String in NavigationState.TABS:
+		var nav := _button(tab.capitalize(), "%sTabButton" % tab.capitalize())
+		nav.toggle_mode = true
+		nav.custom_minimum_size.y = 48
+		nav.add_theme_font_size_override("font_size", 14)
+		nav.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		nav.pressed.connect(select_tab.bind(tab))
+		navigation_bar.add_child(nav)
+		nav_buttons[tab] = nav
+	feedback_label = _label("GRID ONLINE", 11, Color(0.5, 0.62, 0.76))
+	feedback_label.name = "FeedbackLabel"
+	feedback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	layout.add_child(feedback_label)
+
+	_build_modal_layer()
+
+
+func _build_modal_layer() -> void:
+	modal_overlay = ColorRect.new()
+	modal_overlay.name = "ModalOverlay"
+	modal_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	modal_overlay.color = Color(0.01, 0.015, 0.025, 0.92)
+	modal_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	modal_overlay.visible = false
+	add_child(modal_overlay)
+	var margin := MarginContainer.new()
+	margin.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	margin.add_theme_constant_override("margin_left", 18)
+	margin.add_theme_constant_override("margin_top", 36)
+	margin.add_theme_constant_override("margin_right", 18)
+	margin.add_theme_constant_override("margin_bottom", 36)
+	modal_overlay.add_child(margin)
+	var panel := PanelContainer.new()
+	panel.name = "ModalPanel"
+	panel.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.075, 0.12), Color(0.19, 0.73, 1.0), 16, 14))
+	margin.add_child(panel)
+	var modal_layout := VBoxContainer.new()
+	panel.add_child(modal_layout)
+	modal_title = _label("MODAL", 18, Color(0.3, 0.78, 1.0))
+	modal_title.name = "ModalTitle"
+	modal_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	modal_layout.add_child(modal_title)
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	modal_layout.add_child(scroll)
+	modal_content = VBoxContainer.new()
+	modal_content.name = "ModalContent"
+	modal_content.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	modal_content.add_theme_constant_override("separation", 8)
+	scroll.add_child(modal_content)
+
+
+func _refresh_all(rebuild_screen: bool) -> void:
+	if view_model == null:
+		return
+	var status := view_model.status_snapshot()
+	var notation := session.settings.number_notation
+	status_era_label.text = "%s\n%s" % [str(status["era"]).to_upper(), str(status["scale"]).to_upper()]
+	status_energy_label.text = NumberFormatter.format_energy(float(status["stored_energy"]), notation)
+	status_power_label.text = NumberFormatter.format_power(float(status["deliverable_power"]), notation)
+	var request := view_model.request_snapshot()
+	dialogue_label.text = str(request["dialogue"])
+	request_title_label.text = str(request["title"])
+	request_meta_label.text = "%s  •  %s" % [str(request.get("kind", "idle")).to_upper(), str(request["status"]).to_upper()]
+	request_progress.value = float(request.get("progress", 0.0)) * 100.0
+	forecast_label.text = "%s PEAK  •  %s  •  %s" % [
+		NumberFormatter.format_power(float(request.get("peak", 0.0)), notation),
+		str(request.get("bottleneck", "none")).to_upper(),
+		NumberFormatter.format_duration(float(request.get("estimated_seconds", INF))),
+	]
+	_update_request_action(str(request["status"]))
+	var limiting := str(request.get("bottleneck", "none"))
+	(vital_cards["generation"] as VitalCard).configure("Generation", NumberFormatter.format_power(float(status["generation"]), notation), "PRODUCING", limiting == "generation")
+	(vital_cards["transmission"] as VitalCard).configure("Transmission", NumberFormatter.format_power(float(status["transmission"]), notation), "CAPACITY", limiting == "transmission")
+	(vital_cards["reserve"] as VitalCard).configure("Reserve", "%s/%s" % [NumberFormatter.format_number(float(status["reserve_stored"]), notation), NumberFormatter.format_number(float(status["reserve_capacity"]), notation)], "READY", limiting == "reserve")
+	var mode := session.requests.grid.state.allocation_mode
+	for key: Variant in allocation_buttons:
+		(allocation_buttons[key] as Button).button_pressed = str(key) == mode
+	var live_result := session.requests.grid.get_last_result()
+	allocation_label.text = "%s  •  %s/s Stored Energy" % [mode.replace("_", " ").capitalize(), NumberFormatter.format_number(live_result.stored_energy_rate, notation)]
+	environment_label.text = "OLD MONITOR\n%d OUTLET%s" % [int(session.economy.state.owned.get("wall_outlet", 0)), "S" if int(session.economy.state.owned.get("wall_outlet", 0)) != 1 else ""]
+	if rebuild_screen:
+		_rebuild_screen()
+
+
+func _update_request_action(status: String) -> void:
+	match status:
+		RequestRunState.ANNOUNCED:
+			request_action_button.text = "Review + Authorize"
+			request_action_button.disabled = false
+		RequestRunState.RUNNING:
+			request_action_button.text = "Request Running"
+			request_action_button.disabled = true
+		RequestRunState.COMPLETED:
+			request_action_button.text = "View Report"
+			request_action_button.disabled = false
+		_:
+			request_action_button.text = "Waiting for WATT"
+			request_action_button.disabled = true
+
+
+func _rebuild_screen() -> void:
+	if screen_content == null or view_model == null:
+		return
+	_clear_children(screen_content)
+	screen_title_label.text = navigation.current_tab.to_upper()
+	match navigation.current_tab:
+		"grid": _build_grid_screen()
+		"build": _build_shop_screen(view_model.infrastructure_cards())
+		"upgrades": _build_shop_screen(view_model.upgrade_cards())
+		"reports": _build_reports_screen()
+
+
+func _build_grid_screen() -> void:
+	var request := view_model.request_snapshot()
+	var environment := _label("DESK GRID  •  Power pulses route from the wall outlet into WATT's old monitor.", 15, Color(0.74, 0.84, 0.94))
+	environment.name = "EnvironmentSummary"
+	environment.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	screen_content.add_child(environment)
+	var action := _label("RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none"))), 15, Color(0.62, 0.94, 0.72))
+	action.name = "RecommendedActionLabel"
+	action.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	screen_content.add_child(action)
+
+
+func _build_shop_screen(cards: Array[Dictionary]) -> void:
+	for data: Dictionary in cards:
+		var card := SHOP_CARD_SCENE.instantiate() as ShopItemCard
+		card.name = "%sCard" % str(data["id"]).to_pascal_case()
+		screen_content.add_child(card)
+		card.configure(data, session.settings.number_notation)
+		card.purchase_requested.connect(_request_purchase)
+
+
+func _build_reports_screen() -> void:
+	var reports := view_model.reports()
+	if reports.is_empty():
+		var empty := _label("Completed request reports will appear here. WATT has not filed any paperwork yet.", 16, Color(0.68, 0.76, 0.86))
+		empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(empty)
+		return
+	for data: Dictionary in reports:
+		var button := _button("GRADE %s  •  %s\n%.1f%% served  •  %s" % [data["grade"], data["title"], float(data["service_ratio"]) * 100.0, NumberFormatter.format_duration(float(data["completion_seconds"]))], "%sReportButton" % str(data["id"]).to_pascal_case())
+		button.custom_minimum_size.y = 72
+		button.add_theme_font_size_override("font_size", 14)
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.pressed.connect(open_report_modal.bind(str(data["id"])))
+		screen_content.add_child(button)
+
+
+func _request_purchase(content_id: String, family: String) -> void:
+	var preview := session.preview_infrastructure(content_id) if family == "infrastructure" else session.preview_upgrade(content_id)
+	if not preview.can_purchase():
+		return
+	if session.settings.confirm_large_purchases and preview.cost >= session.requests.grid.state.stored_energy * 0.5:
+		_pending_purchase = {"id": content_id, "family": family}
+		_open_modal("purchase_confirmation", "CONFIRM PURCHASE")
+		_add_modal_label("Spend %s?\nThe predicted effect shown on the card will be applied immediately." % NumberFormatter.format_energy(preview.cost, session.settings.number_notation), 18, Color.WHITE)
+		var confirm := _button("Confirm Purchase", "ConfirmPurchaseButton")
+		confirm.pressed.connect(_confirm_pending_purchase)
+		modal_content.add_child(confirm)
+		_add_modal_back_button("Cancel")
+		return
+	_apply_purchase(content_id, family)
+
+
+func _confirm_pending_purchase() -> void:
+	var pending := _pending_purchase.duplicate()
+	_pending_purchase.clear()
+	close_top_modal()
+	_apply_purchase(str(pending.get("id", "")), str(pending.get("family", "")))
+
+
+func _apply_purchase(content_id: String, family: String) -> void:
+	var accepted := session.purchase_infrastructure(content_id) if family == "infrastructure" else session.purchase_upgrade(content_id)
+	feedback_label.text = "BUILT  •  %s" % content_id.replace("_", " ").to_upper() if accepted else "PURCHASE NOT AVAILABLE"
+	_refresh_all(true)
+
+
+func _authorize_from_modal() -> void:
+	if session.authorize_current_request():
+		close_top_modal()
+		_refresh_all(true)
+
+
+func _set_allocation(mode: String) -> void:
+	session.set_allocation_mode(mode)
+	_refresh_all(false)
+
+
+func _open_modal(modal_id: String, title: String) -> void:
+	if navigation.modal_depth() > 0:
+		close_top_modal()
+	navigation.push_modal(modal_id)
+	_clear_children(modal_content)
+	modal_title.text = title
+	modal_overlay.visible = true
+
+
+func _add_modal_label(text: String, font_size: int, color: Color) -> void:
+	var label := _label(text, font_size, color)
+	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	modal_content.add_child(label)
+
+
+func _add_modal_back_button(text: String = "Back") -> void:
+	var back := _button(text, "ModalBackButton")
+	back.pressed.connect(close_top_modal)
+	modal_content.add_child(back)
+
+
+func _cycle_text_size() -> void:
+	var next := (session.settings.text_scale_index + 1) % RuntimeSettings.TEXT_SCALES.size()
+	session.settings.set_text_scale_index(next)
+	var base_theme := theme.duplicate() as Theme
+	base_theme.default_font_size = roundi(18.0 * session.settings.get_text_scale())
+	theme = base_theme
+	var button := modal_content.find_child("TextSizeButton", true, false) as Button
+	if button != null:
+		button.text = _text_size_label()
+
+
+func _toggle_notation() -> void:
+	var target := RuntimeSettings.NOTATION_SCIENTIFIC if session.settings.number_notation == RuntimeSettings.NOTATION_ENGINEERING else RuntimeSettings.NOTATION_ENGINEERING
+	session.settings.set_number_notation(target)
+	var button := modal_content.find_child("NotationButton", true, false) as Button
+	if button != null:
+		button.text = _notation_label()
+	_refresh_all(true)
+
+
+func _cycle_volume(button: Button, field: String, label: String) -> void:
+	var current := float(session.settings.get(field))
+	var next := 0.5 if current > 0.75 else (0.0 if current > 0.25 else 1.0)
+	session.settings.set(field, next)
+	var bus_name := {"master_volume": "Master", "music_volume": "Music", "effects_volume": "SFX", "text_sound_volume": "UI"}.get(field, "") as String
+	var bus_index := AudioServer.get_bus_index(bus_name)
+	if bus_index >= 0:
+		AudioServer.set_bus_mute(bus_index, is_zero_approx(next))
+		if next > 0.0:
+			AudioServer.set_bus_volume_db(bus_index, linear_to_db(next))
+	button.text = "%s volume • %.0f%%" % [label, next * 100.0]
+
+
+func _on_feedback(kind: String) -> void:
+	feedback_label.text = kind.replace("_", " ").to_upper()
+	if session.settings.reduced_motion or watt_core == null:
+		return
+	var tween := create_tween()
+	tween.tween_property(watt_core, "modulate", Color(1.0, 0.9, 0.4), 0.08)
+	tween.tween_property(watt_core, "modulate", Color.WHITE, 0.16)
+
+
+func _show_content_error() -> void:
+	set_process(false)
+	if dialogue_label != null:
+		dialogue_label.text = "Content unavailable. Validation details were printed for development."
+	if request_action_button != null:
+		request_action_button.disabled = true
+	if "--smoke-test" in OS.get_cmdline_user_args():
+		get_tree().quit(1)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("app_back"):
+		if handle_back():
+			get_viewport().set_input_as_handled()
+
+
+func _text_size_label() -> String:
+	return "Text size • %d%%" % roundi(session.settings.get_text_scale() * 100.0)
+
+
+func _notation_label() -> String:
+	return "Number notation • %s" % session.settings.number_notation.capitalize()
+
+
+static func _recommendation(bottleneck: String) -> String:
+	match bottleneck:
+		"generation": return "Build Generation so WATT receives more power."
+		"transmission": return "Build Transmission so generated power can reach WATT."
+		"reserve": return "Build Reserve before the next demand peak."
+		_: return "The grid is ready. Review WATT's request forecast."
+
+
+static func _clear_children(parent: Node) -> void:
+	for child: Node in parent.get_children():
+		parent.remove_child(child)
+		child.queue_free()
+
+
+static func _button(text: String, name: String) -> Button:
+	var button := Button.new()
+	button.name = name
+	button.text = text
+	button.custom_minimum_size.y = 48
+	return button
+
+
+static func _label(text: String, font_size: int, color: Color) -> Label:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_font_size_override("font_size", font_size)
+	label.add_theme_color_override("font_color", color)
+	return label
+
+
+static func _panel_style(background: Color, border: Color, radius: int, margin: int) -> StyleBoxFlat:
+	var style := StyleBoxFlat.new()
+	style.bg_color = background
+	style.border_color = border
+	style.set_border_width_all(1)
+	style.set_corner_radius_all(radius)
+	style.content_margin_left = margin
+	style.content_margin_top = margin
+	style.content_margin_right = margin
+	style.content_margin_bottom = margin
+	return style

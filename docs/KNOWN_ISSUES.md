@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 04 validation found no new economy, unlock, milestone, upgrade, automation, or shop-preview defects. The existing Android setup dependency remains open.
+Phase 05 validation found no new online-loop, navigation, modal, formatting, accessibility, or responsive-layout defects. The existing Android setup dependency remains open.
 
 ### ISSUE-001 — Android export configuration unavailable
 

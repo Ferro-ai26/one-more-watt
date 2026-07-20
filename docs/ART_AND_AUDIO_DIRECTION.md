@@ -88,6 +88,8 @@ WATT uses nonverbal synthesized chirps or text rhythms in the prototype, not ful
 
 Repeated high-frequency actions require variants and cooldowns to prevent fatigue.
 
+Phase 05 uses semantic purchase, request, allocation, completion, brownout, and error feedback hooks without shipping temporary sound files. Haptics run only when enabled on a supporting mobile platform, and missing audio assets remain a silent safe fallback. The placeholder WATT monitor uses restrained color modulation for feedback; reduced-motion mode suppresses that tween while preserving text and state changes.
+
 ## Music
 
 Prototype music should be minimal and loopable, with dynamic layers optional. It must leave space for UI feedback and avoid turning long idle sessions into audio fatigue. Music is not required before core loop validation.
@@ -104,4 +106,3 @@ Every asset must have:
 - Android memory consideration
 
 Do not ship temporary AI-generated or web-sourced art without explicit rights review and a recorded decision.
-

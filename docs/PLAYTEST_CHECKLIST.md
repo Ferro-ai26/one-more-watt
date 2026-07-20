@@ -2,6 +2,27 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 05 main-interface verification — 2026-07-20
+
+- Build/commit: Uncommitted Phase 05 working tree based on `5dfc470`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- Resolutions: 360 × 640, 393 × 873, and 480 × 800
+- [x] `Finish Booting` was reviewed, authorized, run from announcement to completion, and acknowledged through the intended request/report UI at every resolution.
+- [x] Forecast modals showed load, peak, Reserve, predicted service, duration, bottleneck, reward, and underprepared warning behavior without blocking authorization.
+- [x] `Perform Basic Arithmetic` ran underprepared after changing allocation to Feed WATT, visibly browned out, retained progress, and produced a report recording 63.0% service and 12.0 brownout seconds.
+- [x] Generation/Transmission/Reserve cards used explicit `! LIMITING` text in addition to color, and the Grid screen offered a matching actionable recommendation.
+- [x] A Wall Outlet card displayed its predicted +5 Generation effect before purchase; buying it increased ownership to two and the live grid to 10 W using the shared domain preview path.
+- [x] Grid, Build, Upgrades, and Reports navigation, reusable locked/unaffordable/affordable cards, and two-report archive were exercised without debug-panel controls.
+- [x] Request, report, purchase-confirmation, and settings modal/back behavior remained ordered and escapable.
+- [x] Reduced motion, 115% text, scientific notation, haptics, confirmation, audio-bus controls, diagnostics, credits, and version were visible; changed accessibility state survived closing and reopening Settings.
+- [x] Twenty-one captures covering authorization, report, brownout, Build, Upgrades, Reports, and Settings at all three resolutions were visually inspected after the horizontal archive regression was fixed.
+- [x] All visible buttons met the 48-pixel minimum target; scroll containers kept longer card/settings content reachable at 360 × 640.
+- [ ] Physical Android touch, haptic, audio-device, and safe-area behavior verified (device/export unavailable).
+
+Notes: WATT/environment graphics and audio remain Phase 05 placeholders. Xvfb cannot control V-Sync; headless project validation is warning-free.
+
 ## Phase 04 economy-shop verification — 2026-07-20
 
 - Build/commit: `ca56a35`

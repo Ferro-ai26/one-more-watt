@@ -1,12 +1,12 @@
 # Active Phase
 
-Phase: 04 — Infrastructure and Upgrades
+Phase: 05 — Main UI and Feedback
 Status: Complete
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_04_INFRASTRUCTURE_AND_UPGRADES.md`
+`docs/phases/PHASE_05_MAIN_UI_AND_FEEDBACK.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 04 is complete. Do not begin Phase 05 or change this file without explicit user authorization.
+Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 05 is complete. Do not begin Phase 06 or change this file without explicit user authorization.

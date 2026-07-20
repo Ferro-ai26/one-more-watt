@@ -9,7 +9,7 @@
 | 02 — Core Power Simulation | Complete | Commit `96bb219`; 178 simulation checks; 18 debug-panel checks; five scenario captures; headless smoke launch |
 | 03 — Request and WATT System | Complete | Commit `2bd30ac`; 143 request-domain checks; 58 headless panel checks; four lifecycle captures; headless smoke launch |
 | 04 — Infrastructure and Upgrades | Complete | Commit `ca56a35`; 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
-| 05 — Main UI and Feedback | Not started | — |
+| 05 — Main UI and Feedback | Complete | 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
 | 06 — Save and Offline Progress | Not started | — |
 | 07 — Eras 1–3 Vertical Slice | Not started | — |
 | 08 — Balance and Polish | Not started | — |
@@ -17,6 +17,16 @@
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 05 main UI and feedback
+
+- Replaced the development shell with a responsive production hierarchy that keeps WATT, request state, vital cards, allocation, and Grid/Build/Upgrades/Reports navigation visible in portrait play.
+- Added one online-session coordinator and a presentation view model so request rewards, purchases, allocation, and reports share the existing domain truth without scene-owned economy rules.
+- Added reusable infrastructure, upgrade, and vital cards; request authorization and performance-report modals; an archive; explicit bottleneck text; centralized unit formatting; and a placeholder environment.
+- Added runtime reduced-motion, text-size, notation, haptic, confirmation, and audio-bus controls plus safe semantic feedback hooks.
+- Tuned the first request reward to 12 Stored Energy and content version `0.5.0`, allowing its completion to fund the exact 11 Stored Energy second-outlet cost.
+- Verified 40 UI/domain checks, 154 headless main-interface checks, 21 graphical state captures across all three portrait targets, and the complete repository regression suite.
+- Kept save/offline behavior, final art/music, full content population, landscape design, and production store assets out of scope.
 
 ### 2026-07-20 — Phase 04 infrastructure and upgrades
 

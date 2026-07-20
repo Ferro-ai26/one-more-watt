@@ -17,7 +17,7 @@
       "demand_profile_id": "steady_boot",
       "recommended_reserve": 0,
       "unlock_conditions": [],
-      "rewards": {"stored_energy": 10, "unlock_ids": ["era01_basic_arithmetic"]},
+      "rewards": {"stored_energy": 12, "unlock_ids": ["era01_basic_arithmetic"]},
       "tutorial_action": null,
       "repeatable": false,
       "tags": ["main", "character", "tutorial"]

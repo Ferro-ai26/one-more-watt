@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 04 adds the Stored Energy economy over the deterministic grid: exact bulk costs, atomic infrastructure and upgrade purchases, unlock explanations, count milestones, derived-state rebuilding, and an opt-in low-Reserve throttle. The canonical content database now contains all 18 Eras 1–3 infrastructure definitions and three representative upgrades. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 05 connects the request, grid, and economy domains through the responsive portrait interface. WATT and the active request remain visible above Grid, Build, Upgrades, and Reports; forecasts, explicit bottleneck labels, authorization/report modals, reusable purchase cards, centralized unit formatting, runtime accessibility settings, and safe feedback hooks support the complete online loop. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, and economy tests with `./tools/test_economy.sh`. The responsive development shell exposes a simple Phase 04 shop whose preview and purchase paths share the same calculators. Production navigation, persistence, and final shop presentation remain intentionally deferred to later phases.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, and main-interface tests with `./tools/test_ui.sh`. Save data, offline progress, final art/music, and production store assets remain intentionally deferred.
 
 ## Scope policy
 

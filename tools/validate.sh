@@ -20,10 +20,11 @@ GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/validate_content.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_simulation.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_requests.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_economy.sh"
+GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_ui.sh"
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_portrait_layout.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_grid_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_request_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_economy_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" -- --smoke-test
 
-printf 'Phase 04 validation passed.\n'
+printf 'Phase 05 validation passed.\n'

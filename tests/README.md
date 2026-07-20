@@ -26,7 +26,7 @@ Run the request lifecycle, WATT dialogue, incident, reward, unlock, and report s
 ./tools/test_requests.sh
 ```
 
-The repository-level validation entry point also exercises both diagnostic panels and the full request lifecycle at portrait size.
+The repository-level validation entry point also exercises all diagnostic panels and the full request lifecycle at portrait size.
 
 Run exact cost, purchasing, milestone, upgrade, rebuild, unlock, and Reserve automation checks with:
 
@@ -35,3 +35,11 @@ Run exact cost, purchasing, milestone, upgrade, rebuild, unlock, and Reserve aut
 ```
 
 The repository-level entry point exercises the grid, request, and economy diagnostic surfaces while keeping them independent of the finished Phase 05 UI.
+
+Run centralized number formatting, runtime accessibility state, navigation/back-stack, shared online-session, view-model parity, and full main-interface checks with:
+
+```bash
+./tools/test_ui.sh
+```
+
+The main-interface integration suite drives request authorization through report, allocation changes, a brownout, infrastructure purchasing, all four tabs, settings, and modal back behavior at 360 × 640, 393 × 873, and 480 × 800.

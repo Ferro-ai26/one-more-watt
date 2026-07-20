@@ -88,6 +88,8 @@ Starting state:
 
 Era 1 should contain five main requests and one optional vanity request. Main-request energy requirements should rise from approximately 75 to 1,500 energy units.
 
+The Phase 05 `Finish Booting` sample awards 12 Stored Energy. With one starting Wall Outlet, the exact next-outlet cost is 11, leaving one Stored Energy after the first purchase and satisfying the onboarding requirement that the first completion funds a visible improvement.
+
 Era 2 unlock rule: complete the Era 1 capstone request `Understand Tuesdays` and own at least one Reserve item.
 
 ## Era 2 initial economy — Bedroom Assistant
@@ -211,4 +213,3 @@ Until analytics is explicitly approved, balance through deterministic simulation
 - Allocation-mode changes
 - Offline return outcome
 - Points of confusion or loss of interest
-

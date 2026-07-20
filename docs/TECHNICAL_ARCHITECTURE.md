@@ -145,6 +145,10 @@ The Phase 04 economy coordinator owns currency, stable-ID infrastructure counts,
 
 Starting ownership is separated from the non-owned hardware baseline during configuration. Reconfiguration or a future load therefore reconstructs the same Generation, Transmission, Reserve, request modifier, and automation values without serializing derived totals or counting starting infrastructure twice.
 
+The Phase 05 online `GameSession` is a thin coordinator over the request and economy domains. It synchronizes the authoritative Stored Energy balance and pushes economy-derived grid values into the active request simulator after a purchase; it does not recalculate costs, effects, request progress, rewards, or reports. `MainViewModel` converts domain previews and reports into presentation-ready snapshots, while `MainUI` observes those snapshots and issues commands.
+
+Navigation, runtime accessibility settings, number formatting, and feedback hooks are isolated UI services. Number promotion never alters simulation values. Haptic requests are conditional on both runtime preference and mobile capability, audio preferences address named buses, and missing sound assets degrade to a semantic feedback signal without a resource error. Phase 06 may serialize settings and session state but must not treat UI labels as state truth.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.

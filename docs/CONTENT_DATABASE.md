@@ -162,6 +162,8 @@ Effect operations are limited to `add` and `multiply`. Supported direct targets 
 
 Phase 04 canonical JSON uses content version `0.4.0` and contains all 18 infrastructure records listed for Eras 1–3 in `PROGRESSION_AND_BALANCE.md`, plus representative leveled, one-time direct, and category-multiplier upgrades. The Phase 04 shop interprets this complete infrastructure set; full request population remains a later responsibility.
 
+Phase 05 canonical JSON uses content version `0.5.0`. It changes the existing `Finish Booting` reward from 10 to 12 Stored Energy so the first completed request covers the exact 11 Stored Energy next-outlet price exposed by the production UI. No new request population or schema change is included.
+
 ## Prototype request catalog
 
 The exact numbers are tuned in data, but the initial authored set is:

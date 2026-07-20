@@ -96,6 +96,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The documented starting Wall Outlet must be real ownership for cost scaling and unlocks, while the Phase 02 starting grid already included its 5 W. Separating the two sources prevents double counting and makes a fresh state equivalent to a reconstructed state after load.
 - Consequences: Future saves should persist currency, stable ownership counts, upgrade levels, milestone history, and automation settings rather than aggregate grid totals. Authored starting ownership must validate against infrastructure IDs, and balance changes can be applied by rebuilding without save migration unless a stable ID changes.
 
+## DEC-015 — Thin online session coordinator with presentation snapshots
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Use a thin `GameSession` to coordinate the existing request and economy domains during online play. Keep calculations in those domains, synchronize their shared Stored Energy and economy-derived grid state only at explicit boundaries, and expose UI-ready data through `MainViewModel` snapshots.
+- Reason: Phase 05 needs purchases, allocation, requests, and reports to operate as one loop without moving economy rules into scene scripts or forcing the Phase 03 and Phase 04 coordinators to know about presentation.
+- Consequences: UI tests can compare view-model fields directly with domain previews, save work can later serialize domain truth behind the session boundary, and scene labels remain disposable presentation. Any future consolidation of request/economy state must preserve the tested atomic command and rebuild behavior.
+
 ## Proposed decision template
 
 ```markdown
