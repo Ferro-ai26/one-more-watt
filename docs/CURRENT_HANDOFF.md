@@ -5,10 +5,11 @@ Active phase: Phase 04 — Infrastructure and Upgrades
 
 ## Current state
 
-Phase 04 is implemented and validated in the working tree. A deterministic economy coordinator now turns Stored Energy, stable-ID ownership, upgrade levels, milestones, and automation settings into grid values through one shared preview/purchase/rebuild path. Canonical content version `0.4.0` includes all 18 Eras 1–3 infrastructure definitions and three representative upgrades. The active phase is complete; Phase 05 remains gated on explicit user authorization.
+Phase 04 is implemented, validated, committed as `ca56a35`, and pushed to `origin/main`. A deterministic economy coordinator now turns Stored Energy, stable-ID ownership, upgrade levels, milestones, and automation settings into grid values through one shared preview/purchase/rebuild path. Canonical content version `0.4.0` includes all 18 Eras 1–3 infrastructure definitions and three representative upgrades. The active phase is complete; Phase 05 remains gated on explicit user authorization.
 
 ## Completed
 
+- Committed and pushed the Phase 04 implementation as `ca56a35` to `origin/main`.
 - Added exact floored next and bulk pricing with atomic infrastructure and upgrade purchase commands.
 - Added locked, unaffordable, affordable, and maxed previews with missing currency, unmet conditions, exact costs, and predicted derived-grid deltas.
 - Added explicit starting ownership, milestone threshold tracking/events, one-time and leveled upgrades, and direct/category/tag/global multiplier groups.

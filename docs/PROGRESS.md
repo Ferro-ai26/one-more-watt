@@ -8,7 +8,7 @@
 | 01 — Data Architecture | Complete | Commit `9e632d6`; 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
 | 02 — Core Power Simulation | Complete | Commit `96bb219`; 178 simulation checks; 18 debug-panel checks; five scenario captures; headless smoke launch |
 | 03 — Request and WATT System | Complete | Commit `2bd30ac`; 143 request-domain checks; 58 headless panel checks; four lifecycle captures; headless smoke launch |
-| 04 — Infrastructure and Upgrades | Complete | 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
+| 04 — Infrastructure and Upgrades | Complete | Commit `ca56a35`; 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
 | 05 — Main UI and Feedback | Not started | — |
 | 06 — Save and Offline Progress | Not started | — |
 | 07 — Eras 1–3 Vertical Slice | Not started | — |
@@ -20,6 +20,7 @@
 
 ### 2026-07-20 — Phase 04 infrastructure and upgrades
 
+- Committed and pushed the implementation as `ca56a35` to `origin/main`.
 - Added a stable-ID economy state, exact floored single/bulk costs, atomic commands, explicit unlock explanations, leveled and one-time upgrades, cumulative milestones, and opt-in low-Reserve throttling.
 - Rebuilt Generation, Transmission, Reserve, request modifiers, and automation capacity from the non-owned baseline plus explicit starting ownership, infrastructure, passive effects, milestones, and upgrades.
 - Expanded canonical content to version `0.4.0` with all 18 Eras 1–3 infrastructure definitions and three representative upgrades.
