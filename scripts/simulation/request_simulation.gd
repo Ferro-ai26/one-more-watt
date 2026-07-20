@@ -21,6 +21,11 @@ var _incident_timeline := RequestIncidentTimeline.new()
 var _underpower_floor := 0.05
 var _progression_state: EconomyState
 var _selected_id := ""
+var _request_demand_multiplier := 1.0
+var _predictive_guard_enabled := false
+var _predictive_guard_target_ratio := 0.75
+var predictive_guard_active := false
+var predictive_guard_seconds_to_peak := INF
 
 
 func configure(repository: ContentRepository, balance_id: String = "prototype_balance", simulation_seed: int = 1) -> bool:
@@ -42,6 +47,11 @@ func configure(repository: ContentRepository, balance_id: String = "prototype_ba
 	_selected_id = ""
 	_accumulator_seconds = 0.0
 	current_dialogue = ""
+	_request_demand_multiplier = 1.0
+	_predictive_guard_enabled = false
+	_predictive_guard_target_ratio = 0.75
+	predictive_guard_active = false
+	predictive_guard_seconds_to_peak = INF
 	for request_value: Variant in repository.get_all("requests"):
 		var request := request_value as RequestDefinition
 		if request != null:
@@ -112,6 +122,15 @@ func refresh_availability(progression_state: EconomyState = null) -> void:
 	_refresh_availability(true)
 
 
+func configure_runtime_modifiers(request_demand_multiplier: float, predictive_guard_enabled: bool, predictive_guard_target_ratio: float) -> bool:
+	if not is_finite(request_demand_multiplier) or request_demand_multiplier < 0.0 or not is_finite(predictive_guard_target_ratio) or predictive_guard_target_ratio < 0.0 or predictive_guard_target_ratio > 1.0:
+		return false
+	_request_demand_multiplier = request_demand_multiplier
+	_predictive_guard_enabled = predictive_guard_enabled
+	_predictive_guard_target_ratio = predictive_guard_target_ratio
+	return true
+
+
 func select_request(request_id: String) -> bool:
 	if not _active_id.is_empty():
 		return false
@@ -147,7 +166,7 @@ func build_preview(request_id: String) -> RequestPreview:
 	if request == null:
 		return preview
 	var profile := _repository.get_demand_profile(str(request.get_value("demand_profile_id", "")))
-	preview.continuous_demand = float(request.get_value("continuous_demand", 0.0))
+	preview.continuous_demand = float(request.get_value("continuous_demand", 0.0)) * _request_demand_multiplier
 	preview.predicted_peak = preview.continuous_demand * DemandProfileSampler.peak_multiplier(profile)
 	preview.recommended_reserve = float(request.get_value("recommended_reserve", 0.0))
 	preview.research_cost = float(request.get_value("research_cost", 0.0))
@@ -339,9 +358,14 @@ func _process_step(active: RequestRunState, delta_seconds: float, offline: bool 
 	var request := _repository.get_request(active.request_id)
 	var profile := _repository.get_demand_profile(str(request.get_value("demand_profile_id", "")))
 	var demand_multiplier := DemandProfileSampler.multiplier_at(profile, active.elapsed_seconds)
-	var demand_rate := float(request.get_value("continuous_demand", 0.0)) * demand_multiplier
+	var demand_rate := float(request.get_value("continuous_demand", 0.0)) * demand_multiplier * _request_demand_multiplier
+	predictive_guard_seconds_to_peak = DemandProfileSampler.seconds_until_next_peak(profile, active.elapsed_seconds)
+	var reserve_ratio := 0.0 if grid.state.reserve_capacity <= EPSILON else grid.state.reserve_stored / grid.state.reserve_capacity
+	predictive_guard_active = _predictive_guard_enabled and predictive_guard_seconds_to_peak <= 30.0 and reserve_ratio + EPSILON < _predictive_guard_target_ratio
+	grid.set_allocation_override("expand_grid" if predictive_guard_active else "")
 	grid.set_demand_rate(demand_rate)
 	grid.advance_time(delta_seconds)
+	grid.set_allocation_override("")
 	var result := grid.get_last_result()
 	var previous_elapsed := active.elapsed_seconds
 	active.elapsed_seconds += delta_seconds

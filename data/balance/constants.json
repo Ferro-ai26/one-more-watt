@@ -22,7 +22,8 @@
       "stored_energy_efficiency": {
         "era_01_cold_boot": 1.0,
         "era_02_bedroom_assistant": 0.95,
-        "era_03_home_server_closet": 0.9
+        "era_03_home_server_closet": 0.9,
+        "era_04_building_network": 0.85
       },
       "offline_progress": {
         "cap_seconds": 7200,

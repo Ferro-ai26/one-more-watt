@@ -3,8 +3,11 @@ extends RefCounted
 
 
 static func encode(envelope_without_checksum: Dictionary) -> String:
-	var envelope := envelope_without_checksum.duplicate(true)
-	envelope["checksum"] = checksum_for(envelope_without_checksum)
+	# Normalize through JSON before hashing so typed Godot arrays and their
+	# decoded Array equivalents produce the same portable checksum.
+	var normalized_value: Variant = JSON.parse_string(JSON.stringify(_canonicalize(envelope_without_checksum)))
+	var envelope: Dictionary = normalized_value if normalized_value is Dictionary else envelope_without_checksum.duplicate(true)
+	envelope["checksum"] = checksum_for(envelope)
 	return JSON.stringify(_canonicalize(envelope), "  ")
 
 

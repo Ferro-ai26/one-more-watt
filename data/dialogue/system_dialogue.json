@@ -88,6 +88,30 @@
       "text_key": "dialogue.tutorial.authorize",
       "required_placeholders": [],
       "tags": ["critical", "tutorial"]
+    },
+    {
+      "id": "brownout_building_first",
+      "context": "brownout",
+      "era_id": "era_04_building_network",
+      "text_key": "dialogue.brownout.building_first",
+      "required_placeholders": [],
+      "tags": ["reaction", "shared_service", "provisional_copy"]
+    },
+    {
+      "id": "brownout_building_elevator",
+      "context": "brownout",
+      "era_id": "era_04_building_network",
+      "text_key": "dialogue.brownout.building_elevator",
+      "required_placeholders": [],
+      "tags": ["reaction", "elevator", "provisional_copy"]
+    },
+    {
+      "id": "brownout_building_backup",
+      "context": "brownout",
+      "era_id": "era_04_building_network",
+      "text_key": "dialogue.brownout.building_backup",
+      "required_placeholders": [],
+      "tags": ["reaction", "backup", "provisional_copy"]
     }
   ]
 }

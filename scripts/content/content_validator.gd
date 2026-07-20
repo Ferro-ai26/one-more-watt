@@ -5,6 +5,8 @@ const REQUIRED_FAMILIES := [
 	"balance", "eras", "infrastructure", "upgrades", "requests",
 	"demand_profiles", "dialogue", "incidents", "achievements", "localization",
 ]
+const OPTIONAL_FAMILIES := ["maintenance"]
+const ALL_FAMILIES := REQUIRED_FAMILIES + OPTIONAL_FAMILIES
 const ID_PATTERN := "^[a-z][a-z0-9_]*$"
 const CATEGORIES := ["generation", "transmission", "reserve", "support", "automation", "special"]
 const REQUEST_KINDS := ["capacity", "stability", "burst", "research", "vanity"]
@@ -21,8 +23,9 @@ const BASE_EFFECT_TARGETS := [
 	"automation_capacity",
 ]
 const INCIDENT_SEVERITIES := ["cosmetic", "minor", "major"]
-const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked", "stability_service_at_least"]
-const FEATURE_IDS := ["allocation_modes", "automatic_generation", "offline_progress", "reserve_forecast", "detailed_forecast", "reserve_thresholds"]
+const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked", "stability_service_at_least", "maintenance_choice"]
+const FEATURE_IDS := ["allocation_modes", "automatic_generation", "offline_progress", "reserve_forecast", "detailed_forecast", "reserve_thresholds", "predictive_reserve_guard"]
+const MAINTENANCE_OPTION_IDS := ["repair", "replace", "overclock"]
 
 var _id_regex := RegEx.new()
 
@@ -35,7 +38,7 @@ func validate_manifest(manifest_path: String, path_redirects: Dictionary = {}) -
 	var issues: Array[ContentValidationIssue] = []
 	var manifest_value: Variant = _parse_json(manifest_path, path_redirects, issues)
 	var records: Dictionary = {}
-	for family: String in REQUIRED_FAMILIES:
+	for family: String in ALL_FAMILIES:
 		records[family] = []
 
 	if not manifest_value is Dictionary:
@@ -61,7 +64,7 @@ func validate_manifest(manifest_path: String, path_redirects: Dictionary = {}) -
 			var family := str(file_entry.get("family", ""))
 			var file_path := str(file_entry.get("path", ""))
 			var root_key := str(file_entry.get("root", ""))
-			if family not in REQUIRED_FAMILIES:
+			if family not in ALL_FAMILIES:
 				_add_issue(issues, "UNSUPPORTED_FAMILY", manifest_path, "", "unsupported family '%s'" % family)
 				continue
 			seen_families[family] = true
@@ -140,7 +143,7 @@ func _validate_placeholder_assets(value: Variant, path: String, issues: Array[Co
 func _validate_records(records: Dictionary, placeholder_assets: Dictionary, issues: Array[ContentValidationIssue]) -> Dictionary:
 	var indices: Dictionary = {}
 	var global_ids: Dictionary = {}
-	for family: String in REQUIRED_FAMILIES:
+	for family: String in ALL_FAMILIES:
 		indices[family] = {}
 		for wrapper_value: Variant in records[family]:
 			var wrapper: Dictionary = wrapper_value
@@ -217,6 +220,27 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 		"demand_profiles":
 			_require_fields(record, {"duration_seconds": "number", "loop": "boolean", "keyframes": "array"}, path, record_id, issues)
 			_validate_demand_profile(record, path, record_id, issues)
+		"maintenance":
+			_require_fields(record, {"era_id": "string", "trigger_request_id": "string", "title_key": "string", "description_key": "string", "options": "array"}, path, record_id, issues)
+			var option_ids: Dictionary = {}
+			var options: Variant = record.get("options", [])
+			if options is Array:
+				for option_value: Variant in options:
+					if not option_value is Dictionary:
+						_add_issue(issues, "INVALID_TYPE", path, record_id, "maintenance options must be objects")
+						continue
+					var option: Dictionary = option_value
+					_require_fields(option, {"id": "string", "label_key": "string", "description_key": "string", "stored_energy_cost": "number", "next_request_effects": "array"}, path, record_id, issues)
+					var option_id := str(option.get("id", ""))
+					_validate_enum(option_id, MAINTENANCE_OPTION_IDS, "UNSUPPORTED_MAINTENANCE_OPTION", path, record_id, "maintenance option", issues)
+					if option_ids.has(option_id):
+						_add_issue(issues, "DUPLICATE_MAINTENANCE_OPTION", path, record_id, "duplicate maintenance option '%s'" % option_id)
+					option_ids[option_id] = true
+					_validate_nonnegative(option, ["stored_energy_cost"], path, record_id, issues)
+					_validate_effects(option.get("next_request_effects", []), path, record_id, issues)
+			for required_option: String in MAINTENANCE_OPTION_IDS:
+				if not option_ids.has(required_option):
+					_add_issue(issues, "MISSING_MAINTENANCE_OPTION", path, record_id, "maintenance record requires '%s'" % required_option)
 		"dialogue":
 			_require_fields(record, {"context": "string", "era_id": "string", "text_key": "string", "required_placeholders": "array", "tags": "array"}, path, record_id, issues)
 		"incidents":
@@ -266,6 +290,18 @@ func _validate_cross_references(records: Dictionary, indices: Dictionary, placeh
 			for unlock_id: Variant in rewards.get("unlock_ids", []):
 				if not (indices["_global_ids"] as Dictionary).has(str(unlock_id)):
 					_add_issue(issues, "UNKNOWN_REWARD_TARGET", wrapper["path"], request.get("id", ""), "unknown reward unlock ID '%s'" % unlock_id)
+
+	for wrapper_value: Variant in records["maintenance"]:
+		var wrapper: Dictionary = wrapper_value
+		var maintenance: Dictionary = wrapper["data"]
+		_validate_reference(str(maintenance.get("era_id", "")), "eras", indices, wrapper, "era_id", issues)
+		_validate_reference(str(maintenance.get("trigger_request_id", "")), "requests", indices, wrapper, "trigger_request_id", issues)
+		for option_value: Variant in maintenance.get("options", []):
+			if not option_value is Dictionary:
+				continue
+			var grant_value: Variant = option_value.get("grant_upgrade_id", null)
+			if grant_value != null:
+				_validate_reference(str(grant_value), "upgrades", indices, wrapper, "grant_upgrade_id", issues)
 
 	for wrapper_value: Variant in records["dialogue"]:
 		var wrapper: Dictionary = wrapper_value
@@ -332,6 +368,7 @@ func _validate_localization(records: Dictionary, issues: Array[ContentValidation
 		"requests": ["title_key", "summary_key", "announcement_key", "completion_key"],
 		"dialogue": ["text_key"],
 		"achievements": ["name_key", "description_key"],
+		"maintenance": ["title_key", "description_key"],
 	}
 	for family: Variant in key_fields:
 		for wrapper_value: Variant in records[family]:
@@ -344,6 +381,14 @@ func _validate_localization(records: Dictionary, issues: Array[ContentValidation
 		var tutorial_key := str(wrapper_value["data"].get("tutorial_text_key", ""))
 		if not tutorial_key.is_empty():
 			_validate_localization_key(tutorial_key, english, wrapper_value, issues)
+		var payoff_key := str(wrapper_value["data"].get("operator_payoff_key", ""))
+		if not payoff_key.is_empty():
+			_validate_localization_key(payoff_key, english, wrapper_value, issues)
+	for wrapper_value: Variant in records["maintenance"]:
+		for option_value: Variant in wrapper_value["data"].get("options", []):
+			if option_value is Dictionary:
+				_validate_localization_key(str(option_value.get("label_key", "")), english, wrapper_value, issues)
+				_validate_localization_key(str(option_value.get("description_key", "")), english, wrapper_value, issues)
 
 	var placeholder_regex := RegEx.new()
 	placeholder_regex.compile("\\{([a-z][a-z0-9_]*)\\}")
@@ -446,6 +491,9 @@ func _validate_conditions(value: Variant, indices: Dictionary, wrapper: Dictiona
 			"stability_service_at_least":
 				if not _is_number(condition.get("minimum_ratio")) or float(condition.get("minimum_ratio", -1.0)) < 0.0 or float(condition.get("minimum_ratio", 2.0)) > 1.0:
 					_add_issue(issues, "IMPOSSIBLE_UNLOCK", wrapper["path"], wrapper["data"].get("id", ""), "stability minimum_ratio must be between zero and one")
+			"maintenance_choice":
+				_validate_reference(str(condition.get("maintenance_id", "")), "maintenance", indices, wrapper, "maintenance_id", issues)
+				_validate_enum(condition.get("option_id"), MAINTENANCE_OPTION_IDS, "UNSUPPORTED_MAINTENANCE_OPTION", wrapper["path"], wrapper["data"].get("id", ""), "maintenance option", issues)
 
 
 func _validate_trigger(wrapper: Dictionary, indices: Dictionary, issues: Array[ContentValidationIssue], field: String = "trigger") -> void:

@@ -19,10 +19,21 @@
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
-| 15 — Building Network: Era 4 | Appendix proposed — awaiting explicit approval before coding | Building mood/WATT/requests/maintenance/automation/assets/migration plan ready; no Era 4 implementation yet |
+| 15 — Building Network: Era 4 | Completion gate — host implementation/evidence pass; clean APK/static record pending | DEC-034; complete Era 4 route, migration, maintenance, automation, Building presentation, 113 Phase 15 checks, seven reviewed captures; Era 5 absent |
 | 16–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 15 Building Network implementation and host evidence
+
+- Recorded the user's approval of the Era 4 appendix in `DEC-034` before coding. Current request dialogue remains data-driven and tagged `provisional_copy`; the locked WATT voice direction is unchanged and no final writing approval is claimed.
+- Advanced content to `0.9.0` with the stable Building era, six required requests plus one vanity request, seven infrastructure records/icons, five upgrades, three demand profiles, two deterministic maintenance records, three Building brownout lines, and no Era 5 record.
+- Added additive format-2 migration, Predictive Reserve Guard, one-request Overclock binding, deterministic Repair/Replace/Overclock handling, offline input stopping, and completed-era endpoint state without changing prior formulas, IDs, Android foundation, or the 16-era order.
+- Added the project-original Building cutaway, service-console scratched core, lobby face, dim ordinary floors, cyan riser, amber stairwell route, ordinary-life remnant, contextual Build icons, takeover report, and locked Neighborhood pullback. Generated concepts remain reference-only and `ISSUE-007` stays open.
+- Two deterministic routes passed 1,354 balance/reachability checks. Building requests complete in 338.5–625.0 seconds; the complete mechanical/structured route is 115.4/135.5 minutes and the longest modeled gap remains 300 seconds.
+- Added 89 Phase 15 domain checks and 24 headless UI checks. A graphical run passed 38 checks and produced seven manually inspected captures at 393 × 873 and 320 × 568/130% text. Pixel review corrected the captured brownout state, Building-icon framing, narrow maintenance overflow/evidence framing, and report fixture localization.
+- Preserved the existing 1,500 ms Build guard by reconfiguring compatible cards in place. Final full-gate host measurement: 789.7 ms for 25 full refresh requests, 557.0 ms for 500 live refreshes, 378 nodes, and approximately 11.47 MiB isolated skin memory.
+- The current host still has no attached ADB device, `/dev/kvm`, emulator, or system image. Physical update-install/lifecycle/performance checks remain unverified; the clean Phase 15 APK and static inspection are the remaining in-repository closure work before commit/push.
 
 ### 2026-07-20 — Phase 15 authorized; Era 4 appendix proposed
 

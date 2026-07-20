@@ -1,6 +1,6 @@
 # Era 4 Design and Content Appendix — Building Network
 
-Status: Proposed for explicit approval; implementation prohibited until approved
+Status: Approved as written under `DEC-034`; Phase 15 implementation authorized
 
 Date: 2026-07-20
 

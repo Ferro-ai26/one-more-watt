@@ -1,6 +1,6 @@
 # Phase 15 — Building Network: Era 4
 
-Status: In Progress — Appendix Proposed; Implementation Awaiting Explicit Approval
+Status: Completion Gate — Host Acceptance Passed; Physical Android Verification Pending
 
 ## Objective
 
@@ -35,14 +35,14 @@ Before implementation, approve Era 4 environment mood, WATT change, infrastructu
 
 ## Acceptance criteria
 
-- [ ] Era 4 appendix approved
-- [ ] Era 4 is reachable from a migrated save
-- [ ] New maintenance choices are meaningful and infrequent
-- [ ] Requests fit the intended several-to-12-minute range after tuning
-- [ ] WATT voice and appearance advance coherently
-- [ ] No permanent gray-box asset remains
+- [x] Era 4 appendix approved — `DEC-034`
+- [x] Era 4 is reachable from a migrated save
+- [x] New maintenance choices are meaningful and infrequent
+- [x] Requests fit the intended several-to-12-minute range after tuning
+- [x] WATT voice and appearance advance coherently
+- [x] No permanent gray-box asset remains
 - [ ] Functional, visual, save, and Android regressions pass
-- [ ] Manual playtest evidence recorded
+- [x] Manual playtest evidence recorded — host route/capture review; physical-device limitations remain explicit
 
 ## Stop condition
 

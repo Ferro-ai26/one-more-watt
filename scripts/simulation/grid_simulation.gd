@@ -13,6 +13,7 @@ var _allocation_modes: Dictionary = {}
 var _accumulator_seconds := 0.0
 var _events: Array[GridEvent] = []
 var _last_result := GridStepResult.new()
+var _allocation_override := ""
 
 
 func configure(balance: BalanceDefinition, era_id: String = "era_01_cold_boot", simulation_seed: int = 0) -> bool:
@@ -61,6 +62,13 @@ func set_allocation_mode(mode: String) -> bool:
 		return true
 	state.allocation_mode = mode
 	_events.append(GridEvent.new(GridEvent.ALLOCATION_CHANGED, state.elapsed_seconds, {"mode": mode}))
+	return true
+
+
+func set_allocation_override(mode: String = "") -> bool:
+	if not mode.is_empty() and not _allocation_modes.has(mode):
+		return false
+	_allocation_override = mode
 	return true
 
 
@@ -121,4 +129,6 @@ func drain_events() -> Array[GridEvent]:
 
 
 func _current_allocation() -> Dictionary:
+	if not _allocation_override.is_empty():
+		return _allocation_modes.get(_allocation_override, _allocation_modes.get("balanced", {}))
 	return _allocation_modes.get(state.allocation_mode, _allocation_modes.get("balanced", {}))

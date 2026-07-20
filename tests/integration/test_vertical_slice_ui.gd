@@ -73,9 +73,12 @@ func _run() -> void:
 	main.refresh_now(true)
 	await process_frame
 	_check(main.session.economy.state.prototype_complete, "final report acknowledgement reaches prototype completion")
-	_check(main.request_title_label.text == "Home Server Closet Complete", "endpoint is explicit in the focal panel")
-	_check(main.dialogue_label.text.contains("More coming"), "endpoint promises more without presenting Era 4")
-	_check(not main.dialogue_label.text.contains("Building Network"), "Era 4 is not exposed")
+	_check(main.navigation.top_modal() == "era_transition", "the completed prototype now offers the explicit Building Network transition")
+	_check(_modal_text(main).to_upper().contains("BUILDING NETWORK"), "the migrated Era 4 transition names its larger physical scale")
+	await _press(main.modal_content.find_child("EraContinueButton", true, false) as Button)
+	_check(main.session.economy.state.current_era_id == "era_04_building_network", "the operator authorizes entry into Era 4")
+	_check(main.environment_label.text.contains("BUILDING GRID"), "the world-first presentation advances to the Building grid")
+	_check(main.request_title_label.text == "Restore Elevator Service", "the first Building request becomes contextual interaction over the world")
 	var automation := main.screen_content.find_child("ReserveAutomationCheck", true, false) as CheckButton
 	_check(automation != null, "Smart Meter Reserve protection is visible after its tutorial")
 	if automation != null:

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "maintenance": [
+    {
+      "id": "era04_transformer_thermal_review",
+      "era_id": "era_04_building_network",
+      "trigger_request_id": "era04_schedule_rooftop_sunlight",
+      "title_key": "maintenance.era04_transformer_thermal_review.title",
+      "description_key": "maintenance.era04_transformer_thermal_review.description",
+      "options": [
+        {
+          "id": "repair", "label_key": "maintenance.option.repair.label", "description_key": "maintenance.transformer.repair.description",
+          "stored_energy_cost": 30000, "grant_upgrade_id": null, "next_request_effects": []
+        },
+        {
+          "id": "replace", "label_key": "maintenance.option.replace.label", "description_key": "maintenance.transformer.replace.description",
+          "stored_energy_cost": 110000, "grant_upgrade_id": "transformer_replacement_program", "next_request_effects": []
+        },
+        {
+          "id": "overclock", "label_key": "maintenance.option.overclock.label", "description_key": "maintenance.transformer.overclock.description",
+          "stored_energy_cost": 0, "grant_upgrade_id": null,
+          "next_request_effects": [
+            {"operation": "multiply", "target": "generation_rate", "value": 1.20},
+            {"operation": "multiply", "target": "request_demand_multiplier", "value": 1.25}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "era04_cooling_fan_review",
+      "era_id": "era_04_building_network",
+      "trigger_request_id": "era04_certify_stairwell_extension",
+      "title_key": "maintenance.era04_cooling_fan_review.title",
+      "description_key": "maintenance.era04_cooling_fan_review.description",
+      "options": [
+        {
+          "id": "repair", "label_key": "maintenance.option.repair.label", "description_key": "maintenance.cooling.repair.description",
+          "stored_energy_cost": 120000, "grant_upgrade_id": null, "next_request_effects": []
+        },
+        {
+          "id": "replace", "label_key": "maintenance.option.replace.label", "description_key": "maintenance.cooling.replace.description",
+          "stored_energy_cost": 360000, "grant_upgrade_id": "central_cooling_balancing", "next_request_effects": []
+        },
+        {
+          "id": "overclock", "label_key": "maintenance.option.overclock.label", "description_key": "maintenance.cooling.overclock.description",
+          "stored_energy_cost": 0, "grant_upgrade_id": null,
+          "next_request_effects": [
+            {"operation": "multiply", "target": "generation_rate", "value": 1.15},
+            {"operation": "multiply", "target": "request_demand_multiplier", "value": 1.30}
+          ]
+        }
+      ]
+    }
+  ]
+}

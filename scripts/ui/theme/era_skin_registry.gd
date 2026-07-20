@@ -5,6 +5,7 @@ const BASE_ID := "base_workshop"
 const ERA_01_ID := "era_01_desk"
 const ERA_02_ID := "era_02_room"
 const ERA_03_ID := "era_03_house"
+const ERA_04_ID := "era_04_building"
 
 
 static func get_skin(skin_id: String) -> EraSkinDefinition:
@@ -12,17 +13,20 @@ static func get_skin(skin_id: String) -> EraSkinDefinition:
 		ERA_01_ID: return _desk()
 		ERA_02_ID: return _room()
 		ERA_03_ID: return _house()
+		ERA_04_ID: return _building()
 		_: return _base()
 
 
 static func skin_for_era(era_number: int) -> EraSkinDefinition:
-	if era_number >= 3:
+	if era_number >= 4:
+		return get_skin(ERA_04_ID)
+	if era_number == 3:
 		return get_skin(ERA_03_ID)
 	return get_skin(ERA_02_ID if era_number == 2 else ERA_01_ID)
 
 
 static func required_sample_ids() -> PackedStringArray:
-	return PackedStringArray([BASE_ID, ERA_01_ID, ERA_02_ID, ERA_03_ID])
+	return PackedStringArray([BASE_ID, ERA_01_ID, ERA_02_ID, ERA_03_ID, ERA_04_ID])
 
 
 static func _base() -> EraSkinDefinition:
@@ -92,6 +96,29 @@ static func _house() -> EraSkinDefinition:
 	skin.ambient_animation = "server_bank_cooling_cycle"
 	skin.lighting_treatment = "dim_house_cyan_service_priority_amber_warning"
 	skin.estimated_memory_kib = 40
+	return skin
+
+
+static func _building() -> EraSkinDefinition:
+	var skin := EraSkinDefinition.new()
+	skin.skin_id = ERA_04_ID
+	skin.era_number = 4
+	skin.scale_label = "BUILDING GRID • OPERATOR LINK 04"
+	skin.environment_label = "BUILDING CUTAWAY / SHARED SERVICE RISER"
+	skin.background_color = SkinTokens.COLOR_ERA_04_BACKGROUND
+	skin.wall_color = SkinTokens.COLOR_ERA_04_WALL
+	skin.surface_color = SkinTokens.COLOR_ERA_04_SERVICE
+	skin.ambient_color = SkinTokens.COLOR_EMERGENCY_LIGHT
+	skin.infrastructure_slots = PackedStringArray(["roof_plant", "vertical_riser", "service_room", "parking_canopy", "stairwell"])
+	skin.power_flow_paths = [
+		_path([Vector2(0.50, 0.88), Vector2(0.50, 0.69), Vector2(0.50, 0.49), Vector2(0.50, 0.27), Vector2(0.50, 0.08)]),
+		_path([Vector2(0.50, 0.69), Vector2(0.25, 0.69), Vector2(0.08, 0.69)]),
+		_path([Vector2(0.50, 0.49), Vector2(0.75, 0.49), Vector2(0.93, 0.49)]),
+		_path([Vector2(0.50, 0.27), Vector2(0.29, 0.27), Vector2(0.10, 0.27)]),
+	]
+	skin.ambient_animation = "building_riser_load_cycle"
+	skin.lighting_treatment = "dim_shared_floors_cyan_riser_amber_emergency"
+	skin.estimated_memory_kib = 48
 	return skin
 
 

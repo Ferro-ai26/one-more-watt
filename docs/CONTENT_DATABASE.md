@@ -239,3 +239,9 @@ Content validation is required in every phase that edits data.
 ## Phase 08 content baseline
 
 Canonical content version `0.8.0` preserves all Phase 07 stable IDs and expands the dialogue family from four to eleven records. Seven new localized brownout reactions provide three era-specific choices per era when combined with the existing Cold Boot lines. Request energy values and two infrastructure costs are tuned in source JSON; schema version 1 and all validated vocabularies remain unchanged. Additive `0.7.0` and `0.6.0` saves remain compatible.
+
+## Phase 15 Building Network content
+
+Canonical content version `0.9.0` adds the authoritative Era 4 stable ID `era_04_building_network`, six required requests, one optional vanity request, seven infrastructure definitions, five upgrades, three deterministic Building demand profiles, three Building brownout lines, and an optional `maintenance` content family with two authored operator decisions. The six required requests retain explicit `provisional_copy` tags and concrete `operator_payoff_key` values; their current dialogue is functional copy, not a final writing lock.
+
+Maintenance definitions own their stable trigger request, localized option text, disclosed Stored Energy cost, optional permanent upgrade, and optional one-request effects. `maintenance_choice` is a validated unlock condition, so replacement-only upgrades cannot become free purchases before the corresponding operator choice. All seven new infrastructure records point to integrated project-original SVG icons. Phase 15 adds no Era 5 record and preserves schema version 1 for existing families.

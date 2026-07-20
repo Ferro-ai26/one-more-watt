@@ -8,6 +8,7 @@ const DEFINITION_SCRIPTS := {
 	"upgrades": preload("res://scripts/content/definitions/upgrade_definition.gd"),
 	"requests": preload("res://scripts/content/definitions/request_definition.gd"),
 	"demand_profiles": preload("res://scripts/content/definitions/demand_profile_definition.gd"),
+	"maintenance": preload("res://scripts/content/definitions/maintenance_definition.gd"),
 	"dialogue": preload("res://scripts/content/definitions/dialogue_definition.gd"),
 	"incidents": preload("res://scripts/content/definitions/incident_definition.gd"),
 	"achievements": preload("res://scripts/content/definitions/achievement_definition.gd"),
@@ -77,6 +78,10 @@ func get_request(id: String) -> RequestDefinition:
 
 func get_demand_profile(id: String) -> DemandProfileDefinition:
 	return get_definition("demand_profiles", id) as DemandProfileDefinition
+
+
+func get_maintenance(id: String) -> MaintenanceDefinition:
+	return get_definition("maintenance", id) as MaintenanceDefinition
 
 
 func get_dialogue(id: String) -> DialogueDefinition:

@@ -176,6 +176,25 @@ func purchase_upgrade(id: String) -> bool:
 	return true
 
 
+func grant_upgrade(id: String) -> bool:
+	var definition := _repository.get_upgrade(id)
+	if definition == null:
+		return false
+	var current_level := int(state.upgrade_levels.get(id, 0))
+	if current_level >= int(definition.get_value("max_level", 1)):
+		return false
+	var prospective_levels := state.upgrade_levels.duplicate(true)
+	prospective_levels[id] = current_level + 1
+	var rebuilt := _rebuild_for(state.owned, prospective_levels)
+	if not bool(rebuilt["ok"]):
+		return false
+	state.upgrade_levels = prospective_levels
+	_apply_rebuild(rebuilt)
+	_events.append(EconomyEvent.new(EconomyEvent.UPGRADE_PURCHASED, id, {"level": current_level + 1, "cost": 0.0, "granted": true}))
+	_refresh_unlocks(true)
+	return true
+
+
 func rebuild_derived_state() -> bool:
 	var rebuilt := _rebuild_for(state.owned, state.upgrade_levels)
 	if not bool(rebuilt["ok"]):
@@ -233,11 +252,21 @@ func record_request_report(report: PerformanceReport) -> void:
 
 func mark_report_viewed(request_id: String) -> bool:
 	var definition := _repository.get_request(request_id)
-	if definition == null or "prototype_capstone" not in definition.get_value("tags", []) or state.prototype_complete:
+	if definition == null:
 		return false
-	state.prototype_complete = true
-	_events.append(EconomyEvent.new(EconomyEvent.PROTOTYPE_COMPLETED, request_id))
-	return true
+	var tags: Array = definition.get_value("tags", [])
+	var endpoint_reached := false
+	if "era_capstone" in tags:
+		var era_id := str(definition.get_value("era_id", ""))
+		if not era_id.is_empty():
+			state.completed_eras[era_id] = true
+	if "prototype_capstone" in tags and not state.prototype_complete:
+		state.prototype_complete = true
+		_events.append(EconomyEvent.new(EconomyEvent.PROTOTYPE_COMPLETED, request_id))
+		endpoint_reached = true
+	if "phase15_capstone" in tags:
+		endpoint_reached = true
+	return endpoint_reached
 
 
 func has_feature(feature_id: String) -> bool:
@@ -267,6 +296,17 @@ func configure_reserve_automation(enabled: bool, threshold_ratio: float) -> bool
 	state.reserve_automation_enabled = enabled
 	state.reserve_threshold_ratio = threshold_ratio
 	_events.append(EconomyEvent.new(EconomyEvent.AUTOMATION_CHANGED, "reserve_threshold", {"enabled": enabled, "threshold_ratio": threshold_ratio}))
+	return true
+
+
+func configure_predictive_reserve_guard(enabled: bool, target_ratio: float) -> bool:
+	if not is_finite(target_ratio) or target_ratio < 0.0 or target_ratio > 1.0:
+		return false
+	if enabled and not state.unlocked_features.has("predictive_reserve_guard"):
+		return false
+	state.predictive_reserve_guard_enabled = enabled
+	state.predictive_reserve_target_ratio = target_ratio
+	_events.append(EconomyEvent.new(EconomyEvent.AUTOMATION_CHANGED, "predictive_reserve_guard", {"enabled": enabled, "target_ratio": target_ratio}))
 	return true
 
 

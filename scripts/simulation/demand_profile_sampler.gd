@@ -38,3 +38,27 @@ static func peak_multiplier(profile: DemandProfileDefinition) -> float:
 		if keyframe_value is Dictionary:
 			peak = maxf(peak, float(keyframe_value.get("multiplier", 0.0)))
 	return peak
+
+
+static func seconds_until_next_peak(profile: DemandProfileDefinition, elapsed_seconds: float) -> float:
+	if profile == null:
+		return INF
+	var duration := profile.get_duration_seconds()
+	if duration <= 0.0:
+		return INF
+	var keyframes: Array = profile.get_value("keyframes", [])
+	var peak := peak_multiplier(profile)
+	var sample_time := maxf(elapsed_seconds, 0.0)
+	if bool(profile.get_value("loop", false)):
+		sample_time = fmod(sample_time, duration)
+	for keyframe_value: Variant in keyframes:
+		if not keyframe_value is Dictionary or float(keyframe_value.get("multiplier", 0.0)) + 0.000000001 < peak:
+			continue
+		var peak_time := float(keyframe_value.get("time_seconds", 0.0))
+		if peak_time + 0.000000001 >= sample_time:
+			return peak_time - sample_time
+	if bool(profile.get_value("loop", false)):
+		for keyframe_value: Variant in keyframes:
+			if keyframe_value is Dictionary and float(keyframe_value.get("multiplier", 0.0)) + 0.000000001 >= peak:
+				return duration - sample_time + float(keyframe_value.get("time_seconds", 0.0))
+	return INF

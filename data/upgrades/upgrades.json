@@ -36,6 +36,66 @@
       "effects": [{"operation": "multiply", "target": "category_output", "category": "generation", "value": 1.2}],
       "permanent": false,
       "max_level": 1
+    },
+    {
+      "id": "building_load_forecasting",
+      "era_id": "era_04_building_network",
+      "name_key": "upgrade.building_load_forecasting.name",
+      "description_key": "upgrade.building_load_forecasting.description",
+      "cost": {"stored_energy": 180000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_restore_elevator_service"}],
+      "effects": [{"operation": "multiply", "target": "request_demand_multiplier", "value": 0.94}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "elevator_priority_matrix",
+      "era_id": "era_04_building_network",
+      "name_key": "upgrade.elevator_priority_matrix.name",
+      "description_key": "upgrade.elevator_priority_matrix.description",
+      "cost": {"stored_energy": 520000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_reduce_server_room_weather"}],
+      "effects": [{"operation": "multiply", "target": "global_output", "value": 1.08}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "predictive_reserve_guard_upgrade",
+      "era_id": "era_04_building_network",
+      "name_key": "upgrade.predictive_reserve_guard.name",
+      "description_key": "upgrade.predictive_reserve_guard.description",
+      "cost": {"stored_energy": 300000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_stabilize_shared_backup"}],
+      "effects": [{"operation": "add", "target": "automation_capacity", "value": 1.0}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "transformer_replacement_program",
+      "era_id": "era_04_building_network",
+      "name_key": "upgrade.transformer_replacement_program.name",
+      "description_key": "upgrade.transformer_replacement_program.description",
+      "cost": {"stored_energy": 0},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "maintenance_choice", "maintenance_id": "era04_transformer_thermal_review", "option_id": "replace"}],
+      "effects": [{"operation": "multiply", "target": "transmission_capacity", "value": 1.12}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "central_cooling_balancing",
+      "era_id": "era_04_building_network",
+      "name_key": "upgrade.central_cooling_balancing.name",
+      "description_key": "upgrade.central_cooling_balancing.description",
+      "cost": {"stored_energy": 0},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "maintenance_choice", "maintenance_id": "era04_cooling_fan_review", "option_id": "replace"}],
+      "effects": [{"operation": "multiply", "target": "global_output", "value": 1.10}],
+      "permanent": false,
+      "max_level": 1
     }
   ]
 }

@@ -99,6 +99,42 @@
         {"time_seconds": 52, "multiplier": 3.5},
         {"time_seconds": 60, "multiplier": 0.5}
       ]
+    },
+    {
+      "id": "building_wave",
+      "duration_seconds": 90,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.70},
+        {"time_seconds": 30, "multiplier": 0.90},
+        {"time_seconds": 55, "multiplier": 1.70},
+        {"time_seconds": 72, "multiplier": 1.10},
+        {"time_seconds": 90, "multiplier": 0.70}
+      ]
+    },
+    {
+      "id": "building_burst",
+      "duration_seconds": 120,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.45},
+        {"time_seconds": 70, "multiplier": 0.75},
+        {"time_seconds": 84, "multiplier": 3.20},
+        {"time_seconds": 104, "multiplier": 3.20},
+        {"time_seconds": 120, "multiplier": 0.45}
+      ]
+    },
+    {
+      "id": "building_capstone",
+      "duration_seconds": 150,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.65},
+        {"time_seconds": 45, "multiplier": 1.00},
+        {"time_seconds": 95, "multiplier": 2.40},
+        {"time_seconds": 125, "multiplier": 1.35},
+        {"time_seconds": 150, "multiplier": 0.65}
+      ]
     }
   ]
 }

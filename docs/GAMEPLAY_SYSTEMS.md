@@ -209,7 +209,13 @@ Phase 07 unlocks allocation through `Make Thanks Sound Friendlier`, offline/auto
 
 Phase 08 corrects online idle operation: when no request is running, the zero-demand grid continues charging Reserve and converting surplus through the current allocation using the same fixed-step rules as the deterministic balance harness. Active requests still pause under blocking local modals, and background time continues to use the bounded offline path. No tapping income or new automation currency is introduced.
 
-Era 2 requires the `Understand Tuesdays` capstone plus a Laptop Battery. Era 3 requires `Improve Loading Animation`, at least 85% service on a Stability report, and Dedicated Circuit Research. Viewing the `Determine Whether Leftovers Remain Edible` report marks the prototype complete; no Era 4 request is synthesized.
+Era 2 requires the `Understand Tuesdays` capstone plus a Laptop Battery. Era 3 requires `Improve Loading Animation`, at least 85% service on a Stability report, and Dedicated Circuit Research. Viewing the `Determine Whether Leftovers Remain Edible` report marks the original Eras 1–3 prototype complete.
+
+Phase 15 extends that preserved endpoint additively: loading or completing the Era 3 capstone exposes an explicit, operator-authorized transition into `era_04_building_network`. It never spends Stored Energy during migration. The six required Building requests run in authoritative order and each promises an existing-system payoff through Stored Energy, blueprints, upgrades, automation, or infrastructure access.
+
+Two authored request completions can open deterministic maintenance reviews. Repair charges the disclosed modest cost, Replace charges the disclosed larger cost and grants its permanent upgrade, and Overclock charges no Stored Energy while applying a disclosed generation benefit plus demand challenge to exactly the next authorized request. The review blocks new authorization and offline simulation never chooses for the player; idle ownership and completed progress are not lost. There are no recurring degradation timers.
+
+Predictive Reserve Guard is an operator-enabled Era 4 automation. During the authored 30-second pre-peak window, it may temporarily use the existing Expand Grid allocation weights while Reserve is below the selected target. The override is visible, deterministic, and transient: it neither changes the player's selected allocation mode nor spends currency. Completing the Building capstone records Era 4 completion and stops at a locked Neighborhood Microgrid preview; no Era 5 gameplay is synthesized.
 
 ## Prestige: retraining WATT
 

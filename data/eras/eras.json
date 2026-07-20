@@ -85,6 +85,36 @@
       ],
       "visual_state_id": "server_closet_initial",
       "unit_display_floor": "kW"
+    },
+    {
+      "id": "era_04_building_network",
+      "number": 4,
+      "name_key": "era.04.name",
+      "scale_key": "era.04.scale",
+      "description_key": "era.04.description",
+      "unlock_conditions": [
+        {"type": "request_completed", "request_id": "era03_leftovers_edible"}
+      ],
+      "infrastructure_ids": [
+        "building_transformer",
+        "commercial_battery_room",
+        "parking_lot_solar",
+        "diesel_backup_array",
+        "central_cooling",
+        "medium_voltage_connection",
+        "emergency_extension_stairwell"
+      ],
+      "request_ids": [
+        "era04_restore_elevator_service",
+        "era04_schedule_rooftop_sunlight",
+        "era04_stabilize_shared_backup",
+        "era04_reduce_server_room_weather",
+        "era04_certify_stairwell_extension",
+        "era04_standardize_building_power",
+        "era04_improve_lobby_directory"
+      ],
+      "visual_state_id": "building_network_initial",
+      "unit_display_floor": "kW"
     }
   ]
 }

@@ -29,8 +29,13 @@ func status_snapshot() -> Dictionary:
 
 
 func request_snapshot() -> Dictionary:
+	if session.has_pending_maintenance():
+		var maintenance := session.maintenance_snapshot()
+		return {"id": "", "status": "maintenance_pending", "title": str(maintenance.get("title", "Maintenance Review")), "dialogue": str(maintenance.get("description", "Operator decision required."))}
 	var request_id := session.current_request_id()
 	if request_id.is_empty():
+		if session.economy.state.completed_eras.has("era_04_building_network"):
+			return {"id": "", "status": "phase15_complete", "title": session.repository.localize("phase15.complete.title"), "dialogue": session.repository.localize("phase15.complete.dialogue")}
 		if session.economy.state.prototype_complete:
 			return {"id": "", "status": "prototype_complete", "title": session.repository.localize("prototype.complete.title"), "dialogue": session.repository.localize("prototype.complete.dialogue")}
 		return {"id": "", "status": "none", "title": session.repository.localize("request.none.title"), "dialogue": session.repository.localize("request.none.dialogue")}
@@ -58,6 +63,7 @@ func request_snapshot() -> Dictionary:
 		"warning": session.repository.localize(preview.warning_key) if not preview.warning_key.is_empty() else "Grid forecast is ready.",
 		"reward": preview.reward_stored_energy,
 		"unlocks": preview.unlock_ids.duplicate(),
+		"operator_payoff": session.repository.localize(str(definition.get_value("operator_payoff_key", ""))) if not str(definition.get_value("operator_payoff_key", "")).is_empty() else "",
 		"required": bool(definition.get_value("required", true)),
 		"tutorial_action": str(definition.get_value("tutorial_action", "")),
 		"tutorial": session.repository.localize(str(definition.get_value("tutorial_text_key", ""))) if not str(definition.get_value("tutorial_text_key", "")).is_empty() else "",
@@ -76,8 +82,24 @@ func environment_snapshot() -> Dictionary:
 			return {"core": "◉‿◉", "badge": "OLD MONITOR\n%d OUTLET%s" % [int(owned.get("wall_outlet", 0)), "S" if int(owned.get("wall_outlet", 0)) != 1 else ""], "summary": session.repository.localize("environment.era01.summary"), "accent": SkinTokens.COLOR_WATT}
 		2:
 			return {"core": "◉◡◉", "badge": "BEDROOM GRID\n%d GENERATOR%s" % [int(owned.get("portable_generator", 0)), "S" if int(owned.get("portable_generator", 0)) != 1 else ""], "summary": session.repository.localize("environment.era02.summary"), "accent": SkinTokens.COLOR_SUCCESS}
-		_:
+		3:
 			return {"core": "◉▿◉", "badge": "SERVER CLOSET\n%d RACK%s" % [int(owned.get("server_rack", 0)), "S" if int(owned.get("server_rack", 0)) != 1 else ""], "summary": session.repository.localize("environment.era03.summary"), "accent": SkinTokens.COLOR_TRANSMISSION}
+		_:
+			return {"core": "◉⌁◉", "badge": "BUILDING GRID\n%d SHARED LINK%s" % [int(owned.get("building_transformer", 0)), "S" if int(owned.get("building_transformer", 0)) != 1 else ""], "summary": session.repository.localize("environment.era04.summary"), "accent": SkinTokens.COLOR_WATT_REBOOT}
+
+
+func maintenance_snapshot() -> Dictionary:
+	return session.maintenance_snapshot()
+
+
+func predictive_guard_snapshot() -> Dictionary:
+	return {
+		"unlocked": session.has_feature("predictive_reserve_guard"),
+		"enabled": session.economy.state.predictive_reserve_guard_enabled,
+		"target_ratio": session.economy.state.predictive_reserve_target_ratio,
+		"active": session.requests.predictive_guard_active,
+		"seconds_to_peak": session.requests.predictive_guard_seconds_to_peak,
+	}
 
 
 func optional_requests() -> Array[Dictionary]:
@@ -145,6 +167,7 @@ func report_snapshot(report: PerformanceReport) -> Dictionary:
 		"unlock_ids": _localized_unlocks(report.unlock_ids),
 		"completion": session.repository.localize(report.completion_key),
 		"suggestion": session.repository.localize(report.suggestion_key),
+		"takeover_report": (definition.get_value("takeover_report", {}) as Dictionary).duplicate(true),
 	}
 
 
@@ -168,6 +191,8 @@ func _economy_card(definition: ContentDefinition, preview: EconomyPreview, famil
 		"id": definition.get_id(),
 		"family": family,
 		"category": str(definition.get_value("category", "upgrade" if family == "upgrade" else "support")),
+		"icon_path": str(definition.get_value("icon_path", "")),
+		"scene_variant": str(definition.get_value("scene_variant", definition.get_id())),
 		"name": session.repository.localize(str(definition.get_value("name_key", ""))),
 		"description": session.repository.localize(str(definition.get_value("description_key", ""))),
 		"ownership": ownership,

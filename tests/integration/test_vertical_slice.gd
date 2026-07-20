@@ -16,11 +16,18 @@ const MAIN_REQUEST_IDS := [
 	"era03_predict_package_arrival",
 	"era03_write_grocery_list",
 	"era03_leftovers_edible",
+	"era04_restore_elevator_service",
+	"era04_schedule_rooftop_sunlight",
+	"era04_stabilize_shared_backup",
+	"era04_reduce_server_room_weather",
+	"era04_certify_stairwell_extension",
+	"era04_standardize_building_power",
 ]
 const OPTIONAL_REQUEST_IDS := [
 	"era01_larger_loading_dot",
 	"era02_nineteen_plug_certification",
 	"era03_rename_every_device",
+	"era04_improve_lobby_directory",
 ]
 
 var _repository: ContentRepository
@@ -50,7 +57,7 @@ func _init() -> void:
 
 
 func _test_catalog_and_localization() -> void:
-	_check(_repository.get_counts()["requests"] == 18, "all eighteen catalog requests are authored")
+	_check(_repository.get_counts()["requests"] == 25, "all twenty-five Eras 1–4 requests are authored")
 	var kinds: Dictionary = {}
 	for request_value: Variant in _repository.get_all("requests"):
 		var request := request_value as RequestDefinition
@@ -126,10 +133,19 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 			elif transition_id == "era_03_home_server_closet":
 				era3_saved = true
 		_check(session.acknowledge_report(request_id), "%s report is viewed" % request_id)
+		if session.has_pending_maintenance():
+			var pending := session.maintenance_snapshot()
+			var replace_cost := 0.0
+			for option: Dictionary in pending.get("options", []):
+				if option["id"] == "replace":
+					replace_cost = float(option["cost"])
+			_earn_until(session, replace_cost, "%s replace" % pending.get("id", "maintenance"))
+			_check(session.choose_maintenance("replace"), "%s replacement choice applies" % pending.get("id", "maintenance"))
 	_check(session.economy.state.prototype_complete, "leftovers report reaches the explicit prototype endpoint")
-	_check(session.current_request_id().is_empty(), "prototype endpoint does not invent an Era 4 request")
-	_check(session.available_optional_request_ids().size() == 3, "all three vanity requests remain reachable without blocking the endpoint")
-	_check(session.economy.state.current_era_id == "era_03_home_server_closet", "final current era remains Home Server Closet")
+	_check(session.current_request_id().is_empty(), "Phase 15 endpoint does not invent an Era 5 request")
+	_check(session.available_optional_request_ids().size() == 4, "all four vanity requests remain reachable without blocking the endpoint")
+	_check(session.economy.state.current_era_id == "era_04_building_network", "final current era is Building Network")
+	_check(session.economy.state.completed_eras.has("era_04_building_network"), "Building Network capstone records Era 4 completion")
 	_check(session.economy.state.best_stability_service_ratio >= 0.85, "a Stability request reaches the documented 85% gate")
 	_check(session.has_feature("allocation_modes"), "allocation unlock is reachable")
 	_check(session.has_feature("automatic_generation"), "automatic generation unlock is reachable before repetition")
@@ -137,8 +153,9 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 	_check(session.has_feature("reserve_forecast"), "Reserve forecast unlock is reachable")
 	_check(session.has_feature("detailed_forecast"), "detailed forecast unlock is reachable")
 	_check(session.has_feature("reserve_thresholds"), "Reserve threshold unlock is reachable")
+	_check(session.has_feature("predictive_reserve_guard"), "Predictive Reserve Guard unlock is reachable")
 	_check(session.configure_reserve_automation(true, 0.25), "Smart Meter Reserve protection operates after its feature unlock")
-	_check(is_equal_approx(session.requests.grid.conversion_efficiency, 0.9), "Era 3 Stored Energy efficiency comes from authored balance")
+	_check(is_equal_approx(session.requests.grid.conversion_efficiency, 0.85), "Era 4 Stored Energy efficiency comes from authored balance")
 	if verify_boundary_saves:
 		_check(era2_saved and era3_saved, "both era transitions were saved and restored")
 		session = _round_trip(session, "prototype_endpoint")
@@ -193,6 +210,24 @@ func _prepare_for_request(session: GameSession, request_id: String, purchases: A
 		"era03_leftovers_edible":
 			_buy_infrastructure(session, "dedicated_cooling", purchases)
 			_buy_infrastructure(session, "outdoor_transformer", purchases)
+		"era04_restore_elevator_service": _buy_infrastructure(session, "building_transformer", purchases)
+		"era04_schedule_rooftop_sunlight":
+			_buy_infrastructure(session, "commercial_battery_room", purchases)
+			_buy_upgrade(session, "building_load_forecasting", purchases)
+		"era04_stabilize_shared_backup":
+			_buy_infrastructure(session, "parking_lot_solar", purchases)
+			_buy_infrastructure(session, "parking_lot_solar", purchases)
+		"era04_reduce_server_room_weather":
+			_buy_infrastructure(session, "diesel_backup_array", purchases)
+			_buy_infrastructure(session, "diesel_backup_array", purchases)
+			_buy_upgrade(session, "predictive_reserve_guard_upgrade", purchases)
+		"era04_certify_stairwell_extension":
+			_buy_infrastructure(session, "central_cooling", purchases)
+			_buy_upgrade(session, "elevator_priority_matrix", purchases)
+		"era04_standardize_building_power":
+			_buy_infrastructure(session, "medium_voltage_connection", purchases)
+			_buy_infrastructure(session, "emergency_extension_stairwell", purchases)
+			_buy_infrastructure(session, "parking_lot_solar", purchases)
 
 
 func _buy_infrastructure(session: GameSession, id: String, purchases: Array[String]) -> void:
@@ -236,9 +271,9 @@ func _round_trip(session: GameSession, label: String) -> GameSession:
 	var path := "%s/%s" % [_save_root, label]
 	var manager := SaveManager.new(path, _repository.get_content_version())
 	var saved := manager.save({"session": session.snapshot()}, 100000 + roundi(_elapsed), 100000 + roundi(_elapsed), label)
-	_check(bool(saved.get("ok", false)), "%s boundary writes a valid save" % label)
+	_check(bool(saved.get("ok", false)), "%s boundary writes a valid save: %s" % [label, saved])
 	var loaded := manager.load()
-	_check(loaded.ok, "%s boundary reloads its main save" % label)
+	_check(loaded.ok, "%s boundary reloads its main save: %s" % [label, loaded.diagnostics])
 	var restored := GameSession.new()
 	_check(restored.configure(_repository) and restored.restore(loaded.envelope.get("payload", {}).get("session", {}), _repository), "%s boundary restores complete domain state" % label)
 	return restored
@@ -267,7 +302,10 @@ func _compare_runs(first: Dictionary, second: Dictionary) -> void:
 	for era3_id: String in ["era03_sort_photo_archive", "era03_predict_package_arrival", "era03_write_grocery_list", "era03_leftovers_edible"]:
 		var duration := float(first["request_seconds"].get(era3_id, 0.0))
 		_check(duration >= 180.0 and duration <= 360.0, "%s takes 3–6 prepared-route minutes" % era3_id)
-	_check(structured_seconds >= 4500.0 and structured_seconds <= 7200.0, "structured newcomer self-test cadence reaches the 75–120 minute target")
+	for era4_id: String in ["era04_restore_elevator_service", "era04_schedule_rooftop_sunlight", "era04_stabilize_shared_backup", "era04_reduce_server_room_weather", "era04_certify_stairwell_extension", "era04_standardize_building_power"]:
+		var duration := float(first["request_seconds"].get(era4_id, 0.0))
+		_check(duration >= 240.0 and duration <= 720.0, "%s takes 4–12 prepared-route minutes" % era4_id)
+	_check(structured_seconds >= 7200.0 and structured_seconds <= 12000.0, "structured Eras 1–4 cadence reaches the intended expanded route")
 	print("PHASE 08 BALANCE REPORT: mechanical %.1f minutes, structured %.1f, Era 2 %.1f, Era 3 %.1f, idle %.1f minutes, longest gap %.1fs, brownout %.1fs, purchases %d" % [
 		float(first["elapsed"]) / 60.0,
 		structured_seconds / 60.0,

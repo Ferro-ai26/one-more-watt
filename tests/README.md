@@ -6,7 +6,7 @@ Run all repository validation from the repository root:
 ./tools/validate.sh
 ```
 
-After the approved Android package identifier and export preset are committed, build the provenance-checked Phase 10 debug APK with:
+After the approved Android package identifier and export preset are committed, build the provenance-checked current Phase 15 debug APK with:
 
 ```bash
 ./tools/build_android_debug.sh
@@ -75,3 +75,11 @@ Run the complete Eras 1–3 reachability, deterministic balance targets, era-bou
 ```bash
 ./tools/test_vertical_slice.sh
 ```
+
+Phase 15 Building Network domain and graphical regressions run with:
+
+```bash
+./tools/test_phase15_building.sh
+```
+
+On a graphical Linux host, append `--capture-phase15` to the Phase 15 UI test command recorded in `docs/phase_15/VISUAL_QA_RECORD.md` to regenerate the reviewed Building, maintenance, brownout, report, and pullback evidence.

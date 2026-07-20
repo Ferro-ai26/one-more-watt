@@ -42,6 +42,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Phase 13 production-skin tests: `./tools/test_phase13_skin.sh`
 - Persistence/offline tests: `./tools/test_persistence.sh`
 - Eras 1–3 vertical-slice tests: `./tools/test_vertical_slice.sh`
+- Phase 15 Building Network tests: `./tools/test_phase15_building.sh`
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`

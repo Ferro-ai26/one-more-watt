@@ -14,8 +14,8 @@ func _init() -> void:
 
 	var counts := repository.get_counts()
 	var expected_counts := {
-		"balance": 1, "eras": 3, "infrastructure": 18, "upgrades": 3,
-		"requests": 18, "demand_profiles": 9, "dialogue": 11,
+		"balance": 1, "eras": 4, "infrastructure": 25, "upgrades": 8,
+		"requests": 25, "demand_profiles": 12, "dialogue": 14, "maintenance": 2,
 		"incidents": 2, "achievements": 1, "localization": 1,
 	}
 	for family: String in expected_counts:
@@ -36,6 +36,7 @@ func _init() -> void:
 	_check(repository.get_incident("helpful_cool_breeze") is IncidentDefinition, "typed incident lookup should work")
 	_check(repository.get_achievement("first_boot") is AchievementDefinition, "typed achievement lookup should work")
 	_check(repository.get_balance("prototype_balance") is BalanceDefinition, "typed balance lookup should work")
+	_check(repository.get_maintenance("era04_transformer_thermal_review") is MaintenanceDefinition, "typed maintenance lookup should work")
 	_check(repository.get_localization() is LocalizationDefinition, "typed localization lookup should work")
 	_check(repository.localize(request.get_title_key()) == "Finish Booting", "localized request title should match source")
 	_check(repository.localize("dialogue.system.content_ready", {"content_version": "fixture-valid-1"}) == "Content database fixture-valid-1 is ready.", "named localization replacements should resolve")
@@ -46,7 +47,7 @@ func _init() -> void:
 	_check(request.get_required_energy() == 125.0, "exported dictionaries must not mutate definitions")
 	var request_list := repository.get_all("requests")
 	request_list.clear()
-	_check(repository.get_counts()["requests"] == 18, "returned arrays must not mutate repository indices")
+	_check(repository.get_counts()["requests"] == 25, "returned arrays must not mutate repository indices")
 
 	if _failures.is_empty():
 		print("CONTENT VALIDATION PASSED: %d checks" % _checks)

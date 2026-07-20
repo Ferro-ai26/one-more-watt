@@ -250,6 +250,22 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The complete host baseline passed without a new defect, the concrete Moto scrolling defect was fixed and physically retested, no blocker/critical issue remains in available evidence, and the user explicitly said “phase 15 go” after the remaining device evidence was disclosed.
 - Consequences: Missing safe-area/comfort, device FPS, 30-minute heat/battery, screenshots, effective-UI, Android/API, repeated-effect comfort, and lifecycle evidence remain unverified. `ISSUE-004` is deferred rather than fixed and must return before release readiness. Phase 15 may prepare its mandatory design/content appendix, but no Era 4 implementation may begin until that appendix is explicitly approved. `ISSUE-007` remains open. Phase 16/Era 5 is prohibited.
 
+## DEC-034 — Approve the Era 4 Building Network appendix
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Approve `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` as written and authorize implementation of Phase 15 only. Treat the current Era 4 request dialogue as functional/provisional copy for a later dedicated writing pass while preserving WATT's locked persuasive, useful, politely manipulative voice direction.
+- Reason: The approved appendix defines the complete Era 4 environment, WATT evolution, infrastructure, request/payoff route, infrequent maintenance decisions, Predictive Reserve Guard, migration boundary, production presentation, validation plan, and locked Era 5 preview required by the Phase 15 pre-code gate.
+- Consequences: Phase 15 implementation, testing, manual evidence, documentation, commit, and push may proceed. Provisional dialogue must remain data-driven and reviewable; it is not a final writing lock. Neighborhood/Era 5 and Phase 16 remain prohibited and require separate authorization.
+
+## DEC-035 — Keep Building maintenance authored, deterministic, and additive
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Implement the two approved Building maintenance reviews as optional authored content keyed by stable trigger/request IDs and stored as additive format-2 state. Repair spends the disclosed amount, Replace spends the disclosed amount and grants its authored permanent upgrade, and Overclock applies disclosed effects to exactly the next authorized request. Offline simulation stops for the choice. Predictive Reserve Guard uses a transient allocation override and never changes the operator's selected mode.
+- Reason: This preserves meaningful operator agency and the approved infrequent maintenance texture without introducing recurring degradation, hidden outcomes, a new currency, punitive loss, nondeterminism, or a new save format.
+- Consequences: Content version advances to `0.9.0` while save format remains 2 and accepts supported `0.8.0`, `0.7.0`, and `0.6.0` saves. Missing new fields default safely. Maintenance choices, pending input, one-request effects, guard state, and completed eras persist by stable ID. Era 5 remains absent. The existing gameplay formulas and allocation selection remain authoritative.
+
 ## Proposed decision template
 
 ```markdown

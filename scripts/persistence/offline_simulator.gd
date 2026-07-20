@@ -21,6 +21,11 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 		report.effective_elapsed = 0.0
 		report.stored_energy_after = report.stored_energy_before
 		return report
+	if session.has_pending_maintenance():
+		report.stopped_for_input = true
+		report.effective_elapsed = 0.0
+		report.stored_energy_after = report.stored_energy_before
+		return report
 	var current_id := session.current_request_id()
 	report.request_id = current_id
 	var initial_state := session.requests.get_request_state(current_id)
@@ -38,6 +43,9 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 	while remaining > 0.000000001:
 		var active := session.requests.get_active_state()
 		if active == null:
+			if session.has_pending_maintenance():
+				report.stopped_for_input = true
+				break
 			session.advance_idle_time(remaining)
 			remaining = 0.0
 			break

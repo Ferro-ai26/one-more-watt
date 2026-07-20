@@ -1,7 +1,7 @@
 class_name SaveManager
 extends RefCounted
 
-const CONTENT_COMPATIBILITY := {"0.8.0": ["0.7.0", "0.6.0"], "0.7.0": ["0.6.0"]}
+const CONTENT_COMPATIBILITY := {"0.9.0": ["0.8.0", "0.7.0", "0.6.0"], "0.8.0": ["0.7.0", "0.6.0"], "0.7.0": ["0.6.0"]}
 
 const MAIN_NAME := "save_main.json"
 const BACKUP_1_NAME := "save_backup_1.json"
@@ -41,7 +41,7 @@ func save(payload: Dictionary, current_utc: int, last_trusted_utc: int, trigger:
 	var encoded := SaveCodec.encode(unsigned)
 	var verified := SaveCodec.decode(encoded)
 	if not bool(verified.get("ok", false)):
-		return {"ok": false, "error": "self_validation_failed"}
+		return {"ok": false, "error": "self_validation_failed:%s" % verified.get("error", "unknown")}
 	var temp_path := _path(TEMP_NAME)
 	var file := FileAccess.open(temp_path, FileAccess.WRITE)
 	if file == null:

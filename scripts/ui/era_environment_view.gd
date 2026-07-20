@@ -102,6 +102,7 @@ func _draw() -> void:
 	match skin.era_number:
 		2: _draw_room(area)
 		3: _draw_house(area)
+		4: _draw_building(area)
 		_: _draw_desk(area)
 	_draw_power_paths(area)
 	_draw_watt(area)
@@ -166,6 +167,63 @@ func _draw_house(area: Rect2) -> void:
 	var transformer := Rect2(area.size.x * 0.02, area.size.y * 0.83, area.size.x * 0.18, area.size.y * 0.12)
 	draw_rect(transformer, SkinTokens.COLOR_GRAPHITE_RAISED if int(owned_counts.get("outdoor_transformer", 0)) > 0 else SkinTokens.COLOR_SHADOW)
 	draw_rect(transformer, SkinTokens.COLOR_TRANSMISSION, false, 2.0)
+
+
+func _draw_building(area: Rect2) -> void:
+	draw_rect(Rect2(area.size.x * 0.03, area.size.y * 0.04, area.size.x * 0.94, area.size.y * 0.84), skin.wall_color)
+	draw_rect(Rect2(area.size.x * 0.05, area.size.y * 0.07, area.size.x * 0.90, area.size.y * 0.78), SkinTokens.COLOR_SHADOW, false, 3.0)
+	var floor_height := area.size.y * 0.13
+	for floor_index: int in 5:
+		var y := area.size.y * 0.12 + floor_index * floor_height
+		var floor_rect := Rect2(area.size.x * 0.07, y, area.size.x * 0.86, floor_height - 5.0)
+		var ordinary_online := floor_index in [0, 3] and not brownout_active
+		draw_rect(floor_rect, SkinTokens.COLOR_ERA_04_WARM_FLOOR if ordinary_online else SkinTokens.COLOR_ERA_04_DIM_FLOOR)
+		draw_line(Vector2(floor_rect.position.x, floor_rect.end.y), Vector2(floor_rect.end.x, floor_rect.end.y), SkinTokens.COLOR_AGED_METAL, 2.0)
+		for window_index: int in 4:
+			var window := Rect2(floor_rect.position + Vector2(8.0 + window_index * floor_rect.size.x * 0.19, 8.0), Vector2(floor_rect.size.x * 0.11, floor_rect.size.y * 0.44))
+			draw_rect(window, SkinTokens.COLOR_WARM_LIGHT if ordinary_online and window_index == 0 else SkinTokens.COLOR_GLASS_DARK)
+	# Central cyan riser and dim elevator bank are the dominant scale contradiction.
+	var riser := Rect2(area.size.x * 0.47, area.size.y * 0.08, area.size.x * 0.07, area.size.y * 0.78)
+	draw_rect(riser, SkinTokens.COLOR_GRAPHITE_RAISED)
+	draw_rect(riser, SkinTokens.COLOR_WATT if power_online else SkinTokens.COLOR_DISABLED, false, 3.0)
+	for junction: int in 5:
+		draw_circle(Vector2(riser.get_center().x, area.size.y * (0.17 + junction * 0.13)), 3.0, SkinTokens.COLOR_WATT_REBOOT if power_online else SkinTokens.COLOR_DISABLED)
+	var elevator := Rect2(area.size.x * 0.73, area.size.y * 0.13, area.size.x * 0.14, area.size.y * 0.63)
+	draw_rect(elevator, SkinTokens.COLOR_ERA_04_DIM_FLOOR)
+	draw_rect(elevator, SkinTokens.COLOR_EMERGENCY_LIGHT, false, 2.0)
+	for floor_index: int in 4:
+		draw_line(Vector2(elevator.position.x + 5.0, elevator.position.y + 12.0 + floor_index * elevator.size.y / 4.4), Vector2(elevator.end.x - 5.0, elevator.position.y + 12.0 + floor_index * elevator.size.y / 4.4), SkinTokens.COLOR_DISABLED, 2.0)
+	# Rooftop solar and cooling plant read as one representative cluster.
+	var roof_y := area.size.y * 0.075
+	draw_line(Vector2(area.size.x * 0.10, roof_y), Vector2(area.size.x * 0.36, roof_y - area.size.y * 0.05), SkinTokens.COLOR_GENERATION, 5.0)
+	draw_line(Vector2(area.size.x * 0.12, roof_y + 3.0), Vector2(area.size.x * 0.37, roof_y - area.size.y * 0.047), SkinTokens.COLOR_WATT, 2.0)
+	_draw_fan(area, Vector2(area.size.x * 0.66, area.size.y * 0.075), 0.045, int(owned_counts.get("central_cooling", 0)) > 0)
+	_draw_fan(area, Vector2(area.size.x * 0.78, area.size.y * 0.075), 0.045, int(owned_counts.get("central_cooling", 0)) > 0)
+	# Ground-level service masses keep infrastructure representative, not one-to-one.
+	var transformer := Rect2(area.size.x * 0.06, area.size.y * 0.76, area.size.x * 0.20, area.size.y * 0.10)
+	draw_rect(transformer, SkinTokens.COLOR_GRAPHITE_RAISED)
+	draw_rect(transformer, SkinTokens.COLOR_TRANSMISSION, false, 3.0)
+	for coil_x: float in [0.10, 0.16, 0.22]:
+		draw_circle(Vector2(area.size.x * coil_x, area.size.y * 0.81), 5.0, SkinTokens.COLOR_CERAMIC_SHADOW)
+	_draw_battery_bank(area, Vector2(area.size.x * 0.76, area.size.y * 0.77), mini(int(owned_counts.get("commercial_battery_room", 0)), 3), 0.055)
+	# The approved absurd orange emergency extension route remains visibly separate from cyan power.
+	var stair_points := PackedVector2Array([
+		Vector2(area.size.x * 0.91, area.size.y * 0.72), Vector2(area.size.x * 0.84, area.size.y * 0.64),
+		Vector2(area.size.x * 0.91, area.size.y * 0.56), Vector2(area.size.x * 0.84, area.size.y * 0.48),
+		Vector2(area.size.x * 0.91, area.size.y * 0.40), Vector2(area.size.x * 0.84, area.size.y * 0.32),
+	])
+	draw_polyline(stair_points, SkinTokens.COLOR_EMERGENCY_LIGHT if int(owned_counts.get("emergency_extension_stairwell", 0)) > 0 else SkinTokens.COLOR_DISABLED, 4.0, true)
+	# Distributed lobby face demonstrates reach while the physical core remains present.
+	var lobby_screen := Rect2(area.size.x * 0.28, area.size.y * 0.69, area.size.x * 0.13, area.size.y * 0.075)
+	draw_rect(lobby_screen, SkinTokens.COLOR_GLASS_DARK)
+	draw_rect(lobby_screen, SkinTokens.COLOR_WATT, false, 2.0)
+	for eye_x: float in [0.32, 0.37]:
+		draw_circle(Vector2(area.size.x * eye_x, area.size.y * 0.727), 2.2, SkinTokens.COLOR_WATT_REBOOT)
+	# One tiny bicycle/plant remnant prevents the scene from becoming abstract machinery.
+	draw_circle(Vector2(area.size.x * 0.12, area.size.y * 0.70), 5.0, SkinTokens.COLOR_IVORY_DIM, false, 1.5)
+	draw_circle(Vector2(area.size.x * 0.18, area.size.y * 0.70), 5.0, SkinTokens.COLOR_IVORY_DIM, false, 1.5)
+	draw_line(Vector2(area.size.x * 0.12, area.size.y * 0.70), Vector2(area.size.x * 0.15, area.size.y * 0.66), SkinTokens.COLOR_IVORY_DIM, 1.5)
+	draw_line(Vector2(area.size.x * 0.15, area.size.y * 0.66), Vector2(area.size.x * 0.18, area.size.y * 0.70), SkinTokens.COLOR_IVORY_DIM, 1.5)
 
 
 func _draw_shell(area: Rect2, surface_y: float) -> void:
@@ -243,9 +301,9 @@ func _draw_power_paths(area: Rect2) -> void:
 
 
 func _draw_watt(area: Rect2) -> void:
-	var scale_factor := 0.23 if skin.era_number < 3 else 0.19
-	var core_size := Vector2(area.size.x * scale_factor, area.size.y * (0.34 if skin.era_number < 3 else 0.30))
-	var core_center := Vector2(area.size.x * 0.52, area.size.y * (0.52 if skin.era_number < 3 else 0.48))
+	var scale_factor := 0.16 if skin.era_number >= 4 else (0.23 if skin.era_number < 3 else 0.19)
+	var core_size := Vector2(area.size.x * scale_factor, area.size.y * (0.24 if skin.era_number >= 4 else (0.34 if skin.era_number < 3 else 0.30)))
+	var core_center := Vector2(area.size.x * (0.38 if skin.era_number >= 4 else 0.52), area.size.y * (0.81 if skin.era_number >= 4 else (0.52 if skin.era_number < 3 else 0.48)))
 	var core := Rect2(core_center - core_size * 0.5, core_size)
 	draw_rect(core, SkinTokens.COLOR_GRAPHITE_RAISED)
 	draw_rect(core, SkinTokens.COLOR_AGED_METAL, false, 3.0)
@@ -276,7 +334,7 @@ func _draw_operator_plate(area: Rect2) -> void:
 	draw_rect(plate, SkinTokens.COLOR_INK)
 	draw_rect(plate, SkinTokens.COLOR_WATT if authorization_ready else SkinTokens.COLOR_DISABLED, false, 1.0)
 	var state_text := "OPERATOR READY" if authorization_ready else "OPERATOR HOLD"
-	var scale_text: String = str({1: "DESK", 2: "ROOM", 3: "HOUSE"}.get(skin.era_number, "WORKSHOP"))
+	var scale_text: String = str({1: "DESK", 2: "ROOM", 3: "HOUSE", 4: "BUILDING"}.get(skin.era_number, "WORKSHOP"))
 	var copy := "%s  •  %s  •  %s" % [scale_text, representative_state().to_upper(), state_text]
 	draw_string(get_theme_default_font(), plate.position + Vector2(8.0, plate.size.y * 0.68), copy, HORIZONTAL_ALIGNMENT_LEFT, plate.size.x - 16.0, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY)
 
@@ -293,7 +351,7 @@ func _draw_transition(area: Rect2) -> void:
 		return
 	if reduced_motion:
 		draw_rect(area.grow(-6.0), SkinTokens.COLOR_WATT, false, 3.0)
-		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.34, area.size.y * 0.10), "SCALE REVEAL", HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.32, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.20, area.size.y * 0.10), _transition_label(), HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.60, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
 		return
 	if _transition_progress < 0.22:
 		draw_rect(area.grow(-4.0), SkinTokens.COLOR_EMERGENCY_LIGHT, false, 5.0)
@@ -307,4 +365,11 @@ func _draw_transition(area: Rect2) -> void:
 		var reveal := inverse_lerp(0.60, 1.0, _transition_progress)
 		var inset := lerpf(minf(area.size.x, area.size.y) * 0.22, 5.0, reveal)
 		draw_rect(area.grow(-inset), SkinTokens.COLOR_WATT, false, 3.0)
-		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.34, area.size.y * 0.10), "SCALE REVEAL", HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.32, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+		if skin.era_number == 4:
+			for x_fraction: float in [0.03, 0.80]:
+				draw_rect(Rect2(area.size.x * x_fraction, area.size.y * 0.20, area.size.x * 0.17, area.size.y * 0.60), SkinTokens.COLOR_ERA_04_DIM_FLOOR, false, 3.0)
+		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.20, area.size.y * 0.10), _transition_label(), HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.60, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+
+
+func _transition_label() -> String:
+	return "NEIGHBORHOOD MICROGRID • MORE COMING" if skin != null and skin.era_number == 4 else "SCALE REVEAL"

@@ -13,6 +13,7 @@ var persistence: PersistenceController
 var _refresh_accumulator := 0.0
 var _last_report_modal_id := ""
 var _last_era_transition_modal_id := ""
+var _last_maintenance_modal_id := ""
 var _feedback_tween: Tween
 
 var status_era_label: Label
@@ -29,7 +30,7 @@ var request_meta_label: Label
 var request_progress: ProgressBar
 var forecast_label: Label
 var request_action_button: Button
-var vital_grid: HBoxContainer
+var vital_grid: GridContainer
 var vital_cards: Dictionary = {}
 var allocation_box: VBoxContainer
 var allocation_label: Label
@@ -81,7 +82,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 13 production-skin build ready")
+	print("ONE MORE WATT Phase 15 Building Network build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -102,6 +103,8 @@ func _process(delta: float) -> void:
 		open_report_modal(session.last_report_id)
 	elif not session.economy.state.pending_era_transition_id.is_empty() and session.economy.state.pending_era_transition_id != _last_era_transition_modal_id and navigation.modal_depth() == 0:
 		open_era_transition_modal(session.economy.state.pending_era_transition_id)
+	elif session.has_pending_maintenance() and session.economy.state.pending_maintenance_id != _last_maintenance_modal_id and navigation.modal_depth() == 0:
+		open_maintenance_modal()
 
 
 func select_tab(tab: String) -> bool:
@@ -131,6 +134,9 @@ func handle_back() -> bool:
 
 func open_request_modal() -> void:
 	var request := view_model.request_snapshot()
+	if request.get("status") == "maintenance_pending":
+		open_maintenance_modal()
+		return
 	if request.get("status") == RequestRunState.COMPLETED:
 		open_report_modal(str(request["id"]))
 		return
@@ -153,7 +159,9 @@ func open_request_modal() -> void:
 	if bool(request.get("detailed_forecast_unlocked", false)):
 		forecast_text += "  •  PREDICTED SERVICE %.0f%%" % (float(request["service_ratio"]) * 100.0)
 	_add_modal_label(forecast_text, 17, SkinTokens.COLOR_IVORY)
-	var authorize := _button("Authorize Request", "AuthorizeButton")
+	if not str(request.get("operator_payoff", "")).is_empty():
+		_add_modal_label("OPERATOR PAYOFF  •  %s" % request["operator_payoff"], 16, SkinTokens.COLOR_WATT_REBOOT)
+	var authorize := _button("Authorize Connection", "AuthorizeButton")
 	authorize.pressed.connect(_authorize_from_modal)
 	modal_content.add_child(authorize)
 	if bool(request["underprepared"]):
@@ -189,13 +197,24 @@ func open_report_modal(request_id: String) -> void:
 	_add_modal_label(str(data["completion"]), 18, SkinTokens.COLOR_IVORY)
 	_add_modal_label("OPERATOR PAYOFF  •  %s Stored Energy and authorized unlock access" % NumberFormatter.format_energy(float(data["stored_energy"]), session.settings.number_notation), 16, SkinTokens.COLOR_WATT_REBOOT)
 	_add_modal_label("WATT SAYS  •  Thank you. The infrastructure is already being used responsibly.", 16, SkinTokens.COLOR_IVORY)
+	var takeover: Dictionary = data.get("takeover_report", {})
+	if not takeover.is_empty():
+		_add_modal_label("TAKEOVER REPORT\n%s  •  %s\nCIVILIAN INCONVENIENCE  •  %s\n%s" % [
+			str(takeover.get("control_label", "GRID CONTROL")),
+			str(takeover.get("control_value", "RECORDED")),
+			str(takeover.get("inconvenience", "Unreported")),
+			str(takeover.get("consequence", "")),
+		], 17, SkinTokens.COLOR_EMERGENCY_LIGHT)
 	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, SkinTokens.COLOR_SUCCESS)
 	var report_state := session.requests.get_request_state(request_id)
 	var acknowledge := _button("Continue" if report_state.status == RequestRunState.COMPLETED else "Back to Reports", "AcknowledgeButton")
 	acknowledge.pressed.connect(func() -> void:
+		var capstone: bool = "phase15_capstone" in session.repository.get_request(request_id).get_value("tags", [])
 		if report_state.status == RequestRunState.COMPLETED:
 			session.acknowledge_report(request_id)
 		close_top_modal()
+		if capstone and environment_view != null:
+			environment_view.start_capstone_pullback()
 		_refresh_all(true)
 	)
 	modal_content.add_child(acknowledge)
@@ -336,6 +355,31 @@ func open_era_transition_modal(era_id: String) -> void:
 	_apply_text_scale()
 
 
+func open_maintenance_modal() -> void:
+	var maintenance := view_model.maintenance_snapshot()
+	if maintenance.is_empty():
+		return
+	_last_maintenance_modal_id = str(maintenance["id"])
+	_open_modal("maintenance_choice", "OPERATOR MAINTENANCE REVIEW")
+	_add_modal_label(str(maintenance["title"]), 24, SkinTokens.COLOR_EMERGENCY_LIGHT)
+	_add_modal_label(str(maintenance["description"]), 17, SkinTokens.COLOR_IVORY)
+	_add_modal_label("CHOOSE ONCE  •  No progress or owned infrastructure can be lost.", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_SUCCESS)
+	for option: Dictionary in maintenance["options"]:
+		var cost := float(option["cost"])
+		var button := _button("%s  •  %s\n%s" % [
+			str(option["label"]).to_upper(),
+			"NO PURCHASE COST" if is_zero_approx(cost) else NumberFormatter.format_energy(cost, session.settings.number_notation),
+			str(option["description"]),
+		], "Maintenance%sButton" % str(option["id"]).to_pascal_case())
+		button.custom_minimum_size.y = 78
+		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		button.disabled = not bool(option["affordable"])
+		button.pressed.connect(_choose_maintenance.bind(str(option["id"])))
+		modal_content.add_child(button)
+	_add_modal_back_button("Defer Decision")
+	_apply_text_scale()
+
+
 func _open_corrupt_save_modal() -> void:
 	_open_modal("save_recovery", "SAVE RECOVERY REQUIRED")
 	_add_modal_label("The main save and both backups could not be validated. The files were preserved for diagnostics. Start a new local game only if you want to continue.", 18, SkinTokens.COLOR_WARNING)
@@ -446,8 +490,9 @@ func _build_interface() -> void:
 	request_action_button.pressed.connect(open_request_modal)
 	request_column.add_child(request_action_button)
 
-	vital_grid = HBoxContainer.new()
+	vital_grid = GridContainer.new()
 	vital_grid.name = "VitalCards"
+	vital_grid.columns = 3
 	vital_grid.add_theme_constant_override("separation", SkinTokens.SPACE_1)
 	layout.add_child(vital_grid)
 	for vital_id: String in ["generation", "transmission", "reserve"]:
@@ -556,6 +601,8 @@ func _build_modal_layer() -> void:
 	modal_title = _label("MODAL", SkinTokens.TYPE_HEADING, SkinTokens.COLOR_WATT_REBOOT)
 	modal_title.name = "ModalTitle"
 	modal_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	modal_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	modal_title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	modal_layout.add_child(modal_title)
 	modal_scroll = TOUCH_SCROLL_CONTAINER_SCRIPT.new() as ScrollContainer
 	modal_scroll.name = "ModalScroll"
@@ -585,6 +632,10 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	request_progress.value = float(request.get("progress", 0.0)) * 100.0
 	if request["status"] == "prototype_complete":
 		forecast_label.text = "ERAS 1–3 COMPLETE  •  MORE COMING"
+	elif request["status"] == "phase15_complete":
+		forecast_label.text = "BUILDING SECURED  •  NEIGHBORHOOD MICROGRID LOCKED"
+	elif request["status"] == "maintenance_pending":
+		forecast_label.text = "OPERATOR DECISION REQUIRED  •  IDLE GENERATION CONTINUES"
 	else:
 		forecast_label.text = "%s PEAK  •  %s LIMITS  •  %s\nNEXT  •  %s" % [
 			NumberFormatter.format_power(float(request.get("peak", 0.0)), notation),
@@ -610,7 +661,7 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	watt_core.text = str(environment["core"])
 	watt_core.add_theme_color_override("font_color", environment["accent"])
 	if environment_view != null:
-		var target_skin_id := EraSkinRegistry.ERA_03_ID if int(status["era_number"]) >= 3 else (EraSkinRegistry.ERA_02_ID if int(status["era_number"]) == 2 else EraSkinRegistry.ERA_01_ID)
+		var target_skin_id := EraSkinRegistry.skin_for_era(int(status["era_number"])).skin_id
 		if environment_view.skin == null or environment_view.skin.skin_id != target_skin_id:
 			environment_view.set_skin(EraSkinRegistry.get_skin(target_skin_id))
 		environment_view.set_reduced_motion(session.settings.reduced_motion)
@@ -641,6 +692,12 @@ func _update_request_action(status: String) -> void:
 		"prototype_complete":
 			request_action_button.text = "Prototype Complete"
 			request_action_button.disabled = true
+		"maintenance_pending":
+			request_action_button.text = "Resolve Maintenance"
+			request_action_button.disabled = false
+		"phase15_complete":
+			request_action_button.text = "Neighborhood Locked"
+			request_action_button.disabled = true
 		_:
 			request_action_button.text = "Waiting for WATT"
 			request_action_button.disabled = true
@@ -649,15 +706,34 @@ func _update_request_action(status: String) -> void:
 func _rebuild_screen() -> void:
 	if screen_content == null or view_model == null:
 		return
-	_clear_children(screen_content)
 	screen_title_label.text = navigation.current_tab.to_upper()
 	drawer_context_label.text = "%s • LIVE" % environment_view.skin.scale_label if environment_view != null and environment_view.skin != null else "WORLD REMAINS LIVE"
+	var shop_cards: Array[Dictionary] = []
+	if navigation.current_tab == "build":
+		shop_cards = view_model.infrastructure_cards()
+	elif navigation.current_tab == "upgrades":
+		shop_cards = view_model.upgrade_cards()
+	if not shop_cards.is_empty() and _refresh_existing_shop(shop_cards):
+		_apply_text_scale()
+		return
+	_clear_children(screen_content)
 	match navigation.current_tab:
 		"grid": _build_grid_screen()
-		"build": _build_shop_screen(view_model.infrastructure_cards())
-		"upgrades": _build_shop_screen(view_model.upgrade_cards())
+		"build", "upgrades": _build_shop_screen(shop_cards)
 		"reports": _build_reports_screen()
 	_apply_text_scale()
+
+
+func _refresh_existing_shop(cards: Array[Dictionary]) -> bool:
+	if screen_content.get_child_count() != cards.size() + 1 or screen_content.get_child(0).name != "ContextBuildInstruction":
+		return false
+	for index: int in cards.size():
+		var card := screen_content.get_child(index + 1) as ShopItemCard
+		if card == null or card.content_id != str(cards[index].get("id", "")):
+			return false
+	for index: int in cards.size():
+		(screen_content.get_child(index + 1) as ShopItemCard).configure(cards[index], session.settings.number_notation)
+	return true
 
 
 func _build_grid_screen() -> void:
@@ -667,7 +743,13 @@ func _build_grid_screen() -> void:
 	environment.name = "EnvironmentSummary"
 	environment.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	screen_content.add_child(environment)
-	var action_text := "PROTOTYPE COMPLETE  •  WATT's larger network is not part of this build yet." if request["status"] == "prototype_complete" else "RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none")))
+	var action_text := "RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none")))
+	if request["status"] == "prototype_complete":
+		action_text = "PROTOTYPE COMPLETE  •  WATT's larger network is ready for operator authorization."
+	elif request["status"] == "phase15_complete":
+		action_text = "BUILDING NETWORK COMPLETE  •  NEIGHBORHOOD MICROGRID — MORE COMING"
+	elif request["status"] == "maintenance_pending":
+		action_text = "OPERATOR HOLD  •  Choose Repair, Replace, or Overclock before the next connection."
 	var action := _label(action_text, 15, SkinTokens.COLOR_SUCCESS)
 	action.name = "RecommendedActionLabel"
 	action.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
@@ -690,6 +772,23 @@ func _build_grid_screen() -> void:
 			_refresh_all(true)
 		)
 		screen_content.add_child(automation)
+	var predictive_guard := view_model.predictive_guard_snapshot()
+	if bool(predictive_guard["unlocked"]):
+		var guard_control := CheckButton.new()
+		guard_control.name = "PredictiveReserveGuardCheck"
+		guard_control.text = "Predictive Reserve Guard • %s • target %.0f%%" % [
+			"ACTIVE" if bool(predictive_guard["active"]) else ("ARMED" if bool(predictive_guard["enabled"]) else "OFF"),
+			float(predictive_guard["target_ratio"]) * 100.0,
+		]
+		guard_control.custom_minimum_size.y = 48
+		guard_control.add_theme_font_size_override("font_size", 16)
+		guard_control.mouse_filter = Control.MOUSE_FILTER_PASS
+		guard_control.button_pressed = bool(predictive_guard["enabled"])
+		guard_control.toggled.connect(func(enabled: bool) -> void:
+			session.configure_predictive_reserve_guard(enabled, float(predictive_guard["target_ratio"]))
+			_refresh_all(true)
+		)
+		screen_content.add_child(guard_control)
 	for optional: Dictionary in view_model.optional_requests():
 		if optional["id"] == request.get("id", ""):
 			continue
@@ -761,6 +860,12 @@ func _choose_optional_request(request_id: String) -> void:
 		_refresh_all(true)
 
 
+func _choose_maintenance(option_id: String) -> void:
+	if session.choose_maintenance(option_id):
+		close_top_modal()
+		_refresh_all(true)
+
+
 func _set_allocation(mode: String) -> void:
 	session.set_allocation_mode(mode)
 	_refresh_all(false)
@@ -815,6 +920,7 @@ func _apply_text_scale() -> void:
 			_scale_control_font(label_value as Control, scale)
 	for card_value: Variant in find_children("*", "ShopItemCard", true, false):
 		(card_value as ShopItemCard).set_text_scale(scale)
+	_apply_tab_density()
 
 
 func _scale_control_font(control: Control, scale: float) -> void:
@@ -887,6 +993,8 @@ func _apply_tab_density() -> void:
 	screen_panel.visible = compact
 	feedback_label.visible = not short_viewport
 	drawer_context_label.visible = size.x >= 360.0
+	status_era_label.visible = size.x >= 360.0
+	vital_grid.columns = 2 if session.settings.get_text_scale() >= 1.3 else 3
 	if nav_buttons.has("upgrades"):
 		(nav_buttons["upgrades"] as Button).text = "Upgrade" if size.x < 360.0 else "Upgrades"
 	if environment_frame != null:

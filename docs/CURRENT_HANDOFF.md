@@ -4,85 +4,60 @@ Updated: 2026-07-20
 
 Active phase: Phase 15 — Building Network: Era 4
 
-Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
+Status: Completion Gate — Host Implementation and Manual Evidence Pass; Physical Android Verification Pending
 
 ## Exact result achieved
 
-Phase 12 commit `ae61a94` was pushed to `origin/main` and remote synchronization was confirmed before Phase 13 began. Phase 13 then manually reconstructed a complete project-original, code-native presentation layer for the existing Eras 1–3 vertical slice while preserving the locked Phase 11 phone-board direction and Phase 12 technical contracts:
+The user approved `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` under `DEC-034` before implementation. Phase 15 now delivers the complete Building Network route and stops at the locked Neighborhood preview:
 
-- distinct Desk, Room, and House/Home Server Closet dioramas with nested scale continuity, ordinary-life remnants, representative infrastructure clusters, authored cyan routes, warm-to-charcoal escalation, and visible brownout/reserve states;
-- one persistent asymmetric scratched WATT core with curious, thinking, pleased, concerned, and completion expressions; WATT remains cyan during brownouts and never becomes evil or monstrous;
-- contextual Build/Upgrade drawers that preserve 39% of portrait height for the live world at routine phone sizes, replacing the Phase 12 card-heavy full-screen fallback as composition authority;
-- compact semantic infrastructure glyphs, installation pulses, restrained drawer audio, safe overload/blackout/cyan-reboot/scale-reveal transition states, operator-framed completion reports, larger-text sizing, and reduced-motion substitution;
-- 12 final host-rendered evidence images covering Eras 1–3, Main, Build, report, brownout, pullback, 130% text, and 320 × 568;
-- a 44-check headless Phase 13 suite and 68-check graphical capture run integrated into UI/full validation.
+- canonical content `0.9.0` contains Era 4, six required requests, one optional vanity request, seven infrastructure items with project-original SVG icons, five upgrades, three demand profiles, three brownout lines, and two authored maintenance records;
+- every required request promises a concrete human-operator payoff and remains tagged `provisional_copy`; WATT's locked useful, calm, politely manipulative voice is preserved without treating current lines as final writing;
+- additive format-2 migration accepts supported `0.8.0`, `0.7.0`, and `0.6.0` saves, preserves Stored Energy/ownership, and requires explicit authorization before entering Building;
+- deterministic Repair/Replace/Overclock reviews are one-time, non-punitive operator decisions; offline progress stops for input, replacement upgrades are stable-ID gated, and an Overclock binds to exactly one request across save/load;
+- Predictive Reserve Guard uses a visible, transient 30-second pre-peak override without changing the player's selected allocation mode;
+- the reusable presentation adds the Building cutaway, dim ordinary floors, cyan riser, rooftop/service infrastructure, amber stairwell route, bicycle remnant, distributed lobby WATT face, persistent scratched core, brownout, takeover report, and locked Neighborhood pullback;
+- compatible Build/Upgrade cards reconfigure in place, preserving the existing 1,500 ms host rebuild guard despite the larger catalog;
+- no Era 5 content, Phase 16 work, new currency, recurring degradation, resident simulation, wire placement, gameplay-formula rewrite, Android-foundation change, or generated concept raster was added.
 
-No generated Phase 11 raster is integrated. No gameplay formula, balance value, save schema, content progression, Android foundation, request order, or era number changed during Phase 13. Era 4 was not started. Under `DEC-030`, this reusable code-native layer is production-functional but not approval of final painted art; `ISSUE-007` remains open for the later gold-standard visual-production pass.
-
-A first external Phase 13 pass installed and cold-launched the clean commit-`1dcb9cf` APK on a Motorola Moto G (2025), reported at 720 × 1604 / 280 dpi with app version `v0.10.0-dev`. It found that Build and Upgrades could not scroll by touch and that a cost-threshold purchase confirmation appeared only for some purchases. The Phase 13 follow-up now:
-
-- routes both shared scroll instances—main screens and modals—through an explicit reusable touch-drag implementation, with an 8-pixel deadzone, vertical-only movement, drag-safe card/control filtering, and correct input ownership while a modal is open;
-- covers Build, Upgrades, Reports, Settings, and every other screen/modal using those shared containers, with synthetic Android drag regression on overflowing Build and Settings content;
-- removes the conditional purchase-confirmation modal and Settings toggle so every affordable purchase applies on its first tap; the legacy setting stays serialized only for save compatibility (`DEC-031`).
-
-Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build, Upgrades, Reports, and Settings scrolling work, and affordable purchases apply without the removed popup. `ISSUE-009` is fixed. The tester explicitly skipped the effective-UI and Android-version fields, then directed that the remainder of the Phase 13 playtest be skipped, accepted the result, and authorized advancement. Phase 13 is closed under `DEC-032`; its unchecked phone-screenshot/full-playtest criterion is an accepted limitation, not a pass.
-
-The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.md`, `RELEASE_READINESS_DEFINITION.md`, and all Phase 13 evidence have been read. Phase 14 is active for independent visual/mobile/accessibility QA and proven corrections only. Era 4, Phase 15, major direction changes, and final painted-art approval remain outside scope.
-
-Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST.md` now maps each evidenced host pass and leaves device-only observations unchecked. Current measurements are 1,308.2 ms for 25 Build rebuilds, 496.0 ms for 500 refreshes, 294 nodes, and a 10,019.4 KiB inherited isolated skin-memory delta.
-
-The user subsequently said “phase 15 go.” `DEC-033` closes Phase 14 as Approved with targeted revisions, records GO for content expansion, and accepts the already disclosed device-only gaps as deferred limitations rather than passes. `ISSUE-004` remains deferred for later device/release QA; `ISSUE-007` remains open.
-
-The complete Phase 15 contract and permanent gameplay/content/save/visual specifications were read. The mandatory pre-code Era 4 appendix is proposed at `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md`. It defines the Building cutaway mood, vertical-accumulation motif, scratched-core service console plus lobby face, six main requests and one optional vanity request, seven required infrastructure silhouettes, two deterministic Repair/Replace/Overclock prompts, Predictive Reserve Guard, House-to-Building pullback, save/content migration, production asset/reuse plan, validation plan, and locked Neighborhood endpoint. No Era 4 implementation has begun because the appendix is awaiting explicit approval.
+`ISSUE-007` remains open: the code-native/project-original presentation is production-functional and contextually reviewed, not approval of the later tactile painted gold-standard art. `ISSUE-010` records that physical Phase 15 Android execution is unavailable on this host.
 
 ## Files changed
 
-- Runtime: `era_environment_view.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, `main_ui.gd`, `main_view_model.gd`, `shop_item_card.gd`, `vital_card.gd`, `feedback_audio.gd`, and `ShopItemCard.tscn`.
-- Added: `infrastructure_glyph.gd`, `touch_scroll_container.gd`, `test_phase13_production_skin.gd`, and `test_phase13_skin.sh`.
-- Validation/inventory: `test_main_ui_systems.gd`, `test_ui.sh`, `validate.sh`, `asset_inventory.json`, and setup/test documentation.
-- Evidence/docs: `docs/phase_13/`, Phase 13 contract status, `ACTIVE_PHASE.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, and this handoff.
-- Phase 14 evidence: reconciled `VISUAL_QA_CHECKLIST.md` and `docs/phase_14/HOST_QA_BASELINE.md`.
-- Phase 15 proposal: `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md`, Phase 15 contract status, active phase, decision/progress/handoff updates.
+- Content/data: `data/manifest.json`, `data/eras/eras.json`, `data/requests/era_04_requests.json`, `data/requests/demand_profiles.json`, `data/infrastructure/infrastructure.json`, `data/upgrades/upgrades.json`, `data/maintenance/era_04_maintenance.json`, `data/dialogue/system_dialogue.json`, `data/localization/en.json`, and `data/balance/constants.json`.
+- Content runtime: `content_repository.gd`, `content_validator.gd`, new `maintenance_definition.gd`, and `unlock_evaluator.gd`.
+- Simulation/save: `game_session.gd`, `economy_state.gd`, `economy_simulation.gd`, `request_simulation.gd`, `grid_simulation.gd`, `demand_profile_sampler.gd`, `offline_simulator.gd`, `save_codec.gd`, and `save_manager.gd`.
+- Presentation/assets: `era_environment_view.gd`, `main_ui.gd`, `main_view_model.gd`, `infrastructure_glyph.gd`, `shop_item_card.gd`, `feedback_audio.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, seven files under `assets/icons/infrastructure/`, and `assets/asset_inventory.json`.
+- Tests/tools: `test_phase15_building_network.gd`, `test_phase15_building_ui.gd`, `test_vertical_slice.gd`, `test_vertical_slice_ui.gd`, `test_economy_simulation.gd`, content fixtures/validator, `test_phase15_building.sh`, `validate.sh`, and current Android build/device scripts.
+- Phase/living documentation: `ACTIVE_PHASE.md`, Phase 15 contract/appendix, `IMPLEMENTATION_RECORD.md`, `VISUAL_QA_RECORD.md`, seven evidence PNGs, `CONTENT_DATABASE.md`, `GAMEPLAY_SYSTEMS.md`, `SAVE_AND_OFFLINE_SPEC.md`, `UI_UX_SPEC.md`, `ART_AND_AUDIO_DIRECTION.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, setup/test docs, and this handoff.
 
 ## Commands/tests run and results
 
-- Phase 12 push confirmation: local HEAD and `origin/main` both resolved to `ae61a9462ea21bdd0e1bf588e5348f7da04617ca` before Phase 13 work.
-- Baseline `./tools/validate.sh`: all functional suites passed; the unchanged 500-refresh host guard missed twice at 1,050.8 ms and 1,130.5 ms, matching documented VPS variance.
-- `GODOT_BIN=godot4 ./tools/test_ui.sh`: passed 48 UI-system, 296 Main-UI, 81 Phase 12 skin, and 44 Phase 13 skin checks.
-- `GODOT_BIN=godot4 ./tools/test_vertical_slice.sh`: passed 908 balance/reachability and 111 UI/performance checks after removing redundant presentation churn; 25 Build rebuilds 1,428.2 ms, 500 refreshes 489.2 ms, 294 nodes.
-- Final `./tools/validate.sh`: passed every repository suite and headless smoke launch. Accepted endpoint: 25 Build rebuilds 1,342.7 ms, 500 refreshes 487.4 ms, 294 nodes; five portrait layouts passed from 320 × 568 through 720 × 1280.
-- Graphical Phase 13 capture: passed 68 checks and wrote 12 inspected screenshots under `docs/phase_13/evidence/`.
-- Measurement-only dirty-tree Android export: 55,939,440 bytes, SHA-256 `c82bb39f8f854a90f6c5368fe93fd10436388e97e6e075ec25bc616943f24458`; +16,565 bytes / +0.030% over Phase 12. Package, API 24/35, `VIBRATE`-only permission, and v2/v3 signatures passed static inspection. This is not a clean provenance build or device-tested artifact.
-- `adb devices -l`: no attached device.
-- First device-pass report: install/cold launch passed on Motorola Moto G (2025), 720 × 1604 at 280 dpi; app version `v0.10.0-dev`; exact build suffix/effective UI line not supplied; Build/Upgrade touch scrolling failed on the first APK.
-- Follow-up `./tools/test_ui.sh`: passed 48 UI-system, 426 Main-UI, 81 Phase 12 skin, and 51 Phase 13 checks, including real synthetic touch drags on overflowing screen and modal content and immediate purchase behavior with a legacy confirmation preference enabled.
-- Follow-up `./tools/validate.sh`: passed every repository suite and headless smoke launch; 908 balance/reachability and 111 UI/performance checks remain green. Performance measured 1,396.6 ms for 25 Build rebuilds, 489.2 ms for 500 refreshes, and 294 nodes.
-- Follow-up graphical layout capture: passed 461 checks across 35 states at five portrait sizes. Manually inspected the changed 320 × 568 Build/Settings and 393 × 873 Settings captures; scrolling affordance, removed confirmation toggle, world-first drawer, and horizontal fit remain correct.
-- Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed.
-- Targeted external retest: Settings build `738732db1f9b` confirmed; Build, Upgrades, Reports, and Settings scrolling passed; affordable immediate purchase without popup passed. Effective UI and Android version/API were skipped.
-- Phase 14 baseline `./tools/validate.sh`: complete repository suite and headless launch passed; no runtime correction was required.
-- Phase 15 appendix-gate `git diff --check && ./tools/validate.sh`: passed with no whitespace errors; all repository suites, five portrait layouts, and the headless smoke launch remained green. No runtime or authored-content file changed; measured host performance was 1,376.3 ms for 25 Build rebuilds, 490.6 ms for 500 refreshes, and 294 nodes.
+- `git diff --check`: passed.
+- `./tools/validate_content.sh`: 32 canonical checks and 12 invalid fixtures passed.
+- `./tools/test_persistence.sh`: 81 persistence/offline and 14 offline-UI checks passed.
+- `./tools/test_vertical_slice.sh`: 1,354 deterministic balance/reachability and 113 graphical UI/performance checks passed. Mechanical/structured Eras 1–4 routes are 115.4/135.5 minutes; Building requests are 338.5–625.0 seconds; longest modeled gap is 300 seconds.
+- `./tools/test_phase15_building.sh`: 89 domain and 24 headless Building-UI checks passed, including migration, maintenance choices, offline boundary, online/offline Predictive Reserve Guard, endpoint, icon, and layout coverage.
+- `xvfb-run -a godot4 --path . --script res://tests/integration/test_phase15_building_ui.gd -- --capture-phase15`: 38 checks passed and wrote seven final images under `docs/phase_15/evidence/`.
+- Final pre-commit `./tools/validate.sh`: every repository suite, five portrait layouts, and headless smoke launch passed. Performance measured 789.7 ms for 25 full Build refresh requests, 557.0 ms for 500 live refreshes, 378 UI nodes, and approximately 11.47 MiB isolated skin-memory delta.
+- `/usr/lib/android-sdk/platform-tools/adb devices -l`: no attached device. `/dev/kvm`, emulator executable, and installed system images are absent.
 
 ## Manual verification
 
-- Inspected all 12 final captures at original resolution against the locked phone board.
-- Corrected clipped operator/brownout copy, prohibited red WATT eyes during brownout, retained pullback state after modal close, redundant Build description density, maximum-text card height, and narrow navigation copy before accepting the final set.
-- Confirmed WATT remains the scene focal point, environment consequences remain visible, the Build/Upgrade drawer keeps the world live, categories/states remain redundant, and no generated concept raster or baked essential text is present.
-- The first physical pass confirmed install/cold launch and supplied the exact model/display/density, then stopped for the concrete scroll defect. The replacement passed the targeted scroll/purchase retest. No screenshots, full playthrough, audible speaker/headphone mix review, or safe-area/accessibility/lifecycle/haptic/GPU/heat/battery result is claimed.
-- Manually inspected the follow-up host Build and Settings captures at 320 × 568 and Settings at 393 × 873 after removing the toggle; no horizontal clipping or new placeholder direction was introduced.
+All seven Phase 15 screenshots were inspected at original resolution against the locked phone-board composition. The first evidence run was rejected and corrected because live refresh hid the brownout, the Build shot did not expose Era 4 icons below the fold, and the synthetic report used an invalid localization key. Final evidence visibly confirms the world-first Building, focal scratched core, cyan/amber takeover routes, ordinary-life remnant, actual Building icons, red/labeled brownout with cyan eyes, all maintenance options at 320 × 568/130% text, localized takeover report, and locked Neighborhood pullback.
 
-## Phase 15 acceptance criteria
+This host used dummy audio and is not a physical Android device. No audible mix, haptic, real safe-area, update-install, lifecycle, device FPS, heat, or battery result is claimed.
 
-- First obtain explicit approval of the proposed Era 4 appendix; implementation is blocked until then.
-- After approval: implement/migrate/tune the complete Era 4 route, meaningful infrequent maintenance, production presentation, assets/audio, Android regression, and manual evidence.
-- Stop before Neighborhood/Era 5 and Phase 16.
+## Remaining acceptance criteria
+
+- Create a clean provenance Phase 15 APK, complete host static inspection, and record its commit/hash/size.
+- Run the Phase 15 APK on a physical Android device for update install over an Era 3 endpoint save, cold launch, warm resume, background/offline return, save idempotency, touch/safe-area/font behavior, Android Back, sound/haptics, and device performance—or obtain explicit acceptance of that unavailable-device limitation.
+- After the clean APK/static record, update this handoff and commit/push the Phase 15 closure documentation. Do not mark the combined Android regression criterion passed without physical evidence.
 
 ## Known blockers
 
-- The Phase 15 art/content appendix is not yet approved, so Era 4 coding cannot begin.
-- No Android device or emulator is attached to the current ARM64 VPS; later Phase 15 Android/manual evidence will require external testing or an explicitly accepted limitation.
-- `ISSUE-007` deliberately remains open: the current project-original code-native layer is reusable and directionally faithful, but final tactile painted environment/WATT/infrastructure art belongs to the later gold-standard visual-production pass.
+- `ISSUE-010`: no attached physical device or usable emulator exists on this host. Host/static Android checks can proceed, but device execution requires external evidence.
+- `ISSUE-007`: later gold-standard tactile painted environment/WATT/infrastructure production remains deliberately open; it does not block Phase 15's production-functional content boundary.
 
 ## Recommended next action inside Phase 15
 
-Present the Era 4 appendix for explicit approval. If approved, record that decision and begin data/schema/save work before presentation integration. If revisions are requested, revise only the appendix. Do not code before approval, add Era 5, or begin Phase 16.
+Commit the fully validated source/evidence so the Android exporter can bind an APK to a clean commit. Export and statically inspect `build/android/one_more_watt_phase15_debug.apk`, record the artifact, then publish the Phase 15 commits. Stop at this Phase 15 completion gate; do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5.

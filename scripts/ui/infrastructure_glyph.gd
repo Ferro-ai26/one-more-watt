@@ -1,7 +1,11 @@
 class_name InfrastructureGlyph
 extends Control
 
+static var _icon_cache: Dictionary = {}
+
 var category := "support"
+var scene_variant := ""
+var icon_texture: Texture2D
 
 
 func _ready() -> void:
@@ -16,11 +20,28 @@ func set_category(next_category: String) -> void:
 	queue_redraw()
 
 
+func set_asset(icon_path: String, next_scene_variant: String = "") -> void:
+	scene_variant = next_scene_variant
+	if icon_path.is_empty():
+		icon_texture = null
+	elif _icon_cache.has(icon_path):
+		icon_texture = _icon_cache[icon_path] as Texture2D
+	else:
+		icon_texture = load(icon_path) as Texture2D if ResourceLoader.exists(icon_path) else null
+		_icon_cache[icon_path] = icon_texture
+	tooltip_text = "%s • %s" % [scene_variant.replace("_", " ").capitalize(), category.capitalize()]
+	queue_redraw()
+
+
 func _draw() -> void:
 	var center := size * 0.5
 	var color := _category_color()
 	draw_circle(center, minf(size.x, size.y) * 0.40, SkinTokens.COLOR_GRAPHITE_RAISED)
 	draw_arc(center, minf(size.x, size.y) * 0.40, 0.0, TAU, 24, color, 2.0)
+	if icon_texture != null:
+		var icon_size := minf(size.x, size.y) * 0.68
+		draw_texture_rect(icon_texture, Rect2(center - Vector2(icon_size, icon_size) * 0.5, Vector2(icon_size, icon_size)), false)
+		return
 	match category:
 		"generation":
 			draw_line(center + Vector2(-5.0, -13.0), center + Vector2(4.0, -2.0), color, 3.0)

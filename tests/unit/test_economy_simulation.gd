@@ -41,12 +41,12 @@ func _test_all_definitions_interpretable() -> void:
 		var upgrade := upgrade_value as UpgradeDefinition
 		levels[upgrade.get_id()] = int(upgrade.get_value("max_level", 1))
 	var result := InfrastructureAggregator.rebuild(owned, _repository, {}, _repository.get_balance("prototype_balance"), levels)
-	_check(_repository.get_counts()["infrastructure"] == 18, "all eighteen Eras 1-3 infrastructure definitions load")
-	_check(bool(result["ok"]), "all Eras 1-3 infrastructure and upgrade effects are interpretable")
+	_check(_repository.get_counts()["infrastructure"] == 25, "all twenty-five Eras 1-4 infrastructure definitions load")
+	_check(bool(result["ok"]), "all Eras 1-4 infrastructure and upgrade effects are interpretable")
 	_check(float(result["values"]["generation_rate"]) > 0.0, "cross-era rebuild produces Generation")
 	_check(float(result["values"]["transmission_capacity"]) > 0.0, "cross-era rebuild produces Transmission")
 	_check(float(result["values"]["reserve_capacity"]) > 0.0, "cross-era rebuild produces Reserve")
-	_check(float(result["values"]["request_demand_multiplier"]) > 1.0, "GPU demand modifier is interpreted")
+	_check(not is_equal_approx(float(result["values"]["request_demand_multiplier"]), 1.0), "stacked request-demand modifiers are interpreted")
 
 
 func _test_single_and_bulk_costs() -> void:

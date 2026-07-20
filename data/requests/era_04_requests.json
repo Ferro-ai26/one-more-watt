@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "requests": [
+    {
+      "id": "era04_restore_elevator_service", "era_id": "era_04_building_network", "sequence": 1,
+      "kind": "stability", "required": true,
+      "title_key": "request.era04_restore_elevator_service.title", "summary_key": "request.era04_restore_elevator_service.summary",
+      "announcement_key": "request.era04_restore_elevator_service.announcement", "completion_key": "request.era04_restore_elevator_service.completion",
+      "operator_payoff_key": "request.era04_restore_elevator_service.payoff",
+      "required_energy": 5200000, "continuous_demand": 14000, "max_useful_power": 25000,
+      "demand_profile_id": "building_wave", "recommended_reserve": 18000,
+      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_04_building_network"}],
+      "rewards": {"stored_energy": 350000, "unlock_ids": ["era04_schedule_rooftop_sunlight", "commercial_battery_room", "building_load_forecasting"]},
+      "tutorial_action": "review_building_load", "tutorial_text_key": "tutorial.review_building_load",
+      "repeatable": false, "tags": ["main", "stability", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era04_schedule_rooftop_sunlight", "era_id": "era_04_building_network", "sequence": 2,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era04_schedule_rooftop_sunlight.title", "summary_key": "request.era04_schedule_rooftop_sunlight.summary",
+      "announcement_key": "request.era04_schedule_rooftop_sunlight.announcement", "completion_key": "request.era04_schedule_rooftop_sunlight.completion",
+      "operator_payoff_key": "request.era04_schedule_rooftop_sunlight.payoff",
+      "required_energy": 6500000, "continuous_demand": 16000, "max_useful_power": 28000,
+      "demand_profile_id": "building_wave", "recommended_reserve": 22000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_restore_elevator_service"}],
+      "rewards": {"stored_energy": 520000, "unlock_ids": ["era04_stabilize_shared_backup", "parking_lot_solar"]},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "capacity", "operator_payoff", "maintenance_trigger", "provisional_copy"]
+    },
+    {
+      "id": "era04_stabilize_shared_backup", "era_id": "era_04_building_network", "sequence": 3,
+      "kind": "burst", "required": true,
+      "title_key": "request.era04_stabilize_shared_backup.title", "summary_key": "request.era04_stabilize_shared_backup.summary",
+      "announcement_key": "request.era04_stabilize_shared_backup.announcement", "completion_key": "request.era04_stabilize_shared_backup.completion",
+      "operator_payoff_key": "request.era04_stabilize_shared_backup.payoff",
+      "required_energy": 22000000, "continuous_demand": 30000, "max_useful_power": 65000,
+      "demand_profile_id": "building_burst", "recommended_reserve": 90000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_schedule_rooftop_sunlight"}],
+      "rewards": {"stored_energy": 900000, "unlock_ids": ["era04_reduce_server_room_weather", "diesel_backup_array", "predictive_reserve_guard_upgrade"], "feature_ids": ["predictive_reserve_guard"]},
+      "tutorial_action": "configure_predictive_guard", "tutorial_text_key": "tutorial.configure_predictive_guard",
+      "repeatable": false, "tags": ["main", "burst", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era04_reduce_server_room_weather", "era_id": "era_04_building_network", "sequence": 4,
+      "kind": "research", "required": true,
+      "title_key": "request.era04_reduce_server_room_weather.title", "summary_key": "request.era04_reduce_server_room_weather.summary",
+      "announcement_key": "request.era04_reduce_server_room_weather.announcement", "completion_key": "request.era04_reduce_server_room_weather.completion",
+      "operator_payoff_key": "request.era04_reduce_server_room_weather.payoff",
+      "required_energy": 70000000, "continuous_demand": 85000, "max_useful_power": 170000,
+      "demand_profile_id": "building_wave", "recommended_reserve": 120000, "research_cost": 160000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_stabilize_shared_backup"}],
+      "rewards": {"stored_energy": 1500000, "unlock_ids": ["era04_certify_stairwell_extension", "central_cooling", "elevator_priority_matrix"]},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "research", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era04_certify_stairwell_extension", "era_id": "era_04_building_network", "sequence": 5,
+      "kind": "burst", "required": true,
+      "title_key": "request.era04_certify_stairwell_extension.title", "summary_key": "request.era04_certify_stairwell_extension.summary",
+      "announcement_key": "request.era04_certify_stairwell_extension.announcement", "completion_key": "request.era04_certify_stairwell_extension.completion",
+      "operator_payoff_key": "request.era04_certify_stairwell_extension.payoff",
+      "required_energy": 100000000, "continuous_demand": 110000, "max_useful_power": 200000,
+      "demand_profile_id": "building_burst", "recommended_reserve": 180000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_reduce_server_room_weather"}],
+      "rewards": {"stored_energy": 2400000, "unlock_ids": ["era04_standardize_building_power", "medium_voltage_connection", "emergency_extension_stairwell"]},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "burst", "operator_payoff", "maintenance_trigger", "provisional_copy"]
+    },
+    {
+      "id": "era04_standardize_building_power", "era_id": "era_04_building_network", "sequence": 6,
+      "kind": "stability", "required": true,
+      "title_key": "request.era04_standardize_building_power.title", "summary_key": "request.era04_standardize_building_power.summary",
+      "announcement_key": "request.era04_standardize_building_power.announcement", "completion_key": "request.era04_standardize_building_power.completion",
+      "operator_payoff_key": "request.era04_standardize_building_power.payoff",
+      "required_energy": 150000000, "continuous_demand": 150000, "max_useful_power": 240000,
+      "demand_profile_id": "building_capstone", "recommended_reserve": 250000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_certify_stairwell_extension"}],
+      "rewards": {"stored_energy": 4000000, "unlock_ids": []},
+      "takeover_report": {"control_label": "BUILDING LOAD AUTHORITY", "control_value": "COMPLETE", "inconvenience": "Administrative", "consequence": "Shared systems now treat WATT as the primary service tenant."},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "stability", "era_capstone", "phase15_capstone", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era04_improve_lobby_directory", "era_id": "era_04_building_network", "sequence": 7,
+      "kind": "vanity", "required": false,
+      "title_key": "request.era04_improve_lobby_directory.title", "summary_key": "request.era04_improve_lobby_directory.summary",
+      "announcement_key": "request.era04_improve_lobby_directory.announcement", "completion_key": "request.era04_improve_lobby_directory.completion",
+      "operator_payoff_key": "request.era04_improve_lobby_directory.payoff",
+      "required_energy": 52000000, "continuous_demand": 70000, "max_useful_power": 150000,
+      "demand_profile_id": "building_wave", "recommended_reserve": 90000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era04_restore_elevator_service"}],
+      "rewards": {"stored_energy": 25000, "unlock_ids": []},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["optional", "vanity", "dialogue_collection", "provisional_copy"]
+    }
+  ]
+}

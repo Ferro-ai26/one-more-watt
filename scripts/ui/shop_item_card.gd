@@ -38,6 +38,7 @@ func configure(data: Dictionary, notation: String) -> void:
 	family = str(data.get("family", ""))
 	can_purchase = bool(data.get("can_purchase", false))
 	glyph.set_category(str(data.get("category", "support")))
+	glyph.set_asset(str(data.get("icon_path", "")), str(data.get("scene_variant", "")))
 	name_label.text = str(data.get("name", "Unknown"))
 	status_label.text = "%s  •  %s" % [str(data.get("ownership", "")), str(data.get("status", "invalid")).to_upper()]
 	description_label.text = str(data.get("description", ""))

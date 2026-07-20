@@ -2,6 +2,26 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 15 Building Network host pass — 2026-07-20
+
+- Build/commit: Phase 15 working tree during host review; clean APK commit recorded separately after export
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless plus Xvfb/Mesa llvmpipe; dummy audio; no ADB device
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Approved appendix recorded before implementation; current Era 4 request dialogue remains explicitly provisional.
+- [x] Fresh deterministic route and migrated Era 3 endpoint both reach Building through explicit operator authorization without currency/ownership loss.
+- [x] Six required requests complete in 338.5–625.0 seconds, within the approved four-to-12-minute range; full mechanical/structured routes are 115.4/135.5 minutes.
+- [x] Repair, Replace, and Overclock outcomes, deferral boundary, save/load, exact cost/permanent effect, one-request temporary effect, and offline stop behavior pass.
+- [x] Predictive Reserve Guard OFF/ARMED/ACTIVE behavior and transient allocation override pass without changing the player's selected mode.
+- [x] Building world, scratched core, lobby face, ordinary-life remnant, cyan/amber paths, seven integrated icons, brownout, takeover report, and locked Neighborhood pullback pass host automation.
+- [x] Default and 130% text states pass at 393 × 873 and 320 × 568; maintenance remains horizontally contained and every 48-pixel option is reachable by vertical scrolling.
+- [x] Reduced motion and muted-audio comprehension remain explicit; brownout/capstone do not use rapid flashing or color alone.
+- [x] Seven final captures under `docs/phase_15/evidence/` were manually inspected at original resolution; first-run evidence defects were corrected and recaptured.
+- [x] Complete host regression and headless launch pass. Final full-gate measurement: 789.7 ms / 25 Build refresh requests, 557.0 ms / 500 live refreshes, 378 nodes, ~11.47 MiB isolated skin-memory delta.
+- [ ] Physical update install over an Era 3 save, cold launch, warm resume, background/offline return, save idempotency, safe areas, font comfort, Android Back, audible mix, haptics, device FPS, heat, and battery. No device/emulator is available on this host; not claimed.
+
+Result: Phase 15 gameplay, host visual/manual evidence, save migration automation, and accessibility layouts pass. The physical-device portion remains an explicitly documented verification limitation. Phase 16/Era 5 has not begun.
+
 ## Phase 14 visual/mobile/accessibility QA disposition — 2026-07-20
 
 - Host build/state: Phase 13 runtime source `738732d`; Phase 14 baseline commit `36c6a7c`
