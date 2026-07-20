@@ -10,7 +10,22 @@
 
 ## Open issues
 
-Phase 06 validation found no new save integrity, recovery, migration, reward-idempotency, clock, offline-simulation, or return-report defects. The existing Android setup dependency remains open.
+Phase 07 validation found no blocker, critical, progression, reachability, localization, save-boundary, or endpoint defect. One pacing/polish issue and the existing Android setup dependency remain open.
+
+### ISSUE-002 — Optimized prototype path is shorter than the first-run target
+
+- Status: Open
+- Severity: Polish
+- First seen build/commit: Phase 07 working tree, 2026-07-20
+- Affected phase: Phase 07 baseline; tune during Phase 08
+- Reproduction:
+  1. Run `./tools/test_vertical_slice.sh`.
+  2. Observe the deterministic no-debug balance report.
+- Expected: A representative first run reaches the endpoint in 75–120 minutes without a tedious wait.
+- Actual: The optimized accelerated route reaches it in 46.8 simulated minutes, while still accumulating 31.5 idle minutes and one 660-second Era 3 purchase gap.
+- Evidence/log: Two clean runs produce identical Era 2 at 4.6 minutes, Era 3 at 22.8 minutes, endpoint at 46.8 minutes, 408.5 brownout seconds, and 21 earned purchases.
+- Workaround: Offline progress is available before the long Era 3 gap; ordinary human reading and purchase decisions lengthen the route, but have not been used to claim the target is met.
+- Fix verification: Pending Phase 08 pacing and idle-gap tuning plus another clean first-player playtest.
 
 ### ISSUE-001 — Android export configuration unavailable
 

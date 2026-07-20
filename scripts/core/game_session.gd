@@ -19,11 +19,10 @@ func configure(content_repository: ContentRepository) -> bool:
 	run_id = "%d-%d" % [Time.get_unix_time_from_system(), randi()]
 	if not economy.configure(repository) or not requests.configure(repository):
 		return false
+	requests.refresh_availability(economy.state)
 	last_report_id = ""
 	_sync_request_grid_from_economy()
-	var next_id := requests.get_next_available_request_id()
-	if not next_id.is_empty():
-		requests.announce_request(next_id)
+	_announce_next_required_if_needed()
 	return true
 
 
@@ -31,12 +30,17 @@ func current_request_id() -> String:
 	var active := requests.get_active_state()
 	if active != null:
 		return active.request_id
+	var selected_id := requests.get_selected_request_id()
+	if not selected_id.is_empty():
+		return selected_id
 	for request_value: Variant in repository.get_all("requests"):
 		var definition := request_value as RequestDefinition
 		var state := requests.get_request_state(definition.get_id())
 		if state != null and state.status in [RequestRunState.ANNOUNCED, RequestRunState.AUTHORIZED, RequestRunState.COMPLETED]:
 			return definition.get_id()
-	return requests.get_next_available_request_id()
+	if economy.state.prototype_complete:
+		return ""
+	return requests.get_next_available_request_id(true)
 
 
 func authorize_current_request() -> bool:
@@ -63,7 +67,8 @@ func advance_time(delta_seconds: float, offline: bool = false) -> bool:
 	economy.set_stored_energy(requests.grid.state.stored_energy)
 	var completed_state := requests.get_request_state(active_id)
 	if completed_state != null and completed_state.status == RequestRunState.COMPLETED:
-		economy.mark_request_completed(active_id)
+		economy.record_request_report(requests.get_report(active_id))
+		requests.refresh_availability(economy.state)
 		last_report_id = active_id
 		feedback.request("request_complete", true)
 		mutation_committed.emit("request_completed")
@@ -95,14 +100,15 @@ func acknowledge_report(request_id: String) -> bool:
 		return false
 	if request_id == last_report_id:
 		last_report_id = ""
-	var next_id := requests.get_next_available_request_id()
-	if not next_id.is_empty():
-		requests.announce_request(next_id)
-	mutation_committed.emit("report_acknowledged")
+	var endpoint_reached := economy.mark_report_viewed(request_id)
+	_announce_next_required_if_needed()
+	mutation_committed.emit("prototype_completed" if endpoint_reached else "report_acknowledged")
 	return true
 
 
 func set_allocation_mode(mode: String) -> bool:
+	if mode != requests.grid.state.allocation_mode and not has_feature("allocation_modes"):
+		return false
 	var accepted := requests.set_allocation_mode(mode)
 	if accepted:
 		feedback.request("allocation_changed")
@@ -116,6 +122,8 @@ func purchase_infrastructure(id: String, amount: int = 1) -> bool:
 		feedback.request("error")
 		return false
 	_sync_request_grid_from_economy()
+	requests.refresh_availability(economy.state)
+	_announce_next_required_if_needed()
 	feedback.request("purchase", true)
 	mutation_committed.emit("purchase")
 	return true
@@ -127,6 +135,8 @@ func purchase_upgrade(id: String) -> bool:
 		feedback.request("error")
 		return false
 	_sync_request_grid_from_economy()
+	requests.refresh_availability(economy.state)
+	_announce_next_required_if_needed()
 	feedback.request("purchase", true)
 	mutation_committed.emit("purchase")
 	return true
@@ -140,6 +150,46 @@ func preview_infrastructure(id: String, amount: int = 1) -> EconomyPreview:
 func preview_upgrade(id: String) -> EconomyPreview:
 	_sync_economy_currency_from_request()
 	return economy.preview_upgrade(id)
+
+
+func choose_request(request_id: String) -> bool:
+	if not requests.select_request(request_id):
+		return false
+	mutation_committed.emit("request_selected")
+	return true
+
+
+func skip_current_optional_request() -> bool:
+	var request_id := current_request_id()
+	if request_id.is_empty() or not requests.skip_request(request_id):
+		return false
+	var next_id := requests.get_next_available_request_id(true)
+	if not next_id.is_empty():
+		requests.announce_request(next_id)
+	mutation_committed.emit("request_skipped")
+	return true
+
+
+func available_optional_request_ids() -> Array[String]:
+	return requests.get_available_optional_request_ids()
+
+
+func has_feature(feature_id: String) -> bool:
+	return economy.has_feature(feature_id)
+
+
+func configure_reserve_automation(enabled: bool, threshold_ratio: float) -> bool:
+	if not has_feature("reserve_thresholds") or not economy.configure_reserve_automation(enabled, threshold_ratio):
+		return false
+	mutation_committed.emit("automation_changed")
+	return true
+
+
+func acknowledge_era_transition() -> bool:
+	if not economy.acknowledge_era_transition():
+		return false
+	mutation_committed.emit("era_transition")
+	return true
 
 
 func snapshot() -> Dictionary:
@@ -163,6 +213,10 @@ func restore(data: Dictionary, content_repository: ContentRepository) -> bool:
 		return false
 	if not requests.restore(data.get("requests", {}), repository):
 		return false
+	for request_value: Variant in repository.get_all("requests"):
+		var report := requests.get_report((request_value as RequestDefinition).get_id())
+		if report != null:
+			economy.record_request_report(report)
 	if absf(economy.state.stored_energy - requests.grid.state.stored_energy) > 0.000001:
 		return false
 	if not settings.restore(data.get("settings", {})):
@@ -172,6 +226,7 @@ func restore(data: Dictionary, content_repository: ContentRepository) -> bool:
 		return false
 	last_report_id = str(data.get("last_report_id", ""))
 	_sync_request_grid_from_economy()
+	requests.refresh_availability(economy.state)
 	economy.drain_events()
 	requests.drain_events()
 	return true
@@ -186,3 +241,11 @@ func _sync_request_grid_from_economy() -> void:
 	requests.grid.set_grid_values(economy.get_derived_values())
 	requests.grid.state.reserve_stored = minf(reserve_stored, requests.grid.state.reserve_capacity)
 	requests.grid.state.stored_energy = economy.state.stored_energy
+
+
+func _announce_next_required_if_needed() -> void:
+	if requests.get_active_state() != null or not requests.get_selected_request_id().is_empty() or not last_report_id.is_empty() or economy.state.prototype_complete:
+		return
+	var next_id := requests.get_next_available_request_id(true)
+	if not next_id.is_empty():
+		requests.announce_request(next_id)

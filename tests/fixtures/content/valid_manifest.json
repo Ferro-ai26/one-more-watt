@@ -7,6 +7,8 @@
     {"family": "infrastructure", "path": "res://data/infrastructure/infrastructure.json", "root": "infrastructure"},
     {"family": "upgrades", "path": "res://data/upgrades/upgrades.json", "root": "upgrades"},
     {"family": "requests", "path": "res://data/requests/era_01_requests.json", "root": "requests"},
+    {"family": "requests", "path": "res://data/requests/era_02_requests.json", "root": "requests"},
+    {"family": "requests", "path": "res://data/requests/era_03_requests.json", "root": "requests"},
     {"family": "demand_profiles", "path": "res://data/requests/demand_profiles.json", "root": "demand_profiles"},
     {"family": "dialogue", "path": "res://data/dialogue/system_dialogue.json", "root": "dialogue"},
     {"family": "incidents", "path": "res://data/incidents/incidents.json", "root": "incidents"},

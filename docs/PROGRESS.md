@@ -11,12 +11,21 @@
 | 04 — Infrastructure and Upgrades | Complete | Commit `ca56a35`; 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
 | 05 — Main UI and Feedback | Complete | Commit `6ae86ac`; 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
 | 06 — Save and Offline Progress | Complete | Commit `143ccf9`; 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
-| 07 — Eras 1–3 Vertical Slice | Not started | — |
+| 07 — Eras 1–3 Vertical Slice | Complete | 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Not started | — |
 | 09 — Android Prototype | Not started | — |
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 07 Eras 1–3 vertical slice
+
+- Populated all 18 catalog requests across Cold Boot, Bedroom Assistant, and Home Server Closet with deterministic profiles, reviewed English WATT lines, tutorial prompts, stable rewards, and three optional vanity paths.
+- Added report-driven feature and era progression, the documented 85% Stability gate, non-blocking optional selection/skip, persistent era transitions, three placeholder environment transformations, and an explicit no-Era-4 endpoint.
+- Gated allocation, offline progress, Reserve forecast, detailed forecast, and Smart Meter Reserve protection at authored progression beats; reconciled additive Phase 06 saves into the new state safely.
+- Verified a clean no-debug route twice with identical milestones, 21 earned purchases, both era-boundary save/loads, all 15 required completions, and endpoint persistence.
+- Recorded the optimized 46.8-minute route and 660-second Era 3 idle gap as Phase 08 tuning evidence rather than claiming the 75–120 minute target is already met.
+- Passed 917 vertical-slice checks, 105 headless progression-UI checks, the full prior regression suite, and four graphical 393 × 873 clean-path captures.
 
 ### 2026-07-20 — Phase 06 save and offline progress
 

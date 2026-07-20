@@ -153,6 +153,8 @@ Phase 06 persistence is split between `SaveCodec`, `SaveMigrator`, `SaveManager`
 
 `OfflineSimulator` consumes the restored `GameSession`, authored balance policy, and two UTC timestamps. It clamps recognized time before applying efficiency, advances active requests through the existing deterministic coordinator with offline-disallowed incidents suppressed, detects completion as an event boundary, and uses the same grid simulator for remaining idle production. `OfflineReport` is a numeric reconciliation record rendered by the UI only after the resulting state is saved.
 
+Phase 07 keeps era and feature progression inside the existing economy state: current/unlocked eras, best Stability service, feature flags, a pending transition, and prototype completion serialize with ownership. `GameSession` reconciles request reports into that state, refreshes cross-domain availability after completions and purchases, and keeps required-request selection separate from optional vanity selection. Request definitions remain the source for tutorial text, feature rewards, and capstone tags; presentation only renders snapshots.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.

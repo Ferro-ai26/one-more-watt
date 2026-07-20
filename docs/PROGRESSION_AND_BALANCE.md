@@ -213,3 +213,9 @@ Until analytics is explicitly approved, balance through deterministic simulation
 - Allocation-mode changes
 - Offline return outcome
 - Points of confusion or loss of interest
+
+## Phase 07 deterministic baseline
+
+The canonical no-debug accelerated route completes all 15 required requests with 21 earned purchases in 46.8 simulated minutes: Era 2 at 4.6 minutes, Era 3 at 22.8 minutes, 31.5 minutes of total idle earning, a longest 660-second Era 3 purchase gap, and 408.5 seconds of recoverable brownout. Two identical runs produce the same milestones, ownership, currency, and brownout summary.
+
+This is an optimized simulation result, not a claim that the 75–120 minute first-player pacing target has been met. Phase 08 should lengthen or reshape the interactive route while reducing the single long Era 3 idle gap, preserving the strong first-five-minute activity and avoiding artificial progress loss.

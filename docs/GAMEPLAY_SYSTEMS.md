@@ -197,6 +197,10 @@ Automation defaults must be safe and understandable. Players can disable or over
 
 The Phase 04 prototype implements an explicit low-Reserve throttle. It is disabled by default, stores a normalized Reserve threshold, and activates only while current Reserve is below that threshold. It exposes a deterministic throttle decision for the request layer; it does not auto-spend currency or silently change ownership.
 
+Phase 07 unlocks allocation through `Make Thanks Sound Friendlier`, offline/automatic operation through `Organize Photographs`, Reserve forecasting through `Recommend Dinner`, detailed service forecasting through `Predict Package Arrival`, and Smart Meter Reserve protection through `Write a Grocery List`. These flags derive from completed authored rewards and persist with economy state. Optional vanity requests may be selected or skipped without displacing the required path permanently.
+
+Era 2 requires the `Understand Tuesdays` capstone plus a Laptop Battery. Era 3 requires `Improve Loading Animation`, at least 85% service on a Stability report, and Dedicated Circuit Research. Viewing the `Determine Whether Leftovers Remain Edible` report marks the prototype complete; no Era 4 request is synthesized.
+
 ## Prestige: retraining WATT
 
 Prestige becomes optional after completing the first City Data Center capstone request.

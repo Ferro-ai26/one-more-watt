@@ -10,6 +10,7 @@ var navigation := NavigationState.new()
 var persistence: PersistenceController
 var _refresh_accumulator := 0.0
 var _last_report_modal_id := ""
+var _last_era_transition_modal_id := ""
 var _pending_purchase: Dictionary = {}
 
 var status_era_label: Label
@@ -61,7 +62,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 06 persistent interface ready")
+	print("ONE MORE WATT Phase 07 vertical slice ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -77,6 +78,8 @@ func _process(delta: float) -> void:
 		persistence.tick(delta, int(Time.get_unix_time_from_system()))
 	if not session.last_report_id.is_empty() and session.last_report_id != _last_report_modal_id and navigation.modal_depth() == 0:
 		open_report_modal(session.last_report_id)
+	elif not session.economy.state.pending_era_transition_id.is_empty() and session.economy.state.pending_era_transition_id != _last_era_transition_modal_id and navigation.modal_depth() == 0:
+		open_era_transition_modal(session.economy.state.pending_era_transition_id)
 
 
 func select_tab(tab: String) -> bool:
@@ -108,20 +111,29 @@ func open_request_modal() -> void:
 	_open_modal("request_detail", "REQUEST FORECAST")
 	_add_modal_label(str(request["title"]), 24, Color(1.0, 0.89, 0.35))
 	_add_modal_label(str(request["dialogue"]), 18, Color(0.84, 0.92, 1.0))
-	_add_modal_label("LOAD %s  •  PEAK %s\nRESERVE %s  •  SERVICE %.0f%%\nESTIMATE %s  •  BOTTLENECK %s\nREWARD %s" % [
+	if not str(request.get("tutorial", "")).is_empty():
+		_add_modal_label("TUTORIAL  •  %s" % request["tutorial"], 16, Color(0.62, 0.94, 0.72))
+	var forecast_text := "LOAD %s  •  PEAK %s\nESTIMATE %s  •  BOTTLENECK %s\nREWARD %s" % [
 		NumberFormatter.format_power(float(request["continuous_demand"]), session.settings.number_notation),
 		NumberFormatter.format_power(float(request["peak"]), session.settings.number_notation),
-		NumberFormatter.format_energy(float(request["recommended_reserve"]), session.settings.number_notation),
-		float(request["service_ratio"]) * 100.0,
 		NumberFormatter.format_duration(float(request["estimated_seconds"])),
 		str(request["bottleneck"]).to_upper(),
 		NumberFormatter.format_energy(float(request["reward"]), session.settings.number_notation),
-	], 17, Color.WHITE)
+	]
+	if bool(request.get("reserve_forecast_unlocked", false)):
+		forecast_text += "\nRESERVE %s" % NumberFormatter.format_energy(float(request["recommended_reserve"]), session.settings.number_notation)
+	if bool(request.get("detailed_forecast_unlocked", false)):
+		forecast_text += "  •  PREDICTED SERVICE %.0f%%" % (float(request["service_ratio"]) * 100.0)
+	_add_modal_label(forecast_text, 17, Color.WHITE)
 	if bool(request["underprepared"]):
 		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, Color(1.0, 0.62, 0.3))
 	var authorize := _button("Authorize Request", "AuthorizeButton")
 	authorize.pressed.connect(_authorize_from_modal)
 	modal_content.add_child(authorize)
+	if not bool(request.get("required", true)):
+		var skip := _button("Skip Optional Request", "SkipRequestButton")
+		skip.pressed.connect(_skip_optional_from_modal)
+		modal_content.add_child(skip)
 	_add_modal_back_button()
 
 
@@ -232,6 +244,8 @@ func open_offline_report(report: OfflineReport, recovery_note: String = "") -> v
 		earned,
 		NumberFormatter.format_duration(report.brownout_seconds),
 	], 17, Color.WHITE)
+	if report.feature_locked:
+		_add_modal_label("Offline progress unlocks during Bedroom Assistant. No away-time progress was applied yet.", 16, Color(1.0, 0.72, 0.36))
 	if not report.request_id.is_empty():
 		_add_modal_label("REQUEST %.1f%% → %.1f%%\nCOMPLETED %s" % [report.progress_before * 100.0, report.progress_after * 100.0, "None" if report.completed_request_ids.is_empty() else ", ".join(report.completed_request_ids)], 17, Color(0.62, 0.94, 0.72))
 	if report.clock_backward:
@@ -244,6 +258,24 @@ func open_offline_report(report: OfflineReport, recovery_note: String = "") -> v
 		_add_modal_label(recovery_note, 16, Color(1.0, 0.89, 0.35))
 	var continue_button := _button("Continue", "OfflineContinueButton")
 	continue_button.pressed.connect(close_top_modal)
+	modal_content.add_child(continue_button)
+
+
+func open_era_transition_modal(era_id: String) -> void:
+	var era := session.repository.get_era(era_id)
+	if era == null:
+		return
+	_last_era_transition_modal_id = era_id
+	_open_modal("era_transition", "ERA %d UNLOCKED" % era.get_number())
+	_add_modal_label(session.repository.localize(str(era.get_value("name_key", ""))), 28, Color(1.0, 0.89, 0.35))
+	_add_modal_label(session.repository.localize(str(era.get_value("description_key", ""))), 18, Color(0.84, 0.92, 1.0))
+	_add_modal_label(session.repository.localize("dialogue.era.%02d.transition" % era.get_number()), 18, Color(0.62, 0.94, 0.72))
+	var continue_button := _button("Enter %s" % session.repository.localize(str(era.get_value("scale_key", ""))), "EraContinueButton")
+	continue_button.pressed.connect(func() -> void:
+		session.acknowledge_era_transition()
+		close_top_modal()
+		_refresh_all(true)
+	)
 	modal_content.add_child(continue_button)
 
 
@@ -465,22 +497,30 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	request_title_label.text = str(request["title"])
 	request_meta_label.text = "%s  •  %s" % [str(request.get("kind", "idle")).to_upper(), str(request["status"]).to_upper()]
 	request_progress.value = float(request.get("progress", 0.0)) * 100.0
-	forecast_label.text = "%s PEAK  •  %s  •  %s" % [
-		NumberFormatter.format_power(float(request.get("peak", 0.0)), notation),
-		str(request.get("bottleneck", "none")).to_upper(),
-		NumberFormatter.format_duration(float(request.get("estimated_seconds", INF))),
-	]
+	if request["status"] == "prototype_complete":
+		forecast_label.text = "ERAS 1–3 COMPLETE  •  MORE COMING"
+	else:
+		forecast_label.text = "%s PEAK  •  %s  •  %s" % [
+			NumberFormatter.format_power(float(request.get("peak", 0.0)), notation),
+			str(request.get("bottleneck", "none")).to_upper(),
+			NumberFormatter.format_duration(float(request.get("estimated_seconds", INF))),
+		]
 	_update_request_action(str(request["status"]))
 	var limiting := str(request.get("bottleneck", "none"))
 	(vital_cards["generation"] as VitalCard).configure("Generation", NumberFormatter.format_power(float(status["generation"]), notation), "PRODUCING", limiting == "generation")
 	(vital_cards["transmission"] as VitalCard).configure("Transmission", NumberFormatter.format_power(float(status["transmission"]), notation), "CAPACITY", limiting == "transmission")
 	(vital_cards["reserve"] as VitalCard).configure("Reserve", "%s/%s" % [NumberFormatter.format_number(float(status["reserve_stored"]), notation), NumberFormatter.format_number(float(status["reserve_capacity"]), notation)], "READY", limiting == "reserve")
 	var mode := session.requests.grid.state.allocation_mode
+	var allocation_unlocked := session.has_feature("allocation_modes")
 	for key: Variant in allocation_buttons:
 		(allocation_buttons[key] as Button).button_pressed = str(key) == mode
+		(allocation_buttons[key] as Button).disabled = not allocation_unlocked
 	var live_result := session.requests.grid.get_last_result()
-	allocation_label.text = "%s  •  %s/s Stored Energy" % [mode.replace("_", " ").capitalize(), NumberFormatter.format_number(live_result.stored_energy_rate, notation)]
-	environment_label.text = "OLD MONITOR\n%d OUTLET%s" % [int(session.economy.state.owned.get("wall_outlet", 0)), "S" if int(session.economy.state.owned.get("wall_outlet", 0)) != 1 else ""]
+	allocation_label.text = "%s  •  %s/s Stored Energy" % [mode.replace("_", " ").capitalize(), NumberFormatter.format_number(live_result.stored_energy_rate, notation)] if allocation_unlocked else "Routing controls unlock after WATT's language experiment"
+	var environment := view_model.environment_snapshot()
+	environment_label.text = str(environment["badge"])
+	watt_core.text = str(environment["core"])
+	watt_core.add_theme_color_override("font_color", environment["accent"])
 	if rebuild_screen:
 		_rebuild_screen()
 
@@ -496,6 +536,9 @@ func _update_request_action(status: String) -> void:
 		RequestRunState.COMPLETED:
 			request_action_button.text = "View Report"
 			request_action_button.disabled = false
+		"prototype_complete":
+			request_action_button.text = "Prototype Complete"
+			request_action_button.disabled = true
 		_:
 			request_action_button.text = "Waiting for WATT"
 			request_action_button.disabled = true
@@ -515,14 +558,40 @@ func _rebuild_screen() -> void:
 
 func _build_grid_screen() -> void:
 	var request := view_model.request_snapshot()
-	var environment := _label("DESK GRID  •  Power pulses route from the wall outlet into WATT's old monitor.", 15, Color(0.74, 0.84, 0.94))
+	var environment_data := view_model.environment_snapshot()
+	var environment := _label(str(environment_data["summary"]), 15, Color(0.74, 0.84, 0.94))
 	environment.name = "EnvironmentSummary"
 	environment.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	screen_content.add_child(environment)
-	var action := _label("RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none"))), 15, Color(0.62, 0.94, 0.72))
+	var action_text := "PROTOTYPE COMPLETE  •  WATT's larger network is not part of this build yet." if request["status"] == "prototype_complete" else "RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none")))
+	var action := _label(action_text, 15, Color(0.62, 0.94, 0.72))
 	action.name = "RecommendedActionLabel"
 	action.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	screen_content.add_child(action)
+	if not str(request.get("tutorial", "")).is_empty():
+		var tutorial := _label("TUTORIAL  •  %s" % request["tutorial"], 15, Color(1.0, 0.89, 0.35))
+		tutorial.name = "TutorialPrompt"
+		tutorial.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(tutorial)
+	if session.has_feature("reserve_thresholds"):
+		var automation := CheckButton.new()
+		automation.name = "ReserveAutomationCheck"
+		automation.text = "Protect Reserve below %.0f%%" % (session.economy.state.reserve_threshold_ratio * 100.0)
+		automation.custom_minimum_size.y = 48
+		automation.button_pressed = session.economy.state.reserve_automation_enabled
+		automation.toggled.connect(func(enabled: bool) -> void:
+			session.configure_reserve_automation(enabled, session.economy.state.reserve_threshold_ratio)
+			_refresh_all(true)
+		)
+		screen_content.add_child(automation)
+	for optional: Dictionary in view_model.optional_requests():
+		if optional["id"] == request.get("id", ""):
+			continue
+		var optional_button := _button("OPTIONAL  •  %s\n%s" % [optional["title"], optional["summary"]], "%sOptionalButton" % str(optional["id"]).to_pascal_case())
+		optional_button.custom_minimum_size.y = 68
+		optional_button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		optional_button.pressed.connect(_choose_optional_request.bind(str(optional["id"])))
+		screen_content.add_child(optional_button)
 
 
 func _build_shop_screen(cards: Array[Dictionary]) -> void:
@@ -582,6 +651,17 @@ func _apply_purchase(content_id: String, family: String) -> void:
 func _authorize_from_modal() -> void:
 	if session.authorize_current_request():
 		close_top_modal()
+		_refresh_all(true)
+
+
+func _skip_optional_from_modal() -> void:
+	if session.skip_current_optional_request():
+		close_top_modal()
+		_refresh_all(true)
+
+
+func _choose_optional_request(request_id: String) -> void:
+	if session.choose_request(request_id):
 		_refresh_all(true)
 
 

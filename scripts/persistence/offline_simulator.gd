@@ -16,6 +16,11 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 	report.far_forward = nonnegative > maxf(float(policy.get("far_forward_seconds", report.cap_seconds * 4.0)), report.cap_seconds)
 	report.effective_elapsed = report.recognized_elapsed * report.efficiency
 	report.stored_energy_before = session.requests.grid.state.stored_energy
+	if not session.has_feature("offline_progress"):
+		report.feature_locked = true
+		report.effective_elapsed = 0.0
+		report.stored_energy_after = report.stored_energy_before
+		return report
 	var current_id := session.current_request_id()
 	report.request_id = current_id
 	var initial_state := session.requests.get_request_state(current_id)

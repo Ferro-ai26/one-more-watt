@@ -21,7 +21,8 @@ const BASE_EFFECT_TARGETS := [
 	"automation_capacity",
 ]
 const INCIDENT_SEVERITIES := ["cosmetic", "minor", "major"]
-const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked"]
+const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked", "stability_service_at_least"]
+const FEATURE_IDS := ["allocation_modes", "automatic_generation", "offline_progress", "reserve_forecast", "detailed_forecast", "reserve_thresholds"]
 
 var _id_regex := RegEx.new()
 
@@ -202,10 +203,17 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 				_add_issue(issues, "INVALID_VALUE", path, record_id, "sequence must be positive")
 			if record.get("tutorial_action") != null and not record.get("tutorial_action") is String:
 				_add_issue(issues, "INVALID_TYPE", path, record_id, "tutorial_action must be null or a string")
+			if record.get("tutorial_action") != null and (not record.get("tutorial_text_key") is String or str(record.get("tutorial_text_key", "")).is_empty()):
+				_add_issue(issues, "MISSING_FIELD", path, record_id, "tutorial_text_key is required when tutorial_action is set")
 			var rewards: Variant = record.get("rewards", {})
 			if rewards is Dictionary:
 				_require_fields(rewards, {"stored_energy": "number", "unlock_ids": "array"}, path, record_id, issues)
 				_validate_nonnegative(rewards, ["stored_energy"], path, record_id, issues)
+				if rewards.has("feature_ids") and not rewards["feature_ids"] is Array:
+					_add_issue(issues, "INVALID_TYPE", path, record_id, "feature_ids must be an array")
+				else:
+					for feature_value: Variant in rewards.get("feature_ids", []):
+						_validate_enum(feature_value, FEATURE_IDS, "UNSUPPORTED_FEATURE", path, record_id, "feature ID", issues)
 		"demand_profiles":
 			_require_fields(record, {"duration_seconds": "number", "loop": "boolean", "keyframes": "array"}, path, record_id, issues)
 			_validate_demand_profile(record, path, record_id, issues)
@@ -332,6 +340,10 @@ func _validate_localization(records: Dictionary, issues: Array[ContentValidation
 	for wrapper_value: Variant in records["incidents"]:
 		for key: Variant in wrapper_value["data"].get("dialogue_keys", []):
 			_validate_localization_key(str(key), english, wrapper_value, issues)
+	for wrapper_value: Variant in records["requests"]:
+		var tutorial_key := str(wrapper_value["data"].get("tutorial_text_key", ""))
+		if not tutorial_key.is_empty():
+			_validate_localization_key(tutorial_key, english, wrapper_value, issues)
 
 	var placeholder_regex := RegEx.new()
 	placeholder_regex.compile("\\{([a-z][a-z0-9_]*)\\}")
@@ -431,6 +443,9 @@ func _validate_conditions(value: Variant, indices: Dictionary, wrapper: Dictiona
 					_add_issue(issues, "IMPOSSIBLE_UNLOCK", wrapper["path"], wrapper["data"].get("id", ""), "upgrade level must be positive")
 			"era_unlocked":
 				_validate_reference(str(condition.get("era_id", "")), "eras", indices, wrapper, "unlock era_id", issues)
+			"stability_service_at_least":
+				if not _is_number(condition.get("minimum_ratio")) or float(condition.get("minimum_ratio", -1.0)) < 0.0 or float(condition.get("minimum_ratio", 2.0)) > 1.0:
+					_add_issue(issues, "IMPOSSIBLE_UNLOCK", wrapper["path"], wrapper["data"].get("id", ""), "stability minimum_ratio must be between zero and one")
 
 
 func _validate_trigger(wrapper: Dictionary, indices: Dictionary, issues: Array[ContentValidationIssue], field: String = "trigger") -> void:

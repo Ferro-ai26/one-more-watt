@@ -19,6 +19,8 @@ var _events: Array[RequestEvent] = []
 var _dialogue_selector := DialogueSelector.new()
 var _incident_timeline := RequestIncidentTimeline.new()
 var _underpower_floor := 0.05
+var _progression_state: EconomyState
+var _selected_id := ""
 
 
 func configure(repository: ContentRepository, balance_id: String = "prototype_balance", simulation_seed: int = 1) -> bool:
@@ -37,6 +39,7 @@ func configure(repository: ContentRepository, balance_id: String = "prototype_ba
 	_reports.clear()
 	_events.clear()
 	_active_id = ""
+	_selected_id = ""
 	_accumulator_seconds = 0.0
 	current_dialogue = ""
 	for request_value: Variant in repository.get_all("requests"):
@@ -59,19 +62,70 @@ func get_report(request_id: String) -> PerformanceReport:
 	return _reports.get(request_id) as PerformanceReport
 
 
-func get_next_available_request_id() -> String:
+func get_next_available_request_id(required_only: bool = false) -> String:
 	var candidates: Array[RequestDefinition] = []
 	for request_value: Variant in _repository.get_all("requests"):
 		var request := request_value as RequestDefinition
 		var state := get_request_state(request.get_id())
-		if state != null and state.status == RequestRunState.AVAILABLE:
+		if state != null and state.status == RequestRunState.AVAILABLE and (not required_only or bool(request.get_value("required", true))):
 			candidates.append(request)
 	candidates.sort_custom(func(a: RequestDefinition, b: RequestDefinition) -> bool:
+		var a_required := bool(a.get_value("required", true))
+		var b_required := bool(b.get_value("required", true))
+		if a_required != b_required:
+			return a_required
+		var a_era := _repository.get_era(str(a.get_value("era_id", "")))
+		var b_era := _repository.get_era(str(b.get_value("era_id", "")))
+		var a_era_number := 0 if a_era == null else a_era.get_number()
+		var b_era_number := 0 if b_era == null else b_era.get_number()
+		if a_era_number != b_era_number:
+			return a_era_number < b_era_number
 		var a_sequence := int(a.get_value("sequence", 0))
 		var b_sequence := int(b.get_value("sequence", 0))
 		return a_sequence < b_sequence if a_sequence != b_sequence else a.get_id() < b.get_id()
 	)
 	return "" if candidates.is_empty() else candidates[0].get_id()
+
+
+func get_selected_request_id() -> String:
+	return _selected_id
+
+
+func get_available_optional_request_ids() -> Array[String]:
+	var result: Array[String] = []
+	for request_value: Variant in _repository.get_all("requests"):
+		var request := request_value as RequestDefinition
+		var state := get_request_state(request.get_id())
+		if not bool(request.get_value("required", true)) and state != null and state.status in [RequestRunState.AVAILABLE, RequestRunState.ANNOUNCED]:
+			result.append(request.get_id())
+	result.sort_custom(func(a: String, b: String) -> bool:
+		return int(_repository.get_request(a).get_value("sequence", 0)) < int(_repository.get_request(b).get_value("sequence", 0))
+	)
+	return result
+
+
+func refresh_availability(progression_state: EconomyState = null) -> void:
+	_progression_state = progression_state
+	if _progression_state != null:
+		var efficiencies: Dictionary = _balance.get_value("stored_energy_efficiency", {})
+		grid.conversion_efficiency = clampf(float(efficiencies.get(_progression_state.current_era_id, 1.0)), 0.0, 1.0)
+	_refresh_availability(true)
+
+
+func select_request(request_id: String) -> bool:
+	if not _active_id.is_empty():
+		return false
+	var target := get_request_state(request_id)
+	if target == null or target.status not in [RequestRunState.AVAILABLE, RequestRunState.ANNOUNCED]:
+		return false
+	if not _selected_id.is_empty() and _selected_id != request_id:
+		var previous := get_request_state(_selected_id)
+		if previous != null and previous.status == RequestRunState.ANNOUNCED:
+			previous.status = RequestRunState.AVAILABLE
+	if target.status == RequestRunState.AVAILABLE:
+		return announce_request(request_id)
+	_selected_id = request_id
+	return true
 
 
 func announce_request(request_id: String) -> bool:
@@ -80,6 +134,7 @@ func announce_request(request_id: String) -> bool:
 	if state == null or request == null or state.status != RequestRunState.AVAILABLE:
 		return false
 	_set_status(state, RequestRunState.ANNOUNCED)
+	_selected_id = request_id
 	current_dialogue = _repository.localize(str(request.get_value("announcement_key", "")))
 	_events.append(RequestEvent.new(RequestEvent.DIALOGUE_SHOWN, request_id, grid.state.elapsed_seconds, {"role": "announcement", "text": current_dialogue}))
 	return true
@@ -155,6 +210,8 @@ func skip_request(request_id: String) -> bool:
 	if state.status not in [RequestRunState.AVAILABLE, RequestRunState.ANNOUNCED]:
 		return false
 	_set_status(state, RequestRunState.SKIPPED)
+	if _selected_id == request_id:
+		_selected_id = ""
 	return true
 
 
@@ -201,6 +258,7 @@ func snapshot() -> Dictionary:
 		"unlocked": _unlocked.duplicate(true),
 		"reports": reports,
 		"active_id": _active_id,
+		"selected_id": _selected_id,
 		"accumulator_seconds": _accumulator_seconds,
 		"grid": grid.state.snapshot(),
 		"dialogue_selector": _dialogue_selector.snapshot(),
@@ -225,10 +283,13 @@ func restore(data: Dictionary, repository: ContentRepository, balance_id: String
 			return false
 		_reports[str(id_value)] = report
 	_active_id = str(data.get("active_id", ""))
+	_selected_id = str(data.get("selected_id", _active_id))
 	if not _active_id.is_empty():
 		var active := get_request_state(_active_id)
 		if active == null or active.status != RequestRunState.RUNNING:
 			return false
+	if not _selected_id.is_empty() and get_request_state(_selected_id) == null:
+		return false
 	_accumulator_seconds = float(data.get("accumulator_seconds", 0.0))
 	if not is_finite(_accumulator_seconds) or _accumulator_seconds < 0.0 or _accumulator_seconds >= grid.fixed_step_seconds:
 		return false
@@ -250,6 +311,8 @@ func acknowledge_report(request_id: String) -> bool:
 	if state == null or state.status != RequestRunState.COMPLETED or get_report(request_id) == null:
 		return false
 	_set_status(state, RequestRunState.REPORTED)
+	if _selected_id == request_id:
+		_selected_id = ""
 	return true
 
 
@@ -408,6 +471,18 @@ func _conditions_met(conditions: Variant) -> bool:
 				continue
 			"request_completed":
 				if not _completed.has(str(condition.get("request_id", ""))):
+					return false
+			"infrastructure_owned":
+				if _progression_state == null or int(_progression_state.owned.get(str(condition.get("infrastructure_id", "")), 0)) < int(condition.get("amount", 0)):
+					return false
+			"upgrade_owned":
+				if _progression_state == null or int(_progression_state.upgrade_levels.get(str(condition.get("upgrade_id", "")), 0)) < int(condition.get("level", 0)):
+					return false
+			"era_unlocked":
+				if _progression_state == null or not _progression_state.unlocked_eras.has(str(condition.get("era_id", ""))):
+					return false
+			"stability_service_at_least":
+				if _progression_state == null or _progression_state.best_stability_service_ratio + EPSILON < float(condition.get("minimum_ratio", 1.0)):
 					return false
 			_:
 				return false

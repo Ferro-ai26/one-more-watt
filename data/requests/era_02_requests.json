@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "requests": [
+    {
+      "id": "era02_organize_photographs", "era_id": "era_02_bedroom_assistant", "sequence": 1,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era02_organize_photographs.title", "summary_key": "request.era02_organize_photographs.summary",
+      "announcement_key": "request.era02_organize_photographs.announcement", "completion_key": "request.era02_organize_photographs.completion",
+      "required_energy": 3000, "continuous_demand": 50, "max_useful_power": 120,
+      "demand_profile_id": "steady_compute", "recommended_reserve": 20,
+      "unlock_conditions": [
+        {"type": "era_unlocked", "era_id": "era_02_bedroom_assistant"},
+        {"type": "request_completed", "request_id": "era01_understand_tuesdays"}
+      ],
+      "rewards": {"stored_energy": 500, "unlock_ids": ["era02_recommend_dinner", "portable_generator"], "feature_ids": ["automatic_generation", "offline_progress"]},
+      "tutorial_action": "automatic_generation", "tutorial_text_key": "tutorial.automatic_generation",
+      "repeatable": false, "tags": ["main", "character", "tutorial"]
+    },
+    {
+      "id": "era02_recommend_dinner", "era_id": "era_02_bedroom_assistant", "sequence": 2,
+      "kind": "stability", "required": true,
+      "title_key": "request.era02_recommend_dinner.title", "summary_key": "request.era02_recommend_dinner.summary",
+      "announcement_key": "request.era02_recommend_dinner.announcement", "completion_key": "request.era02_recommend_dinner.completion",
+      "required_energy": 7000, "continuous_demand": 120, "max_useful_power": 300,
+      "demand_profile_id": "gentle_peak", "recommended_reserve": 120,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_organize_photographs"}],
+      "rewards": {"stored_energy": 900, "unlock_ids": ["era02_rewrite_text_message", "home_battery"], "feature_ids": ["reserve_forecast"]},
+      "tutorial_action": "read_reserve_forecast", "tutorial_text_key": "tutorial.read_reserve_forecast",
+      "repeatable": false, "tags": ["main", "stability", "tutorial"]
+    },
+    {
+      "id": "era02_rewrite_text_message", "era_id": "era_02_bedroom_assistant", "sequence": 3,
+      "kind": "burst", "required": true,
+      "title_key": "request.era02_rewrite_text_message.title", "summary_key": "request.era02_rewrite_text_message.summary",
+      "announcement_key": "request.era02_rewrite_text_message.announcement", "completion_key": "request.era02_rewrite_text_message.completion",
+      "required_energy": 14000, "continuous_demand": 180, "max_useful_power": 600,
+      "demand_profile_id": "reserve_spike", "recommended_reserve": 500,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_recommend_dinner"}],
+      "rewards": {"stored_energy": 1600, "unlock_ids": ["era02_learn_tuesdays", "second_questionable_power_strip"]},
+      "tutorial_action": "accept_brownout", "tutorial_text_key": "tutorial.accept_brownout",
+      "repeatable": false, "tags": ["main", "burst", "tutorial"]
+    },
+    {
+      "id": "era02_learn_tuesdays", "era_id": "era_02_bedroom_assistant", "sequence": 4,
+      "kind": "research", "required": true,
+      "title_key": "request.era02_learn_tuesdays.title", "summary_key": "request.era02_learn_tuesdays.summary",
+      "announcement_key": "request.era02_learn_tuesdays.announcement", "completion_key": "request.era02_learn_tuesdays.completion",
+      "required_energy": 22000, "continuous_demand": 350, "max_useful_power": 900,
+      "demand_profile_id": "steady_research", "recommended_reserve": 300, "research_cost": 500,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_rewrite_text_message"}],
+      "rewards": {"stored_energy": 2500, "unlock_ids": ["era02_improve_loading_animation", "generator_coordination"]},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "research", "callback"]
+    },
+    {
+      "id": "era02_improve_loading_animation", "era_id": "era_02_bedroom_assistant", "sequence": 5,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era02_improve_loading_animation.title", "summary_key": "request.era02_improve_loading_animation.summary",
+      "announcement_key": "request.era02_improve_loading_animation.announcement", "completion_key": "request.era02_improve_loading_animation.completion",
+      "required_energy": 45000, "continuous_demand": 650, "max_useful_power": 1600,
+      "demand_profile_id": "server_wave", "recommended_reserve": 600,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_learn_tuesdays"}],
+      "rewards": {"stored_energy": 5000, "unlock_ids": ["dedicated_circuit_research"]},
+      "tutorial_action": "purchase_dedicated_circuit", "tutorial_text_key": "tutorial.purchase_dedicated_circuit",
+      "repeatable": false, "tags": ["main", "capacity", "tutorial", "era_capstone"]
+    },
+    {
+      "id": "era02_nineteen_plug_certification", "era_id": "era_02_bedroom_assistant", "sequence": 6,
+      "kind": "vanity", "required": false,
+      "title_key": "request.era02_nineteen_plug_certification.title", "summary_key": "request.era02_nineteen_plug_certification.summary",
+      "announcement_key": "request.era02_nineteen_plug_certification.announcement", "completion_key": "request.era02_nineteen_plug_certification.completion",
+      "required_energy": 12000, "continuous_demand": 250, "max_useful_power": 600,
+      "demand_profile_id": "reserve_spike", "recommended_reserve": 250,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_rewrite_text_message"}],
+      "rewards": {"stored_energy": 100, "unlock_ids": []},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["optional", "vanity", "cosmetic"]
+    }
+  ]
+}

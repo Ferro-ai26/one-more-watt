@@ -32,6 +32,10 @@ static func evaluate(conditions: Variant, state: EconomyState) -> Dictionary:
 				var era_id := str(condition.get("era_id", ""))
 				if not state.unlocked_eras.has(era_id):
 					unmet.append("era_unlocked:%s" % era_id)
+			"stability_service_at_least":
+				var minimum_ratio := float(condition.get("minimum_ratio", 1.0))
+				if state.best_stability_service_ratio + 0.000000001 < minimum_ratio:
+					unmet.append("stability_service_at_least:%.2f" % minimum_ratio)
 			_:
 				unmet.append("unsupported_condition:%s" % condition.get("type", ""))
 	return {"unlocked": unmet.is_empty(), "unmet": unmet}

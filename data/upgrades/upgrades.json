@@ -20,7 +20,7 @@
       "description_key": "upgrade.dedicated_circuit.description",
       "cost": {"stored_energy": 7500},
       "cost_growth": 1.0,
-      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_02_bedroom_assistant"}],
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_improve_loading_animation"}],
       "effects": [{"operation": "multiply", "target": "transmission_capacity", "value": 1.25}],
       "permanent": false,
       "max_level": 1
@@ -32,7 +32,7 @@
       "description_key": "upgrade.generator_coordination.description",
       "cost": {"stored_energy": 1000},
       "cost_growth": 1.0,
-      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_02_bedroom_assistant"}],
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era02_organize_photographs"}],
       "effects": [{"operation": "multiply", "target": "category_output", "category": "generation", "value": 1.2}],
       "permanent": false,
       "max_level": 1

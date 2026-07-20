@@ -41,6 +41,7 @@ func configure(repository: ContentRepository, balance_id: String = "prototype_ba
 	var first_era := _first_era_id()
 	if not first_era.is_empty():
 		state.unlocked_eras[first_era] = true
+		state.current_era_id = first_era
 	_events.clear()
 	_refresh_unlocks(false)
 	return rebuild_derived_state()
@@ -197,6 +198,10 @@ func restore(data: Dictionary, repository: ContentRepository, balance_id: String
 	var restored := EconomyState.new()
 	if not restored.restore(data):
 		return false
+	if repository.get_era(restored.current_era_id) == null:
+		return false
+	if not restored.pending_era_transition_id.is_empty() and repository.get_era(restored.pending_era_transition_id) == null:
+		return false
 	state = restored
 	_events.clear()
 	_refresh_unlocks(false)
@@ -206,6 +211,44 @@ func restore(data: Dictionary, repository: ContentRepository, balance_id: String
 func mark_request_completed(id: String) -> void:
 	state.completed_requests[id] = true
 	_refresh_unlocks(true)
+
+
+func record_request_report(report: PerformanceReport) -> void:
+	if report == null:
+		return
+	state.completed_requests[report.request_id] = true
+	if report.kind == "stability":
+		state.best_stability_service_ratio = maxf(state.best_stability_service_ratio, report.demand_served_ratio)
+	var definition := _repository.get_request(report.request_id)
+	if definition != null:
+		var rewards: Dictionary = definition.get_value("rewards", {})
+		for feature_value: Variant in rewards.get("feature_ids", []):
+			var feature_id := str(feature_value)
+			if feature_id.is_empty() or state.unlocked_features.has(feature_id):
+				continue
+			state.unlocked_features[feature_id] = true
+			_events.append(EconomyEvent.new(EconomyEvent.FEATURE_UNLOCKED, feature_id))
+	_refresh_unlocks(true)
+
+
+func mark_report_viewed(request_id: String) -> bool:
+	var definition := _repository.get_request(request_id)
+	if definition == null or "prototype_capstone" not in definition.get_value("tags", []) or state.prototype_complete:
+		return false
+	state.prototype_complete = true
+	_events.append(EconomyEvent.new(EconomyEvent.PROTOTYPE_COMPLETED, request_id))
+	return true
+
+
+func has_feature(feature_id: String) -> bool:
+	return state.unlocked_features.has(feature_id)
+
+
+func acknowledge_era_transition() -> bool:
+	if state.pending_era_transition_id.is_empty():
+		return false
+	state.pending_era_transition_id = ""
+	return true
 
 
 func unlock_era(id: String) -> bool:
@@ -259,6 +302,7 @@ func _apply_rebuild(rebuilt: Dictionary) -> void:
 
 
 func _refresh_unlocks(emit_events: bool) -> void:
+	_refresh_era_unlocks(emit_events)
 	for family: String in ["infrastructure", "upgrades"]:
 		for definition_value: Variant in _repository.get_all(family):
 			var definition := definition_value as ContentDefinition
@@ -267,6 +311,22 @@ func _refresh_unlocks(emit_events: bool) -> void:
 				state.unlocked_content[definition.get_id()] = true
 				if emit_events:
 					_events.append(EconomyEvent.new(EconomyEvent.CONTENT_UNLOCKED, definition.get_id(), {"family": family}))
+
+
+func _refresh_era_unlocks(emit_events: bool) -> void:
+	var eras: Array = _repository.get_all("eras")
+	eras.sort_custom(func(a: EraDefinition, b: EraDefinition) -> bool: return a.get_number() < b.get_number())
+	for era_value: Variant in eras:
+		var era := era_value as EraDefinition
+		if state.unlocked_eras.has(era.get_id()):
+			continue
+		if not bool(UnlockEvaluator.evaluate(era.get_value("unlock_conditions", []), state)["unlocked"]):
+			continue
+		state.unlocked_eras[era.get_id()] = true
+		state.current_era_id = era.get_id()
+		state.pending_era_transition_id = era.get_id()
+		if emit_events:
+			_events.append(EconomyEvent.new(EconomyEvent.ERA_CHANGED, era.get_id(), {"number": era.get_number()}))
 
 
 func _owns_automation() -> bool:

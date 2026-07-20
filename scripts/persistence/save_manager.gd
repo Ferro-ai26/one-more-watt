@@ -1,6 +1,8 @@
 class_name SaveManager
 extends RefCounted
 
+const CONTENT_COMPATIBILITY := {"0.7.0": ["0.6.0"]}
+
 const MAIN_NAME := "save_main.json"
 const BACKUP_1_NAME := "save_backup_1.json"
 const BACKUP_2_NAME := "save_backup_2.json"
@@ -86,7 +88,7 @@ func load() -> SaveLoadResult:
 			result.diagnostics.append("%s: %s" % [name, migration.get("error", "migration_failed")])
 			continue
 		envelope = migration["envelope"]
-		if not content_version.is_empty() and str(envelope.get("content_version", "")) != content_version:
+		if not _content_version_compatible(str(envelope.get("content_version", ""))):
 			result.diagnostics.append("%s: incompatible_content_version" % name)
 			continue
 		result.ok = true
@@ -101,6 +103,12 @@ func load() -> SaveLoadResult:
 		return result
 	result.status = "corrupt_all" if found_any else "no_save"
 	return result
+
+
+func _content_version_compatible(saved_version: String) -> bool:
+	if content_version.is_empty() or saved_version == content_version:
+		return true
+	return saved_version in CONTENT_COMPATIBILITY.get(content_version, [])
 
 
 func diagnostics() -> Dictionary:

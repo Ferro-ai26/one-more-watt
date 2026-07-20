@@ -40,6 +40,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Economy tests: `./tools/test_economy.sh`
 - Main UI tests: `./tools/test_ui.sh`
 - Persistence/offline tests: `./tools/test_persistence.sh`
+- Eras 1–3 vertical-slice tests: `./tools/test_vertical_slice.sh`
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`

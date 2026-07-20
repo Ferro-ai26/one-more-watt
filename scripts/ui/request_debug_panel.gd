@@ -7,6 +7,14 @@ const REQUEST_IDS := [
 	"era01_understand_tuesdays",
 	"era01_friendlier_thanks",
 ]
+const ERA_01_PATH := [
+	"era01_finish_booting",
+	"era01_remember_name",
+	"era01_identify_cat",
+	"era01_basic_arithmetic",
+	"era01_friendlier_thanks",
+	"era01_understand_tuesdays",
+]
 
 @onready var watt_dialogue_label: Label = %WattDialogueLabel
 @onready var request_label: Label = %RequestLabel
@@ -34,8 +42,12 @@ func _ready() -> void:
 func prepare_target(request_id: String) -> bool:
 	if _repository == null or request_id not in REQUEST_IDS or not simulation.configure(_repository, "prototype_balance", 303):
 		return false
+	var progression := EconomyState.new()
+	progression.owned["laptop_battery"] = 1
+	progression.unlocked_eras["era_01_cold_boot"] = true
+	simulation.refresh_availability(progression)
 	_set_rich_grid()
-	for prior_id: String in REQUEST_IDS:
+	for prior_id: String in ERA_01_PATH:
 		if prior_id == request_id:
 			break
 		simulation.announce_request(prior_id)

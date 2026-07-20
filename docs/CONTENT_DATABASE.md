@@ -156,7 +156,7 @@ Achievement records contain `id`, `name_key`, `description_key`, a deterministic
 
 ## Unlock and effect vocabularies
 
-Unlock conditions are explicit objects using `default`, `request_completed`, `infrastructure_owned`, `upgrade_owned`, or `era_unlocked`. Referenced IDs must exist, ownership amounts and levels must be positive, and required-request dependencies must be acyclic and reachable in era sequence.
+Unlock conditions are explicit objects using `default`, `request_completed`, `infrastructure_owned`, `upgrade_owned`, `era_unlocked`, or `stability_service_at_least`. The Stability condition supplies a zero-through-one `minimum_ratio`. Referenced IDs must exist, ownership amounts and levels must be positive, and required-request dependencies must be acyclic and reachable in era sequence.
 
 Effect operations are limited to `add` and `multiply`. Supported direct targets are `generation_rate`, `transmission_capacity`, `reserve_capacity`, `reserve_charge_rate`, `reserve_discharge_rate`, `request_efficiency`, `automation_capacity`, and `request_demand_multiplier`. Multiplier-only grouping targets are `category_output`, `tag_output`, and `global_output`. Unsupported operations, targets, category names, or missing tag/category metadata are fatal validation errors and are never evaluated as expressions.
 
@@ -165,6 +165,8 @@ Phase 04 canonical JSON uses content version `0.4.0` and contains all 18 infrast
 Phase 05 canonical JSON uses content version `0.5.0`. It changes the existing `Finish Booting` reward from 10 to 12 Stored Energy so the first completed request covers the exact 11 Stored Energy next-outlet price exposed by the production UI. No new request population or schema change is included.
 
 Phase 06 canonical JSON uses content version `0.6.0`. Balance records now require `offline_progress` with nonnegative `cap_seconds` and `far_forward_seconds` plus an `efficiency` from zero through one. The prototype authors 7,200 seconds, 80%, and 604,800 seconds respectively; save and offline code contains no replacement balance values.
+
+Phase 07 canonical JSON uses content version `0.7.0` and multiple manifest entries for the request family, one per era. All 18 catalog requests are populated with stable IDs, deterministic profiles, reviewed English announcement/completion lines, optional localized `tutorial_text_key` values, and reward `feature_ids` drawn from the validated allocation, automatic-generation, offline, Reserve-forecast, detailed-forecast, and Reserve-threshold vocabulary.
 
 ## Prototype request catalog
 
@@ -199,7 +201,7 @@ The exact numbers are tuned in data, but the initial authored set is:
 
 This produces 18 total requests, including three optional vanity requests.
 
-Phase 03 canonical JSON contains one runnable sample for each required Capacity, Stability, Burst, and Research behavior. Full population of this catalog remains a later phase responsibility.
+Phase 03 introduced one runnable sample for each required Capacity, Stability, Burst, and Research behavior. Phase 07 preserves those shipped IDs while completing this catalog across the three era request files.
 
 ## Localization
 

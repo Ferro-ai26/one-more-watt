@@ -89,7 +89,7 @@ func confirm_new_game(current_utc: int) -> Dictionary:
 
 
 func _on_mutation(trigger: String) -> void:
-	if trigger in ["request_completed", "report_acknowledged"]:
+	if trigger in ["request_completed", "report_acknowledged", "era_transition", "prototype_completed"]:
 		dirty = true
 		_save_after = 0.0
 		_dirty_elapsed = 0.0

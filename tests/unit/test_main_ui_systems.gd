@@ -65,7 +65,7 @@ func _test_session_and_view_model_parity() -> void:
 	_check(session.requests.get_request_state(first_id).status == RequestRunState.COMPLETED, "request completes through online coordinator")
 	_check_near(session.requests.grid.state.stored_energy, 12.0, "first completion funds the documented first purchase")
 	_check(session.acknowledge_report(first_id), "report acknowledgement announces the next request")
-	_check(session.current_request_id() == "era01_basic_arithmetic", "next request becomes current")
+	_check(session.current_request_id() == "era01_remember_name", "next authored request becomes current")
 	var domain_economy_preview := session.preview_infrastructure("wall_outlet")
 	var wall_card: Dictionary = {}
 	for card: Dictionary in view_model.infrastructure_cards():

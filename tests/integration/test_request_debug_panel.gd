@@ -7,6 +7,7 @@ const REQUEST_IDS := [
 	"era01_friendlier_thanks",
 ]
 const BUTTON_NAMES := ["CapacityButton", "StabilityButton", "BurstButton", "ResearchButton"]
+const NEXT_IDS := ["era01_remember_name", "era01_friendlier_thanks", "era01_larger_loading_dot", "era01_understand_tuesdays"]
 
 var _failures: Array[String] = []
 var _checks := 0
@@ -111,8 +112,7 @@ func _run_sample(panel: RequestDebugPanel, index: int) -> void:
 	_button(panel, "AcknowledgeButton").emit_signal("pressed")
 	await process_frame
 	_check(state.status == RequestRunState.REPORTED, "%s report acknowledgement completes lifecycle" % request_id)
-	if index + 1 < REQUEST_IDS.size():
-		_check(panel.simulation.get_next_available_request_id() == REQUEST_IDS[index + 1], "%s acknowledgement identifies next request" % request_id)
+	_check(panel.simulation.get_next_available_request_id() == NEXT_IDS[index], "%s acknowledgement identifies the authored next request" % request_id)
 
 
 func _kind_for(index: int) -> String:

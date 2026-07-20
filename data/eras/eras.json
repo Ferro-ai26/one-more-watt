@@ -17,9 +17,12 @@
       ],
       "request_ids": [
         "era01_finish_booting",
+        "era01_remember_name",
+        "era01_identify_cat",
         "era01_basic_arithmetic",
+        "era01_friendlier_thanks",
         "era01_understand_tuesdays",
-        "era01_friendlier_thanks"
+        "era01_larger_loading_dot"
       ],
       "visual_state_id": "desk_initial",
       "unit_display_floor": "W"
@@ -30,7 +33,10 @@
       "name_key": "era.02.name",
       "scale_key": "era.02.scale",
       "description_key": "era.02.description",
-      "unlock_conditions": [],
+      "unlock_conditions": [
+        {"type": "request_completed", "request_id": "era01_understand_tuesdays"},
+        {"type": "infrastructure_owned", "infrastructure_id": "laptop_battery", "amount": 1}
+      ],
       "infrastructure_ids": [
         "upgraded_breaker",
         "portable_generator",
@@ -39,7 +45,14 @@
         "second_questionable_power_strip",
         "gaming_gpu"
       ],
-      "request_ids": [],
+      "request_ids": [
+        "era02_organize_photographs",
+        "era02_recommend_dinner",
+        "era02_rewrite_text_message",
+        "era02_learn_tuesdays",
+        "era02_improve_loading_animation",
+        "era02_nineteen_plug_certification"
+      ],
       "visual_state_id": "bedroom_initial",
       "unit_display_floor": "W"
     },
@@ -49,7 +62,11 @@
       "name_key": "era.03.name",
       "scale_key": "era.03.scale",
       "description_key": "era.03.description",
-      "unlock_conditions": [],
+      "unlock_conditions": [
+        {"type": "request_completed", "request_id": "era02_improve_loading_animation"},
+        {"type": "stability_service_at_least", "minimum_ratio": 0.85},
+        {"type": "upgrade_owned", "upgrade_id": "dedicated_circuit_research", "level": 1}
+      ],
       "infrastructure_ids": [
         "server_rack",
         "whole_home_battery",
@@ -59,7 +76,13 @@
         "reinforced_wiring",
         "outdoor_transformer"
       ],
-      "request_ids": [],
+      "request_ids": [
+        "era03_sort_photo_archive",
+        "era03_predict_package_arrival",
+        "era03_write_grocery_list",
+        "era03_leftovers_edible",
+        "era03_rename_every_device"
+      ],
       "visual_state_id": "server_closet_initial",
       "unit_display_floor": "kW"
     }

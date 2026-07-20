@@ -3,10 +3,13 @@ extends SceneTree
 const TOLERANCE := 0.000001
 const REQUEST_IDS := [
 	"era01_finish_booting",
+	"era01_remember_name",
+	"era01_identify_cat",
 	"era01_basic_arithmetic",
-	"era01_understand_tuesdays",
 	"era01_friendlier_thanks",
+	"era01_understand_tuesdays",
 ]
+const STABILITY_ID := "era01_basic_arithmetic"
 
 var _repository: ContentRepository
 var _failures: Array[String] = []
@@ -58,7 +61,7 @@ func _test_state_transitions_and_four_kinds() -> void:
 		_check(simulation.get_request_state(request_id).status == RequestRunState.AUTHORIZED, "%s stores authorized state" % request_id)
 		_check(simulation.start_request(request_id), "%s transitions authorized to running" % request_id)
 		_check(simulation.get_request_state(request_id).status == RequestRunState.RUNNING, "%s stores running state" % request_id)
-		if index == 1:
+		if index == 3:
 			_check(simulation.set_allocation_mode("feed_watt"), "allocation can change mid-request")
 		_check(simulation.advance_time(120.0), "%s advances to completion" % request_id)
 		var state := simulation.get_request_state(request_id)
@@ -71,8 +74,8 @@ func _test_state_transitions_and_four_kinds() -> void:
 		if index + 1 < REQUEST_IDS.size():
 			_check(simulation.get_next_available_request_id() == REQUEST_IDS[index + 1], "acknowledgement identifies the next request")
 	observed_kinds.sort()
-	_check(observed_kinds == ["burst", "capacity", "research", "stability"], "all four required request behaviors are authored and runnable")
-	_check(simulation.get_request_state(REQUEST_IDS[3]).research_cost_paid, "research authorization consumes its documented cost once")
+	_check("burst" in observed_kinds and "capacity" in observed_kinds and "research" in observed_kinds and "stability" in observed_kinds, "all four required request behaviors are authored and runnable")
+	_check(simulation.get_request_state("era01_friendlier_thanks").research_cost_paid, "research authorization consumes its documented cost once")
 
 
 func _test_invalid_and_underprepared_authorization() -> void:
@@ -101,14 +104,14 @@ func _test_demand_profile_and_reserve_peak() -> void:
 
 	var simulation := _new_simulation()
 	_set_rich_grid(simulation)
-	_run_to_reported(simulation, REQUEST_IDS[0])
+	_run_path_until(simulation, STABILITY_ID)
 	simulation.grid.set_grid_values(_grid(8, 8, 10, 4, 8, simulation.grid.state.stored_energy, 10))
-	_check(simulation.announce_request(REQUEST_IDS[1]), "stability request announces after first completion")
-	_check(simulation.authorize_request(REQUEST_IDS[1]) and simulation.start_request(REQUEST_IDS[1]), "stability request starts")
+	_check(simulation.announce_request(STABILITY_ID), "stability request announces after prerequisites")
+	_check(simulation.authorize_request(STABILITY_ID) and simulation.start_request(STABILITY_ID), "stability request starts")
 	var reserve_before := simulation.grid.state.reserve_stored
 	simulation.advance_time(5.5)
 	_check(simulation.grid.state.reserve_stored < reserve_before, "authored demand peak discharges Reserve")
-	_check(simulation.get_request_state(REQUEST_IDS[1]).progress > 0.0, "stability request progresses through its curve")
+	_check(simulation.get_request_state(STABILITY_ID).progress > 0.0, "stability request progresses through its curve")
 
 
 func _test_brownout_progress_and_truthful_report() -> void:
@@ -146,7 +149,7 @@ func _test_reward_idempotence_and_unlock_order() -> void:
 	_check(not simulation.grant_completion_rewards(REQUEST_IDS[0]), "repeated reward call is idempotently rejected")
 	_check_near(simulation.grid.state.stored_energy, after, "repeated reward call does not change balance")
 	var completed_index := _event_index(events, RequestEvent.STATE_CHANGED, "to", RequestRunState.COMPLETED)
-	var unlock_index := _event_index(events, RequestEvent.CONTENT_UNLOCKED, "content_id", REQUEST_IDS[1])
+	var unlock_index := _event_index(events, RequestEvent.CONTENT_UNLOCKED, "content_id", "era01_remember_name")
 	_check(completed_index >= 0 and unlock_index > completed_index, "stable-ID unlock event follows completion")
 
 
@@ -181,14 +184,14 @@ func _test_grade_boundaries() -> void:
 func _test_seeded_incidents() -> void:
 	var first := RequestIncidentTimeline.new()
 	var second := RequestIncidentTimeline.new()
-	first.configure(REQUEST_IDS[1], _repository.get_all("incidents"), 991)
-	second.configure(REQUEST_IDS[1], _repository.get_all("incidents"), 991)
+	first.configure(STABILITY_ID, _repository.get_all("incidents"), 991)
+	second.configure(STABILITY_ID, _repository.get_all("incidents"), 991)
 	_check(first.scheduled_ids() == second.scheduled_ids(), "identical seeds schedule identical incidents")
 	_check(first.scheduled_ids() == ["browser_tab_bloom"], "eligible seeded incident uses stable authored ID")
 	var found_omitted_seed := false
 	for alternate_seed: int in range(1, 65):
 		var alternate := RequestIncidentTimeline.new()
-		alternate.configure(REQUEST_IDS[1], _repository.get_all("incidents"), alternate_seed)
+		alternate.configure(STABILITY_ID, _repository.get_all("incidents"), alternate_seed)
 		if alternate.scheduled_ids().is_empty():
 			found_omitted_seed = true
 			break
@@ -221,6 +224,10 @@ func _test_fixed_step_repeatability() -> void:
 func _new_simulation(simulation_seed: int = 1) -> RequestSimulation:
 	var simulation := RequestSimulation.new()
 	_check(simulation.configure(_repository, "prototype_balance", simulation_seed), "request simulation configures")
+	var progression := EconomyState.new()
+	progression.owned["laptop_battery"] = 1
+	progression.unlocked_eras["era_01_cold_boot"] = true
+	simulation.refresh_availability(progression)
 	return simulation
 
 
@@ -247,6 +254,13 @@ func _run_to_reported(simulation: RequestSimulation, request_id: String) -> void
 	_check(simulation.advance_time(120.0), "%s advances in helper" % request_id)
 	_check(simulation.acknowledge_report(request_id), "%s acknowledges in helper" % request_id)
 	simulation.drain_events()
+
+
+func _run_path_until(simulation: RequestSimulation, target_id: String) -> void:
+	for request_id: String in REQUEST_IDS:
+		if request_id == target_id:
+			return
+		_run_to_reported(simulation, request_id)
 
 
 func _event_index(events: Array[RequestEvent], type: String, field: String, value: Variant) -> int:

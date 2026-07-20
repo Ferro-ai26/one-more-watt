@@ -11,9 +11,11 @@ func _init(game_session: GameSession = null) -> void:
 func status_snapshot() -> Dictionary:
 	var grid := session.requests.grid.state
 	var derived := session.economy.get_derived_values()
+	var era := session.repository.get_era(session.economy.state.current_era_id)
 	return {
-		"era": session.repository.localize("era.01.name"),
-		"scale": session.repository.localize("era.01.scale"),
+		"era": session.repository.localize(str(era.get_value("name_key", ""))),
+		"scale": session.repository.localize(str(era.get_value("scale_key", ""))),
+		"era_id": era.get_id(),
 		"stored_energy": grid.stored_energy,
 		"deliverable_power": minf(grid.generation_rate, grid.transmission_capacity),
 		"generation": grid.generation_rate,
@@ -28,7 +30,9 @@ func status_snapshot() -> Dictionary:
 func request_snapshot() -> Dictionary:
 	var request_id := session.current_request_id()
 	if request_id.is_empty():
-		return {"id": "", "status": "none", "title": "No request available", "dialogue": "WATT is considering the next sensible use of electricity."}
+		if session.economy.state.prototype_complete:
+			return {"id": "", "status": "prototype_complete", "title": session.repository.localize("prototype.complete.title"), "dialogue": session.repository.localize("prototype.complete.dialogue")}
+		return {"id": "", "status": "none", "title": session.repository.localize("request.none.title"), "dialogue": session.repository.localize("request.none.dialogue")}
 	var definition := session.repository.get_request(request_id)
 	var state := session.requests.get_request_state(request_id)
 	var preview := session.requests.build_preview(request_id)
@@ -53,7 +57,34 @@ func request_snapshot() -> Dictionary:
 		"warning": session.repository.localize(preview.warning_key) if not preview.warning_key.is_empty() else "Grid forecast is ready.",
 		"reward": preview.reward_stored_energy,
 		"unlocks": preview.unlock_ids.duplicate(),
+		"required": bool(definition.get_value("required", true)),
+		"tutorial_action": str(definition.get_value("tutorial_action", "")),
+		"tutorial": session.repository.localize(str(definition.get_value("tutorial_text_key", ""))) if not str(definition.get_value("tutorial_text_key", "")).is_empty() else "",
+		"reserve_forecast_unlocked": session.has_feature("reserve_forecast"),
+		"detailed_forecast_unlocked": session.has_feature("detailed_forecast"),
 	}
+
+
+func environment_snapshot() -> Dictionary:
+	var state := session.economy.state
+	var era := session.repository.get_era(state.current_era_id)
+	var era_number := era.get_number()
+	var owned := state.owned
+	match era_number:
+		1:
+			return {"core": "◉‿◉", "badge": "OLD MONITOR\n%d OUTLET%s" % [int(owned.get("wall_outlet", 0)), "S" if int(owned.get("wall_outlet", 0)) != 1 else ""], "summary": session.repository.localize("environment.era01.summary"), "accent": Color(0.25, 0.88, 1.0)}
+		2:
+			return {"core": "◉◡◉", "badge": "BEDROOM GRID\n%d GENERATOR%s" % [int(owned.get("portable_generator", 0)), "S" if int(owned.get("portable_generator", 0)) != 1 else ""], "summary": session.repository.localize("environment.era02.summary"), "accent": Color(0.38, 0.94, 0.74)}
+		_:
+			return {"core": "◉▿◉", "badge": "SERVER CLOSET\n%d RACK%s" % [int(owned.get("server_rack", 0)), "S" if int(owned.get("server_rack", 0)) != 1 else ""], "summary": session.repository.localize("environment.era03.summary"), "accent": Color(0.72, 0.58, 1.0)}
+
+
+func optional_requests() -> Array[Dictionary]:
+	var result: Array[Dictionary] = []
+	for request_id: String in session.available_optional_request_ids():
+		var definition := session.repository.get_request(request_id)
+		result.append({"id": request_id, "title": session.repository.localize(definition.get_title_key()), "summary": session.repository.localize(str(definition.get_value("summary_key", "")))})
+	return result
 
 
 func infrastructure_cards() -> Array[Dictionary]:
@@ -110,7 +141,7 @@ func report_snapshot(report: PerformanceReport) -> Dictionary:
 		"peak_served": report.peak_served,
 		"brownout_seconds": report.brownout_seconds,
 		"stored_energy": report.stored_energy_earned + report.reward_stored_energy,
-		"unlock_ids": report.unlock_ids.duplicate(),
+		"unlock_ids": _localized_unlocks(report.unlock_ids),
 		"completion": session.repository.localize(report.completion_key),
 		"suggestion": session.repository.localize(report.suggestion_key),
 	}
@@ -155,6 +186,22 @@ func _current_bottleneck(preview: RequestPreview) -> String:
 	return preview.likely_bottleneck
 
 
+func _localized_unlocks(ids: Array[String]) -> Array[String]:
+	var result: Array[String] = []
+	for id: String in ids:
+		var definition: ContentDefinition
+		for family: String in ["eras", "infrastructure", "upgrades", "requests", "achievements"]:
+			definition = session.repository.get_definition(family, id)
+			if definition != null:
+				break
+		if definition == null:
+			result.append(id.replace("_", " ").capitalize())
+			continue
+		var key := str(definition.get_value("name_key", definition.get_value("title_key", "")))
+		result.append(session.repository.localize(key) if not key.is_empty() else id.replace("_", " ").capitalize())
+	return result
+
+
 static func _friendly_key(key: String) -> String:
 	return key.replace("_rate", "").replace("_capacity", "").replace("_", " ").capitalize()
 
@@ -168,5 +215,6 @@ static func _friendly_conditions(conditions: Array) -> String:
 			"infrastructure_owned": result.append("Own %s ×%s" % [str(parts[1]).replace("_", " ").capitalize(), parts[2]])
 			"upgrade_owned": result.append("Upgrade %s to %s" % [str(parts[1]).replace("_", " ").capitalize(), parts[2]])
 			"era_unlocked": result.append("Reach %s" % str(parts[1]).replace("_", " ").capitalize())
+			"stability_service_at_least": result.append("Serve %.0f%% on a Stability request" % (float(parts[1]) * 100.0))
 			_: result.append(str(value))
 	return ", ".join(result)

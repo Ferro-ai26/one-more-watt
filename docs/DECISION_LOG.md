@@ -112,6 +112,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The prototype needs inspectable diagnostics and deterministic migration tests while protecting progress from interrupted writes, malformed files, stale derived caches, and duplicated completion rewards.
 - Consequences: Content compatibility and stable-ID migrations fail closed, every successful save advances a monotonic sequence and non-decreasing trusted UTC, and storage writes remain local under `user://`. Cloud sync and platform backup guarantees require a later decision.
 
+## DEC-017 — Report-driven era and feature progression
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Store unlocked/current eras, best Stability service, authored feature rewards, pending era transition, and prototype completion in the existing economy state. Add the validated `stability_service_at_least` condition for the documented Era 3 gate, and keep required request selection distinct from optional vanity selection.
+- Reason: Phase 07 needs cross-system gates based on requests, ownership, upgrades, and report quality without introducing a second authoritative progression store or embedding stable content IDs in presentation scripts.
+- Consequences: Request reports reconcile into economy progression before availability refresh; all new fields round-trip through format version 2 with safe defaults; additive `0.6.0` saves may load into `0.7.0`; and future conditions must remain enumerated, data-driven, and reachability-tested.
+
 ## Proposed decision template
 
 ```markdown

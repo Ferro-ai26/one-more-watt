@@ -175,3 +175,4 @@ Approve a line only if:
 - It avoids cruelty, forced randomness, and excessive explanation.
 - It fits on the target mobile dialogue surface.
 
+Phase 07 authors and reviews one announcement and completion line for each of the 18 prototype requests. Cold Boot remains tentative and permission-seeking, Bedroom Assistant becomes enthusiastic and questionably helpful, and Home Server Closet uses confident household-optimization language. The one-pass clean route contains no repeated request line; brownout selection retains unseen-first ordering and a 60-second cooldown.

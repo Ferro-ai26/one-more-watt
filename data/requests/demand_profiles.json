@@ -42,6 +42,63 @@
         {"time_seconds": 0, "multiplier": 1.0},
         {"time_seconds": 10, "multiplier": 1.0}
       ]
+    },
+    {
+      "id": "steady_compute",
+      "duration_seconds": 20,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 1.0},
+        {"time_seconds": 20, "multiplier": 1.0}
+      ]
+    },
+    {
+      "id": "gentle_peak",
+      "duration_seconds": 20,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.8},
+        {"time_seconds": 8, "multiplier": 1.0},
+        {"time_seconds": 12, "multiplier": 1.5},
+        {"time_seconds": 16, "multiplier": 1.0},
+        {"time_seconds": 20, "multiplier": 0.8}
+      ]
+    },
+    {
+      "id": "reserve_spike",
+      "duration_seconds": 30,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.6},
+        {"time_seconds": 18, "multiplier": 0.8},
+        {"time_seconds": 21, "multiplier": 3.0},
+        {"time_seconds": 26, "multiplier": 3.0},
+        {"time_seconds": 30, "multiplier": 0.6}
+      ]
+    },
+    {
+      "id": "server_wave",
+      "duration_seconds": 40,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.75},
+        {"time_seconds": 12, "multiplier": 1.0},
+        {"time_seconds": 24, "multiplier": 2.0},
+        {"time_seconds": 32, "multiplier": 1.25},
+        {"time_seconds": 40, "multiplier": 0.75}
+      ]
+    },
+    {
+      "id": "server_burst",
+      "duration_seconds": 60,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.5},
+        {"time_seconds": 35, "multiplier": 0.75},
+        {"time_seconds": 42, "multiplier": 3.5},
+        {"time_seconds": 52, "multiplier": 3.5},
+        {"time_seconds": 60, "multiplier": 0.5}
+      ]
     }
   ]
 }

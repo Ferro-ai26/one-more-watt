@@ -51,6 +51,8 @@ Evolution adds surrounding equipment, projection area, and environmental presenc
 
 Prototype environmental purchases should visibly appear, upgrade, multiply, or activate. Exact one-to-one rendering of hundreds of objects is not required.
 
+Phase 07 uses polished text/glyph placeholders for the three required transformations: the old-monitor desk and outlet count, a green-accented Bedroom Grid with generator count, and a violet Home Server Closet with rack count. The Grid summary names accumulated rooftop/battery, cooling/wiring, and transformer changes. These states prove timing and readability but do not replace final illustrated environments.
+
 ## Animation language
 
 - Power flow: directional pulses

@@ -60,15 +60,14 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 	if _capture_layouts:
 		await _capture(viewport, test_size, "report")
 	await _press(main.modal_content.find_child("AcknowledgeButton", true, false) as Button)
-	_check(main.session.current_request_id() == "era01_basic_arithmetic", "%s report acknowledgement reveals next request" % test_size)
+	_check(main.session.current_request_id() == "era01_remember_name", "%s report acknowledgement reveals next request" % test_size)
 
 	main.open_request_modal()
 	await _press(main.modal_content.find_child("AuthorizeButton", true, false) as Button)
-	await _press(main.allocation_buttons["feed_watt"] as Button)
-	_check(main.session.requests.grid.state.allocation_mode == "feed_watt", "%s allocation changes through segmented control" % test_size)
+	_check((main.allocation_buttons["feed_watt"] as Button).disabled, "%s allocation remains tutorial-locked before language research" % test_size)
 	main.session.advance_time(0.25)
 	main.refresh_now()
-	var active := main.session.requests.get_request_state("era01_basic_arithmetic")
+	var active := main.session.requests.get_request_state("era01_remember_name")
 	_check(active.brownout_seconds > 0.0, "%s underprepared request triggers a recoverable brownout" % test_size)
 	var limiting_visible := false
 	for vital: Variant in main.vital_cards.values():
@@ -78,7 +77,7 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 		await _capture(viewport, test_size, "brownout")
 	main.session.advance_time(120.0)
 	main.refresh_now()
-	main.open_report_modal("era01_basic_arithmetic")
+	main.open_report_modal("era01_remember_name")
 	await process_frame
 	_check(_modal_text(main).contains("BROWNOUT") and not _modal_text(main).contains("BROWNOUT 0.0s"), "%s brownout is recorded in report" % test_size)
 	await _press(main.modal_content.find_child("AcknowledgeButton", true, false) as Button)

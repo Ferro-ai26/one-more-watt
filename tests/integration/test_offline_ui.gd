@@ -23,6 +23,7 @@ func _run() -> void:
 	await process_frame
 	await process_frame
 	var manager := SaveManager.new(_root, main.session.repository.get_content_version())
+	main.session.economy.state.unlocked_features["offline_progress"] = true
 	var controller := PersistenceController.new()
 	controller.configure(main.session, manager)
 	main.persistence = controller

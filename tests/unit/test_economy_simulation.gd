@@ -127,6 +127,7 @@ func _test_upgrade_levels_and_multiplier_stacking() -> void:
 	economy.set_stored_energy(100000.0)
 	economy.purchase_infrastructure("wall_outlet", 9)
 	economy.unlock_era("era_02_bedroom_assistant")
+	economy.mark_request_completed("era02_organize_photographs")
 	var direct_preview := economy.preview_upgrade("outlet_calibration")
 	_check_near(direct_preview.cost, 50.0, "leveled upgrade first cost uses authored base")
 	_check_near(float(direct_preview.resulting_values["generation_rate"]), 110.0, "direct multiplier stacks after milestone")
@@ -141,6 +142,7 @@ func _test_upgrade_levels_and_multiplier_stacking() -> void:
 	_check(economy.preview_upgrade("outlet_calibration").status == EconomyPreview.MAXED, "upgrade reports max level")
 	_check(not economy.purchase_upgrade("outlet_calibration"), "upgrade max level rejects purchase")
 	_check(economy.state.snapshot() == before, "max-level rejection makes no mutation")
+	economy.mark_request_completed("era02_improve_loading_animation")
 	_check(economy.purchase_upgrade("dedicated_circuit_research"), "one-time upgrade purchases")
 	_check(economy.preview_upgrade("dedicated_circuit_research").status == EconomyPreview.MAXED, "one-time upgrade becomes completed")
 

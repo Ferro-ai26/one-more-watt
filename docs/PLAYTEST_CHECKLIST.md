@@ -2,6 +2,30 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 07 clean Eras 1–3 playthrough — 2026-07-20
+
+- Build/commit: Uncommitted Phase 07 working tree based on `3d5157d`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- Method: Controlled accelerated clean-state playthrough using only normal request, idle-generation, purchase, report, transition, and save commands; no debug currency or ownership injection. A matching graphical run exercised the production UI at 393 × 873.
+- [x] WATT, `Finish Booting`, the review/authorize action, Generation/Transmission/Reserve, and the non-punitive tutorial were legible in the initial capture; WATT's role was clear immediately.
+- [x] `Finish Booting` completed at 15 seconds. Six required Cold Boot requests and visible desk purchases completed before Era 2 at 4.6 simulated minutes, satisfying the multiple-request first-five-minute check.
+- [x] Era 2 unlocked at 4.6 minutes and Era 3 at 22.8 minutes; each pending transition survived a complete checksummed save/load before acknowledgement.
+- [x] The Home Server Closet endpoint was reached at 46.8 optimized simulated minutes and survived save/load. It visibly says `ERAS 1–3 COMPLETE • MORE COMING` without naming or fabricating Era 4.
+- [x] Purchases were earned in order: two additional Wall Outlets; Questionable Power Strip; Laptop Battery; Tiny Desk Fan; Extension Cord; Upgraded Breaker; Portable Generator; Rooftop Solar Panel; Home Battery; Second Questionable Power Strip; Generator Coordination; Gaming GPU; Dedicated Circuit Research; Server Rack; Whole-Home Battery; Reinforced Wiring; Backup Generator; Smart Meter; Dedicated Cooling; and Outdoor Transformer.
+- [x] The run accumulated 408.5 brownout seconds without losing progress. Generation, Transmission, and Reserve upgrades were all required by forecasts/gates or observed service pressure, and at least one Stability report cleared the 85% Era 3 gate.
+- [x] Allocation, automatic/offline progress, Reserve forecast, detailed forecast, and low-Reserve protection unlocked before use; an optional vanity request was selected and skipped, then the required path resumed.
+- [x] Total idle earning was 31.5 minutes. The longest continuous gap was 660 seconds before an Era 3 purchase; offline progress was already unlocked, but this is still recorded as `ISSUE-002` for Phase 08 tuning.
+- [x] All 18 announcement/completion pairs and tutorial strings passed localization/content review. No request line repeated in the one-pass route; brownout dialogue retained its 60-second cooldown and unseen-first selection tests.
+- [x] Cold Boot, Bedroom Assistant, Home Server Closet, and prototype-complete captures were inspected. Text, controls, transitions, and scrolling remained accessible; an initially truncated endpoint line/stale forecast was corrected and recaptured.
+- [ ] A measured human first run meets the 75–120 minute target (`ISSUE-002`; optimized harness is 46.8 minutes).
+- [ ] Physical Android touch, lifecycle, safe-area, haptic, audio, storage, and clock behavior verified (device/export unavailable).
+
+Confusion/pacing notes: The system path was coherent and every gate exposed an actionable requirement. The only material concern was the uneven pacing combination of a short optimized total and one long late purchase gap. No repeated-dialogue fatigue was observed.
+
+Prototype verdict: Continue with targeted Phase 08 pacing revisions; do not rework the core loop.
+
 ## Phase 06 save/offline verification — 2026-07-20
 
 - Build/commit: `143ccf9`

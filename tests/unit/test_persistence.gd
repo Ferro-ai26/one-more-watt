@@ -17,6 +17,7 @@ func _init() -> void:
 		_test_purchase_boundary_round_trip()
 		_test_backup_recovery_and_all_failure()
 		_test_migration()
+		_test_phase06_content_compatibility()
 		_test_offline_boundaries_and_equivalence()
 		_test_autosave_debounce()
 	_cleanup_tree(_root)
@@ -140,7 +141,41 @@ func _test_migration() -> void:
 	_check(not loaded.ok, "unknown future schema fails safely")
 
 
+func _test_phase06_content_compatibility() -> void:
+	var path := _case_path("phase06_compatibility")
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path))
+	var old_session := _session(false).snapshot()
+	var old_economy: Dictionary = old_session["economy"]
+	for field: String in ["unlocked_features", "current_era_id", "best_stability_service_ratio", "pending_era_transition_id", "prototype_complete"]:
+		old_economy.erase(field)
+	var old_requests: Dictionary = old_session["requests"]
+	old_requests.erase("selected_id")
+	for request_id: Variant in (old_requests["states"] as Dictionary).keys():
+		if str(request_id) not in ["era01_finish_booting", "era01_basic_arithmetic", "era01_understand_tuesdays", "era01_friendlier_thanks"]:
+			(old_requests["states"] as Dictionary).erase(request_id)
+	var old := {
+		"format_version": SaveMigrator.CURRENT_VERSION,
+		"game_build_version": "phase06",
+		"content_version": "0.6.0",
+		"sequence": 1,
+		"created_utc": 100,
+		"updated_utc": 100,
+		"last_trusted_utc": 100,
+		"trigger": "phase06_fixture",
+		"payload": {"session": old_session},
+	}
+	_write_text("%s/%s" % [path, SaveManager.MAIN_NAME], SaveCodec.encode(old))
+	var loaded := SaveManager.new(path, "0.7.0").load()
+	_check(loaded.ok, "Phase 06 content save is explicitly compatible with additive Phase 07 content: %s" % loaded.diagnostics)
+	if loaded.ok:
+		var restored := _session(false)
+		_check(restored.restore(loaded.envelope["payload"]["session"], _repository), "Phase 06 session defaults new progression fields safely")
+
+
 func _test_offline_boundaries_and_equivalence() -> void:
+	var locked := _session(false)
+	var locked_report := OfflineSimulator.simulate(locked, 3900, 4000)
+	_check(locked_report.feature_locked and locked_report.effective_elapsed == 0.0, "offline progress remains gated before its Era 2 feature unlock")
 	var zero := _session()
 	zero.authorize_current_request()
 	var zero_report := OfflineSimulator.simulate(zero, 4000, 4000)
@@ -176,7 +211,7 @@ func _test_offline_boundaries_and_equivalence() -> void:
 	_check(cap_report.recognized_elapsed == 7200.0 and cap_report.effective_elapsed == 5760.0 and not cap_report.capped, "exact cap is fully recognized and disclosed")
 	_check("era01_finish_booting" in cap_report.completed_request_ids, "active request completes offline")
 	_check(capped.requests.get_active_state() == null, "queue-disabled offline completion does not start another request")
-	_check(capped.requests.get_request_state("era01_basic_arithmetic").status == RequestRunState.AVAILABLE, "next request unlocks without auto-start")
+	_check(capped.requests.get_request_state("era01_remember_name").status == RequestRunState.AVAILABLE, "next request unlocks without auto-start")
 	_check_near(cap_report.stored_energy_after - cap_report.stored_energy_before, capped.requests.grid.state.stored_energy, "offline report reconciles Stored Energy state change")
 	_check(Time.get_ticks_msec() - cap_started < 2000, "maximum offline simulation remains under the prototype performance budget")
 
@@ -206,9 +241,12 @@ func _test_autosave_debounce() -> void:
 	_check(controller.tick(1.0, 10031) and manager.last_sequence == 3, "dirty active progress saves periodically")
 
 
-func _session() -> GameSession:
+func _session(unlock_progression_features: bool = true) -> GameSession:
 	var session := GameSession.new()
 	_check(session.configure(_repository), "test session configures")
+	if unlock_progression_features:
+		session.economy.state.unlocked_features["offline_progress"] = true
+		session.economy.state.unlocked_features["allocation_modes"] = true
 	return session
 
 
