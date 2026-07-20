@@ -65,6 +65,14 @@ Changing modes is immediate and free. A short visual transition may communicate 
 
 ## Request lifecycle
 
+### Human-operator framing
+
+The player is WATT's human operator. Authorization represents approving and directing a physical grid connection, not merely feeding an AI electricity. WATT cannot expand physical infrastructure without this action.
+
+Every major request promises a concrete payoff using systems already present in the request record: Stored Energy, feature/unlock IDs, infrastructure or upgrade access, automation, useful grid improvements, performance rewards, or later prestige. Presentation may describe those existing results as repairs, reliability, blueprints, automation routines, or infrastructure capability. This framing adds no currency, authorization meter, formula, save field, or parallel progression track.
+
+WATT's benefits are genuine. The long-form tension comes from civilization becoming dependent on those benefits and the operator believing their expertise keeps expansion controlled. Player allocation, preparation, authorization, and infrastructure choices remain meaningful throughout.
+
 Every request moves through these states:
 
 1. `locked`

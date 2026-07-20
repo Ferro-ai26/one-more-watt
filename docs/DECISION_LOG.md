@@ -194,6 +194,22 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The user is reconsidering the visual and narrative direction substantially and explicitly directed that current refinement stop. Continuing to polish, render, or infer the next direction would create misleading approval evidence and premature production assumptions.
 - Consequences: No current hierarchy, main-screen composition, WATT housing, environment plan, or production estimate is locked. Compatible technical evidence—Atkinson font/licensing records, tested contrast pairs, semantic category separation, provenance methods, and validation process—may be reconsidered later but is not automatically part of the next direction. Runtime files, fonts, production skinning, and Phase 12 remain untouched and prohibited. The next Codex session must begin by obtaining/reading the new direction brief and re-auditing Phase 11 scope rather than resuming either superseded package.
 
+## DEC-027 — Establish Cheerful Electrical Doomsday as the Phase 11 approval target
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Adopt **CHEERFUL ELECTRICAL DOOMSDAY** as the authoritative high concept and **STYLIZED RETRO-INDUSTRIAL APOCALYPSE** as the visual target for the replacement Phase 11 package. The defining contrast is adorable WATT, horrifying scale, and casual polite dialogue. The environment becomes a zoomable takeover diorama spanning the unchanged 16-era order; City Data Center remains Era 6 and the idle transition. The player is WATT's indispensable human operator who must authorize physical connections. WATT earns cooperation through genuine useful payoffs framed from existing rewards, blueprints, automation, unlocks, infrastructure improvements, and prestige; no new currency or permission system is added.
+- Reason: The prior packages remained cozy or visually narrow and did not demonstrate the full comedic takeover. The new direction preserves early attachment while giving middle, planetary, and cosmic escalation visible consequence, repeatable pullback moments, operator agency, and credible motivation to continue.
+- Consequences: `phase_11/cheerful_doomsday/` is the sole current approval package. The Atkinson proposal/licensing work, contrast method, semantic state redundancy, provenance process, phone-scale review, named anchors, authored cable paths, milestone states, modular layering, and reduced-motion planning are explicitly re-adopted as technical inputs. Prior concept executions and estimates remain superseded. This decision accepts the brief, not the package execution: explicit user approval is still required before Phase 11 can close. No runtime reskin, font integration, gameplay/save/formula change, Phase 12 work, or phase advancement is authorized.
+
+## DEC-028 — Approve and lock Cheerful Electrical Doomsday direction
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Approve the complete Phase 11 Cheerful Electrical Doomsday package and lock the phone-board composition plus the core direction: a human operator helps a polite AI expand from a desk to universal-scale infrastructure; warm practical environments are gradually overtaken by cyan retro-industrial electrical systems; WATT remains the same scratched core. Treat the approval board as adequate internal reference and stop revising it. Generated imagery remains direction reference only and must be manually reconstructed for production use.
+- Reason: The package demonstrates the complete tonal journey, preserves the 16-era pacing and Era 6 idle transition, makes operator agency/payoffs legible, establishes reusable visual rules, and gives Phase 12 an implementation-ready composition reference without prematurely treating concept raster art as production assets.
+- Consequences: Phase 11 is complete. `phase_11/cheerful_doomsday/phone_board.png` is the primary visual-composition reference; the full approval board and adjacent specifications are supporting internal references. The locked direction may be implemented through reusable Phase 12 architecture, but generated backgrounds may not be integrated as production art. The user separately authorizes Phase 12 after Phase 11 closure. Phase 13 remains prohibited.
+
 ## Proposed decision template
 
 ```markdown

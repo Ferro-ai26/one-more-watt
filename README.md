@@ -34,7 +34,7 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phases 00–10 are closed. Phase 10 added Android density-aware canvas scaling while preserving the verified minimum layout and repaired the larger-text path. Its revised APK and complete host regression passed; the user accepted deferral of the remaining Moto verification to Phase 14. Phase 11 remains open with a major visual and narrative pivot pending; all current concept packages are superseded exploration, no direction is selected, and no runtime skinning has begun. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phases 00–11 are closed. Phase 10 added Android density-aware canvas scaling while preserving the verified minimum layout and repaired the larger-text path. Its revised APK and complete host regression passed; the user accepted deferral of the remaining Moto verification to Phase 14. Phase 11 locked Cheerful Electrical Doomsday under `DEC-028`; the phone board is the primary composition reference and generated concepts remain non-production reference. No runtime skinning began in Phase 11. The user authorized Phase 12 after the Phase 11 closure commit/push. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh

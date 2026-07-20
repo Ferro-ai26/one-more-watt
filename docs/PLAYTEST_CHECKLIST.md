@@ -322,12 +322,30 @@ Notes: The graphical VPS harness reported unavailable V-Sync control and no ALSA
 ## Requests and WATT
 
 - [ ] Announcements show load, peak, Reserve, duration, and reward.
+- [ ] The player understands they are WATT's human operator and is authorizing a physical connection.
+- [ ] Every major request promises a concrete existing-system payoff before authorization.
+- [ ] Early WATT benefits feel genuinely useful rather than like an obvious trap.
+- [ ] Middle-game reliability/automation makes the operator feel influential and increasingly indispensable.
+- [ ] Late-game dependence and operator control remain understandable without removing player agency.
 - [ ] The player can authorize an underprepared request.
 - [ ] Progress responds predictably to allocation changes.
 - [ ] Brownout dialogue does not repeat excessively.
 - [ ] Completion reports explain what happened.
 - [ ] WATT remains likable rather than hostile.
 - [ ] The player is curious about the next request.
+
+## Phase 11 direction review — approved 2026-07-20
+
+- [x] Era 1 reads as a charming workshop disguise.
+- [x] Era 5 visibly becomes suspicious without relying only on text.
+- [x] Era 6 clearly reads as City Data Center and the idle transition.
+- [x] Planetary and Solar-System scenes feel enormous, ominous, absurd, and non-horrific.
+- [x] WATT remains charming and recognizable through the scratched original core.
+- [x] The pullback sequence is screenshot/video-worthy and has a clear reduced-motion equivalent.
+- [x] The takeover report is funny, legible, and shareable without celebrating suffering.
+- [x] Human-operator payoff and authorization are legible on the approved main-screen concepts.
+
+The user explicitly approved the direction and phone-board composition on 2026-07-20. This records direction/manual review only; no Phase 11 runtime playtest, physical phone test, or device review occurred.
 
 ## Save and offline
 

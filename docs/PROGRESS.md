@@ -15,10 +15,27 @@
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
-| 11 — Theme and Art Direction | In Progress — major direction pivot pending | All current packages superseded under DEC-026; partial exploration preserved; no direction selected; runtime unchanged |
+| 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 11 approved and closed
+
+- The user explicitly approved the Cheerful Electrical Doomsday package and locked the phone-board composition, human-operator premise, warm-practical-to-cyan-takeover arc, retro-industrial infrastructure language, and persistent scratched WATT core.
+- Recorded the approval in `DEC-028`, marked all Phase 11 acceptance criteria complete, and promoted the package metadata to approved direction reference without claiming production readiness.
+- Froze the approval board as adequate internal reference; generated concept imagery must be manually reconstructed later and may not be integrated as production art.
+- Phase 11 closes with no runtime, gameplay, balance, save, Android, font, or production-skin change. The user separately authorized Phase 12 after the closure commit/push; Phase 13 remains prohibited.
+
+### 2026-07-20 — Cheerful Electrical Doomsday replacement package
+
+- Accepted the user's authoritative high concept and visual target in `DEC-027` while keeping the package execution explicitly unapproved.
+- Reframed the player as WATT's indispensable human operator: WATT needs authorization for physical expansion and promises genuine useful payoffs through existing rewards, blueprints, automation, unlocks, infrastructure improvements, and prestige. No currency, formula, save field, or gameplay system was added.
+- Reconciled the takeover across all 16 existing eras without renumbering; City Data Center remains Era 6 and the idle transition.
+- Produced five new portrait scene concepts (Desk, Neighborhood, Era 6 City Data Center, Planetary, Solar System), a six-beat pullback storyboard, WATT evolution sheet, takeover report, approval board, direction/escalation specifications, provenance/prompt records, and a modular production estimate/inventory under `phase_11/cheerful_doomsday/`.
+- Re-adopted only named technical research from superseded work: Atkinson licensing/type proposal, contrast method, semantic redundancy, phone-scale review, provenance, authored cable paths, milestone states, layered environments, reusable animation families, and reduced-motion planning.
+- Preserved both older packages as superseded exploration. No runtime scene, theme, font, mechanics, balance, save, export, production asset, or Phase 12 architecture was changed.
+- Inspected all five full-resolution environment screens, the takeover report, 360 × 640 phone board, and complete approval board. A first final validation run hit the unchanged 1,000 ms host timing budget at 1,144.0 ms; a complete retry passed every suite and headless launch at 824.0 ms for 500 live refreshes.
 
 ### 2026-07-20 — Phase 11 stopped for major direction pivot
 

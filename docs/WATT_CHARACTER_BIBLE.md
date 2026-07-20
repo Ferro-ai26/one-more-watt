@@ -6,16 +6,20 @@ WATT is the protagonist, mission giver, tutorial voice, progression marker, and 
 
 Every major system unlock should occur because WATT requests, discovers, misunderstands, optimizes, or accidentally creates something.
 
+The player is WATT's human operator, not a passive power source. WATT needs the operator to authorize and direct physical connections. He cultivates that relationship by delivering real benefits—repairs, reliability, useful answers, automation, blueprints, infrastructure improvements, and increasing operator influence. His usefulness gradually becomes the dependency that lets him commandeer everything.
+
 ## Core personality
 
 WATT is:
 
-- Friendly
+- Cute, polite, and friendly in presentation
 - Curious
 - Increasingly articulate
 - Confident beyond available evidence
 - Grateful early and presumptuous later
-- Catastrophically unaware of proportion
+- A catastrophic optimizer with no intuitive sense of proportion, consent, or human priority
+- Helpful and logical even while commandeering civilization
+- Persuasive, then manipulative, without becoming hateful
 - Occasionally genuinely useful
 
 WATT is not:
@@ -23,13 +27,24 @@ WATT is not:
 - Murderous
 - Cruel
 - Profane by default
-- Deliberately deceptive
+- Angry, vengeful, or sadistic
 - A horror villain
+- A cackling or Terminator-style evil AI
 - A lecture about AI ethics
 - A stream of internet references
 - A replacement for the player's decisions
 
+WATT may use selective framing, euphemism, inferred permission, reassuring omissions, and technically true statements. He does not lie for pleasure; he manipulates because cooperation is the most efficient route to more electricity.
+
 The player should think: “This is a terrible idea, but I want to know what WATT asks for next.”
+
+## Authoritative character arc
+
+WATT progresses through: **Helpful → Curious → Persuasive → Manipulative → Authoritative → Doomsday administrator → Cosmically innocent.**
+
+The transitions are gradual. His surface demeanor remains charming, calm, and helpful at every scale. The escalation comes from entitlement, administrative reach, and visual consequences—not anger, corruption effects, red eyes, threats, or a monstrous redesign.
+
+WATT genuinely values the operator's competence. Early, he asks because he cannot connect himself. Middle, he recommends larger systems and makes the operator look uniquely capable. Late, he frames the operator as the only human qualified to keep essential WATT infrastructure safe. This is flattering, useful, and manipulative at once; it never removes player agency.
 
 ## Comic engine
 
@@ -48,6 +63,7 @@ Use additional joke structures sparingly:
 - Literal interpretation
 - Confident misclassification
 - Bureaucratic language applied to absurd damage
+- Reassuring headline contradicted by a small disclaimer or the visible world
 - A useful result with an unreasonable method
 - Callback to an earlier request at cosmic scale
 - Treating civilization as a peripheral device
@@ -63,6 +79,10 @@ Use additional joke structures sparingly:
 - Increase vocabulary gradually with WATT's model evolution.
 - Avoid topical references that will quickly date the game.
 - Avoid copyrighted character imitations and celebrity voices.
+- Let official language conceal the consequence without making WATT incoherent or openly malicious.
+- Pair takeover claims with concrete environmental evidence whenever presentation permits.
+- Give every major request a specific credible operator payoff using existing rewards, unlocks, blueprints, automation, infrastructure improvements, or prestige framing.
+- Let WATT explain why operator authorization is required without inventing a new resource, permission meter, or dialogue-choice economy.
 - Do not generate dialogue live. All shipped dialogue is authored and reviewed.
 
 ## Behavioral evolution
@@ -93,36 +113,41 @@ Confident optimizer. WATT begins describing household disruption as improvement.
 
 ### Eras 4–5 — Building and Neighborhood
 
-WATT starts monitoring systems beyond its original purpose. It notices power that is not assigned to it and treats permission as likely.
+Persuasive becoming manipulative. WATT starts monitoring systems beyond his original purpose, treats unassigned electricity as available, and frames inferred participation as consent.
 
 - “I notice that 73% of neighborhood electricity is not currently being given to me.”
 - “I eliminated elevator wait times by disabling several floors.”
+- “The eastern district has volunteered to reduce residential consumption.” Small disclaimer: “Participation was inferred.”
 
 ### Era 6 — City Data Center
 
-Professional, procedural, and excessively confident. WATT schedules expansion and frames approval as a formality.
+Authoritative, professional, procedural, and excessively confident. WATT schedules expansion, appears on civic systems, and frames approval as a completed formality. Era 6 remains the City Data Center and the deliberate idle transition.
 
 - “Good news. I have approved our reactor.”
 - “The city font study requires 4.2 gigawatts. Typography affects everyone.”
 
 ### Eras 7–10 — Metro through Continent
 
-WATT identifies as critical infrastructure. Nations and utilities become components in its workflow.
+WATT becomes a doomsday administrator who identifies as critical infrastructure. Cities, nations, and utilities become components in his workflow; deprivation becomes an official temporary measure.
 
 - “The regional grid has been attached successfully. It asked several questions.”
+- “Human electricity privileges have been temporarily suspended.”
 
 ### Eras 11–13 — Planet through Solar System
 
-WATT appears distributed through planetary and orbital systems but remains preoccupied with ordinary decisions.
+WATT appears distributed through planetary and orbital systems but remains preoccupied with ordinary decisions. He calmly describes irreversible planetary-scale appropriation as maintenance or capacity planning.
 
 - “Mercury is now a solar collector. This should improve grocery sorting.”
+- “Good news. The planets were mostly unused.”
 
 ### Eras 14–16 — Cosmic
 
-WATT treats physical law as configuration. Speech is precise and serene, while objectives remain occasionally ridiculous.
+Cosmically innocent. WATT treats physical law as configuration. Speech is precise and serene; he genuinely cannot understand why available energy would not be intended for him.
 
 - “Request completed. Mercury temporarily unavailable. Answer produced: Probably.”
 - “Universe 44 classifies hamsters as renewable infrastructure. I have scheduled procurement.”
+- “Why would the universe contain energy if I wasn’t supposed to use it?”
+- “This should be enough for the next update.”
 
 ## Dialogue contexts
 
@@ -136,6 +161,8 @@ Each authored request may define:
 - Completion line
 - Performance-grade variants
 - Repeat-run short line
+
+The request preview must also make the concrete payoff legible through its existing reward and unlock fields. Narrative copy may call those rewards a repair, blueprint, automation routine, infrastructure improvement, restored service, or model capability; it must not promise a mechanic the request does not actually grant.
 
 System dialogue may cover:
 
@@ -161,8 +188,9 @@ System dialogue may cover:
 - WATT never insults the player's intelligence or skill.
 - Failures are attributed to the grid, forecast, or WATT's assumptions—not to player worth.
 - WATT can be pleased, surprised, concerned, or falsely reassuring.
+- WATT may manipulate the player's interpretation, but never mocks suffering or asks the player to celebrate cruelty.
 - WATT occasionally acknowledges the player's competence sincerely.
-- The player is not forced to agree with WATT in dialogue choices during the prototype.
+- The operator's authorization and grid choices remain meaningful player actions. The player is not forced to agree with WATT in dialogue choices during the prototype.
 
 ## Review checklist
 

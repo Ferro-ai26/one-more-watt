@@ -1,6 +1,6 @@
 # Phase 11 Visual-Direction Candidates
 
-Status: Presented for user approval; no direction selected.
+Status: Superseded exploration. The three-way comparison is retained for history; `DEC-027` establishes Cheerful Electrical Doomsday as the sole current approval target.
 
 All three candidates preserve the proven mobile hierarchy and the permanent category mapping: WATT cyan, Generation warm yellow, Transmission violet/blue, Reserve green/teal, warning amber, and critical warm red. The candidate palettes are exploration values, not approved implementation tokens.
 
@@ -231,4 +231,4 @@ High: approximately 30–42 art-days for the Eras 1–3 production skin after th
 
 ## Approval request
 
-Choose A, B, or C, and optionally name required revisions. Approval selects a production logic, not every literal detail in the concept. No elements from rejected candidates will be mixed into the selected direction unless the approval explicitly calls them out.
+Historical gate only: this A/B/C choice was superseded by `DEC-024` through `DEC-027` and is no longer actionable. Review the current package under `phase_11/cheerful_doomsday/` instead.

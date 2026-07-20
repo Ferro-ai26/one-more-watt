@@ -168,6 +168,8 @@ Phase 06 canonical JSON uses content version `0.6.0`. Balance records now requir
 
 Phase 07 canonical JSON uses content version `0.7.0` and multiple manifest entries for the request family, one per era. All 18 catalog requests are populated with stable IDs, deterministic profiles, reviewed English announcement/completion lines, optional localized `tutorial_text_key` values, and reward `feature_ids` drawn from the validated allocation, automatic-generation, offline, Reserve-forecast, detailed-forecast, and Reserve-threshold vocabulary.
 
+Phase 11 establishes a narrative interpretation without changing this schema: the player is WATT's human operator, authorization represents a physical connection, and each major request's concrete promised payoff must resolve to its existing `rewards`, `unlock_ids`, or `feature_ids`. Copy may frame those results as repairs, blueprints, reliability, automation, infrastructure improvements, or prestige capability, but must not promise an unimplemented benefit or introduce a new operator currency.
+
 ## Prototype request catalog
 
 The exact numbers are tuned in data, but the initial authored set is:

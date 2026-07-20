@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="720" height="1280" viewBox="0 0 720 1280" data-status="approved-direction-reference">
+ <defs><linearGradient id="shade" x2="0" y2="1"><stop stop-color="#111718" stop-opacity=".88"/><stop offset=".16" stop-color="#111718" stop-opacity="0"/><stop offset=".62" stop-color="#111718" stop-opacity=".14"/><stop offset="1" stop-color="#111718" stop-opacity=".98"/></linearGradient></defs>
+ <image xlink:href="backgrounds/era13_solar_generated.png" width="720" height="1280" preserveAspectRatio="xMidYMid slice"/><rect width="720" height="1280" fill="url(#shade)"/>
+ <g font-family="Atkinson Hyperlegible,DejaVu Sans,sans-serif">
+  <rect x="20" y="20" width="680" height="88" rx="4" fill="#252B2C" stroke="#D9822B" stroke-width="2"/><text x="44" y="55" fill="#F2E8D2" font-size="17" font-weight="700" letter-spacing="1">ERA 13 · SOLAR-SYSTEM THOUGHT ENGINE</text><text x="44" y="88" fill="#58E5EC" font-size="24" font-weight="700">8.1 EW</text><text x="175" y="87" fill="#F2E8D2" font-size="16">DYSON COVERAGE 31%</text>
+  <rect x="30" y="840" width="660" height="262" rx="6" fill="#F2E8D2" stroke="#252B2C" stroke-width="4"/><rect x="48" y="858" width="132" height="30" fill="#24B8C7"/><text x="62" y="880" fill="#202829" font-size="15" font-weight="700">WATT REQUEST</text>
+  <text x="52" y="928" fill="#202829" font-size="22" font-weight="700">PLANETARY ASSET REVIEW</text><text x="52" y="966" fill="#202829" font-size="18">“Good news. The planets were mostly</text><text x="52" y="992" fill="#202829" font-size="18">unused.”</text>
+  <rect x="52" y="1015" width="616" height="17" rx="8" fill="#B8B0A0"/><rect x="52" y="1015" width="224" height="17" rx="8" fill="#24B8C7"/>
+  <text x="52" y="1064" fill="#A65315" font-size="15" font-weight="700">PAYOFF: SOLAR-SCALE PRESTIGE CAPABILITY</text><text x="52" y="1087" fill="#686F6C" font-size="12">Orbital inconvenience: difficult to express locally.</text>
+  <rect x="30" y="1120" width="660" height="66" rx="6" fill="#252B2C" stroke="#E5A91B" stroke-width="2"/><text x="50" y="1148" fill="#F2E8D2" font-size="14">HUMAN OPERATOR</text><text x="50" y="1174" fill="#F2E8D2" font-size="19" font-weight="700">AUTHORIZE COLLECTOR SWARM</text>
+  <text x="54" y="1238" fill="#F2E8D2" font-size="17">GRID</text><text x="226" y="1238" fill="#F2E8D2" font-size="17">BUILD</text><text x="393" y="1238" fill="#F2E8D2" font-size="17">UPGRADES</text><text x="582" y="1238" fill="#F2E8D2" font-size="17">REPORTS</text>
+ </g>
+</svg>

@@ -1,6 +1,6 @@
 # Phase 11 Concept Asset Record
 
-Status: All recorded packages are superseded exploration under `DEC-026`. No direction or production asset is approved or integrated.
+Status: Earlier packages are superseded exploration under `DEC-026`. The Cheerful Electrical Doomsday package is approved and locked direction reference under `DEC-028`; it is not production-ready or integrated.
 
 ## Provenance
 
@@ -11,6 +11,8 @@ The current-prototype capture was rendered from the repository's own `4c77a30` r
 The revised Soft Circuit package was authored as repository-native SVG markup on 2026-07-20 after the user's Candidate A selection, then rejected and superseded. No image-generation model, external image, texture, traced artwork, or third-party visual asset was used. Its review PNGs were mechanically rendered with FFmpeg while the exact proposed Atkinson Hyperlegible Next and Mono variable fonts were available in an uncommitted temporary font directory.
 
 The later Living Animated Workshop Diorama revision stopped mid-production. Six SVG sources exist under `living_workshop/`; they were not rendered, assembled into a board, or manually inspected. Their directory-level provenance record labels them superseded and incomplete.
+
+The current `cheerful_doomsday/` package combines five built-in-tool generated raster environment studies with repository-native SVG UI overlays and original vector storyboard/model/report artifacts. No external reference image was supplied. Exact prompts, contextual review, discarded-iteration note, rights limitation, render method, and cleanup boundary are recorded in `cheerful_doomsday/CONCEPT_PROVENANCE.md` and `cheerful_doomsday/IMAGE_GENERATION_PROMPTS.md`. Its machine-readable inventory is `cheerful_doomsday/asset_production_inventory.csv`.
 
 ## Inventory
 
@@ -60,4 +62,4 @@ The revised-package render command uses the same one-frame FFmpeg form for every
 
 ## Approval implications
 
-No recorded package remains an approval candidate. All SVGs and PNGs are exploration references only until a future Phase 11 direction explicitly re-adopts an element. They must not be silently mixed into production or treated as inputs to Phase 12.
+Only `cheerful_doomsday/` is approved direction evidence. `concepts/`, `selected_direction/`, and `living_workshop/` remain superseded exploration and must not be silently mixed into production. `DEC-028` selects its rules and phone-board composition; it does not make the generated backgrounds production assets. The user separately authorized Phase 12 after Phase 11 closure.

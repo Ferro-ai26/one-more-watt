@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 11 — Theme and Art Direction
-Status: In Progress — Major Direction Pivot Pending
+Status: Complete — Approved and Locked
 
 Authoritative phase contract:
 
@@ -9,10 +9,10 @@ Authoritative phase contract:
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and the permanent specifications named by Phase 11. Under `DEC-026`, all current Phase 11 direction packages are superseded exploration and a major visual/narrative pivot is pending. Do not resume or refine them. Obtain the new direction brief before creating further concepts, then remain inside Phase 11 until a new package is explicitly approved.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and the permanent specifications named by Phase 11. `DEC-028` approves and locks Cheerful Electrical Doomsday, including the phone-board composition and persistent scratched WATT core. Generated concepts are direction reference only. Phase 11 is closed; do not revise its approval board or integrate generated imagery as production art.
 
 ## Inherited state
 
 Phase 10 is closed. Its density-aware scaling and larger-text fixes passed the complete host regression and APK inspection. The user explicitly accepted the remaining physical-device limitation: `ISSUE-004` device verification is deferred to Phase 14, and `ISSUE-005` was withdrawn without inferring unspecified bugs. Completed Phase 00–10 evidence remains authoritative.
 
-Phase 11 has audited the functional gray-box and compared three Main Grid concepts without changing runtime scenes, themes, mechanics, or saves. The Soft Circuit final proposal and incomplete Living Animated Workshop Diorama revision are both superseded and retained only as exploration evidence. No direction is currently selected or locked.
+Phase 11 audited the functional gray-box, compared and superseded earlier concepts, and produced the approved nine-part Cheerful Electrical Doomsday package without changing runtime scenes, themes, mechanics, or saves. The phone board is the primary composition reference. The user has separately authorized Phase 12 after this closure is committed and pushed; Phase 13 remains prohibited.

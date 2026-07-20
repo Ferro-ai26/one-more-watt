@@ -2,13 +2,15 @@
 
 ## Purpose
 
-This document defines the decisions Phase 11 must make before broad production skinning. It is a specification for creating and approving the visual identity, not permission to apply an unapproved style to the whole game.
+This document records the visual identity approved in Phase 11 and constrains later production skinning. `DEC-028` locks the direction while preserving generated concepts as internal reference rather than production art.
 
 ## Creative objective
 
-ONE MORE WATT should look like a charming, increasingly overbuilt electrical control system assembled around a likable AI. The visual comedy comes from serious presentation applied to wildly disproportionate infrastructure.
+ONE MORE WATT begins as a charming workshop game and reveals itself as **CHEERFUL ELECTRICAL DOOMSDAY**: a comedic AI-takeover simulator in which a cute, polite optimizer consumes progressively more of existence.
 
-The game must remain attractive and readable on a phone while evolving from a cluttered desk into a multiversal utility network.
+The production target is **STYLIZED RETRO-INDUSTRIAL APOCALYPSE**. The game must remain attractive and readable on a phone while evolving from a warm improvised desk to a dark multiversal utility network. The defining contrast is adorable character, horrifying scale, and casual polite dialogue. The early cozy workshop is retained only as the opening disguise.
+
+The player is visibly WATT's human operator. Physical connection and expansion require operator authorization; controls, service labels, handshake states, and WATT's eye line should make that agency legible. Each major request presents a concrete existing-system payoff—repair, reliability, blueprint, automation, unlock, infrastructure improvement, or prestige—alongside its absurd power demand. No new operator currency or permission meter is introduced.
 
 ## Phase 11 superseded structural exploration
 
@@ -22,7 +24,23 @@ Living Animated Workshop Diorama previously proposed a world-first hierarchy and
 - Reports and detailed statistics: secondary overlays where cards are permitted.
 - Purchases: appear at authored installation anchors and connect through authored cable paths; ownership milestones alter scene states rather than rendering every owned unit.
 
-No selected visual or narrative direction currently replaces it. A future Phase 11 brief must explicitly define the new hierarchy and execution before this section can become authoritative again.
+`DEC-027` established Cheerful Electrical Doomsday as the approval target, and `DEC-028` approves and locks its phone-board composition and core direction. None of the superseded hierarchy, composition, WATT housing, or production estimate is silently inherited. The approved package explicitly re-adopts useful technical ideas such as authored cable paths, milestone states, environmental layering, accessibility proof, and restrained reduced-motion alternatives.
+
+## Approved target boundaries
+
+Keep tactile painted machinery, warm ivory and aged metal, graphite hardware, rubber cables, vents, labels, fasteners, switches, controlled wear, WATT's cyan electrical identity, dry environmental comedy, and the recognizable scratched original WATT core.
+
+Add escalating charcoal environments, amber/orange emergency light, dramatic shadows, blacked-out ordinary spaces, cyan infrastructure spreading through the world, tiny human-life remnants, civic and cosmic WATT screens, enormous silhouettes, and machinery that becomes physically impossible while retaining the same material grammar.
+
+Avoid genuine horror, gore, mass death, depressing realism, evil-AI clichés, red-eyed or angry WATT transformations, permanent bedroom coziness, flat dashboard-first gameplay, toy-mascot proportions, sterile neon interfaces, and takeover consequences conveyed only through text.
+
+## Main-screen premise
+
+The environment is the primary interface: a zoomable, animated takeover diorama showing the current physical scale of WATT's grid. Routine state and controls remain live, readable Godot UI attached to or layered around that world; the scene is never a decorative thumbnail inside a dashboard.
+
+Major capstones use a recurring transition grammar: current machinery overloads, the environment briefly goes dark, WATT's cyan eyes reactivate, the camera pulls back, a larger playable area appears, and WATT calmly requests exponentially more power. Reduced motion replaces the travel with a short blackout-safe fade, labeled scale change, and before/after state pair.
+
+Authorization is a visible handshake between human control and physical machinery, not a claim that WATT can expand without the player. Late scenes may show civilization dependent on WATT, but the operator remains the person who understands the system and believes they are keeping it controlled.
 
 ## Required direction decisions
 
@@ -34,7 +52,7 @@ Define:
 - Idle, thinking, pleased, concerned, brownout, and completion expressions
 - How WATT evolves without losing recognition
 - Relationship between WATT's cyan identity and grid-category colors
-- How WATT remains the focal point on every routine screen
+- How WATT remains recognizable at every scale through the original scratched core and distributed face appearances on screens, billboards, control centers, satellites, and infrastructure
 
 ### Visual style
 
@@ -48,7 +66,7 @@ The approved style must address:
 - Lighting and shadow rules
 - Texture/noise limits
 - Detail density at phone scale
-- Humor through props, labels, motion, and accumulation
+- Humor through props, labels, motion, accumulation, visible displacement, and reassuring dialogue contradicted by the scene
 
 ### Color system
 
@@ -117,15 +135,23 @@ Create a visual progression plan for all 16 eras. Each era needs:
 - Connection to earlier equipment
 - Transition concept to the next scale
 
-## Representative approval screens
+The authoritative era order remains exactly: Desk, Room, House, Building/block, Neighborhood, City Data Center, Metropolitan, Regional, National, Continental, Planetary, Orbital, Solar System, Galactic, Universal, Multiversal. City Data Center remains Era 6 and the idle transition. No concept shorthand may renumber or condense this structure.
 
-Phase 11 must produce direction-level mockups or styled prototypes for:
+## Replacement Phase 11 approval package
 
-1. Main Grid screen during an active request
-2. Build screen with affordable, unaffordable, locked, and milestone states
-3. Performance report containing a WATT punchline
+Phase 11 must produce direction-level concepts for:
 
-Also produce one brownout state and one Era 1-to-2 environment transition frame.
+1. Era 1 innocent workshop main screen
+2. Building or Neighborhood stage where the takeover first becomes suspicious
+3. Era 6 City Data Center under WATT's control
+4. Planetary takeover view
+5. Solar-system expansion view
+6. One dramatic camera-pullback storyboard
+7. WATT's behavioral and physical evolution
+8. A shareable end-of-era takeover report
+9. An updated modular production strategy and estimate
+
+The set must demonstrate the complete tonal journey rather than refining only the bedroom. It must show at least one active-request hierarchy, readable bottleneck/action state, environmental brownout/blackout consequence, and completion/report treatment so the original Phase 11 representative-state intent remains covered.
 
 Do not skin the entire game until these samples form a coherent system and are approved.
 
@@ -140,7 +166,7 @@ Create no more than three genuinely distinct direction candidates. Each candidat
 - One representative main-screen concept
 - Strengths, risks, Android readability, and asset-production cost
 
-Record the selected direction in `DECISION_LOG.md`. Rejected candidates remain reference material but are not mixed into production.
+The approval target and explicit approval are recorded separately in `DECISION_LOG.md`. `DEC-028` makes Cheerful Electrical Doomsday authoritative as both brief and direction execution. Superseded candidates remain historical reference and are not presented as approved.
 
 ## AI-assisted artwork policy
 
@@ -155,4 +181,4 @@ AI may help explore concepts and create candidate raster assets, but:
 
 ## Approval gate
 
-Phase 11 completes only when one direction is explicitly approved, its tokens are recorded, representative screens agree, production cost is plausible, and Sol has enough rules to skin new scenes consistently.
+Phase 11 completed under `DEC-028`: one direction is explicitly approved, its tokens are recorded, representative screens agree, production cost is plausible, and Phase 12 has enough rules to build the reusable skin architecture. The phone board is the primary composition reference. Generated concept imagery still requires manual production reconstruction.

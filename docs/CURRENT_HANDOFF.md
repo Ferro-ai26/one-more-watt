@@ -4,58 +4,55 @@ Updated: 2026-07-20
 
 Active phase: Phase 11 — Theme and Art Direction
 
-Status: In Progress — Major Direction Pivot Pending
+Status: Complete — Approved and Locked
 
 ## Exact result achieved
 
-The user stopped the current Phase 11 revision because the visual and narrative direction is being reconsidered substantially. `DEC-026` supersedes both prior direction decisions. Phase 11 remains open with no selected or locked visual direction.
+The user explicitly approved the Cheerful Electrical Doomsday Phase 11 package. `DEC-028` locks:
 
-The worktree was inspected and all Phase 11 exploration was preserved without deleting or rewriting prior evidence:
+- the phone-board composition as the primary visual-composition reference;
+- the human operator helping a polite WATT expand from a desk to universal-scale infrastructure;
+- warm practical environments gradually overtaken by cyan retro-industrial electrical systems;
+- the same scratched WATT core remaining recognizable at every scale;
+- the unchanged 16-era order, including City Data Center as Era 6 and the idle transition.
 
-- `docs/phase_11/concepts/` contains the initial three-candidate comparison and current-prototype audit evidence.
-- `docs/phase_11/selected_direction/` contains the complete rendered Soft Circuit Workshop final proposal. It is explicitly rejected and superseded; only its technical research may be reconsidered later.
-- `docs/phase_11/living_workshop/` contains the interrupted Living Animated Workshop Diorama revision. It has six partial SVG sources plus direction/environment/asset-plan documents. The SVGs are marked `data-status="superseded-exploration"` and the directory documents label the work superseded and incomplete.
-- The Living Workshop revision stopped before SVG rendering, approval-board assembly, or visual inspection. No PNGs or approval evidence are claimed for it.
+The full approval board is adequate supporting internal reference and must not receive further revision. Generated concept imagery is approved only as direction reference; production art must be manually reconstructed later. Earlier Soft Circuit and Living Workshop packages remain superseded exploration.
 
-Compatible technical evidence remains available but is not automatically approved for the next direction: the Atkinson Hyperlegible Next/Mono proposal and licensing records, measured contrast ratios, semantic category separation, asset provenance records, production-estimation work, and the phone-scale validation process.
-
-No runtime, font, gameplay, content, balance, save, export, production-skin, or Phase 12 file was changed. The last runtime state remains the closed Phase 10 commit `4c77a30`.
+Every Phase 11 acceptance criterion is complete. No runtime scene, theme, font, production asset, gameplay formula, balance, save, Android foundation, or export was changed. The user separately authorized Phase 12 after this closure is committed and pushed. Phase 13 is not authorized.
 
 ## Files changed
 
-- Added the Phase 11 current-visual audit, three-candidate comparison, provenance record, editable candidate SVGs, rendered candidate PNGs, comparison board, and prototype baseline capture under `docs/phase_11/`.
-- Added and then labeled the complete Soft Circuit proposal under `docs/phase_11/selected_direction/` as rejected/superseded exploration.
-- Added and then labeled the incomplete Living Workshop documents, inventory, provenance, and six unrendered SVG sources under `docs/phase_11/living_workshop/` as superseded exploration.
-- Updated `docs/ACTIVE_PHASE.md`, `docs/THEME_AND_ART_DIRECTION_SPEC.md`, `docs/ART_DIRECTION_WORKBOOK.md`, and `docs/DECISION_LOG.md` so no current direction is presented as selected.
-- Updated `README.md`, `docs/DOCUMENT_INDEX.md`, `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, `docs/PLAYTEST_CHECKLIST.md`, and this handoff for the pivot checkpoint.
-- No files outside documentation/concept scope were modified.
+- Approved/locked the permanent narrative, art, UI, asset, and workbook specifications.
+- Added and approved the complete nine-part `docs/phase_11/cheerful_doomsday/` package as direction reference.
+- Recorded exact generation prompts, provenance, licensing limits, cleanup requirements, asset inventory, modular production plan, 16-era escalation, phone board, approval board, five environment concepts, pullback storyboard, WATT evolution, and takeover report.
+- Added `DEC-028`, completed the Phase 11 contract checklist, marked all package SVG/CSV records as approved direction reference, and updated every required living document.
+- Preserved all superseded concept work without relabeling it as approved.
 
 ## Commands/tests run
 
-- Inspected `git status`, branch, remotes, recent history, the complete Phase 11 file inventory, and stale approval/status language before checkpoint edits.
-- `git diff --check`: passed before the final validation run.
-- First pre-edit `./tools/validate.sh` baseline attempt reached the performance suite but failed its 1,000 ms live-refresh host budget at 1,134.2 ms. No runtime change preceded that result.
-- Full `./tools/validate.sh` rerun after checkpoint labeling: passed, including headless launch; 55 foundation, 24 Android config, 30 content, 12 invalid-content fixtures, 178 simulation, 187 request, 93 economy, 48 UI-system, 296 main-UI integration, 81 persistence/offline, 14 offline-UI, 908 balance/reachability, 111 UI/performance, five portrait layouts, 18 grid-debug, 59 request-debug, and 42 economy-debug checks. The retry measured 985.2 ms for 500 live refreshes.
+- Inspected the clean starting point at `51af7a4` before the Phase 11 replacement work and reviewed the complete Phase 11 contract/specifications.
+- Rendered and dimension-checked all review artifacts with FFmpeg/FFprobe.
+- Visually inspected the five full-resolution environment screens, takeover report, 360 × 640 phone board, storyboard, WATT evolution, and approval composite.
+- `git diff --check`: passed.
+- Verified all eight current SVG roots use `data-status="approved-direction-reference"`.
+- Phase 11 closure `./tools/validate.sh`: passed, including headless launch; 55 foundation, 24 Android configuration, 30 content, 12 invalid-content fixtures, 178 simulation, 187 request, 93 economy, 48 UI-system, 296 main-UI integration, 81 persistence/offline, 14 offline-UI, 908 balance/reachability, 111 UI/performance, five portrait layouts, 18 grid-debug, 59 request-debug, and 42 economy-debug checks. Live-refresh measurement: 931.9 ms.
 
 ## Manual verification
 
-- Verified the Phase 11 filesystem inventory and the status labels in both superseded package directories.
-- Verified all six Living Workshop SVG roots carry `data-status="superseded-exploration"`.
-- No Living Workshop render, approval board, visual inspection, device test, runtime playtest, export, or font integration was performed after the stop instruction.
+- User explicitly approved the package and locked the phone-board/core direction on 2026-07-20.
+- Direction/manual review checklist is complete.
+- No runtime playtest, physical-device test, APK export, font integration, or generated-art integration occurred in Phase 11.
 
 ## Remaining acceptance criteria
 
-- Receive the substantially revised visual and narrative direction brief.
-- Re-evaluate which technical evidence, if any, remains compatible; do not silently inherit either superseded package.
-- Produce a new coherent Phase 11 approval package satisfying the Phase 11 contract.
-- Obtain explicit user approval before locking the new direction or closing Phase 11.
+None for Phase 11.
 
 ## Known blockers
 
-The new visual and narrative direction is intentionally undefined. Continuing concept work without that brief would materially alter the product and is prohibited.
+None for Phase 11 closure.
 
-`ISSUE-004` physical Android verification remains deferred to Phase 14. The isolated host performance-budget miss described above passed on a complete rerun and did not involve a runtime change.
+Generated environment concepts still have internal-reference-only production/licensing status and require manual reconstruction. `ISSUE-004` physical Android verification remains deferred to Phase 14.
 
 ## Recommended next action
 
-Start a new Codex session in Phase 11, read `DEC-026` and this handoff, obtain the new visual/narrative brief, and establish a fresh approval target. Do not resume Soft Circuit Workshop or Living Animated Workshop Diorama, modify the runtime, integrate fonts, begin production skinning, or begin Phase 12.
+After the Phase 11 closure commit is pushed, advance `ACTIVE_PHASE.md` to Phase 12 — Skin Architecture and Design System. Read the complete Phase 12 contract and this handoff before editing. Use `docs/phase_11/cheerful_doomsday/phone_board.png` as the primary composition reference, preserve the locked direction, integrate no generated background as production art, work only within Phase 12, and do not begin Phase 13.

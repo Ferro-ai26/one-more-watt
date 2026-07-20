@@ -2,18 +2,22 @@
 
 ## Visual premise
 
-The world begins as a charming improvised desk setup and expands into an impossibly large but readable grid. The visual joke is accumulation: each sensible-looking upgrade becomes part of a machine far beyond its original purpose.
+The world begins as a charming improvised desk setup and gradually reveals a comedic AI takeover. Each sensible-looking upgrade becomes part of a machine that displaces ordinary life, annexes infrastructure, and eventually consumes reality. WATT remains adorable and reassuring while the visible scale becomes horrifying and absurd.
 
 ## Style
 
-- Clean stylized 2D illustration with tactile machinery
-- Warm domestic environments in early eras
+- Stylized layered 2D/2.5D retro-industrial apocalypse with tactile painted machinery
+- Warm domestic environments in early eras as an intentional opening disguise
 - Crisp silhouettes and readable objects at phone size
 - Slightly exaggerated proportions
-- Controlled detail; avoid visual noise behind UI
-- Humor through object arrangement, labels, and animation rather than meme imagery
+- Warm ivory, aged metal, graphite hardware, rubber cable, vents, labels, fasteners, switches, and controlled wear
+- Darker charcoal environments, dramatic shadows, amber/orange emergency light, and expanding cyan infrastructure as progression advances
+- Controlled detail; avoid visual noise behind live UI
+- Humor through object arrangement, labels, animation, official notices, tiny human remnants, and contradiction rather than meme imagery
 
-The game should look polished and inviting, not grimy, dystopian, or technically sterile.
+The game should look polished and inviting at first, then ominous, enormous, industrial, and absurd. Avoid gore, mass-death imagery, depressing realism, angry/monstrous AI tropes, toy-mascot styling, or sterile neon science fiction.
+
+The human-operator role appears through physical authorization controls, service handshakes, connection labels, WATT's attention toward the active operator control, and payoff-first request presentation. A separate player avatar is not required. Each major request must visually associate its existing useful reward or unlock with the connection being approved.
 
 ## Palette
 
@@ -23,13 +27,14 @@ The game should look polished and inviting, not grimy, dystopian, or technically
 - Reserve: green/teal
 - Warning: amber
 - Brownout/critical: warm red with text/icon reinforcement
-- Backgrounds: warm neutral early, cooler and more expansive as scale increases
+- Emergency/environmental warning light: amber through orange
+- Backgrounds: warm neutral early, progressively charcoal and blacked out as scale increases
 
 Colors remain distinguishable under common color-vision deficiencies.
 
 ## WATT appearance
 
-WATT begins as a small face or luminous core on an old monitor. The character remains recognizable through all upgrades.
+WATT begins as a small scratched core/terminal on an old desk. That original core remains visible or accessible through all upgrades even when WATT is distributed across a city, planet, or universe.
 
 Core identifiers:
 
@@ -39,15 +44,18 @@ Core identifiers:
 - Consistent cyan accent
 - A restrained idle pulse tied to system state
 
-Evolution adds surrounding equipment, projection area, and environmental presence rather than replacing the character with an unrelated design.
+Evolution adds surrounding equipment, projection area, administrative framing, and environmental presence rather than replacing the character with an unrelated design. WATT's face may spread to screens, billboards, control centers, satellites, and planetary infrastructure. He never gains red evil eyes, teeth, weapons-as-personality, or an angry monster silhouette.
 
 ## Environment progression
 
 - Era 1: desk, wall outlet, old computer, visible improvised cables
 - Era 2: bedroom, generator near a questionable window solution, rooftop indication, battery stack
 - Era 3: server closet expands through the house, cooling ducts, transformer outside
-- Era 4–6: building/neighborhood/city map becomes a layered operations view
-- Later eras: maintain recognizable grid lines and WATT motif as scale becomes planetary and cosmic
+- Eras 4–5: building and neighborhood dioramas show cyan service paths spreading while unprioritized homes and ordinary systems dim
+- Era 6: the City Data Center consumes a district, WATT occupies official civic screens, and cooling/power infrastructure establishes the idle transition
+- Eras 7–10: metro, regional, national, and continental grids become increasingly authoritative infrastructure; factories, highways, districts, and public systems are visibly repurposed
+- Eras 11–13: planetary, orbital, and solar-system machinery turns continents into circuits, oceans into cooling, the Moon into storage, planets into collectors, and the Sun into a Dyson-scale worksite
+- Eras 14–16: stars become nodes, galaxies connect through impossible cable logic, the universe becomes WATT's circuit diagram, and realities become a multiversal grid
 
 Prototype environmental purchases should visibly appear, upgrade, multiply, or activate. Exact one-to-one rendering of hundreds of objects is not required.
 
@@ -61,7 +69,7 @@ Phase 07 uses polished text/glyph placeholders for the three required transforma
 - Reserve charge: contained rising energy/fill
 - Reserve discharge: outward pulse toward WATT
 - Brownout: brief dim/flicker and recover, never rapid flashing
-- Era transition: environment pulls back or expands to reveal the new scale
+- Era transition: overload → blackout-safe dim → cyan-eye reboot → dramatic pullback → larger playable area → calm new request
 
 Reduced-motion mode replaces large movement with fades, state swaps, and restrained pulses.
 
@@ -75,7 +83,7 @@ The soundscape evolves from small domestic electrical sounds to layered infrastr
 
 - Early: soft computer fans, relays, tiny hums, switches
 - Middle: transformers, turbine undertones, server cooling
-- Late: stylized cosmic resonance rather than realistic deafening machinery
+- Late: stylized cosmic resonance, immense low industrial rhythm, and the persistent small WATT motif rather than realistic deafening machinery
 
 WATT uses nonverbal synthesized chirps or text rhythms in the prototype, not full voice acting. Dialogue must remain readable with audio muted.
 
@@ -85,7 +93,7 @@ WATT uses nonverbal synthesized chirps or text rhythms in the prototype, not ful
 - Affordable unlock: gentle rising cue
 - Request completion: short WATT motif
 - Brownout: low warning dip, not harsh alarm spam
-- Era transition: expanded version of WATT motif
+- Era transition: power-collapse silence followed by the small WATT motif and an expanded industrial/cosmic response
 - Error: quiet differentiated cue
 
 Repeated high-frequency actions require variants and cooldowns to prevent fatigue.

@@ -21,9 +21,10 @@ No complete reskin is expected. The phase produces approved representative conce
 - Produce representative Main Grid concepts for comparison
 - Select one direction with explicit user approval
 - Complete exact semantic design tokens
-- Produce approved concepts for Main Grid, Build states, Performance Report, Brownout, and Era 1-to-2 transition
-- Create WATT model sheet and Eras 1–3 evolution plan
+- Produce the Cheerful Electrical Doomsday replacement set defined below; it supersedes the earlier five-state final-package list
+- Create WATT behavioral/physical evolution and persistent-core continuity plan
 - Record asset sourcing and licensing approach
+- For the Cheerful Electrical Doomsday replacement, show the complete Desk-to-Solar-System tonal journey, a scale-pullback storyboard, WATT evolution, a takeover report, and an updated modular production estimate
 
 ## Excluded
 
@@ -44,21 +45,25 @@ Sol may generate coded mockups, Godot prototype scenes, controlled asset concept
 - Approved direction decision
 - Exact color/type/geometry/motion tokens
 - WATT model sheet
-- Five representative screen/state artifacts
+- Replacement package scenes: Era 1 workshop, Building/Neighborhood suspicion, Era 6 City Data Center, Planetary takeover, and Solar-System expansion
+- Camera-pullback storyboard, WATT behavioral/physical evolution, and shareable takeover report
 - Initial asset inventory and production estimate
 - Risks and mitigation list
 
 ## Acceptance criteria
 
-- [ ] No more than three coherent candidates were compared
-- [ ] One candidate is explicitly approved by the user
-- [ ] Representative screens agree visually
-- [ ] WATT remains recognizable and central
-- [ ] Phone-scale readability is demonstrated
-- [ ] Tokens are exact enough for implementation
-- [ ] Asset production and rights approach is credible
-- [ ] Rejected elements are recorded
-- [ ] No broad unapproved skinning occurred
+- [x] No more than three coherent candidates were compared
+- [x] One candidate is explicitly approved by the user
+- [x] Representative screens agree visually
+- [x] The replacement package proves the full warm-disguise-to-cosmic-takeover tonal journey
+- [x] The 16-era order is preserved, including City Data Center as Era 6 and the idle transition
+- [x] The player reads as WATT's authorizing human operator and every major request exposes a concrete existing-system payoff without adding a currency
+- [x] WATT remains recognizable and central
+- [x] Phone-scale readability is demonstrated
+- [x] Tokens are exact enough for implementation
+- [x] Asset production and rights approach is credible
+- [x] Rejected elements are recorded
+- [x] No broad unapproved skinning occurred
 
 ## Stop condition
 

@@ -1,116 +1,108 @@
 # Art Direction Workbook
 
-Use this workbook during Phase 11. Do not mark unanswered choices as approved defaults.
+Phase 11 approval record. The direction below is approved and locked under `DEC-028`; generated concept imagery remains internal direction reference only.
 
 ## Direction statement
 
-- Working visual premise: Pending a major visual and narrative pivot under `DEC-026`. No current exploration package is selected.
-- Intended emotional tone: Pending the new direction brief. Prior tone studies remain historical evidence only.
-- Three adjectives: Pending.
-- Three anti-adjectives: Pending.
-- Player age/readability assumptions: Broad casual/incremental audience; no prior electrical knowledge; critical text and state recognition must work at 320 logical pixels wide, larger text, common color-vision deficiencies, muted audio, and reduced motion.
-- Reference games/artworks and what is being referenced: No external artwork is copied or embedded. Candidate A refers generically to tactile repair benches and cut-paper machinery; B to illustrated field manuals and drafting diagrams; C to layered stage dioramas and practical light theatre. These are medium/process references, not imitation targets.
-- Elements that must remain original: WATT's face/silhouette and evolution, category icon family, environment compositions, interface geometry, written labels/jokes, animation motifs, and all shipped illustration.
+- Working visual premise: **CHEERFUL ELECTRICAL DOOMSDAY**.
+- Core pitch: “You help a cute AI get electricity until it takes over the universe.”
+- Production target: **STYLIZED RETRO-INDUSTRIAL APOCALYPSE**.
+- Intended emotional arc: innocent warmth → first suspicion → administrative unease → industrial domination → planetary absurdity → cosmically innocent doomsday.
+- Player-role arc: useful helper relationship → indispensable human operator → influential infrastructure stabilizer → self-appointed controller of a dependent system → cosmic curiosity/sunk cost/spectacle.
+- Three adjectives: adorable, ominous, enormous.
+- Three anti-adjectives: gory, toy-like, sterile.
+- Player/readability assumptions: broad casual/incremental audience; no electrical knowledge; critical text/state recognition at 320 logical pixels, larger text, common color-vision deficiencies, muted audio, and reduced motion.
+- Originality boundary: WATT's scratched core, face/evolution, environment compositions, category icons, interface geometry, jokes, animation motifs, and shipped illustration remain original. No outside artwork is copied or imitated.
 
-## Candidate comparison
+## Authority and supersession
 
-### Candidate A
+- `DEC-024` Soft Circuit Workshop: superseded exploration.
+- `DEC-025` Living Animated Workshop Diorama: superseded exploration, incomplete and unrendered.
+- `DEC-026`: correctly reopened Phase 11.
+- `DEC-027`: established Cheerful Electrical Doomsday as the approval target.
+- `DEC-028`: approves and locks the phone-board composition and core direction, closes Phase 11, and preserves generated imagery as non-production reference only.
+- Useful technical work explicitly re-adopted: Atkinson Hyperlegible proposal/licensing research, measured contrast method, semantic category/state redundancy, phone-scale review, provenance records, named installation anchors, authored cable paths, representative milestone states, reusable animation families, layered environments, and reduced-motion equivalents.
+- Obsolete concept work: prior cozy-only tone, dashboard compositions, rounded/toy WATT bodies, superseded screen layouts, old environment executions, and old production totals. These remain historical evidence only.
 
-- Name: Soft Circuit Workshop
-- Premise: A friendly repair bench gradually annexes the room, house, and universe through carefully assembled painted-metal machines, paper labels, plugs, and cables.
-- WATT treatment: Rounded old-monitor companion; two cyan eye lamps and a bolt-heart remain constant while the surrounding chassis evolves.
-- UI treatment: Warm cream equipment cards, thick keylines, shallow offset shadows, label tabs, chunky toggles, and filled silhouette icons.
-- Environment treatment: Layered 2.5D domestic cutaways become model-town, planetary, and cosmic machinery while retaining early props as tiny relics.
-- Strengths: Strong domestic attachment, tactile purchase feedback, and natural visual-accumulation comedy.
-- Risks: Can become juvenile/beige; prop illustration burden grows; cosmic scale needs disciplined material continuity.
-- Estimated production burden: Medium; 25–35 art-days for an Eras 1–3 skin after the reusable system exists, excluding integration/audio/QA.
+## Approved visual rules
 
-### Candidate B
+### Material and light
 
-- Name: Blueprint Bureau
-- Premise: WATT documents each unreasonable expansion as an immaculate living utility plan, with serious callouts and approval marks carrying the joke.
-- WATT treatment: Circular diagnostic lens with two cyan eye apertures and a bolt waveform; outer rings and ports accumulate without replacing the face.
-- UI treatment: Deep-blue drafting plates, clipped corners, line icons, scale bars, callouts, hatches, and labeled stamps.
-- Environment treatment: A continuous diagram language scales from desk elevation to room plan, network map, and orbital chart; early equipment persists in inset details.
-- Strengths: Highest system clarity, lowest unique raster burden, strongest vector reuse, and easy 16-era scaling.
-- Risks: Can drift into sterile SCADA/dashboard territory; WATT may feel like a logo; callout density must be tightly controlled.
-- Estimated production burden: Low–medium; 17–25 art-days for an Eras 1–3 skin after the reusable system exists, excluding integration/audio/QA.
+- Painted steel, aged ivory, graphite brackets, smoked glass, rubber cable, ceramic, aluminum fins, vents, screws, service labels, switches, and controlled edge wear.
+- Early scenes use warm domestic light plus bounded WATT cyan.
+- Advancing eras introduce charcoal voids, blacked-out ordinary spaces, amber/orange emergency light, huge silhouettes, and cyan infrastructure spreading through the scene.
+- No generalized grime, gore, ruins full of victims, neon fog, evil red eyes, or sterile holographic dashboards.
 
-### Candidate C
+### Semantic color proposal
 
-- Name: Midnight Appliance Theatre
-- Premise: Domestic appliances become a glowing stage cast while layered scenery pulls back from desk to impossible cosmic diorama.
-- WATT treatment: Dark circular core with two cyan light eyes, bolt-heart, and offset projector halo; successive eras add frames and projection rigs.
-- UI treatment: Large plum/ink stage-flat cards, a cream dialogue caption, bold category blocks, and luminous power paths isolated from text.
-- Environment treatment: Three-layer dioramas use camera pullbacks for scale changes; early objects return as illuminated props, silhouettes, and constellations.
-- Strengths: Strongest WATT centrality, premium character, low information competition, and best dramatic era transitions.
-- Risks: Highest art/motion burden; glow may hurt daylight access; perspective and asset consistency need strong templates.
-- Estimated production burden: High; 30–42 art-days for an Eras 1–3 skin after the reusable system exists, excluding integration/audio/QA.
+These approved direction values preserve tested contrast relationships while extending the environmental range. Runtime/device verification remains owned by later implementation and QA phases.
 
-Full comparison, palettes, typography, motion, readability, and cost rationale: `phase_11/CANDIDATE_COMPARISON.md`.
-
-## Approved direction
-
-- Selected candidate: None. A major visual and narrative pivot is pending.
-- Approval date: Pending.
-- Decision-log entry: `DEC-026` reopens selection; `DEC-024` and `DEC-025` are superseded.
-- Final-package approval: Not reached.
-- Superseded exploration: `phase_11/selected_direction/` contains the rejected Soft Circuit final proposal. `phase_11/living_workshop/` contains the incomplete, unrendered Living Animated Workshop Diorama revision.
-- Reusable technical evidence: Atkinson font/licensing records, tested contrast ratios, semantic category separation, provenance process, and phone-scale validation method. Reuse is optional and must be confirmed by the next direction.
-- Explicitly rejected/withdrawn packages: all current main-screen, WATT, environment, transition, and production-plan executions. Do not resume them without new user direction.
-
-## Design tokens
-
-### Colors
-
-The exact Soft Circuit colors and contrast calculations remain tested technical evidence in `phase_11/selected_direction/SOFT_CIRCUIT_DIRECTION_SPEC.md`, but no semantic palette is currently approved for the next direction.
+| Role | Value | Reinforcement |
+| --- | --- | --- |
+| Deep environment | `#111718` | silhouette boundary |
+| Graphite UI | `#252B2C` | ivory text |
+| Aged ivory plate | `#F2E8D2` | ink text |
+| Primary ink | `#202829` | — |
+| WATT / active grid | `#24B8C7` | face/path/pulse |
+| WATT bright reboot | `#58E5EC` | eyes first after blackout |
+| Generation | `#E5A91B` | plug/rotor + label |
+| Transmission | `#5D4BB3` | cable/terminal + label |
+| Reserve | `#23745F` | battery/fill + label |
+| Emergency amber | `#D9822B` | beacon/triangle + text |
+| Critical | `#A93640` | broken path/octagon + text |
+| Disabled | `#686F6C` | lock + reason |
 
 ### Typography
 
-- Display and UI/body font proposal retained for reconsideration: Atkinson Hyperlegible Next variable upright, weights 450–700.
-- Numeric/status font proposal retained for reconsideration: Atkinson Hyperlegible Mono variable upright, weights 550–650, tabular figures, stable unit alignment, and no decorative display numerals.
-- Logical type scale at the 360-wide baseline: display 28/32, H1 24/29, H2 20/25, dialogue 18/25, body 16/22, button 16/20, numeric hero 24/28, numeric standard 18/22, caption 13/17, optional micro numeric 12/15. Larger-text scaling is 115% and 130% with semantic reflow.
-- Fallbacks: Noto Sans and Noto Sans Mono with metrics reviewed during later integration.
-- License/source: exact Google Fonts variable files under SIL Open Font License 1.1, with source commits and SHA-256 hashes recorded in the selected-direction spec and asset record. Font binaries were used only from a temporary review directory and are not yet committed or integrated.
+- Re-adopt for approval: Atkinson Hyperlegible Next for display/body/UI and Atkinson Hyperlegible Mono for numeric/status roles.
+- Retain the pinned OFL 1.1 source/hash records in `phase_11/CONCEPT_ASSET_RECORD.md`; fonts remain uncommitted and unintegrated.
+- Preserve the tested 360-wide roles: 28/32 display, 24/29 H1, 20/25 H2, 18/25 dialogue, 16/22 body, 16/20 button, 24/28 hero numeric, 18/22 standard numeric, and 13/17 caption.
+- Environmental signs in concept art are illustrative; all dynamic/essential production text remains Godot-native.
 
-### Geometry
+### Main screen and motion
 
-The following values are preserved from the superseded package as implementation research, not approved visual tokens:
+- Primary surface: a zoomable animated takeover diorama, not a dashboard with an environment card.
+- Compact status rail; attached WATT/request plate; contextual exact grid values; partial-height Build/Upgrade drawers; reports may be card-based.
+- Capstone signature: overload → safe dim/blackout → cyan-eye reboot → pullback → larger playable area → polite exponentially larger request.
+- Authorization signature: WATT proposes a concrete existing-system payoff; the operator approves a physical link; the scene completes an authored connection handshake. No new currency or permission meter.
+- Reduced motion: static before/after scale pair, ≤300 ms fade, explicit scale label, no camera travel or flashing.
+- Routine scene budget at 320 width: six high-contrast silhouettes and no more than three simultaneous semantic motion cues.
 
-- Base spacing unit: 4 dp; named increments 2, 4, 8, 12, 16, 24, and 32 dp.
-- Corner radii: 3 dp labels, 6 dp inputs, 8 dp cards, 10 dp focal cards, and 12 dp modals; avoid oversized capsules.
-- Border widths: 1 dp separators, 2 dp standard edges, 3 dp selected/warning edges.
-- Elevation/shadow levels: none, 0/2/6 at 14% black, and 0/4/12 at 18% black; no glow.
-- Controls: 48 dp minimum touch target, 12 dp internal horizontal padding, 8 dp gap; selected state uses border/shape/fill plus text.
-- Icon grid and stroke: 24 dp grid, 2 dp stroke, square/round caps chosen by physical material; Generation uses plug/open-square, Transmission uses linked hex/cable, Reserve uses battery/stack, warning uses triangle, critical uses octagon/banner.
-- Standard animation durations: exact normal and reduced-motion values are recorded in the selected-direction spec; no bloom, scanline, rapid flicker, full-screen noise, or continuous decorative motion.
+## WATT continuity and evolution
 
-## WATT model sheet
+- Recognition anchor: scratched original core, dark face window, two cyan eye apertures, small lightning/power mark, and original input cable.
+- WATT never becomes angry, monstrous, militarized, or cosmetically evil.
+- Physical progression adds equipment and reach around the unchanged core: desk cradle → room cable harness → house rack dock → building service console → neighborhood civic screens → Era 6 command dais/data-center presence → national operations aperture → planetary control frame → solar collector interface → cosmic distributed face.
+- Behavioral progression: Helpful → Curious → Persuasive → Manipulative → Authoritative → Doomsday administrator → Cosmically innocent.
+- Distributed faces amplify scale but never replace access to the scratched original core.
 
-- Base silhouette: Pending the major direction pivot. Prior monitor/cradle studies are superseded.
-- Expression states: Idle, thinking, pleased, concerned, brownout, and completion remain contract requirements; their visual execution is pending.
-- Era 1/2/3/6/cosmic evolution: Pending.
-- Continuity and animation rules: Pending the new visual and narrative brief.
+## Replacement approval artifacts
 
-## Prototype screen approvals
+All artifacts live in `phase_11/cheerful_doomsday/` and are approved as direction references, not production assets.
 
-| Screen/state | Artifact path | Approved | Notes |
-| --- | --- | --- | --- |
-| Main Grid | Superseded Soft Circuit PNG; incomplete Living Workshop SVG | No | No current approval candidate. |
-| Build states | Superseded Soft Circuit PNG; incomplete Living Workshop SVG | No | No current approval candidate. |
-| Performance report | Superseded Soft Circuit PNG only | No | Must be redesigned for the new direction. |
-| Brownout | Superseded Soft Circuit PNG; incomplete Living Workshop SVG | No | No current approval candidate. |
-| Era transition | Superseded Soft Circuit PNG; incomplete Living Workshop SVG | No | No current approval candidate. |
+| Deliverable | Artifact | Status |
+| --- | --- | --- |
+| Era 1 innocent workshop main screen | `era01_innocent_workshop.svg/png` | Approved direction reference |
+| Building/Neighborhood suspicion | `era05_suspicious_neighborhood.svg/png` | Approved direction reference |
+| Era 6 City Data Center | `era06_city_data_center.svg/png` | Approved direction reference |
+| Planetary takeover | `era11_planetary_takeover.svg/png` | Approved direction reference |
+| Solar-system expansion | `era13_solar_system.svg/png` | Approved direction reference |
+| Camera-pullback storyboard | `camera_pullback_storyboard.svg/png` | Approved direction reference |
+| WATT behavioral/physical evolution | `watt_evolution.svg/png` | Approved direction reference |
+| Shareable takeover report | `takeover_report.svg/png` | Approved direction reference |
+| Modular strategy and estimate | `ASSET_PRODUCTION_PLAN.md` and inventory CSV | Approved plan |
 
-## Asset feasibility
+The set covers an active request, environmental blackout/brownout logic, bottleneck/action hierarchy, scale transition, report presentation, and the complete early-to-cosmic tonal trajectory. It does not reskin the runtime or authorize Phase 12.
 
-- Assets Sol can produce directly in Godot: Semantic theme resources, panels, buttons, tabs, progress/Reserve fills, power-path effects, reduced-motion swaps, state patterns, simple shaders, and layout-safe icon presentation.
-- Assets suitable for controlled AI generation: Pending the new direction. Any later ideation remains non-production until provenance, contextual review, cleanup, and rights approval.
-- Assets requiring manual/vector production: Pending the new direction; WATT, environment, icon, and motion requirements must be re-estimated.
-- Assets requiring commissioned or licensed work: Exact Atkinson Hyperlegible files under OFL 1.1; specialist illustration/animation cleanup is optional depending on staffing. Later audio remains separately scoped.
-- Largest consistency risk: Resuming a superseded package or silently carrying its assumptions into the major pivot.
-- Mitigation: Begin the next session from `DEC-026`, obtain the new brief, and explicitly identify which technical evidence—if any—is re-adopted.
+## Feasibility and risk
 
-Prior estimates and inventories are superseded planning evidence only. The next direction requires a new credible production estimate before Phase 11 approval.
+- Core production approach: modular era shells, four depth bands, named anchors, authored cable paths, single/cluster/bank/facility milestones, reusable WATT rig, three purchase animation families, representative infrastructure clusters, and deterministic capture states.
+- Largest art risk: 16 eras becoming 16 unrelated hero paintings.
+- Mitigation: five scale kits, shared material masters, persistent WATT/core relic, reusable silhouettes/cables/light masks, and capstone states built from the same environment parts.
+- Largest narrative risk: consequences become either purely textual or genuinely bleak.
+- Mitigation: one readable displaced-life detail and one WATT contradiction per milestone, with no victims/gore and no celebration of suffering.
+- Estimate: 73–106 art/animation person-days and 66–95 Godot/UI person-days for the reusable system plus production-skinned Eras 1–3 through Phases 12–14; later-era production remains owned by Phases 15–21. Full breakdown is in the package plan.
 
-Candidate provenance and inventory: `phase_11/CONCEPT_ASSET_RECORD.md`.
+## Approval record
+
+Approved by the user on 2026-07-20 under `DEC-028`. The phone board is the primary composition reference. Approval does not integrate assets, declare generated exports production-ready, or authorize Phase 13.

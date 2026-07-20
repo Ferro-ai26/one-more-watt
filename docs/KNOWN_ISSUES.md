@@ -12,7 +12,7 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
-Phase 11's visual audit opened no new runtime defect. WATT's placeholder glyph, text-only environments, incomplete iconography, inline colors, and minimal motion remain documented production gaps rather than regressions. No visual direction is currently selected: the Soft Circuit package and incomplete Living Workshop revision are superseded exploration under `DEC-026`, and a major visual/narrative pivot is pending. No Phase 11 visual asset or font has been integrated into the unchanged game.
+Phase 11's visual audit opened no new runtime defect. WATT's placeholder glyph, text-only environments, incomplete iconography, inline colors, and minimal motion remain documented production gaps rather than regressions. `DEC-028` approves and locks Cheerful Electrical Doomsday as direction reference. Its generated backgrounds retain unresolved production/commercial-use status and identified manual-reconstruction needs; they are not production assets. No Phase 11 visual asset or font was integrated into the unchanged game.
 
 ### ISSUE-004 — Phone presentation appears too small
 
