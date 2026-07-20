@@ -34,7 +34,8 @@
 - Added 89 Phase 15 domain checks and 24 headless UI checks. A graphical run passed 38 checks and produced seven manually inspected captures at 393 × 873 and 320 × 568/130% text. Pixel review corrected the captured brownout state, Building-icon framing, narrow maintenance overflow/evidence framing, and report fixture localization.
 - Preserved the existing 1,500 ms Build guard by reconfiguring compatible cards in place. Final full-gate host measurement: 789.7 ms for 25 full refresh requests, 557.0 ms for 500 live refreshes, 378 nodes, and approximately 11.47 MiB isolated skin memory.
 - Clean source commit `14b577fc8045` exported `build/android/one_more_watt_phase15_debug.apk`: 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, +43,076 bytes / +0.077% over the last Phase 13 device artifact. Package/API/architectures/VIBRATE-only permission/embedded-ID/v2-v3 signature inspection passed.
-- The current host still has no attached ADB device, `/dev/kvm`, emulator, or system image. `android_device_smoke.sh` exited 2 without installing. Physical update-install/lifecycle/performance checks remain unverified under `ISSUE-010`; commit/push and the Phase 15 completion gate remain, while Phase 16 stays prohibited.
+- The current host still has no attached ADB device, `/dev/kvm`, emulator, or system image. `android_device_smoke.sh` exited 2 without installing. Physical update-install/lifecycle/performance checks remain unverified under `ISSUE-010`.
+- Pushed the approved appendix, implementation, evidence, and APK/static record to `origin/main`; local and remote both resolved to `d4e2a2b4dcea87a1affb0c56fc50ad84751c3f70` at confirmation. Phase 15 stops at its completion gate and Phase 16 remains prohibited.
 
 ### 2026-07-20 — Phase 15 authorized; Era 4 appendix proposed
 

@@ -42,6 +42,7 @@ The user approved `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` under `DEC
 - Clean source commit: `14b577fc8045e4de1b70692745f86591b3c38960` (`Phase 15: implement Building Network Era 4`).
 - `./tools/build_android_debug.sh`: passed. `build/android/one_more_watt_phase15_debug.apk` is 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, and embeds build `14b577fc8045`. Package `com.ferroai.onemorewatt`, version `0.10.0-dev`, API 24/35, arm64-v8a+x86_64, VIBRATE-only permissions, and v2/v3 signatures passed static inspection.
 - `./tools/android_device_smoke.sh build/android/one_more_watt_phase15_debug.apk`: exited 2 because no ready device is attached; no installation was attempted. `/dev/kvm`, emulator executable, and installed system images are absent.
+- `git push origin main && git fetch origin main`: pushed the Phase 15 appendix, implementation, and APK/static record; local and `origin/main` both resolved to `d4e2a2b4dcea87a1affb0c56fc50ad84751c3f70` before this final handoff-only update.
 
 ## Manual verification
 
@@ -52,7 +53,7 @@ This host used dummy audio and is not a physical Android device. No audible mix,
 ## Remaining acceptance criteria
 
 - Run the Phase 15 APK on a physical Android device for update install over an Era 3 endpoint save, cold launch, warm resume, background/offline return, save idempotency, touch/safe-area/font behavior, Android Back, sound/haptics, and device performance—or obtain explicit acceptance of that unavailable-device limitation.
-- Commit and push this final APK/static handoff record. Do not mark the combined Android regression criterion passed without physical evidence.
+- Do not mark the combined Android regression criterion passed without physical evidence or explicit acceptance of the limitation.
 
 ## Known blockers
 
@@ -61,4 +62,4 @@ This host used dummy audio and is not a physical Android device. No audible mix,
 
 ## Recommended next action inside Phase 15
 
-Commit this final APK/static record, push the Phase 15 proposal/implementation/documentation commits, verify `origin/main`, and stop at the Phase 15 completion gate. The only unresolved acceptance item is external physical Android verification/acceptance under `ISSUE-010`. Do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5.
+Stop at the Phase 15 completion gate. The only unresolved acceptance item is external physical Android verification/acceptance under `ISSUE-010`; use the exact artifact/checklist in `docs/ANDROID_DEVICE_TEST.md` if a device becomes available. Do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5 without separate user authorization.
