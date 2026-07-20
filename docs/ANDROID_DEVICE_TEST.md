@@ -1,8 +1,8 @@
 # Android Device Tests
 
-## Phase 10 targeted stabilization retest
+## Phase 10 targeted stabilization retest — Deferred to Phase 14
 
-Use this section with the exact revised artifact before Phase 10 closure.
+This preserved checklist records the exact revised artifact and the device checks that were not performed in Phase 10. The user explicitly accepted the Phase 10 limitation and transferred the Moto verification requirement to Phase 14. Unchecked items below remain unverified; none are promoted to passing evidence.
 
 ### Artifact identity
 
@@ -51,7 +51,7 @@ Warning: uninstalling the package deletes its local save. Preserve any wanted sa
 
 ### Phase 10 retest result
 
-Pending. The current VPS has no attached Android device. Host build/static inspection passed, but no revised-APK runtime claim is made.
+Deferred by explicit user direction at Phase 10 closure. The current VPS had no attached Android device, and the revised APK was not run on the Moto phone. Host build/static inspection passed, but no revised-APK runtime claim is made. Phase 14 — Visual, Mobile, and Accessibility QA owns the preserved Moto comfort/display/density and related physical-device checks.
 
 ## Phase 09 historical device test
 

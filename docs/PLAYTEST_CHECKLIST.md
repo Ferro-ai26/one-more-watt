@@ -15,11 +15,12 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Generated 35 graphical captures and inspected representative smallest/reference authorization and Settings states plus the 360 × 640 Build state. Authorization remained initially reachable, settings scrolled intentionally at 320 × 568, and no inspected state clipped horizontally.
 - [x] Full repository regression passed after the changes; gameplay balance, reachability, save/offline behavior, content, and Android configuration remain unchanged and green.
 - [x] Revised Phase 10 APK exported from the clean recorded commit and statically inspected: 55,802,078 bytes; SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`; package/version/API/architectures/permission/signature/alignment/orientation/build ID passed.
-- [ ] Revised APK installed and reviewed on the Moto phone for comfortable physical size.
-- [ ] Exact Moto model, Android/API, physical resolution/density, screenshot, and navigation/cutout mode recorded.
-- [ ] Background/resume, force-close recovery, Android Back, brownout, sound/haptics, safe areas, endpoint, and device performance checked where practical.
+- [ ] Revised APK installed and reviewed on the Moto phone for comfortable physical size. **Deferred to Phase 14 by explicit user acceptance; not performed in Phase 10.**
+- [ ] Exact Moto model, Android/API, physical resolution/density, screenshot, and navigation/cutout mode recorded. **Deferred to Phase 14; not performed in Phase 10.**
+- [ ] Background/resume, force-close recovery, Android Back, brownout, sound/haptics, safe areas, endpoint, and device performance checked where practical. **Deferred to Phase 14; not performed in Phase 10.**
+- [x] Final Phase 10 host regression, APK hash confirmation, and documentation consistency checks passed at closure.
 
-Host-pass note: the runtime Settings screen now exposes display pixels, reported dpi, effective logical viewport, and scale so the next phone report can identify the actual result without guessing. The VPS cannot provide physical Android evidence.
+Closure note: the runtime Settings screen exposes display pixels, reported dpi, effective logical viewport, and scale so Phase 14 can identify the actual device result without guessing. The VPS cannot provide physical Android evidence. The user explicitly accepted this remaining limitation, withdrew the unspecified bug investigation, and closed Phase 10 without representing any unchecked device item as passed.
 
 ## Phase 09 Android host preflight — 2026-07-20
 

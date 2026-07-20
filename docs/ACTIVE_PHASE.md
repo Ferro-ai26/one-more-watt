@@ -1,16 +1,16 @@
 # Active Phase
 
-Phase: 10 — Targeted Bug Fixing and Prototype Stabilization
-Status: In Progress — Host Fix and APK Verified; Phone Retest Pending
+Phase: 11 — Theme and Art Direction
+Status: Ready — Awaiting Explicit Authorization
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_10_TARGETED_BUG_FIXING_AND_STABILIZATION.md`
+`docs/phases/PHASE_11_THEME_AND_ART_DIRECTION.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and `docs/KNOWN_ISSUES.md`. Continue only Phase 10 stabilization and evidence work. Do not advance to Phase 11 automatically.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and the permanent specifications named by Phase 11. Do not begin Phase 11 work until the user explicitly authorizes it, and do not advance beyond it automatically.
 
 ## Inherited state
 
-Phase 09 closed with the decision “continue with targeted revisions.” The user authorized Phase 10 on 2026-07-20. Completed Phase 00–09 evidence remains authoritative. Original v1 Phase 10–16 contracts are archived and superseded.
+Phase 10 is closed. Its density-aware scaling and larger-text fixes passed the complete host regression and APK inspection. The user explicitly accepted the remaining physical-device limitation: `ISSUE-004` device verification is deferred to Phase 14, and `ISSUE-005` was withdrawn without inferring unspecified bugs. Completed Phase 00–10 evidence remains authoritative.

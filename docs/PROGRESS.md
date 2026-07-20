@@ -14,10 +14,19 @@
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
-| 10 — Targeted Bug Fixing and Prototype Stabilization | In progress — phone retest pending | Density-aware mobile scaling and larger-text fix implemented; host regression and revised APK inspection green; device runtime evidence pending |
-| 11–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
+| 11 — Theme and Art Direction | Ready — awaiting explicit authorization | Phase 10 closure committed; no Phase 11 work begun |
+| 12–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 10 closure with accepted device limitation
+
+- The user explicitly cancelled the remaining Phase 10 bug investigation and Moto verification, accepted the resulting Phase 10 verification limitation, and authorized closure without promoting any unexecuted check to passed.
+- Marked `ISSUE-004` **Fix Implemented — Device Verification Deferred**. Its density-aware fix retains its host and APK evidence; the Moto comfort/device-details retest is now owned by Phase 14 — Visual, Mobile, and Accessibility QA.
+- Closed `ISSUE-005` as **Withdrawn — No Actionable Reproduction Details**. No unspecified behavior was inferred or invented.
+- Reran the complete Phase 10 host regression successfully and confirmed the recorded APK SHA-256. Documentation reference/status consistency and `git diff --check` passed.
+- Closed Phase 10 and set Phase 11 to Ready — Awaiting Explicit Authorization. Phase 11 did not begin.
 
 ### 2026-07-20 — Phase 10 host stabilization implementation
 
@@ -28,7 +37,7 @@
 - Passed the full pre-edit baseline and post-edit repository suite. Post-edit evidence includes 48 UI-system checks, 296 headless UI integration checks, 908 balance/reachability checks, 111 UI/performance checks, five portrait layouts, persistence/offline regression, Android configuration validation, and headless smoke launch.
 - Generated 35 graphical UI captures across the five layouts; manually inspected representative 320 × 568 authorization/settings, 360 × 640 Build, and 720 × 1280 authorization/settings captures. Primary actions remained reachable; smallest settings used its intended vertical scroll; no horizontal clipping was observed.
 - Committed the host-verified implementation as `0c4f44e`, then built and statically inspected `one_more_watt_phase10_debug.apk`: version code/name 10/`0.10.0-dev`, 55,802,078 bytes, SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`, API 24–35, arm64-v8a/x86_64, VIBRATE-only, v2/v3 signed, aligned, portrait, and provenance-embedded.
-- The targeted Moto phone retest remains required. Phase 11 has not begun.
+- The targeted Moto phone retest was subsequently deferred to Phase 14 by explicit user acceptance at Phase 10 closure. Phase 11 did not begin during Phase 10.
 
 ### 2026-07-20 — Roadmap v2 documentation migration
 

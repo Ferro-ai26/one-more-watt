@@ -10,14 +10,14 @@
 
 ## Open issues
 
-Phase 09 is closed with the decision “continue with targeted revisions.” Phase 10 host fixes and revised APK inspection are complete, but the targeted phone retest remains pending. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The remaining device matrix was skipped and is not claimed as passed.
+Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
 ### ISSUE-004 — Phone presentation appears too small
 
-- Status: Fix Implemented — Pending Device Verification
+- Status: Fix Implemented — Device Verification Deferred
 - Severity: Minor
 - First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
-- Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization
+- Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization; device verification deferred to Phase 14
 - Reproduction:
   1. Install and launch the Phase 09 APK on the tester's Moto phone.
   2. Review the early onboarding presentation.
@@ -25,7 +25,7 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Pha
 - Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small. Repository diagnosis found that the requested 720 × 1280 base was already configured. Godot's canvas stretch scaled from pixel resolution while the UI treated its 48 logical-pixel target as 48 Android dp, so dense displays could render the interface physically smaller than intended.
 - Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls. Density reference tests resolve 1080 × 2400 at 480 dpi and 720 × 1600 at 320 dpi to 360 × 800 effective logical units.
 - Workaround: None required to continue the tested core flow.
-- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK from `0c4f44e` passed static inspection with SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`; repeat Moto review remains pending.
+- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK from `0c4f44e` passed static inspection with SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`. The user accepted closure without a repeat Moto run; physical comfort and device-detail verification are explicitly deferred to Phase 14 and are not claimed as passing.
 
 ### ISSUE-006 — Larger-text setting did not scale explicit UI fonts
 
@@ -44,16 +44,16 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Pha
 
 ### ISSUE-005 — Additional reported small bugs lack reproduction details
 
-- Status: Needs Information
-- Severity: Needs Information
+- Status: Withdrawn — No Actionable Reproduction Details
+- Severity: Not assessed
 - First seen build/commit: Phase 09 manual Moto report, 2026-07-20
-- Affected phase: Phase 10 targeted stabilization
+- Affected phase: Phase 10 targeted stabilization — closed without action
 - Reproduction: Not provided.
 - Expected: Not provided.
 - Actual: Kevin mentioned additional small bugs but skipped details; no behavior is inferred or fabricated.
 - Evidence/log: `ANDROID_DEVICE_TEST.md` Phase 09 report.
 - Workaround: Unknown.
-- Fix verification: Supply one reproduction sequence, expected result, actual result, and screenshot/log where practical for each concrete defect.
+- Fix verification: The user explicitly withdrew the remaining investigation at Phase 10 closure. No reproduction, expected behavior, or actual behavior was supplied, so no bug was inferred, invented, or changed.
 
 ### ISSUE-003 — Physical Android verification unavailable on current host
 

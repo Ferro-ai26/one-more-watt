@@ -2,7 +2,7 @@
 
 ## Phase 10 stabilization build
 
-Status: Host build/static inspection passed; targeted Moto retest pending
+Status: Host build/static inspection passed; Moto verification deferred to Phase 14 by explicit user acceptance
 Build UTC: 2026-07-20T07:39:10Z
 
 ### Source and artifact
@@ -33,7 +33,7 @@ The toolchain and signing boundary match the Phase 09 record below. The artifact
 
 ### Device boundary
 
-`./tools/android_device_smoke.sh` found no ready ADB device and performed no installation. This build is not claimed as Android runtime evidence. Complete the Phase 10 section of `ANDROID_DEVICE_TEST.md` on the Moto phone.
+`./tools/android_device_smoke.sh` found no ready ADB device and performed no installation. This build is not claimed as Android runtime evidence. The user accepted that Phase 10 limitation; the preserved Moto/device checklist in `ANDROID_DEVICE_TEST.md` is deferred to Phase 14.
 
 ## Phase 09 Android Build Record
 

@@ -160,7 +160,15 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Date: 2026-07-20
 - Decision: Keep the documented 720 × 1280 `canvas_items`/`expand` base, but on mobile multiply Godot's automatic resolution scale by a density-derived content scale. Treat one logical UI unit as one Android density-independent pixel where the display can still provide at least the verified 320 × 568 logical layout; otherwise bound the scale at that layout floor. Expose the measured inputs and result in Settings.
 - Reason: The Moto symptom was “presentation appeared too small,” but the project was already configured at the suggested 720p base. The actual mismatch was that the UI contract's 48-pixel controls were treated as 48 dp while Godot's canvas stretch responded to pixel resolution, not Android density. A fixed resolution change would not reliably correct physical size across xhdpi, xxhdpi, and xxxhdpi phones.
-- Consequences: Typical 720 × 1600 xhdpi and 1080 × 2400 xxhdpi screens both resolve to approximately 360 × 800 logical units, making a 48-unit target approximately 48 dp. Very small dense displays favor the verified layout floor over an impossible physical-size target. The exact Moto result still requires the revised APK and device retest; broad visual redesign remains Phase 11+ work.
+- Consequences: Typical 720 × 1600 xhdpi and 1080 × 2400 xxhdpi screens both resolve to approximately 360 × 800 logical units, making a 48-unit target approximately 48 dp. Very small dense displays favor the verified layout floor over an impossible physical-size target. The exact Moto result is deferred to Phase 14 under DEC-023; broad visual redesign remains Phase 11+ work.
+
+## DEC-023 — Close Phase 10 with device verification deferred
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Close Phase 10 on its complete host regression, diagnosed/implemented density-scale fix, larger-text repair, and verified APK. Accept the absence of a revised-build Moto run as an explicit limitation; transfer `ISSUE-004` physical-device verification to Phase 14. Withdraw `ISSUE-005` because no actionable reproduction details were provided, without inferring any unspecified defect.
+- Reason: The user explicitly cancelled the remaining Phase 10 bug investigation and Moto verification and accepted the limitation so production planning can continue. Existing host and partial-device evidence remains truthful and sufficient for this explicitly qualified stabilization closure.
+- Consequences: No Phase 10 device check is retroactively marked passed. Phase 14 owns the Moto/device comfort, display/density, safe-area, accessibility, lifecycle, and representative-session verification for the density-aware production build. Phase 11 is only Ready — Awaiting Explicit Authorization and did not begin in this closure session.
 
 ## Proposed decision template
 

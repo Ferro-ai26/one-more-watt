@@ -24,6 +24,7 @@ The skinned Eras 1–3 build is visually consistent, comfortably sized, responsi
 - Skin-related performance, memory, APK size, battery, and heat observations
 - 30-minute representative session
 - Save/background/offline regression on the skinned build
+- Deferred `ISSUE-004` Moto-phone retest: record exact model/API/display density, Settings `DISPLAY` and `EFFECTIVE UI` values, screenshot evidence, and a physical-comfort verdict when the original device is available
 
 ## Excluded
 
@@ -35,7 +36,7 @@ The skinned Eras 1–3 build is visually consistent, comfortably sized, responsi
 ## Acceptance criteria
 
 - [ ] `VISUAL_QA_CHECKLIST.md` completed with evidence
-- [ ] ISSUE-004 is verified fixed or explicitly accepted with rationale
+- [ ] ISSUE-004 is verified fixed on the Moto phone, or original-device unavailability and a user-approved representative-device disposition are recorded with rationale
 - [ ] All frequent controls are comfortably sized
 - [ ] No clipping/overlap at supported layouts and text sizes
 - [ ] Critical states do not depend on color alone
