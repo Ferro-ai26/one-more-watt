@@ -1,6 +1,6 @@
 # Phase 13 Production-Skin Implementation
 
-Status: implementation complete; physical-phone verification outstanding.
+Status: closed with user-accepted physical-phone verification limitation.
 
 ## Authority and approval boundary
 
@@ -34,4 +34,4 @@ All Main, Build, Upgrade, Report, settings, confirmation, offline, and diagnosti
 
 ## Stop boundary
 
-Era 4 is absent. Phase 14 has not begun. Physical-phone verification remains required to close Phase 13; final painted reconstruction remains later work under `ISSUE-007`.
+Era 4 is absent. The user accepted Phase 13 closure after the targeted Moto fix retest and explicitly skipped the remaining playtest; skipped checks remain unverified and transfer to Phase 14 where applicable. Final painted reconstruction remains later work under `ISSUE-007`.

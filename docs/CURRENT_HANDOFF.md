@@ -2,9 +2,9 @@
 
 Updated: 2026-07-20
 
-Active phase: Phase 13 — Eras 1–3 Production Skin
+Active phase: Phase 14 — Visual, Mobile, and Accessibility QA
 
-Status: Targeted Device Retest Passed — Remaining Phone Checklist
+Status: Authorized — Host QA Ready
 
 ## Exact result achieved
 
@@ -25,7 +25,9 @@ A first external Phase 13 pass installed and cold-launched the clean commit-`1dc
 - covers Build, Upgrades, Reports, Settings, and every other screen/modal using those shared containers, with synthetic Android drag regression on overflowing Build and Settings content;
 - removes the conditional purchase-confirmation modal and Settings toggle so every affordable purchase applies on its first tap; the legacy setting stays serialized only for save compatibility (`DEC-031`).
 
-Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build, Upgrades, Reports, and Settings scrolling work, and affordable purchases apply without the removed popup. `ISSUE-009` is fixed. The tester explicitly skipped the effective-UI and Android-version fields. Phase 13 remains open; the remainder of the physical checklist is not claimed.
+Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build, Upgrades, Reports, and Settings scrolling work, and affordable purchases apply without the removed popup. `ISSUE-009` is fixed. The tester explicitly skipped the effective-UI and Android-version fields, then directed that the remainder of the Phase 13 playtest be skipped, accepted the result, and authorized advancement. Phase 13 is closed under `DEC-032`; its unchecked phone-screenshot/full-playtest criterion is an accepted limitation, not a pass.
+
+The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.md`, `RELEASE_READINESS_DEFINITION.md`, and all Phase 13 evidence have been read. Phase 14 is active for independent visual/mobile/accessibility QA and proven corrections only. Era 4, Phase 15, major direction changes, and final painted-art approval remain outside scope.
 
 ## Files changed
 
@@ -59,15 +61,18 @@ Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build
 - The first physical pass confirmed install/cold launch and supplied the exact model/display/density, then stopped for the concrete scroll defect. The replacement passed the targeted scroll/purchase retest. No screenshots, full playthrough, audible speaker/headphone mix review, or safe-area/accessibility/lifecycle/haptic/GPU/heat/battery result is claimed.
 - Manually inspected the follow-up host Build and Settings captures at 320 × 568 and Settings at 393 × 873 after removing the toggle; no horizontal clipping or new placeholder direction was introduced.
 
-## Remaining acceptance criteria
+## Phase 14 acceptance criteria
 
-- Screenshots and the remaining Phase 13 phone playtest: full Eras 1–3 route, required states, touch comfort, physical font rasterization, safe areas, Android Back/lifecycle/save/offline behavior, sound repetition/audio focus, haptics, GPU behavior, heat, and battery. Effective UI and Android/API were skipped and must remain labeled unverified unless later supplied.
+- Complete `VISUAL_QA_CHECKLIST.md` with evidence across direction, layouts, states, motion, accessibility, assets, and performance.
+- Resolve or disposition `ISSUE-004` under the Phase 14 contract without fabricating skipped Moto metadata.
+- Verify controls, clipping, color independence, reduced motion, performance, save/offline/lifecycle, and absence of blocker/critical issues.
+- Record the user go/no-go for content expansion. This is not yet requested or inferred.
 
 ## Known blockers
 
-- No Android device or emulator is attached to the current ARM64 VPS; replacement-build results depend on the external Moto tester.
+- No Android device or emulator is attached to the current ARM64 VPS. Device-only Phase 14 evidence depends on external testing or a user-approved representative-device disposition.
 - `ISSUE-007` deliberately remains open: the current project-original code-native layer is reusable and directionally faithful, but final tactile painted environment/WATT/infrastructure art belongs to the later gold-standard visual-production pass.
 
-## Recommended next action inside Phase 13
+## Recommended next action inside Phase 14
 
-Continue the preserved Phase 13 checklist on replacement build `738732db1f9b`, beginning with visual comfort/text-size/reduced-motion/safe-area checks, then Android Back, lifecycle/save/offline behavior, full Eras 1–3 route, screenshots, and qualitative audio/haptic/heat/battery notes. Keep explicitly skipped device metadata unverified. Only then close Phase 13. Do not begin Phase 14 without separate authorization.
+Begin with a clean host baseline: reconcile `VISUAL_QA_CHECKLIST.md` against existing Phase 13 evidence, run the full automation/layout/state/performance suite, inspect fresh representative captures, and record only evidenced passes. Then identify the smallest remaining physical-device evidence request or required disposition. Do not add Era 4 or begin Phase 15.

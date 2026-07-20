@@ -32,6 +32,8 @@ Replacement device result:
 
 The targeted defect retest passes and `ISSUE-009` is fixed. Remaining Phase 13 physical checks stay open.
 
+Closure disposition: the user explicitly skipped the remaining Phase 13 playtest, accepted the result, and authorized Phase 14. Unchecked items remain unverified. Phase 13 closes with an accepted device-verification limitation under `DEC-032`; no omitted test is retroactively marked passed.
+
 ## Phase 13 production-skin host pass — 2026-07-20
 
 - Build/commit: Phase 12 baseline `ae61a94`; Phase 13 working tree during review

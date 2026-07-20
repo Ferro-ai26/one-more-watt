@@ -32,6 +32,6 @@ Scope: Eras 1–3 production-functional skin, host phone-resolution review
 - Performance: pass. 294 nodes; 10,016.1 KiB isolated static-memory delta in the inherited skin harness; final Build/refresh measurement 1,342.7/487.4 ms passes.
 - APK measurement: 55,939,440 bytes, +16,565 / +0.030% from Phase 12; SHA-256 `c82bb39f8f854a90f6c5368fe93fd10436388e97e6e075ec25bc616943f24458`. Dirty-tree measurement only, not a provenance build.
 
-## Manual limitations
+## Manual limitations and closure disposition
 
-No physical Android device was available. Touch comfort, physical safe areas/font rendering, audible mix/audio focus, haptics, GPU frame timing, heat, battery, and device screenshots remain unchecked under `ISSUE-008`. Verdict: **host implementation approved with the physical-phone gate outstanding**.
+The original host had no attached Android device. Subsequent external testing on a Motorola Moto G (2025), 720 × 1604 / 280 dpi, confirmed install/cold launch and found `ISSUE-009`; replacement build `738732db1f9b` then passed Build/Upgrades/Reports/Settings scrolling and immediate purchasing. The tester explicitly skipped effective-UI, Android/API, physical safe areas/font rendering, full route, audible mix/audio focus, haptics, GPU frame timing, heat, battery, and device screenshots, then accepted Phase 13 closure. These are unverified limitations, not passes. Verdict: **Phase 13 accepted with remaining device evidence explicitly skipped; Phase 14 authorized**.

@@ -234,6 +234,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The first Phase 13 Moto G (2025) pass found that card surfaces prevented Build and Upgrades from scrolling, and the cost-threshold confirmation appeared only for some purchases. The tester explicitly directed that scrolling work everywhere and that the inconsistent interruption be removed.
 - Consequences: Build, Upgrades, Reports, Settings, and other modal content share vertical touch-drag behavior while interactive controls remain tappable. Existing purchase costs, affordability rules, rewards, feedback, and saves are unchanged. The legacy `confirm_large_purchases` save field remains readable/writable for compatibility but no longer controls runtime UI; no migration or new currency is introduced. The replacement APK requires physical-device retest before Phase 13 can close.
 
+## DEC-032 — Close Phase 13 with an accepted device-verification limitation
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Accept the successful Phase 13 host evidence and targeted Motorola Moto G (2025) scrolling/purchase retest, explicitly skip the remaining Phase 13 phone playtest, close Phase 13, and authorize Phase 14 — Visual, Mobile, and Accessibility QA.
+- Reason: The user stated they are happy with the results, directed that the remaining playtest be skipped, and requested advancement. The concrete device defect was fixed and retested, while the remaining work is verification rather than an identified blocker/critical defect.
+- Consequences: The unchecked Phase 13 phone-screenshot/full-playtest criterion is an accepted limitation, not a pass. Effective UI, Android/API, safe areas, font comfort, full route, lifecycle, audio, haptics, GPU, heat, battery, and screenshots remain unverified and may be addressed or dispositioned only under Phase 14's contract. `ISSUE-007` remains open. Phase 14 may begin; Phase 15 and Era 4 remain prohibited.
+
 ## Proposed decision template
 
 ```markdown

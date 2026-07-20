@@ -17,10 +17,18 @@
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
-| 13 — Eras 1–3 Production Skin | Targeted device retest passed — remaining phone checklist open | DEC-030/031; Moto G (2025) confirms build `738732db1f9b`, all shared scrolling paths, and immediate purchases; ISSUE-009 fixed; ISSUE-007/008 remain explicit |
-| 14–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
+| 14 — Visual, Mobile, and Accessibility QA | Authorized — host QA ready | Complete contract/handoff/required evidence read; no Era 4 or Phase 15 work authorized |
+| 15–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 13 closed; Phase 14 authorized
+
+- The user explicitly skipped the remainder of the Phase 13 playtest, accepted the successful host and targeted Moto results, and requested advancement.
+- Recorded `DEC-032`. Phase 13's unchecked phone-screenshot/full-playtest criterion remains an accepted limitation rather than a pass; all skipped device details and qualitative checks remain labeled unverified.
+- Closed `ISSUE-008` by accepted disposition, not by claiming missing evidence. `ISSUE-009` remains fixed and `ISSUE-007` remains open for later gold-standard art.
+- Read the complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.md`, `RELEASE_READINESS_DEFINITION.md`, and all Phase 13 evidence. Phase 14 is authorized for QA/corrections only. Era 4 and Phase 15 remain prohibited.
 
 ### 2026-07-20 — Phase 13 targeted Moto retest passed
 

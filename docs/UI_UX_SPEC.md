@@ -172,9 +172,10 @@ Prototype settings:
 - Number notation
 - Text size
 - Haptics
-- Confirm large purchases
 - Save/export diagnostic information
 - Credits and version
+
+Affordable Build and Upgrade purchases apply immediately on the first tap. The former cost-threshold confirmation and its Settings control were removed under `DEC-031`; affordability rules, costs, feedback, and save compatibility are unchanged.
 
 ## First five-minute onboarding
 
@@ -243,7 +244,7 @@ The production-structured prototype shell keeps its top status, WATT/request foc
 
 Request authorization and performance reports use one blocking modal layer with explicit action/back controls. The application back action closes the top modal first, then returns a secondary tab to Grid. Infrastructure and upgrade cards consume economy previews directly and show ownership/level, availability, exact next cost, missing currency or lock reason, and predicted effect before issuing a command.
 
-Runtime accessibility state covers reduced motion, three text scales, engineering/scientific notation, haptics, and large-purchase confirmation. Audio controls map to the existing Master, Music, SFX, and UI buses. These settings intentionally remain in memory until Phase 06 defines persistence.
+Runtime accessibility state covers reduced motion, three text scales, engineering/scientific notation, and haptics. Audio controls map to the existing Master, Music, SFX, and UI buses. These settings intentionally remain in memory until Phase 06 defines persistence. The later `DEC-031` interaction revision removed the conditional large-purchase confirmation while retaining its legacy save field solely for compatibility.
 
 Phase 06 persists those settings with game state. The Offline Return modal shows away, recognized, effective, cap, efficiency, Stored Energy, brownout, request progress/completion, cap application, and neutral clock-anomaly explanations. Backup recovery names the restored file. If main and both backups fail, a blocking recovery modal preserves evidence and requires explicit confirmation before writing a new game.
 

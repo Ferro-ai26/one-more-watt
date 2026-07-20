@@ -45,10 +45,10 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 - Workaround: Continue using the explicit code-native presentation layer for development and verification.
 - Fix verification: A later explicitly authorized gold-standard visual-production pass must replace the five required fallback entries with provenance-recorded production assets, pass release-scope inventory validation, and receive contextual phone review. Phase 13 must not silently close this issue.
 
-### ISSUE-008 — Phase 13 physical-phone playtest requires external completion
+### ISSUE-008 — Phase 13 physical-phone playtest remained incomplete
 
-- Status: Partial External Pass — Remaining Checklist Open
-- Severity: Blocker for Phase 13 closure; not a known runtime defect
+- Status: Closed — User Accepted Verification Limitation
+- Severity: Accepted Phase 13 limitation; not a known runtime defect
 - First seen build/commit: Phase 13 working tree, 2026-07-20
 - Affected phase: Phase 13 manual verification gate
 - Reproduction:
@@ -58,7 +58,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 - Actual: The user confirmed install/cold launch on a Motorola Moto G (2025), app version `v0.10.0-dev`, and a 720 × 1604 / 280 dpi display. Replacement build `738732db1f9b` passed Build/Upgrades/Reports/Settings scrolling and immediate-purchase retests, resolving `ISSUE-009`. The tester explicitly skipped Android/API and the effective UI line. Screenshots, safe areas, font comfort, lifecycle, audio, haptics, GPU, heat, battery, and the rest of the playthrough remain unverified.
 - Evidence/log: `docs/phase_13/VISUAL_QA_RECORD.md`, `docs/PLAYTEST_CHECKLIST.md`, and `docs/CURRENT_HANDOFF.md`.
 - Workaround: Host 320 × 568 and 393 × 873 evidence validates composition/layout only; it does not substitute for physical-device behavior.
-- Fix verification: Retest the replacement clean commit-tied APK on the same phone, then complete and record the preserved checklist before closing Phase 13. Phase 14 remains separately gated.
+- Fix verification: Replacement build `738732db1f9b` passed the concrete scrolling/purchase retest. The user explicitly skipped the remaining Phase 13 playtest, accepted the result, closed Phase 13, and authorized Phase 14 under `DEC-032`. Unperformed checks remain unverified and feed Phase 14 where its contract requires them; this issue is closed by accepted disposition, not by claiming complete device evidence.
 
 ### ISSUE-004 — Phone presentation appears too small
 

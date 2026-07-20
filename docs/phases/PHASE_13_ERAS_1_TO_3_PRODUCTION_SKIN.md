@@ -1,5 +1,7 @@
 # Phase 13 — Eras 1–3 Production Skin
 
+Status: Closed — User Accepted Remaining Device-Verification Limitation (2026-07-20)
+
 ## Objective
 
 Apply the approved design system and production-quality visual/audio treatment to the complete existing Eras 1–3 prototype.
@@ -67,8 +69,10 @@ Skin one screen family at a time. For each family: preserve behavior, apply comp
 - [x] Asset rights and provenance are recorded
 - [ ] Phone screenshots and playtest evidence exist
 
+Closure disposition: the criterion above was explicitly skipped and accepted by the user after the targeted Moto G (2025) fix retest passed. It remains unchecked and must not be represented as completed evidence. Relevant mobile/accessibility/lifecycle gaps transfer to Phase 14; `ISSUE-007` remains open for later gold-standard art.
+
 ## Stop condition
 
 Do not add Era 4. Stop after the complete three-era production skin is integrated.
 
-Implementation and host evidence are recorded in `docs/phase_13/`. Host-rendered 320 × 568 and 393 × 873 phone-resolution screenshots exist and were visually inspected. A first external Moto G (2025) pass confirmed install/cold launch and reported 720 × 1604 at 280 dpi, then found that Build and Upgrades could not scroll by touch. Replacement build `738732db1f9b` passed Build/Upgrades/Reports/Settings scrolling and immediate-purchase retests, fixing `ISSUE-009` under `DEC-031`. The remaining acceptance item still requires complete truthful physical-device playtest evidence; it is not inferred from host captures or the targeted partial pass. Phase 14 has not begun.
+Implementation and host evidence are recorded in `docs/phase_13/`. Host-rendered 320 × 568 and 393 × 873 phone-resolution screenshots exist and were visually inspected. A first external Moto G (2025) pass confirmed install/cold launch and reported 720 × 1604 at 280 dpi, then found that Build and Upgrades could not scroll by touch. Replacement build `738732db1f9b` passed Build/Upgrades/Reports/Settings scrolling and immediate-purchase retests, fixing `ISSUE-009` under `DEC-031`. The user then explicitly skipped the remaining Phase 13 playtest, accepted the result, and authorized Phase 14. No unchecked device item is promoted to passing evidence.

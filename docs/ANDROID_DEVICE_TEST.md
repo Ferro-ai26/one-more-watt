@@ -62,6 +62,10 @@ After launch, confirm Settings shows build `738732db1f9b`. Then drag upward thro
 
 `ISSUE-009` is fixed on physical hardware. Continue with the remaining Phase 13 checks below; this targeted pass alone does not complete the full playtest.
 
+### Phase 13 closure disposition
+
+The tester explicitly skipped the remaining playtest, accepted the Phase 13 result, and authorized advancement on 2026-07-20. All unchecked items above remain unverified rather than passed. Relevant visual/mobile/accessibility checks transfer to Phase 14 under `DEC-032`.
+
 ## Phase 10 targeted stabilization retest — Deferred to Phase 14
 
 This preserved checklist records the exact revised artifact and the device checks that were not performed in Phase 10. The user explicitly accepted the Phase 10 limitation and transferred the Moto verification requirement to Phase 14. Unchecked items below remain unverified; none are promoted to passing evidence.
