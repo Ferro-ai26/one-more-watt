@@ -17,6 +17,7 @@ Phase 08 validation found no blocker, critical, progression, reachability, local
 - Status: Fixed
 - Severity: Polish
 - First seen build/commit: `abbf967`, 2026-07-20
+- Fixed in build/commit: `2cffcd1`, 2026-07-20
 - Affected phase: Phase 07 baseline; tune during Phase 08
 - Reproduction:
   1. Run `./tools/test_vertical_slice.sh`.

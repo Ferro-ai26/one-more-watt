@@ -12,7 +12,7 @@
 | 05 — Main UI and Feedback | Complete | Commit `6ae86ac`; 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
 | 06 — Save and Offline Progress | Complete | Commit `143ccf9`; 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
-| 08 — Balance and Polish | Complete | 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
+| 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Not started | — |
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
@@ -20,6 +20,7 @@
 
 ### 2026-07-20 — Phase 08 balance and prototype polish
 
+- Committed and pushed the implementation as `2cffcd1` to `origin/main`.
 - Tuned 15 required requests into a 65.8-minute mechanical/79.8-minute structured route with the first request at 25 seconds, Era 2 at 11.7 minutes, Era 3 at 37.0, and every Era 3 request at 3–6 minutes.
 - Replaced the 660-second late cliff with a 300-second maximum required-purchase gap by lowering Portable Generator and Reinforced Wiring while moving time into visible request progress.
 - Corrected online idle generation and retained deterministic active/offline rules, save format 2, all stable IDs, and explicit compatibility from content `0.6.0`/`0.7.0` to `0.8.0`.

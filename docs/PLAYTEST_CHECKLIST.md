@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 08 balance and prototype-polish rounds — 2026-07-20
 
-- Build/commit: Uncommitted Phase 08 working tree based on `0fef542`
+- Build/commit: `2cffcd1`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex

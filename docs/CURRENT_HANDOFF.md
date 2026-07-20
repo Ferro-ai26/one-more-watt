@@ -5,10 +5,11 @@ Active phase: Phase 08 — Balance and Prototype Polish
 
 ## Current state
 
-Phase 08 is implemented and in final validation in the working tree. Canonical content version `0.8.0` preserves all 18 request IDs while tuning the structured first run to 79.8 minutes, eliminating purchase gaps over five minutes, polishing small-screen comprehension, adding reviewed dialogue variety and procedural feedback audio, and measuring the worst representative endpoint state. Phase 09 remains gated on explicit user authorization.
+Phase 08 is implemented, validated, committed as `2cffcd1`, and pushed to `origin/main`. Canonical content version `0.8.0` preserves all 18 request IDs while tuning the structured first run to 79.8 minutes, eliminating purchase gaps over five minutes, polishing small-screen comprehension, adding reviewed dialogue variety and procedural feedback audio, and measuring the worst representative endpoint state. Phase 09 remains gated on explicit user authorization.
 
 ## Completed
 
+- Committed and pushed the Phase 08 implementation as `2cffcd1` to `origin/main`.
 - Shifted pacing from idle cliffs into visible request progress: 25-second first request, first purchase before 60 seconds, Era 2 at 11.7 minutes, Era 3 at 37.0, and four Era 3 requests at 3–6 minutes.
 - Reduced Portable Generator to 425 Stored Energy and Reinforced Wiring to 41,000; the 660-second late gap is now 300 seconds and total idle earning falls from 31.5 to 18.5 minutes.
 - Corrected production online idle generation while preserving active-request modal pause and deterministic offline behavior.
