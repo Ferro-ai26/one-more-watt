@@ -18,10 +18,18 @@
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
-| 14 — Visual, Mobile, and Accessibility QA | Host baseline passed — device evidence/disposition outstanding | Full regression green; checklist reconciled to evidence; physical comfort/safe-area/FPS/heat/battery/lifecycle and ISSUE-004 disposition remain |
-| 15–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
+| 15 — Building Network: Era 4 | Appendix proposed — awaiting explicit approval before coding | Building mood/WATT/requests/maintenance/automation/assets/migration plan ready; no Era 4 implementation yet |
+| 16–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 15 authorized; Era 4 appendix proposed
+
+- Interpreted the user's explicit “phase 15 go” as the Phase 14 content-expansion GO decision and acceptance of the already disclosed device-only QA limitations. Recorded `DEC-033`; Phase 14 closes as Approved with targeted revisions without converting any missing device evidence into a pass.
+- Read the complete Phase 15 contract and permanent gameplay, content, save, character, art/audio, and environmental-escalation specifications. Confirmed the mandatory Era 4 appendix must be approved before coding.
+- Proposed `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md`: Building cutaway/vertical-accumulation art gate, persistent scratched-core service console, six main requests plus one vanity request, seven required infrastructure silhouettes, two deterministic Repair/Replace/Overclock prompts, Predictive Reserve Guard, migration plan, complete production asset list/reuse plan, and a locked Neighborhood endpoint.
+- No Era 4 data, mechanics, save migration, runtime scene, asset, or audio implementation was started. Phase 16/Era 5 remains prohibited.
 
 ### 2026-07-20 — Phase 13 closed; Phase 14 authorized
 

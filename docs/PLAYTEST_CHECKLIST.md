@@ -2,6 +2,17 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 14 visual/mobile/accessibility QA disposition — 2026-07-20
+
+- Host build/state: Phase 13 runtime source `738732d`; Phase 14 baseline commit `36c6a7c`
+- [x] Complete host regression, layouts, state/accessibility coverage, save/offline automation, and performance passed.
+- [x] Targeted Moto G (2025) install/build/scrolling/immediate-purchase evidence retained.
+- [ ] Physical safe areas/comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, Settings `EFFECTIVE UI`, and lifecycle behavior. Explicitly unverified.
+- [x] No blocker/critical defect remains in available evidence.
+- [x] User verdict: **Approved with targeted revisions; GO for Phase 15 content expansion.**
+
+Result: Phase 14 closes under `DEC-033` with device-only gaps accepted as deferred limitations, not passes. `ISSUE-004` remains deferred and `ISSUE-007` remains open. Phase 15 is authorized only through its mandatory appendix gate; no Era 4 coding began in this disposition.
+
 ## Phase 13 Moto G (2025) pass — 2026-07-20, partial/fix required
 
 - Expected source/artifact: commit `1dcb9cf2bc5809cf23f445389c971b909dfea8f9`; `build/android/one_more_watt_phase13_debug.apk`; SHA-256 `c4940b483d4b5dfbe77c4f155958dc4428449c9e8483fed553ff6a5d87eceee8`

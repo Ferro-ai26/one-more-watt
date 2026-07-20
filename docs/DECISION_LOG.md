@@ -242,6 +242,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The user stated they are happy with the results, directed that the remaining playtest be skipped, and requested advancement. The concrete device defect was fixed and retested, while the remaining work is verification rather than an identified blocker/critical defect.
 - Consequences: The unchecked Phase 13 phone-screenshot/full-playtest criterion is an accepted limitation, not a pass. Effective UI, Android/API, safe areas, font comfort, full route, lifecycle, audio, haptics, GPU, heat, battery, and screenshots remain unverified and may be addressed or dispositioned only under Phase 14's contract. `ISSUE-007` remains open. Phase 14 may begin; Phase 15 and Era 4 remain prohibited.
 
+## DEC-033 — Approve Phase 14 with limitations and authorize Era 4 appendix work
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Record Phase 14 as **Approved with targeted revisions**, accept the explicitly reported device-only QA gaps as deferred limitations, record **GO** for content expansion, and authorize Phase 15 — Building Network: Era 4.
+- Reason: The complete host baseline passed without a new defect, the concrete Moto scrolling defect was fixed and physically retested, no blocker/critical issue remains in available evidence, and the user explicitly said “phase 15 go” after the remaining device evidence was disclosed.
+- Consequences: Missing safe-area/comfort, device FPS, 30-minute heat/battery, screenshots, effective-UI, Android/API, repeated-effect comfort, and lifecycle evidence remain unverified. `ISSUE-004` is deferred rather than fixed and must return before release readiness. Phase 15 may prepare its mandatory design/content appendix, but no Era 4 implementation may begin until that appendix is explicitly approved. `ISSUE-007` remains open. Phase 16/Era 5 is prohibited.
+
 ## Proposed decision template
 
 ```markdown

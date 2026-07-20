@@ -2,7 +2,7 @@
 
 ## Test record
 
-- Build/commit: Runtime artifact `738732db1f9bf3086d06e2b2d913eb0f559d561c`; Phase 14 baseline/handoff `a3799b5`
+- Build/commit: Runtime artifact `738732db1f9bf3086d06e2b2d913eb0f559d561c`; Phase 14 baseline/handoff `36c6a7c`
 - Device/resolution: Host Godot at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280; partial Motorola Moto G (2025) evidence at 720 × 1604 / 280 dpi
 - Android version: Skipped by external tester; unverified
 - Tester/date: Codex host audit and user targeted Moto retest; 2026-07-20
@@ -83,9 +83,9 @@ Capture representative screenshots for the main screen, Build, report, brownout,
 ## Verdict
 
 - [ ] Approved
-- [ ] Approved with targeted revisions
+- [x] Approved with targeted revisions
 - [ ] Rework required
 
 ## Phase 14 baseline note
 
-`./tools/validate.sh` passed the complete repository suite at Phase 14 entry. Host performance measured 1,308.2 ms for 25 full Build rebuilds, 496.0 ms for 500 live refreshes, and 294 UI nodes. The successful targeted Moto scrolling/purchase retest is retained, but the user explicitly skipped the remainder of the Phase 13 playtest. Physical safe areas/comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, Settings `EFFECTIVE UI`, and lifecycle behavior remain unchecked. No Phase 14 verdict or content-expansion go/no-go is recorded yet.
+`./tools/validate.sh` passed the complete repository suite at Phase 14 entry. Host performance measured 1,308.2 ms for 25 full Build rebuilds, 496.0 ms for 500 live refreshes, and 294 UI nodes. The successful targeted Moto scrolling/purchase retest is retained, but physical safe areas/comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, Settings `EFFECTIVE UI`, and lifecycle behavior remain unchecked. The user explicitly authorized Phase 15 after this limitation was reported, producing an **Approved with targeted revisions / GO for content expansion** verdict under `DEC-033`. Unchecked items remain unverified and carry forward to later device/release QA.

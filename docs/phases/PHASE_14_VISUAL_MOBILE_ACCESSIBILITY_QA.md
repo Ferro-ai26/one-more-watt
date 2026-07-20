@@ -1,6 +1,6 @@
 # Phase 14 — Visual, Mobile, and Accessibility QA
 
-Status: In Progress — Host Baseline Passed; Device Evidence/Disposition Outstanding
+Status: Closed — Approved with User-Accepted Device-QA Limitations (2026-07-20)
 
 ## Objective
 
@@ -40,13 +40,15 @@ The skinned Eras 1–3 build is visually consistent, comfortably sized, responsi
 - [ ] `VISUAL_QA_CHECKLIST.md` completed with evidence
 - [ ] ISSUE-004 is verified fixed on the Moto phone, or original-device unavailability and a user-approved representative-device disposition are recorded with rationale
 - [ ] All frequent controls are comfortably sized
-- [ ] No clipping/overlap at supported layouts and text sizes
-- [ ] Critical states do not depend on color alone
-- [ ] Reduced motion preserves meaning
+- [x] No clipping/overlap at supported layouts and text sizes
+- [x] Critical states do not depend on color alone
+- [x] Reduced motion preserves meaning
 - [ ] Main screen meets performance target on tested hardware
-- [ ] Save/offline/lifecycle behavior remains reliable
-- [ ] No blocker/critical visual or functional issue remains
-- [ ] User records go/no-go for content expansion
+- [x] Save/offline behavior remains reliable in host regression; physical lifecycle remained skipped
+- [x] No blocker/critical visual or functional issue remains in available evidence
+- [x] User records go/no-go for content expansion — **GO: Phase 15 authorized**
+
+Closure disposition: the user explicitly authorized Phase 15 after being told that device-only Phase 14 evidence remained open. The host baseline and targeted Moto scrolling/purchase retest are accepted as sufficient to continue content expansion, while the first three unchecked items and device FPS/heat/battery/lifecycle evidence remain limitations rather than passes. `ISSUE-004` is deferred for a later device/release QA gate; `ISSUE-007` remains open. This exception does not authorize Phase 16.
 
 ## Stop condition
 

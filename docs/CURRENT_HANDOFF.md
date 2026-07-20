@@ -2,9 +2,9 @@
 
 Updated: 2026-07-20
 
-Active phase: Phase 14 — Visual, Mobile, and Accessibility QA
+Active phase: Phase 15 — Building Network: Era 4
 
-Status: Host Baseline Passed — Device Evidence/Disposition Outstanding
+Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
 
 ## Exact result achieved
 
@@ -31,6 +31,10 @@ The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.
 
 Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST.md` now maps each evidenced host pass and leaves device-only observations unchecked. Current measurements are 1,308.2 ms for 25 Build rebuilds, 496.0 ms for 500 refreshes, 294 nodes, and a 10,019.4 KiB inherited isolated skin-memory delta.
 
+The user subsequently said “phase 15 go.” `DEC-033` closes Phase 14 as Approved with targeted revisions, records GO for content expansion, and accepts the already disclosed device-only gaps as deferred limitations rather than passes. `ISSUE-004` remains deferred for later device/release QA; `ISSUE-007` remains open.
+
+The complete Phase 15 contract and permanent gameplay/content/save/visual specifications were read. The mandatory pre-code Era 4 appendix is proposed at `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md`. It defines the Building cutaway mood, vertical-accumulation motif, scratched-core service console plus lobby face, six main requests and one optional vanity request, seven required infrastructure silhouettes, two deterministic Repair/Replace/Overclock prompts, Predictive Reserve Guard, House-to-Building pullback, save/content migration, production asset/reuse plan, validation plan, and locked Neighborhood endpoint. No Era 4 implementation has begun because the appendix is awaiting explicit approval.
+
 ## Files changed
 
 - Runtime: `era_environment_view.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, `main_ui.gd`, `main_view_model.gd`, `shop_item_card.gd`, `vital_card.gd`, `feedback_audio.gd`, and `ShopItemCard.tscn`.
@@ -38,6 +42,7 @@ Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST
 - Validation/inventory: `test_main_ui_systems.gd`, `test_ui.sh`, `validate.sh`, `asset_inventory.json`, and setup/test documentation.
 - Evidence/docs: `docs/phase_13/`, Phase 13 contract status, `ACTIVE_PHASE.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, and this handoff.
 - Phase 14 evidence: reconciled `VISUAL_QA_CHECKLIST.md` and `docs/phase_14/HOST_QA_BASELINE.md`.
+- Phase 15 proposal: `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md`, Phase 15 contract status, active phase, decision/progress/handoff updates.
 
 ## Commands/tests run and results
 
@@ -56,6 +61,7 @@ Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST
 - Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed.
 - Targeted external retest: Settings build `738732db1f9b` confirmed; Build, Upgrades, Reports, and Settings scrolling passed; affordable immediate purchase without popup passed. Effective UI and Android version/API were skipped.
 - Phase 14 baseline `./tools/validate.sh`: complete repository suite and headless launch passed; no runtime correction was required.
+- Phase 15 appendix-gate `git diff --check && ./tools/validate.sh`: passed with no whitespace errors; all repository suites, five portrait layouts, and the headless smoke launch remained green. No runtime or authored-content file changed; measured host performance was 1,376.3 ms for 25 Build rebuilds, 490.6 ms for 500 refreshes, and 294 nodes.
 
 ## Manual verification
 
@@ -65,18 +71,18 @@ Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST
 - The first physical pass confirmed install/cold launch and supplied the exact model/display/density, then stopped for the concrete scroll defect. The replacement passed the targeted scroll/purchase retest. No screenshots, full playthrough, audible speaker/headphone mix review, or safe-area/accessibility/lifecycle/haptic/GPU/heat/battery result is claimed.
 - Manually inspected the follow-up host Build and Settings captures at 320 × 568 and Settings at 393 × 873 after removing the toggle; no horizontal clipping or new placeholder direction was introduced.
 
-## Phase 14 acceptance criteria
+## Phase 15 acceptance criteria
 
-- Complete `VISUAL_QA_CHECKLIST.md` with evidence across direction, layouts, states, motion, accessibility, assets, and performance.
-- Resolve or disposition `ISSUE-004` under the Phase 14 contract without fabricating skipped Moto metadata.
-- Verify controls, clipping, color independence, reduced motion, performance, save/offline/lifecycle, and absence of blocker/critical issues.
-- Record the user go/no-go for content expansion. This is not yet requested or inferred.
+- First obtain explicit approval of the proposed Era 4 appendix; implementation is blocked until then.
+- After approval: implement/migrate/tune the complete Era 4 route, meaningful infrequent maintenance, production presentation, assets/audio, Android regression, and manual evidence.
+- Stop before Neighborhood/Era 5 and Phase 16.
 
 ## Known blockers
 
-- No Android device or emulator is attached to the current ARM64 VPS. Device-only Phase 14 evidence depends on external testing or a user-approved representative-device disposition.
+- The Phase 15 art/content appendix is not yet approved, so Era 4 coding cannot begin.
+- No Android device or emulator is attached to the current ARM64 VPS; later Phase 15 Android/manual evidence will require external testing or an explicitly accepted limitation.
 - `ISSUE-007` deliberately remains open: the current project-original code-native layer is reusable and directionally faithful, but final tactile painted environment/WATT/infrastructure art belongs to the later gold-standard visual-production pass.
 
-## Recommended next action inside Phase 14
+## Recommended next action inside Phase 15
 
-Obtain the remaining Phase 14 physical evidence or an explicit contract-compliant disposition, beginning with `ISSUE-004` physical comfort/Settings diagnostics/screenshot, safe areas, device FPS, repeated-effect comfort, lifecycle, and a 30-minute heat/battery observation. Record the user go/no-go only after the evidence/disposition is clear. Do not add Era 4 or begin Phase 15.
+Present the Era 4 appendix for explicit approval. If approved, record that decision and begin data/schema/save work before presentation integration. If revisions are requested, revise only the appendix. Do not code before approval, add Era 5, or begin Phase 16.

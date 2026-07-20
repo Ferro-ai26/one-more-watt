@@ -24,6 +24,8 @@ Host: Ubuntu 24.04 ARM64 VPS, Godot 4.6.2 GL Compatibility, headless/Xvfb eviden
 
 `docs/VISUAL_QA_CHECKLIST.md` records the host-evidenced passes. Existing Phase 13 captures remain the visual baseline and were already inspected against the locked phone board. The targeted Moto G (2025) retest proves install/cold launch, exact build identity, scrolling across both shared paths, and immediate purchasing.
 
-Physical safe areas and comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, Settings `EFFECTIVE UI`, and lifecycle behavior remain unverified. `ISSUE-004` therefore remains incomplete under the Phase 14 contract. No Phase 14 verdict or content-expansion go/no-go is recorded.
+Physical safe areas and comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, Settings `EFFECTIVE UI`, and lifecycle behavior remain unverified. `ISSUE-004` was therefore incomplete at baseline time, when no Phase 14 verdict or content-expansion go/no-go had yet been recorded.
 
-`ISSUE-007` remains open: this QA baseline does not promote the provisional code-native presentation to final painted-art approval. Era 4 and Phase 15 have not begun.
+Closure update: the user subsequently authorized Phase 15 after these gaps were reported. Under `DEC-033`, Phase 14 closes as **Approved with targeted revisions**, content expansion is **GO**, and the device-only gaps remain deferred limitations rather than passes. `ISSUE-004` remains deferred for later device/release QA.
+
+`ISSUE-007` remains open: this QA baseline does not promote the provisional code-native presentation to final painted-art approval. Phase 15 is active only at its mandatory appendix gate; Era 4 implementation has not begun, and Phase 16 is not authorized.

@@ -62,7 +62,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 
 ### ISSUE-004 — Phone presentation appears too small
 
-- Status: Partial Moto Retest — Phase 14 Evidence Incomplete
+- Status: Deferred — User Accepted Phase 14 Limitation
 - Severity: Minor
 - First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
 - Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization; device verification deferred to Phase 14
@@ -73,7 +73,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 - Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small. Repository diagnosis found that the requested 720 × 1280 base was already configured. Godot's canvas stretch scaled from pixel resolution while the UI treated its 48 logical-pixel target as 48 Android dp, so dense displays could render the interface physically smaller than intended.
 - Evidence/log: The original report identified a Moto but omitted device details. Phase 13 follow-up identified a Motorola Moto G (2025), 720 × 1604 at 280 dpi, and confirmed version/build plus corrected scrolling/purchasing. The tester explicitly skipped Android/API, Settings `EFFECTIVE UI`, screenshots, and the remaining comfort review. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls.
 - Workaround: None required to continue the tested core flow.
-- Fix verification: Host implementation/regression passes and the density-aware layout remains green at five portrait sizes with maximum text and reduced motion. The Phase 13 replacement ran successfully on the original Moto G (2025), but the Phase 14 contract requires the skipped effective-UI/screenshot/physical-comfort evidence or an explicit user-approved disposition. Do not mark ISSUE-004 fixed from the scrolling/purchase retest alone.
+- Fix verification: Host implementation/regression passes and the density-aware layout remains green at five portrait sizes with maximum text and reduced motion. The Phase 13 replacement ran successfully on the original Moto G (2025), but effective-UI/screenshot/physical-comfort evidence was skipped. The user accepted this Phase 14 limitation and authorized Phase 15 under `DEC-033`. ISSUE-004 is deferred—not fixed—and must return at a later device/release QA gate before release-readiness claims.
 
 ### ISSUE-006 — Larger-text setting did not scale explicit UI fonts
 
