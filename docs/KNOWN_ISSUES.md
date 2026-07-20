@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 09 is closed with the decision “continue with targeted revisions.” Manual Moto testing verified install, cold launch, build identity, onboarding, and touch purchases. No blocker or critical defect was reported. The remaining device matrix was skipped at the tester's request and is not claimed as passed.
+Phase 09 is closed with the decision “continue with targeted revisions.” Phase 10 host fixes and revised APK inspection are complete, but the targeted phone retest remains pending. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The remaining device matrix was skipped and is not claimed as passed.
 
 ### ISSUE-004 — Phone presentation appears too small
 
@@ -25,7 +25,7 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Man
 - Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small. Repository diagnosis found that the requested 720 × 1280 base was already configured. Godot's canvas stretch scaled from pixel resolution while the UI treated its 48 logical-pixel target as 48 Android dp, so dense displays could render the interface physically smaller than intended.
 - Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls. Density reference tests resolve 1080 × 2400 at 480 dpi and 720 × 1600 at 320 dpi to 360 × 800 effective logical units.
 - Workaround: None required to continue the tested core flow.
-- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK inspection and repeat Moto review remain pending.
+- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK from `0c4f44e` passed static inspection with SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`; repeat Moto review remains pending.
 
 ### ISSUE-006 — Larger-text setting did not scale explicit UI fonts
 

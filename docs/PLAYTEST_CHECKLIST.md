@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 10 host scale/layout pass — 2026-07-20
 
-- Build/commit: Uncommitted Phase 10 implementation checkpoint
+- Build/commit: `0c4f44e259c919065ff40ff4142c2ea0e33ed5fe`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex
@@ -14,7 +14,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Exercised authorization, report, brownout, Build, Upgrades, Reports, Settings, Android Back handling, reduced motion, and maximum 130% text at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280.
 - [x] Generated 35 graphical captures and inspected representative smallest/reference authorization and Settings states plus the 360 × 640 Build state. Authorization remained initially reachable, settings scrolled intentionally at 320 × 568, and no inspected state clipped horizontally.
 - [x] Full repository regression passed after the changes; gameplay balance, reachability, save/offline behavior, content, and Android configuration remain unchanged and green.
-- [ ] Revised Phase 10 APK exported and statically inspected from a clean commit.
+- [x] Revised Phase 10 APK exported from the clean recorded commit and statically inspected: 55,802,078 bytes; SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`; package/version/API/architectures/permission/signature/alignment/orientation/build ID passed.
 - [ ] Revised APK installed and reviewed on the Moto phone for comfortable physical size.
 - [ ] Exact Moto model, Android/API, physical resolution/density, screenshot, and navigation/cutout mode recorded.
 - [ ] Background/resume, force-close recovery, Android Back, brownout, sound/haptics, safe areas, endpoint, and device performance checked where practical.

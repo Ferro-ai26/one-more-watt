@@ -1,4 +1,59 @@
-# Phase 09 Android Device Test
+# Android Device Tests
+
+## Phase 10 targeted stabilization retest
+
+Use this section with the exact revised artifact before Phase 10 closure.
+
+### Artifact identity
+
+- Source commit: `0c4f44e259c919065ff40ff4142c2ea0e33ed5fe`
+- Package: `com.ferroai.onemorewatt`
+- Version/build shown in Settings: `0.10.0-dev` / `0c4f44e259c9`
+- APK: `build/android/one_more_watt_phase10_debug.apk`
+- Expected SHA-256: `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`
+
+Prefer a non-destructive update first:
+
+```bash
+sha256sum build/android/one_more_watt_phase10_debug.apk
+adb install -r build/android/one_more_watt_phase10_debug.apk
+adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 1
+```
+
+Warning: uninstalling the package deletes its local save. Preserve any wanted save before a fresh-install pass.
+
+### Device and scale evidence
+
+- Tester/date:
+- Manufacturer/exact model:
+- Android version/API:
+- Navigation mode and cutout/system-bar notes:
+- Settings `DISPLAY` line (physical pixels and dpi):
+- Settings `EFFECTIVE UI` line (logical dimensions and scale):
+- Screenshot/video identifiers:
+
+### Required targeted checks
+
+- [ ] APK hash matches and update/fresh install succeeds.
+- [ ] Cold launch succeeds and Settings shows `0.10.0-dev` / `0c4f44e259c9`.
+- [ ] Early onboarding is comfortably sized, not merely technically readable.
+- [ ] Authorize, Build, Upgrades, and primary navigation work by touch.
+- [ ] Default, 115%, and 130% Text size remain usable; 130% may scroll vertically but must not clip horizontally.
+- [ ] Reduced motion retains semantic state feedback.
+- [ ] Cutout, status/navigation bars, and gesture insets do not obstruct controls.
+- [ ] Android Back closes a modal, returns a secondary tab to Grid, then exits from Grid.
+- [ ] A brownout can be triggered/recovered without lost progress.
+- [ ] Background/resume produces the bounded offline report and preserves active progress.
+- [ ] Force-close/relaunch preserves key state and does not duplicate rewards.
+- [ ] Sound is audible/pauses appropriately; haptics follow the setting.
+- [ ] If practical, record endpoint reachability, 30-minute FPS/memory/battery/heat, and the two-hour offline cap.
+- [ ] Each additional small bug has concrete reproduction/expected/actual evidence, or remains Needs Information.
+
+### Phase 10 retest result
+
+Pending. The current VPS has no attached Android device. Host build/static inspection passed, but no revised-APK runtime claim is made.
+
+## Phase 09 historical device test
 
 Use this checklist on physical Android hardware. The current VPS cannot supply this evidence.
 

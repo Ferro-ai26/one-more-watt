@@ -1,4 +1,41 @@
-# Phase 09 Android Build Record
+# Android Build Records
+
+## Phase 10 stabilization build
+
+Status: Host build/static inspection passed; targeted Moto retest pending
+Build UTC: 2026-07-20T07:39:10Z
+
+### Source and artifact
+
+- Source commit: `0c4f44e259c919065ff40ff4142c2ea0e33ed5fe`
+- In-app build identifier: `0c4f44e259c9`
+- Artifact: `build/android/one_more_watt_phase10_debug.apk`
+- Bytes: 55,802,078
+- SHA-256: `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`
+- Export command: `./tools/build_android_debug.sh`
+
+### Verified artifact properties
+
+- Package/label: `com.ferroai.onemorewatt` / `ONE MORE WATT`
+- Version: code 10, name `0.10.0-dev`
+- Minimum/target/compile SDK: API 24 / API 35 / API 35
+- Native architectures: arm64-v8a and x86_64
+- Orientation: portrait; activity is resizeable and declares configuration changes
+- Permissions: `android.permission.VIBRATE` only; no Internet or network-state permission
+- Backup flag: disabled
+- Signature: APK Signature Scheme v2 and v3 verified
+- Debug certificate SHA-256: `dc02e125341858dd653149c58e1c3fa42da24f0210b2001054fa5d60cfe9192f`
+- ZIP alignment: four-byte verification passed
+- Embedded project metadata contains build identifier `0c4f44e259c9`
+- Export log contained no Godot `ERROR:` line
+
+The toolchain and signing boundary match the Phase 09 record below. The artifact, export log, and generated manifest remain ignored by Git. Rebuilding from another source commit or debug keystore may produce a different checksum/signature.
+
+### Device boundary
+
+`./tools/android_device_smoke.sh` found no ready ADB device and performed no installation. This build is not claimed as Android runtime evidence. Complete the Phase 10 section of `ANDROID_DEVICE_TEST.md` on the Moto phone.
+
+## Phase 09 Android Build Record
 
 Status: Host build/static inspection passed; partial manual Moto phone evidence recorded
 Build UTC: 2026-07-20T04:25:54Z
