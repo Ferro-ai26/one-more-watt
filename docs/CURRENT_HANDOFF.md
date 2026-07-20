@@ -5,10 +5,11 @@ Active phase: Phase 03 — Request and WATT System
 
 ## Current state
 
-Phase 03 is implemented and validated in the working tree. A request-domain coordinator connects immutable authored definitions to the Phase 02 grid and supports the complete locked, available, announced, authorized, running, completed, and reported lifecycle. Four focused samples exercise Capacity, Stability, Burst, and Research without adding Phase 04 purchases or the full prototype catalog.
+Phase 03 is implemented, validated, committed as `2bd30ac`, and pushed to `origin/main`. A request-domain coordinator connects immutable authored definitions to the Phase 02 grid and supports the complete locked, available, announced, authorized, running, completed, and reported lifecycle. Four focused samples exercise Capacity, Stability, Burst, and Research without adding Phase 04 purchases or the full prototype catalog.
 
 ## Completed
 
+- Committed and pushed the Phase 03 implementation as `2bd30ac` to `origin/main`.
 - Added deterministic demand-profile sampling, seeded non-destructive incidents, preview/runtime parity, underprepared warnings, and permissive authorization.
 - Added monotonic progress from served request demand plus capped WATT surplus allocation at fixed 0.25-second steps.
 - Added one-time research costs, idempotent completion rewards, stable-ID unlock events, and next-available request selection.

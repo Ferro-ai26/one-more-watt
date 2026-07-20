@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 03 request-lifecycle verification — 2026-07-20
 
-- Build/commit: Uncommitted Phase 03 working tree based on `5724856`
+- Build/commit: `2bd30ac`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex
