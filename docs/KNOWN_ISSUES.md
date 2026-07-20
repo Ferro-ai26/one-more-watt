@@ -62,7 +62,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 
 ### ISSUE-004 — Phone presentation appears too small
 
-- Status: Fix Implemented — Device Verification Deferred
+- Status: Partial Moto Retest — Phase 14 Evidence Incomplete
 - Severity: Minor
 - First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
 - Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization; device verification deferred to Phase 14
@@ -71,9 +71,9 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
   2. Review the early onboarding presentation.
 - Expected: The mobile presentation uses a comfortable phone-scale resolution; tester requested a 720p target.
 - Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small. Repository diagnosis found that the requested 720 × 1280 base was already configured. Godot's canvas stretch scaled from pixel resolution while the UI treated its 48 logical-pixel target as 48 Android dp, so dense displays could render the interface physically smaller than intended.
-- Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls. Density reference tests resolve 1080 × 2400 at 480 dpi and 720 × 1600 at 320 dpi to 360 × 800 effective logical units.
+- Evidence/log: The original report identified a Moto but omitted device details. Phase 13 follow-up identified a Motorola Moto G (2025), 720 × 1604 at 280 dpi, and confirmed version/build plus corrected scrolling/purchasing. The tester explicitly skipped Android/API, Settings `EFFECTIVE UI`, screenshots, and the remaining comfort review. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls.
 - Workaround: None required to continue the tested core flow.
-- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK from `0c4f44e` passed static inspection with SHA-256 `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`. The user accepted closure without a repeat Moto run; physical comfort and device-detail verification are explicitly deferred to Phase 14 and are not claimed as passing.
+- Fix verification: Host implementation/regression passes and the density-aware layout remains green at five portrait sizes with maximum text and reduced motion. The Phase 13 replacement ran successfully on the original Moto G (2025), but the Phase 14 contract requires the skipped effective-UI/screenshot/physical-comfort evidence or an explicit user-approved disposition. Do not mark ISSUE-004 fixed from the scrolling/purchase retest alone.
 
 ### ISSUE-006 — Larger-text setting did not scale explicit UI fonts
 

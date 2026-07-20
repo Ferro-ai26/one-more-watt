@@ -4,7 +4,7 @@ Updated: 2026-07-20
 
 Active phase: Phase 14 — Visual, Mobile, and Accessibility QA
 
-Status: Authorized — Host QA Ready
+Status: Host Baseline Passed — Device Evidence/Disposition Outstanding
 
 ## Exact result achieved
 
@@ -17,7 +17,7 @@ Phase 12 commit `ae61a94` was pushed to `origin/main` and remote synchronization
 - 12 final host-rendered evidence images covering Eras 1–3, Main, Build, report, brownout, pullback, 130% text, and 320 × 568;
 - a 44-check headless Phase 13 suite and 68-check graphical capture run integrated into UI/full validation.
 
-No generated Phase 11 raster is integrated. No gameplay formula, balance value, save schema, content progression, Android foundation, request order, or era number changed. Era 4 and Phase 14 were not started. Under `DEC-030`, this reusable code-native layer is production-functional but not approval of final painted art; `ISSUE-007` remains open for the later gold-standard visual-production pass.
+No generated Phase 11 raster is integrated. No gameplay formula, balance value, save schema, content progression, Android foundation, request order, or era number changed during Phase 13. Era 4 was not started. Under `DEC-030`, this reusable code-native layer is production-functional but not approval of final painted art; `ISSUE-007` remains open for the later gold-standard visual-production pass.
 
 A first external Phase 13 pass installed and cold-launched the clean commit-`1dcb9cf` APK on a Motorola Moto G (2025), reported at 720 × 1604 / 280 dpi with app version `v0.10.0-dev`. It found that Build and Upgrades could not scroll by touch and that a cost-threshold purchase confirmation appeared only for some purchases. The Phase 13 follow-up now:
 
@@ -29,12 +29,15 @@ Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build
 
 The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.md`, `RELEASE_READINESS_DEFINITION.md`, and all Phase 13 evidence have been read. Phase 14 is active for independent visual/mobile/accessibility QA and proven corrections only. Era 4, Phase 15, major direction changes, and final painted-art approval remain outside scope.
 
+Phase 14 entry validation passed without a new host defect. `VISUAL_QA_CHECKLIST.md` now maps each evidenced host pass and leaves device-only observations unchecked. Current measurements are 1,308.2 ms for 25 Build rebuilds, 496.0 ms for 500 refreshes, 294 nodes, and a 10,019.4 KiB inherited isolated skin-memory delta.
+
 ## Files changed
 
 - Runtime: `era_environment_view.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, `main_ui.gd`, `main_view_model.gd`, `shop_item_card.gd`, `vital_card.gd`, `feedback_audio.gd`, and `ShopItemCard.tscn`.
 - Added: `infrastructure_glyph.gd`, `touch_scroll_container.gd`, `test_phase13_production_skin.gd`, and `test_phase13_skin.sh`.
 - Validation/inventory: `test_main_ui_systems.gd`, `test_ui.sh`, `validate.sh`, `asset_inventory.json`, and setup/test documentation.
 - Evidence/docs: `docs/phase_13/`, Phase 13 contract status, `ACTIVE_PHASE.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, and this handoff.
+- Phase 14 evidence: reconciled `VISUAL_QA_CHECKLIST.md` and `docs/phase_14/HOST_QA_BASELINE.md`.
 
 ## Commands/tests run and results
 
@@ -52,6 +55,7 @@ The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.
 - Follow-up graphical layout capture: passed 461 checks across 35 states at five portrait sizes. Manually inspected the changed 320 × 568 Build/Settings and 393 × 873 Settings captures; scrolling affordance, removed confirmation toggle, world-first drawer, and horizontal fit remain correct.
 - Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed.
 - Targeted external retest: Settings build `738732db1f9b` confirmed; Build, Upgrades, Reports, and Settings scrolling passed; affordable immediate purchase without popup passed. Effective UI and Android version/API were skipped.
+- Phase 14 baseline `./tools/validate.sh`: complete repository suite and headless launch passed; no runtime correction was required.
 
 ## Manual verification
 
@@ -75,4 +79,4 @@ The complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.
 
 ## Recommended next action inside Phase 14
 
-Begin with a clean host baseline: reconcile `VISUAL_QA_CHECKLIST.md` against existing Phase 13 evidence, run the full automation/layout/state/performance suite, inspect fresh representative captures, and record only evidenced passes. Then identify the smallest remaining physical-device evidence request or required disposition. Do not add Era 4 or begin Phase 15.
+Obtain the remaining Phase 14 physical evidence or an explicit contract-compliant disposition, beginning with `ISSUE-004` physical comfort/Settings diagnostics/screenshot, safe areas, device FPS, repeated-effect comfort, lifecycle, and a 30-minute heat/battery observation. Record the user go/no-go only after the evidence/disposition is clear. Do not add Era 4 or begin Phase 15.

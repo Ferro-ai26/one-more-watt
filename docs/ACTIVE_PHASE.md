@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 14 — Visual, Mobile, and Accessibility QA
-Status: Authorized — Host QA Ready
+Status: Host Baseline Passed — Device Evidence/Disposition Outstanding
 
 Authoritative phase contract:
 
@@ -19,6 +19,6 @@ Do not integrate generated concept backgrounds as production art, add Era 4, cha
 
 Phase 11 is closed and pushed at commit `d4b611f`. Every Phase 11 acceptance criterion passed, the phone-board composition/core direction is locked, and generated imagery remains reference-only. The runtime remains the validated Phase 10 functional baseline. `ISSUE-004` physical Android verification remains deferred to Phase 14.
 
-Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Phase 13 must preserve those technical contracts while manually reconstructing the Eras 1–3 presentation in code-native/project-original form. Production-painted environment/WATT art remains an explicit later fallback under `ISSUE-007`; generated Phase 11 imagery remains reference-only.
+Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Phase 13 preserved those technical contracts while manually reconstructing the Eras 1–3 presentation in code-native/project-original form. Production-painted environment/WATT art remains an explicit later fallback under `ISSUE-007`; generated Phase 11 imagery remains reference-only.
 
 Phase 13 is closed under `DEC-032` with an explicitly accepted verification limitation. A Motorola Moto G (2025) pass at 720 × 1604 / 280 dpi confirmed install/cold launch, and replacement build `738732db1f9b` confirmed Build/Upgrades/Reports/Settings scrolling plus immediate purchasing; `ISSUE-009` is fixed. The user explicitly skipped the remainder of the Phase 13 playtest and accepted the result. Skipped effective-UI, Android/API, screenshots, full-route, lifecycle, audio, haptic, GPU, heat, and battery items remain unverified—not passed—and feed the Phase 14 QA record where applicable. `ISSUE-004` remains a Phase 14 acceptance item. Phase 15 is not authorized.

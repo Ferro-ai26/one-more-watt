@@ -18,7 +18,7 @@
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
-| 14 — Visual, Mobile, and Accessibility QA | Authorized — host QA ready | Complete contract/handoff/required evidence read; no Era 4 or Phase 15 work authorized |
+| 14 — Visual, Mobile, and Accessibility QA | Host baseline passed — device evidence/disposition outstanding | Full regression green; checklist reconciled to evidence; physical comfort/safe-area/FPS/heat/battery/lifecycle and ISSUE-004 disposition remain |
 | 15–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
@@ -29,6 +29,13 @@
 - Recorded `DEC-032`. Phase 13's unchecked phone-screenshot/full-playtest criterion remains an accepted limitation rather than a pass; all skipped device details and qualitative checks remain labeled unverified.
 - Closed `ISSUE-008` by accepted disposition, not by claiming missing evidence. `ISSUE-009` remains fixed and `ISSUE-007` remains open for later gold-standard art.
 - Read the complete Phase 14 contract, `VISUAL_QA_CHECKLIST.md`, `ANDROID_RELEASE_SPEC.md`, `RELEASE_READINESS_DEFINITION.md`, and all Phase 13 evidence. Phase 14 is authorized for QA/corrections only. Era 4 and Phase 15 remain prohibited.
+
+### 2026-07-20 — Phase 14 host baseline passed
+
+- `./tools/validate.sh` passed the complete repository suite and headless launch at Phase 14 entry: 426 Main-UI, 81 Phase 12 skin, 51 Phase 13 skin, 908 balance/reachability, 111 UI/performance, persistence/offline, and five-layout checks are green.
+- Host performance measured 1,308.2 ms for 25 Build rebuilds, 496.0 ms for 500 live refreshes, and 294 UI nodes; the inherited skin memory measurement is 10,019.4 KiB.
+- Reconciled `VISUAL_QA_CHECKLIST.md` to exact existing evidence. Direction, component/state coverage, host layouts/text sizes, reduced motion, color-independent signals, assets/provenance, memory, transitions, and APK size are evidenced passes.
+- Left physical safe areas/comfort, device FPS, repeated-effect comfort, 30-minute heat/battery, screenshots, Android/API, effective UI, and lifecycle checks unchecked. No verdict or content-expansion go/no-go is inferred. No runtime correction was needed from the host baseline.
 
 ### 2026-07-20 — Phase 13 targeted Moto retest passed
 
