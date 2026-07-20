@@ -40,7 +40,7 @@ No Era 5 data, mechanics, migration, runtime scene, asset, audio, or test implem
 - The locked `phone_board.png` and Phase 15 Neighborhood pullback evidence were visually inspected at original resolution.
 - Final proposal `./tools/validate.sh`: passed every repository suite through Phase 15 and headless launch after the documentation changes. The final performance sample was 811.5 ms for 25 Build rebuilds, 548.7 ms for 500 live refreshes, and 378 nodes.
 - Final `git diff --check`: passed.
-- Proposal commit/push evidence must be appended after publication.
+- Proposal commit `65dae8507d7f95c96472ce46f7448df4ab2048b3` (`Phase 16: propose Era 5 design appendix`) pushed successfully; local and `origin/main` matched that commit before this handoff-only record.
 
 ## Manual verification
 
