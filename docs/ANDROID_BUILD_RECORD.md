@@ -1,6 +1,6 @@
 # Phase 09 Android Build Record
 
-Status: Host build and static inspection passed; physical-device verification pending
+Status: Host build/static inspection passed; partial manual Moto phone evidence recorded
 Build UTC: 2026-07-20T04:25:54Z
 
 ## Source and artifact
@@ -49,4 +49,4 @@ The artifact and generated `export.log`/`build_manifest.txt` are intentionally i
 
 Godot's editor performs a background device probe using the SDK's x86_64 platform-tools binary, which prints an ARM64 binfmt loader message on this VPS. Export itself completes with exit 0, and static inspection uses native ARM64 tools. This does not constitute device execution.
 
-ADB reported no connected device. `/dev/kvm` and an Android emulator binary are unavailable, so install/launch, touch, safe-area, lifecycle, audio, haptic, storage, performance, battery, and heat checks are not claimed.
+ADB reported no connected device and `/dev/kvm`/emulator remain unavailable. Kevin separately reported successful APK install/cold launch, correct build identity, readable/authorizable onboarding, and working Build/Upgrade touch purchases on a Moto phone. Exact device/API details and all other device checks were skipped; see `ANDROID_DEVICE_TEST.md`.

@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 09 — Android Prototype
-Status: Blocked — Awaiting physical Android device
+Status: Closed — Continue with targeted revisions; device matrix partial
 
 Authoritative phase contract:
 
@@ -9,4 +9,4 @@ Authoritative phase contract:
 
 ## Session instruction
 
-Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 09 was explicitly authorized by the user on 2026-07-20. Host build/static verification is complete; resume only when physical Android hardware is available. Do not begin Phase 10 automatically.
+Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 09 concluded with partial manual device evidence and the decision “continue with targeted revisions.” Do not begin the existing Phase 10; the roadmap and document pack are being revised.

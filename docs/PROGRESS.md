@@ -13,10 +13,18 @@
 | 06 — Save and Offline Progress | Complete | Commit `143ccf9`; 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
-| 09 — Android Prototype | Blocked on device | APK from `e165b2b` built and statically verified; physical install/lifecycle/playtest evidence pending |
-| 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
+| 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
+| 10–16 — Expansion and Release | Gated/revision pending | Existing Phase 10 must not start while roadmap/document pack is revised |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 09 manual device report and closure
+
+- Kevin manually installed and cold-launched the recorded APK on a Moto phone; Settings showed `0.9.0-dev` / `e165b2b7ace7`.
+- Early onboarding remained readable/authorizable, and Build/Upgrade touch purchases worked.
+- Recorded `ISSUE-004`: presentation appeared too small; tester requested a later 720p/scale revision.
+- Brownout, Android Back, lifecycle/offline, force-close recovery, audio/haptics, full safe-area review, endpoint, and device performance checks were skipped at the tester's request and are not claimed as passing.
+- Final Phase 09 decision: continue with targeted revisions. Phase 10 did not begin because the roadmap/document pack is being revised.
 
 ### 2026-07-20 — Phase 09 Android prototype started
 
@@ -28,7 +36,7 @@
 - Built the final host-verified debug APK from `e165b2b7ace78a848b1eed4431f919804a8b8e6f`; SHA-256 `8402cde8c980c6f226dc7ac88df977692ba0822bd332d1e246055afd66c1785a`.
 - Verified package/version/API levels, arm64-v8a/x86_64 payloads, only `VIBRATE` permission, v2/v3 signature, ZIP alignment, embedded build identifier, portrait manifest, and the generated launcher icon.
 - Added a reproducible Android build record, physical-device checklist, and guarded install/launch smoke script.
-- Physical-device verification remains unavailable because ADB has no attached device and the ARM64 VPS has no emulator or `/dev/kvm`; Phase 09 remains blocked and Phase 10 is not authorized.
+- Direct VPS device verification remained unavailable because ADB had no attached device and the ARM64 VPS had no emulator or `/dev/kvm`; a later manual phone report supplied the available device evidence.
 
 ### 2026-07-20 — Phase 08 balance and prototype polish
 

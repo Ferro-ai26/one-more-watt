@@ -136,6 +136,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The prototype has no custom Java/plugin dependency requiring Gradle, while a deterministic script makes artifact provenance and PC handoff repeatable. x86_64 supports a future emulator pass and arm64-v8a covers the intended physical-device pass.
 - Consequences: The prebuilt template supplies minimum API 24 and target API 35. A production AAB, release signing, store assets, and additional architectures remain outside Phase 09. The publisher approved the permanent package identifier `com.ferroai.onemorewatt` on 2026-07-20.
 
+## DEC-020 — Close Phase 09 with targeted revisions
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Conclude Phase 09 with “continue with targeted revisions.” Accept Kevin's manual Moto phone report as the available physical-device evidence while recording every skipped device check as unverified. Do not begin the existing Phase 10 because the roadmap and document pack are being revised.
+- Reason: The recorded APK passed host build/static verification and successfully installed/launched on physical hardware with working onboarding and touch purchases. The tester reported no blocker/critical defect, but found a minor presentation-scale issue and chose to skip the remaining questionnaire.
+- Consequences: `ISSUE-004` remains open for a later 720p/scale revision. Brownout/Back, lifecycle/offline, force-close, audio/haptics, safe-area, endpoint, and device-performance behavior are not promoted to passing evidence. Future planning must account for those validation gaps before external release claims.
+
 ## Proposed decision template
 
 ```markdown

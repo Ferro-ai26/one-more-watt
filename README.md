@@ -34,7 +34,7 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 09 is preparing the complete Eras 1–3 vertical slice for Android verification. The host-side lifecycle and build-provenance work is in place, `com.ferroai.onemorewatt` is approved in the export preset, and the Android 35 SDK/templates are available. Physical-device acceptance requires an attached Android device. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 09 is closed with the decision “continue with targeted revisions.” The recorded APK passed host build/static verification, and Kevin's partial Moto phone test confirmed install, cold launch, build identity, onboarding, and touch purchases. The remaining device matrix was skipped and is not claimed as passing. Do not begin the existing Phase 10 while the roadmap/document pack is being revised. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh

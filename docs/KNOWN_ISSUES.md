@@ -10,11 +10,26 @@
 
 ## Open issues
 
-Phase 09 is active. No critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect is known. The package identifier is approved and export configuration is ready; Phase 09 completion remains blocked on physical Android hardware.
+Phase 09 is closed with the decision “continue with targeted revisions.” Manual Moto testing verified install, cold launch, build identity, onboarding, and touch purchases. No blocker or critical defect was reported. The remaining device matrix was skipped at the tester's request and is not claimed as passed.
+
+### ISSUE-004 — Phone presentation appears too small
+
+- Status: Open
+- Severity: Minor
+- First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
+- Affected phase: Phase 09 device polish; targeted revision later
+- Reproduction:
+  1. Install and launch the Phase 09 APK on the tester's Moto phone.
+  2. Review the early onboarding presentation.
+- Expected: The mobile presentation uses a comfortable phone-scale resolution; tester requested a 720p target.
+- Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small.
+- Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided.
+- Workaround: None required to continue the tested core flow.
+- Fix verification: Pending a targeted resolution/scale revision and repeat device review.
 
 ### ISSUE-003 — Physical Android verification unavailable on current host
 
-- Status: Open
+- Status: Fixed
 - Severity: Blocker
 - First seen build/commit: `d588ba3`, 2026-07-20
 - Affected phase: Phase 09 completion gate
@@ -22,10 +37,10 @@ Phase 09 is active. No critical, progression, reachability, localization, save-b
   1. Run `/home/ubuntu/.local/share/android-sdk/platform-tools/adb devices -l`.
   2. Observe no attached device; inspect the ARM64 VPS and observe no emulator package, system image, or `/dev/kvm` device.
 - Expected: At least one physical Android device is available for install, cold launch, touch, safe-area, lifecycle, save/offline, sound, haptic, storage, performance, battery, and heat checks.
-- Actual: No device is attached, and the current host cannot provide truthful physical-device evidence.
-- Evidence/log: ADB returned an empty device list on 2026-07-20. No device test is claimed.
-- Workaround: Build and inspect the APK locally, then transfer it and the Phase 09 checklist to a physical Android device or a suitable PC/device test environment.
-- Fix verification: Pending recorded physical-device pass.
+- Actual: No device is attached to the VPS, but the user supplied truthful manual evidence from a Moto phone.
+- Evidence/log: Kevin reported successful install/cold launch, correct Settings version/build, readable and authorizable onboarding, and working Build/Upgrade touch purchases. Remaining device checks were explicitly skipped.
+- Workaround: Manual device reporting was used because direct ADB access to the VPS was unavailable.
+- Fix verification: The Phase 09 physical-evidence blocker is resolved for the recorded partial pass; unexecuted checks remain documented limitations rather than passed results.
 
 ### ISSUE-002 — Optimized prototype path is shorter than the first-run target
 

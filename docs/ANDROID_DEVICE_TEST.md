@@ -30,13 +30,14 @@ For a non-destructive reinstall that preserves an existing debug save, use `./to
 
 ## Record the device
 
-- Tester and date:
-- Manufacturer/model:
-- Android version/API:
-- Display size/aspect and cutout/navigation mode:
-- Build identifier visible in Settings:
-- Cold-launch time:
-- Warm-resume time:
+- Tester and date: Kevin; date not provided
+- Manufacturer/model: Moto; exact model not provided
+- Android version/API: Skipped by tester
+- Display size/aspect and cutout/navigation mode: Skipped by tester
+- Build identifier visible in Settings: Yes — version `0.9.0-dev`, build `e165b2b7ace7`
+- APK install and cold launch: Passed
+- Cold-launch time: Not observed
+- Warm-resume time: Not observed
 - Observed FPS/memory:
 - Battery/heat notes after 30 minutes:
 
@@ -54,19 +55,22 @@ adb shell dumpsys meminfo com.ferroai.onemorewatt
 
 - [ ] Fresh install and cold launch succeed.
 - [ ] Settings shows version `0.9.0-dev` and build `e165b2b7ace7`.
-- [ ] Early onboarding is readable and the first request can be authorized.
-- [ ] Build and Upgrades purchases work by touch.
-- [ ] A brownout can be triggered and recovered without losing progress.
-- [ ] Android Back closes the top modal, then returns a secondary tab to Grid.
-- [ ] Background during an active request saves state.
-- [ ] Resume shows a truthful bounded offline report.
-- [ ] Force-close/relaunch preserves the exact key state and does not duplicate rewards.
-- [ ] Sound is audible and pauses appropriately; haptics follow the setting.
-- [ ] Cutout, status/navigation bars, and gesture insets do not obstruct content.
-- [ ] All frequent controls are usable and text remains readable.
-- [ ] The agreed Eras 1–3 endpoint is reachable on the device build.
-- [ ] A 30-minute representative session records FPS, memory, battery, and heat observations.
-- [ ] A two-hour offline return applies the documented cap/efficiency truthfully.
+- [x] Early onboarding is readable and the first request can be authorized. Tester note: presentation resolution/scale appeared too small; a 720p target was requested for a later revision.
+- [x] Build purchases work by touch.
+- [x] Upgrade purchases work by touch.
+- [ ] A brownout can be triggered and recovered without losing progress. Skipped by tester.
+- [ ] Android Back closes the top modal, then returns a secondary tab to Grid. Skipped by tester.
+- [ ] Background during an active request saves state. Skipped by tester.
+- [ ] Resume shows a truthful bounded offline report. Skipped by tester.
+- [ ] Force-close/relaunch preserves the exact key state and does not duplicate rewards. Skipped by tester.
+- [ ] Sound is audible and pauses appropriately; haptics follow the setting. Skipped by tester.
+- [ ] Cutout, status/navigation bars, and gesture insets do not obstruct content. Skipped by tester.
+- [ ] All frequent controls are usable and text remains readable. Partial: onboarding was readable and touch purchases worked; full review skipped.
+- [ ] The agreed Eras 1–3 endpoint is reachable on the device build. Skipped by tester.
+- [ ] A 30-minute representative session records FPS, memory, battery, and heat observations. Skipped by tester.
+- [ ] A two-hour offline return applies the documented cap/efficiency truthfully. Skipped by tester.
+
+Tester reported additional small bugs to address later but did not provide details; no undocumented behavior is inferred. At the tester's request, all remaining questions were skipped.
 
 ## Evidence capture
 
@@ -78,3 +82,13 @@ adb logcat -v time Godot:D godot:D '*:S'
 ```
 
 After the checklist, update `docs/PLAYTEST_CHECKLIST.md`, `docs/KNOWN_ISSUES.md`, `docs/CURRENT_HANDOFF.md`, and the Phase 09 go/no-go decision. Do not begin Phase 10 automatically.
+
+## Final result
+
+- Manual tester: Kevin
+- Device: Moto; exact model, Android/API, display details, and test date not provided
+- Verified on hardware: install, cold launch, build/version identity, readable/authorizable onboarding, Build purchases, and Upgrade purchases
+- Concrete issue: presentation appeared too small; tester requested a future 720p/scale revision
+- Unverified by tester: all other device checklist items above
+- Phase 09 decision: **Continue with targeted revisions**
+- Phase 10: Not started; existing roadmap/document pack is being revised

@@ -22,7 +22,21 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [ ] APK installed and launched on physical Android hardware.
 - [ ] Early onboarding, Build, Upgrades, brownout/recovery, background/resume, force-close/reopen, sound, haptics, safe areas, Back, readable text, performance, battery, and heat verified on device.
 
-Notes: ADB reported no connected devices; `adb install -r` failed with `no devices/emulators found`, as expected. The ARM64 VPS has no emulator binary or KVM device. Available ARM64 system-image listings do not replace an executable, accelerated runtime, so this preflight is not represented as Android runtime or physical-device evidence. Phase 09 is NO-GO for completion/advancement until `docs/ANDROID_DEVICE_TEST.md` is completed on hardware.
+Host-preflight notes: ADB reported no connected devices; `adb install -r` failed with `no devices/emulators found`, as expected. The ARM64 VPS has no emulator binary or KVM device. This host preflight is not represented as Android runtime evidence; the separate manual Moto report below supplies the available physical-device evidence.
+
+### Manual Moto phone report — Kevin
+
+- Test date, exact Moto model, Android/API, display/cutout/navigation details, and launch timings: Not provided or skipped
+- [x] APK installed and cold-launched successfully.
+- [x] Settings showed version `0.9.0-dev` and build `e165b2b7ace7`.
+- [x] Early onboarding was readable and the first request was authorizable.
+- [x] Build and Upgrade purchases worked by touch.
+- [ ] Brownout/recovery and Android Back behavior: Skipped.
+- [ ] Background/resume, offline report, force-close recovery, reward idempotency, sound, haptics, safe areas, endpoint, performance, battery/heat, and two-hour offline return: Skipped at tester request.
+- Concrete minor issue: presentation appeared too small; tester requested a future 720p/scale revision (`ISSUE-004`).
+- Other small bugs were mentioned without details and are not inferred or fabricated.
+
+Phase 09 verdict: **Continue with targeted revisions.** No blocker or critical defect was reported, but the skipped device checks are not treated as passes. Do not begin Phase 10; the roadmap/document pack is being revised.
 
 ## Phase 08 balance and prototype-polish rounds — 2026-07-20
 
