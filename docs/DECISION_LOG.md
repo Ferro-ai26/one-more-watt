@@ -266,6 +266,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: This preserves meaningful operator agency and the approved infrequent maintenance texture without introducing recurring degradation, hidden outcomes, a new currency, punitive loss, nondeterminism, or a new save format.
 - Consequences: Content version advances to `0.9.0` while save format remains 2 and accepts supported `0.8.0`, `0.7.0`, and `0.6.0` saves. Missing new fields default safely. Maintenance choices, pending input, one-request effects, guard state, and completed eras persist by stable ID. Era 5 remains absent. The existing gameplay formulas and allocation selection remain authoritative.
 
+## DEC-036 — Close Phase 15 with its disclosed device limitation and authorize the Era 5 appendix
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Interpret the user's explicit “Phase 16 is a go” as authorization to advance from the Phase 15 completion gate and begin Phase 16. Close Phase 15 on its complete host implementation, reviewed manual evidence, clean APK/static inspection, and accepted physical-device verification limitation. Authorize preparation of the mandatory Era 5 content/visual appendix, but require separate explicit approval of that appendix before any Era 5 implementation.
+- Reason: Phase 15's only remaining criterion requires external physical hardware unavailable on the host, and that limitation was disclosed before the user explicitly authorized the next phase. The Phase 16 contract independently requires an approved appendix before coding, so phase authorization cannot bypass that product decision gate.
+- Consequences: No missing Phase 15 device check is converted into a pass; `ISSUE-010` closes by accepted disposition and its unverified matrix remains historical evidence. `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` may be proposed, validated, committed, and pushed. No Era 5 data, automation, save, runtime, or asset work begins until explicit appendix approval. City Data Center/Era 6, Prestige, Phase 17, and release publication remain prohibited.
+
 ## Proposed decision template
 
 ```markdown

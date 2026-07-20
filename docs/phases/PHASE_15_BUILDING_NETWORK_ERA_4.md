@@ -1,6 +1,6 @@
 # Phase 15 — Building Network: Era 4
 
-Status: Completion Gate — Host Acceptance Passed; Physical Android Verification Pending
+Status: Closed under `DEC-036` — Approved with accepted physical Android verification limitation
 
 ## Objective
 

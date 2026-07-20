@@ -19,10 +19,19 @@
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
-| 15 — Building Network: Era 4 | Completion gate — implementation, host/manual evidence, and clean APK/static inspection pass; physical Android pending | DEC-034–035; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; Era 5 absent |
-| 16–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 15 — Building Network: Era 4 | Complete — accepted device-verification limitation | DEC-034–036; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; unavailable physical matrix retained as unverified |
+| 16 — Neighborhood Microgrid: Era 5 | Appendix proposed — awaiting explicit approval before coding | DEC-036; blue-hour Neighborhood, six-request route, seven infrastructure silhouettes, truthful forecast confidence, bounded automation/scheduling, locked Era 6 endpoint |
+| 17–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 16 authorized; Era 5 appendix proposed
+
+- Interpreted the user's explicit “Phase 16 is a go” as acceptance to advance past Phase 15's already disclosed unavailable-device limitation. Recorded `DEC-036`; no unchecked physical Android item is marked passed, and `ISSUE-010` closes by accepted disposition only.
+- Read the complete Phase 16 contract, current handoff, permanent gameplay/content/save/visual specifications, approved escalation/production references, Phase 13/15 implementation records, asset inventory, and the locked phone board. The full Phase 15 baseline validator passed from a clean, synchronized tree.
+- Audited the existing deterministic Reserve Threshold, Predictive Reserve Guard, maintenance, request authorization, offline report, save, content-validation, and world-first presentation interfaces. Identified the additive Phase 16 work needed for truthful forecast confidence/detail, policy-bounded routine maintenance, one-request advance authorization/scheduling, and ordered automation explanations.
+- Proposed `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md`: blue-hour neighborhood/lateral-annexation composition, persistent scratched core plus civic displays, six 10–25 minute main requests plus one vanity request, seven required infrastructure silhouettes, deterministic forecast confidence, bounded automation policy, exactly one preauthorized scheduled request, offline reporting/migration boundaries, complete production/reuse plan, and a locked City Data Center endpoint.
+- No Era 5 content, mechanics, save migration, runtime scene, asset, or audio implementation was started. Explicit appendix approval is still required. Era 6/Phase 17 remains prohibited.
 
 ### 2026-07-20 — Phase 15 Building Network implementation and host evidence
 

@@ -2,64 +2,67 @@
 
 Updated: 2026-07-20
 
-Active phase: Phase 15 — Building Network: Era 4
+Active phase: Phase 16 — Neighborhood Microgrid: Era 5
 
-Status: Completion Gate — Host Implementation and Manual Evidence Pass; Physical Android Verification Pending
+Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
 
 ## Exact result achieved
 
-The user approved `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` under `DEC-034` before implementation. Phase 15 now delivers the complete Building Network route and stops at the locked Neighborhood preview:
+The user explicitly authorized Phase 16 after the Phase 15 physical-device limitation was disclosed. `DEC-036` closes Phase 15 with that limitation accepted—not passed—and opens only the Phase 16 appendix gate.
 
-- canonical content `0.9.0` contains Era 4, six required requests, one optional vanity request, seven infrastructure items with project-original SVG icons, five upgrades, three demand profiles, three brownout lines, and two authored maintenance records;
-- every required request promises a concrete human-operator payoff and remains tagged `provisional_copy`; WATT's locked useful, calm, politely manipulative voice is preserved without treating current lines as final writing;
-- additive format-2 migration accepts supported `0.8.0`, `0.7.0`, and `0.6.0` saves, preserves Stored Energy/ownership, and requires explicit authorization before entering Building;
-- deterministic Repair/Replace/Overclock reviews are one-time, non-punitive operator decisions; offline progress stops for input, replacement upgrades are stable-ID gated, and an Overclock binds to exactly one request across save/load;
-- Predictive Reserve Guard uses a visible, transient 30-second pre-peak override without changing the player's selected allocation mode;
-- the reusable presentation adds the Building cutaway, dim ordinary floors, cyan riser, rooftop/service infrastructure, amber stairwell route, bicycle remnant, distributed lobby WATT face, persistent scratched core, brownout, takeover report, and locked Neighborhood pullback;
-- compatible Build/Upgrade cards reconfigure in place, preserving the existing 1,500 ms host rebuild guard despite the larger catalog;
-- no Era 5 content, Phase 16 work, new currency, recurring degradation, resident simulation, wire placement, gameplay-formula rewrite, Android-foundation change, or generated concept raster was added.
+The required `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` is now proposed. It defines:
 
-`ISSUE-007` remains open: the code-native/project-original presentation is production-functional and contextually reviewed, not approval of the later tactile painted gold-standard art. `ISSUE-010` records that physical Phase 15 Android execution is unavailable on this host.
+- a blue-hour neighborhood cutaway whose dominant motif is lateral annexation, with dim ordinary blocks, a bright substation, authored overhead/underground cyan routes, tiny human-life remnants, and the completed Building nested as one feeder;
+- the same selectable scratched WATT core in the Building service kiosk plus distributed substation/municipal faces, without anger, monster imagery, or replacement of the core;
+- six required 10–25 minute requests and one optional vanity request, each main request promising an implemented operator payoff and all proposed dialogue remaining provisional;
+- Community Solar Farm, Municipal Generator, Neighborhood Substation, Battery Warehouse, Small Hydroelectric Plant, Underground Distribution, and Borrowed Utility Connection silhouettes;
+- truthful `Limited` / `Modeled` / `Verified` forecast confidence based on deterministic coverage rather than fabricated randomness;
+- operator-configured Reserve/start thresholds, safe throttling, and automatic handling only for explicitly authored non-strategic routine maintenance;
+- exactly one named request that the human may preauthorize and schedule; WATT cannot purchase, discover, authorize, or chain requests offline;
+- ordered automation explanations in online/offline reports, additive `0.9.0`→`0.10.0` content/save migration, an era-complete production/reuse plan, and a locked City Data Center/Era 6 preview.
+
+No Era 5 data, mechanics, migration, runtime scene, asset, audio, or test implementation has started. Era 6, City Data Center, idle systems, Prestige, Phase 17, and release work remain prohibited.
 
 ## Files changed
 
-- Content/data: `data/manifest.json`, `data/eras/eras.json`, `data/requests/era_04_requests.json`, `data/requests/demand_profiles.json`, `data/infrastructure/infrastructure.json`, `data/upgrades/upgrades.json`, `data/maintenance/era_04_maintenance.json`, `data/dialogue/system_dialogue.json`, `data/localization/en.json`, and `data/balance/constants.json`.
-- Content runtime: `content_repository.gd`, `content_validator.gd`, new `maintenance_definition.gd`, and `unlock_evaluator.gd`.
-- Simulation/save: `game_session.gd`, `economy_state.gd`, `economy_simulation.gd`, `request_simulation.gd`, `grid_simulation.gd`, `demand_profile_sampler.gd`, `offline_simulator.gd`, `save_codec.gd`, and `save_manager.gd`.
-- Presentation/assets: `era_environment_view.gd`, `main_ui.gd`, `main_view_model.gd`, `infrastructure_glyph.gd`, `shop_item_card.gd`, `feedback_audio.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, seven files under `assets/icons/infrastructure/`, and `assets/asset_inventory.json`.
-- Tests/tools: `test_phase15_building_network.gd`, `test_phase15_building_ui.gd`, `test_vertical_slice.gd`, `test_vertical_slice_ui.gd`, `test_economy_simulation.gd`, content fixtures/validator, `test_phase15_building.sh`, `validate.sh`, and current Android build/device scripts.
-- Phase/living documentation: `ACTIVE_PHASE.md`, Phase 15 contract/appendix, `IMPLEMENTATION_RECORD.md`, `VISUAL_QA_RECORD.md`, seven evidence PNGs, `CONTENT_DATABASE.md`, `GAMEPLAY_SYSTEMS.md`, `SAVE_AND_OFFLINE_SPEC.md`, `UI_UX_SPEC.md`, `ART_AND_AUDIO_DIRECTION.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, setup/test docs, and this handoff.
+- Added `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md`.
+- Advanced phase/gate documentation in `docs/ACTIVE_PHASE.md`, `docs/phases/PHASE_15_BUILDING_NETWORK_ERA_4.md`, and `docs/phases/PHASE_16_NEIGHBORHOOD_MICROGRID_ERA_5.md`.
+- Recorded the advancement and accepted verification disposition in `docs/DECISION_LOG.md`, `docs/PROGRESS.md`, and `docs/KNOWN_ISSUES.md`.
+- Updated this handoff.
+- No runtime, data, asset, test, Android, gameplay-formula, or save-system file changed.
 
 ## Commands/tests run and results
 
-- `git diff --check`: passed.
-- `./tools/validate_content.sh`: 32 canonical checks and 12 invalid fixtures passed.
-- `./tools/test_persistence.sh`: 81 persistence/offline and 14 offline-UI checks passed.
-- `./tools/test_vertical_slice.sh`: 1,354 deterministic balance/reachability and 113 graphical UI/performance checks passed. Mechanical/structured Eras 1–4 routes are 115.4/135.5 minutes; Building requests are 338.5–625.0 seconds; longest modeled gap is 300 seconds.
-- `./tools/test_phase15_building.sh`: 89 domain and 24 headless Building-UI checks passed, including migration, maintenance choices, offline boundary, online/offline Predictive Reserve Guard, endpoint, icon, and layout coverage.
-- `xvfb-run -a godot4 --path . --script res://tests/integration/test_phase15_building_ui.gd -- --capture-phase15`: 38 checks passed and wrote seven final images under `docs/phase_15/evidence/`.
-- Final pre-commit `./tools/validate.sh`: every repository suite, five portrait layouts, and headless smoke launch passed. Performance measured 789.7 ms for 25 full Build refresh requests, 557.0 ms for 500 live refreshes, 378 UI nodes, and approximately 11.47 MiB isolated skin-memory delta.
-- Clean source commit: `14b577fc8045e4de1b70692745f86591b3c38960` (`Phase 15: implement Building Network Era 4`).
-- `./tools/build_android_debug.sh`: passed. `build/android/one_more_watt_phase15_debug.apk` is 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, and embeds build `14b577fc8045`. Package `com.ferroai.onemorewatt`, version `0.10.0-dev`, API 24/35, arm64-v8a+x86_64, VIBRATE-only permissions, and v2/v3 signatures passed static inspection.
-- `./tools/android_device_smoke.sh build/android/one_more_watt_phase15_debug.apk`: exited 2 because no ready device is attached; no installation was attempted. `/dev/kvm`, emulator executable, and installed system images are absent.
-- `git push origin main && git fetch origin main`: pushed the Phase 15 appendix, implementation, and APK/static record; local and `origin/main` both resolved to `d4e2a2b4dcea87a1affb0c56fc50ad84751c3f70` before this final handoff-only update.
+- Entry `git status --short --branch`: clean `main`, synchronized with `origin/main` at `8f217c88db8df647a420d5a8cafcab9a8a5930b5`.
+- Entry `git diff --check`: passed.
+- Entry `./tools/validate.sh`: passed every repository suite through Phase 15 and the headless launch. This included 32 canonical/12 invalid content checks, 178 grid checks, 187 request checks, 93 economy checks, 474 Main-UI checks, 83 Phase 12 skin checks, 51 Phase 13 skin checks, 95 persistence/offline checks, 1,354 balance/reachability checks, 113 vertical-slice UI/performance checks, 113 Phase 15 checks, five layout checks, debug panels, skin checks, and smoke launch.
+- Entry performance sample: 807.1 ms for 25 Build rebuilds, 550.2 ms for 500 live refreshes, 378 nodes, and approximately 11.47 MiB isolated skin-memory delta.
+- The locked `phone_board.png` and Phase 15 Neighborhood pullback evidence were visually inspected at original resolution.
+- Final proposal `./tools/validate.sh`: passed every repository suite through Phase 15 and headless launch after the documentation changes. The final performance sample was 811.5 ms for 25 Build rebuilds, 548.7 ms for 500 live refreshes, and 378 nodes.
+- Final `git diff --check`: passed.
+- Proposal commit/push evidence must be appended after publication.
 
 ## Manual verification
 
-All seven Phase 15 screenshots were inspected at original resolution against the locked phone-board composition. The first evidence run was rejected and corrected because live refresh hid the brownout, the Build shot did not expose Era 4 icons below the fold, and the synthetic report used an invalid localization key. Final evidence visibly confirms the world-first Building, focal scratched core, cyan/amber takeover routes, ordinary-life remnant, actual Building icons, red/labeled brownout with cyan eyes, all maintenance options at 320 × 568/130% text, localized takeover report, and locked Neighborhood pullback.
+The locked Phase 11 phone board was inspected directly, especially its Era 5 Neighborhood composition: world-first scale, WATT/substation focal point, dim homes around bright cyan infrastructure, compact top rail, attached authorization plate, and contextual bottom navigation. The Phase 15 Building-to-Neighborhood pullback was also inspected to ensure the proposal grows laterally from the actual current implementation instead of inventing an unrelated scene.
 
-This host used dummy audio and is not a physical Android device. No audible mix, haptic, real safe-area, update-install, lifecycle, device FPS, heat, or battery result is claimed.
+No new runtime visual, APK, physical-device test, audio test, haptic test, or playtest occurred in this appendix-only step.
 
 ## Remaining acceptance criteria
 
-- Run the Phase 15 APK on a physical Android device for update install over an Era 3 endpoint save, cold launch, warm resume, background/offline return, save idempotency, touch/safe-area/font behavior, Android Back, sound/haptics, and device performance—or obtain explicit acceptance of that unavailable-device limitation.
-- Do not mark the combined Android regression criterion passed without physical evidence or explicit acceptance of the limitation.
+- Obtain explicit user approval of the complete Era 5 appendix before coding.
+- After approval, implement and test all Phase 16 content, forecast, automation, scheduling, offline, reporting, migration, production presentation, motion/audio, and locked Era 6 endpoint requirements.
+- Tune every required Era 5 request to 10–25 minutes on prepared deterministic routes.
+- Produce and manually inspect contextual evidence against the locked phone board.
+- Complete the required physical-phone readability/performance/offline playtest, or stop for an explicit limitation disposition if external hardware remains unavailable.
+- Update permanent specifications and living documents, commit/push the approved implementation, and stop at the Phase 16 completion gate.
 
 ## Known blockers
 
-- `ISSUE-010`: no attached physical device or usable emulator exists on this host. Host/static Android checks can proceed, but device execution requires external evidence.
-- `ISSUE-007`: later gold-standard tactile painted environment/WATT/infrastructure production remains deliberately open; it does not block Phase 15's production-functional content boundary.
+- Approval gate: the proposed Era 5 appendix requires explicit user approval before any implementation.
+- `ISSUE-007`: the later cross-game tactile painted gold-standard environment/WATT/infrastructure pass remains open. Phase 16 still requires a complete, project-original production-functional Neighborhood presentation and cannot use the issue as permission for permanent gray box art.
+- Physical phone hardware is not attached to the current host. This does not block appendix approval work, but the Phase 16 contract's phone-playtest criterion cannot be claimed from host evidence.
 
-## Recommended next action inside Phase 15
+## Recommended next action inside Phase 16
 
-Stop at the Phase 15 completion gate. The only unresolved acceptance item is external physical Android verification/acceptance under `ISSUE-010`; use the exact artifact/checklist in `docs/ANDROID_DEVICE_TEST.md` if a device becomes available. Do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5 without separate user authorization.
+Review `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` and explicitly approve it as written or request targeted changes. Do not implement Era 5 and do not begin Phase 17 before that approval.

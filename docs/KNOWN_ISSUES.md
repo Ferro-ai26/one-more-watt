@@ -14,11 +14,11 @@ Phase 10 is closed with the user's explicit acceptance of the remaining physical
 
 Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one concrete interaction defect: Build and Upgrades could not be scrolled by touch. Replacement build `738732db1f9b` passed scrolling across Build, Upgrades, Reports, and Settings, so `ISSUE-009` is fixed. The tester also confirmed the accepted removal of the conditional large-purchase confirmation under `DEC-031`. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
 
-Phase 15 host implementation, deterministic migration/save coverage, graphical layout checks, and manual screenshot review pass. The current host still has no attached ADB device or usable emulator, so the Phase 15 update-install/lifecycle/device-performance matrix remains unverified under `ISSUE-010`; it is not a known runtime failure and is not reported as a pass.
+Phase 15 host implementation, deterministic migration/save coverage, graphical layout checks, and manual screenshot review pass. The current host still has no attached ADB device or usable emulator, so the Phase 15 update-install/lifecycle/device-performance matrix remains unverified under `ISSUE-010`. The user authorized Phase 16 with that limitation disclosed; it is closed by accepted disposition rather than reported as a pass.
 
 ### ISSUE-010 — Phase 15 physical Android regression is unavailable on the current host
 
-- Status: Open — External Device Verification Required
+- Status: Closed — User Accepted Phase 15 Verification Limitation (`DEC-036`)
 - Severity: Verification limitation; no runtime defect currently reproduced
 - First seen build/commit: Phase 15 working tree, 2026-07-20
 - Affected phase: Phase 15 Android/manual completion gate
@@ -29,7 +29,7 @@ Phase 15 host implementation, deterministic migration/save coverage, graphical l
 - Actual: Host save/migration automation, five-layout regressions, 320 × 568/130% maintenance evidence, static APK inspection, and manual screenshot review are available. Physical Android runtime evidence cannot be produced locally.
 - Evidence/log: `docs/phase_15/VISUAL_QA_RECORD.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/ANDROID_BUILD_RECORD.md`, and the empty ADB device list recorded in the Phase 15 handoff.
 - Workaround: Run `./tools/android_device_smoke.sh build/android/one_more_watt_phase15_debug.apk` on an attached device, then complete the Phase 15 rows in `docs/ANDROID_DEVICE_TEST.md` without clearing the existing save.
-- Fix verification: Requires an external physical-device report or an explicit user acceptance of this remaining limitation. Do not infer a pass from host/static evidence.
+- Fix verification: The user explicitly authorized Phase 16 after the unavailable-device limitation was disclosed. Under `DEC-036`, this closes the Phase 15 gate by accepted limitation, not by defect correction or a claimed device pass. The unchecked matrix remains unverified and may be revisited on later hardware.
 
 ### ISSUE-009 — Build and Upgrades did not scroll by touch on Moto G (2025)
 

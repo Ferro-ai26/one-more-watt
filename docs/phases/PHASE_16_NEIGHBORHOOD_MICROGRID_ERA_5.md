@@ -1,5 +1,7 @@
 # Phase 16 — Neighborhood Microgrid: Era 5
 
+Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
+
 ## Objective
 
 Add Era 5 and finish every automation tool required before the City-scale idle transition.

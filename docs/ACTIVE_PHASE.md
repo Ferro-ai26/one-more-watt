@@ -1,19 +1,19 @@
 # Active Phase
 
-Phase: 15 — Building Network: Era 4
-Status: Completion Gate — Host Implementation and Manual Evidence Pass; Physical Android Verification Pending
+Phase: 16 — Neighborhood Microgrid: Era 5
+Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_15_BUILDING_NETWORK_ERA_4.md`
+`docs/phases/PHASE_16_NEIGHBORHOOD_MICROGRID_ERA_5.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, the approved permanent gameplay/content/save/visual specifications, and `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` before editing. Use `docs/phase_11/cheerful_doomsday/phone_board.png` and the approved 16-era escalation plan as composition authority. Preserve the human-operator role, persistent scratched WATT core, and Cheerful Electrical Doomsday direction.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, the approved permanent gameplay/content/save/visual specifications, and the proposed `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` before editing. Use `docs/phase_11/cheerful_doomsday/phone_board.png` and the approved 16-era escalation plan as composition authority. Preserve the human-operator role, persistent scratched WATT core, and Cheerful Electrical Doomsday direction.
 
-Phase 15 is explicitly authorized under `DEC-033`, and the mandatory pre-code appendix gate was approved as written under `DEC-034`. Implement only Building Network through the established data and presentation systems and keep `ISSUE-007` explicit. Treat Phase 15 request dialogue as functional/provisional copy for a later dedicated writing pass while preserving the locked WATT voice direction.
+Phase 16 is explicitly authorized under `DEC-036`, which also accepts Phase 15's disclosed physical-device verification limitation without marking those checks passed. The mandatory Era 5 pre-code appendix is now proposed but not approved. Do not add Era 5 data, automation, save changes, runtime presentation, or assets until the user explicitly approves the appendix.
 
-Do not integrate generated concept backgrounds as production art, add Neighborhood/Era 5 content, create degradation chores or resident simulation, add wire placement, perform a major visual-direction change, begin Phase 16, or advance this file beyond the Phase 15 completion gate without explicit authorization.
+Do not integrate generated concept backgrounds as production art, add City Data Center/Era 6 content, create degradation chores or resident simulation, add wire placement, introduce hidden offline decisions, perform a major visual-direction change, begin Phase 17, or advance beyond the Phase 16 completion gate without explicit authorization.
 
 ## Inherited state
 
@@ -23,4 +23,6 @@ Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system
 
 Phase 13 is closed under `DEC-032`; its targeted Motorola Moto G (2025) scrolling/purchase retest passed and `ISSUE-009` is fixed. Phase 14 is closed under `DEC-033` as Approved with targeted revisions: the full host baseline passed, no blocker/critical issue was found, and the user recorded GO for content expansion. Device-only gaps remain accepted limitations; `ISSUE-004` is deferred rather than fixed. `ISSUE-007` remains open.
 
-The approved Phase 15 appendix defines the Building cutaway mood, WATT service-console evolution, vertical-accumulation motif, six main requests plus one vanity request, seven infrastructure silhouettes, two deterministic maintenance prompts, Predictive Reserve Guard, House-to-Building pullback, save/content migration, production asset gate, validation plan, and locked Neighborhood endpoint. Phase 16 is not authorized.
+Phase 15 is closed under `DEC-036` with its unavailable physical Android matrix retained as an accepted limitation, not a pass. The complete Building route, host/manual evidence, clean APK/static inspection, and approved provisional-copy boundary remain authoritative.
+
+The proposed Phase 16 appendix defines the Neighborhood blue-hour mood, lateral-annexation motif, persistent scratched core plus distributed civic faces, six main requests plus one vanity request, seven infrastructure silhouettes, truthful forecast confidence/detail, policy-bounded routine maintenance, Reserve/safe-throttle policy, exactly one preauthorized scheduled request, offline action reporting, Building-to-Neighborhood pullback, and locked City Data Center endpoint. Implementation awaits explicit approval. Phase 17 is not authorized.
