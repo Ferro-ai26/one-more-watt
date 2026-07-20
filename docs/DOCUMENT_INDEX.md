@@ -26,6 +26,8 @@
 | `KNOWN_ISSUES.md` | When a defect is found, changed, or verified fixed |
 | `PLAYTEST_CHECKLIST.md` | Every formal player-facing verification |
 | `PROJECT_SETUP_CHECKLIST.md` | Toolchain/repository environment change |
+| `ANDROID_BUILD_RECORD.md` | Every recorded Android artifact and static inspection |
+| `ANDROID_DEVICE_TEST.md` | Physical Android install/lifecycle/performance pass |
 | `CODEX_RUNBOOK.md` | Operator workflow change |
 
 ## Phase contracts
@@ -38,4 +40,3 @@
 ## Authority reminder
 
 If two documents conflict, use the hierarchy in the root `README.md`. Fix the contradiction in documentation before building behavior that depends on it.
-

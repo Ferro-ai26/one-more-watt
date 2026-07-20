@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 09 Android host preflight — 2026-07-20
 
-- Build/commit: Phase 09 working tree based on `33d521b`
+- Build/commit: `e165b2b7ace78a848b1eed4431f919804a8b8e6f`
 - Platform/device: Ubuntu 24.04 ARM64 VPS; no Android device attached
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex
@@ -16,11 +16,13 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Approved permanent package identifier `com.ferroai.onemorewatt` recorded and export preset validated with 21 checks.
 - [x] Initial export configuration failure (partial debug-keystore fields) was corrected without producing or mis-signing an artifact; signing configuration remains outside version control.
 - [x] A second export exposed the approved package/API/architectures/permission/signature correctly, then was rejected because of a missing project icon and incompatible host inspection binaries; both acceptance-path defects were corrected before recording a final artifact.
-- [ ] Debug APK exported and inspected.
+- [x] Debug APK exported and inspected: 55,797,809 bytes; SHA-256 `8402cde8c980c6f226dc7ac88df977692ba0822bd332d1e246055afd66c1785a`.
+- [x] Package/version/API 24–35, arm64-v8a/x86_64 payloads, `VIBRATE`-only permission, v2/v3 signature, ZIP alignment, portrait manifest, embedded build ID, and launcher icon verified.
+- [x] Complete repository regression passed after the final icon/export changes: 55 foundation, 24 Android configuration, all prior domain/integration suites, 111 performance checks at 985.1/955.6 ms, and headless smoke launch.
 - [ ] APK installed and launched on physical Android hardware.
 - [ ] Early onboarding, Build, Upgrades, brownout/recovery, background/resume, force-close/reopen, sound, haptics, safe areas, Back, readable text, performance, battery, and heat verified on device.
 
-Notes: ADB reported no connected devices. This ARM64 VPS has no emulator package, Android system image, or KVM device, so this preflight is not represented as Android runtime or physical-device evidence.
+Notes: ADB reported no connected devices; `adb install -r` failed with `no devices/emulators found`, as expected. The ARM64 VPS has no emulator binary or KVM device. Available ARM64 system-image listings do not replace an executable, accelerated runtime, so this preflight is not represented as Android runtime or physical-device evidence. Phase 09 is NO-GO for completion/advancement until `docs/ANDROID_DEVICE_TEST.md` is completed on hardware.
 
 ## Phase 08 balance and prototype-polish rounds — 2026-07-20
 

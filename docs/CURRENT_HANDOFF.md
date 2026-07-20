@@ -5,48 +5,44 @@ Active phase: Phase 09 — Android Prototype
 
 ## Current state
 
-Phase 09 is in progress by explicit user authorization. The permanent package identifier `com.ferroai.onemorewatt` is approved and captured in a validated debug export preset. Host-side Android preparation is implemented: the correct Android 35 SDK was located, the app version is `0.9.0-dev`, build provenance is visible in Settings/diagnostics, Android Back is app-controlled, pause/resume audio behavior is explicit, and a clean-tree export/inspection script is ready. Physical-device acceptance is waiting for an attached Android device.
+All host-executable Phase 09 work is complete. The permanent package `com.ferroai.onemorewatt` is approved, Android lifecycle/build-provenance gaps are addressed, and a debug APK from recorded commit `e165b2b7ace78a848b1eed4431f919804a8b8e6f` passed export and static inspection. Phase 09 remains blocked—not complete—because no physical Android device or executable emulator is available. Phase 10 has not started and is not authorized.
 
 ## Completed
 
 - Activated Phase 09 without opening Phase 10 scope.
-- Reinspected the local toolchain and found Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, a local debug keystore, and matching Godot 4.6.2 Android templates.
-- Set the Phase 09 development version and added build provenance to Settings and the diagnostic summary.
-- Disabled automatic Android Back exit; Back now closes the top modal, returns secondary navigation to Grid, then saves and exits only from the root screen.
-- Stopped feedback audio on application pause and restored playback eligibility on resume; the existing background save and offline-return path remains authoritative.
-- Added `tools/build_android_debug.sh`, which requires a clean tree, injects the exact source commit into the exported build, exports with Godot, verifies the APK signature/package, and records SHA-256 provenance.
-- Added regression coverage for version/build diagnostics and Android Back notifications across all four portrait sizes.
-- Recorded the approved permanent package identifier and a debug-only preset with arm64-v8a/x86_64, no Internet/network-state permission, and vibration permission for optional haptics.
+- Located Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, a local debug keystore, and matching Godot 4.6.2 Android templates.
+- Recorded `com.ferroai.onemorewatt` in a validated debug preset with arm64-v8a/x86_64, version code/name 9/`0.9.0-dev`, no Internet/network-state permission, and `VIBRATE` for optional haptics.
+- Added version/commit diagnostics, app-controlled Android Back behavior, explicit pause/resume feedback-audio handling, a project launcher icon, and four-size regression coverage.
+- Added a clean-tree export tool that injects the exact source commit, rejects Godot export errors, and verifies package, version, permissions, architectures, embedded build ID, signature, and checksum.
+- Built `build/android/one_more_watt_phase09_debug.apk` from `e165b2b`; the 55,797,809-byte artifact has SHA-256 `8402cde8c980c6f226dc7ac88df977692ba0822bd332d1e246055afd66c1785a`.
+- Verified API 24/35, portrait/resizeable manifest, no backup, debug flag, only `VIBRATE`, arm64-v8a/x86_64 native payloads, v2/v3 debug signature, four-byte ZIP alignment, embedded build `e165b2b7ace7`, and the rendered WATT launcher icon.
+- Added `docs/ANDROID_BUILD_RECORD.md`, `docs/ANDROID_DEVICE_TEST.md`, and a guarded non-destructive device install/launch script.
 
 ## Next action
 
-Commit the validated export configuration and run `./tools/build_android_debug.sh`. Then attach a physical Android device for install, lifecycle, touch, safe-area, audio, haptic, storage, performance, and full-loop verification.
+Make one physical Android device available through ADB, verify the artifact checksum, run `./tools/android_device_smoke.sh`, then complete `docs/ANDROID_DEVICE_TEST.md`. Record device model/API, launch/resume time, memory/FPS, 30-minute battery/heat notes, two-hour offline return, touch/safe-area/audio/haptic behavior, force-close save recovery, and the Eras 1–3 endpoint. Only then can Phase 09 receive a final expand/revise/stop decision.
 
 ## Known blockers
 
-- No Android device is attached to ADB, and this ARM64 VPS has no emulator/system image or KVM device. Phase 09 cannot meet its physical-device acceptance criteria on the current host alone.
+- `adb devices -l` returns no device; `adb install -r` reports `no devices/emulators found`.
+- This ARM64 VPS has no Android emulator binary or `/dev/kvm`. Listed ARM64 system images cannot run without an executable runtime and do not satisfy the contract's physical-device requirement.
 
 ## Test evidence
 
-- `godot4 --headless --path . --script res://tests/validate_foundation.gd` — passed 53 checks.
-- `godot4 --headless --path . --script res://tests/unit/test_main_ui_systems.gd` — passed 42 checks.
-- `godot4 --headless --path . --script res://tests/integration/test_main_ui.gd` — passed 225 checks across 320 × 568, 360 × 640, 393 × 873, and 480 × 800.
-- `./tools/validate.sh` — passed the complete repository suite: clean import, 53 foundation, content/invalid fixtures, grid, request, economy, 42 UI/domain, 225 main-interface, persistence/offline, 908 balance/reachability, 111 progression-UI/performance, four portrait layouts, all diagnostic panels, and headless smoke launch.
-- `bash -n tools/build_android_debug.sh` — passed.
-- `godot4 --headless --path . --script res://tests/validate_android_config.gd` — passed 21 package/version/architecture/permission/export-boundary checks.
-- `adb devices -l` — no attached devices.
-- One full-suite run hit 1016.8 ms against the 1000 ms host-only live-refresh budget; immediate isolated rerun passed at 969.3 ms with all 111 UI/performance checks. No functional failure occurred.
-- First export attempt from `54781a1` failed before artifact creation because the preset mixed an empty debug-keystore path with explicit credentials. The preset was corrected to keep all debug signing configuration in uncommitted editor settings.
-- Second export attempt from `3dffe01` produced a correctly packaged and signed APK, exposing the approved package, API 24/35, arm64-v8a/x86_64 libraries, and only `VIBRATE`; it was not accepted because Godot logged a missing-project-icon error and the API-35 inspection binaries were not executable on the ARM64 host. A project icon and native inspection-tool fallback were added for the next clean build.
-- APK export remains to be run from the committed preset.
+- `./tools/validate.sh` — passed after the final export/icon changes: clean import, 55 foundation, 24 Android config, content/invalid fixtures, 178 grid, 187 request, 93 economy, 42 UI/domain, 225 main-interface, 81 persistence/offline, 14 offline UI, 908 balance/reachability, 111 UI/performance, four portrait layouts, all diagnostic panels, and headless smoke launch.
+- Final host performance: 25 full Build rebuilds in 985.1 ms, 500 live refreshes in 955.6 ms, 217 nodes.
+- `./tools/build_android_debug.sh` — passed from clean `e165b2b`; build record and full SHA-256 generated.
+- Native `aapt`, `apksigner`, `zipalign`, archive, and embedded-project checks — passed.
+- Extracted xxxhdpi launcher icon — visually inspected and correct.
+- `./tools/android_device_smoke.sh` — safely stopped with status 2 before mutation because no device is attached.
+- A prior full-suite host timing run narrowly missed the 1000 ms synthetic refresh budget at 1016.8 ms; immediate isolated rerun passed at 969.3 ms and final full regression passed at 955.6 ms. No functional defect was observed.
 
 ## Files changed
 
-- Phase control/setup: `docs/ACTIVE_PHASE.md`, `docs/PROJECT_SETUP_CHECKLIST.md`
-- Runtime: `project.godot`, `scripts/ui/main_ui.gd`, `scripts/ui/feedback_audio.gd`
-- Tests/tooling: `tests/validate_foundation.gd`, `tests/integration/test_main_ui.gd`, `tools/build_android_debug.sh`
-- Living documentation: `README.md`, `docs/CURRENT_HANDOFF.md`, `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/DECISION_LOG.md`
+- Android/runtime: `export_presets.cfg`, `project.godot`, `assets/icons/app_icon.svg`, `scripts/ui/main_ui.gd`, `scripts/ui/feedback_audio.gd`
+- Tests/tools: `tests/validate_android_config.gd`, `tests/validate_foundation.gd`, `tests/integration/test_main_ui.gd`, `tools/build_android_debug.sh`, `tools/android_device_smoke.sh`, `tools/validate.sh`
+- Documentation: `docs/ANDROID_BUILD_RECORD.md`, `docs/ANDROID_DEVICE_TEST.md`, and all required living control documents
 
 ## Remaining acceptance criteria
 
-All Phase 09 acceptance criteria involving physical Android hardware remain open. Host-side lifecycle behavior, export configuration, and build provenance are implemented and covered, but an APK checksum/package/signature inspection is still pending the clean commit, and device install/launch, complete core loop, force-close save recovery, background offline report, touch/safe-area review, and device performance evidence have not yet occurred.
+The recorded-commit APK/checksum and host setup/evidence criteria pass. Physical install/launch, on-device core-loop endpoint, force-close save recovery, background/offline report, unobstructed touch/safe-area behavior, device performance, and a final expand/revise/stop decision remain open. Because these are explicit Phase 09 acceptance criteria, the phase is blocked rather than complete.

@@ -89,3 +89,10 @@ A release candidate must pass:
 
 Phase 09 passes when an APK built from a recorded commit installs and runs on a physical Android device, the player can complete Eras 1–3 or the agreed prototype endpoint, save/resume works, and offline progress produces a truthful report.
 
+## Phase 09 host build baseline
+
+The approved permanent package identifier is `com.ferroai.onemorewatt`. The debug prototype uses Godot 4.6.2's matching prebuilt template, version code/name 9/`0.9.0-dev`, API 24 minimum/API 35 target, arm64-v8a and x86_64, local debug signing, and only the `VIBRATE` permission required for optional haptics. Internet and network-state permissions are disabled.
+
+`tools/build_android_debug.sh` requires a clean Git tree, injects the exact source commit into in-app diagnostics, rejects engine export errors, and verifies package, version, API, permissions, architectures, embedded build ID, signature, and checksum. `tools/android_device_smoke.sh` refuses to mutate anything when no ready ADB device exists, and performs a non-clearing install/launch preflight when one is selected.
+
+The first recorded host-verified artifact is documented in `ANDROID_BUILD_RECORD.md`. Static verification and an APK's existence do not satisfy Phase 09 physical-device acceptance; complete `ANDROID_DEVICE_TEST.md` before recording an expand/revise/stop decision.

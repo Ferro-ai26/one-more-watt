@@ -14,6 +14,8 @@ After the approved Android package identifier and export preset are committed, b
 
 The full validation entry point also checks the permanent package name, version, architectures, permissions, debug-only signing boundary, and APK resource exclusions in `export_presets.cfg`.
 
+When a physical Android device is attached, run `./tools/android_device_smoke.sh` for the non-destructive install/launch/memory preflight, then complete `docs/ANDROID_DEVICE_TEST.md` manually.
+
 Set `GODOT_BIN` when the executable is not named `godot`. The command imports and parses the project, validates the foundation and content configuration, runs valid and invalid content fixtures, exercises the shell at 320 × 568, 360 × 640, 393 × 873, and 480 × 800, and launches the main scene in smoke-test mode.
 
 Run only deterministic content validation with:

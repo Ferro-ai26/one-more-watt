@@ -45,6 +45,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`
 - Debug APK export: `./tools/build_android_debug.sh` from a clean committed tree
+- Physical-device install/launch smoke: `./tools/android_device_smoke.sh` after confirming the intended ADB device
 - Release AAB export: Phase 16; not configured
 
 ## Ownership and publishing
@@ -56,4 +57,4 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 
 ## Environment findings
 
-Phase 09 reinspection found a separate current SDK at `/home/ubuntu/.local/share/android-sdk` with the required Android 35 platform and build tools; the earlier `/usr/lib/android-sdk` finding was stale and incomplete. Godot 4.6.2 and matching Android export templates are installed. The permanent package identifier and a debug-only prebuilt-template export preset are recorded. No physical-device test has occurred.
+Phase 09 reinspection found a separate current SDK at `/home/ubuntu/.local/share/android-sdk` with the required Android 35 platform and build tools; the earlier `/usr/lib/android-sdk` finding was stale and incomplete. Godot 4.6.2 and matching Android export templates are installed. The permanent package identifier and a debug-only prebuilt-template export preset are recorded. The host-verified artifact/build record is in `docs/ANDROID_BUILD_RECORD.md`; no physical-device test has occurred.

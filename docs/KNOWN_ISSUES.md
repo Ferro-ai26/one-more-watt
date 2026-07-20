@@ -16,7 +16,7 @@ Phase 09 is active. No critical, progression, reachability, localization, save-b
 
 - Status: Open
 - Severity: Blocker
-- First seen build/commit: Phase 09 working tree, 2026-07-20
+- First seen build/commit: `d588ba3`, 2026-07-20
 - Affected phase: Phase 09 completion gate
 - Reproduction:
   1. Run `/home/ubuntu/.local/share/android-sdk/platform-tools/adb devices -l`.
@@ -45,18 +45,18 @@ Phase 09 is active. No critical, progression, reachability, localization, save-b
 
 ### ISSUE-001 — Android export configuration unavailable
 
-- Status: Investigating
+- Status: Fixed
 - Severity: Major
 - First seen build/commit: Phase 00 working tree, 2026-07-19
-- Affected phase: Phase 00 foundation; must be resolved before Phase 09 Android gate
+- Affected phase: Phase 00 foundation and Phase 09 export; resolved during Phase 09
 - Reproduction:
   1. Inspect `docs/PROJECT_SETUP_CHECKLIST.md`.
   2. Observe that no publisher-controlled package identifier has been approved.
 - Expected: A valid Android export preset can target an installed SDK platform with the approved package identifier.
 - Actual: Resolved in source. The publisher approved `com.ferroai.onemorewatt`; Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, matching export templates, and a validated export preset are available.
-- Evidence/log: `tests/validate_android_config.gd` passes 21 checks over the recorded preset.
+- Evidence/log: `tests/validate_android_config.gd` passes 24 checks over the recorded preset.
 - Workaround: None required.
-- Fix verification: Pending inspected APK package metadata; then mark Fixed.
+- Fix verification: APK from `e165b2b` statically verifies package `com.ferroai.onemorewatt`, version code/name 9/`0.9.0-dev`, API 24/35, arm64-v8a/x86_64, only `VIBRATE`, v2/v3 signature, four-byte alignment, and embedded build ID. SHA-256 is recorded in `docs/ANDROID_BUILD_RECORD.md`.
 
 ## Issue template
 

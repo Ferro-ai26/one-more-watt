@@ -40,7 +40,7 @@ Phase 09 is preparing the complete Eras 1–3 vertical slice for Android verific
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. After the Android export preset and package identity are committed, `./tools/build_android_debug.sh` produces and verifies the debug APK. Era 4, prestige, cloud accounts, final production art/music, store rollout, and release signing remain deferred.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. `./tools/build_android_debug.sh` produces and verifies the debug APK from a clean commit; `./tools/android_device_smoke.sh` installs and cold-launches it when a device is attached. Era 4, prestige, cloud accounts, final production art/music, store rollout, and release signing remain deferred.
 
 ## Scope policy
 

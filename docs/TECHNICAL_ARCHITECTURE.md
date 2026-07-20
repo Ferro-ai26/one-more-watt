@@ -231,3 +231,9 @@ Adding an era should require data and presentation assets, not new core simulati
 `FeedbackAudio` is a presentation-only node that converts semantic `FeedbackHooks` events into cached procedural PCM cues on the SFX bus; simulation remains silent and testable. Headless runs generate and validate cue data without opening playback. `MainUI` advances idle grid simulation when no request is active, retains the specified modal pause for active requests, and rebuilds secondary content only on explicit navigation/mutation while normal 5 Hz refreshes update existing controls.
 
 The available-host worst-state budget is tested at the complete endpoint with all Build definitions and reports reachable: 500 non-rebuilding refreshes must complete under one second, 25 full Build rebuilds under 1.5 seconds, and the live tree under 500 UI nodes. These host checks supplement rather than replace the Android memory, launch, and frame budgets.
+
+## Phase 09 Android boundary
+
+Android export remains a packaging concern around the scene-independent simulation and existing persistence controller. The app owns `NOTIFICATION_WM_GO_BACK_REQUEST`: it unwinds the modal/tab stack first, then saves and exits only from the root screen. Application pause stops presentation audio and commits the background save; resume uses the existing bounded offline controller and report.
+
+The debug build is produced only from a clean Git commit. A temporary build-time replacement injects the 12-character source commit into `application/config/build_commit`, then restores the tracked project file. Package/signature/checksum inspection occurs outside the game, while Settings exposes the version/build identifier for device evidence. Signing material and generated APK/log/manifest artifacts remain outside version control.
