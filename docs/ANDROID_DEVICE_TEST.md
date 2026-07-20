@@ -52,6 +52,16 @@ adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 
 
 After launch, confirm Settings shows build `738732db1f9b`. Then drag upward through Build, Upgrades, Reports, and Settings; make an affordable purchase and confirm it applies immediately without a purchase modal.
 
+### Replacement targeted-retest result
+
+- [x] Settings showed build `738732db1f9b`.
+- [x] Build, Upgrades, Reports, and Settings scrolling worked on the Moto G (2025).
+- [x] Affordable purchasing worked without the removed confirmation popup.
+- [ ] Settings `EFFECTIVE UI` line. Explicitly skipped by tester.
+- [ ] Android version/API. Explicitly skipped by tester.
+
+`ISSUE-009` is fixed on physical hardware. Continue with the remaining Phase 13 checks below; this targeted pass alone does not complete the full playtest.
+
 ## Phase 10 targeted stabilization retest — Deferred to Phase 14
 
 This preserved checklist records the exact revised artifact and the device checks that were not performed in Phase 10. The user explicitly accepted the Phase 10 limitation and transferred the Moto verification requirement to Phase 14. Unchecked items below remain unverified; none are promoted to passing evidence.

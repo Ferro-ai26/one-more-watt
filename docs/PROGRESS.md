@@ -17,10 +17,16 @@
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
-| 13 — Eras 1–3 Production Skin | Device retest in progress — touch fix implemented | DEC-030/031; first Moto G (2025) pass confirmed launch and found drawer scrolling; shared touch-scroll fix and immediate purchases implemented; ISSUE-007/008/009 explicit |
+| 13 — Eras 1–3 Production Skin | Targeted device retest passed — remaining phone checklist open | DEC-030/031; Moto G (2025) confirms build `738732db1f9b`, all shared scrolling paths, and immediate purchases; ISSUE-009 fixed; ISSUE-007/008 remain explicit |
 | 14–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 13 targeted Moto retest passed
+
+- On replacement build `738732db1f9b`, the tester confirmed Build, Upgrades, Reports, and Settings scrolling all work on the Motorola Moto G (2025).
+- The tester confirmed affordable purchasing works without the removed conditional confirmation popup. `ISSUE-009` is fixed on physical hardware.
+- Settings effective-UI details and Android version/API were explicitly skipped and remain unverified. Phase 13 stays open for screenshots and the remaining visual, accessibility, lifecycle, audio, haptic, GPU, heat, battery, and full-route checks. Phase 14 remains unauthorized.
 
 ### 2026-07-20 — Phase 13 first Moto pass and touch follow-up
 

@@ -4,7 +4,7 @@ Updated: 2026-07-20
 
 Active phase: Phase 13 — Eras 1–3 Production Skin
 
-Status: Device Retest In Progress — Touch Fix Implemented
+Status: Targeted Device Retest Passed — Remaining Phone Checklist
 
 ## Exact result achieved
 
@@ -25,7 +25,7 @@ A first external Phase 13 pass installed and cold-launched the clean commit-`1dc
 - covers Build, Upgrades, Reports, Settings, and every other screen/modal using those shared containers, with synthetic Android drag regression on overflowing Build and Settings content;
 - removes the conditional purchase-confirmation modal and Settings toggle so every affordable purchase applies on its first tap; the legacy setting stays serialized only for save compatibility (`DEC-031`).
 
-`ISSUE-009` is fix-implemented and awaiting device retest. Phase 13 remains open; the remainder of the physical checklist is not claimed.
+Replacement build `738732db1f9b` passed the targeted Moto G (2025) retest: Build, Upgrades, Reports, and Settings scrolling work, and affordable purchases apply without the removed popup. `ISSUE-009` is fixed. The tester explicitly skipped the effective-UI and Android-version fields. Phase 13 remains open; the remainder of the physical checklist is not claimed.
 
 ## Files changed
 
@@ -48,20 +48,20 @@ A first external Phase 13 pass installed and cold-launched the clean commit-`1dc
 - Follow-up `./tools/test_ui.sh`: passed 48 UI-system, 426 Main-UI, 81 Phase 12 skin, and 51 Phase 13 checks, including real synthetic touch drags on overflowing screen and modal content and immediate purchase behavior with a legacy confirmation preference enabled.
 - Follow-up `./tools/validate.sh`: passed every repository suite and headless smoke launch; 908 balance/reachability and 111 UI/performance checks remain green. Performance measured 1,396.6 ms for 25 Build rebuilds, 489.2 ms for 500 refreshes, and 294 nodes.
 - Follow-up graphical layout capture: passed 461 checks across 35 states at five portrait sizes. Manually inspected the changed 320 × 568 Build/Settings and 393 × 873 Settings captures; scrolling affordance, removed confirmation toggle, world-first drawer, and horizontal fit remain correct.
-- Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed; it has not yet run on the Moto.
+- Clean replacement Android export from commit `738732db1f9bf3086d06e2b2d913eb0f559d561c`: `build/android/one_more_watt_phase13_debug.apk`, 55,939,625 bytes, SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`, Settings build `738732db1f9b`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed.
+- Targeted external retest: Settings build `738732db1f9b` confirmed; Build, Upgrades, Reports, and Settings scrolling passed; affordable immediate purchase without popup passed. Effective UI and Android version/API were skipped.
 
 ## Manual verification
 
 - Inspected all 12 final captures at original resolution against the locked phone board.
 - Corrected clipped operator/brownout copy, prohibited red WATT eyes during brownout, retained pullback state after modal close, redundant Build description density, maximum-text card height, and narrow navigation copy before accepting the final set.
 - Confirmed WATT remains the scene focal point, environment consequences remain visible, the Build/Upgrade drawer keeps the world live, categories/states remain redundant, and no generated concept raster or baked essential text is present.
-- The first physical pass confirmed install/cold launch and supplied the exact model/display/density, then stopped for the concrete scroll defect. The fix is host-verified but has not yet run on that phone. No screenshots, full playthrough, audible speaker/headphone mix review, or safe-area/touch/haptic/GPU/heat/battery result is claimed.
+- The first physical pass confirmed install/cold launch and supplied the exact model/display/density, then stopped for the concrete scroll defect. The replacement passed the targeted scroll/purchase retest. No screenshots, full playthrough, audible speaker/headphone mix review, or safe-area/accessibility/lifecycle/haptic/GPU/heat/battery result is claimed.
 - Manually inspected the follow-up host Build and Settings captures at 320 × 568 and Settings at 393 × 873 after removing the toggle; no horizontal clipping or new placeholder direction was introduced.
 
 ## Remaining acceptance criteria
 
-- Replacement-APK retest of Build, Upgrades, Reports, and Settings scrolling plus immediate purchasing.
-- Exact Settings build suffix and `EFFECTIVE UI` line, Android/API, screenshots, and the remaining Phase 13 phone playtest: full Eras 1–3 route, required states, touch comfort, physical font rasterization, safe areas, sound repetition/audio focus, haptics, GPU behavior, heat, and battery.
+- Screenshots and the remaining Phase 13 phone playtest: full Eras 1–3 route, required states, touch comfort, physical font rasterization, safe areas, Android Back/lifecycle/save/offline behavior, sound repetition/audio focus, haptics, GPU behavior, heat, and battery. Effective UI and Android/API were skipped and must remain labeled unverified unless later supplied.
 
 ## Known blockers
 
@@ -70,4 +70,4 @@ A first external Phase 13 pass installed and cold-launched the clean commit-`1dc
 
 ## Recommended next action inside Phase 13
 
-Build and install a clean commit-tied replacement APK. First verify touch scrolling in Build, Upgrades, Reports, and Settings and confirm purchases no longer open a modal. Then continue the preserved Phase 13 physical-phone checklist and record the exact Settings build/EFFECTIVE UI lines plus screenshots and qualitative audio/haptic/heat/battery notes. Only then close Phase 13. Do not begin Phase 14 without separate authorization.
+Continue the preserved Phase 13 checklist on replacement build `738732db1f9b`, beginning with visual comfort/text-size/reduced-motion/safe-area checks, then Android Back, lifecycle/save/offline behavior, full Eras 1–3 route, screenshots, and qualitative audio/haptic/heat/battery notes. Keep explicitly skipped device metadata unverified. Only then close Phase 13. Do not begin Phase 14 without separate authorization.

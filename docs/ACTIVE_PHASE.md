@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 13 — Eras 1–3 Production Skin
-Status: Device Retest In Progress — Touch Fix Implemented
+Status: Targeted Device Retest Passed — Remaining Phone Checklist
 
 Authoritative phase contract:
 
@@ -21,4 +21,4 @@ Phase 11 is closed and pushed at commit `d4b611f`. Every Phase 11 acceptance cri
 
 Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Phase 13 must preserve those technical contracts while manually reconstructing the Eras 1–3 presentation in code-native/project-original form. Production-painted environment/WATT art remains an explicit later fallback under `ISSUE-007`; generated Phase 11 imagery remains reference-only.
 
-Phase 13 implementation, host regression, host phone-resolution screenshots, and visual inspection are complete. A first Motorola Moto G (2025) pass at 720 × 1604 / 280 dpi confirmed install and cold launch, then found that Build and Upgrades could not be touch-scrolled. The active Phase 13 follow-up adds one shared touch-drag path for every player-facing scroll container and removes the conditional purchase-confirmation interruption under `DEC-031`; the replacement APK still requires device retest. Audible mix, haptic, safe-area, GPU, heat, battery, and the remaining playthrough evidence are outstanding. Keep Phase 13 active. Do not begin Phase 14 or mark Phase 13 complete without explicit direction and truthful device evidence.
+Phase 13 implementation, host regression, host phone-resolution screenshots, and visual inspection are complete. A Motorola Moto G (2025) pass at 720 × 1604 / 280 dpi found that Build and Upgrades could not be touch-scrolled. Replacement build `738732db1f9b` passed the targeted retest: Build, Upgrades, Reports, and Settings scroll correctly, and affordable purchases apply without a confirmation popup. `ISSUE-009` is fixed. The tester skipped the effective-UI and Android-version fields; those remain unverified. Audible mix, haptic, safe-area, GPU, heat, battery, screenshots, and the remaining playthrough evidence are outstanding. Keep Phase 13 active. Do not begin Phase 14 or mark Phase 13 complete without explicit direction and truthful device evidence.

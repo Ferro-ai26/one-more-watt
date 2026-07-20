@@ -12,11 +12,11 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
-Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one concrete interaction defect: Build and Upgrades could not be scrolled by touch. `ISSUE-009` has a host-verified fix and awaits replacement-APK retest. The tester also directed removal of the conditional large-purchase confirmation; that accepted interaction change is recorded in `DEC-031`. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
+Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one concrete interaction defect: Build and Upgrades could not be scrolled by touch. Replacement build `738732db1f9b` passed scrolling across Build, Upgrades, Reports, and Settings, so `ISSUE-009` is fixed. The tester also confirmed the accepted removal of the conditional large-purchase confirmation under `DEC-031`. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
 
-### ISSUE-009 — Build and Upgrades do not scroll by touch on Moto G (2025)
+### ISSUE-009 — Build and Upgrades did not scroll by touch on Moto G (2025)
 
-- Status: Fix Implemented — Device Retest Required
+- Status: Fixed
 - Severity: Major
 - First seen build/commit: Phase 13 APK from `1dcb9cf`, Motorola Moto G (2025), 2026-07-20
 - Affected phase: Phase 13 physical-phone verification
@@ -28,7 +28,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 - Actual: Build and Upgrades remain at the top and content below the fold cannot be reached.
 - Evidence/log: Direct tester report; `docs/ANDROID_DEVICE_TEST.md`. Source inspection found scroll containers but no explicit shared touch path, while card/control surfaces could intercept the gesture.
 - Workaround: None practical on the affected APK.
-- Fix verification: Added `TouchScrollContainer` for the shared screen and modal paths, explicit vertical/deadzone/pass settings, drag-safe card/control filters, and synthetic touch-drag tests for an overflowing Build drawer and Settings modal. Full host regression passes. Replacement commit `738732d`, APK SHA-256 `a26a4521494b2aa6d714abfae1545147e6dbade6ea0df55ea236be10e0e8b8cb`. Repeat Build, Upgrades, Reports, and Settings scrolling on the Moto before marking fixed.
+- Fix verification: Added `TouchScrollContainer` for the shared screen and modal paths, explicit vertical/deadzone/pass settings, drag-safe card/control filters, and synthetic touch-drag tests for an overflowing Build drawer and Settings modal. Full host regression passed. On replacement build `738732db1f9b`, the tester confirmed Build, Upgrades, Reports, and Settings all scroll correctly on the Moto G (2025), and immediate purchasing works without the removed popup.
 
 ### ISSUE-007 — Production environment and WATT art remain explicit fallbacks
 
@@ -47,7 +47,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 
 ### ISSUE-008 — Phase 13 physical-phone playtest requires external completion
 
-- Status: Partial External Pass — Retest In Progress
+- Status: Partial External Pass — Remaining Checklist Open
 - Severity: Blocker for Phase 13 closure; not a known runtime defect
 - First seen build/commit: Phase 13 working tree, 2026-07-20
 - Affected phase: Phase 13 manual verification gate
@@ -55,7 +55,7 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
   1. Run `adb devices -l` on the current ARM64 VPS.
   2. Observe that no device or emulator is attached.
 - Expected: Run the complete Phase 13 Eras 1–3 skin on a physical Android phone and record screenshots, touch comfort, font rasterization, sound repetition/audio focus, haptics, GPU behavior, heat, and battery.
-- Actual: The user confirmed install/cold launch on a Motorola Moto G (2025), app version `v0.10.0-dev`, and a 720 × 1604 / 280 dpi display. The pass found `ISSUE-009` before the full route was completed. Android/API, exact Settings build suffix, effective UI line, screenshots, safe areas, font comfort, lifecycle, audio, haptics, GPU, heat, battery, and the rest of the playthrough remain unverified.
+- Actual: The user confirmed install/cold launch on a Motorola Moto G (2025), app version `v0.10.0-dev`, and a 720 × 1604 / 280 dpi display. Replacement build `738732db1f9b` passed Build/Upgrades/Reports/Settings scrolling and immediate-purchase retests, resolving `ISSUE-009`. The tester explicitly skipped Android/API and the effective UI line. Screenshots, safe areas, font comfort, lifecycle, audio, haptics, GPU, heat, battery, and the rest of the playthrough remain unverified.
 - Evidence/log: `docs/phase_13/VISUAL_QA_RECORD.md`, `docs/PLAYTEST_CHECKLIST.md`, and `docs/CURRENT_HANDOFF.md`.
 - Workaround: Host 320 × 568 and 393 × 873 evidence validates composition/layout only; it does not substitute for physical-device behavior.
 - Fix verification: Retest the replacement clean commit-tied APK on the same phone, then complete and record the preserved checklist before closing Phase 13. Phase 14 remains separately gated.
