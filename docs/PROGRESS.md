@@ -7,7 +7,7 @@
 | 00 — Project Foundation | Complete | Commit `d48e01d`; clean import; 51 foundation checks; 3 portrait layout checks; headless smoke launch |
 | 01 — Data Architecture | Complete | Commit `9e632d6`; 29 content/API checks; 12 invalid fixtures; shell source-data verification; headless smoke launch |
 | 02 — Core Power Simulation | Complete | Commit `96bb219`; 178 simulation checks; 18 debug-panel checks; five scenario captures; headless smoke launch |
-| 03 — Request and WATT System | Not started | — |
+| 03 — Request and WATT System | Complete | 143 request-domain checks; 58 headless panel checks; four lifecycle captures; headless smoke launch |
 | 04 — Infrastructure and Upgrades | Not started | — |
 | 05 — Main UI and Feedback | Not started | — |
 | 06 — Save and Offline Progress | Not started | — |
@@ -17,6 +17,14 @@
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 03 request and WATT system
+
+- Added the complete locked-to-reported request state machine, permissive underprepared authorization, four request behaviors, deterministic curves/incidents, and fixed-step grid integration.
+- Added idempotent Stored Energy rewards, stable-ID unlock events, data-driven WATT lines, repetition controls, aggregate performance reports, and next-request selection.
+- Expanded the canonical content to four focused Phase 03 samples and content version `0.3.0` without populating the full Era 1–3 catalog.
+- Verified 143 request-domain checks, 58 headless panel checks, four portrait lifecycle captures, and the repository smoke suite.
+- Kept the Build shop, purchases, persistence, finished UI hierarchy, request queues, and vanity cosmetics out of scope.
 
 ### 2026-07-19 — Phase 02 core power simulation
 

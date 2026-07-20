@@ -2,6 +2,24 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 03 request-lifecycle verification — 2026-07-20
+
+- Build/commit: Uncommitted Phase 03 working tree based on `5724856`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Capacity, Stability, Burst, and Research samples completed through announcement, authorization, running, completion, and report acknowledgement.
+- [x] Announcement and completion lines matched localized request data for every sample.
+- [x] An underprepared Stability request remained authorizable and continued progressing during a deliberate brownout.
+- [x] Allocation changed to Feed WATT during the run, the grid browned out for 1.00 second, recovered, and returned to Balanced.
+- [x] Stability report truthfully recorded grade A, 93.7% service, 1.00 brownout second, a 12 W peak, and an improvement suggestion.
+- [x] Capacity, Burst, and Research reports recorded 100% service and no brownout; Burst handled its 12 W peak with Reserve.
+- [x] Reward amounts and next-request availability matched stable authored IDs after acknowledgement.
+- [x] Four report captures at 393 × 873 were inspected; controls and report text remained readable, and shell layout passed all three portrait sizes.
+- [ ] Physical Android touch and safe-area behavior verified (device/export unavailable).
+
+Notes: The panel is a Phase 03 diagnostic surface, not the finished main UI. Xvfb cannot control V-Sync; headless project validation is warning-free.
+
 ## Phase 02 grid-debug verification — 2026-07-19
 
 - Build/commit: `96bb219`

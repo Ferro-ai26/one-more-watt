@@ -1,50 +1,49 @@
 # Current Handoff
 
-Updated: 2026-07-19
-Active phase: Phase 02 — Core Power Simulation
+Updated: 2026-07-20
+Active phase: Phase 03 — Request and WATT System
 
 ## Current state
 
-Phase 02 is implemented, validated, committed as `96bb219`, and pushed to `origin/main`. The request-agnostic grid core deterministically simulates Generation, Transmission, Reserve, allocation, Stored Energy, stability, and brownout transitions at a fixed 0.25-second step. A scrollable debug panel exposes controlled scenarios and time advancement. Authored request lifecycle behavior remains absent.
+Phase 03 is implemented and validated in the working tree. A request-domain coordinator connects immutable authored definitions to the Phase 02 grid and supports the complete locked, available, announced, authorized, running, completed, and reported lifecycle. Four focused samples exercise Capacity, Stability, Burst, and Research without adding Phase 04 purchases or the full prototype catalog.
 
 ## Completed
 
-- Committed and pushed the Phase 02 implementation as `96bb219` to `origin/main`.
-- Added invariant-safe `GridState`, pure step calculations, typed step results, domain events, and a fixed-step `GridSimulation` coordinator.
-- Added infrastructure aggregate rebuilding from stable IDs and immutable content definitions.
-- Added balance-driven Expand Grid, Balanced, and Feed WATT shares plus Reserve charge/discharge rates; content version is now `0.2.0`.
-- Added edge-triggered `brownout_started` and `brownout_ended` events without currency or infrastructure loss.
-- Added cumulative 0–100 Grid Stability using served-demand ratio, brownout duration, and Reserve margin.
-- Added debug scenarios for Generation, Transmission, Reserve protection, brownout, recovery, allocation changes, and exact time advancement.
-- Added 178 equation/invariant checks and 18 headless debug-panel checks.
+- Added deterministic demand-profile sampling, seeded non-destructive incidents, preview/runtime parity, underprepared warnings, and permissive authorization.
+- Added monotonic progress from served request demand plus capped WATT surplus allocation at fixed 0.25-second steps.
+- Added one-time research costs, idempotent completion rewards, stable-ID unlock events, and next-available request selection.
+- Added authored announcement/completion dialogue, unseen-priority selection, ten-event repetition history, and 60-second brownout cooldown.
+- Added aggregate performance reports with grades, demand/service, peak, brownout, Reserve, allocation changes, incidents, currency, rewards, unlocks, and actionable suggestions.
+- Added a responsive request debug panel covering lifecycle commands, four types, allocation, intentional brownout, recovery, report, and acknowledgement.
+- Expanded canonical content to version `0.3.0` with four phase samples and one deterministic runtime incident.
 
 ## Next action
 
-Review the Phase 02 evidence and proposed `DEC-012`. Do not begin Phase 03 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
+Review the Phase 03 evidence and proposed `DEC-013`. Do not begin Phase 04 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
 
 ## Known blockers
 
 - Android package identifier and publisher identity are not yet supplied.
 - The local Android SDK has tools but no installed platform package, so Android export is not supportable yet.
-- Physical Android safe-area and device behavior remain unverified.
-- No Phase 02 implementation blocker remains.
+- Physical Android safe-area, touch, and device behavior remain unverified.
+- No Phase 03 implementation blocker remains.
 
 ## Test evidence
 
-- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 29 content/API checks, 12 invalid content fixtures, 178 simulation checks, three portrait layout checks, 18 debug-panel checks, and headless smoke launch.
-- `./tools/test_simulation.sh` — passed independently with 178 checks covering every required equation, seeded repeatability, fixed-step equivalence, aggregation, and negative/non-finite invariants.
-- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_grid_debug_panel.gd -- --capture-layouts` — passed with 23 checks including capture creation.
-- Generation-limited, Transmission-limited, Reserve-protected, and brownout captures at 393 × 873 were visually inspected; labels and values matched calculations. Recovery was also exercised and verified by the panel integration test.
-- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 02.
+- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 29 content/API checks, 12 invalid fixtures, 178 grid checks, 143 request-domain checks, three portrait layouts, 18 grid-panel checks, 58 request-panel checks, and headless smoke launch.
+- `./tools/test_requests.sh` — passed independently with 143 checks covering every required lifecycle, behavior, boundary, invariant, reward, dialogue, report, unlock, incident, and fixed-step case.
+- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_request_debug_panel.gd -- --capture-layouts` — passed with 62 checks and four captures.
+- Capacity, Stability, Burst, and Research reports at 393 × 873 were visually inspected. Stability recorded the intentional allocation change, 1.00-second brownout, recovery, 93.7% service, and grade A; the other samples recorded full service and no brownout.
+- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 03.
 
 ## Files changed
 
-- Simulation: `scripts/simulation/grid_state.gd`, `grid_calculator.gd`, `grid_step_result.gd`, `grid_event.gd`, `grid_simulation.gd`, and `infrastructure_aggregator.gd`
-- Balance/content: `data/balance/constants.json`, `data/manifest.json`, content validation updates, and the negative-balance fixture
-- Debug presentation: `scenes/debug/GridDebugPanel.tscn`, `scripts/ui/grid_debug_panel.gd`, and `scenes/app/Main.tscn`
-- Tests/tools: `tests/unit/test_grid_simulation.gd`, `tests/integration/test_grid_debug_panel.gd`, `tools/test_simulation.sh`, and the repository validation runner
-- Documentation: gameplay/content/architecture specifications, `README.md`, `docs/ACTIVE_PHASE.md`, and all required living documents
+- Request domain: state, preview, event, profile sampler, incident timeline, dialogue selector, coordinator, and aggregate report classes under `scripts/simulation/`
+- Content: four request/demand-profile samples, WATT dialogue, incident, localization, validator extensions, and manifest content version `0.3.0`
+- Debug presentation: `scenes/debug/RequestDebugPanel.tscn`, `scripts/ui/request_debug_panel.gd`, and the Phase 03 main development shell
+- Tests/tools: request unit and panel integration suites, `tools/test_requests.sh`, prior-panel regression adjustment, and the full validator
+- Documentation: request/grid boundary, content schema, architecture, proposed decision, README, active phase, and all required living documents
 
 ## Remaining acceptance criteria
 
-All Phase 02 acceptance criteria pass locally. Authored request states, request progression, demand-profile playback, incident behavior, purchases, saves, and offline simulation remain intentionally out of scope.
+All Phase 03 acceptance criteria pass locally. Full Era 1–3 request population, vanity cosmetics, request queues, Build shop/purchases, finished main UI, persistence, offline progress, and physical Android verification remain intentionally out of scope.

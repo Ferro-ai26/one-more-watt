@@ -182,6 +182,11 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 			_require_fields(record, {"era_id": "string", "sequence": "integer", "kind": "string", "required": "boolean", "title_key": "string", "summary_key": "string", "announcement_key": "string", "completion_key": "string", "required_energy": "number", "continuous_demand": "number", "max_useful_power": "number", "demand_profile_id": "string", "recommended_reserve": "number", "unlock_conditions": "array", "rewards": "dictionary", "repeatable": "boolean", "tags": "array"}, path, record_id, issues)
 			_validate_enum(record.get("kind"), REQUEST_KINDS, "UNSUPPORTED_REQUEST_KIND", path, record_id, "kind", issues)
 			_validate_nonnegative(record, ["required_energy", "continuous_demand", "max_useful_power", "recommended_reserve"], path, record_id, issues)
+			if record.has("research_cost"):
+				if not _is_number(record["research_cost"]) or float(record["research_cost"]) < 0.0:
+					_add_issue(issues, "INVALID_VALUE", path, record_id, "research_cost must be nonnegative")
+				if str(record.get("kind", "")) != "research":
+					_add_issue(issues, "INVALID_VALUE", path, record_id, "research_cost is only valid for research requests")
 			if int(record.get("sequence", 0)) <= 0:
 				_add_issue(issues, "INVALID_VALUE", path, record_id, "sequence must be positive")
 			if record.get("tutorial_action") != null and not record.get("tutorial_action") is String:
@@ -413,6 +418,12 @@ func _validate_trigger(wrapper: Dictionary, indices: Dictionary, issues: Array[C
 	var trigger_type := str(trigger.get("type", ""))
 	if trigger_type == "request_completed":
 		_validate_reference(str(trigger.get("target_id", "")), "requests", indices, wrapper, "%s target_id" % field, issues)
+	elif trigger_type == "request_elapsed" and field == "trigger":
+		_validate_reference(str(trigger.get("target_id", "")), "requests", indices, wrapper, "%s target_id" % field, issues)
+		if not _is_number(trigger.get("at_seconds")) or float(trigger.get("at_seconds", -1.0)) < 0.0:
+			_add_issue(issues, "INVALID_VALUE", wrapper["path"], record.get("id", ""), "request_elapsed at_seconds must be nonnegative")
+		if not _is_number(trigger.get("chance")) or float(trigger.get("chance", -1.0)) < 0.0 or float(trigger.get("chance", 2.0)) > 1.0:
+			_add_issue(issues, "INVALID_VALUE", wrapper["path"], record.get("id", ""), "request_elapsed chance must be between 0 and 1")
 	else:
 		_add_issue(issues, "UNSUPPORTED_TRIGGER", wrapper["path"], record.get("id", ""), "unsupported %s type '%s'" % [field, trigger_type])
 

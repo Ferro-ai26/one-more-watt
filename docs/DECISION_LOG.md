@@ -80,6 +80,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: This preserves the documented Reserve equations, prevents simultaneous Reserve charge/discharge, and avoids embedding request lifecycle assumptions in `GridCalculator`.
 - Consequences: Phase 03 owns the mapping from authored continuous demand and useful WATT power to request progress, but it must consume the existing grid outputs rather than rewriting the core flow equations.
 
+## DEC-013 — Served request load contributes useful WATT power
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: During an active request, power that serves its authored demand contributes to useful WATT power. WATT's share of surplus may add acceleration up to `max_useful_power`; only the remaining grid share may charge Reserve or convert to Stored Energy.
+- Reason: This connects the load-first Phase 02 boundary to the documented first request, which must complete from the starting 5 W grid even when its continuous demand is also 5 W, without double-counting request-serving energy as currency.
+- Consequences: Allocation affects acceleration when surplus exists, underpowered requests still advance from actually served demand, and preview/runtime use the same demand and cap definitions. A future balance change can alter authored values without changing this boundary.
+
 ## Proposed decision template
 
 ```markdown

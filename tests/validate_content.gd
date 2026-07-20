@@ -15,8 +15,8 @@ func _init() -> void:
 	var counts := repository.get_counts()
 	var expected_counts := {
 		"balance": 1, "eras": 2, "infrastructure": 1, "upgrades": 1,
-		"requests": 1, "demand_profiles": 1, "dialogue": 1,
-		"incidents": 1, "achievements": 1, "localization": 1,
+		"requests": 4, "demand_profiles": 4, "dialogue": 4,
+		"incidents": 2, "achievements": 1, "localization": 1,
 	}
 	for family: String in expected_counts:
 		_check(counts.get(family) == expected_counts[family], "%s count should be %d" % [family, expected_counts[family]])
@@ -45,7 +45,7 @@ func _init() -> void:
 	_check(request.get_required_energy() == 75.0, "exported dictionaries must not mutate definitions")
 	var request_list := repository.get_all("requests")
 	request_list.clear()
-	_check(repository.get_counts()["requests"] == 1, "returned arrays must not mutate repository indices")
+	_check(repository.get_counts()["requests"] == 4, "returned arrays must not mutate repository indices")
 
 	if _failures.is_empty():
 		print("CONTENT VALIDATION PASSED: %d checks" % _checks)

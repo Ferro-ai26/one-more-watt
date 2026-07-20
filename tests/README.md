@@ -20,4 +20,10 @@ Run the standalone grid equation and invariant suite with:
 ./tools/test_simulation.sh
 ```
 
-Later phases may add a dedicated unit-test framework under `tests/unit/`; this script remains the repository-level validation entry point.
+Run the request lifecycle, WATT dialogue, incident, reward, unlock, and report suite with:
+
+```bash
+./tools/test_requests.sh
+```
+
+The repository-level validation entry point also exercises both diagnostic panels and the full request lifecycle at portrait size.

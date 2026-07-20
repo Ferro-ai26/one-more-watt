@@ -9,8 +9,8 @@ func _init() -> void:
 
 
 func _run() -> void:
-	var packed := load("res://scenes/app/Main.tscn") as PackedScene
-	_check(packed != null, "main scene loads")
+	var packed := load("res://scenes/debug/GridDebugPanel.tscn") as PackedScene
+	_check(packed != null, "standalone grid debug scene loads")
 	if packed == null:
 		_finish()
 		return
@@ -20,12 +20,11 @@ func _run() -> void:
 	viewport.disable_3d = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	get_root().add_child(viewport)
-	var main := packed.instantiate() as Control
-	viewport.add_child(main)
+	var panel := packed.instantiate() as GridDebugPanel
+	viewport.add_child(panel)
 	await process_frame
 	await process_frame
 
-	var panel := main.get_node("SafeArea/DevelopmentShell/ContentScroll/Content/GridDebugPanel") as GridDebugPanel
 	var status := panel.get_node("GridStatusLabel") as Label
 	var event_label := panel.get_node("GridEventLabel") as Label
 	var capture_layouts := "--capture-layouts" in OS.get_cmdline_user_args()
@@ -35,33 +34,33 @@ func _run() -> void:
 	_check(status.text == "GRID STABLE  •  LIMITING: GENERATION", "generation scenario identifies Generation")
 	_check_near(panel.simulation.get_last_result().deliverable_power, 5.0, "generation scenario delivered power")
 	if capture_layouts:
-		await _capture(viewport, main, "generation")
+		await _capture(viewport, "generation")
 
 	await _press(panel.get_node("Scenarios/TransmissionLimitedButton") as Button)
 	_check(status.text == "GRID STABLE  •  LIMITING: TRANSMISSION", "transmission scenario identifies Transmission")
 	_check_near(panel.simulation.get_last_result().deliverable_power, 6.0, "transmission scenario delivered power")
 	if capture_layouts:
-		await _capture(viewport, main, "transmission")
+		await _capture(viewport, "transmission")
 
 	await _press(panel.get_node("Scenarios/ReserveProtectedButton") as Button)
 	_check(status.text == "GRID STABLE  •  LIMITING: RESERVE", "Reserve scenario identifies Reserve")
 	_check_near(panel.simulation.get_last_result().reserve_discharge_power, 4.0, "Reserve scenario covers peak")
 	_check(not panel.simulation.state.brownout_active, "Reserve scenario remains stable")
 	if capture_layouts:
-		await _capture(viewport, main, "reserve")
+		await _capture(viewport, "reserve")
 
 	await _press(panel.get_node("Scenarios/BrownoutButton") as Button)
 	_check("BROWNOUT" in status.text, "brownout scenario shows status")
 	_check("brownout_started" in event_label.text, "brownout scenario shows start event")
 	_check_near(panel.simulation.get_last_result().unmet_power, 10.0, "brownout scenario shows remaining deficit")
 	if capture_layouts:
-		await _capture(viewport, main, "brownout")
+		await _capture(viewport, "brownout")
 
 	await _press(panel.get_node("TimeControls/RecoverButton") as Button)
 	_check("GRID STABLE" in status.text, "Recover control returns grid to stable")
 	_check("brownout_ended" in event_label.text, "Recover control shows end event")
 	if capture_layouts:
-		await _capture(viewport, main, "recovery")
+		await _capture(viewport, "recovery")
 
 	panel.load_scenario("generation_limited")
 	await _press(panel.get_node("Allocation/ExpandGridButton") as Button)
@@ -88,9 +87,7 @@ func _press(button: Button) -> void:
 	await process_frame
 
 
-func _capture(viewport: SubViewport, main: Control, scenario: String) -> void:
-	var scroll := main.get_node("SafeArea/DevelopmentShell/ContentScroll") as ScrollContainer
-	scroll.scroll_vertical = 0
+func _capture(viewport: SubViewport, scenario: String) -> void:
 	await process_frame
 	await process_frame
 	var path := "user://grid_debug_%s.png" % scenario

@@ -9,7 +9,12 @@
       "description_key": "era.01.description",
       "unlock_conditions": [],
       "infrastructure_ids": ["wall_outlet"],
-      "request_ids": ["era01_finish_booting"],
+      "request_ids": [
+        "era01_finish_booting",
+        "era01_basic_arithmetic",
+        "era01_understand_tuesdays",
+        "era01_friendlier_thanks"
+      ],
       "visual_state_id": "desk_initial",
       "unit_display_floor": "W"
     },

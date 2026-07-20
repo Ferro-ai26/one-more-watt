@@ -110,6 +110,10 @@ func get_accumulator_seconds() -> float:
 	return _accumulator_seconds
 
 
+func get_allocation() -> Dictionary:
+	return _current_allocation().duplicate(true)
+
+
 func drain_events() -> Array[GridEvent]:
 	var drained := _events.duplicate()
 	_events.clear()

@@ -8,3 +8,15 @@ func get_title_key() -> String:
 
 func get_required_energy() -> float:
 	return float(get_value("required_energy", 0.0))
+
+
+func get_kind() -> String:
+	return str(get_value("kind", ""))
+
+
+func get_continuous_demand() -> float:
+	return float(get_value("continuous_demand", 0.0))
+
+
+func get_max_useful_power() -> float:
+	return float(get_value("max_useful_power", 0.0))

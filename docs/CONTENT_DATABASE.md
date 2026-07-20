@@ -128,6 +128,8 @@ Supported effect operations must be enumerated and validated. Do not execute arb
 
 Request kinds: `capacity`, `stability`, `burst`, `research`, `vanity`.
 
+Research requests may add a nonnegative `research_cost` in Stored Energy. The cost is validated and paid atomically at authorization; it is never embedded in UI code.
+
 ## Demand profile schema
 
 Demand profiles define a positive `duration_seconds`, a `loop` flag, and ordered keyframes. Each keyframe contains a unique `time_seconds` within the profile duration and a nonnegative demand `multiplier`; the first keyframe starts at zero. These authored curves are deterministic.
@@ -142,7 +144,7 @@ Dialogue records contain `id`, `context`, `era_id`, `text_key`, `required_placeh
 
 ## Incident schema
 
-Incidents contain `id`, a deterministic `trigger`, nonnegative `duration_seconds`, a `modifiers` effect array, `dialogue_keys`, `severity`, and `offline_allowed`. Phase 01 supports request-completion triggers and `cosmetic`, `minor`, or `major` severity. Prototype incidents default to `offline_allowed: false`; only cosmetic incidents may opt in until a later contract defines beneficial offline behavior.
+Incidents contain `id`, a deterministic `trigger`, nonnegative `duration_seconds`, a `modifiers` effect array, `dialogue_keys`, `severity`, and `offline_allowed`. Supported triggers are request completion and seeded request-elapsed events with a stable request ID, nonnegative start time, and 0–1 chance. Severity is `cosmetic`, `minor`, or `major`. Prototype incidents default to `offline_allowed: false`; only cosmetic incidents may opt in until a later contract defines beneficial offline behavior.
 
 ## Achievement schema
 
@@ -187,7 +189,7 @@ The exact numbers are tuned in data, but the initial authored set is:
 
 This produces 18 total requests, including three optional vanity requests.
 
-Phase 01 canonical JSON contains only enough records to exercise each schema. Full population of this catalog remains a later phase responsibility.
+Phase 03 canonical JSON contains one runnable sample for each required Capacity, Stability, Burst, and Research behavior. Full population of this catalog remains a later phase responsibility.
 
 ## Localization
 

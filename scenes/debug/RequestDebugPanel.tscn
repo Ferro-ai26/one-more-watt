@@ -1,0 +1,194 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/request_debug_panel.gd" id="1_request_debug"]
+
+[node name="RequestDebugPanel" type="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_request_debug")
+
+[node name="Heading" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19, 0.73, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "REQUEST LIFECYCLE DEBUG"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="WattDialogueLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+text = "WATT is waiting."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="RequestLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ProgressLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="PreviewLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.88, 1)
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="GridLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ScenarioHeading" type="Label" parent="."]
+layout_mode = 2
+text = "FOUR REQUEST TYPES"
+
+[node name="ScenarioGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="CapacityButton" type="Button" parent="ScenarioGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Capacity"
+
+[node name="StabilityButton" type="Button" parent="ScenarioGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Stability"
+
+[node name="BurstButton" type="Button" parent="ScenarioGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Burst"
+
+[node name="ResearchButton" type="Button" parent="ScenarioGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Research"
+
+[node name="LifecycleHeading" type="Label" parent="."]
+layout_mode = 2
+text = "LIFECYCLE"
+
+[node name="LifecycleGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="AnnounceButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Announce"
+
+[node name="AuthorizeButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Authorize"
+
+[node name="StartButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Start"
+
+[node name="AdvanceOneButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+1 sec"
+
+[node name="AdvanceTenButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "+10 sec"
+
+[node name="AcknowledgeButton" type="Button" parent="LifecycleGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Acknowledge"
+
+[node name="StressGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 1
+
+[node name="UnderprepareButton" type="Button" parent="StressGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cause Brownout"
+
+[node name="RecoverButton" type="Button" parent="StressGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Recover Grid"
+
+[node name="AllocationGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="ExpandButton" type="Button" parent="AllocationGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Expand"
+
+[node name="BalancedButton" type="Button" parent="AllocationGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Balanced"
+
+[node name="FeedButton" type="Button" parent="AllocationGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Feed WATT"
+
+[node name="ReportLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+text = "REPORT: pending"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="EventsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+text = "EVENTS: ready"
+horizontal_alignment = 1
+autowrap_mode = 2

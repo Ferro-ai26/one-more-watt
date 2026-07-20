@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 02 has established the Godot project foundation, validated content architecture, and deterministic standalone power simulation. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 03 connects authored WATT requests to the deterministic grid through a complete announcement-to-report lifecycle. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh` and simulation tests with `./tools/test_simulation.sh`. The project currently launches a responsive development shell with an interactive grid debug panel; authored request gameplay remains intentionally out of scope until its later phase contract is activated.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, and request-domain tests with `./tools/test_requests.sh`. The responsive development shell exposes four request types, previews, authorization warnings, allocation changes, brownout/recovery, completion reports, and acknowledgement. Phase 04 shop and purchase behavior remain intentionally out of scope.
 
 ## Scope policy
 

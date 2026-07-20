@@ -41,8 +41,8 @@ func _run() -> void:
 		_check(main.size.is_equal_approx(Vector2(test_size)), "%s root was %s" % [test_size, main.size])
 		_check(minimum.x <= test_size.x and minimum.y <= test_size.y, "%s minimum shell was %s" % [test_size, minimum])
 		_check(shell.size.x <= test_size.x and shell.size.y <= test_size.y, "%s shell was %s" % [test_size, shell.size])
-		_check("Content v0.2.0" in content_version_label.text and "schema 1" in content_version_label.text, "%s content version label was '%s'" % [test_size, content_version_label.text])
-		_check("2 eras" in content_counts_label.text and "1 infrastructure" in content_counts_label.text and "1 upgrade" in content_counts_label.text and "1 request" in content_counts_label.text, "%s content counts label was '%s'" % [test_size, content_counts_label.text])
+		_check("Content v0.3.0" in content_version_label.text and "schema 1" in content_version_label.text, "%s content version label was '%s'" % [test_size, content_version_label.text])
+		_check("2 eras" in content_counts_label.text and "1 infrastructure" in content_counts_label.text and "1 upgrade" in content_counts_label.text and "4 request" in content_counts_label.text, "%s content counts label was '%s'" % [test_size, content_counts_label.text])
 		_check(sample_request_label.text == "Finish Booting  •  75 energy", "%s sample request label was '%s'" % [test_size, sample_request_label.text])
 		print("PORTRAIT LAYOUT: %s passed (shell %s, minimum %s)" % [test_size, shell.size, minimum])
 		if capture_layouts:

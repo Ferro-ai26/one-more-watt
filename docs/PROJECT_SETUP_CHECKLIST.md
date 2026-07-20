@@ -36,6 +36,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Content validation: `./tools/validate_content.sh`
 - Unit tests: `godot4 --headless --path . --script res://tests/content/test_invalid_content.gd`
 - Simulation tests: `./tools/test_simulation.sh`
+- Request lifecycle tests: `./tools/test_requests.sh`
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`

@@ -139,6 +139,8 @@ Avoid per-frame signals for values that have not changed.
 
 The Phase 02 active simulator rejects non-finite or negative deltas and bounds one direct active-time call to one hour. Larger offline intervals belong to the later event-boundary offline simulator rather than the fixed-step active loop.
 
+The Phase 03 request coordinator owns lifecycle commands and advances demand profiles at the same fixed-step boundary as `GridSimulation`. It consumes grid step results, emits summary domain events, and stores one aggregate `PerformanceReport` per completed sample; presentation never calculates rewards, grades, or progress.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.

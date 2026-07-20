@@ -11,6 +11,22 @@
       "dialogue_keys": ["incident.helpful_cool_breeze.start"],
       "severity": "cosmetic",
       "offline_allowed": false
+    },
+    {
+      "id": "browser_tab_bloom",
+      "trigger": {
+        "type": "request_elapsed",
+        "target_id": "era01_basic_arithmetic",
+        "at_seconds": 2,
+        "chance": 0.75
+      },
+      "duration_seconds": 2,
+      "modifiers": [
+        {"operation": "multiply", "target": "request_efficiency", "value": 0.8}
+      ],
+      "dialogue_keys": ["incident.browser_tab_bloom.start"],
+      "severity": "minor",
+      "offline_allowed": false
     }
   ]
 }

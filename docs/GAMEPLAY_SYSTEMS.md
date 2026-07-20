@@ -95,9 +95,13 @@ progress_per_second = useful_watt_power / required_energy
 
 The balance layer may apply a minimum efficiency floor so a badly underbuilt request advances slowly rather than appearing frozen.
 
+For the Phase 03 integration, served authored request demand counts as useful WATT power because that load belongs to the active request. WATT's allocation share of remaining surplus may accelerate the request up to `max_useful_power`. Only the grid share can charge Reserve or become Stored Energy, so request-serving power is never counted again as currency.
+
 ### Completion
 
 Progress never moves backward. Completion grants rewards once, records performance, unlocks content, and queues a report.
+
+Reports retain aggregate demand, service, peak, brownout, Reserve, allocation-change, incident, currency, reward, and unlock summaries. They do not retain raw fixed-step frames.
 
 ## Request types
 

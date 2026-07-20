@@ -9,6 +9,39 @@
         {"time_seconds": 0, "multiplier": 1.0},
         {"time_seconds": 15, "multiplier": 1.0}
       ]
+    },
+    {
+      "id": "arithmetic_peak",
+      "duration_seconds": 8,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 1.0},
+        {"time_seconds": 3, "multiplier": 1.0},
+        {"time_seconds": 4, "multiplier": 2.0},
+        {"time_seconds": 6, "multiplier": 2.0},
+        {"time_seconds": 8, "multiplier": 1.0}
+      ]
+    },
+    {
+      "id": "tuesday_burst",
+      "duration_seconds": 8,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.5},
+        {"time_seconds": 4, "multiplier": 0.5},
+        {"time_seconds": 5, "multiplier": 3.0},
+        {"time_seconds": 7, "multiplier": 3.0},
+        {"time_seconds": 8, "multiplier": 0.5}
+      ]
+    },
+    {
+      "id": "steady_research",
+      "duration_seconds": 10,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 1.0},
+        {"time_seconds": 10, "multiplier": 1.0}
+      ]
     }
   ]
 }

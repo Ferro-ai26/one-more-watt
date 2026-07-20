@@ -8,6 +8,30 @@
       "text_key": "dialogue.system.content_ready",
       "required_placeholders": ["content_version"],
       "tags": ["debug"]
+    },
+    {
+      "id": "brownout_first",
+      "context": "brownout",
+      "era_id": "era_01_cold_boot",
+      "text_key": "dialogue.brownout.first",
+      "required_placeholders": [],
+      "tags": ["reaction", "unseen_priority"]
+    },
+    {
+      "id": "brownout_second",
+      "context": "brownout",
+      "era_id": "era_01_cold_boot",
+      "text_key": "dialogue.brownout.second",
+      "required_placeholders": [],
+      "tags": ["reaction", "unseen_priority"]
+    },
+    {
+      "id": "tutorial_authorize",
+      "context": "tutorial",
+      "era_id": "era_01_cold_boot",
+      "text_key": "dialogue.tutorial.authorize",
+      "required_placeholders": [],
+      "tags": ["critical", "tutorial"]
     }
   ]
 }
