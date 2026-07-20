@@ -167,6 +167,7 @@ func _economy_card(definition: ContentDefinition, preview: EconomyPreview, famil
 	return {
 		"id": definition.get_id(),
 		"family": family,
+		"category": str(definition.get_value("category", "upgrade" if family == "upgrade" else "support")),
 		"name": session.repository.localize(str(definition.get_value("name_key", ""))),
 		"description": session.repository.localize(str(definition.get_value("description_key", ""))),
 		"ownership": ownership,

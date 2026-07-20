@@ -1,12 +1,20 @@
 class_name EraEnvironmentView
 extends Control
 
+const EXPRESSIONS := ["curious", "pleased", "thinking", "concerned", "complete"]
+
 var skin: EraSkinDefinition
 var reduced_motion := false
 var power_online := true
+var brownout_active := false
 var authorization_ready := true
+var reserve_state := "ready"
+var expression := "curious"
 var owned_counts: Dictionary = {}
+var last_installation := ""
 var _pulse := 0.0
+var _installation_pulse := 0.0
+var _transition_progress := -1.0
 
 
 func _ready() -> void:
@@ -19,28 +27,71 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if reduced_motion:
 		return
-	_pulse = fmod(_pulse + delta * 0.55, 1.0)
+	_pulse = fmod(_pulse + delta * 0.42, 1.0)
+	_installation_pulse = maxf(_installation_pulse - delta * 0.8, 0.0)
+	if _transition_progress >= 0.0:
+		_transition_progress = minf(_transition_progress + delta / 2.2, 1.0)
 	queue_redraw()
 
 
 func set_skin(next_skin: EraSkinDefinition) -> void:
 	if next_skin == null:
 		next_skin = EraSkinRegistry.get_skin(EraSkinRegistry.BASE_ID)
+	if skin != null and skin.skin_id == next_skin.skin_id:
+		return
 	skin = next_skin
 	queue_redraw()
 
 
 func set_reduced_motion(enabled: bool) -> void:
+	if reduced_motion == enabled:
+		return
 	reduced_motion = enabled
 	_pulse = 0.45
 	queue_redraw()
 
 
-func set_runtime_state(counts: Dictionary, is_online: bool, can_authorize: bool) -> void:
+func set_runtime_state(counts: Dictionary, is_online: bool, can_authorize: bool, is_brownout: bool = false, next_reserve_state: String = "ready", next_expression: String = "curious") -> void:
+	var resolved_expression := next_expression if next_expression in EXPRESSIONS else "curious"
+	var unchanged := owned_counts == counts and power_online == is_online and authorization_ready == can_authorize and brownout_active == is_brownout and reserve_state == next_reserve_state and expression == resolved_expression
+	if unchanged:
+		return
 	owned_counts = counts.duplicate()
 	power_online = is_online
 	authorization_ready = can_authorize
+	brownout_active = is_brownout
+	reserve_state = next_reserve_state
+	expression = resolved_expression
 	queue_redraw()
+
+
+func cue_installation(content_id: String) -> void:
+	last_installation = content_id
+	_installation_pulse = 1.0
+	queue_redraw()
+
+
+func start_capstone_pullback() -> void:
+	_transition_progress = 1.0 if reduced_motion else 0.0
+	queue_redraw()
+
+
+func finish_capstone_pullback() -> void:
+	_transition_progress = -1.0
+	queue_redraw()
+
+
+func representative_state() -> String:
+	var total := 0
+	for value: Variant in owned_counts.values():
+		total += maxi(int(value), 0)
+	if total >= 20:
+		return "facility"
+	if total >= 10:
+		return "bank"
+	if total >= 4:
+		return "cluster"
+	return "single"
 
 
 func _draw() -> void:
@@ -48,40 +99,133 @@ func _draw() -> void:
 		return
 	var area := Rect2(Vector2.ZERO, size)
 	draw_rect(area, skin.background_color)
-	_draw_wall_and_desk(area)
-	_draw_infrastructure(area)
+	match skin.era_number:
+		2: _draw_room(area)
+		3: _draw_house(area)
+		_: _draw_desk(area)
 	_draw_power_paths(area)
 	_draw_watt(area)
 	_draw_operator_plate(area)
+	_draw_state_beacons(area)
+	_draw_transition(area)
 
 
-func _draw_wall_and_desk(area: Rect2) -> void:
-	draw_rect(Rect2(0.0, 0.0, area.size.x, area.size.y * 0.72), skin.wall_color)
-	draw_rect(Rect2(0.0, area.size.y * 0.72, area.size.x, area.size.y * 0.28), skin.surface_color)
-	draw_line(Vector2(0.0, area.size.y * 0.72), Vector2(area.size.x, area.size.y * 0.72), SkinTokens.COLOR_SHADOW, 4.0)
-	# Old wall label and fasteners establish the practical, painted workshop.
-	draw_rect(Rect2(area.size.x * 0.06, area.size.y * 0.12, area.size.x * 0.28, area.size.y * 0.16), SkinTokens.COLOR_IVORY_DIM)
-	draw_string(get_theme_default_font(), Vector2(area.size.x * 0.08, area.size.y * 0.22), "AUTHORIZED LOAD", HORIZONTAL_ALIGNMENT_LEFT, -1.0, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_INK)
+func _draw_desk(area: Rect2) -> void:
+	_draw_shell(area, 0.70)
+	var pegboard := Rect2(area.size.x * 0.05, area.size.y * 0.10, area.size.x * 0.30, area.size.y * 0.28)
+	draw_rect(pegboard, SkinTokens.COLOR_ERA_01_DESK)
+	draw_rect(pegboard, SkinTokens.COLOR_AGED_METAL, false, 2.0)
+	for x_index: int in 5:
+		for y_index: int in 3:
+			draw_circle(pegboard.position + Vector2(12.0 + x_index * pegboard.size.x / 5.5, 12.0 + y_index * pegboard.size.y / 3.5), 1.4, SkinTokens.COLOR_SHADOW)
+	var monitor := Rect2(area.size.x * 0.08, area.size.y * 0.43, area.size.x * 0.22, area.size.y * 0.20)
+	draw_rect(monitor, SkinTokens.COLOR_AGED_METAL)
+	draw_rect(monitor.grow(-4.0), SkinTokens.COLOR_GLASS_DARK)
+	draw_line(Vector2(monitor.get_center().x, monitor.end.y), Vector2(monitor.get_center().x, area.size.y * 0.70), SkinTokens.COLOR_SHADOW, 4.0)
+	_draw_outlet(Rect2(area.size.x * 0.83, area.size.y * 0.24, area.size.x * 0.11, area.size.y * 0.18))
+	_draw_battery_bank(area, Vector2(area.size.x * 0.10, area.size.y * 0.73), mini(int(owned_counts.get("laptop_battery", 0)), 3), 0.075)
+	_draw_fan(area, Vector2(area.size.x * 0.76, area.size.y * 0.75), 0.065, int(owned_counts.get("tiny_desk_fan", 0)) > 0)
+	_draw_warm_lamp(area, Vector2(area.size.x * 0.90, area.size.y * 0.12), power_online)
+
+
+func _draw_room(area: Rect2) -> void:
+	_draw_shell(area, 0.78)
+	var nested_desk := Rect2(area.size.x * 0.34, area.size.y * 0.48, area.size.x * 0.34, area.size.y * 0.27)
+	draw_rect(nested_desk, SkinTokens.COLOR_ERA_01_DESK)
+	draw_rect(nested_desk, SkinTokens.COLOR_AGED_METAL, false, 2.0)
+	var bed := Rect2(area.size.x * 0.03, area.size.y * 0.62, area.size.x * 0.25, area.size.y * 0.14)
+	draw_rect(bed, SkinTokens.COLOR_IVORY_DIM)
+	draw_rect(bed, SkinTokens.COLOR_SHADOW, false, 2.0)
+	draw_rect(Rect2(bed.position + Vector2(5.0, 4.0), Vector2(bed.size.x * 0.28, bed.size.y * 0.45)), SkinTokens.COLOR_IVORY)
+	var window := Rect2(area.size.x * 0.72, area.size.y * 0.10, area.size.x * 0.22, area.size.y * 0.27)
+	draw_rect(window, SkinTokens.COLOR_GLASS_DARK)
+	draw_rect(window, SkinTokens.COLOR_AGED_METAL, false, 3.0)
+	draw_line(Vector2(window.get_center().x, window.position.y), Vector2(window.get_center().x, window.end.y), SkinTokens.COLOR_AGED_METAL, 2.0)
+	_draw_generator(Rect2(area.size.x * 0.05, area.size.y * 0.35, area.size.x * 0.22, area.size.y * 0.20), int(owned_counts.get("portable_generator", 0)) > 0)
+	_draw_battery_bank(area, Vector2(area.size.x * 0.73, area.size.y * 0.64), mini(int(owned_counts.get("home_battery", 0)), 3), 0.085)
+	_draw_fan(area, Vector2(area.size.x * 0.84, area.size.y * 0.47), 0.055, int(owned_counts.get("gaming_gpu", 0)) > 0)
+	_draw_warm_lamp(area, Vector2(area.size.x * 0.14, area.size.y * 0.13), not brownout_active)
+
+
+func _draw_house(area: Rect2) -> void:
+	draw_rect(Rect2(0.0, 0.0, area.size.x, area.size.y * 0.82), skin.wall_color)
+	var roof := PackedVector2Array([Vector2(0.0, area.size.y * 0.20), Vector2(area.size.x * 0.50, area.size.y * 0.02), Vector2(area.size.x, area.size.y * 0.20)])
+	draw_polyline(roof, SkinTokens.COLOR_AGED_METAL, 5.0)
+	for x_fraction: float in [0.32, 0.67]:
+		draw_line(Vector2(area.size.x * x_fraction, area.size.y * 0.20), Vector2(area.size.x * x_fraction, area.size.y * 0.82), SkinTokens.COLOR_SHADOW, 3.0)
+	draw_line(Vector2(0.0, area.size.y * 0.52), Vector2(area.size.x, area.size.y * 0.52), SkinTokens.COLOR_SHADOW, 3.0)
+	var fridge := Rect2(area.size.x * 0.04, area.size.y * 0.27, area.size.x * 0.13, area.size.y * 0.22)
+	draw_rect(fridge, SkinTokens.COLOR_CERAMIC_SHADOW)
+	draw_line(Vector2(fridge.position.x, fridge.position.y + fridge.size.y * 0.62), Vector2(fridge.end.x, fridge.position.y + fridge.size.y * 0.62), SkinTokens.COLOR_AGED_METAL, 1.0)
+	draw_circle(Vector2(fridge.end.x - 6.0, fridge.position.y + 8.0), 1.5, SkinTokens.COLOR_DISABLED)
+	draw_rect(Rect2(area.size.x * 0.19, area.size.y * 0.44, area.size.x * 0.04, area.size.y * 0.035), SkinTokens.COLOR_IVORY_DIM)
+	_draw_server_bank(area, Rect2(area.size.x * 0.70, area.size.y * 0.23, area.size.x * 0.24, area.size.y * 0.54), mini(int(owned_counts.get("server_rack", 0)), 4))
+	_draw_battery_bank(area, Vector2(area.size.x * 0.06, area.size.y * 0.59), mini(int(owned_counts.get("whole_home_battery", 0)), 3), 0.10)
+	_draw_generator(Rect2(area.size.x * 0.72, area.size.y * 0.62, area.size.x * 0.22, area.size.y * 0.15), int(owned_counts.get("backup_generator", 0)) > 0)
+	_draw_fan(area, Vector2(area.size.x * 0.57, area.size.y * 0.34), 0.07, int(owned_counts.get("dedicated_cooling", 0)) > 0)
+	var transformer := Rect2(area.size.x * 0.02, area.size.y * 0.83, area.size.x * 0.18, area.size.y * 0.12)
+	draw_rect(transformer, SkinTokens.COLOR_GRAPHITE_RAISED if int(owned_counts.get("outdoor_transformer", 0)) > 0 else SkinTokens.COLOR_SHADOW)
+	draw_rect(transformer, SkinTokens.COLOR_TRANSMISSION, false, 2.0)
+
+
+func _draw_shell(area: Rect2, surface_y: float) -> void:
+	draw_rect(Rect2(0.0, 0.0, area.size.x, area.size.y * surface_y), skin.wall_color)
+	draw_rect(Rect2(0.0, area.size.y * surface_y, area.size.x, area.size.y * (1.0 - surface_y)), skin.surface_color)
+	draw_line(Vector2(0.0, area.size.y * surface_y), Vector2(area.size.x, area.size.y * surface_y), SkinTokens.COLOR_SHADOW, 4.0)
 	for point: Vector2 in [Vector2(8, 8), Vector2(area.size.x - 8, 8), Vector2(8, area.size.y - 8), Vector2(area.size.x - 8, area.size.y - 8)]:
 		draw_circle(point, 2.0, SkinTokens.COLOR_AGED_METAL)
 
 
-func _draw_infrastructure(area: Rect2) -> void:
-	var outlet := Rect2(area.size.x * 0.82, area.size.y * 0.25, area.size.x * 0.12, area.size.y * 0.22)
-	draw_rect(outlet, SkinTokens.COLOR_IVORY)
-	draw_rect(outlet, SkinTokens.COLOR_INK, false, 2.0)
-	draw_circle(Vector2(outlet.position.x + outlet.size.x * 0.35, outlet.position.y + outlet.size.y * 0.48), 2.5, SkinTokens.COLOR_INK)
-	draw_circle(Vector2(outlet.position.x + outlet.size.x * 0.65, outlet.position.y + outlet.size.y * 0.48), 2.5, SkinTokens.COLOR_INK)
-	var battery_count := mini(int(owned_counts.get("portable_battery", 1)), 3)
-	for index: int in battery_count:
-		var battery := Rect2(area.size.x * (0.08 + index * 0.09), area.size.y * 0.76, area.size.x * 0.07, area.size.y * 0.13)
-		draw_rect(battery, SkinTokens.COLOR_GRAPHITE_RAISED)
-		draw_rect(battery, SkinTokens.COLOR_GENERATION, false, 2.0)
-	var fan_center := Vector2(area.size.x * 0.72, area.size.y * 0.77)
-	draw_circle(fan_center, area.size.y * 0.085, SkinTokens.COLOR_GRAPHITE)
+func _draw_outlet(rect: Rect2) -> void:
+	draw_rect(rect, SkinTokens.COLOR_IVORY)
+	draw_rect(rect, SkinTokens.COLOR_INK, false, 2.0)
+	for x_fraction: float in [0.35, 0.65]:
+		draw_circle(Vector2(rect.position.x + rect.size.x * x_fraction, rect.position.y + rect.size.y * 0.48), 2.5, SkinTokens.COLOR_INK)
+
+
+func _draw_battery_bank(area: Rect2, origin: Vector2, count: int, width_fraction: float) -> void:
+	for index: int in mini(maxi(count, 1), 3):
+		var battery := Rect2(origin + Vector2(index * area.size.x * (width_fraction + 0.015), 0.0), Vector2(area.size.x * width_fraction, area.size.y * 0.12))
+		draw_rect(battery, SkinTokens.COLOR_GRAPHITE_RAISED if count > 0 else SkinTokens.COLOR_SHADOW)
+		draw_rect(battery, SkinTokens.COLOR_RESERVE if count > 0 else SkinTokens.COLOR_DISABLED, false, 2.0)
+		draw_rect(Rect2(battery.position + Vector2(battery.size.x * 0.25, -2.0), Vector2(battery.size.x * 0.50, 3.0)), SkinTokens.COLOR_AGED_METAL)
+
+
+func _draw_fan(area: Rect2, center: Vector2, radius_fraction: float, installed: bool) -> void:
+	var radius := area.size.y * radius_fraction
+	draw_circle(center, radius, SkinTokens.COLOR_GRAPHITE)
+	draw_arc(center, radius, 0.0, TAU, 24, SkinTokens.COLOR_AGED_METAL, 2.0)
 	for angle_index: int in 4:
-		var angle := float(angle_index) * PI * 0.5 + (_pulse * TAU if not reduced_motion else 0.0)
-		draw_line(fan_center, fan_center + Vector2.from_angle(angle) * area.size.y * 0.065, SkinTokens.COLOR_IVORY_DIM, 3.0)
+		var angle := float(angle_index) * PI * 0.5 + (_pulse * TAU if installed and not reduced_motion else 0.0)
+		draw_line(center, center + Vector2.from_angle(angle) * radius * 0.76, SkinTokens.COLOR_IVORY_DIM if installed else SkinTokens.COLOR_DISABLED, 3.0)
+
+
+func _draw_generator(rect: Rect2, installed: bool) -> void:
+	draw_rect(rect, SkinTokens.COLOR_GRAPHITE_RAISED if installed else SkinTokens.COLOR_SHADOW)
+	draw_rect(rect, SkinTokens.COLOR_GENERATION if installed else SkinTokens.COLOR_DISABLED, false, 2.0)
+	draw_circle(rect.get_center(), minf(rect.size.x, rect.size.y) * 0.22, SkinTokens.COLOR_AGED_METAL)
+	draw_circle(rect.get_center(), minf(rect.size.x, rect.size.y) * 0.10, SkinTokens.COLOR_INK)
+
+
+func _draw_server_bank(area: Rect2, rect: Rect2, count: int) -> void:
+	for index: int in clampi(count, 1, 3):
+		var rack := Rect2(rect.position + Vector2(index * rect.size.x / 3.0, 0.0), Vector2(rect.size.x / 3.4, rect.size.y))
+		draw_rect(rack, SkinTokens.COLOR_GRAPHITE)
+		draw_rect(rack, SkinTokens.COLOR_AGED_METAL, false, 2.0)
+		for unit: int in 5:
+			var y := rack.position.y + 8.0 + unit * (rack.size.y - 14.0) / 5.0
+			draw_line(Vector2(rack.position.x + 4.0, y), Vector2(rack.end.x - 4.0, y), SkinTokens.COLOR_WATT if power_online and count > 0 else SkinTokens.COLOR_DISABLED, 1.0)
+			draw_circle(Vector2(rack.end.x - 6.0, y - 2.0), 1.5, SkinTokens.COLOR_WATT_REBOOT if power_online and count > 0 else SkinTokens.COLOR_DISABLED)
+	if count <= 0:
+		draw_string(get_theme_default_font(), rect.position + Vector2(3.0, area.size.y * 0.05), "AUTHORIZED RACK BAY", HORIZONTAL_ALIGNMENT_LEFT, rect.size.x, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_DISABLED)
+
+
+func _draw_warm_lamp(area: Rect2, anchor: Vector2, enabled: bool) -> void:
+	draw_line(anchor, anchor + Vector2(0.0, area.size.y * 0.10), SkinTokens.COLOR_AGED_METAL, 3.0)
+	var shade := PackedVector2Array([anchor + Vector2(-12.0, area.size.y * 0.10), anchor + Vector2(12.0, area.size.y * 0.10), anchor + Vector2(7.0, area.size.y * 0.15), anchor + Vector2(-7.0, area.size.y * 0.15)])
+	draw_colored_polygon(shade, SkinTokens.COLOR_WARNING if enabled else SkinTokens.COLOR_DISABLED)
+	if enabled:
+		draw_circle(anchor + Vector2(0.0, area.size.y * 0.16), 3.0, SkinTokens.COLOR_WARM_LIGHT)
 
 
 func _draw_power_paths(area: Rect2) -> void:
@@ -89,34 +233,78 @@ func _draw_power_paths(area: Rect2) -> void:
 		var points := PackedVector2Array()
 		for point: Vector2 in normalized_path:
 			points.append(Vector2(point.x * area.size.x, point.y * area.size.y))
-		draw_polyline(points, SkinTokens.COLOR_SHADOW, 7.0, true)
-		draw_polyline(points, SkinTokens.COLOR_WATT if power_online else SkinTokens.COLOR_DISABLED, 3.0, true)
-		if power_online and not reduced_motion and points.size() > 1:
+		draw_polyline(points, SkinTokens.COLOR_SHADOW, 8.0, true)
+		var path_color := SkinTokens.COLOR_CRITICAL if brownout_active else (SkinTokens.COLOR_WATT if power_online else SkinTokens.COLOR_DISABLED)
+		draw_polyline(points, path_color, 3.0, true)
+		if power_online and not brownout_active and not reduced_motion and points.size() > 1:
 			var segment := mini(int(_pulse * float(points.size() - 1)), points.size() - 2)
 			var local_t := fmod(_pulse * float(points.size() - 1), 1.0)
 			draw_circle(points[segment].lerp(points[segment + 1], local_t), 4.0, SkinTokens.COLOR_WATT_REBOOT)
 
 
 func _draw_watt(area: Rect2) -> void:
-	var core_size := Vector2(area.size.x * 0.25, area.size.y * 0.38)
-	var core := Rect2(Vector2(area.size.x * 0.50 - core_size.x * 0.5, area.size.y * 0.36), core_size)
+	var scale_factor := 0.23 if skin.era_number < 3 else 0.19
+	var core_size := Vector2(area.size.x * scale_factor, area.size.y * (0.34 if skin.era_number < 3 else 0.30))
+	var core_center := Vector2(area.size.x * 0.52, area.size.y * (0.52 if skin.era_number < 3 else 0.48))
+	var core := Rect2(core_center - core_size * 0.5, core_size)
 	draw_rect(core, SkinTokens.COLOR_GRAPHITE_RAISED)
 	draw_rect(core, SkinTokens.COLOR_AGED_METAL, false, 3.0)
+	draw_rect(Rect2(core.position + Vector2(-4.0, core.size.y * 0.22), Vector2(5.0, core.size.y * 0.47)), SkinTokens.COLOR_AGED_METAL)
 	var display := core.grow(-core.size.y * 0.19)
 	draw_rect(display, SkinTokens.COLOR_INK)
-	var eye_color := SkinTokens.COLOR_WATT_REBOOT if power_online else SkinTokens.COLOR_DISABLED
+	var eye_color := SkinTokens.COLOR_WATT if brownout_active else (SkinTokens.COLOR_WATT_REBOOT if power_online else SkinTokens.COLOR_DISABLED)
 	var eye_y := display.position.y + display.size.y * 0.43
-	draw_circle(Vector2(display.position.x + display.size.x * 0.31, eye_y), 4.0, eye_color)
-	draw_circle(Vector2(display.position.x + display.size.x * 0.69, eye_y), 4.0, eye_color)
-	draw_arc(Vector2(display.get_center().x, display.position.y + display.size.y * 0.59), display.size.x * 0.16, 0.15, PI - 0.15, 12, eye_color, 2.0)
-	# Persistent scratches keep WATT's original core recognizable at every scale.
+	var eye_spread := display.size.x * (0.25 if expression == "concerned" else 0.31)
+	var eye_radius := 5.0 if expression in ["pleased", "complete"] else 4.0
+	for direction: float in [-1.0, 1.0]:
+		var eye := Vector2(display.get_center().x + direction * eye_spread, eye_y)
+		if expression == "thinking" and direction > 0.0:
+			draw_line(eye + Vector2(-4.0, 0.0), eye + Vector2(4.0, -2.0), eye_color, 3.0)
+		else:
+			draw_circle(eye, eye_radius, eye_color)
+	if expression in ["pleased", "complete"]:
+		draw_arc(Vector2(display.get_center().x, display.position.y + display.size.y * 0.62), display.size.x * 0.16, 0.15, PI - 0.15, 12, eye_color, 2.0)
 	draw_line(core.position + Vector2(core.size.x * 0.14, core.size.y * 0.17), core.position + Vector2(core.size.x * 0.31, core.size.y * 0.11), SkinTokens.COLOR_IVORY_DIM, 1.0)
 	draw_line(core.position + Vector2(core.size.x * 0.72, core.size.y * 0.87), core.position + Vector2(core.size.x * 0.88, core.size.y * 0.76), SkinTokens.COLOR_IVORY_DIM, 1.0)
+	draw_line(core.position + Vector2(core.size.x * 0.82, core.size.y * 0.18), core.position + Vector2(core.size.x * 0.91, core.size.y * 0.24), SkinTokens.COLOR_IVORY_DIM, 1.0)
+	if _installation_pulse > 0.0:
+		draw_arc(core.get_center(), maxf(core.size.x, core.size.y) * (0.55 + 0.12 * _installation_pulse), 0.0, TAU, 32, SkinTokens.COLOR_WATT_REBOOT, 2.0)
 
 
 func _draw_operator_plate(area: Rect2) -> void:
-	var plate := Rect2(area.size.x * 0.04, area.size.y * 0.89, area.size.x * 0.92, area.size.y * 0.085)
+	var plate := Rect2(area.size.x * 0.035, area.size.y * 0.895, area.size.x * 0.93, area.size.y * 0.075)
 	draw_rect(plate, SkinTokens.COLOR_INK)
 	draw_rect(plate, SkinTokens.COLOR_WATT if authorization_ready else SkinTokens.COLOR_DISABLED, false, 1.0)
-	var state_text := "OPERATOR HANDSHAKE READY" if authorization_ready else "OPERATOR LINK HOLD"
-	draw_string(get_theme_default_font(), plate.position + Vector2(8.0, plate.size.y * 0.68), "%s  •  %s" % [skin.scale_label, state_text], HORIZONTAL_ALIGNMENT_LEFT, plate.size.x - 16.0, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY)
+	var state_text := "OPERATOR READY" if authorization_ready else "OPERATOR HOLD"
+	var scale_text: String = str({1: "DESK", 2: "ROOM", 3: "HOUSE"}.get(skin.era_number, "WORKSHOP"))
+	var copy := "%s  •  %s  •  %s" % [scale_text, representative_state().to_upper(), state_text]
+	draw_string(get_theme_default_font(), plate.position + Vector2(8.0, plate.size.y * 0.68), copy, HORIZONTAL_ALIGNMENT_LEFT, plate.size.x - 16.0, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY)
+
+
+func _draw_state_beacons(area: Rect2) -> void:
+	var label := "BROWNOUT • PATH ISOLATED" if brownout_active else ("RESERVE %s" % reserve_state.to_upper())
+	var color := SkinTokens.COLOR_CRITICAL if brownout_active else SkinTokens.COLOR_RESERVE
+	draw_circle(Vector2(area.size.x * 0.04, area.size.y * 0.055), 4.0, color)
+	draw_string(get_theme_default_font(), Vector2(area.size.x * 0.06, area.size.y * 0.07), label, HORIZONTAL_ALIGNMENT_LEFT, area.size.x * 0.48, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY)
+
+
+func _draw_transition(area: Rect2) -> void:
+	if _transition_progress < 0.0:
+		return
+	if reduced_motion:
+		draw_rect(area.grow(-6.0), SkinTokens.COLOR_WATT, false, 3.0)
+		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.34, area.size.y * 0.10), "SCALE REVEAL", HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.32, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+		return
+	if _transition_progress < 0.22:
+		draw_rect(area.grow(-4.0), SkinTokens.COLOR_EMERGENCY_LIGHT, false, 5.0)
+	elif _transition_progress < 0.46:
+		draw_rect(area, SkinTokens.COLOR_BLACKOUT_OVERLAY)
+	elif _transition_progress < 0.60:
+		draw_rect(area, SkinTokens.COLOR_BLACKOUT_OVERLAY)
+		for offset: float in [-10.0, 10.0]:
+			draw_circle(area.get_center() + Vector2(offset, 0.0), 4.0, SkinTokens.COLOR_WATT_REBOOT)
+	else:
+		var reveal := inverse_lerp(0.60, 1.0, _transition_progress)
+		var inset := lerpf(minf(area.size.x, area.size.y) * 0.22, 5.0, reveal)
+		draw_rect(area.grow(-inset), SkinTokens.COLOR_WATT, false, 3.0)
+		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.34, area.size.y * 0.10), "SCALE REVEAL", HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.32, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)

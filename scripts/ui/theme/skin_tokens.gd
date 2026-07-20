@@ -23,6 +23,8 @@ const COLOR_DISABLED := Color("686f6c")
 const COLOR_FOCUS := COLOR_WATT_REBOOT
 const COLOR_SHADOW := Color("090d0e")
 const COLOR_MODAL_SCRIM := Color("090d0eeb")
+const COLOR_TRANSITION_SCRIM := Color("090d0e70")
+const COLOR_BLACKOUT_OVERLAY := Color("090d0ee8")
 const COLOR_MODULATE_NEUTRAL := Color("ffffff")
 const COLOR_ERA_01_BACKGROUND := Color("2e302d")
 const COLOR_ERA_01_WALL := Color("6f684f")
@@ -30,6 +32,13 @@ const COLOR_ERA_01_DESK := Color("5b4938")
 const COLOR_ERA_02_BACKGROUND := Color("202626")
 const COLOR_ERA_02_WALL := Color("4b5047")
 const COLOR_ERA_02_DESK := Color("4e4337")
+const COLOR_ERA_03_BACKGROUND := Color("151b1c")
+const COLOR_ERA_03_WALL := Color("353a36")
+const COLOR_ERA_03_DESK := Color("423930")
+const COLOR_WARM_LIGHT := Color("f2ba55")
+const COLOR_EMERGENCY_LIGHT := Color("e66d2e")
+const COLOR_GLASS_DARK := Color("172326")
+const COLOR_CERAMIC_SHADOW := Color("aca18c")
 
 const TYPE_DISPLAY := 28
 const TYPE_WATT := 26
@@ -114,3 +123,7 @@ static func state_color(state: String) -> Color:
 		"critical": return COLOR_CRITICAL
 		"disabled", "locked": return COLOR_DISABLED
 		_: return COLOR_IVORY
+
+
+static func drawer() -> StyleBoxFlat:
+	return panel(COLOR_INK, COLOR_AGED_METAL, RADIUS_LARGE, SPACE_3, BORDER_FOCUS)

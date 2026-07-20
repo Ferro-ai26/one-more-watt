@@ -11,6 +11,7 @@ var reduced_motion := false
 var _resting_state := "default"
 
 @onready var name_label: Label = %NameLabel
+@onready var glyph: InfrastructureGlyph = %InfrastructureGlyph
 @onready var status_label: Label = %StatusLabel
 @onready var description_label: Label = %DescriptionLabel
 @onready var effect_label: Label = %EffectLabel
@@ -29,9 +30,12 @@ func configure(data: Dictionary, notation: String) -> void:
 	content_id = str(data.get("id", ""))
 	family = str(data.get("family", ""))
 	can_purchase = bool(data.get("can_purchase", false))
+	glyph.set_category(str(data.get("category", "support")))
 	name_label.text = str(data.get("name", "Unknown"))
 	status_label.text = "%s  •  %s" % [str(data.get("ownership", "")), str(data.get("status", "invalid")).to_upper()]
 	description_label.text = str(data.get("description", ""))
+	description_label.tooltip_text = description_label.text
+	description_label.visible = false
 	effect_label.text = "PREDICTED  %s" % data.get("effect", "")
 	var locked_reason := str(data.get("locked_reason", ""))
 	var missing := float(data.get("missing", 0.0))
@@ -40,7 +44,7 @@ func configure(data: Dictionary, notation: String) -> void:
 		set_visual_state("locked")
 	elif missing > 0.0:
 		var wait_seconds := float(data.get("wait_seconds", INF))
-		reason_label.text = "NEED %s MORE%s" % [
+		reason_label.text = "NEED %s%s" % [
 			NumberFormatter.format_energy(missing, notation),
 			"  •  ABOUT %s" % NumberFormatter.format_duration(wait_seconds) if is_finite(wait_seconds) else "",
 		]
@@ -71,3 +75,7 @@ func set_visual_state(state: String) -> void:
 func set_reduced_motion(enabled: bool) -> void:
 	reduced_motion = enabled
 	set_meta("reduced_motion", enabled)
+
+
+func set_text_scale(scale: float) -> void:
+	custom_minimum_size.y = 160.0 if scale >= 1.3 else (146.0 if scale > 1.0 else 136.0)

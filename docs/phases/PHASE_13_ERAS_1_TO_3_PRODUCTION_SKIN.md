@@ -57,16 +57,18 @@ Skin one screen family at a time. For each family: preserve behavior, apply comp
 
 ## Acceptance criteria
 
-- [ ] All release-intended prototype screens use the approved design system
-- [ ] Eras 1–3 have distinct coherent environments
-- [ ] WATT evolves while remaining recognizable
-- [ ] No unintended placeholder remains in scoped content
-- [ ] All important system states have clear visual feedback
-- [ ] Accessibility variants work
-- [ ] Functional progression and saves are unchanged except approved fixes
-- [ ] Asset rights and provenance are recorded
+- [x] All release-intended prototype screens use the approved design system
+- [x] Eras 1–3 have distinct coherent environments
+- [x] WATT evolves while remaining recognizable
+- [x] No unintended placeholder remains in scoped content; intentional provisional code-native layers remain declared under `ISSUE-007`
+- [x] All important system states have clear visual feedback
+- [x] Accessibility variants work
+- [x] Functional progression and saves are unchanged except approved fixes
+- [x] Asset rights and provenance are recorded
 - [ ] Phone screenshots and playtest evidence exist
 
 ## Stop condition
 
 Do not add Era 4. Stop after the complete three-era production skin is integrated.
+
+Implementation and host evidence are recorded in `docs/phase_13/`. Host-rendered 320 × 568 and 393 × 873 phone-resolution screenshots exist and were visually inspected, but no physical Android phone was attached. The remaining acceptance item requires truthful physical-device playtest evidence; it is not inferred from host captures. Phase 14 has not begun.

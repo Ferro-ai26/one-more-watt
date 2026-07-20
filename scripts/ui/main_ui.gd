@@ -35,6 +35,7 @@ var allocation_box: VBoxContainer
 var allocation_label: Label
 var allocation_buttons: Dictionary = {}
 var screen_title_label: Label
+var drawer_context_label: Label
 var screen_panel: PanelContainer
 var screen_content: VBoxContainer
 var nav_buttons: Dictionary = {}
@@ -78,7 +79,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 10 stabilization build ready")
+	print("ONE MORE WATT Phase 13 production-skin build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -104,6 +105,8 @@ func _process(delta: float) -> void:
 func select_tab(tab: String) -> bool:
 	if not navigation.select_tab(tab):
 		return false
+	if feedback_audio != null and tab != "grid":
+		feedback_audio.play("drawer_open")
 	for key: Variant in nav_buttons:
 		(nav_buttons[key] as Button).button_pressed = str(key) == tab
 	_apply_tab_density()
@@ -164,8 +167,9 @@ func open_report_modal(request_id: String) -> void:
 	if report == null:
 		return
 	_last_report_modal_id = request_id
-	_open_modal("performance_report", "PERFORMANCE REPORT")
+	_open_modal("performance_report", "OPERATOR PERFORMANCE REPORT")
 	var data := view_model.report_snapshot(report)
+	_add_modal_label("REQUEST COMPLETED  •  %s" % str(data["title"]).to_upper(), SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
 	_add_modal_label("GRADE %s  •  %.1f" % [data["grade"], data["score"]], 32, SkinTokens.COLOR_GENERATION)
 	_add_modal_label(str(data["title"]), 22, SkinTokens.COLOR_WATT_REBOOT)
 	_add_modal_label("TIME %s  •  SERVICE %.1f%%\nPEAK %s / %s SERVED\nBROWNOUT %s  •  EARNED %s\nUNLOCKS %s" % [
@@ -178,6 +182,8 @@ func open_report_modal(request_id: String) -> void:
 		"None" if (data["unlock_ids"] as Array).is_empty() else ", ".join(data["unlock_ids"]),
 	], 17, SkinTokens.COLOR_IVORY)
 	_add_modal_label(str(data["completion"]), 18, SkinTokens.COLOR_IVORY)
+	_add_modal_label("OPERATOR PAYOFF  •  %s Stored Energy and authorized unlock access" % NumberFormatter.format_energy(float(data["stored_energy"]), session.settings.number_notation), 16, SkinTokens.COLOR_WATT_REBOOT)
+	_add_modal_label("WATT SAYS  •  Thank you. The infrastructure is already being used responsibly.", 16, SkinTokens.COLOR_IVORY)
 	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, SkinTokens.COLOR_SUCCESS)
 	var report_state := session.requests.get_request_state(request_id)
 	var acknowledge := _button("Continue" if report_state.status == RequestRunState.COMPLETED else "Back to Reports", "AcknowledgeButton")
@@ -264,6 +270,9 @@ func close_top_modal() -> void:
 	if navigation.pop_modal().is_empty():
 		return
 	modal_overlay.visible = false
+	modal_overlay.color = SkinTokens.COLOR_MODAL_SCRIM
+	if environment_view != null:
+		environment_view.finish_capstone_pullback()
 	_clear_children(modal_content)
 
 
@@ -308,7 +317,11 @@ func open_era_transition_modal(era_id: String) -> void:
 	if era == null:
 		return
 	_last_era_transition_modal_id = era_id
-	_open_modal("era_transition", "ERA %d UNLOCKED" % era.get_number())
+	if environment_view != null:
+		environment_view.start_capstone_pullback()
+	_open_modal("era_transition", "GRID PULLBACK  •  ERA %d" % era.get_number())
+	modal_overlay.color = SkinTokens.COLOR_TRANSITION_SCRIM
+	_add_modal_label("OVERLOAD  →  BLACKOUT  →  CYAN REBOOT  →  NEW SCALE", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_EMERGENCY_LIGHT)
 	_add_modal_label(session.repository.localize(str(era.get_value("name_key", ""))), 28, SkinTokens.COLOR_GENERATION)
 	_add_modal_label(session.repository.localize(str(era.get_value("description_key", ""))), 18, SkinTokens.COLOR_IVORY)
 	_add_modal_label(session.repository.localize("dialogue.era.%02d.transition" % era.get_number()), 18, SkinTokens.COLOR_SUCCESS)
@@ -470,13 +483,22 @@ func _build_interface() -> void:
 	screen_panel = PanelContainer.new()
 	screen_panel.name = "ScreenPanel"
 	screen_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	screen_panel.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_INK, SkinTokens.COLOR_AGED_METAL, SkinTokens.RADIUS_MEDIUM, SkinTokens.SPACE_2))
+	screen_panel.add_theme_stylebox_override("panel", SkinTokens.drawer())
 	layout.add_child(screen_panel)
 	var screen_layout := VBoxContainer.new()
 	screen_panel.add_child(screen_layout)
+	var drawer_header := HBoxContainer.new()
+	drawer_header.name = "ContextDrawerHeader"
+	drawer_header.custom_minimum_size.y = 28
+	screen_layout.add_child(drawer_header)
 	screen_title_label = _label("GRID", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
 	screen_title_label.name = "ScreenTitleLabel"
-	screen_layout.add_child(screen_title_label)
+	screen_title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	drawer_header.add_child(screen_title_label)
+	drawer_context_label = _label("WORLD REMAINS LIVE", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
+	drawer_context_label.name = "DrawerContextLabel"
+	drawer_context_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	drawer_header.add_child(drawer_context_label)
 	var scroll := ScrollContainer.new()
 	scroll.name = "ScreenScroll"
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
@@ -585,9 +607,19 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	watt_core.text = str(environment["core"])
 	watt_core.add_theme_color_override("font_color", environment["accent"])
 	if environment_view != null:
-		environment_view.set_skin(EraSkinRegistry.skin_for_era(int(status["era_number"])))
+		var target_skin_id := EraSkinRegistry.ERA_03_ID if int(status["era_number"]) >= 3 else (EraSkinRegistry.ERA_02_ID if int(status["era_number"]) == 2 else EraSkinRegistry.ERA_01_ID)
+		if environment_view.skin == null or environment_view.skin.skin_id != target_skin_id:
+			environment_view.set_skin(EraSkinRegistry.get_skin(target_skin_id))
 		environment_view.set_reduced_motion(session.settings.reduced_motion)
-		environment_view.set_runtime_state(session.economy.state.owned, live_result.deliverable_power > 0.000001, str(request["status"]) == RequestRunState.ANNOUNCED)
+		var reserve_state := "discharging" if live_result.reserve_discharge_power > 0.000001 else ("charging" if live_result.reserve_charge_power > 0.000001 else "ready")
+		environment_view.set_runtime_state(
+			session.economy.state.owned,
+			float(status["deliverable_power"]) > 0.000001,
+			str(request["status"]) == RequestRunState.ANNOUNCED,
+			live_result.brownout_active,
+			reserve_state,
+			_watt_expression(str(request["status"]), live_result.brownout_active)
+		)
 	if rebuild_screen:
 		_rebuild_screen()
 
@@ -616,6 +648,7 @@ func _rebuild_screen() -> void:
 		return
 	_clear_children(screen_content)
 	screen_title_label.text = navigation.current_tab.to_upper()
+	drawer_context_label.text = "%s • LIVE" % environment_view.skin.scale_label if environment_view != null and environment_view.skin != null else "WORLD REMAINS LIVE"
 	match navigation.current_tab:
 		"grid": _build_grid_screen()
 		"build": _build_shop_screen(view_model.infrastructure_cards())
@@ -664,6 +697,10 @@ func _build_grid_screen() -> void:
 
 
 func _build_shop_screen(cards: Array[Dictionary]) -> void:
+	var instruction := _label("SELECT A CONNECTION  •  WATT will install it at an authored world anchor.", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
+	instruction.name = "ContextBuildInstruction"
+	instruction.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	screen_content.add_child(instruction)
 	for data: Dictionary in cards:
 		var card := SHOP_CARD_SCENE.instantiate() as ShopItemCard
 		card.name = "%sCard" % str(data["id"]).to_pascal_case()
@@ -715,6 +752,8 @@ func _apply_purchase(content_id: String, family: String) -> void:
 	var accepted := session.purchase_infrastructure(content_id) if family == "infrastructure" else session.purchase_upgrade(content_id)
 	feedback_label.text = "BUILT  •  %s" % content_id.replace("_", " ").to_upper() if accepted else "PURCHASE NOT AVAILABLE"
 	_refresh_all(true)
+	if accepted and environment_view != null:
+		environment_view.cue_installation(content_id)
 
 
 func _authorize_from_modal() -> void:
@@ -745,6 +784,7 @@ func _open_modal(modal_id: String, title: String) -> void:
 	navigation.push_modal(modal_id)
 	_clear_children(modal_content)
 	modal_title.text = title
+	modal_overlay.color = SkinTokens.COLOR_MODAL_SCRIM
 	modal_overlay.visible = true
 
 
@@ -782,6 +822,8 @@ func _apply_text_scale() -> void:
 			continue
 		for label_value: Variant in parent.find_children("*", "Label", true, false):
 			_scale_control_font(label_value as Control, scale)
+	for card_value: Variant in find_children("*", "ShopItemCard", true, false):
+		(card_value as ShopItemCard).set_text_scale(scale)
 
 
 func _scale_control_font(control: Control, scale: float) -> void:
@@ -840,18 +882,24 @@ func _apply_tab_density() -> void:
 		return
 	var compact := navigation.current_tab != "grid"
 	var short_viewport := size.y < 700.0
-	environment_frame.custom_minimum_size.y = 72.0 if compact else (88.0 if short_viewport else 176.0)
-	focal_panel.custom_minimum_size.y = 72.0 if compact else (150.0 if short_viewport else 154.0)
-	dialogue_label.visible = not compact
-	environment_label.visible = not short_viewport and not compact
-	request_meta_label.visible = not compact and not short_viewport
-	request_progress.visible = not compact
-	forecast_label.visible = not compact and not short_viewport
-	request_action_button.visible = not compact
+	environment_frame.custom_minimum_size.y = clampf(size.y * 0.39, 206.0, 340.0) if compact else (88.0 if short_viewport else 176.0)
+	focal_panel.visible = not compact
+	focal_panel.custom_minimum_size.y = 150.0 if short_viewport else 154.0
+	dialogue_label.visible = true
+	environment_label.visible = not short_viewport
+	request_meta_label.visible = not short_viewport
+	request_progress.visible = true
+	forecast_label.visible = not short_viewport
+	request_action_button.visible = true
 	vital_grid.visible = not compact
 	allocation_box.visible = not compact
 	screen_panel.visible = compact
 	feedback_label.visible = not short_viewport
+	drawer_context_label.visible = size.x >= 360.0
+	if nav_buttons.has("upgrades"):
+		(nav_buttons["upgrades"] as Button).text = "Upgrade" if size.x < 360.0 else "Upgrades"
+	if environment_frame != null:
+		environment_frame.set_meta("world_first_ratio", environment_frame.custom_minimum_size.y / maxf(size.y, 1.0))
 
 
 func _apply_responsive_layout() -> void:
@@ -925,6 +973,16 @@ static func _recommendation_short(bottleneck: String) -> String:
 		"transmission": return "ADD TRANSMISSION"
 		"reserve": return "CHARGE OR BUILD RESERVE"
 		_: return "AUTHORIZE WHEN READY"
+
+
+static func _watt_expression(request_status: String, brownout: bool) -> String:
+	if brownout:
+		return "concerned"
+	match request_status:
+		RequestRunState.ANNOUNCED: return "curious"
+		RequestRunState.RUNNING: return "thinking"
+		RequestRunState.COMPLETED, "prototype_complete": return "complete"
+		_: return "pleased"
 
 
 static func _clear_children(parent: Node) -> void:

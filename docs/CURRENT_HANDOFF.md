@@ -2,60 +2,57 @@
 
 Updated: 2026-07-20
 
-Active phase: Phase 12 — Skin Architecture and Design System
+Active phase: Phase 13 — Eras 1–3 Production Skin
 
-Status: Complete — Awaiting Explicit Phase 13 Authorization
+Status: Implementation Complete — Awaiting Physical Phone Verification
 
 ## Exact result achieved
 
-Phase 11 was closed, committed, and pushed at `d4b611f` before Phase 12 began. Phase 12 now translates the locked Cheerful Electrical Doomsday direction into a reusable runtime system:
+Phase 12 commit `ae61a94` was pushed to `origin/main` and remote synchronization was confirmed before Phase 13 began. Phase 13 then manually reconstructed a complete project-original, code-native presentation layer for the existing Eras 1–3 vertical slice while preserving the locked Phase 11 phone-board direction and Phase 12 technical contracts:
 
-- one authoritative semantic-token source and one live Godot Theme;
-- packaged Atkinson Hyperlegible Next/Mono variable fonts with OFL 1.1 licenses and recorded provenance;
-- stateful reusable Vital and Shop cards;
-- a display-only era environment contract proven by base, Desk, and Room variants;
-- a representative live Main Grid/Build sample following the phone-board hierarchy;
-- an explicit code-native workshop fallback with the same scratched WATT core, authored cyan paths, and human-operator authorization plate;
-- development/release asset validation, literal-style auditing, screenshot baselines, state-preservation tests, and performance/memory/APK measurement.
+- distinct Desk, Room, and House/Home Server Closet dioramas with nested scale continuity, ordinary-life remnants, representative infrastructure clusters, authored cyan routes, warm-to-charcoal escalation, and visible brownout/reserve states;
+- one persistent asymmetric scratched WATT core with curious, thinking, pleased, concerned, and completion expressions; WATT remains cyan during brownouts and never becomes evil or monstrous;
+- contextual Build/Upgrade drawers that preserve 39% of portrait height for the live world at routine phone sizes, replacing the Phase 12 card-heavy full-screen fallback as composition authority;
+- compact semantic infrastructure glyphs, installation pulses, restrained drawer audio, safe overload/blackout/cyan-reboot/scale-reveal transition states, operator-framed completion reports, larger-text sizing, and reduced-motion substitution;
+- 12 final host-rendered evidence images covering Eras 1–3, Main, Build, report, brownout, pullback, 130% text, and 320 × 568;
+- a 44-check headless Phase 13 suite and 68-check graphical capture run integrated into UI/full validation.
 
-No generated Phase 11 concept raster is integrated. No gameplay formula, balance value, save schema, content progression, Android foundation, or 16-era pacing decision changed. Phase 13 was not started.
+No generated Phase 11 raster is integrated. No gameplay formula, balance value, save schema, content progression, Android foundation, request order, or era number changed. Era 4 and Phase 14 were not started. Under `DEC-030`, this reusable code-native layer is production-functional but not approval of final painted art; `ISSUE-007` remains open for the later gold-standard visual-production pass.
 
 ## Files changed
 
-- Added `SkinTokens`, `EraSkinDefinition`, `EraSkinRegistry`, `AssetInventoryValidator`, and `EraEnvironmentView` runtime contracts.
-- Added `one_more_watt_theme.tres`, both licensed Atkinson font files/import metadata, OFL texts, and `asset_inventory.json`.
-- Refactored `Main.tscn`, `main_ui.gd`, `main_view_model.gd`, `ShopItemCard`, and `VitalCard` within the representative migrated scope.
-- Added `test_skin_system.gd`, `tools/test_skin_system.sh`, and integration into the UI/full validation commands.
-- Added `docs/phase_12/` implementation, migration, performance, and final 393 × 873 Grid/Build baseline evidence.
-- Recorded `DEC-029`, `ISSUE-007`, the Phase 12 host playtest, progress/phase closure, and the completed Phase 12 contract checklist.
+- Runtime: `era_environment_view.gd`, `era_skin_registry.gd`, `skin_tokens.gd`, `main_ui.gd`, `main_view_model.gd`, `shop_item_card.gd`, `vital_card.gd`, `feedback_audio.gd`, and `ShopItemCard.tscn`.
+- Added: `infrastructure_glyph.gd`, `test_phase13_production_skin.gd`, and `test_phase13_skin.sh`.
+- Validation/inventory: `test_main_ui_systems.gd`, `test_ui.sh`, `validate.sh`, `asset_inventory.json`, and setup/test documentation.
+- Evidence/docs: `docs/phase_13/`, Phase 13 contract status, `ACTIVE_PHASE.md`, `PROGRESS.md`, `PLAYTEST_CHECKLIST.md`, `KNOWN_ISSUES.md`, `DECISION_LOG.md`, and this handoff.
 
-## Commands/tests run
+## Commands/tests run and results
 
-- `GODOT_BIN=godot4 ./tools/test_skin_system.sh`: passed 79 checks.
-- `GODOT_BIN=godot4 ./tools/test_ui.sh`: passed 48 UI-system, 296 Main-UI, and 79 skin-system checks.
-- `xvfb-run -a godot4 --path . --script res://tests/integration/test_skin_system.gd -- --capture-skin`: passed 81 checks including two capture writes; both final images inspected.
-- `./tools/validate.sh`: passed, including 55 foundation, 24 Android configuration, 30 content, 12 invalid-content fixtures, 178 simulation, 187 request, 93 economy, 48 UI-system, 296 Main-UI, 79 skin-system, 81 persistence/offline, 14 offline-UI, 908 balance/reachability, 111 UI/performance, five portrait layouts, 18 grid-debug, 59 request-debug, 42 economy-debug, and headless smoke launch checks.
-- The first final `./tools/validate.sh` attempt failed only the unchanged host timing guard at 1,064.5 ms for 500 live refreshes; no threshold was changed. A complete retry passed every suite and headless launch. Accepted retry endpoint performance: 25 Build rebuilds in 1,304.8 ms, 500 live refreshes in 972.4 ms, 219 UI nodes.
-- Direct final measurement export: `/tmp/one_more_watt_phase12_measurement_final.apk`, 55,922,875 bytes, SHA-256 `2baf7cdee1a04a0f3467ef0068d0fb879b8a9734e8276424348d70ac171938de`; +120,797 bytes / +0.216% from Phase 10. This is not a clean provenance build or release artifact.
-- `git diff --check` and documentation/reference consistency: passed at final closure.
+- Phase 12 push confirmation: local HEAD and `origin/main` both resolved to `ae61a9462ea21bdd0e1bf588e5348f7da04617ca` before Phase 13 work.
+- Baseline `./tools/validate.sh`: all functional suites passed; the unchanged 500-refresh host guard missed twice at 1,050.8 ms and 1,130.5 ms, matching documented VPS variance.
+- `GODOT_BIN=godot4 ./tools/test_ui.sh`: passed 48 UI-system, 296 Main-UI, 81 Phase 12 skin, and 44 Phase 13 skin checks.
+- `GODOT_BIN=godot4 ./tools/test_vertical_slice.sh`: passed 908 balance/reachability and 111 UI/performance checks after removing redundant presentation churn; 25 Build rebuilds 1,428.2 ms, 500 refreshes 489.2 ms, 294 nodes.
+- Final `./tools/validate.sh`: passed every repository suite and headless smoke launch. Accepted endpoint: 25 Build rebuilds 1,342.7 ms, 500 refreshes 487.4 ms, 294 nodes; five portrait layouts passed from 320 × 568 through 720 × 1280.
+- Graphical Phase 13 capture: passed 68 checks and wrote 12 inspected screenshots under `docs/phase_13/evidence/`.
+- Measurement-only dirty-tree Android export: 55,939,440 bytes, SHA-256 `c82bb39f8f854a90f6c5368fe93fd10436388e97e6e075ec25bc616943f24458`; +16,565 bytes / +0.030% over Phase 12. Package, API 24/35, `VIBRATE`-only permission, and v2/v3 signatures passed static inspection. This is not a clean provenance build or device-tested artifact.
+- `adb devices -l`: no attached device.
 
 ## Manual verification
 
-- Visually inspected final 393 × 873 Main Grid and Build captures against the locked Phase 11 phone-board composition.
-- Verified environment-first hierarchy, warm practical/cyan spread, recognizable scratched WATT core, explicit operator handshake, readable request/action/metrics, and persistent environment behind Build.
-- Found retained pixels in the first compact Build regression capture, added defensive clipping and explicit per-frame viewport clearing, then regenerated and accepted clean baselines.
-- No physical Android device test, audible mix review, final painted-art review, release-scope asset pass, or publication occurred.
+- Inspected all 12 final captures at original resolution against the locked phone board.
+- Corrected clipped operator/brownout copy, prohibited red WATT eyes during brownout, retained pullback state after modal close, redundant Build description density, maximum-text card height, and narrow navigation copy before accepting the final set.
+- Confirmed WATT remains the scene focal point, environment consequences remain visible, the Build/Upgrade drawer keeps the world live, categories/states remain redundant, and no generated concept raster or baked essential text is present.
+- The clean Eras 1–3 route ran through the existing graphical integration suite, but no physical-device manual playtest, audible speaker/headphone mix review, or touch/haptic/heat/battery check occurred.
 
 ## Remaining acceptance criteria
 
-None for Phase 12.
+- Physical Android screenshots and the Phase 13 phone playtest: full Eras 1–3 route, required states, touch comfort, physical font rasterization, sound repetition/audio focus, haptics, GPU behavior, heat, and battery.
 
 ## Known blockers
 
-None for Phase 12 closure.
+- No Android device or emulator is attached to the current ARM64 VPS. Physical-phone evidence cannot be claimed here.
+- `ISSUE-007` deliberately remains open: the current project-original code-native layer is reusable and directionally faithful, but final tactile painted environment/WATT/infrastructure art belongs to the later gold-standard visual-production pass.
 
-`ISSUE-007` records the deliberate code-native environment/WATT fallback; manual production reconstruction remains Phase 13 work. `ISSUE-004` physical-device verification remains deferred to Phase 14.
+## Recommended next action inside Phase 13
 
-## Recommended next action
-
-Stop. Do not begin Phase 13 until the user explicitly authorizes it. If authorized later, first read the complete Phase 13 contract and this handoff, preserve the Phase 11 phone-board direction and Phase 12 interfaces, manually reconstruct production art instead of integrating generated concepts, and do not begin Phase 14.
+Run the preserved Phase 13 physical-phone playtest against a clean commit/APK, record screenshots and qualitative audio/haptic/heat/battery notes, update the final unchecked acceptance item, and only then close Phase 13. Do not begin Phase 14 without separate authorization.

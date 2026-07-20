@@ -7,9 +7,12 @@
     {"id": "app_icon", "path": "res://assets/icons/app_icon.svg", "kind": "icon", "phase12_status": "integrated", "release_required": true, "license": "project"},
     {"id": "era_base", "path": "res://scenes/components/EraEnvironmentView.tscn", "kind": "code-native-environment", "phase12_status": "integrated", "release_required": true, "license": "project"},
     {"id": "era01_production", "path": "res://assets/art/environments/era_01/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-manual-production"},
-    {"id": "era02_production", "path": "res://assets/art/environments/era_02/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"},
-    {"id": "era03_production", "path": "res://assets/art/environments/era_03/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"},
+    {"id": "era02_production", "path": "res://assets/art/environments/era_02/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-gold-standard-production"},
+    {"id": "era03_production", "path": "res://assets/art/environments/era_03/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-gold-standard-production"},
     {"id": "watt_production", "path": "res://assets/art/watt/scratched_core.webp", "kind": "raster-character", "phase12_status": "fallback", "release_required": true, "license": "pending-manual-production"},
-    {"id": "infrastructure_icons", "path": "res://assets/icons/infrastructure/production_set.tres", "kind": "icon-set", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"}
+    {"id": "infrastructure_icons", "path": "res://assets/icons/infrastructure/production_set.tres", "kind": "painted-icon-set", "phase12_status": "fallback", "release_required": true, "license": "pending-gold-standard-production"},
+    {"id": "domestic_environment_kit", "path": "res://scripts/ui/era_environment_view.gd", "kind": "project-original-code-native-diorama", "phase12_status": "integrated", "phase13_status": "integrated-provisional", "release_required": false, "license": "project-original"},
+    {"id": "contextual_infrastructure_glyphs", "path": "res://scripts/ui/infrastructure_glyph.gd", "kind": "project-original-code-native-icon-set", "phase12_status": "integrated", "phase13_status": "integrated-provisional", "release_required": false, "license": "project-original"},
+    {"id": "procedural_feedback_cues", "path": "res://scripts/ui/feedback_audio.gd", "kind": "project-original-procedural-audio", "phase12_status": "integrated", "phase13_status": "integrated", "release_required": false, "license": "project-original"}
   ]
 }

@@ -48,7 +48,7 @@ func _test_navigation_and_runtime_settings() -> void:
 	var feedback := FeedbackHooks.new(settings)
 	feedback.request("purchase", true)
 	_check(feedback.last_feedback == "purchase", "feedback hook remains functional when haptics are disabled or unavailable")
-	_check(FeedbackAudio.CUES.size() == 7, "essential purchase, request, brownout, allocation, transition, and error cues are authored")
+	_check(FeedbackAudio.CUES.size() >= 8 and FeedbackAudio.CUES.has("drawer_open"), "essential purchase, request, brownout, allocation, drawer, transition, and error cues are authored")
 	var tone := FeedbackAudio.build_tone(440.0, 660.0, 0.1)
 	_check(tone.format == AudioStreamWAV.FORMAT_16_BITS and tone.mix_rate == 22050 and tone.data.size() > 4000, "procedural feedback cue is a bounded mono PCM stream")
 

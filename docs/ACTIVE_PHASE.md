@@ -1,20 +1,24 @@
 # Active Phase
 
-Phase: 12 — Skin Architecture and Design System
-Status: Complete — Awaiting Explicit Phase 13 Authorization
+Phase: 13 — Eras 1–3 Production Skin
+Status: Implementation Complete — Awaiting Physical Phone Verification
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_12_SKIN_ARCHITECTURE_AND_DESIGN_SYSTEM.md`
+`docs/phases/PHASE_13_ERAS_1_TO_3_PRODUCTION_SKIN.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and every permanent specification named by Phase 12. Use `docs/phase_11/cheerful_doomsday/phone_board.png` as the primary visual-composition reference. Preserve the locked Cheerful Electrical Doomsday direction and the human-operator/persistent scratched WATT core rules under `DEC-028`.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and every permanent specification named by Phase 13. Use `docs/phase_11/cheerful_doomsday/phone_board.png` as the primary visual-composition reference. Preserve the locked Cheerful Electrical Doomsday direction and the human-operator/persistent scratched WATT core rules under `DEC-028`.
 
-Phase 12 is complete. Preserve the reusable token/Theme/component/environment contracts and the locked Phase 11 direction. Do not integrate generated concept backgrounds as production art, extend the sample into full Eras 1–3 production, add Era 4, change gameplay/save behavior, revise the Phase 11 approval board, modify Phase 12 merely to begin later work, or begin Phase 13 without explicit user authorization.
+Phase 13 is explicitly authorized. Production-skin only the existing Eras 1–3 vertical slice through the reusable Phase 12 contracts. The world-first phone-board hierarchy—not the Phase 12 Build screenshot—is composition authority: keep WATT focal, keep the evolving environment visible under contextual Build/Upgrade interaction, and keep numeric information compact. The Phase 12 Build capture is functional scaffolding only. Do not silently approve its card-heavy/flat fallback treatment or any other placeholder as final art. Keep `ISSUE-007` explicit for the later gold-standard visual-production pass.
+
+Do not integrate generated concept backgrounds as production art, add Era 4, change gameplay/save behavior, revise the Phase 11 approval board, perform broad final-art polish, claim provisional code-native art as the final visual target, begin Phase 14, or modify `ACTIVE_PHASE.md` again without explicit authorization.
 
 ## Inherited state
 
 Phase 11 is closed and pushed at commit `d4b611f`. Every Phase 11 acceptance criterion passed, the phone-board composition/core direction is locked, and generated imagery remains reference-only. The runtime remains the validated Phase 10 functional baseline. `ISSUE-004` physical Android verification remains deferred to Phase 14.
 
-Phase 12 proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Production environment/WATT art remains an explicit manual-reconstruction fallback. Phase 13 has not begun.
+Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Phase 13 must preserve those technical contracts while manually reconstructing the Eras 1–3 presentation in code-native/project-original form. Production-painted environment/WATT art remains an explicit later fallback under `ISSUE-007`; generated Phase 11 imagery remains reference-only.
+
+Phase 13 implementation, host regression, host phone-resolution screenshots, and visual inspection are complete. No Android device is attached to this host, so the contract's physical-phone playtest, audible mix, haptic, touch-comfort, GPU, heat, and battery evidence remains outstanding. Keep Phase 13 active at this verification gate. Do not begin Phase 14 or mark Phase 13 complete without explicit direction and truthful device evidence.

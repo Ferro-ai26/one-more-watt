@@ -17,9 +17,20 @@
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
-| 13–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 13 — Eras 1–3 Production Skin | Implementation complete — physical phone verification outstanding | DEC-030; distinct code-native Desk/Room/House dioramas, contextual drawers, WATT expressions, state effects, 12 host captures, full regression; ISSUE-007 and ISSUE-008 explicit |
+| 14–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 13 implementation complete; phone gate remains
+
+- Confirmed and pushed Phase 12 commit `ae61a94` before reading the complete Phase 13 contract/handoff/specifications. Recorded `DEC-030`: the locked phone board remains composition authority, the Phase 12 Build screenshot is scaffolding only, and the code-native Phase 13 layer does not approve final painted art.
+- Reconstructed distinct project-original Desk, Room, and House/Home Server Closet dioramas with nested scale, ordinary-life remnants, representative single/cluster/bank/facility states, authored cyan paths, Reserve/brownout presentation, and a persistent scratched WATT core with five non-evil expressions.
+- Replaced the compact secondary fallback with a contextual lower Build/Upgrade drawer preserving the live world; added semantic code-native infrastructure glyphs, installation pulse, drawer cue, operator completion report, and safe overload/blackout/cyan-reboot/scale-reveal sequence with reduced-motion substitution.
+- Added a 44-check headless/68-check graphical Phase 13 suite and 12 host-rendered evidence images covering all three environments, Main, Build, report, brownout, pullback, 130% text, and 320 × 568. Pixel review corrected clipped copy, red WATT eyes, retained transition state, redundant card density, large-text height, and narrow navigation copy.
+- Full repository validation and headless launch passed. Final accepted performance measured 1,342.7 ms for 25 Build rebuilds, 487.4 ms for 500 refreshes, and 294 nodes. A measurement APK was 55,939,440 bytes, +16,565 / +0.030% from Phase 12, and passed static package/API/permission/signature checks.
+- Gameplay, balance, saves, Android foundations, content progression, and era numbering are unchanged. No generated concept raster, Era 4, Phase 14 work, broad final-art polish, release, or publication occurred.
+- Phase 13 remains active because no Android device is attached. Physical-phone screenshots/playtest, audible mix, touch/haptic, GPU, heat, and battery evidence remain unchecked under `ISSUE-008`. `ISSUE-007` remains deferred to the later gold-standard visual-production pass as explicitly required.
 
 ### 2026-07-20 — Phase 12 reusable skin architecture complete
 

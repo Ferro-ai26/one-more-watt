@@ -12,22 +12,37 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
-Phase 12 opened no new gameplay/save defect. The live reusable sample replaces raw migrated colors and text-only environment presentation with a tokenized Theme, licensed fonts, stateful components, and a code-native workshop. Production environment/WATT raster art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the manually reconstructed production layer is tracked as `ISSUE-007`, not silently claimed complete.
+Phase 13 opened no new gameplay/save defect. Its project-original code-native Eras 1–3 layer replaces the Phase 12 composition scaffold with distinct world-first Desk, Room, and House dioramas, contextual drawers, expressions, state effects, glyphs, reports, and transition presentation. Final tactile painted environment/WATT/infrastructure art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the gold-standard replacement remains tracked as `ISSUE-007`, not silently claimed complete.
 
 ### ISSUE-007 — Production environment and WATT art remain explicit fallbacks
 
-- Status: Deferred — Phase 13 Production Skinning
+- Status: Deferred — Later Gold-Standard Visual Production
 - Severity: Polish
 - First seen build/commit: Phase 12 working tree, 2026-07-20
-- Affected phase: Phase 12 architecture proof; production replacement owned by Phase 13
+- Affected phase: Phase 12 architecture proof and Phase 13 provisional production skin; final replacement owned by a later authorized visual-production pass
 - Reproduction:
-  1. Launch the Phase 12 Main Grid.
-  2. Observe the code-native workshop and scratched-core presentation.
-- Expected: Phase 12 provides a usable fallback and proves the approved composition without integrating generated concepts; later production work manually reconstructs final painted Era 1/WATT assets.
-- Actual: The fallback is functional, readable, responsive, and directionally faithful, but intentionally schematic rather than final tactile painted production art.
-- Evidence/log: `assets/asset_inventory.json` reports five development fallbacks and fails release scope for the required Eras 1–3 environment, WATT, and infrastructure-icon production assets. Final 393 × 873 baselines are under `docs/phase_12/evidence/`.
-- Workaround: Continue using the explicit development fallback.
-- Fix verification: Phase 13 must replace required entries with provenance-recorded manual production assets and make their inventory status integrated. Phase 13 is not authorized or started.
+  1. Launch any Phase 13 Era 1–3 Main or Build state.
+  2. Observe the project-original code-native diorama, scratched core, and semantic glyph presentation.
+- Expected: Phase 13 provides a coherent, reusable, directionally faithful Eras 1–3 presentation without integrating generated concepts; a later gold-standard pass manually reconstructs final tactile painted environment, WATT, and infrastructure assets.
+- Actual: The current layer is functional, responsive, authored, and compositionally faithful, but intentionally schematic rather than approval of final painted production art. This is an intended fallback, not an accidental placeholder.
+- Evidence/log: `assets/asset_inventory.json` retains five release-required fallbacks and fails release scope while separately recording the integrated project-original Phase 13 diorama/glyph/audio layer. Final evidence is under `docs/phase_13/evidence/`.
+- Workaround: Continue using the explicit code-native presentation layer for development and verification.
+- Fix verification: A later explicitly authorized gold-standard visual-production pass must replace the five required fallback entries with provenance-recorded production assets, pass release-scope inventory validation, and receive contextual phone review. Phase 13 must not silently close this issue.
+
+### ISSUE-008 — Phase 13 physical-phone playtest is unavailable on the current host
+
+- Status: Needs External Verification
+- Severity: Blocker for Phase 13 closure; not a known runtime defect
+- First seen build/commit: Phase 13 working tree, 2026-07-20
+- Affected phase: Phase 13 manual verification gate
+- Reproduction:
+  1. Run `adb devices -l` on the current ARM64 VPS.
+  2. Observe that no device or emulator is attached.
+- Expected: Run the complete Phase 13 Eras 1–3 skin on a physical Android phone and record screenshots, touch comfort, font rasterization, sound repetition/audio focus, haptics, GPU behavior, heat, and battery.
+- Actual: All host automation, five portrait layouts, graphical captures, visual inspection, and static APK measurement pass, but the physical-device checks cannot run and are not claimed.
+- Evidence/log: `docs/phase_13/VISUAL_QA_RECORD.md`, `docs/PLAYTEST_CHECKLIST.md`, and `docs/CURRENT_HANDOFF.md`.
+- Workaround: Host 320 × 568 and 393 × 873 evidence validates composition/layout only; it does not substitute for physical-device behavior.
+- Fix verification: Attach a representative Android phone, export a clean commit-tied APK, execute the preserved checklist, and record truthful device evidence before closing Phase 13. Phase 14 remains separately gated.
 
 ### ISSUE-004 — Phone presentation appears too small
 

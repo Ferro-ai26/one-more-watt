@@ -39,6 +39,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Request lifecycle tests: `./tools/test_requests.sh`
 - Economy tests: `./tools/test_economy.sh`
 - Main UI tests: `./tools/test_ui.sh`
+- Phase 13 production-skin tests: `./tools/test_phase13_skin.sh`
 - Persistence/offline tests: `./tools/test_persistence.sh`
 - Eras 1–3 vertical-slice tests: `./tools/test_vertical_slice.sh`
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`

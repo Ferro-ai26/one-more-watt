@@ -2,6 +2,30 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 13 production-skin host pass — 2026-07-20
+
+- Build/commit: Phase 12 baseline `ae61a94`; Phase 13 working tree during review
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless plus Xvfb/Mesa llvmpipe; dummy audio; no ADB device
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Exercised the clean Eras 1–3 route through the established graphical integration suite without debug currency or new gameplay behavior.
+- [x] Validated distinct Desk, Room, and House/Home Server Closet skins plus base fallback through the display-only contract without changing the session economy snapshot.
+- [x] Verified representative infrastructure moves through single/cluster/bank/facility states and purchases target an authored installation cue.
+- [x] Verified WATT curious, thinking, pleased, concerned, and completion expressions retain the same scratched cyan-eyed core; brownout never gives WATT red/evil eyes.
+- [x] Verified Generation, Transmission, Reserve charging/discharging, brownout, affordable/unaffordable/locked, purchase, completion, report, and era pullback states with text/shape reinforcement.
+- [x] Verified Build/Upgrade uses a contextual lower drawer while the live world retains at least 35% of portrait height at 320 × 568 and 393 × 873.
+- [x] Verified default, 130% text, and reduced-motion presentation; five portrait layouts pass through 720 × 1280 and 48-pixel touch-target automation remains green.
+- [x] Generated and manually inspected 12 final captures under `docs/phase_13/evidence/` against the locked Phase 11 phone board.
+- [x] Corrected clipped operator/brownout copy, prohibited red brownout eyes, persistent post-transition overlay, redundant Build description density, large-text row sizing, and narrow navigation copy found during pixel review.
+- [x] Confirmed no generated Phase 11 raster, essential baked text, Era 4 content, gameplay/save change, or silently approved placeholder appears.
+- [x] Full repository regression and headless launch passed. Final accepted host performance: 25 Build rebuilds 1,342.7 ms, 500 refreshes 487.4 ms, 294 nodes.
+- [x] Measurement-only debug APK exported and statically inspected: 55,939,440 bytes; SHA-256 `c82bb39f8f854a90f6c5368fe93fd10436388e97e6e075ec25bc616943f24458`; package/API/permission/signature checks passed.
+- [ ] Physical Android install/launch, screenshots, full touch route, safe areas, and physical font rasterization. No device was attached.
+- [ ] Audible speaker/headphone repetition and audio-focus review. Host used dummy audio; cue synthesis/routing/cooldowns are automated only.
+- [ ] Physical haptic behavior, GPU frame timing, heat, and battery observation.
+
+Result: Phase 13 implementation and host visual evidence pass. The phase remains open at its physical-phone manual gate (`ISSUE-008`). The project-original code-native layer remains explicitly provisional under `ISSUE-007`; it is not the later gold-standard final-art approval. Phase 14 did not begin.
+
 ## Phase 12 skin architecture host pass — 2026-07-20
 
 - Build/commit: Phase 11 baseline `d4b611f`; Phase 12 working tree uncommitted during review

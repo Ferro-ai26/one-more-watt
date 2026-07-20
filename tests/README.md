@@ -54,6 +54,14 @@ Run centralized number formatting, runtime accessibility state, navigation/back-
 
 The main-interface integration suite drives request authorization through report, online idle generation, the early allocation feature gate, a brownout, infrastructure purchasing, compact secondary headers, all four tabs, settings, audio feedback, density-scaling calculations, maximum text size with reduced motion, and modal back behavior at all five portrait sizes.
 
+Run the Phase 13 Desk/Room/House environment, WATT expression, state/effect, contextual drawer, provenance-boundary, and phone-composition checks with:
+
+```bash
+./tools/test_phase13_skin.sh
+```
+
+On a graphical Linux host, append `--capture-phase13` to the underlying Godot test command documented in `docs/phase_13/VISUAL_QA_RECORD.md` to regenerate review evidence. Generated Phase 11 concepts are never loaded by this test or the runtime.
+
 Run versioned save envelopes, checksum validation, atomic writes, backup recovery, migration, full session round trips, autosave debounce, clock anomalies, bounded offline simulation, reward idempotency, and the offline-return UI with:
 
 ```bash

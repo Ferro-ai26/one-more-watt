@@ -218,6 +218,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: Phase 12 must prove the locked phone-board direction in the real game without allowing presentation to own progression, introducing one-off styles, or promoting generated concepts to production assets. A small stable interface lets future era work swap layers, paths, lighting, and WATT presentation while the tested gameplay and save state remain untouched.
 - Consequences: Main Grid and the first Build card set use the reusable system; base, Desk, and Room variants pass state-preservation tests. The retained code-native environment is architecture evidence only. Phase 13 owns final Era 1 art/component production after explicit authorization, Phase 14 owns physical-device visual/performance evidence, and no later phase begins through this decision.
 
+## DEC-030 — Treat Phase 13 code-native production skin as a reversible visual layer
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Execute Phase 13 through the reusable Phase 12 skin contracts while treating the locked Phase 11 phone board as the sole composition authority. Recompose Build and Upgrade as contextual interaction over a world-first evolving scene, keep WATT focal and numerics compact, and manually construct project-original Eras 1–3 presentation without integrating generated concepts. The Phase 12 Build screenshot is functional scaffolding only. Phase 13 may prove a complete reusable code-native presentation layer, but it must not promote schematic/flat/card-heavy fallback elements to final-art approval; `ISSUE-007` remains open for the later gold-standard visual-production pass.
+- Reason: The user authorized Phase 13 while explicitly distinguishing functional skin-system proof from the approved visual target. Preserving that distinction prevents a temporary implementation baseline from silently overriding the locked Cheerful Electrical Doomsday composition or consuming the later final-art mandate.
+- Consequences: Phase 13 improves all existing Eras 1–3 screens and state feedback without broad final-art polish, gameplay/save changes, generated concept integration, or Era 4 work. Asset provenance and release audits must continue identifying the unresolved painted environment/WATT/infrastructure replacement. Phase 14 requires separate authorization.
+
 ## Proposed decision template
 
 ```markdown

@@ -1,50 +1,74 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://scripts/ui/shop_item_card.gd" id="1_card"]
+[ext_resource type="Script" path="res://scripts/ui/infrastructure_glyph.gd" id="2_glyph"]
 
 [node name="ShopItemCard" type="PanelContainer"]
-custom_minimum_size = Vector2(0, 190)
+custom_minimum_size = Vector2(0, 136)
 script = ExtResource("1_card")
 
-[node name="Content" type="VBoxContainer" parent="."]
+[node name="Row" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/separation = 4
+theme_override_constants/separation = 8
 
-[node name="NameLabel" type="Label" parent="Content"]
+[node name="InfrastructureGlyph" type="Control" parent="Row"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+script = ExtResource("2_glyph")
+
+[node name="Content" type="VBoxContainer" parent="Row"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="Header" type="VBoxContainer" parent="Row/Content"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="NameLabel" type="Label" parent="Row/Content/Header"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Infrastructure"
 autowrap_mode = 2
 theme_type_variation = &"HeadingLabel"
 
-[node name="StatusLabel" type="Label" parent="Content"]
+[node name="StatusLabel" type="Label" parent="Row/Content/Header"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Owned 0"
+horizontal_alignment = 0
 autowrap_mode = 2
 theme_type_variation = &"CaptionLabel"
 
-[node name="DescriptionLabel" type="Label" parent="Content"]
+[node name="DescriptionLabel" type="Label" parent="Row/Content"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Description"
 autowrap_mode = 2
+max_lines_visible = 1
 
-[node name="EffectLabel" type="Label" parent="Content"]
+[node name="EffectLabel" type="Label" parent="Row/Content"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Predicted effect"
 autowrap_mode = 2
+theme_type_variation = &"CaptionLabel"
 
-[node name="ReasonLabel" type="Label" parent="Content"]
+[node name="ActionRow" type="HBoxContainer" parent="Row/Content"]
+layout_mode = 2
+
+[node name="ReasonLabel" type="Label" parent="Row/Content/ActionRow"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 text = "Ready"
 autowrap_mode = 2
 theme_type_variation = &"CaptionLabel"
 
-[node name="BuyButton" type="Button" parent="Content"]
+[node name="BuyButton" type="Button" parent="Row/Content/ActionRow"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 48)
+custom_minimum_size = Vector2(110, 48)
 layout_mode = 2
 text = "Buy"
