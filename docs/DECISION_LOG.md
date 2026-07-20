@@ -154,6 +154,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Consequences: Completed Phase 00–09 history remains authoritative. Original Phase 10–16 contracts are archived as superseded and must not be executed. Phase 10 begins only after explicit authorization.
 <!-- END_ONE_MORE_WATT_DECISION_V2 -->
 
+## DEC-022 — Scale the Android prototype by density within layout bounds
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Keep the documented 720 × 1280 `canvas_items`/`expand` base, but on mobile multiply Godot's automatic resolution scale by a density-derived content scale. Treat one logical UI unit as one Android density-independent pixel where the display can still provide at least the verified 320 × 568 logical layout; otherwise bound the scale at that layout floor. Expose the measured inputs and result in Settings.
+- Reason: The Moto symptom was “presentation appeared too small,” but the project was already configured at the suggested 720p base. The actual mismatch was that the UI contract's 48-pixel controls were treated as 48 dp while Godot's canvas stretch responded to pixel resolution, not Android density. A fixed resolution change would not reliably correct physical size across xhdpi, xxhdpi, and xxxhdpi phones.
+- Consequences: Typical 720 × 1600 xhdpi and 1080 × 2400 xxhdpi screens both resolve to approximately 360 × 800 logical units, making a 48-unit target approximately 48 dp. Very small dense displays favor the verified layout floor over an impossible physical-size target. The exact Moto result still requires the revised APK and device retest; broad visual redesign remains Phase 11+ work.
+
 ## Proposed decision template
 
 ```markdown

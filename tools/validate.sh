@@ -30,4 +30,4 @@ GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_vertical_slice.sh"
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_economy_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" -- --smoke-test
 
-printf 'Repository validation passed for Phase 09.\n'
+printf 'Repository validation passed for Phase 10.\n'

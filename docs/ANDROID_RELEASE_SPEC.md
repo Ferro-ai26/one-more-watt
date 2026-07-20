@@ -96,3 +96,7 @@ The approved permanent package identifier is `com.ferroai.onemorewatt`. The debu
 `tools/build_android_debug.sh` requires a clean Git tree, injects the exact source commit into in-app diagnostics, rejects engine export errors, and verifies package, version, API, permissions, architectures, embedded build ID, signature, and checksum. `tools/android_device_smoke.sh` refuses to mutate anything when no ready ADB device exists, and performs a non-clearing install/launch preflight when one is selected.
 
 The first recorded host-verified artifact is documented in `ANDROID_BUILD_RECORD.md`. Static verification and an APK's existence do not satisfy Phase 09 physical-device acceptance; complete `ANDROID_DEVICE_TEST.md` before recording an expand/revise/stop decision.
+
+## Phase 10 stabilization baseline
+
+The Phase 10 debug build advances to version code/name 10/`0.10.0-dev` and `build/android/one_more_watt_phase10_debug.apk`. It retains the approved package, SDK, architecture, permission, signing, and reproducible-inspection boundaries above. Android startup now derives a bounded canvas scale from the physical window and Android's reported density so logical controls approach density-independent sizing without reducing the effective viewport below the verified 320 × 568 layout. Settings exposes the reported physical dimensions, density, effective logical viewport, and applied scale for targeted device evidence.

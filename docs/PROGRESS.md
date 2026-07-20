@@ -14,10 +14,20 @@
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
-| 10 — Targeted Bug Fixing and Prototype Stabilization | Ready — awaiting explicit authorization | Roadmap v2 installed; no implementation started |
+| 10 — Targeted Bug Fixing and Prototype Stabilization | In progress — phone retest pending | Density-aware mobile scaling and larger-text fix implemented; host regression green; revised APK/device evidence pending |
 | 11–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 10 host stabilization implementation
+
+- Began the explicitly authorized Phase 10 and preserved the functional Eras 1–3 gameplay/save baseline.
+- Diagnosed `ISSUE-004`: the requested 720 × 1280 base was already configured, but resolution-based canvas stretch did not make 48 logical pixels equal 48 Android dp on dense phones.
+- Added bounded Android density-aware canvas scaling, on-device display diagnostics, a functional semantic larger-text path, a 720 × 1280 reference layout, and Phase 10 version/artifact identity.
+- Marked the unspecified “additional small bugs” Needs Information rather than inventing reproduction steps.
+- Passed the full pre-edit baseline and post-edit repository suite. Post-edit evidence includes 48 UI-system checks, 296 headless UI integration checks, 908 balance/reachability checks, 111 UI/performance checks, five portrait layouts, persistence/offline regression, Android configuration validation, and headless smoke launch.
+- Generated 35 graphical UI captures across the five layouts; manually inspected representative 320 × 568 authorization/settings, 360 × 640 Build, and 720 × 1280 authorization/settings captures. Primary actions remained reachable; smallest settings used its intended vertical scroll; no horizontal clipping was observed.
+- Revised APK export/static inspection and the targeted Moto phone retest remain required. Phase 11 has not begun.
 
 ### 2026-07-20 — Roadmap v2 documentation migration
 

@@ -34,7 +34,7 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 09 is closed with the decision “continue with targeted revisions.” The recorded APK passed host build/static verification, and Kevin's partial Moto phone test confirmed install, cold launch, build identity, onboarding, and touch purchases. The remaining device matrix was skipped and is not claimed as passing. Roadmap v2 is installed, and revised Phase 10 is Ready — Awaiting Explicit Authorization. No Phase 10 implementation has begun. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 09 is closed with the decision “continue with targeted revisions.” Phase 10 is authorized and in progress. The repository-side fix for the Moto presentation-scale report uses Android density-aware canvas scaling while preserving the verified minimum layout; a revised APK and targeted Moto retest remain required before Phase 10 can close. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh

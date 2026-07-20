@@ -6,7 +6,7 @@ Run all repository validation from the repository root:
 ./tools/validate.sh
 ```
 
-After the approved Android package identifier and export preset are committed, build the provenance-checked Phase 09 debug APK with:
+After the approved Android package identifier and export preset are committed, build the provenance-checked Phase 10 debug APK with:
 
 ```bash
 ./tools/build_android_debug.sh
@@ -16,7 +16,7 @@ The full validation entry point also checks the permanent package name, version,
 
 When a physical Android device is attached, run `./tools/android_device_smoke.sh` for the non-destructive install/launch/memory preflight, then complete `docs/ANDROID_DEVICE_TEST.md` manually.
 
-Set `GODOT_BIN` when the executable is not named `godot`. The command imports and parses the project, validates the foundation and content configuration, runs valid and invalid content fixtures, exercises the shell at 320 × 568, 360 × 640, 393 × 873, and 480 × 800, and launches the main scene in smoke-test mode.
+Set `GODOT_BIN` when the executable is not named `godot`. The command imports and parses the project, validates the foundation and content configuration, runs valid and invalid content fixtures, exercises the shell at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and the 720 × 1280 reference, and launches the main scene in smoke-test mode.
 
 Run only deterministic content validation with:
 
@@ -52,7 +52,7 @@ Run centralized number formatting, runtime accessibility state, navigation/back-
 ./tools/test_ui.sh
 ```
 
-The main-interface integration suite drives request authorization through report, online idle generation, the early allocation feature gate, a brownout, infrastructure purchasing, compact secondary headers, all four tabs, settings, audio feedback, and modal back behavior at all four portrait sizes.
+The main-interface integration suite drives request authorization through report, online idle generation, the early allocation feature gate, a brownout, infrastructure purchasing, compact secondary headers, all four tabs, settings, audio feedback, density-scaling calculations, maximum text size with reduced motion, and modal back behavior at all five portrait sizes.
 
 Run versioned save envelopes, checksum validation, atomic writes, backup recovery, migration, full session round trips, autosave debounce, clock anomalies, bounded offline simulation, reward idempotency, and the offline-return UI with:
 

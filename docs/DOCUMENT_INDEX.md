@@ -40,7 +40,7 @@
 ## Phase contracts
 
 - Phases 00–09: completed development sequence and evidence for the Android vertical slice
-- Phase 10: targeted prototype stabilization; Ready — Awaiting Explicit Authorization
+- Phase 10: targeted prototype stabilization; In Progress — host fix verified, APK and phone retest pending
 - Phases 11–14: visual direction, reusable skin architecture, production skinning, and visual/mobile QA
 - Phases 15–21: era-integrated game and art production through the Multiverse
 - Phases 22–26: content lock, final audiovisual production, stabilization, closed testing/store preparation, and separately authorized production release

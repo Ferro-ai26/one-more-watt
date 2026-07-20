@@ -28,8 +28,8 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Android SDK path/tool versions: `/home/ubuntu/.local/share/android-sdk`; command-line tools latest package 19.0; build-tools 35.0.1; platform-tools/adb 37.0.0; Android Platform 35 installed
 - Debug keystore policy: Local development keystore only; never commit
 - Release keystore location policy: External secret; never commit
-- Version name: `0.9.0-dev`, sourced from `application/config/version` in `project.godot`
-- Version code: 9 for the Phase 09 debug prototype
+- Version name: `0.10.0-dev`, sourced from `application/config/version` in `project.godot`
+- Version code: 10 for the Phase 10 stabilization build
 
 ## Build commands
 

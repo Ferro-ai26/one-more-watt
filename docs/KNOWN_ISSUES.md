@@ -14,7 +14,7 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Man
 
 ### ISSUE-004 — Phone presentation appears too small
 
-- Status: Open
+- Status: Fix Implemented — Pending Device Verification
 - Severity: Minor
 - First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
 - Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization
@@ -22,10 +22,38 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Man
   1. Install and launch the Phase 09 APK on the tester's Moto phone.
   2. Review the early onboarding presentation.
 - Expected: The mobile presentation uses a comfortable phone-scale resolution; tester requested a 720p target.
-- Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small.
-- Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided.
+- Actual: Onboarding remained readable and authorizable, but the overall presentation appeared too small. Repository diagnosis found that the requested 720 × 1280 base was already configured. Godot's canvas stretch scaled from pixel resolution while the UI treated its 48 logical-pixel target as 48 Android dp, so dense displays could render the interface physically smaller than intended.
+- Evidence/log: Manual report from Kevin. Exact Moto model, Android/API, display size, and screenshot were not provided. Phase 10 source inspection confirmed 720 × 1280, `canvas_items`, `expand`, anchored full-rect controls, 12–22 logical-pixel type, and 48 logical-pixel controls. Density reference tests resolve 1080 × 2400 at 480 dpi and 720 × 1600 at 320 dpi to 360 × 800 effective logical units.
 - Workaround: None required to continue the tested core flow.
-- Fix verification: Pending a targeted resolution/scale revision and repeat device review.
+- Fix verification: Host-side implementation and regression pass. Density-aware scaling preserves at least 320 × 568, Settings reports physical/density/effective values, and UI/layout checks pass at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280 with maximum text and reduced motion. Revised APK inspection and repeat Moto review remain pending.
+
+### ISSUE-006 — Larger-text setting did not scale explicit UI fonts
+
+- Status: Fixed
+- Severity: Minor
+- First seen build/commit: Phase 05 UI baseline; diagnosed during Phase 10 ISSUE-004 investigation
+- Affected phase: Phase 10 targeted stabilization
+- Reproduction:
+  1. Open Settings in the Phase 09 prototype.
+  2. Change Text size while observing request titles, dialogue, numeric vitals, modal copy, and shop text that use local font overrides.
+- Expected: The documented text-size setting enlarges important dialogue, numeric, modal, and scrollable screen text and remains usable at the smallest layout.
+- Actual: The setting updated runtime state and only changed the theme default; most player-facing labels had explicit font-size overrides and did not change. A restored non-default setting was likewise not applied during UI bootstrap.
+- Evidence/log: Source inspection of `_cycle_text_size`, `_label`, component scenes, and the persistence bootstrap path.
+- Workaround: None; reduced or default text remained readable in host layouts.
+- Fix verification: Important dialogue/numeric text and labels inside scrollable screen/modal regions now scale semantically after bootstrap and after dynamic rebuilds. The integration suite verifies 130% text with reduced motion at five portrait sizes, including a 25-pixel scaled request title and no horizontal shell overflow.
+
+### ISSUE-005 — Additional reported small bugs lack reproduction details
+
+- Status: Needs Information
+- Severity: Needs Information
+- First seen build/commit: Phase 09 manual Moto report, 2026-07-20
+- Affected phase: Phase 10 targeted stabilization
+- Reproduction: Not provided.
+- Expected: Not provided.
+- Actual: Kevin mentioned additional small bugs but skipped details; no behavior is inferred or fabricated.
+- Evidence/log: `ANDROID_DEVICE_TEST.md` Phase 09 report.
+- Workaround: Unknown.
+- Fix verification: Supply one reproduction sequence, expected result, actual result, and screenshot/log where practical for each concrete defect.
 
 ### ISSUE-003 — Physical Android verification unavailable on current host
 

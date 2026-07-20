@@ -1,6 +1,6 @@
 extends SceneTree
 
-var _portrait_sizes: Array[Vector2i] = [Vector2i(320, 568), Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800)]
+var _portrait_sizes: Array[Vector2i] = [Vector2i(320, 568), Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800), Vector2i(720, 1280)]
 var _failures: Array[String] = []
 
 

@@ -40,8 +40,8 @@ var _checks := 0
 
 func _init() -> void:
 	_check_equal("project name", ProjectSettings.get_setting("application/config/name"), "ONE MORE WATT")
-	_check_equal("project version", ProjectSettings.get_setting("application/config/version"), "0.9.0-dev")
-	_check_equal("build identifier", ProjectSettings.get_setting("application/config/build_commit"), "phase09-dev")
+	_check_equal("project version", ProjectSettings.get_setting("application/config/version"), "0.10.0-dev")
+	_check_equal("build identifier", ProjectSettings.get_setting("application/config/build_commit"), "phase10-dev")
 	_check_equal("application icon path", ProjectSettings.get_setting("application/config/icon"), "res://assets/icons/app_icon.svg")
 	_check_equal("Android back is app-controlled", ProjectSettings.get_setting("application/config/quit_on_go_back"), false)
 	_check_equal("main scene", ProjectSettings.get_setting("application/run/main_scene"), "res://scenes/app/Main.tscn")

@@ -37,9 +37,11 @@ var modal_overlay: ColorRect
 var modal_title: Label
 var modal_content: VBoxContainer
 var feedback_audio: FeedbackAudio
+var ui_scale_diagnostics: Dictionary = {}
 
 
 func _ready() -> void:
+	ui_scale_diagnostics = MobileUIScaler.apply_to_window(get_window())
 	_build_interface()
 	feedback_audio = FeedbackAudio.new()
 	feedback_audio.name = "FeedbackAudio"
@@ -59,6 +61,7 @@ func _ready() -> void:
 		persistence.configure(session, SaveManager.new("user://", repository.get_content_version()))
 		bootstrap_result = persistence.bootstrap(int(Time.get_unix_time_from_system()))
 	view_model = MainViewModel.new(session)
+	_apply_text_scale()
 	session.feedback.feedback_requested.connect(_on_feedback)
 	select_tab("grid")
 	_refresh_all(true)
@@ -68,7 +71,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 09 Android prototype ready")
+	print("ONE MORE WATT Phase 10 stabilization build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -146,6 +149,7 @@ func open_request_modal() -> void:
 		skip.pressed.connect(_skip_optional_from_modal)
 		modal_content.add_child(skip)
 	_add_modal_back_button()
+	_apply_text_scale()
 
 
 func open_report_modal(request_id: String) -> void:
@@ -177,6 +181,7 @@ func open_report_modal(request_id: String) -> void:
 		_refresh_all(true)
 	)
 	modal_content.add_child(acknowledge)
+	_apply_text_scale()
 
 
 func open_settings_modal() -> void:
@@ -233,8 +238,19 @@ func open_settings_modal() -> void:
 			diagnostic.text = "%s • save %d • main %s • B1 %s • B2 %s" % [build_text, details["sequence"], details["main_exists"], details["backup_1_exists"], details["backup_2_exists"]]
 	)
 	modal_content.add_child(diagnostic)
+	if bool(ui_scale_diagnostics.get("applied", false)):
+		var logical_size: Vector2 = ui_scale_diagnostics.get("effective_logical_size", Vector2.ZERO)
+		_add_modal_label("DISPLAY %d×%d px  •  %d dpi\nEFFECTIVE UI %d×%d  •  SCALE %.2f×" % [
+			int((ui_scale_diagnostics.get("physical_size", Vector2i.ZERO) as Vector2i).x),
+			int((ui_scale_diagnostics.get("physical_size", Vector2i.ZERO) as Vector2i).y),
+			int(ui_scale_diagnostics.get("dpi", 0)),
+			roundi(logical_size.x),
+			roundi(logical_size.y),
+			float(ui_scale_diagnostics.get("content_scale_factor", 1.0)),
+		], 15, Color(0.62, 0.82, 0.94))
 	_add_modal_label("ONE MORE WATT • v%s\nBUILD %s • Prototype by Ferro AI" % [ProjectSettings.get_setting("application/config/version", "unknown"), ProjectSettings.get_setting("application/config/build_commit", "unknown")], 15, Color(0.6, 0.68, 0.8))
 	_add_modal_back_button("Close Settings")
+	_apply_text_scale()
 
 
 func close_top_modal() -> void:
@@ -277,6 +293,7 @@ func open_offline_report(report: OfflineReport, recovery_note: String = "") -> v
 	var continue_button := _button("Continue", "OfflineContinueButton")
 	continue_button.pressed.connect(close_top_modal)
 	modal_content.add_child(continue_button)
+	_apply_text_scale()
 
 
 func open_era_transition_modal(era_id: String) -> void:
@@ -295,6 +312,7 @@ func open_era_transition_modal(era_id: String) -> void:
 		_refresh_all(true)
 	)
 	modal_content.add_child(continue_button)
+	_apply_text_scale()
 
 
 func _open_corrupt_save_modal() -> void:
@@ -306,6 +324,7 @@ func _open_corrupt_save_modal() -> void:
 			close_top_modal()
 	)
 	modal_content.add_child(confirm)
+	_apply_text_scale()
 
 
 func _build_interface() -> void:
@@ -375,6 +394,7 @@ func _build_interface() -> void:
 	request_column.add_child(request_title_label)
 	request_meta_label = _label("CAPACITY • ANNOUNCED", 12, Color(0.55, 0.75, 0.92))
 	request_meta_label.name = "RequestMetaLabel"
+	request_meta_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	request_column.add_child(request_meta_label)
 	request_progress = ProgressBar.new()
 	request_progress.name = "RequestProgress"
@@ -575,6 +595,7 @@ func _rebuild_screen() -> void:
 		"build": _build_shop_screen(view_model.infrastructure_cards())
 		"upgrades": _build_shop_screen(view_model.upgrade_cards())
 		"reports": _build_reports_screen()
+	_apply_text_scale()
 
 
 func _build_grid_screen() -> void:
@@ -717,13 +738,33 @@ func _add_modal_back_button(text: String = "Back") -> void:
 func _cycle_text_size() -> void:
 	var next := (session.settings.text_scale_index + 1) % RuntimeSettings.TEXT_SCALES.size()
 	session.settings.set_text_scale_index(next)
-	var base_theme := theme.duplicate() as Theme
-	base_theme.default_font_size = roundi(18.0 * session.settings.get_text_scale())
-	theme = base_theme
+	_apply_text_scale()
 	var button := modal_content.find_child("TextSizeButton", true, false) as Button
 	if button != null:
 		button.text = _text_size_label()
 	_settings_changed()
+
+
+func _apply_text_scale() -> void:
+	var scale := session.settings.get_text_scale()
+	for control: Control in [status_energy_label, status_power_label, dialogue_label, request_title_label, forecast_label, allocation_label]:
+		_scale_control_font(control, scale)
+	for vital_value: Variant in find_children("ValueLabel", "Label", true, false):
+		_scale_control_font(vital_value as Control, scale)
+	for parent: Control in [screen_content, modal_content]:
+		if parent == null:
+			continue
+		for label_value: Variant in parent.find_children("*", "Label", true, false):
+			_scale_control_font(label_value as Control, scale)
+
+
+func _scale_control_font(control: Control, scale: float) -> void:
+	if control == null:
+		return
+	if not control.has_meta("one_more_watt_base_font_size"):
+		control.set_meta("one_more_watt_base_font_size", control.get_theme_font_size("font_size"))
+	var base_size := int(control.get_meta("one_more_watt_base_font_size"))
+	control.add_theme_font_size_override("font_size", roundi(float(base_size) * scale))
 
 
 func _toggle_notation() -> void:

@@ -12,6 +12,7 @@ func _init() -> void:
 	if result.is_ok():
 		_test_number_formatter()
 		_test_navigation_and_runtime_settings()
+		_test_mobile_ui_scaler()
 		_test_session_and_view_model_parity()
 	_finish()
 
@@ -50,6 +51,21 @@ func _test_navigation_and_runtime_settings() -> void:
 	_check(FeedbackAudio.CUES.size() == 7, "essential purchase, request, brownout, allocation, transition, and error cues are authored")
 	var tone := FeedbackAudio.build_tone(440.0, 660.0, 0.1)
 	_check(tone.format == AudioStreamWAV.FORMAT_16_BITS and tone.mix_rate == 22050 and tone.data.size() > 4000, "procedural feedback cue is a bounded mono PCM stream")
+
+
+func _test_mobile_ui_scaler() -> void:
+	var factor_1080_xxhdpi := MobileUIScaler.calculate_content_scale_factor(Vector2i(1080, 2400), 480)
+	_check_near(factor_1080_xxhdpi, 2.0, "1080×2400 xxhdpi display receives density-aware canvas scale")
+	var logical_1080 := MobileUIScaler.effective_logical_size(Vector2i(1080, 2400), factor_1080_xxhdpi)
+	_check(logical_1080.is_equal_approx(Vector2(360.0, 800.0)), "1080×2400 xxhdpi resolves to a comfortable 360×800 logical viewport")
+	var factor_720_xhdpi := MobileUIScaler.calculate_content_scale_factor(Vector2i(720, 1600), 320)
+	_check_near(factor_720_xhdpi, 2.0, "720×1600 xhdpi display receives density-aware canvas scale")
+	var logical_720 := MobileUIScaler.effective_logical_size(Vector2i(720, 1600), factor_720_xhdpi)
+	_check(logical_720.is_equal_approx(Vector2(360.0, 800.0)), "720×1600 xhdpi resolves to a comfortable 360×800 logical viewport")
+	var constrained_factor := MobileUIScaler.calculate_content_scale_factor(Vector2i(720, 1280), 480)
+	var constrained_logical := MobileUIScaler.effective_logical_size(Vector2i(720, 1280), constrained_factor)
+	_check(constrained_logical.x >= 320.0 and constrained_logical.y >= 568.0, "small dense displays retain the verified minimum logical layout")
+	_check_near(MobileUIScaler.calculate_content_scale_factor(Vector2i.ZERO, 480), 1.0, "invalid display dimensions fail safely")
 
 
 func _test_session_and_view_model_parity() -> void:

@@ -2,6 +2,25 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 10 host scale/layout pass — 2026-07-20
+
+- Build/commit: Uncommitted Phase 10 implementation checkpoint
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Confirmed the project already uses the documented 720 × 1280 base, `canvas_items` stretch, `expand` aspect, portrait orientation, and full-rect anchored root/safe-area layers.
+- [x] Reproduced the scale mismatch mathematically: 48 logical pixels are not 48 Android dp when automatic canvas scale follows physical resolution without density compensation.
+- [x] Verified bounded reference mappings: 1080 × 2400 at 480 dpi and 720 × 1600 at 320 dpi both produce an effective 360 × 800 logical viewport; a small dense display never reduces below the verified 320 × 568 layout.
+- [x] Exercised authorization, report, brownout, Build, Upgrades, Reports, Settings, Android Back handling, reduced motion, and maximum 130% text at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280.
+- [x] Generated 35 graphical captures and inspected representative smallest/reference authorization and Settings states plus the 360 × 640 Build state. Authorization remained initially reachable, settings scrolled intentionally at 320 × 568, and no inspected state clipped horizontally.
+- [x] Full repository regression passed after the changes; gameplay balance, reachability, save/offline behavior, content, and Android configuration remain unchanged and green.
+- [ ] Revised Phase 10 APK exported and statically inspected from a clean commit.
+- [ ] Revised APK installed and reviewed on the Moto phone for comfortable physical size.
+- [ ] Exact Moto model, Android/API, physical resolution/density, screenshot, and navigation/cutout mode recorded.
+- [ ] Background/resume, force-close recovery, Android Back, brownout, sound/haptics, safe areas, endpoint, and device performance checked where practical.
+
+Host-pass note: the runtime Settings screen now exposes display pixels, reported dpi, effective logical viewport, and scale so the next phone report can identify the actual result without guessing. The VPS cannot provide physical Android evidence.
+
 ## Phase 09 Android host preflight — 2026-07-20
 
 - Build/commit: `e165b2b7ace78a848b1eed4431f919804a8b8e6f`

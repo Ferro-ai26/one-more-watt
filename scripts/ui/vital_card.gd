@@ -7,8 +7,8 @@ extends PanelContainer
 
 
 func configure(title: String, value: String, detail: String, limiting: bool) -> void:
-	title_label.text = title.to_upper()
+	title_label.text = {"Generation": "GEN.", "Transmission": "TRANS."}.get(title, title.to_upper())
+	title_label.tooltip_text = title
 	value_label.text = value
 	state_label.text = "! LIMITING" if limiting else detail
 	state_label.add_theme_color_override("font_color", Color(1.0, 0.45, 0.35) if limiting else Color(0.55, 0.75, 0.92))
-

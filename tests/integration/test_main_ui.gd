@@ -1,6 +1,6 @@
 extends SceneTree
 
-const TEST_SIZES := [Vector2i(320, 568), Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800)]
+const TEST_SIZES := [Vector2i(320, 568), Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800), Vector2i(720, 1280)]
 
 var _failures: Array[String] = []
 var _checks := 0
@@ -117,18 +117,20 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 
 	main.open_settings_modal()
 	await process_frame
-	_check(_modal_text(main).contains("v0.9.0-dev") and _modal_text(main).contains("BUILD phase09-dev"), "%s settings expose build provenance" % test_size)
+	_check(_modal_text(main).contains("v0.10.0-dev") and _modal_text(main).contains("BUILD phase10-dev"), "%s settings expose build provenance" % test_size)
 	var diagnostic := main.modal_content.find_child("DiagnosticButton", true, false) as Button
 	await _press(diagnostic)
-	_check("v0.9.0-dev • build phase09-dev" in diagnostic.text, "%s diagnostic summary exposes build provenance" % test_size)
+	_check("v0.10.0-dev • build phase10-dev" in diagnostic.text, "%s diagnostic summary exposes build provenance" % test_size)
 	var reduced := main.modal_content.find_child("ReducedMotionCheck", true, false) as CheckButton
 	reduced.button_pressed = true
 	reduced.toggled.emit(true)
-	var old_scale := main.session.settings.get_text_scale()
+	await _press(main.modal_content.find_child("TextSizeButton", true, false) as Button)
 	await _press(main.modal_content.find_child("TextSizeButton", true, false) as Button)
 	await _press(main.modal_content.find_child("NotationButton", true, false) as Button)
 	_check(main.session.settings.reduced_motion, "%s reduced motion persists in runtime settings" % test_size)
-	_check(main.session.settings.get_text_scale() > old_scale, "%s text size option changes scale" % test_size)
+	_check(is_equal_approx(main.session.settings.get_text_scale(), 1.3), "%s maximum text size option reaches 130%%" % test_size)
+	_check(main.request_title_label.get_theme_font_size("font_size") == 25, "%s maximum text setting scales explicit label overrides" % test_size)
+	_check(shell.get_combined_minimum_size().x <= test_size.x, "%s larger text minimum %.1f keeps the shell within the viewport width" % [test_size, shell.get_combined_minimum_size().x])
 	_check(main.session.settings.number_notation == RuntimeSettings.NOTATION_SCIENTIFIC, "%s number notation option changes formatter mode" % test_size)
 	if _capture_layouts:
 		await _capture(viewport, test_size, "settings")

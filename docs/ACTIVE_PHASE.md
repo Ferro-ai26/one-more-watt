@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 10 — Targeted Bug Fixing and Prototype Stabilization
-Status: Ready — Awaiting Explicit Authorization
+Status: In Progress — Authorized 2026-07-20
 
 Authoritative phase contract:
 
@@ -9,8 +9,8 @@ Authoritative phase contract:
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and `docs/KNOWN_ISSUES.md`. Do not begin implementation until the user explicitly authorizes Phase 10. Do not advance to Phase 11 automatically.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and `docs/KNOWN_ISSUES.md`. Continue only Phase 10 stabilization and evidence work. Do not advance to Phase 11 automatically.
 
 ## Inherited state
 
-Phase 09 closed with the decision “continue with targeted revisions.” Completed Phase 00–09 evidence remains authoritative. Original v1 Phase 10–16 contracts are archived and superseded.
+Phase 09 closed with the decision “continue with targeted revisions.” The user authorized Phase 10 on 2026-07-20. Completed Phase 00–09 evidence remains authoritative. Original v1 Phase 10–16 contracts are archived and superseded.
