@@ -100,3 +100,24 @@ Use concise reports with these labels:
 
 Never claim a device test, export, visual inspection, or playtest occurred unless it actually occurred.
 
+
+<!-- ONE_MORE_WATT_ROADMAP_V2 -->
+This block is appended to the repository `AGENTS.md` by the v2 installer.
+
+## Visual production authority
+
+- Read `docs/ROADMAP_V2.md` for all work after Phase 09.
+- The revised Phase 10–26 contracts supersede archived v1 Phase 10–16 contracts.
+- Functional completion does not imply visual completion or release readiness.
+- Do not skin the whole game before Phase 11 approves a visual direction and Phase 12 proves the reusable skin architecture.
+- Do not introduce independent one-off styles when a semantic token or reusable component exists.
+- Do not change gameplay or save behavior merely to simplify visual work.
+- Every new era after Phase 14 must include its required production presentation; permanent gray-box content cannot pass an era phase.
+- AI-assisted assets require provenance, contextual review, and licensing status.
+- Device screenshots and manual visual evidence are required where a phase contract says so.
+- Phase 26 may prepare production publication, but publishing requires explicit user authorization.
+
+## Current post-prototype state
+
+Phase 09 closed with “continue with targeted revisions.” The new Phase 10 addresses known and newly documented prototype defects. Do not infer, fabricate, or fix unspecified bugs; obtain reproduction details first.
+<!-- END_ONE_MORE_WATT_ROADMAP_V2 -->

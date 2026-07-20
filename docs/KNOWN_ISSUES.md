@@ -17,7 +17,7 @@ Phase 09 is closed with the decision “continue with targeted revisions.” Man
 - Status: Open
 - Severity: Minor
 - First seen build/commit: APK from `e165b2b`, manual Moto phone test, 2026-07-20
-- Affected phase: Phase 09 device polish; targeted revision later
+- Affected phase: Phase 09 device evidence; Phase 10 targeted stabilization
 - Reproduction:
   1. Install and launch the Phase 09 APK on the tester's Moto phone.
   2. Review the early onboarding presentation.

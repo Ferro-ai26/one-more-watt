@@ -1,12 +1,16 @@
 # Active Phase
 
-Phase: 09 — Android Prototype
-Status: Closed — Continue with targeted revisions; device matrix partial
+Phase: 10 — Targeted Bug Fixing and Prototype Stabilization
+Status: Ready — Awaiting Explicit Authorization
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_09_ANDROID_PROTOTYPE.md`
+`docs/phases/PHASE_10_TARGETED_BUG_FIXING_AND_STABILIZATION.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 09 concluded with partial manual device evidence and the decision “continue with targeted revisions.” Do not begin the existing Phase 10; the roadmap and document pack are being revised.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, and `docs/KNOWN_ISSUES.md`. Do not begin implementation until the user explicitly authorizes Phase 10. Do not advance to Phase 11 automatically.
+
+## Inherited state
+
+Phase 09 closed with the decision “continue with targeted revisions.” Completed Phase 00–09 evidence remains authoritative. Original v1 Phase 10–16 contracts are archived and superseded.

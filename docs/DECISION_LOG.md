@@ -144,6 +144,16 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The recorded APK passed host build/static verification and successfully installed/launched on physical hardware with working onboarding and touch purchases. The tester reported no blocker/critical defect, but found a minor presentation-scale issue and chose to skip the remaining questionnaire.
 - Consequences: `ISSUE-004` remains open for a later 720p/scale revision. Brownout/Back, lifecycle/offline, force-close, audio/haptics, safe-area, endpoint, and device-performance behavior are not promoted to passing evidence. Future planning must account for those validation gaps before external release claims.
 
+<!-- ONE_MORE_WATT_DECISION_V2 -->
+## DEC-021 — Adopt post-prototype roadmap v2
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Replace the unstarted v1 Phase 10–16 roadmap with the v2 Phase 10–26 roadmap. Add explicit targeted stabilization, theme/art direction, reusable skin architecture, Eras 1–3 production skinning, visual/mobile QA, era-integrated art production, content lock, final audiovisual production, release-candidate stabilization, closed testing, and separately authorized production release.
+- Reason: The Phase 09 Android prototype proved the functional loop, but the original roadmap did not allocate enough controlled work for visual identity, systematic skinning, full-game production quality, and external release evidence.
+- Consequences: Completed Phase 00–09 history remains authoritative. Original Phase 10–16 contracts are archived as superseded and must not be executed. Phase 10 begins only after explicit authorization.
+<!-- END_ONE_MORE_WATT_DECISION_V2 -->
+
 ## Proposed decision template
 
 ```markdown

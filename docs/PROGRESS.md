@@ -14,9 +14,20 @@
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
-| 10–16 — Expansion and Release | Gated/revision pending | Existing Phase 10 must not start while roadmap/document pack is revised |
+| 10 — Targeted Bug Fixing and Prototype Stabilization | Ready — awaiting explicit authorization | Roadmap v2 installed; no implementation started |
+| 11–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Roadmap v2 documentation migration
+
+- Preserved completed Phase 00–09 history and evidence.
+- Archived unstarted v1 Phase 10–16 contracts under `docs/phases/legacy_v1/`.
+- Installed revised Phase 10–26 contracts and visual-production specifications.
+- Set Phase 10 to Ready, awaiting explicit authorization; no implementation work started.
+- Pre-migration document backup: `.roadmap-backups/v1-pre-v2-20260720T050355Z/pre_v2_documents.tar.gz`.
+- Verified the backup exactly matches pre-migration Git content, Phase 00–09 contracts are unchanged, and every archived v1 Phase 10–16 contract matches its original.
+- Passed documentation structure/reference checks, `git diff --check`, and the complete `./tools/validate.sh` repository suite after documentation-only cleanup.
 
 ### 2026-07-20 — Phase 09 manual device report and closure
 
@@ -24,7 +35,7 @@
 - Early onboarding remained readable/authorizable, and Build/Upgrade touch purchases worked.
 - Recorded `ISSUE-004`: presentation appeared too small; tester requested a later 720p/scale revision.
 - Brownout, Android Back, lifecycle/offline, force-close recovery, audio/haptics, full safe-area review, endpoint, and device performance checks were skipped at the tester's request and are not claimed as passing.
-- Final Phase 09 decision: continue with targeted revisions. Phase 10 did not begin because the roadmap/document pack is being revised.
+- Final Phase 09 decision: continue with targeted revisions. Phase 10 did not begin; the roadmap revision was still pending at closure.
 
 ### 2026-07-20 — Phase 09 Android prototype started
 

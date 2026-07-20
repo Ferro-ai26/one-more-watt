@@ -14,6 +14,12 @@
 | `SAVE_AND_OFFLINE_SPEC.md` | Persistence and offline rules | Save/lifecycle decision |
 | `ART_AND_AUDIO_DIRECTION.md` | Visual/audio language and assets | Creative direction decision |
 | `ANDROID_RELEASE_SPEC.md` | Android/export/release requirements | Toolchain or publishing decision |
+| `ROADMAP_V2.md` | Accepted post-prototype phase sequence and release policy | Roadmap or release-gate decision |
+| `THEME_AND_ART_DIRECTION_SPEC.md` | Visual premise, palette, WATT design, typography, motion, and approval rules | Accepted creative-direction change |
+| `SKIN_ARCHITECTURE_SPEC.md` | Reusable Godot theme, component, token, and skin boundaries | Skin-system architecture decision |
+| `ASSET_PIPELINE_AND_INVENTORY.md` | Asset ownership, states, formats, naming, and production tracking | Asset-pipeline or inventory change |
+| `VISUAL_QA_CHECKLIST.md` | Visual, mobile, skin, and accessibility verification | QA-scope or device-policy change |
+| `RELEASE_READINESS_DEFINITION.md` | Evidence required before production release | Release policy or publisher decision |
 
 ## Living control documents
 
@@ -29,13 +35,16 @@
 | `ANDROID_BUILD_RECORD.md` | Every recorded Android artifact and static inspection |
 | `ANDROID_DEVICE_TEST.md` | Physical Android install/lifecycle/performance pass |
 | `CODEX_RUNBOOK.md` | Operator workflow change |
+| `ART_DIRECTION_WORKBOOK.md` | During Phase 11 exploration and whenever an approved visual direction changes |
 
 ## Phase contracts
 
-- Phases 00–09: approved development sequence for the Android vertical slice
-- Phases 10–12: expansion from Building Network through City and first prestige
-- Phases 13–15: grouped long-game production contracts requiring approved era appendices
-- Phase 16: release preparation, still requiring explicit authorization to publish
+- Phases 00–09: completed development sequence and evidence for the Android vertical slice
+- Phase 10: targeted prototype stabilization; Ready — Awaiting Explicit Authorization
+- Phases 11–14: visual direction, reusable skin architecture, production skinning, and visual/mobile QA
+- Phases 15–21: era-integrated game and art production through the Multiverse
+- Phases 22–26: content lock, final audiovisual production, stabilization, closed testing/store preparation, and separately authorized production release
+- `phases/legacy_v1/`: superseded, unstarted v1 Phase 10–16 contracts retained for history only
 
 ## Authority reminder
 

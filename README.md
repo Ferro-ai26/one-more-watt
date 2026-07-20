@@ -1,6 +1,6 @@
 # ONE MORE WATT — Development Document Pack
 
-Version: 1.0  
+Version: 2.0
 Target: Android-first Godot incremental/idle game  
 Prototype scope: Eras 1–3  
 First major product checkpoint: Era 6 and first prestige
@@ -34,7 +34,7 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 09 is closed with the decision “continue with targeted revisions.” The recorded APK passed host build/static verification, and Kevin's partial Moto phone test confirmed install, cold launch, build identity, onboarding, and touch purchases. The remaining device matrix was skipped and is not claimed as passing. Do not begin the existing Phase 10 while the roadmap/document pack is being revised. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 09 is closed with the decision “continue with targeted revisions.” The recorded APK passed host build/static verification, and Kevin's partial Moto phone test confirmed install, cold launch, build identity, onboarding, and touch purchases. The remaining device matrix was skipped and is not claimed as passing. Roadmap v2 is installed, and revised Phase 10 is Ready — Awaiting Explicit Authorization. No Phase 10 implementation has begun. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
@@ -44,7 +44,7 @@ Run content validation alone with `./tools/validate_content.sh`, grid tests with
 
 ## Scope policy
 
-Phases 00–09 are the committed prototype plan. Phases 10–16 are expansion contracts and should not begin until the Android prototype passes the Phase 09 gate.
+Phases 00–09 are the completed prototype history. `docs/ROADMAP_V2.md` and the revised Phase 10–26 contracts govern post-prototype work. The superseded, unstarted v1 Phase 10–16 contracts are retained under `docs/phases/legacy_v1/` for history only and must not be executed.
 
 The numerical values in `PROGRESSION_AND_BALANCE.md` are initial tuning values, not promises. Change them through recorded balance decisions and data files, never by scattering constants through scripts.
 
@@ -61,9 +61,22 @@ The numerical values in `PROGRESSION_AND_BALANCE.md` are initial tuning values, 
 - `docs/SAVE_AND_OFFLINE_SPEC.md`: persistence and offline rules
 - `docs/ART_AND_AUDIO_DIRECTION.md`: audiovisual direction
 - `docs/ANDROID_RELEASE_SPEC.md`: Android requirements
+- `docs/ROADMAP_V2.md`: accepted post-prototype phase sequence and release policy
+- `docs/THEME_AND_ART_DIRECTION_SPEC.md`: visual identity approval contract
+- `docs/ART_DIRECTION_WORKBOOK.md`: Phase 11 visual exploration and approval record
+- `docs/SKIN_ARCHITECTURE_SPEC.md`: reusable production skin system
+- `docs/ASSET_PIPELINE_AND_INVENTORY.md`: asset ownership and production pipeline
+- `docs/VISUAL_QA_CHECKLIST.md`: visual, mobile, and accessibility verification
+- `docs/RELEASE_READINESS_DEFINITION.md`: production release evidence bar
 - `docs/phases/`: build contracts
 - `docs/templates/`: reusable content and phase templates
 
 ## Definition of a completed phase
 
 A phase is complete only when its acceptance criteria pass, its automated checks pass, its manual test results are recorded, and all living documents are updated. Producing code without evidence does not complete a phase.
+
+<!-- ONE_MORE_WATT_README_V2 -->
+## Post-prototype roadmap v2
+
+Phase 09 closed with “continue with targeted revisions.” `docs/ROADMAP_V2.md` and the revised Phase 10–26 contracts supersede the archived v1 Phase 10–16 plan. The new roadmap adds targeted stabilization, approved art direction, reusable skin architecture, production skinning, era-integrated art, content lock, final audiovisual production, release-candidate stabilization, closed testing, and separately authorized production release.
+<!-- END_ONE_MORE_WATT_README_V2 -->
