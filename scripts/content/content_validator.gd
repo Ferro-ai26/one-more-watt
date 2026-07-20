@@ -162,7 +162,7 @@ func _validate_records(records: Dictionary, placeholder_assets: Dictionary, issu
 func _validate_family_record(family: String, record: Dictionary, path: String, record_id: String, placeholder_assets: Dictionary, issues: Array[ContentValidationIssue]) -> void:
 	match family:
 		"balance":
-			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "starting_owned": "dictionary", "allocation_modes": "dictionary", "stored_energy_efficiency": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
+			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "starting_owned": "dictionary", "allocation_modes": "dictionary", "stored_energy_efficiency": "dictionary", "offline_progress": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
 			_validate_nonnegative_tree(record, path, record_id, issues)
 			_validate_allocation_modes(record.get("allocation_modes", {}), path, record_id, issues)
 		"eras":
@@ -295,6 +295,13 @@ func _validate_cross_references(records: Dictionary, indices: Dictionary, placeh
 		if efficiencies is Dictionary:
 			for era_id: Variant in efficiencies:
 				_validate_reference(str(era_id), "eras", indices, wrapper_value, "stored_energy_efficiency", issues)
+		var offline: Variant = balance.get("offline_progress", {})
+		if offline is Dictionary:
+			for field: String in ["cap_seconds", "efficiency", "far_forward_seconds"]:
+				if not offline.has(field) or typeof(offline[field]) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(offline[field])) or float(offline[field]) < 0.0:
+					_add_issue(issues, "INVALID_VALUE", wrapper_value["path"], balance.get("id", ""), "offline_progress.%s must be nonnegative" % field)
+			if float(offline.get("efficiency", 0.0)) > 1.0:
+				_add_issue(issues, "INVALID_VALUE", wrapper_value["path"], balance.get("id", ""), "offline_progress.efficiency cannot exceed 1")
 
 	for asset_path: Variant in placeholder_assets:
 		if not bool(placeholder_assets[asset_path]):

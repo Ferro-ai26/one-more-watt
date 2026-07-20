@@ -123,3 +123,12 @@ If the clock moves backward, grant zero negative progress, retain the last trust
 - Offline request completes with queue disabled
 - Multiple offline completions with queue enabled
 
+## Phase 06 implementation baseline
+
+Prototype saves use format version 2 and inspectable checksummed JSON. `save_main.json`, `save_backup_1.json`, and `save_backup_2.json` live under `user://`; a complete snapshot is restored into a throwaway domain session before the validated temporary file can rotate known-good backups and replace main. Corrupt main files are copied to timestamped diagnostic evidence before recovery or replacement.
+
+The envelope stores build/content versions, sequence, UTC epoch timestamps, last trusted UTC, trigger, checksum, and a session payload. Session state includes stable-ID ownership and upgrades, milestone/unlock state, full request lifecycle/statistics/reports, fixed-step accumulator and grid state, deterministic seed/incident position, dialogue repetition state, runtime settings, and extensible prestige/lifetime/tutorial sections. Derived grid values are always rebuilt after restore.
+
+Format migrations run sequentially before domain restore. The version 1 fixture adds the prestige namespace and maps the retired fixture ID `starter_outlet` to `wall_outlet`; unknown future formats fail closed. A migrated main is preserved as Backup 1 when the new current-format save is written.
+
+Offline policy is authored in balance data: a 7,200-second cap, 80% efficiency, and a seven-day far-forward diagnostic threshold. Simulation uses the normal fixed-step request/grid rules in bounded chunks, stops at request completion before consuming remaining idle time, disables incidents not explicitly allowed offline, never auto-starts the next request without queue automation, and pauses an announced tutorial requiring input. The post-offline state is saved before its return report is dismissed.

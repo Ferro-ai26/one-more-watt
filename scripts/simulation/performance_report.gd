@@ -46,3 +46,29 @@ func snapshot() -> Dictionary:
 		"completion_key": completion_key,
 		"suggestion_key": suggestion_key,
 	}
+
+
+func restore(data: Dictionary) -> bool:
+	request_id = str(data.get("request_id", ""))
+	if request_id.is_empty():
+		return false
+	kind = str(data.get("kind", ""))
+	grade = str(data.get("grade", "D"))
+	stability_score = clampf(float(data.get("stability_score", 0.0)), 0.0, 100.0)
+	completion_seconds = maxf(float(data.get("completion_seconds", 0.0)), 0.0)
+	demand_served_ratio = clampf(float(data.get("demand_served_ratio", 1.0)), 0.0, 1.0)
+	demanded_energy = maxf(float(data.get("demanded_energy", 0.0)), 0.0)
+	served_energy = clampf(float(data.get("served_energy", 0.0)), 0.0, demanded_energy)
+	peak_demand = maxf(float(data.get("peak_demand", 0.0)), 0.0)
+	peak_served = clampf(float(data.get("peak_served", 0.0)), 0.0, peak_demand)
+	brownout_seconds = clampf(float(data.get("brownout_seconds", 0.0)), 0.0, completion_seconds)
+	stored_energy_earned = maxf(float(data.get("stored_energy_earned", 0.0)), 0.0)
+	reward_stored_energy = maxf(float(data.get("reward_stored_energy", 0.0)), 0.0)
+	ending_reserve = maxf(float(data.get("ending_reserve", 0.0)), 0.0)
+	ending_reserve_capacity = maxf(float(data.get("ending_reserve_capacity", 0.0)), 0.0)
+	allocation_changes = maxi(int(data.get("allocation_changes", 0)), 0)
+	incident_ids.assign(data.get("incident_ids", []))
+	unlock_ids.assign(data.get("unlock_ids", []))
+	completion_key = str(data.get("completion_key", ""))
+	suggestion_key = str(data.get("suggestion_key", ""))
+	return true

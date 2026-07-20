@@ -44,6 +44,21 @@ func recent_ids() -> Array[String]:
 	return _recent.duplicate()
 
 
+func snapshot() -> Dictionary:
+	return {"seen": _seen.duplicate(true), "last_shown": _last_shown.duplicate(true), "recent": _recent.duplicate(), "context_last_time": _context_last_time.duplicate(true)}
+
+
+func restore(data: Dictionary) -> void:
+	_seen = (data.get("seen", {}) as Dictionary).duplicate(true)
+	_last_shown = (data.get("last_shown", {}) as Dictionary).duplicate(true)
+	_context_last_time = (data.get("context_last_time", {}) as Dictionary).duplicate(true)
+	_recent.clear()
+	for value: Variant in data.get("recent", []):
+		_recent.append(str(value))
+	while _recent.size() > RECENT_LIMIT:
+		_recent.pop_front()
+
+
 func _less_preferred(first: DialogueDefinition, second: DialogueDefinition) -> bool:
 	var first_seen := _seen.has(first.get_id())
 	var second_seen := _seen.has(second.get_id())

@@ -53,12 +53,14 @@ func events_between(previous_seconds: float, current_seconds: float) -> Array[Di
 	return events
 
 
-func request_efficiency_at(elapsed_seconds: float) -> float:
+func request_efficiency_at(elapsed_seconds: float, offline: bool = false) -> float:
 	var multiplier := 1.0
 	for scheduled: Dictionary in _scheduled:
 		if elapsed_seconds < float(scheduled["start"]) or elapsed_seconds >= float(scheduled["end"]):
 			continue
 		var incident: IncidentDefinition = scheduled["definition"]
+		if offline and not bool(incident.get_value("offline_allowed", false)):
+			continue
 		for modifier_value: Variant in incident.get_value("modifiers", []):
 			if not modifier_value is Dictionary:
 				continue
@@ -78,6 +80,17 @@ func scheduled_ids() -> Array[String]:
 		var incident: IncidentDefinition = scheduled["definition"]
 		ids.append(incident.get_id())
 	return ids
+
+
+func seek(elapsed_seconds: float) -> void:
+	_started.clear()
+	_ended.clear()
+	for scheduled: Dictionary in _scheduled:
+		var incident: IncidentDefinition = scheduled["definition"]
+		if elapsed_seconds >= float(scheduled["start"]):
+			_started[incident.get_id()] = true
+		if elapsed_seconds >= float(scheduled["end"]):
+			_ended[incident.get_id()] = true
 
 
 static func _mixed_seed(seed: int, value: String) -> int:

@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 05 connects the request, grid, and economy domains through the responsive portrait interface. WATT and the active request remain visible above Grid, Build, Upgrades, and Reports; forecasts, explicit bottleneck labels, authorization/report modals, reusable purchase cards, centralized unit formatting, runtime accessibility settings, and safe feedback hooks support the complete online loop. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 06 makes the complete online state durable with versioned checksummed JSON, atomic replacement, two known-good backups, sequential migrations, corruption recovery, debounced lifecycle saves, and bounded deterministic offline simulation. Return reports disclose recognized time, cap, efficiency, request changes, Stored Energy, brownouts, clock anomalies, and backup source. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, and main-interface tests with `./tools/test_ui.sh`. Save data, offline progress, final art/music, and production store assets remain intentionally deferred.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, and persistence/offline tests with `./tools/test_persistence.sh`. Cloud accounts, final content/art/music, and production store assets remain intentionally deferred.
 
 ## Scope policy
 

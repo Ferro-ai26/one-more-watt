@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 05 validation found no new online-loop, navigation, modal, formatting, accessibility, or responsive-layout defects. The existing Android setup dependency remains open.
+Phase 06 validation found no new save integrity, recovery, migration, reward-idempotency, clock, offline-simulation, or return-report defects. The existing Android setup dependency remains open.
 
 ### ISSUE-001 — Android export configuration unavailable
 

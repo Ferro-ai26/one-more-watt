@@ -168,7 +168,7 @@ func set_allocation_mode(mode: String) -> bool:
 	return true
 
 
-func advance_time(delta_seconds: float) -> bool:
+func advance_time(delta_seconds: float, offline: bool = false) -> bool:
 	if not is_finite(delta_seconds) or delta_seconds < 0.0 or delta_seconds > GridSimulation.MAX_ACTIVE_ADVANCE_SECONDS:
 		return false
 	var active := get_active_state()
@@ -176,13 +176,72 @@ func advance_time(delta_seconds: float) -> bool:
 		return false
 	_accumulator_seconds += delta_seconds
 	while _accumulator_seconds + EPSILON >= grid.fixed_step_seconds:
-		_process_step(active, grid.fixed_step_seconds)
+		_process_step(active, grid.fixed_step_seconds, offline)
 		_accumulator_seconds -= grid.fixed_step_seconds
 		if _accumulator_seconds < EPSILON:
 			_accumulator_seconds = 0.0
 		if active.status == RequestRunState.COMPLETED:
 			_accumulator_seconds = 0.0
 			break
+	return true
+
+
+func snapshot() -> Dictionary:
+	var states: Dictionary = {}
+	for id_value: Variant in _states:
+		states[str(id_value)] = (_states[id_value] as RequestRunState).snapshot()
+	var reports: Dictionary = {}
+	for id_value: Variant in _reports:
+		reports[str(id_value)] = (_reports[id_value] as PerformanceReport).snapshot()
+	return {
+		"seed": seed,
+		"current_dialogue": current_dialogue,
+		"states": states,
+		"completed": _completed.duplicate(true),
+		"unlocked": _unlocked.duplicate(true),
+		"reports": reports,
+		"active_id": _active_id,
+		"accumulator_seconds": _accumulator_seconds,
+		"grid": grid.state.snapshot(),
+		"dialogue_selector": _dialogue_selector.snapshot(),
+	}
+
+
+func restore(data: Dictionary, repository: ContentRepository, balance_id: String = "prototype_balance") -> bool:
+	if not configure(repository, balance_id, int(data.get("seed", 1))):
+		return false
+	var saved_states: Dictionary = data.get("states", {})
+	for id_value: Variant in saved_states:
+		var id := str(id_value)
+		var state := get_request_state(id)
+		if state == null or not state.restore(saved_states[id_value]):
+			return false
+	_completed = (data.get("completed", {}) as Dictionary).duplicate(true)
+	_unlocked = (data.get("unlocked", {}) as Dictionary).duplicate(true)
+	_reports.clear()
+	for id_value: Variant in (data.get("reports", {}) as Dictionary):
+		var report := PerformanceReport.new()
+		if repository.get_request(str(id_value)) == null or not report.restore(data["reports"][id_value]):
+			return false
+		_reports[str(id_value)] = report
+	_active_id = str(data.get("active_id", ""))
+	if not _active_id.is_empty():
+		var active := get_request_state(_active_id)
+		if active == null or active.status != RequestRunState.RUNNING:
+			return false
+	_accumulator_seconds = float(data.get("accumulator_seconds", 0.0))
+	if not is_finite(_accumulator_seconds) or _accumulator_seconds < 0.0 or _accumulator_seconds >= grid.fixed_step_seconds:
+		return false
+	if not grid.state.restore(data.get("grid", {})) or not grid.set_allocation_mode(grid.state.allocation_mode):
+		return false
+	current_dialogue = str(data.get("current_dialogue", ""))
+	_dialogue_selector.restore(data.get("dialogue_selector", {}))
+	if not _active_id.is_empty():
+		var active_state := get_request_state(_active_id)
+		_incident_timeline.configure(_active_id, repository.get_all("incidents"), seed)
+		_incident_timeline.seek(active_state.elapsed_seconds)
+	_events.clear()
+	grid.drain_events()
 	return true
 
 
@@ -213,7 +272,7 @@ func drain_events() -> Array[RequestEvent]:
 	return drained
 
 
-func _process_step(active: RequestRunState, delta_seconds: float) -> void:
+func _process_step(active: RequestRunState, delta_seconds: float, offline: bool = false) -> void:
 	var request := _repository.get_request(active.request_id)
 	var profile := _repository.get_demand_profile(str(request.get_value("demand_profile_id", "")))
 	var demand_multiplier := DemandProfileSampler.multiplier_at(profile, active.elapsed_seconds)
@@ -229,11 +288,11 @@ func _process_step(active: RequestRunState, delta_seconds: float) -> void:
 	active.peak_served = maxf(active.peak_served, result.served_power)
 	if result.brownout_active:
 		active.brownout_seconds += delta_seconds
-	_process_incidents(active, previous_elapsed, active.elapsed_seconds)
+	_process_incidents(active, previous_elapsed, active.elapsed_seconds, offline)
 	var useful_power := minf(float(request.get_value("max_useful_power", 0.0)), result.served_power + result.watt_power)
 	if useful_power > EPSILON:
 		useful_power = maxf(useful_power, float(request.get_value("max_useful_power", 0.0)) * _underpower_floor)
-	useful_power *= _incident_timeline.request_efficiency_at(active.elapsed_seconds)
+	useful_power *= _incident_timeline.request_efficiency_at(active.elapsed_seconds, offline)
 	var required_energy := float(request.get_value("required_energy", 0.0))
 	if required_energy > EPSILON:
 		active.progress = clampf(active.progress + useful_power * delta_seconds / required_energy, active.progress, 1.0)
@@ -244,9 +303,11 @@ func _process_step(active: RequestRunState, delta_seconds: float) -> void:
 		_complete_request(active, request)
 
 
-func _process_incidents(active: RequestRunState, previous_elapsed: float, current_elapsed: float) -> void:
+func _process_incidents(active: RequestRunState, previous_elapsed: float, current_elapsed: float, offline: bool = false) -> void:
 	for incident_event: Dictionary in _incident_timeline.events_between(previous_elapsed, current_elapsed):
 		var incident: IncidentDefinition = incident_event["definition"]
+		if offline and not bool(incident.get_value("offline_allowed", false)):
+			continue
 		if incident_event["type"] == RequestEvent.INCIDENT_STARTED and incident.get_id() not in active.incident_ids:
 			active.incident_ids.append(incident.get_id())
 			var keys: Array = incident.get_value("dialogue_keys", [])

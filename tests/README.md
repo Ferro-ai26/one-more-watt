@@ -43,3 +43,11 @@ Run centralized number formatting, runtime accessibility state, navigation/back-
 ```
 
 The main-interface integration suite drives request authorization through report, allocation changes, a brownout, infrastructure purchasing, all four tabs, settings, and modal back behavior at 360 × 640, 393 × 873, and 480 × 800.
+
+Run versioned save envelopes, checksum validation, atomic writes, backup recovery, migration, full session round trips, autosave debounce, clock anomalies, bounded offline simulation, reward idempotency, and the offline-return UI with:
+
+```bash
+./tools/test_persistence.sh
+```
+
+The persistence tests use isolated temporary user-data directories and remove them after each run. Deliberately corrupt fixtures are preserved long enough to verify recovery diagnostics, then removed with their isolated test directory.

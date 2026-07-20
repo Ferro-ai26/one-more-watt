@@ -77,6 +77,30 @@ func snapshot() -> Dictionary:
 	}
 
 
+func restore(data: Dictionary) -> bool:
+	for key: String in ["generation_rate", "transmission_capacity", "reserve_capacity", "reserve_stored", "reserve_charge_rate", "reserve_discharge_rate", "stored_energy", "demand_rate", "elapsed_seconds", "demanded_energy", "served_energy", "brownout_seconds", "stability"]:
+		var value: Variant = data.get(key, 0.0)
+		if typeof(value) not in [TYPE_INT, TYPE_FLOAT] or not is_finite(float(value)) or float(value) < 0.0:
+			return false
+	generation_rate = float(data.get("generation_rate", 0.0))
+	transmission_capacity = float(data.get("transmission_capacity", 0.0))
+	reserve_capacity = float(data.get("reserve_capacity", 0.0))
+	reserve_stored = float(data.get("reserve_stored", 0.0))
+	reserve_charge_rate = float(data.get("reserve_charge_rate", 0.0))
+	reserve_discharge_rate = float(data.get("reserve_discharge_rate", 0.0))
+	stored_energy = float(data.get("stored_energy", 0.0))
+	demand_rate = float(data.get("demand_rate", 0.0))
+	allocation_mode = str(data.get("allocation_mode", "balanced"))
+	elapsed_seconds = float(data.get("elapsed_seconds", 0.0))
+	demanded_energy = float(data.get("demanded_energy", 0.0))
+	served_energy = float(data.get("served_energy", 0.0))
+	brownout_seconds = float(data.get("brownout_seconds", 0.0))
+	stability = float(data.get("stability", 100.0))
+	brownout_active = bool(data.get("brownout_active", false))
+	sanitize()
+	return true
+
+
 static func _safe_nonnegative(value: float) -> float:
 	if not is_finite(value):
 		return 0.0

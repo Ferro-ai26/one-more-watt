@@ -164,6 +164,8 @@ Phase 04 canonical JSON uses content version `0.4.0` and contains all 18 infrast
 
 Phase 05 canonical JSON uses content version `0.5.0`. It changes the existing `Finish Booting` reward from 10 to 12 Stored Energy so the first completed request covers the exact 11 Stored Energy next-outlet price exposed by the production UI. No new request population or schema change is included.
 
+Phase 06 canonical JSON uses content version `0.6.0`. Balance records now require `offline_progress` with nonnegative `cap_seconds` and `far_forward_seconds` plus an `efficiency` from zero through one. The prototype authors 7,200 seconds, 80%, and 604,800 seconds respectively; save and offline code contains no replacement balance values.
+
 ## Prototype request catalog
 
 The exact numbers are tuned in data, but the initial authored set is:

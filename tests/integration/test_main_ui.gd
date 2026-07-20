@@ -13,6 +13,7 @@ func _init() -> void:
 
 
 func _run() -> void:
+	ProjectSettings.set_setting("one_more_watt/testing/disable_persistence", true)
 	var packed := load("res://scenes/app/Main.tscn") as PackedScene
 	_check(packed != null, "main scene loads")
 	if packed == null:

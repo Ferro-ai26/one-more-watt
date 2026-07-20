@@ -104,6 +104,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: Phase 05 needs purchases, allocation, requests, and reports to operate as one loop without moving economy rules into scene scripts or forcing the Phase 03 and Phase 04 coordinators to know about presentation.
 - Consequences: UI tests can compare view-model fields directly with domain previews, save work can later serialize domain truth behind the session boundary, and scene labels remain disposable presentation. Any future consolidation of request/economy state must preserve the tested atomic command and rebuild behavior.
 
+## DEC-016 — Checksummed local JSON with validated backup rotation
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Use canonical SHA-256-checksummed JSON save format version 2 with one main file, two known-good rotating backups, timestamped corrupt evidence, sequential migrations, and domain restore validation before a new snapshot may replace main.
+- Reason: The prototype needs inspectable diagnostics and deterministic migration tests while protecting progress from interrupted writes, malformed files, stale derived caches, and duplicated completion rewards.
+- Consequences: Content compatibility and stable-ID migrations fail closed, every successful save advances a monotonic sequence and non-decreasing trusted UTC, and storage writes remain local under `user://`. Cloud sync and platform backup guarantees require a later decision.
+
 ## Proposed decision template
 
 ```markdown

@@ -23,6 +23,11 @@
         "era_01_cold_boot": 1.0,
         "era_02_bedroom_assistant": 0.95
       },
+      "offline_progress": {
+        "cap_seconds": 7200,
+        "efficiency": 0.8,
+        "far_forward_seconds": 604800
+      },
       "milestone_sets": {
         "standard_high_volume": [
           {"owned": 10, "multiplier": 2.0},

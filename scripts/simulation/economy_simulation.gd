@@ -187,6 +187,22 @@ func get_derived_values() -> Dictionary:
 	return _derived_values.duplicate(true)
 
 
+func snapshot() -> Dictionary:
+	return state.snapshot()
+
+
+func restore(data: Dictionary, repository: ContentRepository, balance_id: String = "prototype_balance") -> bool:
+	if not configure(repository, balance_id):
+		return false
+	var restored := EconomyState.new()
+	if not restored.restore(data):
+		return false
+	state = restored
+	_events.clear()
+	_refresh_unlocks(false)
+	return rebuild_derived_state()
+
+
 func mark_request_completed(id: String) -> void:
 	state.completed_requests[id] = true
 	_refresh_unlocks(true)

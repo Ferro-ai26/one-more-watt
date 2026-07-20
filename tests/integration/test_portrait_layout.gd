@@ -9,6 +9,7 @@ func _init() -> void:
 
 
 func _run() -> void:
+	ProjectSettings.set_setting("one_more_watt/testing/disable_persistence", true)
 	var packed_scene := load("res://scenes/app/Main.tscn") as PackedScene
 	var capture_layouts := "--capture-layouts" in OS.get_cmdline_user_args()
 	if packed_scene == null:

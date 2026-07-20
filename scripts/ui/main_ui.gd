@@ -7,6 +7,7 @@ const VITAL_CARD_SCENE := preload("res://scenes/components/VitalCard.tscn")
 var session := GameSession.new()
 var view_model: MainViewModel
 var navigation := NavigationState.new()
+var persistence: PersistenceController
 var _refresh_accumulator := 0.0
 var _last_report_modal_id := ""
 var _pending_purchase: Dictionary = {}
@@ -44,12 +45,23 @@ func _ready() -> void:
 	if not session.configure(repository):
 		_show_content_error()
 		return
+	var bootstrap_result: Dictionary = {"ok": true, "status": "disabled"}
+	var persistence_disabled := bool(ProjectSettings.get_setting("one_more_watt/testing/disable_persistence", false)) or "--smoke-test" in OS.get_cmdline_user_args()
+	if not persistence_disabled:
+		persistence = PersistenceController.new()
+		persistence.configure(session, SaveManager.new("user://", repository.get_content_version()))
+		bootstrap_result = persistence.bootstrap(int(Time.get_unix_time_from_system()))
 	view_model = MainViewModel.new(session)
 	session.feedback.feedback_requested.connect(_on_feedback)
 	select_tab("grid")
 	_refresh_all(true)
+	if bootstrap_result.get("status") == "corrupt_all":
+		call_deferred("_open_corrupt_save_modal")
+	elif bootstrap_result.get("offline_report") is OfflineReport:
+		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
+		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 05 main interface ready")
+	print("ONE MORE WATT Phase 06 persistent interface ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -61,6 +73,8 @@ func _process(delta: float) -> void:
 	if _refresh_accumulator >= 0.2:
 		_refresh_accumulator = 0.0
 		_refresh_all(false)
+	if persistence != null:
+		persistence.tick(delta, int(Time.get_unix_time_from_system()))
 	if not session.last_report_id.is_empty() and session.last_report_id != _last_report_modal_id and navigation.modal_depth() == 0:
 		open_report_modal(session.last_report_id)
 
@@ -149,7 +163,7 @@ func open_settings_modal() -> void:
 	reduced.custom_minimum_size.y = 48
 	reduced.text = "Reduced motion"
 	reduced.button_pressed = session.settings.reduced_motion
-	reduced.toggled.connect(func(value: bool) -> void: session.settings.reduced_motion = value)
+	reduced.toggled.connect(func(value: bool) -> void: session.settings.reduced_motion = value; _settings_changed())
 	modal_content.add_child(reduced)
 	var text_size := _button(_text_size_label(), "TextSizeButton")
 	text_size.pressed.connect(_cycle_text_size)
@@ -162,14 +176,14 @@ func open_settings_modal() -> void:
 	haptics.custom_minimum_size.y = 48
 	haptics.text = "Haptics"
 	haptics.button_pressed = session.settings.haptics_enabled
-	haptics.toggled.connect(func(value: bool) -> void: session.settings.haptics_enabled = value)
+	haptics.toggled.connect(func(value: bool) -> void: session.settings.haptics_enabled = value; _settings_changed())
 	modal_content.add_child(haptics)
 	var confirm := CheckButton.new()
 	confirm.name = "ConfirmLargeCheck"
 	confirm.custom_minimum_size.y = 48
 	confirm.text = "Confirm large purchases"
 	confirm.button_pressed = session.settings.confirm_large_purchases
-	confirm.toggled.connect(func(value: bool) -> void: session.settings.confirm_large_purchases = value)
+	confirm.toggled.connect(func(value: bool) -> void: session.settings.confirm_large_purchases = value; _settings_changed())
 	modal_content.add_child(confirm)
 	for volume_data: Dictionary in [
 		{"label": "Master", "field": "master_volume"},
@@ -181,7 +195,13 @@ func open_settings_modal() -> void:
 		volume_button.pressed.connect(_cycle_volume.bind(volume_button, str(volume_data["field"]), str(volume_data["label"])))
 		modal_content.add_child(volume_button)
 	var diagnostic := _button("Show diagnostic summary", "DiagnosticButton")
-	diagnostic.pressed.connect(func() -> void: diagnostic.text = "Online session • content %s • no save yet" % session.repository.get_content_version())
+	diagnostic.pressed.connect(func() -> void:
+		if persistence == null:
+			diagnostic.text = "Test session • persistence disabled"
+		else:
+			var details := persistence.manager.diagnostics()
+			diagnostic.text = "Save sequence %d • main %s • B1 %s • B2 %s" % [details["sequence"], details["main_exists"], details["backup_1_exists"], details["backup_2_exists"]]
+	)
 	modal_content.add_child(diagnostic)
 	_add_modal_label("ONE MORE WATT • v%s\nPrototype by Ferro AI" % ProjectSettings.get_setting("application/config/version", "unknown"), 15, Color(0.6, 0.68, 0.8))
 	_add_modal_back_button("Close Settings")
@@ -196,6 +216,46 @@ func close_top_modal() -> void:
 
 func refresh_now(rebuild_screen: bool = false) -> void:
 	_refresh_all(rebuild_screen)
+
+
+func open_offline_report(report: OfflineReport, recovery_note: String = "") -> void:
+	_open_modal("offline_report", "OFFLINE RETURN")
+	var earned := report.stored_energy_after - report.stored_energy_before
+	_add_modal_label("WELCOME BACK", 26, Color(0.3, 0.78, 1.0))
+	_add_modal_label("AWAY %s  •  RECOGNIZED %s\nEFFICIENCY %.0f%%  •  EFFECTIVE %s\nCAP %s%s\nSTORED ENERGY %+.1f  •  BROWNOUT %s" % [
+		NumberFormatter.format_duration(maxf(report.raw_elapsed, 0.0)),
+		NumberFormatter.format_duration(report.recognized_elapsed),
+		report.efficiency * 100.0,
+		NumberFormatter.format_duration(report.effective_elapsed),
+		NumberFormatter.format_duration(report.cap_seconds),
+		" • CAP APPLIED" if report.capped else "",
+		earned,
+		NumberFormatter.format_duration(report.brownout_seconds),
+	], 17, Color.WHITE)
+	if not report.request_id.is_empty():
+		_add_modal_label("REQUEST %.1f%% → %.1f%%\nCOMPLETED %s" % [report.progress_before * 100.0, report.progress_after * 100.0, "None" if report.completed_request_ids.is_empty() else ", ".join(report.completed_request_ids)], 17, Color(0.62, 0.94, 0.72))
+	if report.clock_backward:
+		_add_modal_label("Clock moved backward. No negative progress was applied.", 16, Color(1.0, 0.72, 0.36))
+	elif report.far_forward:
+		_add_modal_label("Large clock jump detected. The normal offline cap was applied.", 16, Color(1.0, 0.72, 0.36))
+	if report.stopped_for_input:
+		_add_modal_label("Offline progress paused because WATT is waiting for your authorization.", 16, Color(1.0, 0.72, 0.36))
+	if not recovery_note.is_empty():
+		_add_modal_label(recovery_note, 16, Color(1.0, 0.89, 0.35))
+	var continue_button := _button("Continue", "OfflineContinueButton")
+	continue_button.pressed.connect(close_top_modal)
+	modal_content.add_child(continue_button)
+
+
+func _open_corrupt_save_modal() -> void:
+	_open_modal("save_recovery", "SAVE RECOVERY REQUIRED")
+	_add_modal_label("The main save and both backups could not be validated. The files were preserved for diagnostics. Start a new local game only if you want to continue.", 18, Color(1.0, 0.72, 0.36))
+	var confirm := _button("Start New Game", "ConfirmNewGameButton")
+	confirm.pressed.connect(func() -> void:
+		if persistence.confirm_new_game(int(Time.get_unix_time_from_system())).get("ok", false):
+			close_top_modal()
+	)
+	modal_content.add_child(confirm)
 
 
 func _build_interface() -> void:
@@ -561,6 +621,7 @@ func _cycle_text_size() -> void:
 	var button := modal_content.find_child("TextSizeButton", true, false) as Button
 	if button != null:
 		button.text = _text_size_label()
+	_settings_changed()
 
 
 func _toggle_notation() -> void:
@@ -570,6 +631,7 @@ func _toggle_notation() -> void:
 	if button != null:
 		button.text = _notation_label()
 	_refresh_all(true)
+	_settings_changed()
 
 
 func _cycle_volume(button: Button, field: String, label: String) -> void:
@@ -583,6 +645,7 @@ func _cycle_volume(button: Button, field: String, label: String) -> void:
 		if next > 0.0:
 			AudioServer.set_bus_volume_db(bus_index, linear_to_db(next))
 	button.text = "%s volume • %.0f%%" % [label, next * 100.0]
+	_settings_changed()
 
 
 func _on_feedback(kind: String) -> void:
@@ -608,6 +671,23 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("app_back"):
 		if handle_back():
 			get_viewport().set_input_as_handled()
+
+
+func _notification(what: int) -> void:
+	if persistence == null:
+		return
+	var now := int(Time.get_unix_time_from_system())
+	if what == NOTIFICATION_APPLICATION_PAUSED:
+		persistence.background(now)
+	elif what == NOTIFICATION_APPLICATION_RESUMED:
+		open_offline_report(persistence.resume(now))
+	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
+		persistence.save_now("clean_quit", now)
+
+
+func _settings_changed() -> void:
+	if persistence != null:
+		persistence.mark_dirty("settings")
 
 
 func _text_size_label() -> String:

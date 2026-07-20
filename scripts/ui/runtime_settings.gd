@@ -46,3 +46,20 @@ func snapshot() -> Dictionary:
 		"effects_volume": effects_volume,
 		"text_sound_volume": text_sound_volume,
 	}
+
+
+func restore(data: Dictionary) -> bool:
+	var notation := str(data.get("number_notation", NOTATION_ENGINEERING))
+	var scale_index := int(data.get("text_scale_index", 0))
+	if notation not in [NOTATION_ENGINEERING, NOTATION_SCIENTIFIC] or scale_index < 0 or scale_index >= TEXT_SCALES.size():
+		return false
+	reduced_motion = bool(data.get("reduced_motion", false))
+	number_notation = notation
+	text_scale_index = scale_index
+	haptics_enabled = bool(data.get("haptics_enabled", true))
+	confirm_large_purchases = bool(data.get("confirm_large_purchases", true))
+	master_volume = clampf(float(data.get("master_volume", 1.0)), 0.0, 1.0)
+	music_volume = clampf(float(data.get("music_volume", 0.8)), 0.0, 1.0)
+	effects_volume = clampf(float(data.get("effects_volume", 1.0)), 0.0, 1.0)
+	text_sound_volume = clampf(float(data.get("text_sound_volume", 0.8)), 0.0, 1.0)
+	return true

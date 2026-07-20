@@ -2,6 +2,24 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 06 save/offline verification — 2026-07-20
+
+- Build/commit: Uncommitted Phase 06 working tree based on `bbb5918`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Started `Finish Booting`, advanced two seconds, invoked the background save trigger at controlled UTC 10002, and resumed at UTC 10012.
+- [x] Offline Return visibly disclosed 10.0 seconds away/recognized, 80% efficiency, 8.0 effective seconds, the 120-minute cap, zero Stored Energy, zero brownout, and request progress from 13.3% to 66.7%.
+- [x] Repeated the boundary across request completion; the report showed 66.7% to 100%, one completed stable request ID, and exactly +12 Stored Energy.
+- [x] Reloaded the completed-before-report state and verified the completion reward could not be granted twice.
+- [x] Deliberately replaced isolated `save_main.json` with invalid text while retaining Backup 1, then bootstrapped recovery.
+- [x] Recovery preserved the corrupt main as timestamped diagnostic evidence, restored `save_backup_1.json`, reapplied the controlled offline interval, and named the restored backup in the UI.
+- [x] Both 393 × 873 captures were inspected without clipping, overlap, inaccessible controls, or accusatory clock/recovery language.
+- [x] The isolated recovery directory and test saves were removed after verification; actual user save files were not modified by the exercise.
+- [ ] Physical Android suspension, process death, storage, and device-clock behavior verified (device/export unavailable).
+
+Notes: The graphical harness controls timestamps rather than waiting in real time. Xvfb cannot control V-Sync; headless project validation is warning-free.
+
 ## Phase 05 main-interface verification — 2026-07-20
 
 - Build/commit: `6ae86ac`

@@ -149,6 +149,10 @@ The Phase 05 online `GameSession` is a thin coordinator over the request and eco
 
 Navigation, runtime accessibility settings, number formatting, and feedback hooks are isolated UI services. Number promotion never alters simulation values. Haptic requests are conditional on both runtime preference and mobile capability, audio preferences address named buses, and missing sound assets degrade to a semantic feedback signal without a resource error. Phase 06 may serialize settings and session state but must not treat UI labels as state truth.
 
+Phase 06 persistence is split between `SaveCodec`, `SaveMigrator`, `SaveManager`, and `PersistenceController`. The codec owns canonical SHA-256 integrity; the migrator owns sequential schema and stable-ID transformations; the manager owns temporary writes, backup rotation, corruption preservation, and candidate recovery; and the controller validates complete domain-restorable snapshots, applies lifecycle/autosave policy, advances trusted UTC, and invokes offline simulation. No presentation node reads or writes save JSON directly.
+
+`OfflineSimulator` consumes the restored `GameSession`, authored balance policy, and two UTC timestamps. It clamps recognized time before applying efficiency, advances active requests through the existing deterministic coordinator with offline-disallowed incidents suppressed, detects completion as an event boundary, and uses the same grid simulator for remaining idle production. `OfflineReport` is a numeric reconciliation record rendered by the UI only after the resulting state is saved.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.
