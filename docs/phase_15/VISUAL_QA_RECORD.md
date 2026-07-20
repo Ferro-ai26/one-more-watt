@@ -26,6 +26,7 @@ Scope: Era 4 production-functional presentation and host phone-resolution review
 - Layout/accessibility: pass in host evidence at 393 × 873 and 320 × 568 with 130% text. All maintenance options are reachable vertically, frequent controls remain at least 48 pixels, and brownout/capstone states avoid flashing and color-only meaning.
 - Asset boundary: pass. New icons and environment elements are project-original; no generated concept raster or undeclared fallback is integrated. `ISSUE-007` remains open, so this review does not approve final painted art.
 - Performance: pass. Final full-gate host measurement was 789.7 ms for 25 full Build refresh requests, 557.0 ms for 500 live refreshes, and 378 nodes; the isolated skin harness measured approximately 11.47 MiB static-memory delta. Compatible shop cards are reconfigured in place to keep the existing 1,500 ms guard.
+- APK/static: pass. Clean source commit `14b577fc8045` produced a 55,982,701-byte APK (SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`), +0.077% over the last Phase 13 device artifact; package/API/architectures/permission/signature/embedded-ID inspection passed.
 
 ## Evidence corrections made during review
 

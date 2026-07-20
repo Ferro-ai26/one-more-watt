@@ -1,5 +1,37 @@
 # Android Build Records
 
+## Phase 15 Building Network build
+
+Status: Clean source build/static inspection passed; physical runtime matrix unavailable on current host
+Build UTC: 2026-07-20T23:17:10Z
+
+### Source and artifact
+
+- Source commit: `14b577fc8045e4de1b70692745f86591b3c38960`
+- In-app build identifier: `14b577fc8045`
+- Artifact: `build/android/one_more_watt_phase15_debug.apk`
+- Bytes: 55,982,701
+- SHA-256: `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`
+- Size delta from the last Phase 13 device artifact: +43,076 bytes / +0.077%
+- Export command: `./tools/build_android_debug.sh`
+
+### Verified artifact properties
+
+- Package/label: `com.ferroai.onemorewatt` / `ONE MORE WATT`
+- Version: code 10, name `0.10.0-dev`
+- Minimum/target SDK: API 24 / API 35
+- Native architectures: arm64-v8a and x86_64
+- Orientation: portrait; activity remains resizeable and declares configuration changes
+- Permissions: `android.permission.VIBRATE` only; no Internet or network-state permission
+- Signature: APK Signature Scheme v2 and v3 verified
+- Debug certificate SHA-256: `dc02e125341858dd653149c58e1c3fa42da24f0210b2001054fa5d60cfe9192f`
+- Embedded project metadata contains build identifier `14b577fc8045`
+- Export log contained no Godot `ERROR:` line
+
+### Device boundary
+
+`./tools/android_device_smoke.sh build/android/one_more_watt_phase15_debug.apk` exited 2 because no ready ADB device was attached; it performed no installation. `/dev/kvm`, an emulator executable, and installed system images are absent on the host. This artifact is not claimed as physical Android runtime evidence. `ISSUE-010` retains the update-install, lifecycle, save-idempotency, touch/safe-area/font, audio/haptic, FPS, heat, and battery matrix.
+
 ## Phase 10 stabilization build
 
 Status: Host build/static inspection passed; Moto verification deferred to Phase 14 by explicit user acceptance

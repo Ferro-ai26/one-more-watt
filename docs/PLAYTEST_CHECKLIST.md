@@ -18,6 +18,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Reduced motion and muted-audio comprehension remain explicit; brownout/capstone do not use rapid flashing or color alone.
 - [x] Seven final captures under `docs/phase_15/evidence/` were manually inspected at original resolution; first-run evidence defects were corrected and recaptured.
 - [x] Complete host regression and headless launch pass. Final full-gate measurement: 789.7 ms / 25 Build refresh requests, 557.0 ms / 500 live refreshes, 378 nodes, ~11.47 MiB isolated skin-memory delta.
+- [x] Clean APK/static inspection pass: source/build `14b577fc8045`, 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, API 24/35, both architectures, `VIBRATE` only, v2/v3 signatures.
 - [ ] Physical update install over an Era 3 save, cold launch, warm resume, background/offline return, save idempotency, safe areas, font comfort, Android Back, audible mix, haptics, device FPS, heat, and battery. No device/emulator is available on this host; not claimed.
 
 Result: Phase 15 gameplay, host visual/manual evidence, save migration automation, and accessibility layouts pass. The physical-device portion remains an explicitly documented verification limitation. Phase 16/Era 5 has not begun.

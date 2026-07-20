@@ -19,7 +19,7 @@
 | 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
-| 15 — Building Network: Era 4 | Completion gate — host implementation/evidence pass; clean APK/static record pending | DEC-034; complete Era 4 route, migration, maintenance, automation, Building presentation, 113 Phase 15 checks, seven reviewed captures; Era 5 absent |
+| 15 — Building Network: Era 4 | Completion gate — implementation, host/manual evidence, and clean APK/static inspection pass; physical Android pending | DEC-034–035; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; Era 5 absent |
 | 16–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
@@ -33,7 +33,8 @@
 - Two deterministic routes passed 1,354 balance/reachability checks. Building requests complete in 338.5–625.0 seconds; the complete mechanical/structured route is 115.4/135.5 minutes and the longest modeled gap remains 300 seconds.
 - Added 89 Phase 15 domain checks and 24 headless UI checks. A graphical run passed 38 checks and produced seven manually inspected captures at 393 × 873 and 320 × 568/130% text. Pixel review corrected the captured brownout state, Building-icon framing, narrow maintenance overflow/evidence framing, and report fixture localization.
 - Preserved the existing 1,500 ms Build guard by reconfiguring compatible cards in place. Final full-gate host measurement: 789.7 ms for 25 full refresh requests, 557.0 ms for 500 live refreshes, 378 nodes, and approximately 11.47 MiB isolated skin memory.
-- The current host still has no attached ADB device, `/dev/kvm`, emulator, or system image. Physical update-install/lifecycle/performance checks remain unverified; the clean Phase 15 APK and static inspection are the remaining in-repository closure work before commit/push.
+- Clean source commit `14b577fc8045` exported `build/android/one_more_watt_phase15_debug.apk`: 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, +43,076 bytes / +0.077% over the last Phase 13 device artifact. Package/API/architectures/VIBRATE-only permission/embedded-ID/v2-v3 signature inspection passed.
+- The current host still has no attached ADB device, `/dev/kvm`, emulator, or system image. `android_device_smoke.sh` exited 2 without installing. Physical update-install/lifecycle/performance checks remain unverified under `ISSUE-010`; commit/push and the Phase 15 completion gate remain, while Phase 16 stays prohibited.
 
 ### 2026-07-20 — Phase 15 authorized; Era 4 appendix proposed
 

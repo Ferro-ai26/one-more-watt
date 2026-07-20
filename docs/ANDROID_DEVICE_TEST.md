@@ -1,5 +1,49 @@
 # Android Device Tests
 
+## Phase 15 Building Network regression — Awaiting external device
+
+### Artifact identity
+
+- Source commit: `14b577fc8045e4de1b70692745f86591b3c38960`
+- Settings version/build: `0.10.0-dev` / `14b577fc8045`
+- Package: `com.ferroai.onemorewatt`
+- APK: `build/android/one_more_watt_phase15_debug.apk`
+- Bytes: 55,982,701
+- SHA-256: `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`
+- Static inspection: API 24/35; arm64-v8a and x86_64; `VIBRATE` only; no network permission; v2/v3 signatures and embedded build ID pass
+
+Prefer an update install so an existing Era 3 endpoint save can exercise migration:
+
+```bash
+sha256sum build/android/one_more_watt_phase15_debug.apk
+adb install -r build/android/one_more_watt_phase15_debug.apk
+adb shell am force-stop com.ferroai.onemorewatt
+adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 1
+```
+
+Do not uninstall before the update-migration check; uninstalling deletes the local save.
+
+### Required Phase 15 checks
+
+- [ ] Hash matches; update install over an Era 3 endpoint save succeeds.
+- [ ] Cold launch succeeds; Settings shows `0.10.0-dev` / `14b577fc8045`.
+- [ ] Migrated save preserves Stored Energy/ownership and offers explicit Building authorization.
+- [ ] Building world, scratched core, cyan riser, warm/dim floors, lobby face, ordinary-life remnant, and contextual Build icons render correctly.
+- [ ] Six required requests and one vanity request remain reachable; no Neighborhood/Era 5 gameplay appears.
+- [ ] Repair, Replace, Overclock, and Defer are touch reachable; option effects/costs match the text and no choice loses progress/ownership.
+- [ ] Predictive Reserve Guard OFF/ARMED/ACTIVE states are legible and do not silently change the selected allocation.
+- [ ] Default, 115%, and 130% text remain usable; maintenance scrolls at the narrow effective width without horizontal clipping.
+- [ ] Build, Upgrades, Reports, Settings, maintenance, and request/report modals scroll by touch; affordable purchases remain immediate.
+- [ ] Brownout and capstone pullback avoid flashing; WATT's eyes remain cyan; reduced motion retains state labels.
+- [ ] Takeover report is readable and completion stops on `Neighborhood Locked`.
+- [ ] Android Back closes modal, returns a secondary tab to Grid, then exits from Grid.
+- [ ] Warm resume and background/offline return preserve request/maintenance state and produce one truthful offline report.
+- [ ] Force-close/relaunch is save-idempotent: no duplicated rewards, maintenance choice, or one-request effect.
+- [ ] Muted audio remains understandable; audible cues, audio focus, and haptics follow settings.
+- [ ] Record device/API, display/density/effective UI, screenshots, FPS/memory, and representative heat/battery notes.
+
+Current result: host/static validation passed. `./tools/android_device_smoke.sh` found no attached device and performed no installation. Every checkbox above remains unverified under `ISSUE-010`; none is inferred from host evidence.
+
 ## Phase 13 Eras 1–3 production-skin test — In progress
 
 ### First tested artifact

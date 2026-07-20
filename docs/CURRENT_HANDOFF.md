@@ -39,7 +39,9 @@ The user approved `docs/phase_15/ERA_04_BUILDING_NETWORK_APPENDIX.md` under `DEC
 - `./tools/test_phase15_building.sh`: 89 domain and 24 headless Building-UI checks passed, including migration, maintenance choices, offline boundary, online/offline Predictive Reserve Guard, endpoint, icon, and layout coverage.
 - `xvfb-run -a godot4 --path . --script res://tests/integration/test_phase15_building_ui.gd -- --capture-phase15`: 38 checks passed and wrote seven final images under `docs/phase_15/evidence/`.
 - Final pre-commit `./tools/validate.sh`: every repository suite, five portrait layouts, and headless smoke launch passed. Performance measured 789.7 ms for 25 full Build refresh requests, 557.0 ms for 500 live refreshes, 378 UI nodes, and approximately 11.47 MiB isolated skin-memory delta.
-- `/usr/lib/android-sdk/platform-tools/adb devices -l`: no attached device. `/dev/kvm`, emulator executable, and installed system images are absent.
+- Clean source commit: `14b577fc8045e4de1b70692745f86591b3c38960` (`Phase 15: implement Building Network Era 4`).
+- `./tools/build_android_debug.sh`: passed. `build/android/one_more_watt_phase15_debug.apk` is 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`, and embeds build `14b577fc8045`. Package `com.ferroai.onemorewatt`, version `0.10.0-dev`, API 24/35, arm64-v8a+x86_64, VIBRATE-only permissions, and v2/v3 signatures passed static inspection.
+- `./tools/android_device_smoke.sh build/android/one_more_watt_phase15_debug.apk`: exited 2 because no ready device is attached; no installation was attempted. `/dev/kvm`, emulator executable, and installed system images are absent.
 
 ## Manual verification
 
@@ -49,9 +51,8 @@ This host used dummy audio and is not a physical Android device. No audible mix,
 
 ## Remaining acceptance criteria
 
-- Create a clean provenance Phase 15 APK, complete host static inspection, and record its commit/hash/size.
 - Run the Phase 15 APK on a physical Android device for update install over an Era 3 endpoint save, cold launch, warm resume, background/offline return, save idempotency, touch/safe-area/font behavior, Android Back, sound/haptics, and device performance—or obtain explicit acceptance of that unavailable-device limitation.
-- After the clean APK/static record, update this handoff and commit/push the Phase 15 closure documentation. Do not mark the combined Android regression criterion passed without physical evidence.
+- Commit and push this final APK/static handoff record. Do not mark the combined Android regression criterion passed without physical evidence.
 
 ## Known blockers
 
@@ -60,4 +61,4 @@ This host used dummy audio and is not a physical Android device. No audible mix,
 
 ## Recommended next action inside Phase 15
 
-Commit the fully validated source/evidence so the Android exporter can bind an APK to a clean commit. Export and statically inspect `build/android/one_more_watt_phase15_debug.apk`, record the artifact, then publish the Phase 15 commits. Stop at this Phase 15 completion gate; do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5.
+Commit this final APK/static record, push the Phase 15 proposal/implementation/documentation commits, verify `origin/main`, and stop at the Phase 15 completion gate. The only unresolved acceptance item is external physical Android verification/acceptance under `ISSUE-010`. Do not edit `ACTIVE_PHASE.md` to Phase 16 and do not begin Era 5.

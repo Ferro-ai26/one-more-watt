@@ -2,7 +2,7 @@
 
 Date: 2026-07-20
 
-Status: Implementation and host acceptance complete; Android artifact/static record pending clean-commit export
+Status: Implementation, host acceptance, and clean APK/static inspection complete; physical Android verification pending
 
 ## Delivered boundary
 
@@ -30,4 +30,4 @@ The seven new SVG silhouettes, environment drawing, animation states, and proced
 - `./tools/test_vertical_slice.sh`: deterministic fresh route, migration-era path, UI route, and unchanged host performance guards.
 - `./tools/validate.sh`: complete repository gate including the Phase 15 suites and headless launch.
 
-The clean Android export and static inspection are recorded separately in `docs/ANDROID_BUILD_RECORD.md` after the source commit exists.
+The clean Android export from source commit `14b577fc8045e4de1b70692745f86591b3c38960` is `build/android/one_more_watt_phase15_debug.apk`, 55,982,701 bytes, SHA-256 `c82563de4bc3fdfb1c07f39cd626dc9f11d0b3f9dd28166453844718a58063e6`. Package/API/architectures/permission/embedded-ID/v2-v3 signature inspection passed. Physical execution remains unavailable under `ISSUE-010`.
