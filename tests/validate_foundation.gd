@@ -42,6 +42,7 @@ func _init() -> void:
 	_check_equal("project name", ProjectSettings.get_setting("application/config/name"), "ONE MORE WATT")
 	_check_equal("project version", ProjectSettings.get_setting("application/config/version"), "0.9.0-dev")
 	_check_equal("build identifier", ProjectSettings.get_setting("application/config/build_commit"), "phase09-dev")
+	_check_equal("application icon path", ProjectSettings.get_setting("application/config/icon"), "res://assets/icons/app_icon.svg")
 	_check_equal("Android back is app-controlled", ProjectSettings.get_setting("application/config/quit_on_go_back"), false)
 	_check_equal("main scene", ProjectSettings.get_setting("application/run/main_scene"), "res://scenes/app/Main.tscn")
 	_check_equal("viewport width", ProjectSettings.get_setting("display/window/size/viewport_width"), 720)
@@ -60,6 +61,7 @@ func _init() -> void:
 		_check_true("directory %s" % directory, DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(directory)))
 
 	_check_resource("res://scenes/app/Main.tscn", "PackedScene")
+	_check_resource("res://assets/icons/app_icon.svg", "Texture2D")
 	_check_resource("res://assets/themes/base_theme.tres", "Theme")
 	_check_resource("res://default_bus_layout.tres", "AudioBusLayout")
 

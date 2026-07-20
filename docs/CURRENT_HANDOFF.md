@@ -37,6 +37,7 @@ Commit the validated export configuration and run `./tools/build_android_debug.s
 - `adb devices -l` — no attached devices.
 - One full-suite run hit 1016.8 ms against the 1000 ms host-only live-refresh budget; immediate isolated rerun passed at 969.3 ms with all 111 UI/performance checks. No functional failure occurred.
 - First export attempt from `54781a1` failed before artifact creation because the preset mixed an empty debug-keystore path with explicit credentials. The preset was corrected to keep all debug signing configuration in uncommitted editor settings.
+- Second export attempt from `3dffe01` produced a correctly packaged and signed APK, exposing the approved package, API 24/35, arm64-v8a/x86_64 libraries, and only `VIBRATE`; it was not accepted because Godot logged a missing-project-icon error and the API-35 inspection binaries were not executable on the ARM64 host. A project icon and native inspection-tool fallback were added for the next clean build.
 - APK export remains to be run from the committed preset.
 
 ## Files changed

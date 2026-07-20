@@ -14,6 +14,7 @@ config/name="ONE MORE WATT"
 config/description="Android-first character-driven incremental power-grid game"
 config/version="0.9.0-dev"
 config/build_commit="phase09-dev"
+config/icon="res://assets/icons/app_icon.svg"
 config/quit_on_go_back=false
 run/main_scene="res://scenes/app/Main.tscn"
 config/features=PackedStringArray("4.6", "GL Compatibility")

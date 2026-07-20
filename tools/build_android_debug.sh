@@ -9,6 +9,7 @@ OMW_APK_PATH="$OMW_BUILD_ROOT/one_more_watt_phase09_debug.apk"
 OMW_EXPORT_LOG="$OMW_BUILD_ROOT/export.log"
 OMW_MANIFEST="$OMW_BUILD_ROOT/build_manifest.txt"
 OMW_PROJECT_FILE="$PROJECT_ROOT/project.godot"
+OMW_ANDROID_INSPECT_ROOT="${OMW_ANDROID_INSPECT_ROOT:-/usr/lib/android-sdk/build-tools/debian}"
 
 cd "$PROJECT_ROOT"
 
@@ -24,8 +25,8 @@ fi
 
 OMW_COMMIT="$(git rev-parse HEAD)"
 OMW_COMMIT_SHORT="$(git rev-parse --short=12 HEAD)"
-OMW_AAPT="$OMW_ANDROID_SDK_ROOT/build-tools/35.0.1/aapt"
-OMW_APKSIGNER="$OMW_ANDROID_SDK_ROOT/build-tools/35.0.1/apksigner"
+OMW_AAPT="$OMW_ANDROID_INSPECT_ROOT/aapt"
+OMW_APKSIGNER="$OMW_ANDROID_INSPECT_ROOT/apksigner"
 
 for OMW_REQUIRED_TOOL in "$OMW_AAPT" "$OMW_APKSIGNER"; do
 	if [[ ! -x "$OMW_REQUIRED_TOOL" ]]; then
@@ -51,14 +52,52 @@ sed -i "s/config\/build_commit=\"[^\"]*\"/config\/build_commit=\"$OMW_COMMIT_SHO
 	echo "Commit: $OMW_COMMIT"
 	echo "Godot: $($GODOT_EXECUTABLE --version)"
 	echo "Android SDK: $OMW_ANDROID_SDK_ROOT"
+	echo "Inspection aapt: $($OMW_AAPT version 2>&1)"
+	echo "Inspection apksigner: $($OMW_APKSIGNER version 2>&1)"
 } | tee "$OMW_EXPORT_LOG"
 
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --export-debug "Android Debug" "$OMW_APK_PATH" 2>&1 | tee -a "$OMW_EXPORT_LOG"
 
+if grep -q '^ERROR:' "$OMW_EXPORT_LOG"; then
+	echo "Godot reported an export error; refusing to accept the APK." >&2
+	exit 1
+fi
+
 OMW_BADGING="$($OMW_AAPT dump badging "$OMW_APK_PATH")"
 OMW_PACKAGE="$(sed -n "s/^package: name='\([^']*\)'.*/\1/p" <<<"$OMW_BADGING")"
-if [[ -z "$OMW_PACKAGE" || "$OMW_PACKAGE" == "com.godot.game" ]]; then
-	echo "Exported APK has an invalid or default package identifier: $OMW_PACKAGE" >&2
+if [[ "$OMW_PACKAGE" != "com.ferroai.onemorewatt" ]]; then
+	echo "Exported APK has the wrong package identifier: $OMW_PACKAGE" >&2
+	exit 1
+fi
+
+if [[ "$OMW_BADGING" != *"versionCode='9'"* || "$OMW_BADGING" != *"versionName='0.9.0-dev'"* ]]; then
+	echo "Exported APK has unexpected version metadata." >&2
+	exit 1
+fi
+
+OMW_PERMISSIONS="$($OMW_AAPT dump permissions "$OMW_APK_PATH")"
+if [[ "$OMW_PERMISSIONS" != *"android.permission.VIBRATE"* ]]; then
+	echo "Exported APK is missing the optional-haptics vibration permission." >&2
+	exit 1
+fi
+if [[ "$OMW_PERMISSIONS" == *"android.permission.INTERNET"* || "$OMW_PERMISSIONS" == *"android.permission.ACCESS_NETWORK_STATE"* ]]; then
+	echo "Exported APK unexpectedly requests network access." >&2
+	exit 1
+fi
+
+OMW_APK_FILES="$(unzip -Z1 "$OMW_APK_PATH")"
+for OMW_ARCHIVE_PATH in \
+	"lib/arm64-v8a/libgodot_android.so" \
+	"lib/x86_64/libgodot_android.so" \
+	"assets/project.binary"; do
+	if [[ "$OMW_APK_FILES" != *"$OMW_ARCHIVE_PATH"* ]]; then
+		echo "Exported APK is missing $OMW_ARCHIVE_PATH" >&2
+		exit 1
+	fi
+done
+
+if ! unzip -p "$OMW_APK_PATH" assets/project.binary | strings | grep -qx "$OMW_COMMIT_SHORT"; then
+	echo "Exported APK does not contain the expected build identifier $OMW_COMMIT_SHORT" >&2
 	exit 1
 fi
 
@@ -73,6 +112,8 @@ OMW_SIZE="$(stat -c '%s' "$OMW_APK_PATH")"
 	echo "commit=$OMW_COMMIT"
 	echo "build_identifier=$OMW_COMMIT_SHORT"
 	echo "package=$OMW_PACKAGE"
+	echo "permissions=android.permission.VIBRATE"
+	echo "architectures=arm64-v8a,x86_64"
 	sed -n "/^sdkVersion:/p;/^targetSdkVersion:/p" <<<"$OMW_BADGING"
 } | tee "$OMW_MANIFEST"
 
