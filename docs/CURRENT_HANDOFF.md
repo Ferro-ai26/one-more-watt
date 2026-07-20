@@ -5,10 +5,11 @@ Active phase: Phase 05 — Main UI and Feedback
 
 ## Current state
 
-Phase 05 is implemented and validated in the working tree. The former development shell is now a responsive production-structured online interface connecting WATT requests, the deterministic grid, purchases/upgrades, allocation, and reports without exposing debug controls. Content version is `0.5.0`. The active phase is complete; Phase 06 persistence/offline work remains gated on explicit user authorization.
+Phase 05 is implemented, validated, committed as `6ae86ac`, and pushed to `origin/main`. The former development shell is now a responsive production-structured online interface connecting WATT requests, the deterministic grid, purchases/upgrades, allocation, and reports without exposing debug controls. Content version is `0.5.0`. The active phase is complete; Phase 06 persistence/offline work remains gated on explicit user authorization.
 
 ## Completed
 
+- Committed and pushed the Phase 05 implementation as `6ae86ac` to `origin/main`.
 - Added a thin `GameSession` that synchronizes shared Stored Energy and economy-derived grid values across the existing request and economy domains at explicit command boundaries.
 - Added `MainViewModel` snapshots whose request forecasts, costs, effects, and reports come directly from domain calculators.
 - Built the fixed portrait hierarchy: top status, persistent WATT/request focal panel, Generation/Transmission/Reserve vital cards, allocation control, lower screen region, and Grid/Build/Upgrades/Reports navigation.

@@ -9,7 +9,7 @@
 | 02 — Core Power Simulation | Complete | Commit `96bb219`; 178 simulation checks; 18 debug-panel checks; five scenario captures; headless smoke launch |
 | 03 — Request and WATT System | Complete | Commit `2bd30ac`; 143 request-domain checks; 58 headless panel checks; four lifecycle captures; headless smoke launch |
 | 04 — Infrastructure and Upgrades | Complete | Commit `ca56a35`; 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
-| 05 — Main UI and Feedback | Complete | 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
+| 05 — Main UI and Feedback | Complete | Commit `6ae86ac`; 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
 | 06 — Save and Offline Progress | Not started | — |
 | 07 — Eras 1–3 Vertical Slice | Not started | — |
 | 08 — Balance and Polish | Not started | — |
@@ -20,6 +20,7 @@
 
 ### 2026-07-20 — Phase 05 main UI and feedback
 
+- Committed and pushed the implementation as `6ae86ac` to `origin/main`.
 - Replaced the development shell with a responsive production hierarchy that keeps WATT, request state, vital cards, allocation, and Grid/Build/Upgrades/Reports navigation visible in portrait play.
 - Added one online-session coordinator and a presentation view model so request rewards, purchases, allocation, and reports share the existing domain truth without scene-owned economy rules.
 - Added reusable infrastructure, upgrade, and vital cards; request authorization and performance-report modals; an archive; explicit bottleneck text; centralized unit formatting; and a placeholder environment.
