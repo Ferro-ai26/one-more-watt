@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 07 clean Eras 1–3 playthrough — 2026-07-20
 
-- Build/commit: Uncommitted Phase 07 working tree based on `3d5157d`
+- Build/commit: `abbf967`
 - Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex

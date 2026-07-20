@@ -16,7 +16,7 @@ Phase 07 validation found no blocker, critical, progression, reachability, local
 
 - Status: Open
 - Severity: Polish
-- First seen build/commit: Phase 07 working tree, 2026-07-20
+- First seen build/commit: `abbf967`, 2026-07-20
 - Affected phase: Phase 07 baseline; tune during Phase 08
 - Reproduction:
   1. Run `./tools/test_vertical_slice.sh`.

@@ -5,10 +5,11 @@ Active phase: Phase 07 — Eras 1–3 Vertical Slice
 
 ## Current state
 
-Phase 07 is implemented and validated in the working tree. Canonical content version `0.7.0` contains all 18 reviewed requests, and a fresh no-debug session can reach the persistent Home Server Closet endpoint through both era gates. Allocation, offline progress, forecasts, and Reserve automation unlock at authored beats; optional vanity requests do not block the required path. Phase 08 remains gated on explicit user authorization.
+Phase 07 is implemented, validated, committed as `abbf967`, and pushed to `origin/main`. Canonical content version `0.7.0` contains all 18 reviewed requests, and a fresh no-debug session can reach the persistent Home Server Closet endpoint through both era gates. Allocation, offline progress, forecasts, and Reserve automation unlock at authored beats; optional vanity requests do not block the required path. Phase 08 remains gated on explicit user authorization.
 
 ## Completed
 
+- Committed and pushed the Phase 07 implementation as `abbf967` to `origin/main`.
 - Authored seven Cold Boot, six Bedroom Assistant, and five Home Server Closet requests, including all four required request types and three optional vanity requests.
 - Added tutorial text/feature rewards, cross-domain request availability, the 85% Stability condition, report-driven era changes, and explicit prototype completion after viewing the leftovers report.
 - Added distinct desk/bedroom/server-closet placeholder environments, WATT evolution, transition modals, optional selection/skip, progressive forecast disclosure, and Smart Meter Reserve protection.
