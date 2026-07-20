@@ -14,6 +14,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Application pause saves through the existing lifecycle controller and stops feedback audio; resume applies the existing bounded offline path and restores playback eligibility.
 - [x] Clean-tree export tooling is prepared to inject the exact commit, verify APK package/signature metadata, and write a SHA-256 manifest.
 - [x] Approved permanent package identifier `com.ferroai.onemorewatt` recorded and export preset validated with 21 checks.
+- [x] Initial export configuration failure (partial debug-keystore fields) was corrected without producing or mis-signing an artifact; signing configuration remains outside version control.
 - [ ] Debug APK exported and inspected.
 - [ ] APK installed and launched on physical Android hardware.
 - [ ] Early onboarding, Build, Upgrades, brownout/recovery, background/resume, force-close/reopen, sound, haptics, safe areas, Back, readable text, performance, battery, and heat verified on device.

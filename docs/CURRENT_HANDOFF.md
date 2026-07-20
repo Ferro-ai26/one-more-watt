@@ -36,6 +36,7 @@ Commit the validated export configuration and run `./tools/build_android_debug.s
 - `godot4 --headless --path . --script res://tests/validate_android_config.gd` — passed 21 package/version/architecture/permission/export-boundary checks.
 - `adb devices -l` — no attached devices.
 - One full-suite run hit 1016.8 ms against the 1000 ms host-only live-refresh budget; immediate isolated rerun passed at 969.3 ms with all 111 UI/performance checks. No functional failure occurred.
+- First export attempt from `54781a1` failed before artifact creation because the preset mixed an empty debug-keystore path with explicit credentials. The preset was corrected to keep all debug signing configuration in uncommitted editor settings.
 - APK export remains to be run from the committed preset.
 
 ## Files changed
