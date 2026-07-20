@@ -34,6 +34,14 @@ func _exit_tree() -> void:
 		_player.stream = null
 
 
+func set_application_paused(paused: bool) -> void:
+	if _player == null:
+		return
+	_player.stream_paused = paused
+	if paused:
+		_player.stop()
+
+
 func play(kind: String) -> bool:
 	if not CUES.has(kind) or _player == null:
 		return false

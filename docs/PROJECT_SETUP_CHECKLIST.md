@@ -22,14 +22,14 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 ## Android
 
 - Package identifier: Unknown — publisher-controlled value required before creating an export preset
-- Minimum Android SDK: Unknown — not selected
-- Target Android SDK: Unknown — not selected
+- Minimum Android SDK: API 24, inherited from the Godot 4.6.2 prebuilt Android template
+- Target Android SDK: API 35, inherited from the Godot 4.6.2 prebuilt Android template
 - Java/JDK version: OpenJDK 21.0.11 at `/usr/lib/jvm/java-21-openjdk-arm64`
-- Android SDK path/tool versions: `/usr/lib/android-sdk`; command-line tools 19.0; build-tools 29.0.3; adb 34.0.4; no installed Android platform (`android.jar`) detected
+- Android SDK path/tool versions: `/home/ubuntu/.local/share/android-sdk`; command-line tools latest package 19.0; build-tools 35.0.1; platform-tools/adb 37.0.0; Android Platform 35 installed
 - Debug keystore policy: Local development keystore only; never commit
 - Release keystore location policy: External secret; never commit
-- Version name: `0.0.1-dev`, sourced from `application/config/version` in `project.godot`
-- Version code: Not configured; requires Android export preset
+- Version name: `0.9.0-dev`, sourced from `application/config/version` in `project.godot`
+- Version code: 9 for the Phase 09 debug prototype
 
 ## Build commands
 
@@ -44,7 +44,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`
-- Debug APK export: Pending package identifier, SDK platform installation, and export preset
+- Debug APK export: `./tools/build_android_debug.sh` after the approved package identifier and export preset are committed
 - Release AAB export: Phase 16; not configured
 
 ## Ownership and publishing
@@ -56,4 +56,4 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 
 ## Environment findings
 
-Phase 00 was executed on Ubuntu 24.04 ARM64 (`aarch64`). Godot 4.6.2 and matching ARM64 desktop export templates run locally. Android export templates are installed, but the SDK has no installed Android platform and the package identifier is undecided, so no Android preset or APK was produced. No physical-device test has occurred.
+Phase 09 reinspection found a separate current SDK at `/home/ubuntu/.local/share/android-sdk` with the required Android 35 platform and build tools; the earlier `/usr/lib/android-sdk` finding was stale and incomplete. Godot 4.6.2 and matching Android export templates are installed. The package identifier remains a publisher-controlled decision, so no export preset or APK is recorded yet. No physical-device test has occurred.

@@ -13,10 +13,18 @@
 | 06 — Save and Offline Progress | Complete | Commit `143ccf9`; 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
 | 07 — Eras 1–3 Vertical Slice | Complete | Commit `abbf967`; 18 requests; 917 vertical-slice checks; 105 headless progression-UI checks; four clean-path captures; headless smoke launch |
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
-| 09 — Android Prototype | Not started | — |
+| 09 — Android Prototype | In progress | Android 35 toolchain found; lifecycle/build-provenance prep implemented; package ID and physical device pending |
 | 10–16 — Expansion and Release | Gated | Requires Phase 09 go decision |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 09 Android prototype started
+
+- Activated Phase 09 after explicit user authorization; Phase 10 remains gated.
+- Located the current Android SDK at `/home/ubuntu/.local/share/android-sdk` with Platform 35, build-tools 35.0.1, platform-tools 37.0.0, and the existing local debug keystore.
+- Added Phase 09 version/build diagnostics, app-controlled Android Back behavior, explicit pause/resume feedback-audio handling, and regression coverage across four portrait sizes.
+- Added a clean-tree Android build script that embeds the source commit, exports a debug APK, verifies package/signature metadata, and records a SHA-256 manifest.
+- APK export remains pending the publisher-approved package identifier. Physical-device verification remains unavailable because ADB has no attached device and the ARM64 VPS has no emulator/KVM setup.
 
 ### 2026-07-20 — Phase 08 balance and prototype polish
 

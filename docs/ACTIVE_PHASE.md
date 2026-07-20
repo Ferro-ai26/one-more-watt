@@ -1,12 +1,12 @@
 # Active Phase
 
-Phase: 08 — Balance and Prototype Polish
-Status: Complete
+Phase: 09 — Android Prototype
+Status: In Progress
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_08_BALANCE_AND_POLISH.md`
+`docs/phases/PHASE_09_ANDROID_PROTOTYPE.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 08 is complete with a recorded GO recommendation. Do not begin Phase 09 or Android export work without explicit user authorization.
+Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 09 was explicitly authorized by the user on 2026-07-20. Work only on Android export and physical prototype verification; do not begin Phase 10 automatically.

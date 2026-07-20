@@ -10,7 +10,22 @@
 
 ## Open issues
 
-Phase 08 validation found no blocker, critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect. The Phase 07 pacing issue is fixed. The Android setup dependency remains deferred with explicit disposition, and outside-player/audible-device validation is recorded as a playtest limitation rather than a product defect.
+Phase 09 is active. No blocker, critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect is known. Android export is blocked on the publisher-controlled package identifier, and Phase 09 completion is blocked on physical Android hardware.
+
+### ISSUE-003 — Physical Android verification unavailable on current host
+
+- Status: Open
+- Severity: Blocker
+- First seen build/commit: Phase 09 working tree, 2026-07-20
+- Affected phase: Phase 09 completion gate
+- Reproduction:
+  1. Run `/home/ubuntu/.local/share/android-sdk/platform-tools/adb devices -l`.
+  2. Observe no attached device; inspect the ARM64 VPS and observe no emulator package, system image, or `/dev/kvm` device.
+- Expected: At least one physical Android device is available for install, cold launch, touch, safe-area, lifecycle, save/offline, sound, haptic, storage, performance, battery, and heat checks.
+- Actual: No device is attached, and the current host cannot provide truthful physical-device evidence.
+- Evidence/log: ADB returned an empty device list on 2026-07-20. No device test is claimed.
+- Workaround: Build and inspect the APK locally, then transfer it and the Phase 09 checklist to a physical Android device or a suitable PC/device test environment.
+- Fix verification: Pending recorded physical-device pass.
 
 ### ISSUE-002 — Optimized prototype path is shorter than the first-run target
 
@@ -28,20 +43,20 @@ Phase 08 validation found no blocker, critical, progression, reachability, local
 - Workaround: None required for the fixed pacing cliff. Offline progress remains available before both five-minute gaps.
 - Fix verification: `./tools/test_vertical_slice.sh`, structured Phase 08 rounds, and visually inspected clean-path captures pass.
 
-### ISSUE-001 — Android export configuration unavailable
+### ISSUE-001 — Android package identity not approved
 
-- Status: Deferred
+- Status: Open
 - Severity: Major
 - First seen build/commit: Phase 00 working tree, 2026-07-19
 - Affected phase: Phase 00 foundation; must be resolved before Phase 09 Android gate
 - Reproduction:
-  1. Inspect `docs/PROJECT_SETUP_CHECKLIST.md` and the local Android SDK.
-  2. Observe that no publisher-controlled package identifier or Android SDK platform is available.
+  1. Inspect `docs/PROJECT_SETUP_CHECKLIST.md`.
+  2. Observe that no publisher-controlled package identifier has been approved.
 - Expected: A valid Android export preset can target an installed SDK platform with the approved package identifier.
-- Actual: Creating a truthful, usable Android export preset is not currently possible.
-- Evidence/log: Android command-line tools 19.0, build-tools 29.0.3, and adb 34.0.4 are present under `/usr/lib/android-sdk`; no `android.jar` was found.
-- Workaround: Desktop/headless Godot development and tests are available.
-- Fix verification: Pending package identifier, SDK platform installation, preset creation, export, and device test. Disposition: Phase 08 may recommend GO, but Phase 09 cannot complete until these prerequisites and physical-device checks exist.
+- Actual: The SDK portion of the former issue is resolved: Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, and matching export templates are available. Creating the final preset is still blocked because the repository contract prohibits guessing the publisher's identity.
+- Evidence/log: `/home/ubuntu/.local/share/android-sdk/platforms/android-35/android.jar` exists. Sibling projects suggest `com.ferroai.onemorewatt`, but that value is not treated as approval.
+- Workaround: Host-side lifecycle, tests, and reproducible export tooling can proceed without claiming the package identifier.
+- Fix verification: Pending explicit identifier approval, preset validation, and inspected APK package metadata.
 
 ## Issue template
 

@@ -2,6 +2,24 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 09 Android host preflight — 2026-07-20
+
+- Build/commit: Phase 09 working tree based on `33d521b`
+- Platform/device: Ubuntu 24.04 ARM64 VPS; no Android device attached
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, matching export templates, and a local debug keystore are present.
+- [x] App version and build identifier are visible in Settings and the diagnostic summary at all four portrait test sizes.
+- [x] Android Back notification closes the top modal; the shared handler then returns secondary screens to Grid before root exit.
+- [x] Application pause saves through the existing lifecycle controller and stops feedback audio; resume applies the existing bounded offline path and restores playback eligibility.
+- [x] Clean-tree export tooling is prepared to inject the exact commit, verify APK package/signature metadata, and write a SHA-256 manifest.
+- [ ] Approved package identifier recorded and export preset created.
+- [ ] Debug APK exported and inspected.
+- [ ] APK installed and launched on physical Android hardware.
+- [ ] Early onboarding, Build, Upgrades, brownout/recovery, background/resume, force-close/reopen, sound, haptics, safe areas, Back, readable text, performance, battery, and heat verified on device.
+
+Notes: ADB reported no connected devices. This ARM64 VPS has no emulator package, Android system image, or KVM device, so this preflight is not represented as Android runtime or physical-device evidence.
+
 ## Phase 08 balance and prototype-polish rounds — 2026-07-20
 
 - Build/commit: `2cffcd1`

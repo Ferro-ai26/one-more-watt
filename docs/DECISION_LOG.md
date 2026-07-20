@@ -128,6 +128,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The Phase 07 route reached the endpoint in 46.8 minutes but hid 660 seconds behind one late purchase. Continuously moving request progress is legible and character-bearing; an unchanging affordability wait is not.
 - Consequences: The first request remains 25 seconds, Era 2 and Era 3 move to 11.7 and 37.0 minutes, all four prepared-route Era 3 requests take 3–6 minutes, and the structured route lands at 79.8 minutes. This is deterministic self-test evidence, not an external-player timing claim; an unfamiliar-player pass remains required when a tester is available.
 
+## DEC-019 — Reproducible prebuilt-template Android prototype
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Export the Phase 09 debug prototype from a clean recorded commit with Godot 4.6.2's matching prebuilt Android template, arm64-v8a and x86_64 architectures, version code 9, no Internet permission, and only the vibration permission required by the existing optional haptic feedback. Inject the exact source commit into build diagnostics during export and record the APK package, signature verification, byte size, and SHA-256 hash.
+- Reason: The prototype has no custom Java/plugin dependency requiring Gradle, while a deterministic script makes artifact provenance and PC handoff repeatable. x86_64 supports a future emulator pass and arm64-v8a covers the intended physical-device pass.
+- Consequences: The prebuilt template supplies minimum API 24 and target API 35. A production AAB, release signing, store assets, and additional architectures remain outside Phase 09. The package identifier is intentionally unresolved until the publisher approves it.
+
 ## Proposed decision template
 
 ```markdown

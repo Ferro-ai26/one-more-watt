@@ -68,7 +68,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 08 playtest build ready")
+	print("ONE MORE WATT Phase 09 Android prototype ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -222,14 +222,18 @@ func open_settings_modal() -> void:
 		modal_content.add_child(volume_button)
 	var diagnostic := _button("Show diagnostic summary", "DiagnosticButton")
 	diagnostic.pressed.connect(func() -> void:
+		var build_text := "v%s • build %s" % [
+			ProjectSettings.get_setting("application/config/version", "unknown"),
+			ProjectSettings.get_setting("application/config/build_commit", "unknown"),
+		]
 		if persistence == null:
-			diagnostic.text = "Test session • persistence disabled"
+			diagnostic.text = "%s • test session" % build_text
 		else:
 			var details := persistence.manager.diagnostics()
-			diagnostic.text = "Save sequence %d • main %s • B1 %s • B2 %s" % [details["sequence"], details["main_exists"], details["backup_1_exists"], details["backup_2_exists"]]
+			diagnostic.text = "%s • save %d • main %s • B1 %s • B2 %s" % [build_text, details["sequence"], details["main_exists"], details["backup_1_exists"], details["backup_2_exists"]]
 	)
 	modal_content.add_child(diagnostic)
-	_add_modal_label("ONE MORE WATT • v%s\nPrototype by Ferro AI" % ProjectSettings.get_setting("application/config/version", "unknown"), 15, Color(0.6, 0.68, 0.8))
+	_add_modal_label("ONE MORE WATT • v%s\nBUILD %s • Prototype by Ferro AI" % [ProjectSettings.get_setting("application/config/version", "unknown"), ProjectSettings.get_setting("application/config/build_commit", "unknown")], 15, Color(0.6, 0.68, 0.8))
 	_add_modal_back_button("Close Settings")
 
 
@@ -793,15 +797,26 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _notification(what: int) -> void:
-	if persistence == null:
-		return
 	var now := int(Time.get_unix_time_from_system())
 	if what == NOTIFICATION_APPLICATION_PAUSED:
-		persistence.background(now)
+		if feedback_audio != null:
+			feedback_audio.set_application_paused(true)
+		if persistence != null:
+			persistence.background(now)
 	elif what == NOTIFICATION_APPLICATION_RESUMED:
-		open_offline_report(persistence.resume(now))
+		if feedback_audio != null:
+			feedback_audio.set_application_paused(false)
+		if persistence != null:
+			open_offline_report(persistence.resume(now))
+	elif what == NOTIFICATION_WM_GO_BACK_REQUEST:
+		if handle_back():
+			return
+		if persistence != null:
+			persistence.save_now("android_back_exit", now)
+		get_tree().quit()
 	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
-		persistence.save_now("clean_quit", now)
+		if persistence != null:
+			persistence.save_now("clean_quit", now)
 
 
 func _settings_changed() -> void:

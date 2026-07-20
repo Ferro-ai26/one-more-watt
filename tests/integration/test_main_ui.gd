@@ -117,6 +117,10 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 
 	main.open_settings_modal()
 	await process_frame
+	_check(_modal_text(main).contains("v0.9.0-dev") and _modal_text(main).contains("BUILD phase09-dev"), "%s settings expose build provenance" % test_size)
+	var diagnostic := main.modal_content.find_child("DiagnosticButton", true, false) as Button
+	await _press(diagnostic)
+	_check("v0.9.0-dev • build phase09-dev" in diagnostic.text, "%s diagnostic summary exposes build provenance" % test_size)
 	var reduced := main.modal_content.find_child("ReducedMotionCheck", true, false) as CheckButton
 	reduced.button_pressed = true
 	reduced.toggled.emit(true)
@@ -132,7 +136,9 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 	main.open_settings_modal()
 	await process_frame
 	_check((main.modal_content.find_child("ReducedMotionCheck", true, false) as CheckButton).button_pressed, "%s accessibility setting survives modal reopen" % test_size)
-	main.close_top_modal()
+	main.notification(Node.NOTIFICATION_WM_GO_BACK_REQUEST)
+	await process_frame
+	_check(not main.modal_overlay.visible, "%s Android back notification closes the top modal" % test_size)
 
 	for button_value: Variant in main.find_children("*", "Button", true, false):
 		var button := button_value as Button

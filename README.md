@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 08 delivers the external-playtest prototype: a tuned 79.8-minute structured newcomer route, 20–30 second first request, target-window era arrivals, no purchase gap over five minutes, clearer forecasts, automatic online idle generation, compact 320-pixel secondary screens, era-specific brownout dialogue, restrained feedback animation, procedural sound cues, and worst-state performance coverage. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 09 is preparing the complete Eras 1–3 vertical slice for Android verification. The host-side lifecycle and build-provenance work is in place, and the Android 35 SDK/templates are available. APK export is waiting for the publisher-approved package identifier; physical-device acceptance requires an attached Android device. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. Android export/device work, Era 4, prestige, cloud accounts, final production art/music, and store assets remain intentionally deferred.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. After the Android export preset and package identity are committed, `./tools/build_android_debug.sh` produces and verifies the debug APK. Era 4, prestige, cloud accounts, final production art/music, store rollout, and release signing remain deferred.
 
 ## Scope policy
 
