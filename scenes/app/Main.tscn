@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/core/app_bootstrap.gd" id="1_bootstrap"]
 [ext_resource type="Script" path="res://scripts/ui/safe_area_root.gd" id="2_safe_area"]
 [ext_resource type="Theme" path="res://assets/themes/base_theme.tres" id="3_theme"]
-[ext_resource type="PackedScene" path="res://scenes/debug/RequestDebugPanel.tscn" id="4_request_debug"]
+[ext_resource type="PackedScene" path="res://scenes/debug/EconomyDebugPanel.tscn" id="4_economy_debug"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBox_shell"]
 bg_color = Color(0.055, 0.075, 0.12, 0.96)
@@ -94,7 +94,7 @@ autowrap_mode = 2
 layout_mode = 2
 theme_override_colors/font_color = Color(0.66, 0.72, 0.82, 1)
 theme_override_font_sizes/font_size = 18
-text = "PHASE 03  •  REQUEST + WATT DEBUG"
+text = "PHASE 04  •  BUILD + UPGRADE DEBUG"
 horizontal_alignment = 1
 autowrap_mode = 2
 
@@ -124,7 +124,7 @@ text = "No sample request loaded"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="RequestDebugPanel" parent="SafeArea/DevelopmentShell/ContentScroll/Content" instance=ExtResource("4_request_debug")]
+[node name="EconomyDebugPanel" parent="SafeArea/DevelopmentShell/ContentScroll/Content" instance=ExtResource("4_economy_debug")]
 layout_mode = 2
 
 [node name="Spacer" type="Control" parent="SafeArea/DevelopmentShell/ContentScroll/Content"]

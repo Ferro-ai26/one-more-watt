@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 03 validation found no new request, WATT, reward, or report defects. The existing Android setup dependency remains open.
+Phase 04 validation found no new economy, unlock, milestone, upgrade, automation, or shop-preview defects. The existing Android setup dependency remains open.
 
 ### ISSUE-001 — Android export configuration unavailable
 

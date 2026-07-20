@@ -22,16 +22,19 @@ func _run() -> void:
 	viewport.disable_3d = true
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 	get_root().add_child(viewport)
-	var packed := load("res://scenes/app/Main.tscn") as PackedScene
-	_check(packed != null, "main scene loads")
+	var packed := load("res://scenes/debug/RequestDebugPanel.tscn") as PackedScene
+	_check(packed != null, "standalone request debug scene loads")
 	if packed == null:
 		_finish(viewport)
 		return
-	var main := packed.instantiate() as Control
-	viewport.add_child(main)
+	var scroll := ScrollContainer.new()
+	scroll.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	viewport.add_child(scroll)
+	var panel := packed.instantiate() as RequestDebugPanel
+	panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(panel)
 	await process_frame
 	await process_frame
-	var panel := main.get_node("SafeArea/DevelopmentShell/ContentScroll/Content/RequestDebugPanel") as RequestDebugPanel
 	_check(panel != null, "request debug panel instantiates")
 	if panel == null:
 		_finish(viewport)
@@ -40,7 +43,6 @@ func _run() -> void:
 	for index: int in REQUEST_IDS.size():
 		await _run_sample(panel, index)
 		if capture_layouts:
-			var scroll := main.get_node("SafeArea/DevelopmentShell/ContentScroll") as ScrollContainer
 			scroll.scroll_vertical = 100000
 			await process_frame
 			scroll.scroll_vertical = maxi(scroll.scroll_vertical - 100, 0)

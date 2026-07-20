@@ -2,15 +2,38 @@
   "schema_version": 1,
   "upgrades": [
     {
+      "id": "outlet_calibration",
+      "era_id": "era_01_cold_boot",
+      "name_key": "upgrade.outlet_calibration.name",
+      "description_key": "upgrade.outlet_calibration.description",
+      "cost": {"stored_energy": 50},
+      "cost_growth": 2.0,
+      "unlock_conditions": [{"type": "infrastructure_owned", "infrastructure_id": "wall_outlet", "amount": 2}],
+      "effects": [{"operation": "multiply", "target": "generation_rate", "value": 1.1}],
+      "permanent": false,
+      "max_level": 3
+    },
+    {
       "id": "dedicated_circuit_research",
       "era_id": "era_02_bedroom_assistant",
       "name_key": "upgrade.dedicated_circuit.name",
       "description_key": "upgrade.dedicated_circuit.description",
       "cost": {"stored_energy": 7500},
-      "unlock_conditions": [],
-      "effects": [
-        {"operation": "multiply", "target": "transmission_capacity", "value": 1.25}
-      ],
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_02_bedroom_assistant"}],
+      "effects": [{"operation": "multiply", "target": "transmission_capacity", "value": 1.25}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "generator_coordination",
+      "era_id": "era_02_bedroom_assistant",
+      "name_key": "upgrade.generator_coordination.name",
+      "description_key": "upgrade.generator_coordination.description",
+      "cost": {"stored_energy": 1000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_02_bedroom_assistant"}],
+      "effects": [{"operation": "multiply", "target": "category_output", "category": "generation", "value": 1.2}],
       "permanent": false,
       "max_level": 1
     }

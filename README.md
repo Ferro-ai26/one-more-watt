@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 03 connects authored WATT requests to the deterministic grid through a complete announcement-to-report lifecycle. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 04 adds the Stored Energy economy over the deterministic grid: exact bulk costs, atomic infrastructure and upgrade purchases, unlock explanations, count milestones, derived-state rebuilding, and an opt-in low-Reserve throttle. The canonical content database now contains all 18 Eras 1–3 infrastructure definitions and three representative upgrades. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, and request-domain tests with `./tools/test_requests.sh`. The responsive development shell exposes four request types, previews, authorization warnings, allocation changes, brownout/recovery, completion reports, and acknowledgement. Phase 04 shop and purchase behavior remain intentionally out of scope.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, and economy tests with `./tools/test_economy.sh`. The responsive development shell exposes a simple Phase 04 shop whose preview and purchase paths share the same calculators. Production navigation, persistence, and final shop presentation remain intentionally deferred to later phases.
 
 ## Scope policy
 

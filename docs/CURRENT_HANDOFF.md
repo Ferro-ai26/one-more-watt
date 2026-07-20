@@ -1,50 +1,49 @@
 # Current Handoff
 
 Updated: 2026-07-20
-Active phase: Phase 03 — Request and WATT System
+Active phase: Phase 04 — Infrastructure and Upgrades
 
 ## Current state
 
-Phase 03 is implemented, validated, committed as `2bd30ac`, and pushed to `origin/main`. A request-domain coordinator connects immutable authored definitions to the Phase 02 grid and supports the complete locked, available, announced, authorized, running, completed, and reported lifecycle. Four focused samples exercise Capacity, Stability, Burst, and Research without adding Phase 04 purchases or the full prototype catalog.
+Phase 04 is implemented and validated in the working tree. A deterministic economy coordinator now turns Stored Energy, stable-ID ownership, upgrade levels, milestones, and automation settings into grid values through one shared preview/purchase/rebuild path. Canonical content version `0.4.0` includes all 18 Eras 1–3 infrastructure definitions and three representative upgrades. The active phase is complete; Phase 05 remains gated on explicit user authorization.
 
 ## Completed
 
-- Committed and pushed the Phase 03 implementation as `2bd30ac` to `origin/main`.
-- Added deterministic demand-profile sampling, seeded non-destructive incidents, preview/runtime parity, underprepared warnings, and permissive authorization.
-- Added monotonic progress from served request demand plus capped WATT surplus allocation at fixed 0.25-second steps.
-- Added one-time research costs, idempotent completion rewards, stable-ID unlock events, and next-available request selection.
-- Added authored announcement/completion dialogue, unseen-priority selection, ten-event repetition history, and 60-second brownout cooldown.
-- Added aggregate performance reports with grades, demand/service, peak, brownout, Reserve, allocation changes, incidents, currency, rewards, unlocks, and actionable suggestions.
-- Added a responsive request debug panel covering lifecycle commands, four types, allocation, intentional brownout, recovery, report, and acknowledgement.
-- Expanded canonical content to version `0.3.0` with four phase samples and one deterministic runtime incident.
+- Added exact floored next and bulk pricing with atomic infrastructure and upgrade purchase commands.
+- Added locked, unaffordable, affordable, and maxed previews with missing currency, unmet conditions, exact costs, and predicted derived-grid deltas.
+- Added explicit starting ownership, milestone threshold tracking/events, one-time and leveled upgrades, and direct/category/tag/global multiplier groups.
+- Added a rebuild boundary that derives grid values from baseline hardware, ownership, passive effects, milestones, and upgrades without double-counting the starting Wall Outlet.
+- Added disabled-by-default low-Reserve throttling with an explicit normalized threshold and no automated spending.
+- Expanded canonical content to version `0.4.0` with three eras, all 18 specified infrastructure definitions, and three representative upgrades.
+- Added a portrait diagnostic shop exercising core categories, unlocks, affordability, milestone crossing, upgrades, and automation through domain previews rather than UI balance constants.
 
 ## Next action
 
-Review the Phase 03 evidence and proposed `DEC-013`. Do not begin Phase 04 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
+Review the Phase 04 evidence and proposed `DEC-014`. Do not begin Phase 05 until the user explicitly advances `docs/ACTIVE_PHASE.md`.
 
 ## Known blockers
 
 - Android package identifier and publisher identity are not yet supplied.
 - The local Android SDK has tools but no installed platform package, so Android export is not supportable yet.
 - Physical Android safe-area, touch, and device behavior remain unverified.
-- No Phase 03 implementation blocker remains.
+- No Phase 04 implementation blocker remains.
 
 ## Test evidence
 
-- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 29 content/API checks, 12 invalid fixtures, 178 grid checks, 143 request-domain checks, three portrait layouts, 18 grid-panel checks, 58 request-panel checks, and headless smoke launch.
-- `./tools/test_requests.sh` — passed independently with 143 checks covering every required lifecycle, behavior, boundary, invariant, reward, dialogue, report, unlock, incident, and fixed-step case.
-- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_request_debug_panel.gd -- --capture-layouts` — passed with 62 checks and four captures.
-- Capacity, Stability, Burst, and Research reports at 393 × 873 were visually inspected. Stability recorded the intentional allocation change, 1.00-second brownout, recovery, 93.7% service, and grade A; the other samples recorded full service and no brownout.
-- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 03.
+- `./tools/validate.sh` — passed: clean import, 51 foundation checks, 30 content/API checks, 12 invalid fixtures, 178 grid checks, 143 request-domain checks, 93 economy checks, three portrait layouts, 18 grid-panel checks, 58 request-panel checks, 42 economy-panel checks, and headless smoke launch.
+- `./tools/test_economy.sh` — passed independently with 93 checks covering every Era 1–3 infrastructure interpretation, exact costs, atomicity, unlocks, milestones, stacking, max levels, rebuild equivalence, and automation boundaries.
+- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_economy_debug_panel.gd -- --capture-layouts` — passed with 46 checks and four captures.
+- Core-category purchases, the tenth-item milestone, an upgrade, and low-Reserve automation at 393 × 873 were visually inspected. Each purchase reported that its preview matched the resulting grid; milestone and purchase events were distinct and readable.
+- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 04.
 
 ## Files changed
 
-- Request domain: state, preview, event, profile sampler, incident timeline, dialogue selector, coordinator, and aggregate report classes under `scripts/simulation/`
-- Content: four request/demand-profile samples, WATT dialogue, incident, localization, validator extensions, and manifest content version `0.3.0`
-- Debug presentation: `scenes/debug/RequestDebugPanel.tscn`, `scripts/ui/request_debug_panel.gd`, and the Phase 03 main development shell
-- Tests/tools: request unit and panel integration suites, `tools/test_requests.sh`, prior-panel regression adjustment, and the full validator
-- Documentation: request/grid boundary, content schema, architecture, proposed decision, README, active phase, and all required living documents
+- Economy domain: state, preview, event, unlock evaluator, calculator, coordinator, and generalized infrastructure aggregator under `scripts/simulation/`
+- Content: all Eras 1–3 infrastructure, three upgrades, era membership, localization, milestone/starting-ownership balance, validator extensions, and manifest content version `0.4.0`
+- Debug presentation: `scenes/debug/EconomyDebugPanel.tscn`, `scripts/ui/economy_debug_panel.gd`, and the Phase 04 main development shell
+- Tests/tools: economy unit and panel integration suites, `tools/test_economy.sh`, responsive/prior-panel regression adjustments, and the full validator
+- Documentation: economy/rebuild boundaries, content schema, proposed decision, README, active phase, and all required living documents
 
 ## Remaining acceptance criteria
 
-All Phase 03 acceptance criteria pass locally. Full Era 1–3 request population, vanity cosmetics, request queues, Build shop/purchases, finished main UI, persistence, offline progress, and physical Android verification remain intentionally out of scope.
+All Phase 04 acceptance criteria pass locally. Production main navigation, finished shop presentation, persistence, offline progress, full Era 1–3 request population, automated spending, Eras 4+, monetization, and physical Android verification remain intentionally out of scope.

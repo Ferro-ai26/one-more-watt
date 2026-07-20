@@ -27,3 +27,11 @@ Run the request lifecycle, WATT dialogue, incident, reward, unlock, and report s
 ```
 
 The repository-level validation entry point also exercises both diagnostic panels and the full request lifecycle at portrait size.
+
+Run exact cost, purchasing, milestone, upgrade, rebuild, unlock, and Reserve automation checks with:
+
+```bash
+./tools/test_economy.sh
+```
+
+The repository-level entry point exercises the grid, request, and economy diagnostic surfaces while keeping them independent of the finished Phase 05 UI.

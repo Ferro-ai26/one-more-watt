@@ -14,7 +14,7 @@ func _init() -> void:
 
 	var counts := repository.get_counts()
 	var expected_counts := {
-		"balance": 1, "eras": 2, "infrastructure": 1, "upgrades": 1,
+		"balance": 1, "eras": 3, "infrastructure": 18, "upgrades": 3,
 		"requests": 4, "demand_profiles": 4, "dialogue": 4,
 		"incidents": 2, "achievements": 1, "localization": 1,
 	}
@@ -29,6 +29,7 @@ func _init() -> void:
 	_check(era is EraDefinition and era.get_number() == 1, "typed era lookup should work")
 	_check(infrastructure is InfrastructureDefinition and infrastructure.get_category() == "generation", "typed infrastructure lookup should work")
 	_check(upgrade is UpgradeDefinition and upgrade.get_effects().size() == 1, "typed upgrade lookup should work")
+	_check(repository.get_upgrade("outlet_calibration") is UpgradeDefinition, "leveled upgrade lookup should work")
 	_check(request is RequestDefinition and request.get_required_energy() == 75.0, "typed request lookup should work")
 	_check(profile is DemandProfileDefinition and profile.get_duration_seconds() == 15.0, "typed demand profile lookup should work")
 	_check(repository.get_dialogue("content_ready") is DialogueDefinition, "typed dialogue lookup should work")

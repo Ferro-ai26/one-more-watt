@@ -2,6 +2,24 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 04 economy-shop verification — 2026-07-20
+
+- Build/commit: Uncommitted Phase 04 working tree based on `755e334`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Purchased one Generation, Transmission, Reserve, Support, and Automation item through the simple shop.
+- [x] Each pre-purchase prediction matched the rebuilt resulting grid values and exact Stored Energy deduction.
+- [x] Locked and unaffordable selections showed distinct status text, unmet conditions, and missing Stored Energy.
+- [x] Prepared nine Wall Outlets, previewed the tenth at its exact cost, then observed the cumulative ×2 milestone effect and a single `milestone_reached=10.0` event.
+- [x] Purchased a leveled direct-output upgrade and a one-time multiplier upgrade; predicted and resulting values matched, and max-level state prevented another purchase.
+- [x] Enabled, exercised, and disabled the low-Reserve threshold; throttling activated only below the selected threshold while enabled.
+- [x] Four 393 × 873 captures were inspected; transaction, milestone, upgrade, and automation state text remained readable and all tested controls met the 48-pixel touch-target baseline.
+- [x] General shell layout passed 360 × 640, 393 × 873, and 480 × 800 without horizontal clipping.
+- [ ] Physical Android touch and safe-area behavior verified (device/export unavailable).
+
+Notes: The shop is a Phase 04 diagnostic surface, not the finished Build/Upgrades navigation. Xvfb cannot control V-Sync; headless project validation is warning-free.
+
 ## Phase 03 request-lifecycle verification — 2026-07-20
 
 - Build/commit: `2bd30ac`

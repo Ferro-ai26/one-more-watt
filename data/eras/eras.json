@@ -8,7 +8,13 @@
       "scale_key": "era.01.scale",
       "description_key": "era.01.description",
       "unlock_conditions": [],
-      "infrastructure_ids": ["wall_outlet"],
+      "infrastructure_ids": [
+        "wall_outlet",
+        "questionable_power_strip",
+        "laptop_battery",
+        "tiny_desk_fan",
+        "extension_cord"
+      ],
       "request_ids": [
         "era01_finish_booting",
         "era01_basic_arithmetic",
@@ -25,10 +31,37 @@
       "scale_key": "era.02.scale",
       "description_key": "era.02.description",
       "unlock_conditions": [],
-      "infrastructure_ids": [],
+      "infrastructure_ids": [
+        "upgraded_breaker",
+        "portable_generator",
+        "rooftop_solar_panel",
+        "home_battery",
+        "second_questionable_power_strip",
+        "gaming_gpu"
+      ],
       "request_ids": [],
       "visual_state_id": "bedroom_initial",
       "unit_display_floor": "W"
+    },
+    {
+      "id": "era_03_home_server_closet",
+      "number": 3,
+      "name_key": "era.03.name",
+      "scale_key": "era.03.scale",
+      "description_key": "era.03.description",
+      "unlock_conditions": [],
+      "infrastructure_ids": [
+        "server_rack",
+        "whole_home_battery",
+        "backup_generator",
+        "smart_meter",
+        "dedicated_cooling",
+        "reinforced_wiring",
+        "outdoor_transformer"
+      ],
+      "request_ids": [],
+      "visual_state_id": "server_closet_initial",
+      "unit_display_floor": "kW"
     }
   ]
 }

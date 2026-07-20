@@ -11,7 +11,14 @@ const REQUEST_KINDS := ["capacity", "stability", "burst", "research", "vanity"]
 const EFFECT_OPERATIONS := ["add", "multiply"]
 const EFFECT_TARGETS := [
 	"generation_rate", "transmission_capacity", "reserve_capacity",
-	"reserve_discharge_rate", "request_efficiency", "category_output",
+	"reserve_charge_rate", "reserve_discharge_rate", "request_efficiency",
+	"automation_capacity", "request_demand_multiplier", "category_output",
+	"tag_output", "global_output",
+]
+const BASE_EFFECT_TARGETS := [
+	"generation_rate", "transmission_capacity", "reserve_capacity",
+	"reserve_charge_rate", "reserve_discharge_rate", "request_efficiency",
+	"automation_capacity",
 ]
 const INCIDENT_SEVERITIES := ["cosmetic", "minor", "major"]
 const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked"]
@@ -155,7 +162,7 @@ func _validate_records(records: Dictionary, placeholder_assets: Dictionary, issu
 func _validate_family_record(family: String, record: Dictionary, path: String, record_id: String, placeholder_assets: Dictionary, issues: Array[ContentValidationIssue]) -> void:
 	match family:
 		"balance":
-			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "allocation_modes": "dictionary", "stored_energy_efficiency": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
+			_require_fields(record, {"simulation_step_seconds": "number", "underpower_efficiency_floor": "number", "starting_grid": "dictionary", "starting_owned": "dictionary", "allocation_modes": "dictionary", "stored_energy_efficiency": "dictionary", "milestone_sets": "dictionary"}, path, record_id, issues)
 			_validate_nonnegative_tree(record, path, record_id, issues)
 			_validate_allocation_modes(record.get("allocation_modes", {}), path, record_id, issues)
 		"eras":
@@ -169,12 +176,16 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 			if float(record.get("cost_growth", 0.0)) < 1.0:
 				_add_issue(issues, "INVALID_VALUE", path, record_id, "cost_growth must be at least 1")
 			_validate_base_effects(record.get("base_effects", {}), path, record_id, issues)
+			if record.has("passive_effects"):
+				_validate_effects(record.get("passive_effects", []), path, record_id, issues)
 			_validate_asset(str(record.get("icon_path", "")), path, record_id, placeholder_assets, issues)
 			if record.has("max_owned") and record["max_owned"] != null and (not _is_integer(record["max_owned"]) or int(record["max_owned"]) <= 0):
 				_add_issue(issues, "INVALID_VALUE", path, record_id, "max_owned must be null or a positive integer")
 		"upgrades":
 			_require_fields(record, {"era_id": "string", "name_key": "string", "description_key": "string", "cost": "dictionary", "unlock_conditions": "array", "effects": "array", "permanent": "boolean", "max_level": "integer"}, path, record_id, issues)
 			_validate_nonnegative_tree(record.get("cost", {}), path, record_id, issues)
+			if record.has("cost_growth") and (not _is_number(record["cost_growth"]) or float(record["cost_growth"]) < 1.0):
+				_add_issue(issues, "INVALID_VALUE", path, record_id, "upgrade cost_growth must be at least 1")
 			_validate_effects(record.get("effects", []), path, record_id, issues)
 			if int(record.get("max_level", 0)) <= 0:
 				_add_issue(issues, "INVALID_VALUE", path, record_id, "max_level must be positive")
@@ -274,6 +285,12 @@ func _validate_cross_references(records: Dictionary, indices: Dictionary, placeh
 
 	for wrapper_value: Variant in records["balance"]:
 		var balance: Dictionary = wrapper_value["data"]
+		var starting_owned: Variant = balance.get("starting_owned", {})
+		if starting_owned is Dictionary:
+			for infrastructure_id: Variant in starting_owned:
+				_validate_reference(str(infrastructure_id), "infrastructure", indices, wrapper_value, "starting_owned", issues)
+				if not _is_integer(starting_owned[infrastructure_id]) or int(starting_owned[infrastructure_id]) < 0:
+					_add_issue(issues, "INVALID_VALUE", wrapper_value["path"], balance.get("id", ""), "starting_owned counts must be nonnegative integers")
 		var efficiencies: Variant = balance.get("stored_energy_efficiency", {})
 		if efficiencies is Dictionary:
 			for era_id: Variant in efficiencies:
@@ -464,6 +481,15 @@ func _validate_effects(value: Variant, path: String, record_id: String, issues: 
 		_require_fields(effect, {"operation": "string", "target": "string", "value": "number"}, path, record_id, issues)
 		_validate_enum(effect.get("operation"), EFFECT_OPERATIONS, "UNSUPPORTED_EFFECT_OPERATION", path, record_id, "effect operation", issues)
 		_validate_enum(effect.get("target"), EFFECT_TARGETS, "UNSUPPORTED_EFFECT_TARGET", path, record_id, "effect target", issues)
+		var target := str(effect.get("target", ""))
+		if target == "category_output":
+			if not effect.get("category") is String or str(effect.get("category", "")) not in CATEGORIES:
+				_add_issue(issues, "INVALID_VALUE", path, record_id, "category_output requires a supported category")
+		elif target == "tag_output":
+			if not effect.get("tag") is String or str(effect.get("tag", "")).is_empty():
+				_add_issue(issues, "INVALID_VALUE", path, record_id, "tag_output requires a non-empty tag")
+		if target in ["category_output", "tag_output", "global_output"] and str(effect.get("operation", "")) != "multiply":
+			_add_issue(issues, "INVALID_VALUE", path, record_id, "%s only supports multiply" % target)
 		if _is_number(effect.get("value")) and float(effect.get("value")) < 0.0:
 			_add_issue(issues, "NEGATIVE_VALUE", path, record_id, "effect value must be nonnegative")
 
@@ -487,7 +513,7 @@ func _validate_base_effects(value: Variant, path: String, record_id: String, iss
 	if not value is Dictionary:
 		return
 	for target: Variant in value:
-		if str(target) not in EFFECT_TARGETS:
+		if str(target) not in BASE_EFFECT_TARGETS:
 			_add_issue(issues, "UNSUPPORTED_EFFECT_TARGET", path, record_id, "unsupported base effect target '%s'" % target)
 		if not _is_number(value[target]) or float(value[target]) < 0.0:
 			_add_issue(issues, "INVALID_VALUE", path, record_id, "base effect '%s' must be nonnegative" % target)

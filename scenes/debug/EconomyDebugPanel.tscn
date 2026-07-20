@@ -1,0 +1,215 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/economy_debug_panel.gd" id="1_economy_debug"]
+
+[node name="EconomyDebugPanel" type="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+script = ExtResource("1_economy_debug")
+
+[node name="Heading" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.19, 0.73, 1, 1)
+theme_override_font_sizes/font_size = 18
+text = "BUILD + UPGRADE DEBUG"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SummaryLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="SelectionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="DescriptionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.72, 0.78, 0.88, 1)
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="PreviewLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="CoreHeading" type="Label" parent="."]
+layout_mode = 2
+text = "CORE INFRASTRUCTURE"
+
+[node name="CoreGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="GenerationButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Generation"
+
+[node name="TransmissionButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Transmission"
+
+[node name="ReserveButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reserve"
+
+[node name="SupportButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Support"
+
+[node name="AutomationButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Automation"
+
+[node name="LockedButton" type="Button" parent="CoreGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Locked Sample"
+
+[node name="UpgradeHeading" type="Label" parent="."]
+layout_mode = 2
+text = "UPGRADES"
+
+[node name="UpgradeGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 1
+
+[node name="LeveledUpgradeButton" type="Button" parent="UpgradeGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Leveled Upgrade"
+
+[node name="OneTimeUpgradeButton" type="Button" parent="UpgradeGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "One-Time Upgrade"
+
+[node name="PurchaseGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="BuyOneButton" type="Button" parent="PurchaseGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Buy 1 / Upgrade"
+
+[node name="BuyTenButton" type="Button" parent="PurchaseGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Buy 10"
+
+[node name="DebugHeading" type="Label" parent="."]
+layout_mode = 2
+text = "CONTROLLED SETUP"
+
+[node name="SetupGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 1
+
+[node name="SeedFundsButton" type="Button" parent="SetupGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reset + Fund"
+
+[node name="ClearFundsButton" type="Button" parent="SetupGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear Funds"
+
+[node name="UnlockButton" type="Button" parent="SetupGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Unlock Prereqs"
+
+[node name="MilestoneButton" type="Button" parent="SetupGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Prepare 9 Owned"
+
+[node name="AutomationGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 1
+
+[node name="EnableAutomationButton" type="Button" parent="AutomationGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enable Threshold"
+
+[node name="DisableAutomationButton" type="Button" parent="AutomationGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Disable Threshold"
+
+[node name="TestThrottleButton" type="Button" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Test Low-Reserve Throttle"
+
+[node name="TransactionLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.89, 0.35, 1)
+text = "TRANSACTION: ready"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="AutomationLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "AUTOMATION: disabled"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="EventsLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.65, 0.72, 0.82, 1)
+text = "EVENTS: ready"
+horizontal_alignment = 1
+autowrap_mode = 3

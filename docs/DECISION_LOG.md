@@ -88,6 +88,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: This connects the load-first Phase 02 boundary to the documented first request, which must complete from the starting 5 W grid even when its continuous demand is also 5 W, without double-counting request-serving energy as currency.
 - Consequences: Allocation affects acceleration when surplus exists, underpowered requests still advance from actually served demand, and preview/runtime use the same demand and cap definitions. A future balance change can alter authored values without changing this boundary.
 
+## DEC-014 — Explicit starting ownership and derived economy rebuild
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Store starting infrastructure as stable-ID counts in balance data. Remove those items' authored contributions from the non-owned starting-grid baseline during economy configuration, then rebuild all derived grid values from baseline hardware, ownership, milestones, passive effects, and upgrades through the same aggregator used by previews.
+- Reason: The documented starting Wall Outlet must be real ownership for cost scaling and unlocks, while the Phase 02 starting grid already included its 5 W. Separating the two sources prevents double counting and makes a fresh state equivalent to a reconstructed state after load.
+- Consequences: Future saves should persist currency, stable ownership counts, upgrade levels, milestone history, and automation settings rather than aggregate grid totals. Authored starting ownership must validate against infrastructure IDs, and balance changes can be applied by rebuilding without save migration unless a stable ID changes.
+
 ## Proposed decision template
 
 ```markdown

@@ -82,6 +82,8 @@ Required fields:
 
 Allowed primary categories: `generation`, `transmission`, `reserve`, `support`, `automation`, `special`.
 
+Infrastructure may also declare `passive_effects` using the same enumerated effect records as upgrades. Phase 04 recognizes additive base outputs for Generation, Transmission, Reserve capacity, Reserve charge/discharge, request efficiency, automation capacity, and request-demand multiplier. Multiplier effects may target one direct output, an authored category, an authored tag, or all production. Category and tag targets carry a matching stable `category` or `tag` field.
+
 ## Upgrade schema
 
 ```json
@@ -99,6 +101,8 @@ Allowed primary categories: `generation`, `transmission`, `reserve`, `support`, 
 ```
 
 Supported effect operations must be enumerated and validated. Do not execute arbitrary expressions from content files.
+
+Leveled upgrades may provide a numeric `cost_growth`; their level cost is the floored geometric price derived from the base Stored Energy cost. Omitting it retains a fixed per-level cost. `max_level: 1` represents a one-time upgrade.
 
 ## Request schema
 
@@ -136,7 +140,7 @@ Demand profiles define a positive `duration_seconds`, a `loop` flag, and ordered
 
 ## Balance schema
 
-Balance records have a stable `id` and contain `simulation_step_seconds`, `underpower_efficiency_floor`, `starting_grid`, three required `allocation_modes`, era-keyed `stored_energy_efficiency`, and named `milestone_sets`. Each allocation mode supplies nonnegative `grid_share` and `watt_share` values totaling 1. Numeric balance values are nonnegative. Infrastructure `milestone_set` references must resolve to one of these named sets.
+Balance records have a stable `id` and contain `simulation_step_seconds`, `underpower_efficiency_floor`, `starting_grid`, `starting_owned`, three required `allocation_modes`, era-keyed `stored_energy_efficiency`, and named `milestone_sets`. `starting_owned` maps stable infrastructure IDs to positive counts; owned contributions are separated from the non-owned starting-grid baseline when derived values are rebuilt. Each allocation mode supplies nonnegative `grid_share` and `watt_share` values totaling 1. Numeric balance values are nonnegative. Infrastructure `milestone_set` references must resolve to one of these named sets.
 
 ## Dialogue schema
 
@@ -154,7 +158,9 @@ Achievement records contain `id`, `name_key`, `description_key`, a deterministic
 
 Unlock conditions are explicit objects using `default`, `request_completed`, `infrastructure_owned`, `upgrade_owned`, or `era_unlocked`. Referenced IDs must exist, ownership amounts and levels must be positive, and required-request dependencies must be acyclic and reachable in era sequence.
 
-Effect operations are limited to `add` and `multiply`. Supported targets are `generation_rate`, `transmission_capacity`, `reserve_capacity`, `reserve_discharge_rate`, `request_efficiency`, and `category_output`. Unsupported operations or targets are fatal validation errors and are never evaluated as expressions.
+Effect operations are limited to `add` and `multiply`. Supported direct targets are `generation_rate`, `transmission_capacity`, `reserve_capacity`, `reserve_charge_rate`, `reserve_discharge_rate`, `request_efficiency`, `automation_capacity`, and `request_demand_multiplier`. Multiplier-only grouping targets are `category_output`, `tag_output`, and `global_output`. Unsupported operations, targets, category names, or missing tag/category metadata are fatal validation errors and are never evaluated as expressions.
+
+Phase 04 canonical JSON uses content version `0.4.0` and contains all 18 infrastructure records listed for Eras 1–3 in `PROGRESSION_AND_BALANCE.md`, plus representative leveled, one-time direct, and category-multiplier upgrades. The Phase 04 shop interprets this complete infrastructure set; full request population remains a later responsibility.
 
 ## Prototype request catalog
 

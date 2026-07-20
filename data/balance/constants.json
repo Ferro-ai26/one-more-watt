@@ -13,6 +13,7 @@
         "reserve_discharge_rate": 5,
         "stored_energy": 0
       },
+      "starting_owned": {"wall_outlet": 1},
       "allocation_modes": {
         "expand_grid": {"grid_share": 0.8, "watt_share": 0.2},
         "balanced": {"grid_share": 0.5, "watt_share": 0.5},
@@ -30,6 +31,19 @@
           {"owned": 100, "multiplier": 16.0},
           {"owned": 250, "multiplier": 40.0},
           {"owned": 500, "multiplier": 100.0}
+        ],
+        "standard": [
+          {"owned": 10, "multiplier": 2.0},
+          {"owned": 25, "multiplier": 4.0},
+          {"owned": 50, "multiplier": 8.0},
+          {"owned": 100, "multiplier": 16.0}
+        ],
+        "major_facility": [
+          {"owned": 10, "multiplier": 1.5},
+          {"owned": 25, "multiplier": 2.5},
+          {"owned": 50, "multiplier": 4.0}
+        ],
+        "unique": [
         ]
       }
     }

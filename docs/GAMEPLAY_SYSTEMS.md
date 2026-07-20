@@ -171,9 +171,15 @@ Each item defines base cost, cost scaling, base output/capacity, era, unlock rul
 
 Buying an item recalculates aggregate grid statistics. Infrastructure is never manually placed wire by wire.
 
+Phase 04 purchasing uses Stored Energy and stable content IDs. A purchase preview reports one of locked, unaffordable, affordable, or maxed, along with exact cost, unmet conditions, missing currency, and predicted grid deltas. The command repeats the same calculation immediately before mutating currency and ownership, so an invalid or unaffordable purchase makes no partial change.
+
+The initial Wall Outlet is explicit ownership. Its authored contribution is removed from the non-owned starting-grid baseline, then all derived grid values are rebuilt from the baseline, owned infrastructure, milestones, passive effects, and upgrades. This makes a fresh configuration and a later load rebuild equivalent.
+
 ## Milestones and relevance
 
 Count milestones occur at 10, 25, 50, 100, 250, 500, and 1,000 owned when applicable. Milestones may increase that item's output or activate a synergy.
+
+Milestones are cumulative multipliers selected by each item's authored milestone set. Crossing a threshold emits one event; rebuilding a state that already owns that count does not award or emit the milestone again.
 
 Later systems should multiply categories or earlier assets rather than making them irrelevant. Examples include substations boosting outlets, Dyson Swarms boosting Solar-tagged infrastructure, and wormhole transmission boosting Extension Cord-tagged assets.
 
@@ -188,6 +194,8 @@ Automation unlocks before long idle waits. Prototype automation may include:
 - A forecast warning before high demand
 
 Automation defaults must be safe and understandable. Players can disable or override it.
+
+The Phase 04 prototype implements an explicit low-Reserve throttle. It is disabled by default, stores a normalized Reserve threshold, and activates only while current Reserve is below that threshold. It exposes a deterministic throttle decision for the request layer; it does not auto-spend currency or silently change ownership.
 
 ## Prestige: retraining WATT
 

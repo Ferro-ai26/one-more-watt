@@ -141,6 +141,10 @@ The Phase 02 active simulator rejects non-finite or negative deltas and bounds o
 
 The Phase 03 request coordinator owns lifecycle commands and advances demand profiles at the same fixed-step boundary as `GridSimulation`. It consumes grid step results, emits summary domain events, and stores one aggregate `PerformanceReport` per completed sample; presentation never calculates rewards, grades, or progress.
 
+The Phase 04 economy coordinator owns currency, stable-ID infrastructure counts, upgrade levels, reached milestones, and automation settings. `EconomyCalculator` is the single source for geometric costs and milestone lookup; `UnlockEvaluator` returns explicit unmet conditions; and `InfrastructureAggregator` rebuilds derived outputs from content plus ownership. Preview commands simulate the proposed ownership/level change through that same aggregate path before an atomic purchase applies it. Grid metrics remain derived cache data rather than purchase truth.
+
+Starting ownership is separated from the non-owned hardware baseline during configuration. Reconfiguration or a future load therefore reconstructs the same Generation, Transmission, Reserve, request modifier, and automation values without serializing derived totals or counting starting infrastructure twice.
+
 ## Determinism
 
 - Demand profiles are authored curves or seeded sequences.
