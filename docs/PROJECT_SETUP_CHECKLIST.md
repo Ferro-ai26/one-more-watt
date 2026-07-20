@@ -21,7 +21,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 
 ## Android
 
-- Package identifier: Unknown — publisher-controlled value required before creating an export preset
+- Package identifier: `com.ferroai.onemorewatt` — permanently approved by the publisher on 2026-07-20
 - Minimum Android SDK: API 24, inherited from the Godot 4.6.2 prebuilt Android template
 - Target Android SDK: API 35, inherited from the Godot 4.6.2 prebuilt Android template
 - Java/JDK version: OpenJDK 21.0.11 at `/usr/lib/jvm/java-21-openjdk-arm64`
@@ -44,7 +44,7 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 - Integration tests: `godot4 --headless --path . --script res://tests/integration/test_portrait_layout.gd`
 - Headless smoke test: `godot4 --headless --path . -- --smoke-test`
 - Full repository validation: `./tools/validate.sh`
-- Debug APK export: `./tools/build_android_debug.sh` after the approved package identifier and export preset are committed
+- Debug APK export: `./tools/build_android_debug.sh` from a clean committed tree
 - Release AAB export: Phase 16; not configured
 
 ## Ownership and publishing
@@ -56,4 +56,4 @@ Complete this file before or during Phase 00. Do not guess publisher-controlled 
 
 ## Environment findings
 
-Phase 09 reinspection found a separate current SDK at `/home/ubuntu/.local/share/android-sdk` with the required Android 35 platform and build tools; the earlier `/usr/lib/android-sdk` finding was stale and incomplete. Godot 4.6.2 and matching Android export templates are installed. The package identifier remains a publisher-controlled decision, so no export preset or APK is recorded yet. No physical-device test has occurred.
+Phase 09 reinspection found a separate current SDK at `/home/ubuntu/.local/share/android-sdk` with the required Android 35 platform and build tools; the earlier `/usr/lib/android-sdk` finding was stale and incomplete. Godot 4.6.2 and matching Android export templates are installed. The permanent package identifier and a debug-only prebuilt-template export preset are recorded. No physical-device test has occurred.

@@ -16,6 +16,7 @@ fi
 
 "$GODOT_EXECUTABLE" --headless --editor --path "$PROJECT_ROOT" --quit
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/validate_foundation.gd
+"$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/validate_android_config.gd
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/validate_content.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_simulation.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_requests.sh"

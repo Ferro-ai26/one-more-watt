@@ -24,7 +24,8 @@
 - Located the current Android SDK at `/home/ubuntu/.local/share/android-sdk` with Platform 35, build-tools 35.0.1, platform-tools 37.0.0, and the existing local debug keystore.
 - Added Phase 09 version/build diagnostics, app-controlled Android Back behavior, explicit pause/resume feedback-audio handling, and regression coverage across four portrait sizes.
 - Added a clean-tree Android build script that embeds the source commit, exports a debug APK, verifies package/signature metadata, and records a SHA-256 manifest.
-- APK export remains pending the publisher-approved package identifier. Physical-device verification remains unavailable because ADB has no attached device and the ARM64 VPS has no emulator/KVM setup.
+- The publisher approved `com.ferroai.onemorewatt`; a validated debug-only export preset now records package, version, architecture, permission, signing, and resource-exclusion boundaries.
+- APK export is ready after committing the preset. Physical-device verification remains unavailable because ADB has no attached device and the ARM64 VPS has no emulator/KVM setup.
 
 ### 2026-07-20 — Phase 08 balance and prototype polish
 

@@ -10,7 +10,7 @@
 
 ## Open issues
 
-Phase 09 is active. No blocker, critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect is known. Android export is blocked on the publisher-controlled package identifier, and Phase 09 completion is blocked on physical Android hardware.
+Phase 09 is active. No critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect is known. The package identifier is approved and export configuration is ready; Phase 09 completion remains blocked on physical Android hardware.
 
 ### ISSUE-003 — Physical Android verification unavailable on current host
 
@@ -43,9 +43,9 @@ Phase 09 is active. No blocker, critical, progression, reachability, localizatio
 - Workaround: None required for the fixed pacing cliff. Offline progress remains available before both five-minute gaps.
 - Fix verification: `./tools/test_vertical_slice.sh`, structured Phase 08 rounds, and visually inspected clean-path captures pass.
 
-### ISSUE-001 — Android package identity not approved
+### ISSUE-001 — Android export configuration unavailable
 
-- Status: Open
+- Status: Investigating
 - Severity: Major
 - First seen build/commit: Phase 00 working tree, 2026-07-19
 - Affected phase: Phase 00 foundation; must be resolved before Phase 09 Android gate
@@ -53,10 +53,10 @@ Phase 09 is active. No blocker, critical, progression, reachability, localizatio
   1. Inspect `docs/PROJECT_SETUP_CHECKLIST.md`.
   2. Observe that no publisher-controlled package identifier has been approved.
 - Expected: A valid Android export preset can target an installed SDK platform with the approved package identifier.
-- Actual: The SDK portion of the former issue is resolved: Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, and matching export templates are available. Creating the final preset is still blocked because the repository contract prohibits guessing the publisher's identity.
-- Evidence/log: `/home/ubuntu/.local/share/android-sdk/platforms/android-35/android.jar` exists. Sibling projects suggest `com.ferroai.onemorewatt`, but that value is not treated as approval.
-- Workaround: Host-side lifecycle, tests, and reproducible export tooling can proceed without claiming the package identifier.
-- Fix verification: Pending explicit identifier approval, preset validation, and inspected APK package metadata.
+- Actual: Resolved in source. The publisher approved `com.ferroai.onemorewatt`; Android Platform 35, build-tools 35.0.1, platform-tools 37.0.0, matching export templates, and a validated export preset are available.
+- Evidence/log: `tests/validate_android_config.gd` passes 21 checks over the recorded preset.
+- Workaround: None required.
+- Fix verification: Pending inspected APK package metadata; then mark Fixed.
 
 ## Issue template
 

@@ -134,7 +134,7 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Date: 2026-07-20
 - Decision: Export the Phase 09 debug prototype from a clean recorded commit with Godot 4.6.2's matching prebuilt Android template, arm64-v8a and x86_64 architectures, version code 9, no Internet permission, and only the vibration permission required by the existing optional haptic feedback. Inject the exact source commit into build diagnostics during export and record the APK package, signature verification, byte size, and SHA-256 hash.
 - Reason: The prototype has no custom Java/plugin dependency requiring Gradle, while a deterministic script makes artifact provenance and PC handoff repeatable. x86_64 supports a future emulator pass and arm64-v8a covers the intended physical-device pass.
-- Consequences: The prebuilt template supplies minimum API 24 and target API 35. A production AAB, release signing, store assets, and additional architectures remain outside Phase 09. The package identifier is intentionally unresolved until the publisher approves it.
+- Consequences: The prebuilt template supplies minimum API 24 and target API 35. A production AAB, release signing, store assets, and additional architectures remain outside Phase 09. The publisher approved the permanent package identifier `com.ferroai.onemorewatt` on 2026-07-20.
 
 ## Proposed decision template
 

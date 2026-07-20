@@ -12,6 +12,8 @@ After the approved Android package identifier and export preset are committed, b
 ./tools/build_android_debug.sh
 ```
 
+The full validation entry point also checks the permanent package name, version, architectures, permissions, debug-only signing boundary, and APK resource exclusions in `export_presets.cfg`.
+
 Set `GODOT_BIN` when the executable is not named `godot`. The command imports and parses the project, validates the foundation and content configuration, runs valid and invalid content fixtures, exercises the shell at 320 × 568, 360 × 640, 393 × 873, and 480 × 800, and launches the main scene in smoke-test mode.
 
 Run only deterministic content validation with:
