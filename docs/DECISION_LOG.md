@@ -170,6 +170,30 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The user explicitly cancelled the remaining Phase 10 bug investigation and Moto verification and accepted the limitation so production planning can continue. Existing host and partial-device evidence remains truthful and sufficient for this explicitly qualified stabilization closure.
 - Consequences: No Phase 10 device check is retroactively marked passed. Phase 14 owns the Moto/device comfort, display/density, safe-area, accessibility, lifecycle, and representative-session verification for the density-aware production build. Phase 11 is only Ready — Awaiting Explicit Authorization and did not begin in this closure session.
 
+## DEC-024 — Select Soft Circuit Workshop for final direction revision
+
+- Status: Superseded by DEC-025
+- Date: 2026-07-20
+- Decision: Select Phase 11 Candidate A — Soft Circuit Workshop as the sole direction to revise toward final approval. Preserve its warm, tactile, domestic, character-first premise and WATT's visual priority, but remove overly childish, plastic, chunky, toy-like, or exaggerated presentation. Ground the style in believable electrical hardware, painted metal, rubber cable, switches, cooling equipment, monitors, restrained wear, labels, and improvised construction details. Keep numeric data crisp on Android, category and warning colors strongly separated, effects restrained, and the visual grammar continuous from workshop through city and cosmic scales.
+- Reason: Candidate A best supports early attachment, infrastructure accumulation, and the permanent domestic-to-cosmic premise. The required revisions address its main identified risk without importing another candidate's identity.
+- Consequences: Fredoka, oversized pill controls, thick cartoon outlines, pristine plastic surfaces, and exaggerated bounce are rejected. Blueprint Bureau's industrial-dashboard/drafting identity and Midnight Appliance Theatre's heavy glow/noise are also rejected and must not be mixed into the selected system. Atkinson Hyperlegible Next/Mono, mature tactile hardware, smaller radii, controlled edge wear, and restrained effects form the final proposal. Candidate selection is accepted, but the direction is not locked and Phase 11 is not complete until the user explicitly approves the revised final package.
+
+## DEC-025 — Supersede dashboard composition with Living Animated Workshop Diorama
+
+- Status: Superseded by DEC-026
+- Date: 2026-07-20
+- Decision: Reject the Soft Circuit Workshop final package's main-screen composition and flat environmental treatment. Replace it with **Living Animated Workshop Diorama** and lock the hierarchy as: world first (WATT plus evolving physical infrastructure), character second (requests, expressions, reactions), numbers third (details in drawers and contextual panels). The routine portrait screen uses a compact 10–12% status rail, a 60–65% layered animated cutaway, WATT physically occupying about 20–30% of that scene, an attached request near the scene bottom, compact navigation, and partial-height Build/Upgrade drawers that preserve the visible world. Reports may remain card-based secondary overlays.
+- Reason: The rejected package retained dashboard-first gameplay and treated the environment as an illustration inside equipment cards. That contradicted the intended visible-accumulation fantasy and detached WATT from the world. A living diorama makes physical change, character behavior, and scale escalation the primary play surface while keeping detailed numbers available without dominating it.
+- Consequences: Preserve the Atkinson font proposal, verified contrasts, semantic category colors, graphite/fastener/cable/vent/label/cooling/wear language, provenance work, production planning, and phone-scale review process. Redesign WATT as a non-toy physical resident with authored body/cable behavior. Purchases use installation anchors, cable-path animation, and milestone visual states rather than free physics or one rendered object per owned unit. The earlier `selected_direction/` package is superseded evidence only. The world-first structure is decided; approval remains required for the revised visual execution before Phase 11 can lock. Runtime integration, font import, skinning, and Phase 12 remain prohibited.
+
+## DEC-026 — Reopen Phase 11 for a major visual and narrative pivot
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Stop the Living Animated Workshop Diorama revision and remove every current Phase 11 package from approval consideration. Preserve the three-candidate comparison, rejected Soft Circuit final proposal, and incomplete Living Workshop sources as clearly labeled superseded exploration. Phase 11 remains open with no selected visual or narrative direction while a substantial pivot is defined in a future session.
+- Reason: The user is reconsidering the visual and narrative direction substantially and explicitly directed that current refinement stop. Continuing to polish, render, or infer the next direction would create misleading approval evidence and premature production assumptions.
+- Consequences: No current hierarchy, main-screen composition, WATT housing, environment plan, or production estimate is locked. Compatible technical evidence—Atkinson font/licensing records, tested contrast pairs, semantic category separation, provenance methods, and validation process—may be reconsidered later but is not automatically part of the next direction. Runtime files, fonts, production skinning, and Phase 12 remain untouched and prohibited. The next Codex session must begin by obtaining/reading the new direction brief and re-auditing Phase 11 scope rather than resuming either superseded package.
+
 ## Proposed decision template
 
 ```markdown

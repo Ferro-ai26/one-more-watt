@@ -1,0 +1,95 @@
+<svg data-status="superseded-exploration" xmlns="http://www.w3.org/2000/svg" width="1600" height="1600" viewBox="0 0 1600 1600" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">WATT physical resident model sheet</title>
+  <desc id="desc">A mature salvaged terminal construction, physical behavior diagrams, six expression and body states, and evolution from desk cradle to room rig, rack console, city service bay, and cosmic maintenance frame.</desc>
+  <defs>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#71807E"/><stop offset=".55" stop-color="#4B5958"/><stop offset="1" stop-color="#2D3737"/></linearGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity=".28"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.b{font-weight:700}.m{font-weight:600}.light{fill:#FFF9EC}.muted{fill:#C9D1CC}.ink2{fill:#566160}</style>
+    <g id="shell">
+      <path d="M20 0h240l30 24v166l-23 28H10l-18-28V28z" fill="url(#steel)" stroke="#252B2C" stroke-width="7"/>
+      <path d="M20 0h240l15 12H8z" fill="#9AA8A3" opacity=".45"/>
+      <rect x="38" y="40" width="216" height="124" rx="7" fill="#102829" stroke="#263536" stroke-width="7"/>
+      <rect x="96" y="179" width="92" height="25" rx="3" fill="#172829" stroke="#71807C" stroke-width="2"/>
+      <circle cx="17" cy="183" r="7" fill="#24B8C7"/><circle cx="43" cy="183" r="7" fill="#2B764C"/>
+      <path d="M234 177h28M234 188h28M234 199h20" stroke="#182424" stroke-width="6"/>
+      <path d="M16 90l13-9M263 70l13 7M228 202l30-8" stroke="#FFF9EC" stroke-width="4" opacity=".22"/>
+      <circle cx="17" cy="20" r="6" fill="#8B8D84"/><circle cx="267" cy="24" r="6" fill="#8B8D84"/>
+      <path d="M38 218v26H7M253 218v26h36" fill="none" stroke="#252B2C" stroke-width="13"/>
+      <path d="M-7 117c-38 2-54 27-43 57" fill="none" stroke="#252B2C" stroke-width="18" stroke-linecap="round"/>
+    </g>
+    <g id="heart"><path d="M136 183l-9 12h9l-4 8 17-14h-10l6-6z" fill="#24B8C7"/></g>
+  </defs>
+  <rect width="1600" height="1600" fill="#C7B79C"/>
+  <rect width="1600" height="92" fill="#252B2C"/>
+  <text x="38" y="59" class="ui b light" font-size="44">WATT · physical resident model sheet</text>
+  <text x="1562" y="58" text-anchor="end" class="mono b" font-size="25" fill="#24B8C7">LIVING WORKSHOP · EXECUTION B</text>
+
+  <!-- construction -->
+  <rect x="30" y="120" width="750" height="520" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="3"/>
+  <text x="60" y="168" class="ui b" font-size="35">Desk terminal · construction</text>
+  <g transform="translate(145 250) scale(1.65)" filter="url(#shadow)"><use href="#shell"/><path d="M73 98q19-22 38 0M183 98q19-22 38 0" fill="none" stroke="#24B8C7" stroke-width="13" stroke-linecap="round"/><use href="#heart"/></g>
+  <path d="M206 266H93v-54M550 320h120v-56M370 552v42H170M553 505h115v60" fill="none" stroke="#006E79" stroke-width="4"/>
+  <g class="ui m" font-size="21"><text x="60" y="203" fill="#006E79">asymmetric 1.35:1 steel body</text><text x="585" y="244" fill="#006E79">1.58:1 smoked glass</text><text x="60" y="619" fill="#006E79">low cradle + improvised shim</text><text x="583" y="591" fill="#006E79">status meter, not a mouth</text></g>
+  <rect x="95" y="500" width="120" height="30" fill="#FFF9EC" transform="rotate(-2 95 500)"/><text x="155" y="521" text-anchor="middle" class="mono b" font-size="16">UNIT 01 · SERVICE</text>
+  <text x="60" y="610" class="ui ink2" font-size="19">Fixed body, real fasteners, restrained wear, rear strain relief.</text>
+
+  <!-- behavior -->
+  <rect x="810" y="120" width="760" height="520" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="3"/>
+  <text x="840" y="168" class="ui b" font-size="35">Physical behavior · authored, not physics</text>
+  <g class="ui">
+    <rect x="840" y="194" width="700" height="92" rx="8" fill="#DCD3C3"/>
+    <text x="864" y="228" class="b" font-size="25">Eyes follow activity</text><text x="864" y="259" class="m ink2" font-size="21">±8 dp toward active anchor; expression leads detail.</text>
+    <rect x="1347" y="209" width="156" height="60" rx="5" fill="#102829"/><path d="M1371 239q12-13 24 0M1444 231q12-13 24 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M1518 239h18" stroke="#5D4BB3" stroke-width="5"/><path d="M1526 230l10 9-10 9" fill="none" stroke="#5D4BB3" stroke-width="4"/>
+    <rect x="840" y="298" width="700" height="92" rx="8" fill="#DCD3C3"/>
+    <text x="864" y="332" class="b" font-size="25">Cable communicates load</text><text x="864" y="363" class="m ink2" font-size="21">Sag at idle; taut toward bottleneck; relax after completion.</text>
+    <path d="M1346 340q47 48 95 0t95 0" fill="none" stroke="#252B2C" stroke-width="13"/><path d="M1346 340q47 48 95 0t95 0" fill="none" stroke="#5D4BB3" stroke-width="5" stroke-dasharray="14 10"/>
+    <rect x="840" y="402" width="700" height="92" rx="8" fill="#DCD3C3"/>
+    <text x="864" y="436" class="b" font-size="25">Body reacts through hardware</text><text x="864" y="467" class="m ink2" font-size="21">2–4° cradle lean, vent flap, lamp/fan response; no squash.</text>
+    <path d="M1370 462h130l-8-57h-114z" fill="#4B5958" stroke="#252B2C" stroke-width="5"/><path d="M1400 424h62" stroke="#24B8C7" stroke-width="8"/><path d="M1512 421l18-17M1512 446l22 5" stroke="#D98B36" stroke-width="6"/>
+    <rect x="840" y="506" width="700" height="104" rx="8" fill="#252B2C"/>
+    <text x="864" y="542" class="b light" font-size="25">Recognition at distance</text><text x="864" y="576" class="m muted" font-size="21">Two cyan apertures + lower bolt meter + cable tail at 64 × 48 dp.</text>
+    <rect x="1382" y="524" width="126" height="66" rx="4" fill="#102829" stroke="#667574" stroke-width="6"/><path d="M1401 553q10-11 20 0M1468 553q10-11 20 0" fill="none" stroke="#24B8C7" stroke-width="7"/><path d="M1442 564l-7 9h7l-3 6 12-10h-7l5-5z" fill="#24B8C7"/>
+  </g>
+
+  <!-- states -->
+  <text x="30" y="696" class="ui b" font-size="38">Expression + physical state</text>
+  <g>
+    <rect x="30" y="720" width="245" height="330" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="291" y="720" width="245" height="330" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="552" y="720" width="245" height="330" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="813" y="720" width="245" height="330" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="1074" y="720" width="245" height="330" rx="14" fill="#F7F1E5" stroke="#A93640" stroke-width="3"/>
+    <rect x="1335" y="720" width="235" height="330" rx="14" fill="#F7F1E5" stroke="#2B764C" stroke-width="3"/>
+  </g>
+  <!-- six shells -->
+  <g transform="translate(48 780) scale(.68)"><use href="#shell"/><path d="M74 98q17-19 34 0M186 98q17-19 34 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/></g>
+  <g transform="translate(309 780) scale(.68)"><use href="#shell"/><path d="M72 96h38M184 96h38" stroke="#24B8C7" stroke-width="11" stroke-linecap="round"/><circle cx="104" cy="96" r="6" fill="#FFF9EC"/><circle cx="216" cy="96" r="6" fill="#FFF9EC"/><use href="#heart"/></g>
+  <g transform="translate(570 773) scale(.68) rotate(-2 145 120)"><use href="#shell"/><path d="M72 102q19-28 38 0M184 102q19-28 38 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/><path d="M-7 117q-32 4-43 36" fill="none" stroke="#5D4BB3" stroke-width="6"/></g>
+  <g transform="translate(831 780) scale(.68)"><use href="#shell"/><path d="M72 102q18-12 36 5M184 107q18-17 36-5" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/><path d="M-7 117c-24 0-37-9-43-22" fill="none" stroke="#5D4BB3" stroke-width="6"/></g>
+  <g transform="translate(1092 786) scale(.68)"><use href="#shell"/><path d="M72 106q18-11 36 4M184 110q18-16 36-4" fill="none" stroke="#24B8C7" stroke-opacity=".58" stroke-width="12"/><g opacity=".58"><use href="#heart"/></g><circle cx="17" cy="183" r="7" fill="#A93640"/><path d="M-7 117c-24 0-37-12-43-29" fill="none" stroke="#A93640" stroke-width="6" stroke-dasharray="9 8"/></g>
+  <g transform="translate(1350 773) scale(.68) translate(0 -4)"><use href="#shell"/><path d="M72 102q19-28 38 0M184 102q19-28 38 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/><path d="M-7 117q-28 8-43 5" fill="none" stroke="#5D4BB3" stroke-width="6"/></g>
+  <g class="ui b" text-anchor="middle" font-size="26"><text x="152" y="975">Idle</text><text x="413" y="975">Thinking</text><text x="674" y="975">Pleased</text><text x="935" y="975">Concerned</text><text x="1196" y="975">Brownout</text><text x="1452" y="975">Completion</text></g>
+  <g class="ui ink2" text-anchor="middle" font-size="18"><text x="152" y="1007">soft cable sag</text><text x="413" y="1007">eyes scan; heart steady</text><text x="674" y="1007">cradle lifts 2°</text><text x="935" y="1007">cable pulls toward fault</text><text x="1196" y="1007">body drops; fan coasts</text><text x="1452" y="1007">cable relaxes</text><text x="152" y="1033">no decorative bounce</text><text x="413" y="1033">vent flap ticks once</text><text x="674" y="1033">no permanent mouth</text><text x="935" y="1033">red lamp stays separate</text><text x="1196" y="1033">cyan at 58%</text><text x="1452" y="1033">two heart pulses</text></g>
+
+  <!-- evolution -->
+  <text x="30" y="1100" class="ui b" font-size="38">Housing evolution · terminal remains a physical resident</text>
+  <g>
+    <rect x="30" y="1122" width="294" height="438" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="340" y="1122" width="294" height="438" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="650" y="1122" width="294" height="438" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="960" y="1122" width="294" height="438" rx="14" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="1270" y="1122" width="300" height="438" rx="14" fill="#252B2C" stroke="#333B3B" stroke-width="2"/>
+  </g>
+  <!-- era 1 -->
+  <g transform="translate(58 1205) scale(.78)"><use href="#shell"/><path d="M72 98q17-19 34 0M186 98q17-19 34 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/></g>
+  <!-- era 2 shelf rig -->
+  <path d="M380 1210h214v244H380z" fill="#596360" stroke="#252B2C" stroke-width="6"/><path d="M362 1190h252v30H362zM374 1454v33M600 1454v33" stroke="#252B2C" stroke-width="14"/><g transform="translate(392 1260) scale(.62)"><use href="#shell"/><path d="M72 98q17-19 34 0M186 98q17-19 34 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/></g><circle cx="404" cy="1238" r="9" fill="#2B764C"/><circle cx="436" cy="1238" r="9" fill="#E5A91B"/><path d="M566 1230h26M566 1247h26" stroke="#C9D1CC" stroke-width="5"/>
+  <!-- era3 rack -->
+  <rect x="704" y="1175" width="185" height="310" fill="#3F4948" stroke="#252B2C" stroke-width="7"/><path d="M720 1200h153M720 1444h153" stroke="#8B8D84" stroke-width="5"/><g transform="translate(710 1280) scale(.58)"><use href="#shell"/><path d="M72 98q17-19 34 0M186 98q17-19 34 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/></g><path d="M730 1230h132M730 1250h132M730 1410h132" stroke="#C9D1CC" stroke-width="5"/>
+  <!-- era6 bay -->
+  <path d="M992 1195h232v267H992z" fill="#343E3E" stroke="#252B2C" stroke-width="7"/><path d="M976 1175h264v28M976 1480h264v-24" fill="none" stroke="#667574" stroke-width="15"/><g transform="translate(1018 1285) scale(.6)"><use href="#shell"/><path d="M72 98q17-19 34 0M186 98q17-19 34 0" fill="none" stroke="#24B8C7" stroke-width="12"/><use href="#heart"/></g><path d="M1002 1240h44M1002 1260h44M1170 1240h44M1170 1260h44" stroke="#C9D1CC" stroke-width="5"/>
+  <!-- cosmic frame -->
+  <path d="M1312 1190h216v287h-216z" fill="#303A3A" stroke="#8B8D84" stroke-width="7"/><path d="M1294 1172h252v30M1294 1494h252v-30" fill="none" stroke="#8B8D84" stroke-width="15"/><circle cx="1420" cy="1322" r="95" fill="#102829" stroke="#4B5958" stroke-width="12"/><path d="M1366 1309q20-23 40 0M1438 1309q20-23 40 0" fill="none" stroke="#24B8C7" stroke-width="14"/><path d="M1414 1342l-12 17h12l-6 11 24-20h-14l9-8z" fill="#24B8C7"/><rect x="1355" y="1438" width="130" height="25" fill="#F7F1E5"/><text x="1420" y="1456" text-anchor="middle" class="mono b" font-size="13">OUTLET 01 RETAINED</text>
+  <g class="ui b" text-anchor="middle" font-size="24"><text x="177" y="1518">Era 1 · desk cradle</text><text x="487" y="1518">Era 2 · room rig</text><text x="797" y="1518">Era 3 · rack service</text><text x="1107" y="1518">Era 6 · city bay</text><text x="1420" y="1518" class="light">Cosmic · maintenance frame</text></g>
+  <g class="ui ink2" text-anchor="middle" font-size="17"><text x="177" y="1546">terminal sits in the world</text><text x="487" y="1546">same body, added support</text><text x="797" y="1546">original cradle bolts in</text><text x="1107" y="1546">console remains serviceable</text><text x="1420" y="1546" fill="#C9D1CC">physical aperture, never hologram</text></g>
+</svg>

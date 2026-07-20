@@ -1,0 +1,16 @@
+id,path,type,era,screen,status,source,license,dimensions,memory_notes,approved_by
+font_atkinson_next,assets/fonts/atkinson_hyperlegible_next.ttf,font,all,all,retired_plan,Google Fonts pinned file,SIL OFL 1.1,variable TTF 200-800,114552-byte evidence file; import TBD,superseded under DEC-026
+font_atkinson_mono,assets/fonts/atkinson_hyperlegible_mono.ttf,font,all,all,retired_plan,Google Fonts pinned file,SIL OFL 1.1,variable TTF 200-800,53960-byte evidence file; import TBD,superseded under DEC-026
+diorama_compositor,scenes/presentation/diorama_compositor.tscn,system,all,grid,retired_plan,Godot-native original,project original,4 depth bands,measure in Phase 12,superseded under DEC-026
+installation_anchor_schema,scripts/presentation/installation_anchor.gd,system,all,grid_build,retired_plan,Godot-native original,project original,named anchors and authored curves,no physics allocation,superseded under DEC-026
+watt_physical_rig,assets/illustrations/watt/watt_physical_rig.svg,watt_rig,all,grid,superseded_exploration,layered original,project original,scalable,target <=10MiB with masks/icons,superseded under DEC-026
+watt_expression_body_states,assets/illustrations/watt/states/,watt_state_set,all,grid,superseded_exploration,rig poses original,project original,6 expressions plus 5 body reactions,reuse one rig,superseded under DEC-026
+env_era01_workshop,assets/illustrations/environments/era01/,environment,1,grid,superseded_exploration,layered original,project original,4 bands and 7 anchors,part of <=28MiB active era,superseded under DEC-026
+env_era02_bedroom,assets/illustrations/environments/era02/,environment,2,grid,superseded_exploration,layered original,project original,4 bands and 6 new anchors,reuses Era 1 desk,superseded under DEC-026
+env_era03_house_closet,assets/illustrations/environments/era03/,environment,3,grid,retired_plan,layered original,project original,4 bands and 7 new anchors,reuses nested room,superseded under DEC-026
+purchase_animation_families,assets/animations/purchase/,animation_set,all,grid_build,superseded_exploration,authored timelines,project original,place connect activate,reduced motion swaps,superseded under DEC-026
+infrastructure_milestone_states,assets/illustrations/infrastructure/,state_set,all,grid_build,retired_plan,layered original,project original,single cluster bank facility,no per-unit rendering,superseded under DEC-026
+drawer_component_family,scenes/ui/drawers/,ui_component_set,all,build_upgrades,retired_plan,Godot-native original,project original,6-8 components,no full-screen texture,superseded under DEC-026
+semantic_icon_set,assets/icons/semantic/,icon_set,all,all,retired_plan,SVG original,project original,48x48 masters,vector import TBD,superseded under DEC-026
+transition_era01_02,assets/illustrations/transitions/era01_02/,transition,1-2,modal,superseded_exploration,reused environment bands,project original,camera rig plus masks,no unique full-screen texture,superseded under DEC-026
+semantic_light_masks,assets/illustrations/effects/,effect_set,all,grid,retired_plan,grayscale masks and code,project original,8 families,cropped masks,superseded under DEC-026

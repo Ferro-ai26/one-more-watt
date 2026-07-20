@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Circuit Workshop revised Main Grid direction</title>
+  <desc id="desc">A mature warm domestic electrical workspace with WATT as the cyan focal point, crisp request information, three strongly differentiated grid vital cards, restrained power flow, and believable hardware detail.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".15"/></filter>
+    <style>
+      .ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}
+      .mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}
+      .w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}
+      .light{fill:#FFF9EC}.secondary{fill:#566160}.darksecondary{fill:#C9D1CC}
+      .cap{font-size:26px}.body{font-size:32px}.dialogue{font-size:36px}.h2{font-size:40px}.num{font-size:48px}
+    </style>
+  </defs>
+  <rect width="720" height="1280" fill="#D9CCB8"/>
+  <path d="M0 72h720M0 1145h720" stroke="#B9AC99" stroke-width="2"/>
+
+  <!-- status rail -->
+  <rect width="720" height="72" fill="#252B2C"/>
+  <text x="24" y="29" class="ui w700 light" font-size="24">COLD BOOT</text>
+  <text x="24" y="57" class="ui darksecondary" font-size="25">Desk · Era 01</text>
+  <text x="360" y="45" text-anchor="middle" class="mono w650" font-size="34" fill="#E5A91B">24 SE</text>
+  <text x="632" y="45" text-anchor="end" class="mono w650 light" font-size="32">8 W</text>
+  <rect x="656" y="12" width="48" height="48" rx="12" fill="#F7F1E5"/>
+  <path d="M668 26h24M668 36h24M668 46h24" stroke="#333B3B" stroke-width="4"/>
+
+  <!-- focal panel -->
+  <rect x="16" y="88" width="688" height="330" rx="20" fill="#F7F1E5" stroke="#333B3B" stroke-width="2" filter="url(#e1)"/>
+  <rect x="28" y="100" width="286" height="270" rx="12" fill="#DCD3C3"/>
+  <path d="M42 328h260v22H42z" fill="#78604A"/>
+  <path d="M60 350v36M286 350v36" stroke="#5E4938" stroke-width="12"/>
+  <path d="M74 310c12-72 48-82 75-50s62 43 91 2" fill="none" stroke="#3D4240" stroke-width="10" stroke-linecap="round"/>
+  <path d="M78 310c12-72 48-82 75-50" fill="none" stroke="#5D4BB3" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- believable WATT monitor -->
+  <path d="M89 135h166l22 18v132l-18 18H91l-15-15V151z" fill="#526968" stroke="#333B3B" stroke-width="4"/>
+  <rect x="96" y="155" width="160" height="105" rx="8" fill="#172829" stroke="#2D3838" stroke-width="6"/>
+  <path d="M120 204q14-15 28 0M190 204q14-15 28 0" fill="none" stroke="#24B8C7" stroke-width="10" stroke-linecap="round"/>
+  <path d="M151 231q20 13 40 0" fill="none" stroke="#24B8C7" stroke-width="5" stroke-linecap="round"/>
+  <path d="M171 212l-13 19h13l-6 20 22-28h-13l8-11z" fill="#24B8C7" opacity=".92"/>
+  <circle cx="102" cy="278" r="5" fill="#24B8C7"/><circle cx="119" cy="278" r="5" fill="#686F6C"/>
+  <path d="M226 275h22M226 284h22" stroke="#293333" stroke-width="4"/>
+  <circle cx="89" cy="147" r="4" fill="#8B8D84"/><circle cx="262" cy="150" r="4" fill="#8B8D84"/>
+  <path d="M104 137l24 0M235 301l15-4M80 220l8-6" stroke="#FFF9EC" stroke-opacity=".28" stroke-width="3"/>
+  <rect x="110" y="303" width="129" height="22" rx="3" fill="#FFF9EC" transform="rotate(-1 110 303)"/>
+  <text x="174" y="319" text-anchor="middle" class="mono w650" font-size="15">WATT · UNIT 01</text>
+  <path d="M166 325v15M126 340h80" stroke="#333B3B" stroke-width="8" stroke-linecap="square"/>
+  <rect x="37" y="109" width="142" height="32" rx="6" fill="#252B2C"/>
+  <text x="108" y="132" text-anchor="middle" class="ui w650 light" font-size="20">WATT ONLINE</text>
+
+  <!-- request -->
+  <text x="334" y="128" class="ui w650" font-size="24" fill="#006E79">CURRENT REQUEST</text>
+  <text x="334" y="172" class="ui w500 dialogue">
+    <tspan x="334" dy="0">“Hello. I am almost</tspan><tspan x="334" dy="43">awake. May I finish</tspan><tspan x="334" dy="43">booting?”</tspan>
+  </text>
+  <text x="334" y="300" class="ui w700 h2">Finish Booting</text>
+  <text x="334" y="333" class="mono w650 secondary" font-size="24">CAPACITY · 3 W PEAK · 25s</text>
+  <rect x="334" y="350" width="346" height="16" rx="8" fill="#DCD3C3"/>
+  <path d="M334 350h112v16H334z" fill="#24B8C7"/>
+  <path d="M446 346v24" stroke="#333B3B" stroke-width="3"/>
+  <rect x="466" y="375" width="214" height="48" rx="12" fill="#252B2C"/>
+  <text x="573" y="407" text-anchor="middle" class="ui w650 light" font-size="30">Review request</text>
+
+  <!-- vitals -->
+  <g filter="url(#e1)">
+    <rect x="16" y="438" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+    <rect x="250" y="438" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#5D4BB3" stroke-width="4"/>
+    <rect x="484" y="438" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+  </g>
+  <path d="M34 463h32v34H34zM42 451v12M58 451v12" fill="none" stroke="#E5A91B" stroke-width="5"/>
+  <text x="78" y="486" class="ui w650" font-size="27">Generation</text>
+  <text x="34" y="547" class="mono w650 num">5 W</text>
+  <text x="34" y="578" class="ui w650 secondary" font-size="22">● PRODUCING</text>
+  <path d="M270 466h30l14 14-14 14h-30l-14-14z" fill="none" stroke="#5D4BB3" stroke-width="5"/>
+  <text x="322" y="486" class="ui w650" font-size="27">Transmission</text>
+  <text x="268" y="547" class="mono w650 num" fill="#5D4BB3">8 W</text>
+  <rect x="268" y="557" width="178" height="28" rx="5" fill="#5D4BB3"/>
+  <text x="357" y="578" text-anchor="middle" class="ui w700 light" font-size="20">◆ LIMITING</text>
+  <path d="M510 461h32v12h10v27h-52v-27h10z" fill="none" stroke="#23745F" stroke-width="5"/>
+  <path d="M505 486h42" stroke="#23745F" stroke-width="5"/>
+  <text x="566" y="486" class="ui w650" font-size="27">Reserve</text>
+  <text x="502" y="547" class="mono w650" font-size="44" fill="#23745F">0 / 10</text>
+  <text x="502" y="578" class="ui w650 secondary" font-size="22">■ READY</text>
+
+  <!-- routing -->
+  <text x="18" y="629" class="ui w650" font-size="28">Route spare power</text>
+  <text x="700" y="629" text-anchor="end" class="mono w650 secondary" font-size="23">+0.12 SE/s</text>
+  <rect x="16" y="646" width="688" height="72" rx="12" fill="#252B2C"/>
+  <rect x="245" y="654" width="230" height="56" rx="12" fill="#24B8C7"/>
+  <path d="M354 710l6 8 6-8z" fill="#24B8C7"/>
+  <text x="130" y="691" text-anchor="middle" class="ui w650 light" font-size="28">Expand Grid</text>
+  <text x="360" y="691" text-anchor="middle" class="ui w700" font-size="30">Balanced</text>
+  <text x="588" y="691" text-anchor="middle" class="ui w650 light" font-size="28">Feed WATT</text>
+
+  <!-- action panel -->
+  <rect x="16" y="742" width="688" height="389" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+  <rect x="16" y="742" width="688" height="62" rx="16" fill="#252B2C"/>
+  <path d="M16 784h688v20H16z" fill="#252B2C"/>
+  <text x="40" y="784" class="ui w700 light" font-size="30">Desk grid</text>
+  <text x="680" y="783" text-anchor="end" class="mono w650" font-size="24" fill="#E5A91B">LIVE · 8 W</text>
+  <text x="40" y="850" class="ui w700" font-size="34">Best next move</text>
+  <rect x="38" y="870" width="644" height="98" rx="12" fill="#DCD3C3"/>
+  <circle cx="75" cy="919" r="18" fill="#E5A91B" stroke="#333B3B" stroke-width="3"/>
+  <path d="M93 919h62" stroke="#5D4BB3" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="173" cy="919" r="18" fill="#24B8C7" stroke="#333B3B" stroke-width="3"/>
+  <text x="210" y="911" class="ui w500" font-size="28">Add Transmission so</text>
+  <text x="210" y="947" class="ui w500" font-size="28">every generated watt reaches WATT.</text>
+  <rect x="38" y="990" width="438" height="108" rx="12" fill="#E5A91B" stroke="#333B3B" stroke-width="2"/>
+  <path d="M57 1009h7v70h-7M70 1019h10v50H70" stroke="#202829" stroke-width="3"/>
+  <text x="96" y="1034" class="ui w700" font-size="34">Braided cable</text>
+  <text x="96" y="1074" class="mono w650" font-size="28">+4 W TRANS. · 18 SE</text>
+  <rect x="498" y="990" width="184" height="108" rx="12" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+  <path d="M522 1024h46M554 1008l16 16-16 16" fill="none" stroke="#006E79" stroke-width="7"/>
+  <text x="590" y="1028" text-anchor="middle" class="ui w700" font-size="25">VISIBLE</text>
+  <text x="522" y="1071" class="ui secondary" font-size="24">cable appears</text>
+  <path d="M651 825l18 0M660 816v18" stroke="#8B8D84" stroke-width="2" opacity=".6"/>
+
+  <!-- nav -->
+  <rect x="0" y="1145" width="720" height="135" fill="#252B2C"/>
+  <rect x="16" y="1161" width="160" height="92" rx="12" fill="#F7F1E5"/>
+  <text x="96" y="1208" text-anchor="middle" class="ui w700" font-size="30">● Grid</text>
+  <text x="96" y="1238" text-anchor="middle" class="ui secondary" font-size="21">live desk</text>
+  <text x="269" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Build</text>
+  <text x="450" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Upgrades</text>
+  <text x="625" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Reports</text>
+</svg>

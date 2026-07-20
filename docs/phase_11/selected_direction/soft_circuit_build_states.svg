@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Circuit Workshop Build screen state concept</title>
+  <desc id="desc">Build screen with a visually dominant compact WATT monitor header and believable electrical item cards demonstrating affordable, unaffordable, locked, and milestone states.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".15"/></filter>
+    <pattern id="criticalHatch" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v16" stroke="#A93640" stroke-width="6" opacity=".25"/></pattern>
+    <style>
+      .ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}
+      .w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}.light{fill:#FFF9EC}.secondary{fill:#566160}.darksecondary{fill:#C9D1CC}
+    </style>
+  </defs>
+  <rect width="720" height="1280" fill="#D9CCB8"/>
+  <rect width="720" height="72" fill="#252B2C"/>
+  <text x="24" y="30" class="ui w700 light" font-size="24">COLD BOOT</text><text x="24" y="58" class="ui darksecondary" font-size="25">Desk · Era 01</text>
+  <text x="360" y="46" text-anchor="middle" class="mono w650" font-size="34" fill="#E5A91B">24 SE</text><text x="632" y="46" text-anchor="end" class="mono w650 light" font-size="32">8 W</text>
+  <rect x="656" y="12" width="48" height="48" rx="12" fill="#F7F1E5"/><path d="M668 26h24M668 36h24M668 46h24" stroke="#333B3B" stroke-width="4"/>
+
+  <!-- WATT compact focal header -->
+  <rect x="16" y="88" width="688" height="168" rx="20" fill="#F7F1E5" stroke="#333B3B" stroke-width="2" filter="url(#e1)"/>
+  <rect x="30" y="101" width="250" height="142" rx="10" fill="#DCD3C3"/>
+  <path d="M68 117h152l14 12v92l-12 10H66l-11-11v-91z" fill="#526968" stroke="#333B3B" stroke-width="4"/>
+  <rect x="79" y="130" width="132" height="75" rx="7" fill="#172829"/>
+  <path d="M103 163q12-13 24 0M162 163q12-13 24 0" fill="none" stroke="#24B8C7" stroke-width="9" stroke-linecap="round"/>
+  <path d="M133 185q17 11 34 0" fill="none" stroke="#24B8C7" stroke-width="4"/>
+  <path d="M148 168l-10 15h10l-5 15 19-23h-11l7-7z" fill="#24B8C7"/>
+  <circle cx="78" cy="217" r="4" fill="#24B8C7"/><circle cx="94" cy="217" r="4" fill="#686F6C"/>
+  <rect x="106" y="229" width="83" height="14" rx="2" fill="#FFF9EC"/><text x="147" y="240" text-anchor="middle" class="mono w650" font-size="10">WATT · UNIT 01</text>
+  <text x="304" y="126" class="ui w650" font-size="23" fill="#006E79">WATT · CURRENT REQUEST</text>
+  <text x="304" y="169" class="ui w700" font-size="36">Finish Booting</text>
+  <text x="304" y="207" class="ui w500" font-size="29">“A sensible cable would help.”</text>
+  <text x="304" y="236" class="mono w650 secondary" font-size="22">TRANS. LIMITING · 25s</text>
+
+  <text x="20" y="307" class="ui w700" font-size="38">Build</text>
+  <text x="700" y="304" text-anchor="end" class="ui w650 secondary" font-size="24">Showing available first</text>
+
+  <!-- affordable -->
+  <rect x="16" y="326" width="688" height="190" rx="16" fill="#FFF9EC" stroke="#2B764C" stroke-width="3" filter="url(#e1)"/>
+  <path d="M16 342a16 16 0 0 1 16-16h12v190H32a16 16 0 0 1-16-16z" fill="#2B764C"/>
+  <path d="M66 353h50v54H66zM77 338v15M101 338v15" fill="none" stroke="#E5A91B" stroke-width="7"/>
+  <text x="138" y="370" class="ui w700" font-size="34">Wall outlet</text>
+  <rect x="524" y="344" width="156" height="38" rx="6" fill="#2B764C"/><text x="602" y="370" text-anchor="middle" class="ui w700 light" font-size="22">✓ AFFORDABLE</text>
+  <text x="138" y="408" class="ui w500" font-size="27">Owned 1 · adds a grounded 5 W source</text>
+  <text x="138" y="447" class="mono w650" font-size="25" fill="#2B764C">PREDICTED +5 W GEN.</text>
+  <rect x="138" y="463" width="310" height="42" rx="8" fill="#DCD3C3"/><text x="154" y="492" class="ui w650" font-size="23">Appears beside desk plate 01</text>
+  <rect x="474" y="448" width="206" height="56" rx="12" fill="#252B2C"/><text x="577" y="485" text-anchor="middle" class="ui w650 light" font-size="29">Buy · 11 SE</text>
+
+  <!-- unaffordable -->
+  <rect x="16" y="532" width="688" height="184" rx="16" fill="#F7F1E5" stroke="#5D4BB3" stroke-width="3"/>
+  <path d="M16 548a16 16 0 0 1 16-16h12v184H32a16 16 0 0 1-16-16z" fill="#5D4BB3"/>
+  <path d="M67 562h48l17 20-17 20H67l-17-20z" fill="none" stroke="#5D4BB3" stroke-width="7"/><circle cx="73" cy="582" r="5" fill="#5D4BB3"/><circle cx="110" cy="582" r="5" fill="#5D4BB3"/>
+  <text x="150" y="578" class="ui w700" font-size="34">Questionable power strip</text>
+  <text x="150" y="616" class="ui w500" font-size="27">Owned 0 · moves more power to WATT</text>
+  <text x="150" y="655" class="mono w650" font-size="28" fill="#5D4BB3">PREDICTED +18 W TRANS.</text>
+  <rect x="150" y="669" width="314" height="34" rx="5" fill="#A65315"/><text x="307" y="693" text-anchor="middle" class="ui w650 light" font-size="21">NEED 17 SE MORE · ABOUT 02:22</text>
+  <rect x="486" y="646" width="194" height="57" rx="12" fill="#686F6C"/><text x="583" y="683" text-anchor="middle" class="ui w650 light" font-size="27">35 SE</text>
+
+  <!-- locked -->
+  <rect x="16" y="732" width="688" height="174" rx="16" fill="#DCD3C3" stroke="#686F6C" stroke-width="2"/>
+  <path d="M16 748a16 16 0 0 1 16-16h12v174H32a16 16 0 0 1-16-16z" fill="#686F6C"/>
+  <rect x="66" y="766" width="50" height="42" rx="5" fill="none" stroke="#686F6C" stroke-width="7"/><path d="M77 766v-13q0-16 14-16t14 16v13" fill="none" stroke="#686F6C" stroke-width="7"/>
+  <text x="144" y="775" class="ui w700" font-size="34">Rooftop solar panel</text>
+  <rect x="548" y="750" width="132" height="38" rx="6" fill="#686F6C"/><text x="614" y="776" text-anchor="middle" class="ui w700 light" font-size="22">▣ LOCKED</text>
+  <text x="144" y="816" class="ui w500" font-size="27">Generation hardware for the bedroom roof</text>
+  <text x="144" y="857" class="ui w650" font-size="26" fill="#686F6C">Complete “Organize Photographs”</text>
+  <text x="144" y="889" class="ui secondary" font-size="23">WATT has not inspected the roof yet.</text>
+
+  <!-- milestone -->
+  <rect x="16" y="922" width="688" height="190" rx="16" fill="#FFF9EC" stroke="#E5A91B" stroke-width="3" filter="url(#e1)"/>
+  <path d="M16 938a16 16 0 0 1 16-16h12v190H32a16 16 0 0 1-16-16z" fill="#E5A91B"/>
+  <path d="M68 953h48v52H68zM78 940v13M104 940v13" fill="none" stroke="#E5A91B" stroke-width="7"/>
+  <text x="144" y="967" class="ui w700" font-size="34">Outlet circuit</text>
+  <rect x="500" y="942" width="180" height="39" rx="6" fill="#E5A91B"/><text x="590" y="969" text-anchor="middle" class="ui w700" font-size="22">★ MILESTONE</text>
+  <text x="144" y="1008" class="ui w500" font-size="25">10 installed · improvised branch linked</text>
+  <text x="144" y="1051" class="mono w650" font-size="27" fill="#2B764C">ALL OUTLETS ×2</text>
+  <rect x="486" y="1033" width="194" height="58" rx="12" fill="#2B764C"/><text x="583" y="1071" text-anchor="middle" class="ui w650 light" font-size="27">✓ ACTIVE</text>
+
+  <!-- nav -->
+  <rect x="0" y="1145" width="720" height="135" fill="#252B2C"/>
+  <text x="96" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Grid</text>
+  <rect x="189" y="1161" width="160" height="92" rx="12" fill="#F7F1E5"/><text x="269" y="1214" text-anchor="middle" class="ui w700" font-size="30">● Build</text>
+  <text x="450" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Upgrades</text><text x="625" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Reports</text>
+</svg>

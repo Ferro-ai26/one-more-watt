@@ -10,6 +10,20 @@ ONE MORE WATT should look like a charming, increasingly overbuilt electrical con
 
 The game must remain attractive and readable on a phone while evolving from a cluttered desk into a multiversal utility network.
 
+## Phase 11 superseded structural exploration
+
+Living Animated Workshop Diorama previously proposed a world-first hierarchy and cutaway main screen. `DEC-026` superseded that proposal before visual approval. The following structure is retained as exploration history, not as current authority:
+
+- Compact top status rail: approximately 10–12% of portrait height.
+- Living diorama: approximately 60–65% of portrait height.
+- WATT: a physical scene resident occupying approximately 20–30% of the diorama and responding to nearby activity.
+- Current request: physically attached to WATT near the lower portion of the scene.
+- Build and Upgrade: partial-height drawers over a still-visible scene.
+- Reports and detailed statistics: secondary overlays where cards are permitted.
+- Purchases: appear at authored installation anchors and connect through authored cable paths; ownership milestones alter scene states rather than rendering every owned unit.
+
+No selected visual or narrative direction currently replaces it. A future Phase 11 brief must explicitly define the new hierarchy and execution before this section can become authoritative again.
+
 ## Required direction decisions
 
 ### WATT

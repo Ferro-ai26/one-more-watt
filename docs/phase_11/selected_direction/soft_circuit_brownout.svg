@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Circuit Workshop brownout state concept</title>
+  <desc id="desc">A restrained brownout state that dims only the domestic environment, keeps WATT and controls readable, marks Transmission as limiting with color, icon, pattern, and text, and gives an actionable recovery step.</desc>
+  <defs>
+    <pattern id="hatch" width="20" height="20" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v20" stroke="#A93640" stroke-width="7" opacity=".38"/></pattern>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#000" flood-opacity=".15"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}.light{fill:#FFF9EC}.secondary{fill:#566160}.darksecondary{fill:#C9D1CC}</style>
+  </defs>
+  <rect width="720" height="1280" fill="#B9AC99"/>
+  <rect width="720" height="72" fill="#252B2C"/>
+  <text x="24" y="29" class="ui w700 light" font-size="24">COLD BOOT</text><text x="24" y="57" class="ui darksecondary" font-size="25">Desk · Era 01</text>
+  <text x="360" y="45" text-anchor="middle" class="mono w650" font-size="34" fill="#E5A91B">24 SE</text><text x="632" y="45" text-anchor="end" class="mono w650 light" font-size="32">4 / 8 W</text>
+  <rect x="656" y="12" width="48" height="48" rx="12" fill="#F7F1E5"/><path d="M668 26h24M668 36h24M668 46h24" stroke="#333B3B" stroke-width="4"/>
+
+  <!-- persistent critical strip -->
+  <rect x="16" y="88" width="688" height="72" rx="12" fill="#A93640"/>
+  <path d="M42 108l18 32H24z" fill="#FFF9EC"/><path d="M42 117v12M42 135v1" stroke="#A93640" stroke-width="5"/>
+  <text x="78" y="122" class="ui w700 light" font-size="31">BROWNOUT · TRANSMISSION LIMITING</text>
+  <text x="78" y="148" class="ui w500 light" font-size="23">4 W is reaching WATT · progress is slower, never lost</text>
+
+  <!-- focal panel, environment deliberately dimmed -->
+  <rect x="16" y="176" width="688" height="286" rx="20" fill="#F7F1E5" stroke="#A93640" stroke-width="3" filter="url(#e1)"/>
+  <g opacity=".58">
+    <rect x="30" y="190" width="286" height="222" rx="12" fill="#DCD3C3"/>
+    <path d="M44 378h260v22H44z" fill="#78604A"/><path d="M62 400v32M286 400v32" stroke="#5E4938" stroke-width="12"/>
+    <path d="M73 361c25-53 47-68 73-36" fill="none" stroke="#3D4240" stroke-width="10"/>
+    <path d="M197 349h75" stroke="#A93640" stroke-width="8" stroke-dasharray="14 12"/>
+  </g>
+  <!-- WATT stays high-contrast -->
+  <path d="M87 214h174l18 16v135l-15 14H85l-14-15V230z" fill="#526968" stroke="#333B3B" stroke-width="4"/>
+  <rect x="98" y="235" width="158" height="103" rx="8" fill="#172829"/>
+  <path d="M120 280q14-10 28 2M191 282q14-12 28-1" fill="none" stroke="#24B8C7" stroke-opacity=".62" stroke-width="9" stroke-linecap="round"/>
+  <path d="M156 313h39" stroke="#24B8C7" stroke-opacity=".62" stroke-width="5" stroke-linecap="round"/>
+  <path d="M171 289l-13 19h13l-6 20 22-28h-13l8-11z" fill="#24B8C7" opacity=".62"/>
+  <circle cx="96" cy="354" r="5" fill="#A93640"/><circle cx="114" cy="354" r="5" fill="#686F6C"/>
+  <rect x="126" y="374" width="122" height="22" rx="3" fill="#FFF9EC"/><text x="187" y="390" text-anchor="middle" class="mono w650" font-size="14">WATT · CONCERNED</text>
+  <rect x="38" y="198" width="122" height="31" rx="6" fill="#A93640"/><text x="99" y="220" text-anchor="middle" class="ui w700 light" font-size="19">VOLTAGE LOW</text>
+
+  <text x="338" y="210" class="ui w650" font-size="23" fill="#006E79">WATT · ACTIVE REQUEST</text>
+  <text x="338" y="256" class="ui w500" font-size="32">“The grid appears to be</text><text x="338" y="294" class="ui w500" font-size="32">taking a brief sit-down.”</text>
+  <text x="338" y="342" class="ui w700" font-size="38">Basic Arithmetic</text>
+  <text x="338" y="376" class="mono w650" font-size="23" fill="#A93640">SERVICE 50% · +01:18 ETA</text>
+  <rect x="338" y="395" width="342" height="18" rx="9" fill="#DCD3C3"/><path d="M338 395h188v18H338z" fill="#24B8C7"/><path d="M526 395h70v18h-70z" fill="url(#hatch)"/>
+  <text x="338" y="444" class="ui w650" font-size="25" fill="#A93640">Progress retained · recovery automatic</text>
+
+  <!-- vitals -->
+  <rect x="16" y="482" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+  <rect x="250" y="482" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#A93640" stroke-width="4"/>
+  <rect x="250" y="482" width="16" height="154" rx="6" fill="url(#hatch)"/>
+  <rect x="484" y="482" width="220" height="154" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+  <path d="M34 506h32v34H34zM42 494v12M58 494v12" fill="none" stroke="#E5A91B" stroke-width="5"/><text x="78" y="529" class="ui w650" font-size="27">Generation</text><text x="34" y="590" class="mono w650" font-size="46">8 W</text><text x="34" y="621" class="ui w650 secondary" font-size="22">● PRODUCING</text>
+  <path d="M278 509h26l11 12-11 12h-26l-11-12z" fill="none" stroke="#5D4BB3" stroke-width="5"/><path d="M291 500v42" stroke="#A93640" stroke-width="4"/><text x="324" y="529" class="ui w650" font-size="23">Transmission</text><text x="278" y="590" class="mono w650" font-size="46" fill="#A93640">4 W</text><rect x="278" y="600" width="168" height="28" rx="5" fill="#A93640"/><text x="362" y="621" text-anchor="middle" class="ui w700 light" font-size="19">! LIMITING</text>
+  <path d="M510 504h32v12h10v27h-52v-27h10z" fill="none" stroke="#23745F" stroke-width="5"/><text x="566" y="529" class="ui w650" font-size="27">Reserve</text><text x="502" y="590" class="mono w650" font-size="43" fill="#23745F">2 / 10</text><text x="502" y="621" class="ui w650 secondary" font-size="22">↓ SUPPORTING</text>
+
+  <!-- recovery action -->
+  <rect x="16" y="660" width="688" height="456" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+  <text x="40" y="710" class="ui w700" font-size="36">Recover the request</text>
+  <rect x="40" y="736" width="640" height="108" rx="12" fill="#DCD3C3"/>
+  <path d="M70 783h75" stroke="#5D4BB3" stroke-width="9" stroke-dasharray="16 10"/><path d="M145 783l-18-12v24z" fill="#5D4BB3"/>
+  <text x="178" y="774" class="ui w700" font-size="29">Add Transmission</text><text x="178" y="811" class="ui w500" font-size="27">Restore the missing 4 W path to WATT.</text>
+  <rect x="40" y="866" width="410" height="104" rx="12" fill="#5D4BB3"/>
+  <text x="64" y="909" class="ui w700 light" font-size="32">Braided cable</text><text x="64" y="947" class="mono w650 light" font-size="27">+4 W TRANS. · 18 SE</text>
+  <rect x="474" y="866" width="206" height="104" rx="12" fill="#252B2C"/><text x="577" y="929" text-anchor="middle" class="ui w650 light" font-size="30">Build now</text>
+  <text x="40" y="1015" class="ui w650 secondary" font-size="24">No progress is lost. Reserve supports WATT until empty.</text>
+  <path d="M40 1042h640" stroke="#8B8D84" stroke-width="2"/>
+  <text x="40" y="1082" class="mono w650" font-size="25" fill="#A93640">BROWNOUT 00:12.4 · STABILITY 82.1</text>
+
+  <rect x="0" y="1145" width="720" height="135" fill="#252B2C"/>
+  <rect x="16" y="1161" width="160" height="92" rx="12" fill="#F7F1E5"/><text x="96" y="1214" text-anchor="middle" class="ui w700" font-size="30">● Grid</text>
+  <text x="269" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Build</text><text x="450" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Upgrades</text><text x="625" y="1215" text-anchor="middle" class="ui w650 light" font-size="29">Reports</text>
+</svg>

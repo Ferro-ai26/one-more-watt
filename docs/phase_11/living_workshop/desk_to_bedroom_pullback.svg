@@ -1,0 +1,56 @@
+<svg data-status="superseded-exploration" xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Desk to Bedroom Assistant camera pullback</title>
+  <desc id="desc">A three-beat transition storyboard pulls from the desk, through the room boundary, to a full bedroom cutaway where the original desk grid remains connected to a generator, window service, cooling, and battery.</desc>
+  <defs>
+    <linearGradient id="wall"><stop stop-color="#B69B73"/><stop offset="1" stop-color="#5A4434"/></linearGradient>
+    <linearGradient id="steel"><stop stop-color="#667574"/><stop offset="1" stop-color="#2D3737"/></linearGradient>
+    <radialGradient id="cyan"><stop stop-color="#48D7DF" stop-opacity=".4"/><stop offset="1" stop-color="#24B8C7" stop-opacity="0"/></radialGradient>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.b{font-weight:700}.m{font-weight:600}.light{fill:#FFF9EC}.muted{fill:#C9D1CC}</style>
+    <g id="miniWatt"><path d="M8 0h150l18 15v108l-15 17H3l-13-17V18z" fill="url(#steel)" stroke="#252B2C" stroke-width="5"/><rect x="26" y="25" width="126" height="72" rx="5" fill="#102829"/><path d="M47 59q13-15 26 0M105 59q13-15 26 0" fill="none" stroke="#24B8C7" stroke-width="9" stroke-linecap="round"/><rect x="62" y="109" width="55" height="20" rx="3" fill="#172829"/><path d="M86 112l-7 10h7l-3 6 13-11h-7l5-5z" fill="#24B8C7"/><path d="M25 140v16H5M150 140v16h22" stroke="#252B2C" stroke-width="9"/></g>
+  </defs>
+  <rect width="1800" height="900" fill="#171D1D"/>
+  <text x="42" y="62" class="ui b light" font-size="42">Era transition · the room joins the grid</text>
+  <text x="1758" y="58" text-anchor="end" class="mono b" font-size="24" fill="#24B8C7">1200 ms PULLBACK · 300 ms REDUCED</text>
+
+  <!-- frame 1 -->
+  <rect x="30" y="96" width="520" height="730" rx="14" fill="url(#wall)" stroke="#8B8D84" stroke-width="3"/>
+  <text x="58" y="142" class="ui b light" font-size="30">1 · DESK</text><text x="520" y="140" text-anchor="end" class="mono m muted" font-size="20">scale 1.00</text>
+  <ellipse cx="318" cy="393" rx="190" ry="180" fill="url(#cyan)"/>
+  <rect x="78" y="560" width="420" height="42" fill="#6B4932"/><path d="M98 602v140M470 602v140" stroke="#3D2B22" stroke-width="25"/>
+  <use href="#miniWatt" transform="translate(243 389) scale(1.22)"/>
+  <rect x="95" y="410" width="52" height="72" rx="5" fill="#C3B79F" stroke="#252B2C" stroke-width="4"/><circle cx="112" cy="440" r="5"/><circle cx="132" cy="440" r="5"/>
+  <path d="M120 482C128 540 191 531 236 524" fill="none" stroke="#E5A91B" stroke-width="8" stroke-dasharray="18 11"/>
+  <rect x="60" y="765" width="460" height="42" rx="5" fill="#F7F1E5"/><text x="290" y="793" text-anchor="middle" class="ui b" font-size="23">Original outlet 01 remains the source.</text>
+
+  <!-- frame 2 -->
+  <rect x="640" y="96" width="520" height="730" rx="14" fill="#302923" stroke="#E5A91B" stroke-width="4"/>
+  <text x="668" y="142" class="ui b light" font-size="30">2 · WALLS APPEAR</text><text x="1130" y="140" text-anchor="end" class="mono m" font-size="20" fill="#E5A91B">scale 0.68</text>
+  <path d="M678 198h444v510H678z" fill="url(#wall)"/><path d="M678 198h444v38H678zM678 674h444v34H678z" fill="#3A3028"/>
+  <rect x="725" y="525" width="350" height="34" fill="#6B4932"/><path d="M742 559v110M1055 559v110" stroke="#3D2B22" stroke-width="20"/>
+  <use href="#miniWatt" transform="translate(852 412) scale(.78)"/>
+  <rect x="735" y="430" width="38" height="53" fill="#C3B79F" stroke="#252B2C" stroke-width="3"/>
+  <path d="M754 483C760 521 808 516 852 510" fill="none" stroke="#E5A91B" stroke-width="6" stroke-dasharray="14 9"/>
+  <rect x="980" y="248" width="110" height="154" fill="#C8D8D2" stroke="#252B2C" stroke-width="6"/><path d="M1035 248v154M980 325h110" stroke="#333B3B" stroke-width="5"/>
+  <path d="M678 198l-25-28M1122 198l25-28M678 708l-25 28M1122 708l25 28" stroke="#24B8C7" stroke-width="5"/>
+  <rect x="670" y="765" width="460" height="42" rx="5" fill="#F7F1E5"/><text x="900" y="793" text-anchor="middle" class="ui b" font-size="23">Desk becomes one subsystem inside the room.</text>
+
+  <!-- frame 3 -->
+  <rect x="1250" y="96" width="520" height="730" rx="14" fill="#302923" stroke="#2B764C" stroke-width="4"/>
+  <text x="1278" y="142" class="ui b light" font-size="30">3 · BEDROOM ASSISTANT</text><text x="1740" y="140" text-anchor="end" class="mono m" font-size="20" fill="#77C9AC">scale 0.42</text>
+  <path d="M1282 185h455v523h-455z" fill="url(#wall)"/><path d="M1282 185h455v32h-455zM1282 675h455v33h-455z" fill="#3A3028"/>
+  <!-- window and outside generator -->
+  <rect x="1572" y="225" width="130" height="176" fill="#B9D0CB" stroke="#252B2C" stroke-width="6"/><path d="M1637 225v176M1572 313h130" stroke="#333B3B" stroke-width="5"/>
+  <path d="M1637 401v54" stroke="#333B3B" stroke-width="7"/><rect x="1585" y="447" width="133" height="79" rx="6" fill="#4B5958" stroke="#252B2C" stroke-width="5"/><circle cx="1617" cy="487" r="20" fill="#252B2C" stroke="#E5A91B" stroke-width="7"/><path d="M1660 475h36M1660 490h36" stroke="#C9D1CC" stroke-width="5"/>
+  <path d="M1585 462C1540 453 1529 476 1538 529" fill="none" stroke="#252B2C" stroke-width="12"/><path d="M1585 462C1540 453 1529 476 1538 529" fill="none" stroke="#E5A91B" stroke-width="5"/>
+  <!-- desk subsystem -->
+  <rect x="1320" y="530" width="270" height="30" fill="#6B4932"/><path d="M1338 560v99M1570 560v99" stroke="#3D2B22" stroke-width="18"/>
+  <use href="#miniWatt" transform="translate(1425 438) scale(.59)"/>
+  <rect x="1340" y="458" width="30" height="43" fill="#C3B79F" stroke="#252B2C" stroke-width="3"/>
+  <path d="M1355 501C1363 527 1394 521 1425 516" fill="none" stroke="#E5A91B" stroke-width="5" stroke-dasharray="12 8"/>
+  <!-- fan and battery -->
+  <circle cx="1360" cy="385" r="42" fill="#4B5958" stroke="#252B2C" stroke-width="5"/><path d="M1360 385c-6-25 15-29 24-12 7 13-8 17-24 12zm0 0c23 9 17 29 0 29-15 0-11-15 0-29zm0 0c-17 18-32 5-23-10 8-13 19-2 23 10z" fill="#9AA8A3"/>
+  <rect x="1613" y="562" width="84" height="96" rx="5" fill="#3F4948" stroke="#252B2C" stroke-width="5"/><path d="M1628 590h54M1628 616h54M1628 642h54" stroke="#23745F" stroke-width="6"/>
+  <rect x="1280" y="748" width="460" height="59" rx="6" fill="#F7F1E5"/><text x="1510" y="773" text-anchor="middle" class="ui b" font-size="25">ERA 02 · Bedroom Assistant</text><text x="1510" y="797" text-anchor="middle" class="ui m" font-size="20">Generator outside. WATT found more electricity.</text>
+
+  <path d="M566 450h47M598 433l18 17-18 17M1176 450h47M1208 433l18 17-18 17" fill="none" stroke="#24B8C7" stroke-width="7"/>
+</svg>

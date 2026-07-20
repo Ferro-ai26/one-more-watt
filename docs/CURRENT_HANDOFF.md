@@ -4,40 +4,58 @@ Updated: 2026-07-20
 
 Active phase: Phase 11 — Theme and Art Direction
 
-Status: Ready — Awaiting Explicit Authorization
+Status: In Progress — Major Direction Pivot Pending
 
 ## Exact result achieved
 
-Phase 10 — Targeted Bug Fixing and Prototype Stabilization is closed at the explicit direction of the user. The functional Eras 1–3 prototype remains unchanged except for the targeted mobile density scaling and larger-text repairs already committed in `0c4f44e`.
+The user stopped the current Phase 11 revision because the visual and narrative direction is being reconsidered substantially. `DEC-026` supersedes both prior direction decisions. Phase 11 remains open with no selected or locked visual direction.
 
-`ISSUE-004` has a host-confirmed root cause and implemented fix. The project retains its 720 × 1280 `canvas_items`/`expand` base; the bounded mobile scaler uses Android-reported dpi and physical window dimensions to target density-independent logical sizing without reducing the effective viewport below the verified 320 × 568 layout. Settings exposes the display inputs and applied result. The revised APK passed static inspection, but it was not run on the Moto phone. The user explicitly accepted that Phase 10 limitation and deferred physical-device verification to Phase 14 — Visual, Mobile, and Accessibility QA.
+The worktree was inspected and all Phase 11 exploration was preserved without deleting or rewriting prior evidence:
 
-`ISSUE-005` is closed as **Withdrawn — No Actionable Reproduction Details**. No unspecified bug was inferred, reproduced, or fixed.
+- `docs/phase_11/concepts/` contains the initial three-candidate comparison and current-prototype audit evidence.
+- `docs/phase_11/selected_direction/` contains the complete rendered Soft Circuit Workshop final proposal. It is explicitly rejected and superseded; only its technical research may be reconsidered later.
+- `docs/phase_11/living_workshop/` contains the interrupted Living Animated Workshop Diorama revision. It has six partial SVG sources plus direction/environment/asset-plan documents. The SVGs are marked `data-status="superseded-exploration"` and the directory documents label the work superseded and incomplete.
+- The Living Workshop revision stopped before SVG rendering, approval-board assembly, or visual inspection. No PNGs or approval evidence are claimed for it.
 
-Phase 10 host regression and documentation consistency checks passed at closure. Phase 11 has not begun and requires separate explicit authorization.
+Compatible technical evidence remains available but is not automatically approved for the next direction: the Atkinson Hyperlegible Next/Mono proposal and licensing records, measured contrast ratios, semantic category separation, asset provenance records, production-estimation work, and the phone-scale validation process.
+
+No runtime, font, gameplay, content, balance, save, export, production-skin, or Phase 12 file was changed. The last runtime state remains the closed Phase 10 commit `4c77a30`.
 
 ## Files changed
 
-- Updated `README.md` and `docs/ACTIVE_PHASE.md` for the closed Phase 10 state and gated Phase 11 pointer.
-- Updated `docs/CURRENT_HANDOFF.md`, `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, `docs/PLAYTEST_CHECKLIST.md`, and `docs/DECISION_LOG.md` with the accepted verification limitation and final dispositions.
-- Updated `docs/ANDROID_DEVICE_TEST.md` and `docs/ANDROID_BUILD_RECORD.md` without deleting or promoting any unexecuted device check.
-- Updated `docs/phases/PHASE_14_VISUAL_MOBILE_ACCESSIBILITY_QA.md` so Phase 14 owns the deferred Moto verification.
+- Added the Phase 11 current-visual audit, three-candidate comparison, provenance record, editable candidate SVGs, rendered candidate PNGs, comparison board, and prototype baseline capture under `docs/phase_11/`.
+- Added and then labeled the complete Soft Circuit proposal under `docs/phase_11/selected_direction/` as rejected/superseded exploration.
+- Added and then labeled the incomplete Living Workshop documents, inventory, provenance, and six unrendered SVG sources under `docs/phase_11/living_workshop/` as superseded exploration.
+- Updated `docs/ACTIVE_PHASE.md`, `docs/THEME_AND_ART_DIRECTION_SPEC.md`, `docs/ART_DIRECTION_WORKBOOK.md`, and `docs/DECISION_LOG.md` so no current direction is presented as selected.
+- Updated `README.md`, `docs/DOCUMENT_INDEX.md`, `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, `docs/PLAYTEST_CHECKLIST.md`, and this handoff for the pivot checkpoint.
+- No files outside documentation/concept scope were modified.
 
 ## Commands/tests run
 
-- `./tools/validate.sh`: passed the complete Phase 10 repository suite, including project import, 55 foundation checks, 24 Android configuration checks, content/invalid-content validation, 178 simulation checks, 187 request checks, 93 economy checks, 48 UI-system checks, 296 main-UI integration checks, 81 persistence/offline checks, 14 offline-UI checks, 908 balance/reachability checks, 111 UI/performance checks, five portrait layouts, all debug-panel checks, and headless smoke launch.
-- `sha256sum build/android/one_more_watt_phase10_debug.apk`: matched `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`.
-- Documentation reference/status consistency checks: passed.
-- `git diff --check`: passed.
+- Inspected `git status`, branch, remotes, recent history, the complete Phase 11 file inventory, and stale approval/status language before checkpoint edits.
+- `git diff --check`: passed before the final validation run.
+- First pre-edit `./tools/validate.sh` baseline attempt reached the performance suite but failed its 1,000 ms live-refresh host budget at 1,134.2 ms. No runtime change preceded that result.
+- Full `./tools/validate.sh` rerun after checkpoint labeling: passed, including headless launch; 55 foundation, 24 Android config, 30 content, 12 invalid-content fixtures, 178 simulation, 187 request, 93 economy, 48 UI-system, 296 main-UI integration, 81 persistence/offline, 14 offline-UI, 908 balance/reachability, 111 UI/performance, five portrait layouts, 18 grid-debug, 59 request-debug, and 42 economy-debug checks. The retry measured 985.2 ms for 500 live refreshes.
+
+## Manual verification
+
+- Verified the Phase 11 filesystem inventory and the status labels in both superseded package directories.
+- Verified all six Living Workshop SVG roots carry `data-status="superseded-exploration"`.
+- No Living Workshop render, approval board, visual inspection, device test, runtime playtest, export, or font integration was performed after the stop instruction.
 
 ## Remaining acceptance criteria
 
-None inside Phase 10. The unexecuted Moto/device checks remain truthful historical limitations and are transferred to Phase 14 rather than claimed as passing.
+- Receive the substantially revised visual and narrative direction brief.
+- Re-evaluate which technical evidence, if any, remains compatible; do not silently inherit either superseded package.
+- Produce a new coherent Phase 11 approval package satisfying the Phase 11 contract.
+- Obtain explicit user approval before locking the new direction or closing Phase 11.
 
 ## Known blockers
 
-None for the Phase 10 closure accepted by the user. Physical Android evidence is still absent for the density-aware build and remains required/dispositioned under the Phase 14 contract.
+The new visual and narrative direction is intentionally undefined. Continuing concept work without that brief would materially alter the product and is prohibited.
+
+`ISSUE-004` physical Android verification remains deferred to Phase 14. The isolated host performance-budget miss described above passed on a complete rerun and did not involve a runtime change.
 
 ## Recommended next action
 
-Stop. Obtain explicit user authorization before beginning Phase 11 — Theme and Art Direction. Do not perform Phase 14 verification early.
+Start a new Codex session in Phase 11, read `DEC-026` and this handoff, obtain the new visual/narrative brief, and establish a fresh approval target. Do not resume Soft Circuit Workshop or Living Animated Workshop Diorama, modify the runtime, integrate fonts, begin production skinning, or begin Phase 12.

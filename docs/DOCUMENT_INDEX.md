@@ -40,8 +40,9 @@
 ## Phase contracts
 
 - Phases 00–09: completed development sequence and evidence for the Android vertical slice
-- Phase 10: targeted prototype stabilization; In Progress — host fix and APK verified, phone retest pending
-- Phases 11–14: visual direction, reusable skin architecture, production skinning, and visual/mobile QA
+- Phase 10: targeted prototype stabilization; Complete — accepted device-verification limitation transferred to Phase 14
+- Phase 11: theme and art direction; In Progress — no selected direction; major visual/narrative pivot pending under DEC-026
+- Phases 12–14: reusable skin architecture, production skinning, and visual/mobile QA
 - Phases 15–21: era-integrated game and art production through the Multiverse
 - Phases 22–26: content lock, final audiovisual production, stabilization, closed testing/store preparation, and separately authorized production release
 - `phases/legacy_v1/`: superseded, unstarted v1 Phase 10–16 contracts retained for history only

@@ -1,0 +1,18 @@
+id,path,type,era,screen,status,source,license,dimensions,memory_notes,approved_by
+font_atkinson_next,assets/fonts/atkinson_hyperlegible_next.ttf,font,all,all,retired_plan,Google Fonts pinned file,SIL OFL 1.1,variable TTF 200-800,114552-byte evidence file; Godot import TBD,superseded under DEC-026
+font_atkinson_mono,assets/fonts/atkinson_hyperlegible_mono.ttf,font,all,all,retired_plan,Google Fonts pinned file,SIL OFL 1.1,variable TTF 200-800,53960-byte evidence file; Godot import TBD,superseded under DEC-026
+theme_soft_circuit,assets/themes/soft_circuit_theme.tres,theme,all,all,retired_plan,Godot-native original,project original,n/a,no texture allocation,superseded under DEC-026
+icons_grid_categories,assets/icons/grid/,icon_set,all,grid,retired_plan,editable SVG original,project original,48x48 masters,vector import measurement TBD,superseded under DEC-026
+icons_navigation,assets/icons/navigation/,icon_set,all,all,retired_plan,editable SVG original,project original,48x48 masters,vector import measurement TBD,superseded under DEC-026
+icons_states,assets/icons/states/,icon_set,all,all,retired_plan,editable SVG and code patterns,project original,48x48 masters,vector import measurement TBD,superseded under DEC-026
+icons_infrastructure,assets/icons/infrastructure/,icon_set,1-3,build,retired_plan,editable SVG original,project original,18 masters at 48x48,reuse environment prop masters,superseded under DEC-026
+icons_upgrades,assets/icons/upgrades/,icon_set,1-3,upgrades,retired_plan,editable SVG original,project original,3 masters at 48x48,reuse changed-part silhouettes,superseded under DEC-026
+watt_base_rig,assets/illustrations/watt/watt_base_rig.svg,watt_rig,all,all,superseded_exploration,layered SVG original,project original,scalable,texture budget TBD,superseded under DEC-026
+watt_expressions,assets/illustrations/watt/expressions/,watt_pose_set,all,all,superseded_exploration,rig poses original,project original,6 required plus blink,reuse base rig,superseded under DEC-026
+watt_era_housings,assets/illustrations/watt/housings/,watt_housing_set,1-3 and 6,all,superseded_exploration,layered SVG original,project original,4 masters,reuse face and core,superseded under DEC-026
+env_era01_desk,assets/illustrations/environments/era01/,environment,1,grid,superseded_exploration,layered original illustration,project original,3-4 cropped depth bands,part of <=24MiB active-era target,superseded under DEC-026
+env_era02_bedroom,assets/illustrations/environments/era02/,environment,2,grid,superseded_exploration,layered original illustration,project original,3-4 cropped depth bands,part of <=24MiB active-era target,superseded under DEC-026
+env_era03_house_closet,assets/illustrations/environments/era03/,environment,3,grid,superseded_exploration,layered original illustration,project original,3-4 cropped depth bands,part of <=24MiB active-era target,superseded under DEC-026
+transition_era01_02,assets/illustrations/transitions/era01_02/,transition,1-2,modal,superseded_exploration,reused environment bands,project original,720x1280 reference,no dedicated full-screen texture required,superseded under DEC-026
+transition_era02_03,assets/illustrations/transitions/era02_03/,transition,2-3,modal,retired_plan,reused environment bands,project original,720x1280 reference,no dedicated full-screen texture required,superseded under DEC-026
+effects_semantic,scripts/ui/soft_circuit_effects.gd,effect_set,all,all,retired_plan,Godot-native original,project original,7 semantic hooks,no texture allocation expected,superseded under DEC-026

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Circuit Workshop Era 1 to Era 2 transition concept</title>
+  <desc id="desc">A pullback from WATT's original desk to a believable bedroom-scale electrical installation with an outdoor generator, weatherproof cable pass-through, battery cabinet, ventilation, and retained original outlet.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".18"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}.light{fill:#FFF9EC}.secondary{fill:#566160}.darksecondary{fill:#C9D1CC}</style>
+  </defs>
+  <rect width="720" height="1280" fill="#252B2C"/>
+  <text x="28" y="48" class="ui w650 darksecondary" font-size="24">ERA TRANSITION · SCALE PULLBACK</text>
+  <text x="692" y="48" text-anchor="end" class="mono w650" font-size="22" fill="#24B8C7">DESK → ROOM</text>
+
+  <!-- room cutaway -->
+  <rect x="20" y="72" width="680" height="710" rx="20" fill="#D9CCB8" stroke="#FFF9EC" stroke-width="2"/>
+  <path d="M20 615h680v167H20z" fill="#A98E70"/>
+  <path d="M20 606h680v12H20z" fill="#7B6957"/>
+  <!-- window and outdoor generator -->
+  <rect x="468" y="118" width="190" height="248" rx="5" fill="#C7D7D3" stroke="#333B3B" stroke-width="7"/>
+  <path d="M563 118v248M468 244h190" stroke="#333B3B" stroke-width="5"/>
+  <path d="M474 328h178v38H474z" fill="#72847F"/>
+  <path d="M505 367v63" stroke="#333B3B" stroke-width="10"/>
+  <rect x="470" y="430" width="188" height="112" rx="8" fill="#6D7771" stroke="#333B3B" stroke-width="4"/>
+  <circle cx="520" cy="486" r="30" fill="#333B3B"/><circle cx="520" cy="486" r="19" fill="none" stroke="#E5A91B" stroke-width="6"/>
+  <rect x="566" y="458" width="70" height="45" rx="4" fill="#252B2C"/><path d="M578 473h46M578 484h31" stroke="#C9D1CC" stroke-width="4"/>
+  <path d="M470 449h188" stroke="#E5A91B" stroke-width="8"/>
+  <rect x="495" y="524" width="135" height="25" rx="3" fill="#FFF9EC"/><text x="563" y="542" text-anchor="middle" class="mono w650" font-size="14">GENERATOR · OUTSIDE</text>
+  <!-- safe cable pass-through -->
+  <circle cx="455" cy="403" r="19" fill="#333B3B"/><circle cx="455" cy="403" r="10" fill="#E5A91B"/>
+  <path d="M470 482c-40 0-30-79-15-79M436 403c-38 0-60 45-77 92" fill="none" stroke="#3D4240" stroke-width="11" stroke-linecap="round"/>
+  <path d="M470 482c-40 0-30-79-15-79" fill="none" stroke="#E5A91B" stroke-width="4"/>
+  <rect x="385" y="375" width="112" height="24" rx="3" fill="#FFF9EC"/><text x="441" y="392" text-anchor="middle" class="mono w650" font-size="13">WEATHER SEAL</text>
+
+  <!-- WATT desk -->
+  <path d="M65 570h360v28H65z" fill="#78604A"/><path d="M88 598v97M400 598v97" stroke="#5E4938" stroke-width="16"/>
+  <rect x="86" y="520" width="76" height="50" rx="5" fill="#FFF9EC" stroke="#333B3B" stroke-width="3"/>
+  <circle cx="110" cy="542" r="6" fill="#202829"/><circle cx="138" cy="542" r="6" fill="#202829"/><rect x="94" y="572" width="69" height="24" rx="3" fill="#FFF9EC"/><text x="128" y="589" text-anchor="middle" class="mono w650" font-size="13">ORIGINAL 01</text>
+  <!-- reinforced shelf -->
+  <path d="M178 268h244v24H178z" fill="#606866"/><path d="M201 292l-28 50M399 292l28 50" stroke="#333B3B" stroke-width="8"/>
+  <!-- WATT enlarged and central -->
+  <path d="M190 315h220l24 21v164l-19 18H187l-18-19V336z" fill="#526968" stroke="#333B3B" stroke-width="5" filter="url(#e1)"/>
+  <rect x="216" y="343" width="170" height="114" rx="8" fill="#172829"/>
+  <path d="M240 392q16-19 32 0M327 392q16-19 32 0" fill="none" stroke="#24B8C7" stroke-width="12" stroke-linecap="round"/>
+  <path d="M272 427q29 20 58 0" fill="none" stroke="#24B8C7" stroke-width="6"/>
+  <path d="M297 399l-16 24h16l-8 24 29-36h-17l10-12z" fill="#24B8C7"/>
+  <circle cx="200" cy="481" r="6" fill="#24B8C7"/><circle cx="221" cy="481" r="6" fill="#2B764C"/>
+  <rect x="248" y="493" width="138" height="25" rx="3" fill="#FFF9EC"/><text x="317" y="511" text-anchor="middle" class="mono w650" font-size="15">WATT · SAME CORE</text>
+  <path d="M217 322l23 0M395 502l16-5M176 415l10-6" stroke="#FFF9EC" stroke-opacity=".3" stroke-width="3"/>
+  <!-- fan/cooling and battery -->
+  <rect x="63" y="304" width="95" height="128" rx="6" fill="#66716E" stroke="#333B3B" stroke-width="4"/>
+  <circle cx="110" cy="354" r="34" fill="none" stroke="#C9D1CC" stroke-width="5"/><path d="M110 320c18 12 17 23 0 34M144 354c-12 18-23 17-34 0M110 388c-18-12-17-23 0-34M76 354c12-18 23-17 34 0" fill="#C9D1CC" opacity=".65"/>
+  <rect x="68" y="398" width="85" height="22" rx="3" fill="#FFF9EC"/><text x="110" y="414" text-anchor="middle" class="mono w650" font-size="12">AUX COOLING</text>
+  <rect x="484" y="568" width="154" height="130" rx="6" fill="#596764" stroke="#333B3B" stroke-width="4"/>
+  <path d="M505 595h112M505 626h112M505 657h112" stroke="#23745F" stroke-width="8"/>
+  <rect x="509" y="674" width="104" height="23" rx="3" fill="#FFF9EC"/><text x="561" y="691" text-anchor="middle" class="mono w650" font-size="13">VENTED BATTERY</text>
+  <path d="M435 570c36 0 49 39 49 60" fill="none" stroke="#3D4240" stroke-width="11"/>
+  <path d="M435 570c36 0 49 39 49 60" fill="none" stroke="#23745F" stroke-width="4"/>
+  <!-- scale arrows -->
+  <path d="M52 101h80M52 101l18-12M52 101l18 12M668 101h-80M668 101l-18-12M668 101l-18 12" stroke="#006E79" stroke-width="4"/>
+  <text x="360" y="110" text-anchor="middle" class="ui w650" font-size="22" fill="#006E79">THE ROOM JOINS THE GRID</text>
+
+  <!-- transition plate -->
+  <rect x="28" y="806" width="664" height="434" rx="24" fill="#FFF9EC" stroke="#333B3B" stroke-width="3" filter="url(#e1)"/>
+  <text x="52" y="857" class="ui w650" font-size="25" fill="#006E79">ERA 02</text>
+  <text x="52" y="914" class="ui w700" font-size="48">Bedroom Assistant</text>
+  <text x="52" y="959" class="ui w500" font-size="31">The desk grid has reached the walls.</text>
+  <rect x="52" y="990" width="616" height="106" rx="12" fill="#DCD3C3"/>
+  <rect x="70" y="1008" width="118" height="32" rx="6" fill="#006E79"/><text x="129" y="1031" text-anchor="middle" class="ui w700 light" font-size="19">WATT SAYS</text>
+  <text x="70" y="1075" class="ui w500" font-size="29">“I found additional electricity outside.”</text>
+  <text x="52" y="1122" class="ui w650 secondary" font-size="24">New scale · room</text>
+  <text x="668" y="1122" text-anchor="end" class="ui w650 secondary" font-size="24">Original outlet 01 remains connected</text>
+  <rect x="52" y="1157" width="616" height="58" rx="12" fill="#252B2C"/><text x="360" y="1196" text-anchor="middle" class="ui w650 light" font-size="30">Enter Bedroom Assistant</text>
+</svg>

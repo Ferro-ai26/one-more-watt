@@ -1,0 +1,74 @@
+<svg data-status="superseded-exploration" xmlns="http://www.w3.org/2000/svg" width="1800" height="900" viewBox="0 0 1800 900" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Questionable Power Strip purchase sequence</title>
+  <desc id="desc">Three authored storyboard states show an empty desk-front anchor, a power strip seating and cable tracing toward WATT, and an activated connected result with WATT, lamp, fan, and power flow responding.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B69B73"/><stop offset="1" stop-color="#594535"/></linearGradient>
+    <linearGradient id="steel"><stop stop-color="#687776"/><stop offset="1" stop-color="#2D3737"/></linearGradient>
+    <radialGradient id="cyan"><stop stop-color="#48D7DF" stop-opacity=".35"/><stop offset="1" stop-color="#24B8C7" stop-opacity="0"/></radialGradient>
+    <radialGradient id="amber"><stop stop-color="#F3B75B" stop-opacity=".5"/><stop offset="1" stop-color="#D98B36" stop-opacity="0"/></radialGradient>
+    <filter id="shadow"><feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#000" flood-opacity=".4"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.b{font-weight:700}.m{font-weight:600}.light{fill:#FFF9EC}.muted{fill:#C9D1CC}</style>
+    <g id="watt">
+      <path d="M35 0h210l22 20v146l-19 23H27L10 168V23z" fill="url(#steel)" stroke="#252B2C" stroke-width="6"/>
+      <rect x="45" y="32" width="184" height="99" rx="6" fill="#102829" stroke="#263536" stroke-width="7"/>
+      <path d="M76 78q17-18 34 0M162 78q17-18 34 0" fill="none" stroke="#24B8C7" stroke-width="12" stroke-linecap="round"/>
+      <rect x="96" y="145" width="82" height="26" rx="4" fill="#172829" stroke="#71807C" stroke-width="2"/><path d="M133 149l-9 12h9l-4 8 17-14h-10l6-6z" fill="#24B8C7"/>
+      <circle cx="31" cy="151" r="7" fill="#24B8C7"/><path d="M218 145h28M218 157h28" stroke="#192525" stroke-width="6"/>
+      <path d="M46 189v21h-28M230 189v21h30" fill="none" stroke="#252B2C" stroke-width="12"/>
+      <path d="M11 103c-35 2-47 22-39 47" fill="none" stroke="#252B2C" stroke-width="16"/>
+    </g>
+    <g id="strip">
+      <path d="M0 16l18-16h182l19 16-19 40H18z" fill="#454F4E" stroke="#252B2C" stroke-width="6"/>
+      <g fill="#171D1D"><circle cx="40" cy="29" r="9"/><circle cx="82" cy="29" r="9"/><circle cx="124" cy="29" r="9"/><circle cx="166" cy="29" r="9"/></g>
+      <circle cx="198" cy="29" r="8" fill="#A93640"/><path d="M0 30h-32" stroke="#252B2C" stroke-width="13"/>
+      <rect x="55" y="53" width="112" height="21" fill="#F7F1E5"/><text x="111" y="68" text-anchor="middle" class="mono b" font-size="13">4 OUTLETS · 1 WARNING</text>
+    </g>
+  </defs>
+  <rect width="1800" height="900" fill="#171D1D"/>
+  <text x="42" y="64" class="ui b light" font-size="42">Questionable Power Strip · authored purchase choreography</text>
+  <text x="1758" y="60" text-anchor="end" class="mono b" font-size="24" fill="#24B8C7">PLACE → CONNECT → RESPOND</text>
+
+  <!-- panels -->
+  <g>
+    <rect x="30" y="100" width="560" height="750" rx="14" fill="url(#wall)" stroke="#8B8D84" stroke-width="3"/>
+    <rect x="620" y="100" width="560" height="750" rx="14" fill="url(#wall)" stroke="#E5A91B" stroke-width="4"/>
+    <rect x="1210" y="100" width="560" height="750" rx="14" fill="url(#wall)" stroke="#2B764C" stroke-width="4"/>
+  </g>
+
+  <!-- before -->
+  <text x="58" y="148" class="ui b light" font-size="31">1 · BEFORE</text><text x="558" y="146" text-anchor="end" class="mono m muted" font-size="20">desk_front_power_strip</text>
+  <ellipse cx="337" cy="396" rx="205" ry="180" fill="url(#cyan)"/><ellipse cx="145" cy="425" rx="155" ry="210" fill="url(#amber)"/>
+  <rect x="72" y="580" width="475" height="47" fill="#6B4932" stroke="#30251F" stroke-width="5"/><path d="M100 627v127M510 627v127" stroke="#3D2B22" stroke-width="25"/>
+  <use href="#watt" transform="translate(258 353) scale(.93)" filter="url(#shadow)"/>
+  <rect x="146" y="523" width="250" height="77" rx="8" fill="#252B2C" opacity=".5" stroke="#E5A91B" stroke-width="4" stroke-dasharray="14 10"/>
+  <text x="271" y="555" text-anchor="middle" class="ui b light" font-size="23">EMPTY INSTALLATION ANCHOR</text><text x="271" y="583" text-anchor="middle" class="ui m muted" font-size="19">bracket holes already suspicious</text>
+  <path d="M282 538q22-18 44 0M361 538q22-18 44 0" fill="none" stroke="#24B8C7" stroke-width="0"/>
+  <rect x="60" y="780" width="500" height="48" rx="6" fill="#F7F1E5"/><text x="310" y="812" text-anchor="middle" class="ui b" font-size="24">WATT looks toward the empty rail.</text>
+
+  <!-- connection -->
+  <text x="648" y="148" class="ui b light" font-size="31">2 · INSTALL / CONNECT</text><text x="1148" y="146" text-anchor="end" class="mono m" font-size="20" fill="#E5A91B">420 ms path trace</text>
+  <ellipse cx="929" cy="396" rx="205" ry="180" fill="url(#cyan)"/>
+  <rect x="660" y="580" width="475" height="47" fill="#6B4932" stroke="#30251F" stroke-width="5"/><path d="M688 627v127M1098 627v127" stroke="#3D2B22" stroke-width="25"/>
+  <use href="#watt" transform="translate(850 353) scale(.93)" filter="url(#shadow)"/>
+  <use href="#strip" transform="translate(713 505)" filter="url(#shadow)"/>
+  <path d="M900 534C945 504 984 490 1003 459" fill="none" stroke="#252B2C" stroke-width="17"/>
+  <path d="M900 534C945 504 984 490 1003 459" fill="none" stroke="#5D4BB3" stroke-width="7" stroke-dasharray="16 10"/>
+  <circle cx="1003" cy="459" r="12" fill="#E5A91B" stroke="#FFF9EC" stroke-width="4"/>
+  <path d="M745 486v-55M724 454l21-23 21 23" fill="none" stroke="#E5A91B" stroke-width="7"/>
+  <rect x="650" y="780" width="500" height="48" rx="6" fill="#F7F1E5"/><text x="900" y="812" text-anchor="middle" class="ui b" font-size="24">Brackets seat; authored cable reaches WATT.</text>
+
+  <!-- activated -->
+  <text x="1238" y="148" class="ui b light" font-size="31">3 · ACTIVATED</text><text x="1738" y="146" text-anchor="end" class="mono m" font-size="20" fill="#77C9AC">TRANSMISSION +18 W</text>
+  <ellipse cx="1519" cy="396" rx="250" ry="205" fill="url(#cyan)"/><ellipse cx="1310" cy="430" rx="190" ry="220" fill="url(#amber)"/>
+  <rect x="1250" y="580" width="475" height="47" fill="#6B4932" stroke="#30251F" stroke-width="5"/><path d="M1278 627v127M1688 627v127" stroke="#3D2B22" stroke-width="25"/>
+  <use href="#watt" transform="translate(1440 347) scale(.93)" filter="url(#shadow)"/>
+  <use href="#strip" transform="translate(1303 505)" filter="url(#shadow)"/>
+  <path d="M1490 534C1535 504 1574 490 1593 459" fill="none" stroke="#252B2C" stroke-width="17"/>
+  <path d="M1490 534C1535 504 1574 490 1593 459" fill="none" stroke="#5D4BB3" stroke-width="7" stroke-dasharray="16 10"/>
+  <path d="M1508 522l16-8M1542 502l16-8M1572 480l14-10" stroke="#FFF9EC" stroke-width="4"/>
+  <circle cx="1593" cy="459" r="12" fill="#2B764C" stroke="#FFF9EC" stroke-width="4"/>
+  <path d="M1475 421q18-23 36 0M1561 421q18-23 36 0" fill="none" stroke="#24B8C7" stroke-width="13" stroke-linecap="round"/>
+  <path d="M1282 344q31-56 79-9l-32 64-65-24z" fill="#596360" stroke="#252B2C" stroke-width="5"/><path d="M1294 375q20 12 38 3" stroke="#F3B75B" stroke-width="7"/>
+  <circle cx="1700" cy="404" r="42" fill="#596360" stroke="#252B2C" stroke-width="6"/><path d="M1700 404c-7-27 17-31 26-13 7 15-9 18-26 13zm0 0c25 10 18 31 0 31-17 0-12-16 0-31zm0 0c-19 20-35 5-25-11 9-14 21-2 25 11z" fill="#9AA8A3"/>
+  <rect x="1240" y="780" width="500" height="48" rx="6" fill="#F7F1E5"/><text x="1490" y="812" text-anchor="middle" class="ui b" font-size="24">Status lamp, power flow, fan, and WATT respond.</text>
+</svg>

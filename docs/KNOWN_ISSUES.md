@@ -12,6 +12,8 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
+Phase 11's visual audit opened no new runtime defect. WATT's placeholder glyph, text-only environments, incomplete iconography, inline colors, and minimal motion remain documented production gaps rather than regressions. No visual direction is currently selected: the Soft Circuit package and incomplete Living Workshop revision are superseded exploration under `DEC-026`, and a major visual/narrative pivot is pending. No Phase 11 visual asset or font has been integrated into the unchanged game.
+
 ### ISSUE-004 — Phone presentation appears too small
 
 - Status: Fix Implemented — Device Verification Deferred

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1500" viewBox="0 0 1400 1500" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">WATT model sheet for Soft Circuit Workshop</title>
+  <desc id="desc">Construction, six expression states, and Era 1, Era 2, Era 3, Era 6, and cosmic continuity housings for WATT's cyan monitor face.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#000" flood-opacity=".16"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}.light{fill:#FFF9EC}.secondary{fill:#566160}</style>
+  </defs>
+  <rect width="1400" height="1500" fill="#D9CCB8"/>
+  <rect x="0" y="0" width="1400" height="92" fill="#252B2C"/>
+  <text x="40" y="58" class="ui w700 light" font-size="42">WATT · Model sheet</text>
+  <text x="1360" y="57" text-anchor="end" class="mono w650" font-size="26" fill="#24B8C7">SOFT CIRCUIT WORKSHOP · REV A</text>
+
+  <!-- base construction -->
+  <rect x="30" y="122" width="650" height="494" rx="20" fill="#FFF9EC" stroke="#333B3B" stroke-width="2" filter="url(#e1)"/>
+  <text x="60" y="171" class="ui w700" font-size="34">Base construction · Era 1</text>
+  <path d="M124 236h344l36 31v252l-30 28H120l-28-29V267z" fill="#526968" stroke="#333B3B" stroke-width="6"/>
+  <rect x="152" y="272" width="292" height="188" rx="12" fill="#172829" stroke="#2D3838" stroke-width="8"/>
+  <path d="M194 351q25-28 50 0M352 351q25-28 50 0" fill="none" stroke="#24B8C7" stroke-width="16" stroke-linecap="round"/>
+  <path d="M258 413q40 27 80 0" fill="none" stroke="#24B8C7" stroke-width="8" stroke-linecap="round"/>
+  <path d="M294 365l-26 39h26l-13 41 48-59h-28l17-21z" fill="#24B8C7"/>
+  <circle cx="133" cy="501" r="8" fill="#24B8C7"/><circle cx="161" cy="501" r="8" fill="#686F6C"/>
+  <path d="M410 493h42M410 509h42" stroke="#293333" stroke-width="7"/>
+  <circle cx="112" cy="254" r="6" fill="#8B8D84"/><circle cx="480" cy="258" r="6" fill="#8B8D84"/>
+  <path d="M150 241h44M430 537l30-8M95 391l18-10" stroke="#FFF9EC" stroke-opacity=".28" stroke-width="5"/>
+  <rect x="182" y="538" width="240" height="38" rx="4" fill="#FFF9EC" transform="rotate(-1 182 538)"/>
+  <text x="302" y="565" text-anchor="middle" class="mono w650" font-size="22">WATT · UNIT 01 · 5 W</text>
+  <path d="M297 576v12M230 588h134" stroke="#333B3B" stroke-width="12"/>
+  <!-- callouts -->
+  <path d="M446 294H602v-48" fill="none" stroke="#006E79" stroke-width="3"/><circle cx="446" cy="294" r="5" fill="#006E79"/>
+  <text x="474" y="228" class="ui w650" font-size="20" fill="#006E79">4:3 dark glass</text><text x="474" y="252" class="ui secondary" font-size="18">no scanlines</text>
+  <path d="M393 351H621" stroke="#006E79" stroke-width="3"/><circle cx="393" cy="351" r="5" fill="#006E79"/>
+  <text x="480" y="337" class="ui w650" font-size="20" fill="#006E79">two cyan eyes</text><text x="480" y="364" class="ui secondary" font-size="18">38% spacing</text>
+  <path d="M318 404H618v46" fill="none" stroke="#006E79" stroke-width="3"/><circle cx="318" cy="404" r="5" fill="#006E79"/>
+  <text x="470" y="472" class="ui w650" font-size="20" fill="#006E79">bolt-heart</text><text x="470" y="497" class="ui secondary" font-size="18">identity + state</text>
+  <text x="60" y="608" class="ui secondary" font-size="18">Satin green-gray casing · restrained wear · cyan belongs only to WATT</text>
+
+  <!-- rules panel -->
+  <rect x="710" y="122" width="660" height="494" rx="20" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+  <text x="740" y="171" class="ui w700" font-size="34">Recognition rules</text>
+  <text x="744" y="216" class="ui w650" font-size="25">1. Face window</text><text x="930" y="208" class="ui w500" font-size="22"><tspan x="930" dy="0">wide dark glass;</tspan><tspan x="930" dy="25">1.55:1 visible ratio</tspan></text>
+  <text x="744" y="274" class="ui w650" font-size="25">2. Eyes</text><text x="930" y="266" class="ui w500" font-size="22"><tspan x="930" dy="0">two cyan apertures;</tspan><tspan x="930" dy="25">expression before detail</tspan></text>
+  <text x="744" y="332" class="ui w650" font-size="25">3. Bolt-heart</text><text x="930" y="324" class="ui w500" font-size="22"><tspan x="930" dy="0">centered below eyes;</tspan><tspan x="930" dy="25">never category-colored</tspan></text>
+  <text x="744" y="390" class="ui w650" font-size="25">4. Housing</text><text x="930" y="382" class="ui w500" font-size="22"><tspan x="930" dy="0">apparatus may grow;</tspan><tspan x="930" dy="25">face proportions do not</tspan></text>
+  <text x="744" y="448" class="ui w650" font-size="25">5. Mouth</text><text x="930" y="440" class="ui w500" font-size="22"><tspan x="930" dy="0">pleased/completion only;</tspan><tspan x="930" dy="25">one restrained line</tspan></text>
+  <rect x="740" y="480" width="600" height="100" rx="12" fill="#252B2C"/>
+  <text x="766" y="512" class="ui w650" font-size="20" fill="#C9D1CC">6. FOCUS · HIGHEST CONTRAST · SOLE CYAN FACE</text>
+  <text x="766" y="552" class="ui w500 light" font-size="23">At 56 × 40 dp: two eyes + bolt-heart.</text>
+  <circle cx="1287" cy="534" r="30" fill="#172829" stroke="#526968" stroke-width="6"/><path d="M1270 526q7-8 14 0M1290 526q7-8 14 0" fill="none" stroke="#24B8C7" stroke-width="5"/><path d="M1287 529l-7 10h7l-3 9 12-15h-7l4-4z" fill="#24B8C7"/>
+
+  <!-- expressions -->
+  <text x="30" y="672" class="ui w700" font-size="38">Expression states</text>
+  <g>
+    <rect x="30" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+    <rect x="256" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+    <rect x="482" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+    <rect x="708" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#333B3B" stroke-width="2"/>
+    <rect x="934" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#A93640" stroke-width="3"/>
+    <rect x="1160" y="700" width="210" height="262" rx="16" fill="#FFF9EC" stroke="#2B764C" stroke-width="3"/>
+  </g>
+  <!-- repeated mini chassis -->
+  <g fill="#526968" stroke="#333B3B" stroke-width="3">
+    <rect x="56" y="742" width="158" height="124" rx="9"/><rect x="282" y="742" width="158" height="124" rx="9"/><rect x="508" y="742" width="158" height="124" rx="9"/><rect x="734" y="742" width="158" height="124" rx="9"/><rect x="960" y="742" width="158" height="124" rx="9"/><rect x="1186" y="742" width="158" height="124" rx="9"/>
+  </g>
+  <g fill="#172829"><rect x="70" y="758" width="130" height="78" rx="6"/><rect x="296" y="758" width="130" height="78" rx="6"/><rect x="522" y="758" width="130" height="78" rx="6"/><rect x="748" y="758" width="130" height="78" rx="6"/><rect x="974" y="758" width="130" height="78" rx="6"/><rect x="1200" y="758" width="130" height="78" rx="6"/></g>
+  <!-- idle -->
+  <path d="M88 792q10-12 20 0M158 792q10-12 20 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M130 799l-9 13h9l-4 12 15-18h-9l5-7z" fill="#24B8C7"/>
+  <!-- thinking -->
+  <path d="M309 790h24M384 790h24" stroke="#24B8C7" stroke-width="8" stroke-linecap="round"/><circle cx="329" cy="790" r="5" fill="#FFF9EC"/><circle cx="404" cy="790" r="5" fill="#FFF9EC"/><path d="M356 799l-9 13h9l-4 12 15-18h-9l5-7z" fill="#24B8C7"/>
+  <!-- pleased -->
+  <path d="M540 797q12-19 24 0M610 797q12-19 24 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M574 816q15 12 30 0" fill="none" stroke="#24B8C7" stroke-width="4"/><path d="M582 795l-9 13h9l-4 12 15-18h-9l5-7z" fill="#24B8C7"/>
+  <!-- concerned -->
+  <path d="M766 796q10-7 20 3M836 799q10-10 20-3" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M800 818h26" stroke="#24B8C7" stroke-width="4"/><path d="M808 795l-9 13h9l-4 12 15-18h-9l5-7z" fill="#24B8C7"/>
+  <!-- brownout -->
+  <path d="M992 796q10-7 20 3M1062 799q10-10 20-3" fill="none" stroke="#24B8C7" stroke-opacity=".58" stroke-width="8"/><path d="M1026 818h26" stroke="#24B8C7" stroke-opacity=".58" stroke-width="4"/><path d="M1034 795l-9 13h9l-4 12 15-18h-9l5-7z" fill="#24B8C7" opacity=".58"/><circle cx="972" cy="850" r="6" fill="#A93640"/>
+  <!-- complete -->
+  <path d="M1218 797q12-19 24 0M1288 797q12-19 24 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M1252 815q15 15 30 0" fill="none" stroke="#24B8C7" stroke-width="5"/><path d="M1260 793l-10 15h10l-5 15 18-22h-10l6-8z" fill="#24B8C7"/><circle cx="1200" cy="850" r="6" fill="#2B764C"/>
+  <g class="ui w700" font-size="26" text-anchor="middle"><text x="135" y="903">Idle</text><text x="361" y="903">Thinking</text><text x="587" y="903">Pleased</text><text x="813" y="903">Concerned</text><text x="1039" y="903">Brownout</text><text x="1265" y="903">Completion</text></g>
+  <g class="ui secondary" font-size="18" text-anchor="middle"><text x="135" y="932">slow heart pulse</text><text x="361" y="932">eye scan ±4 dp</text><text x="587" y="932">mouth allowed</text><text x="813" y="932">amber chassis cue</text><text x="1039" y="932">cyan 58% + red lamp</text><text x="1265" y="932">two heart pulses</text></g>
+
+  <!-- evolution -->
+  <text x="30" y="1024" class="ui w700" font-size="38">Housing evolution · face geometry remains fixed</text>
+  <g>
+    <rect x="30" y="1050" width="250" height="394" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="296" y="1050" width="250" height="394" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="562" y="1050" width="250" height="394" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="828" y="1050" width="250" height="394" rx="16" fill="#F7F1E5" stroke="#333B3B" stroke-width="2"/>
+    <rect x="1094" y="1050" width="276" height="394" rx="16" fill="#252B2C" stroke="#333B3B" stroke-width="2"/>
+  </g>
+  <!-- era 1 -->
+  <path d="M73 1117h162l15 13v132l-13 12H70l-12-13v-131z" fill="#526968" stroke="#333B3B" stroke-width="4"/><rect x="88" y="1142" width="131" height="84" rx="6" fill="#172829"/><path d="M109 1178q10-12 20 0M177 1178q10-12 20 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M151 1183l-8 12h8l-4 12 15-18h-9l5-6z" fill="#24B8C7"/><rect x="108" y="1270" width="100" height="19" fill="#FFF9EC"/>
+  <!-- era 2 -->
+  <path d="M332 1125h178v147H332z" fill="#66716E" stroke="#333B3B" stroke-width="4"/><path d="M320 1110h202v18H320zM345 1085h152v25H345z" fill="#596360"/><circle cx="354" cy="1097" r="9" fill="#686F6C"/><circle cx="382" cy="1097" r="9" fill="#2B764C"/><rect x="351" y="1144" width="140" height="86" rx="6" fill="#172829"/><path d="M374 1180q10-12 20 0M448 1180q10-12 20 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M416 1185l-8 12h8l-4 12 15-18h-9l5-6z" fill="#24B8C7"/><path d="M347 1272v34M495 1272v34" stroke="#333B3B" stroke-width="8"/>
+  <!-- era 3 rack -->
+  <rect x="596" y="1087" width="181" height="244" fill="#454F4E" stroke="#333B3B" stroke-width="5"/><path d="M610 1106h153M610 1298h153" stroke="#8B8D84" stroke-width="4"/><rect x="617" y="1152" width="139" height="84" rx="4" fill="#172829"/><path d="M639 1186q10-12 20 0M713 1186q10-12 20 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M681 1191l-8 12h8l-4 12 15-18h-9l5-6z" fill="#24B8C7"/><g fill="#686F6C"><circle cx="628" cy="1125" r="6"/><circle cx="649" cy="1125" r="6"/><circle cx="670" cy="1125" r="6"/></g><path d="M625 1260h123M625 1278h123" stroke="#C9D1CC" stroke-width="4"/>
+  <!-- era 6 -->
+  <path d="M853 1120h199v190H853z" fill="#3F4948" stroke="#333B3B" stroke-width="5"/><path d="M832 1100h241v25H832zM832 1305h241v25H832z" fill="#596360"/><rect x="879" y="1154" width="148" height="88" rx="4" fill="#172829"/><path d="M902 1190q10-12 20 0M982 1190q10-12 20 0" fill="none" stroke="#24B8C7" stroke-width="8"/><path d="M947 1195l-8 12h8l-4 12 15-18h-9l5-6z" fill="#24B8C7"/><path d="M849 1147h20M849 1171h20M1038 1147h20M1038 1171h20" stroke="#C9D1CC" stroke-width="5"/><circle cx="858" cy="1282" r="6" fill="#2B764C"/><circle cx="1048" cy="1282" r="6" fill="#E5A91B"/>
+  <!-- cosmic -->
+  <path d="M1125 1124h212v186H1125z" fill="#3F4948" stroke="#8B8D84" stroke-width="5"/><path d="M1106 1100h250v24M1106 1330h250v-20" fill="none" stroke="#8B8D84" stroke-width="12"/><circle cx="1231" cy="1215" r="74" fill="#172829" stroke="#526968" stroke-width="8"/><path d="M1187 1201q16-19 32 0M1243 1201q16-19 32 0" fill="none" stroke="#24B8C7" stroke-width="11"/><path d="M1227 1207l-12 18h12l-6 19 22-27h-13l8-10z" fill="#24B8C7"/><rect x="1155" y="1285" width="152" height="24" fill="#FFF9EC"/><text x="1231" y="1302" text-anchor="middle" class="mono w650" font-size="14">ORIGINAL PLUG RETAINED</text>
+  <g class="ui w700" font-size="25" text-anchor="middle"><text x="155" y="1374">Era 1 · monitor</text><text x="421" y="1374">Era 2 · shelf rig</text><text x="687" y="1374">Era 3 · rack bezel</text><text x="953" y="1374">Era 6 · city console</text><text x="1232" y="1374" class="light">Cosmic · service frame</text></g>
+  <g class="ui secondary" font-size="19" text-anchor="middle"><text x="155" y="1406">old casing + label</text><text x="421" y="1406">status strip + cooling</text><text x="687" y="1406">original bezel bolted in</text><text x="953" y="1406">face is central module</text><text x="1232" y="1406" fill="#C9D1CC">same eyes + heart ratio</text></g>
+</svg>

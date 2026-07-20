@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" role="img" aria-labelledby="title desc">
+  <title id="title">Candidate B — Blueprint Bureau, Main Grid concept</title>
+  <desc id="desc">Deep blue drafting-paper mobile interface with WATT as a circular diagnostic lens, illustrated grid callouts, vital plates, and precise navigation.</desc>
+  <defs>
+    <pattern id="minorGrid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0H0V24" fill="none" stroke="#55E6FF" stroke-width="1" opacity="0.07"/>
+    </pattern>
+    <pattern id="majorGrid" width="120" height="120" patternUnits="userSpaceOnUse">
+      <rect width="120" height="120" fill="url(#minorGrid)"/>
+      <path d="M120 0H0V120" fill="none" stroke="#55E6FF" stroke-width="2" opacity="0.08"/>
+    </pattern>
+    <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="10" stroke="#FF6174" stroke-width="4" opacity="0.45"/>
+    </pattern>
+    <style>
+      .display { font-family: "Barlow Condensed", "DejaVu Sans Condensed", sans-serif; font-weight: 700; letter-spacing: 1px; }
+      .body { font-family: Barlow, "DejaVu Sans", sans-serif; }
+      .mono { font-family: "Space Mono", "DejaVu Sans Mono", monospace; }
+      .primary { fill: #E7F4F5; }
+      .muted { fill: #A8C3C8; }
+      .cyan { fill: #55E6FF; }
+      .tiny { font-size: 17px; letter-spacing: 1.4px; }
+      .small { font-size: 21px; }
+      .bodycopy { font-size: 24px; }
+    </style>
+  </defs>
+
+  <rect width="720" height="1280" fill="#061C2A"/>
+  <rect width="720" height="1280" fill="url(#majorGrid)"/>
+
+  <!-- header -->
+  <path d="M0 0H720V82H0z" fill="#0C2A3C" stroke="#55E6FF" stroke-width="2"/>
+  <path d="M22 18h8v46h-8M698 18h-8v46h8" fill="none" stroke="#55E6FF" stroke-width="3"/>
+  <text x="42" y="34" class="display cyan" font-size="18">SHEET 01 / COLD BOOT</text>
+  <text x="42" y="62" class="body primary" font-size="20">DESK INSTALLATION · REV 0.1</text>
+  <text x="363" y="49" text-anchor="middle" class="mono" font-size="27" fill="#FFC857">24 SE</text>
+  <text x="622" y="49" text-anchor="end" class="mono primary" font-size="23">8 W LIVE</text>
+  <rect x="655" y="18" width="43" height="43" fill="none" stroke="#55E6FF" stroke-width="2"/>
+  <path d="M666 29h21M666 39h21M666 49h21" stroke="#E7F4F5" stroke-width="3"/>
+
+  <!-- WATT blueprint field -->
+  <path d="M22 104H698V430H22z" fill="#0C2A3C" fill-opacity="0.93" stroke="#55E6FF" stroke-width="2"/>
+  <path d="M22 104h24M22 104v24M698 104h-24M698 104v24M22 430h24M22 430v-24M698 430h-24M698 430v-24" fill="none" stroke="#E7F4F5" stroke-width="4"/>
+  <rect x="535" y="116" width="143" height="30" fill="#55E6FF"/>
+  <text x="606" y="137" text-anchor="middle" class="display" font-size="16" fill="#061C2A">CANDIDATE B</text>
+
+  <!-- WATT diagnostic lens -->
+  <circle cx="199" cy="249" r="117" fill="#061C2A" stroke="#164B61" stroke-width="28"/>
+  <circle cx="199" cy="249" r="105" fill="none" stroke="#55E6FF" stroke-width="3" stroke-dasharray="13 8"/>
+  <circle cx="199" cy="249" r="79" fill="#0C2A3C" stroke="#E7F4F5" stroke-width="3"/>
+  <path d="M152 231q19-22 38 0M208 231q19-22 38 0" fill="none" stroke="#55E6FF" stroke-width="10" stroke-linecap="square"/>
+  <path d="M177 275h44M188 291h22" stroke="#55E6FF" stroke-width="5"/>
+  <path d="M196 243l-17 25h17l-8 26 30-38h-18l10-13z" fill="#FFC857"/>
+  <path d="M82 249H47M316 249h31M199 132V97M199 366v35" stroke="#55E6FF" stroke-width="3"/>
+  <circle cx="47" cy="249" r="5" fill="#55E6FF"/><circle cx="347" cy="249" r="5" fill="#55E6FF"/>
+  <text x="46" y="284" class="mono muted" font-size="14">CORE 01</text>
+  <text x="199" y="393" text-anchor="middle" class="display primary" font-size="20">WATT / DIAGNOSTIC LENS</text>
+
+  <!-- request block -->
+  <path d="M347 160H668V323L648 343H347z" fill="#061C2A" stroke="#A8C3C8" stroke-width="2"/>
+  <path d="M347 160h321v46H347z" fill="#164B61"/>
+  <text x="365" y="190" class="display cyan" font-size="19">REQUEST 01 · AUTHORIZATION</text>
+  <text x="365" y="232" class="body primary bodycopy">
+    <tspan x="365" dy="0">“Hello. I am almost awake.</tspan>
+    <tspan x="365" dy="31">May I finish booting?”</tspan>
+  </text>
+  <text x="365" y="305" class="display" font-size="28" fill="#FFC857">FINISH BOOTING</text>
+  <path d="M347 363h321" stroke="#164B61" stroke-width="18"/>
+  <path d="M347 363h106" stroke="#55E6FF" stroke-width="18"/>
+  <path d="M453 349v28" stroke="#E7F4F5" stroke-width="3"/>
+  <text x="347" y="405" class="mono muted" font-size="15">PEAK 3 W · ETA 00:25 · CAPACITY TEST</text>
+
+  <!-- grid vitals -->
+  <text x="24" y="466" class="display cyan" font-size="19">GRID VITALS / IDENTIFY THE CONSTRAINT</text>
+  <g>
+    <path d="M22 482H238V632H22z" fill="#0C2A3C" stroke="#FFC857" stroke-width="3"/>
+    <path d="M252 482H468V632H252z" fill="#0C2A3C" stroke="#A78BFA" stroke-width="4"/>
+    <path d="M482 482H698V632H482z" fill="#0C2A3C" stroke="#52D6A2" stroke-width="3"/>
+  </g>
+  <path d="M41 504h30v30H41zM48 496v8M64 496v8" fill="none" stroke="#FFC857" stroke-width="4"/>
+  <text x="84" y="526" class="display primary" font-size="17">01 · GENERATION</text>
+  <text x="42" y="578" class="mono" font-size="34" fill="#FFC857">5 W</text>
+  <text x="42" y="610" class="display muted" font-size="17">● PRODUCING</text>
+  <path d="M271 505h34l13 14-13 14h-34l-13-14z" fill="none" stroke="#A78BFA" stroke-width="4"/>
+  <text x="326" y="526" class="display primary" font-size="18">02 · TRANS.</text>
+  <text x="272" y="578" class="mono" font-size="34" fill="#A78BFA">8 W</text>
+  <rect x="272" y="592" width="173" height="25" fill="url(#hatch)" stroke="#FF6174" stroke-width="2"/>
+  <text x="358" y="611" text-anchor="middle" class="display primary" font-size="16">! LIMITING REQUEST</text>
+  <path d="M509 504h28v10h9v22h-46v-22h9z" fill="none" stroke="#52D6A2" stroke-width="4"/>
+  <text x="559" y="526" class="display primary" font-size="18">03 · RESERVE</text>
+  <text x="502" y="578" class="mono" font-size="31" fill="#52D6A2">0 / 10</text>
+  <text x="502" y="610" class="display muted" font-size="17">■ READY</text>
+
+  <!-- routing -->
+  <path d="M22 654H698V742H22z" fill="#0C2A3C" stroke="#164B61" stroke-width="2"/>
+  <text x="40" y="681" class="display muted" font-size="16">ROUTING MODE</text>
+  <path d="M40 699H680" stroke="#68808A" stroke-width="3"/>
+  <circle cx="110" cy="699" r="8" fill="#68808A"/><circle cx="360" cy="699" r="13" fill="#55E6FF"/><circle cx="610" cy="699" r="8" fill="#68808A"/>
+  <text x="110" y="729" text-anchor="middle" class="display primary" font-size="18">EXPAND GRID</text>
+  <text x="360" y="729" text-anchor="middle" class="display cyan" font-size="20">BALANCED</text>
+  <text x="610" y="729" text-anchor="middle" class="display primary" font-size="18">FEED WATT</text>
+
+  <!-- recommendation drawing -->
+  <path d="M22 766H698V1134H22z" fill="#061C2A" fill-opacity="0.88" stroke="#55E6FF" stroke-width="2"/>
+  <text x="40" y="804" class="display cyan" font-size="20">PLAN VIEW / DESK GRID</text>
+  <text x="680" y="804" text-anchor="end" class="mono muted" font-size="15">SCALE 1:12 · LIVE</text>
+  <path d="M82 889h98v105H82z" fill="none" stroke="#E7F4F5" stroke-width="3"/>
+  <path d="M101 910h60v48h-60z" fill="none" stroke="#55E6FF" stroke-width="3"/>
+  <path d="M118 931h11m17 0h11" stroke="#55E6FF" stroke-width="6"/>
+  <text x="131" y="1022" text-anchor="middle" class="display muted" font-size="16">WATT CORE</text>
+  <path d="M180 941H347" stroke="#A78BFA" stroke-width="7" stroke-dasharray="14 9"/>
+  <path d="M347 941l-22-14v28z" fill="#A78BFA"/>
+  <circle cx="386" cy="941" r="39" fill="#0C2A3C" stroke="#FF6174" stroke-width="4"/>
+  <path d="M367 941h38M386 922v38" stroke="#FF6174" stroke-width="5"/>
+  <path d="M425 941H547" stroke="#68808A" stroke-width="7" stroke-dasharray="10 10"/>
+  <circle cx="578" cy="941" r="35" fill="#0C2A3C" stroke="#55E6FF" stroke-width="3"/>
+  <path d="M562 941h32M578 925v32" stroke="#55E6FF" stroke-width="4"/>
+  <path d="M386 889V850H654" fill="none" stroke="#FF6174" stroke-width="2"/>
+  <circle cx="386" cy="889" r="5" fill="#FF6174"/>
+  <rect x="457" y="824" width="197" height="50" fill="#FF6174"/>
+  <text x="555" y="845" text-anchor="middle" class="display" font-size="16" fill="#061C2A">BOTTLENECK 02</text>
+  <text x="555" y="865" text-anchor="middle" class="mono" font-size="13" fill="#061C2A">ADD +4 W TRANS.</text>
+  <path d="M40 1061H680V1110H40z" fill="#FFC857"/>
+  <text x="58" y="1093" class="display" font-size="22" fill="#061C2A">ISSUE WORK ORDER · BRAIDED CABLE · 18 SE</text>
+  <path d="M647 1075l13 11-13 11" fill="none" stroke="#061C2A" stroke-width="5"/>
+
+  <!-- navigation -->
+  <rect x="0" y="1158" width="720" height="122" fill="#0C2A3C" stroke="#55E6FF" stroke-width="2"/>
+  <rect x="17" y="1172" width="160" height="76" fill="#164B61" stroke="#55E6FF" stroke-width="2"/>
+  <text x="97" y="1203" text-anchor="middle" class="display cyan" font-size="19">01 / GRID</text>
+  <text x="97" y="1232" text-anchor="middle" class="mono muted" font-size="13">ACTIVE SHEET</text>
+  <text x="269" y="1221" text-anchor="middle" class="display primary" font-size="20">02 / BUILD</text>
+  <text x="451" y="1221" text-anchor="middle" class="display primary" font-size="20">03 / UPGRADES</text>
+  <text x="625" y="1221" text-anchor="middle" class="display primary" font-size="20">04 / REPORTS</text>
+</svg>

@@ -15,10 +15,41 @@
 | 08 — Balance and Polish | Complete | Commit `2cffcd1`; 79.8-minute structured route; 908 balance/reachability checks; 111 headless UI/performance checks; 320-pixel graphical review |
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
-| 11 — Theme and Art Direction | Ready — awaiting explicit authorization | Phase 10 closure committed; no Phase 11 work begun |
+| 11 — Theme and Art Direction | In Progress — major direction pivot pending | All current packages superseded under DEC-026; partial exploration preserved; no direction selected; runtime unchanged |
 | 12–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 11 stopped for major direction pivot
+
+- The user explicitly stopped the current revision because the visual and narrative direction is being reconsidered substantially.
+- Superseded `DEC-025` with `DEC-026`; no hierarchy, main-screen composition, WATT treatment, environment plan, or production estimate is currently selected or locked.
+- Preserved the three-candidate comparison, rejected Soft Circuit package, and incomplete Living Animated Workshop Diorama SVG sources as clearly labeled superseded exploration.
+- Work stopped before the Living Workshop SVGs were rendered, assembled into an approval board, or manually inspected. No missing PNGs or approval evidence are claimed.
+- Retained technical research—font/licensing records, contrast calculations, semantic category separation, provenance, and phone-scale review methods—as optional evidence for the future pivot, not automatic direction requirements.
+- Runtime files, fonts, gameplay, saves, exports, production skinning, and Phase 12 remain untouched.
+
+### 2026-07-20 — Phase 11 revised final direction package
+
+- The user explicitly selected Candidate A — Soft Circuit Workshop and supplied binding revisions: warm/tactile/domestic/character-first; WATT dominant; mature believable hardware; crisp Android numerics; strong semantic contrast; workshop-to-cosmic continuity; restrained effects; no Blueprint Bureau or Midnight Appliance Theatre identity mixing.
+- Recorded the accepted selection and rejected elements in `DEC-024` while keeping the final direction unlocked pending approval of this revised package.
+- Finalized exact semantic colors and verified key contrast pairs from 4.91:1 to 13.70:1; defined 4 dp geometry, 48 dp touch targets, icon shapes, shadow limits, and exact normal/reduced-motion durations.
+- Proposed Atkinson Hyperlegible Next for UI/body and Atkinson Hyperlegible Mono for numeric/status text. Recorded authoritative Google Fonts source commits, OFL 1.1 status, file hashes, byte sizes, fallback policy, and later packaging requirements; no font was committed to or integrated into the runtime.
+- Produced original SVG/PNG concepts for Main Grid, four Build states, Performance Report, Brownout, Era 01-to-02 transition, and a WATT model sheet with six expressions and workshop-to-cosmic housing continuity. Inspected all full-resolution renders and the five-screen 360 × 640 phone board; corrected label/control collisions and overlong captions found during review.
+- Added the 16-era environment escalation plan and a production/rights plan with a 52–73 art/animation-day plus 31–48 Godot/UI-day Eras 1–3 estimate for later Phases 12–14. No AI-generated or external art is used or required by the proposal.
+- Runtime scenes, themes, mechanics, content, balance, saves, exports, and Phase 12 architecture remain untouched. Phase 11 stops at explicit final-package approval.
+- `git diff --check` and the complete `./tools/validate.sh` repository suite passed after the final package/document update; all five screen renders, both boards, and the WATT sheet have verified dimensions.
+
+### 2026-07-20 — Phase 11 candidate approval gate
+
+- Began Phase 11 under explicit user authorization after verifying the Phase 10 closure commit, accepted device limitation, recorded APK hash, clean worktree, and complete host baseline.
+- Audited the current 360 × 640 first-run Grid screen, runtime UI/theme construction, populated asset directories, app icon, responsive evidence, and reusable information architecture.
+- Documented the gray-box strengths and production gaps in `phase_11/CURRENT_VISUAL_AUDIT.md` without changing gameplay, saves, runtime scenes, or the existing theme.
+- Developed exactly three coherent directions: Soft Circuit Workshop, Blueprint Bureau, and Midnight Appliance Theatre. Each records visual premise, WATT design, UI, exact candidate palette, typography, environment, motion, strengths, risks, Android readability, rights approach, and relative production burden.
+- Produced original code-authored 720 × 1280 SVG Main Grid concepts, rendered PNGs, and a 360 × 640-per-candidate comparison board. Manually inspected the full-size concepts and comparison board; corrected dense category/header text before final capture.
+- Updated `ART_DIRECTION_WORKBOOK.md` to the truthful approval-stage state. No candidate, semantic token system, WATT model sheet, or representative state set is approved yet.
+- `./tools/validate.sh` passed the complete unchanged runtime suite and headless launch. The Phase 10 APK SHA-256 still matches `c5ab857ef877284a8c09e84bdf136c06b8789be6effdf3d8b6ff931f95e8c5c4`.
+- Stopped at the Phase 11 approval gate. Phase 12 and broad skinning remain prohibited.
 
 ### 2026-07-20 — Phase 10 closure with accepted device limitation
 

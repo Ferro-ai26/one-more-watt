@@ -34,7 +34,7 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phases 00–10 are closed. Phase 10 added Android density-aware canvas scaling while preserving the verified minimum layout and repaired the larger-text path. Its revised APK and complete host regression passed; the user accepted deferral of the remaining Moto verification to Phase 14. Phase 11 is awaiting explicit authorization and has not begun. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phases 00–10 are closed. Phase 10 added Android density-aware canvas scaling while preserving the verified minimum layout and repaired the larger-text path. Its revised APK and complete host regression passed; the user accepted deferral of the remaining Moto verification to Phase 14. Phase 11 remains open with a major visual and narrative pivot pending; all current concept packages are superseded exploration, no direction is selected, and no runtime skinning has begun. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
@@ -44,7 +44,7 @@ Run content validation alone with `./tools/validate_content.sh`, grid tests with
 
 ## Scope policy
 
-Phases 00–10 are completed history. `docs/ROADMAP_V2.md` and the revised Phase 10–26 contracts govern post-prototype work. The superseded, unstarted v1 Phase 10–16 contracts are retained under `docs/phases/legacy_v1/` for history only and must not be executed.
+Phases 00–10 are completed history. Phase 11 is the active visual-direction phase. `docs/ROADMAP_V2.md` and the revised Phase 10–26 contracts govern post-prototype work. The superseded, unstarted v1 Phase 10–16 contracts are retained under `docs/phases/legacy_v1/` for history only and must not be executed.
 
 The numerical values in `PROGRESSION_AND_BALANCE.md` are initial tuning values, not promises. Change them through recorded balance decisions and data files, never by scattering constants through scripts.
 

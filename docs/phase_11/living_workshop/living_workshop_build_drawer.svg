@@ -1,0 +1,50 @@
+<svg data-status="superseded-exploration" xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Living Workshop with half-height Build drawer</title>
+  <desc id="desc">The same Era 1 diorama remains visible above a partial-height Build drawer containing affordable, unaffordable, locked, and milestone rows.</desc>
+  <defs>
+    <filter id="drawerShadow" x="-10%" y="-30%" width="120%" height="150%"><feDropShadow dx="0" dy="-8" stdDeviation="10" flood-color="#111" flood-opacity=".45"/></filter>
+    <pattern id="lockHatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0v12" stroke="#686F6C" stroke-width="4" opacity=".16"/></pattern>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.b{font-weight:700}.m{font-weight:600}.light{fill:#FFF9EC}.muted{fill:#C9D1CC}.ink2{fill:#566160}</style>
+  </defs>
+  <image href="living_workshop_main.svg" width="720" height="1280"/>
+  <rect x="0" y="600" width="720" height="570" fill="#171D1D" opacity=".18"/>
+  <g filter="url(#drawerShadow)">
+    <path d="M0 646q0-22 22-22h676q22 0 22 22v524H0z" fill="#252B2C" stroke="#A4774E" stroke-width="5"/>
+    <rect x="286" y="636" width="148" height="8" rx="4" fill="#8B8D84"/>
+    <text x="24" y="685" class="ui b light" font-size="34">Build in the workshop</text>
+    <text x="696" y="682" text-anchor="end" class="ui m muted" font-size="23">Scene remains live</text>
+
+    <!-- affordable -->
+    <rect x="22" y="708" width="676" height="104" rx="8" fill="#F7F1E5" stroke="#2B764C" stroke-width="4"/>
+    <rect x="22" y="708" width="13" height="104" fill="#2B764C"/>
+    <path d="M55 732h36v39H55zM63 722v10M82 722v10" fill="none" stroke="#E5A91B" stroke-width="5"/>
+    <text x="112" y="745" class="ui b" font-size="29">Wall outlet</text>
+    <text x="112" y="779" class="ui m" font-size="23">Grounded source · appears at wall anchor</text>
+    <text x="482" y="744" text-anchor="end" class="mono b" font-size="22" fill="#2B764C">+5 W</text>
+    <rect x="505" y="725" width="170" height="64" rx="6" fill="#2B764C"/><text x="590" y="765" text-anchor="middle" class="ui b light" font-size="27">Buy · 11 SE</text>
+
+    <!-- unaffordable -->
+    <rect x="22" y="824" width="676" height="104" rx="8" fill="#F7F1E5" stroke="#5D4BB3" stroke-width="4"/>
+    <rect x="22" y="824" width="13" height="104" fill="#5D4BB3"/>
+    <path d="M54 848h36l13 15-13 15H54l-13-15z" fill="none" stroke="#5D4BB3" stroke-width="5"/><circle cx="61" cy="863" r="4" fill="#5D4BB3"/><circle cx="87" cy="863" r="4" fill="#5D4BB3"/>
+    <text x="112" y="860" class="ui b" font-size="28">Questionable Power Strip</text>
+    <text x="112" y="894" class="ui m" font-size="22">Connects at desk-front rail · need 17 SE more</text>
+    <rect x="505" y="841" width="170" height="64" rx="6" fill="#686F6C"/><text x="590" y="881" text-anchor="middle" class="mono b light" font-size="27">35 SE</text>
+
+    <!-- locked -->
+    <rect x="22" y="940" width="676" height="92" rx="8" fill="#DCD3C3" stroke="#686F6C" stroke-width="3"/>
+    <rect x="22" y="940" width="676" height="92" rx="8" fill="url(#lockHatch)"/>
+    <path d="M59 973v-8q0-12 11-12t11 12v8M52 973h36v31H52z" fill="none" stroke="#686F6C" stroke-width="5"/>
+    <text x="112" y="976" class="ui b" font-size="27">Battery shelf</text>
+    <text x="112" y="1007" class="ui m ink2" font-size="21">Locked · finish “Remember My Name”</text>
+    <rect x="548" y="958" width="127" height="48" rx="5" fill="#686F6C"/><text x="611" y="990" text-anchor="middle" class="ui b light" font-size="23">LOCKED</text>
+
+    <!-- milestone -->
+    <rect x="22" y="1044" width="676" height="104" rx="8" fill="#FFF9EC" stroke="#E5A91B" stroke-width="4"/>
+    <rect x="22" y="1044" width="13" height="104" fill="#E5A91B"/>
+    <path d="M55 1068h36v39H55zM63 1058v10M82 1058v10" fill="none" stroke="#E5A91B" stroke-width="5"/>
+    <text x="112" y="1080" class="ui b" font-size="27">Outlet circuit · 10 installed</text>
+    <text x="112" y="1115" class="ui m" font-size="22">Scene changes to a labeled outlet bank</text>
+    <rect x="522" y="1061" width="153" height="64" rx="6" fill="#E5A91B"/><text x="598" y="1087" text-anchor="middle" class="ui b" font-size="21">MILESTONE</text><text x="598" y="1113" text-anchor="middle" class="mono b" font-size="20">×2 OUTPUT</text>
+  </g>
+</svg>

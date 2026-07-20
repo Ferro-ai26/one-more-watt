@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="1280" viewBox="0 0 720 1280" fill="#202829" role="img" aria-labelledby="title desc">
+  <title id="title">Soft Circuit Workshop performance report concept</title>
+  <desc id="desc">A warm elevated performance report with WATT's pleased monitor face, grade, crisp numerical results, a punchline, unlock hardware label, and actionable improvement.</desc>
+  <defs>
+    <filter id="e2" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#000" flood-opacity=".24"/></filter>
+    <style>.ui{font-family:"Atkinson Hyperlegible Next","DejaVu Sans",sans-serif}.mono{font-family:"Atkinson Hyperlegible Mono","DejaVu Sans Mono",monospace}.w700{font-weight:700}.w650{font-weight:650}.w500{font-weight:500}.light{fill:#FFF9EC}.secondary{fill:#566160}.darksecondary{fill:#C9D1CC}</style>
+  </defs>
+  <rect width="720" height="1280" fill="#B9AC99"/>
+  <g opacity=".35"><rect x="16" y="28" width="688" height="112" rx="16" fill="#252B2C"/><rect x="16" y="158" width="214" height="140" rx="16" fill="#F7F1E5"/><rect x="250" y="158" width="220" height="140" rx="16" fill="#F7F1E5"/><rect x="490" y="158" width="214" height="140" rx="16" fill="#F7F1E5"/><rect x="16" y="318" width="688" height="800" rx="16" fill="#F7F1E5"/></g>
+  <rect width="720" height="1280" fill="#252B2C" opacity=".48"/>
+
+  <!-- modal -->
+  <rect x="28" y="38" width="664" height="1204" rx="24" fill="#FFF9EC" stroke="#333B3B" stroke-width="3" filter="url(#e2)"/>
+  <rect x="28" y="38" width="664" height="74" rx="24" fill="#252B2C"/><path d="M28 88h664v24H28z" fill="#252B2C"/>
+  <text x="52" y="85" class="ui w700 light" font-size="32">Performance report</text>
+  <rect x="564" y="56" width="100" height="38" rx="6" fill="#2B764C"/><text x="614" y="82" text-anchor="middle" class="ui w700 light" font-size="21">COMPLETE</text>
+
+  <!-- WATT and grade -->
+  <rect x="52" y="140" width="298" height="255" rx="16" fill="#DCD3C3"/>
+  <path d="M97 170h194l20 17v151l-16 15H94l-15-16V187z" fill="#526968" stroke="#333B3B" stroke-width="4"/>
+  <rect x="105" y="193" width="180" height="112" rx="8" fill="#172829"/>
+  <path d="M130 241q18-22 36 0M219 241q18-22 36 0" fill="none" stroke="#24B8C7" stroke-width="11" stroke-linecap="round"/>
+  <path d="M163 273q32 24 64 0" fill="none" stroke="#24B8C7" stroke-width="6" stroke-linecap="round"/>
+  <path d="M193 249l-15 22h15l-7 23 26-33h-15l9-12z" fill="#24B8C7"/>
+  <circle cx="101" cy="329" r="5" fill="#24B8C7"/><circle cx="119" cy="329" r="5" fill="#2B764C"/>
+  <rect x="139" y="343" width="129" height="24" rx="3" fill="#FFF9EC"/><text x="203" y="360" text-anchor="middle" class="mono w650" font-size="15">WATT · PLEASED</text>
+  <path d="M118 176l22 0M278 344l14-4" stroke="#FFF9EC" stroke-opacity=".28" stroke-width="3"/>
+
+  <text x="386" y="166" class="ui w650" font-size="25" fill="#006E79">FINISH BOOTING</text>
+  <text x="386" y="232" class="ui w700" font-size="76" fill="#E5A91B">B+</text>
+  <text x="386" y="274" class="mono w650 secondary" font-size="25">STABILITY 87.4</text>
+  <text x="386" y="320" class="ui w500" font-size="29">Reliable, with one</text><text x="386" y="354" class="ui w500" font-size="29">brief cable complaint.</text>
+  <path d="M386 375h268" stroke="#8B8D84" stroke-width="2"/>
+
+  <!-- numeric grid -->
+  <text x="52" y="442" class="ui w700" font-size="34">What happened</text>
+  <g>
+    <rect x="52" y="464" width="294" height="104" rx="12" fill="#F7F1E5" stroke="#8B8D84" stroke-width="2"/>
+    <rect x="374" y="464" width="290" height="104" rx="12" fill="#F7F1E5" stroke="#8B8D84" stroke-width="2"/>
+    <rect x="52" y="584" width="294" height="104" rx="12" fill="#F7F1E5" stroke="#8B8D84" stroke-width="2"/>
+    <rect x="374" y="584" width="290" height="104" rx="12" fill="#F7F1E5" stroke="#8B8D84" stroke-width="2"/>
+  </g>
+  <text x="72" y="495" class="ui w650 secondary" font-size="23">DEMAND SERVED</text><text x="72" y="544" class="mono w650" font-size="40" fill="#2B764C">96.8%</text><text x="249" y="544" class="ui w650" font-size="22" fill="#2B764C">✓ GOOD</text>
+  <text x="394" y="495" class="ui w650 secondary" font-size="23">COMPLETION TIME</text><text x="394" y="544" class="mono w650" font-size="40">00:27.4</text>
+  <text x="72" y="615" class="ui w650 secondary" font-size="23">PEAK HANDLED</text><text x="72" y="664" class="mono w650" font-size="40" fill="#5D4BB3">3 / 3 W</text>
+  <text x="394" y="615" class="ui w650 secondary" font-size="23">BROWNOUT</text><text x="394" y="664" class="mono w650" font-size="40" fill="#A65315">00:01.2</text>
+
+  <!-- reward/unlock -->
+  <rect x="52" y="716" width="612" height="112" rx="14" fill="#252B2C"/>
+  <text x="76" y="752" class="ui w650 darksecondary" font-size="23">STORED ENERGY EARNED</text>
+  <text x="76" y="801" class="mono w650" font-size="42" fill="#E5A91B">+12 SE</text>
+  <path d="M348 738v70" stroke="#566160" stroke-width="2"/>
+  <text x="374" y="752" class="ui w650 darksecondary" font-size="23">UNLOCKED</text>
+  <path d="M378 778h38v33h-38zM387 767v11M407 767v11" fill="none" stroke="#E5A91B" stroke-width="5"/>
+  <text x="432" y="801" class="ui w700 light" font-size="28">Wall outlet</text>
+
+  <!-- punchline -->
+  <rect x="52" y="856" width="612" height="154" rx="14" fill="#DCD3C3" stroke="#333B3B" stroke-width="2"/>
+  <rect x="68" y="872" width="118" height="34" rx="6" fill="#006E79"/><text x="127" y="896" text-anchor="middle" class="ui w700 light" font-size="20">WATT SAYS</text>
+  <text x="76" y="943" class="ui w500" font-size="31">“Thank you. I am fully awake.</text>
+  <text x="76" y="980" class="ui w500" font-size="31">I have several follow-up requests.”</text>
+
+  <!-- recommendation -->
+  <rect x="52" y="1032" width="612" height="92" rx="12" fill="#F7F1E5" stroke="#A65315" stroke-width="2"/>
+  <path d="M74 1055l16 28H58z" fill="#A65315"/><text x="74" y="1079" text-anchor="middle" class="ui w700 light" font-size="18">!</text>
+  <text x="112" y="1065" class="ui w700" font-size="25">Next time</text><text x="112" y="1099" class="ui w500" font-size="26">Add Transmission before the demand peak.</text>
+
+  <rect x="52" y="1150" width="612" height="64" rx="12" fill="#252B2C"/><text x="358" y="1192" text-anchor="middle" class="ui w650 light" font-size="31">Continue</text>
+</svg>

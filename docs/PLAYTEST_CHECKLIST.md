@@ -2,6 +2,37 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 11 candidate visual review — 2026-07-20
+
+- Build/commit: Runtime baseline `4c77a30`; Phase 11 documents and concepts uncommitted at review time
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot/Xvfb capture and direct PNG inspection
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Captured and inspected the unchanged first-run Grid screen at 360 × 640 with isolated fresh user data.
+- [x] Audited WATT prominence, reading order, category states, touch-safe structure, text density, environment representation, icon coverage, and motion hooks against the permanent specifications.
+- [x] Inspected three full-size 720 × 1280 candidate Main Grid concepts and the side-by-side board scaled to 360 × 640 per candidate.
+- [x] Confirmed every concept keeps WATT, dialogue, request/progress, Generation/Transmission/Reserve, explicit limiting text, allocation, recommendation, and four-tab navigation in one portrait hierarchy.
+- [x] Corrected the first candidate render's dense Blueprint Bureau labels and the Midnight Appliance Theatre vital headings, then regenerated and reinspected the final board.
+- [x] Confirmed no concept contains external imagery, generated raster art, copied marks, or baked production-game text assets; editable SVG sources are retained.
+- [x] User selected Candidate A — Soft Circuit Workshop and approved the binding revision brief recorded in `DEC-024`.
+- [x] Inspected the revised full-size Main Grid, Build-state family, Performance Report, Brownout, Era 01-to-02 transition, and WATT model sheet after rendering with the proposed exact fonts.
+- [x] Inspected all five representative screens at 360 × 640 logical pixels on the two-row phone board. WATT remained the strongest local cyan focus; category numerics and labels stayed readable; warnings used text/icon/pattern in addition to color.
+- [x] Corrected full-size review defects: Build benefit/button collisions, Main Grid instruction overflow, brownout Transmission width, transition caption width, and WATT-sheet caption/focus collisions; regenerated and reinspected the affected renders.
+- [x] Confirmed the five screens use the same warm surfaces, mature hardware construction, type roles, category colors, small radii, border/shadow limits, and restrained effects without importing the rejected dashboard or heavy-glow identities.
+- [ ] User approved the revised final direction package and authorized it to be recorded as locked.
+- [ ] Selected direction reviewed on a physical Android device. This remains later Phase 14 evidence, not a Phase 11 claim.
+
+This is a concept/final-proposal review, not a gameplay playtest or physical-device test. The runtime project was not reskinned. Contrast was calculated from exact tokens and the concepts were reviewed at logical phone scale; font packaging, live larger-text reflow, live reduced-motion behavior, physical touch comfort, and device screenshots remain implementation/QA work after approval.
+
+### Direction-pivot checkpoint
+
+- [x] Soft Circuit final-proposal screens relabeled as rejected/superseded exploration.
+- [x] Living Animated Workshop Diorama documents and six partial SVG sources preserved as superseded, incomplete exploration.
+- [x] Recorded truthfully that the Living Workshop sources were not rendered, assembled into an approval board, or visually inspected before work stopped.
+- [x] Confirmed no runtime skin, font, gameplay, save, or Phase 12 change was made.
+- [ ] New visual/narrative direction brief received.
+- [ ] New Phase 11 approval package produced and explicitly approved.
+
 ## Phase 10 host scale/layout pass — 2026-07-20
 
 - Build/commit: `0c4f44e259c919065ff40ff4142c2ea0e33ed5fe`
