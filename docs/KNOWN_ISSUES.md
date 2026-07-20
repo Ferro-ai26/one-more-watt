@@ -12,7 +12,22 @@
 
 Phase 10 is closed with the user's explicit acceptance of the remaining physical-device verification limitation. The earlier Moto pass verified install, cold launch, build identity, onboarding, and touch purchases; no blocker or critical defect was reported. The density-aware Phase 10 build passed host regression and static APK inspection but was not run on that phone. Those checks remain unverified and are deferred to Phase 14 rather than claimed as passed.
 
-Phase 11's visual audit opened no new runtime defect. WATT's placeholder glyph, text-only environments, incomplete iconography, inline colors, and minimal motion remain documented production gaps rather than regressions. `DEC-028` approves and locks Cheerful Electrical Doomsday as direction reference. Its generated backgrounds retain unresolved production/commercial-use status and identified manual-reconstruction needs; they are not production assets. No Phase 11 visual asset or font was integrated into the unchanged game.
+Phase 12 opened no new gameplay/save defect. The live reusable sample replaces raw migrated colors and text-only environment presentation with a tokenized Theme, licensed fonts, stateful components, and a code-native workshop. Production environment/WATT raster art remains deliberately absent: generated Phase 11 backgrounds are reference-only and the manually reconstructed production layer is tracked as `ISSUE-007`, not silently claimed complete.
+
+### ISSUE-007 — Production environment and WATT art remain explicit fallbacks
+
+- Status: Deferred — Phase 13 Production Skinning
+- Severity: Polish
+- First seen build/commit: Phase 12 working tree, 2026-07-20
+- Affected phase: Phase 12 architecture proof; production replacement owned by Phase 13
+- Reproduction:
+  1. Launch the Phase 12 Main Grid.
+  2. Observe the code-native workshop and scratched-core presentation.
+- Expected: Phase 12 provides a usable fallback and proves the approved composition without integrating generated concepts; later production work manually reconstructs final painted Era 1/WATT assets.
+- Actual: The fallback is functional, readable, responsive, and directionally faithful, but intentionally schematic rather than final tactile painted production art.
+- Evidence/log: `assets/asset_inventory.json` reports five development fallbacks and fails release scope for the required Eras 1–3 environment, WATT, and infrastructure-icon production assets. Final 393 × 873 baselines are under `docs/phase_12/evidence/`.
+- Workaround: Continue using the explicit development fallback.
+- Fix verification: Phase 13 must replace required entries with provenance-recorded manual production assets and make their inventory status integrated. Phase 13 is not authorized or started.
 
 ### ISSUE-004 — Phone presentation appears too small
 

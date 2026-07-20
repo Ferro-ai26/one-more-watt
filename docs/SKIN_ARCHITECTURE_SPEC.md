@@ -126,3 +126,7 @@ For each screen:
 9. Record remaining placeholder assets.
 
 Sol must not rewrite proven gameplay logic merely to simplify skinning.
+
+## Phase 12 implementation authority
+
+The reusable implementation is recorded in `docs/phase_12/SKIN_SYSTEM_IMPLEMENTATION.md`. `scripts/ui/theme/skin_tokens.gd` is the authoritative runtime token source; `assets/themes/one_more_watt_theme.tres` is the live base Theme; and `assets/asset_inventory.json` is the machine-validated asset inventory. The base/Desk/Room environment contract is proven without integrating generated concept imagery. Remaining production migration is explicitly routed in `docs/phase_12/UI_OVERRIDE_AND_MIGRATION_INVENTORY.md` rather than silently treated as complete.

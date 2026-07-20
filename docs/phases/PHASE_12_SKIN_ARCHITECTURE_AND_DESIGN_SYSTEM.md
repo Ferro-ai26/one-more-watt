@@ -55,15 +55,17 @@ A limited vertical sample demonstrates the approved skin functioning in the real
 
 ## Acceptance criteria
 
-- [ ] Approved tokens exist in one authoritative system
-- [ ] Representative live sample matches the approved direction
-- [ ] Components expose all required states
-- [ ] No gameplay/save regression
-- [ ] Environment-skin contract is proven with at least two early-era variants or a base plus variant
-- [ ] Asset inventory validation works
-- [ ] Performance cost is measured and acceptable
-- [ ] Remaining screens/assets have a migration inventory
+- [x] Approved tokens exist in one authoritative system
+- [x] Representative live sample matches the approved direction
+- [x] Components expose all required states
+- [x] No gameplay/save regression
+- [x] Environment-skin contract is proven with at least two early-era variants or a base plus variant
+- [x] Asset inventory validation works
+- [x] Performance cost is measured and acceptable
+- [x] Remaining screens/assets have a migration inventory
 
 ## Stop condition
 
 Stop after the reusable system is proven. Do not skin all Eras 1–3 screens.
+
+Closure evidence is recorded in `docs/phase_12/`. The complete repository suite, graphical baseline review, dirty-tree measurement APK, asset audit, and headless launch passed on 2026-07-20. Phase 13 was not started.

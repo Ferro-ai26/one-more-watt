@@ -16,9 +16,19 @@
 | 09 — Android Prototype | Closed — targeted revisions | APK verified; partial Moto phone pass recorded; remaining device matrix skipped truthfully |
 | 10 — Targeted Bug Fixing and Prototype Stabilization | Complete — accepted verification limitation | Density-aware scaling and larger-text fix implemented; complete host regression and APK inspection green; ISSUE-004 device verification deferred to Phase 14; ISSUE-005 withdrawn |
 | 11 — Theme and Art Direction | Complete — approved and locked | DEC-028; phone-board composition and Cheerful Electrical Doomsday direction locked; generated concepts reference-only; runtime unchanged |
-| 12–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 12 — Skin Architecture and Design System | Complete | DEC-029; token/Theme/font system, stateful components, environment contract, live Grid/Build sample, asset audit, baselines, full regression, measured cost |
+| 13–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-20 — Phase 12 reusable skin architecture complete
+
+- Implemented the authoritative semantic-token source, Atkinson Hyperlegible Next/Mono base Theme with OFL packaging, stateful Vital/Build components, and a display-only era environment contract with validated base, Desk, and Room variants.
+- Rebuilt the representative Main Grid and first Build card set around the locked phone-board hierarchy. The live code-native workshop uses warm practical surfaces, cyan authored cable paths, the persistent scratched WATT core, and an explicit operator-handshake plate; no generated Phase 11 concept raster was integrated.
+- Added development/release asset audits, unauthorized-literal checks, component-state coverage, environment state-preservation proof, reduced-motion/larger-text checks, and 393 × 873 Grid/Build scene baselines. A first Build capture exposed retained pixels during the Grid-to-Build resize; defensive clipping and explicit regression-viewport clearing were added before final visual inspection.
+- Measured 219 live UI nodes, 9,493.6 KiB static-memory delta in the final headless skin suite, and a 55,922,875-byte measurement APK (+120,797 bytes / +0.216% from Phase 10). A first final run hit the unchanged flaky host guard at 1,064.5 ms for 500 refreshes; the complete retry passed at 1,304.8 ms for 25 rebuilds and 972.4 ms for 500 live refreshes without changing the threshold.
+- The complete repository suite and headless launch passed with 75 additional skin-system checks. Gameplay formulas, balance, save schema, content progression, Android foundations, and the 16-era structure are unchanged.
+- Phase 12 closes at its reusable-system stop condition. Production Era 1/WATT art remains a declared manual-reconstruction fallback; Phase 13 did not begin and requires explicit authorization.
 
 ### 2026-07-20 — Phase 11 approved and closed
 

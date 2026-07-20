@@ -3,6 +3,7 @@ extends Control
 
 const SHOP_CARD_SCENE := preload("res://scenes/components/ShopItemCard.tscn")
 const VITAL_CARD_SCENE := preload("res://scenes/components/VitalCard.tscn")
+const ERA_ENVIRONMENT_SCENE := preload("res://scenes/components/EraEnvironmentView.tscn")
 
 var session := GameSession.new()
 var view_model: MainViewModel
@@ -17,6 +18,8 @@ var _feedback_tween: Tween
 var status_era_label: Label
 var status_energy_label: Label
 var status_power_label: Label
+var environment_view: EraEnvironmentView
+var environment_frame: PanelContainer
 var watt_core: Label
 var focal_panel: PanelContainer
 var environment_label: Label
@@ -26,10 +29,13 @@ var request_meta_label: Label
 var request_progress: ProgressBar
 var forecast_label: Label
 var request_action_button: Button
+var vital_grid: HBoxContainer
 var vital_cards: Dictionary = {}
+var allocation_box: VBoxContainer
 var allocation_label: Label
 var allocation_buttons: Dictionary = {}
 var screen_title_label: Label
+var screen_panel: PanelContainer
 var screen_content: VBoxContainer
 var nav_buttons: Dictionary = {}
 var feedback_label: Label
@@ -43,6 +49,7 @@ var ui_scale_diagnostics: Dictionary = {}
 func _ready() -> void:
 	ui_scale_diagnostics = MobileUIScaler.apply_to_window(get_window())
 	_build_interface()
+	resized.connect(_apply_responsive_layout)
 	feedback_audio = FeedbackAudio.new()
 	feedback_audio.name = "FeedbackAudio"
 	add_child(feedback_audio)
@@ -122,10 +129,10 @@ func open_request_modal() -> void:
 	if request.get("status") != RequestRunState.ANNOUNCED:
 		return
 	_open_modal("request_detail", "REQUEST FORECAST")
-	_add_modal_label(str(request["title"]), 24, Color(1.0, 0.89, 0.35))
-	_add_modal_label(str(request["dialogue"]), 18, Color(0.84, 0.92, 1.0))
+	_add_modal_label(str(request["title"]), 24, SkinTokens.COLOR_GENERATION)
+	_add_modal_label(str(request["dialogue"]), 18, SkinTokens.COLOR_IVORY)
 	if not str(request.get("tutorial", "")).is_empty():
-		_add_modal_label("TUTORIAL  •  %s" % request["tutorial"], 16, Color(0.62, 0.94, 0.72))
+		_add_modal_label("TUTORIAL  •  %s" % request["tutorial"], 16, SkinTokens.COLOR_SUCCESS)
 	var forecast_text := "LOAD %s  •  PEAK %s\nESTIMATE %s  •  BOTTLENECK %s\nREWARD %s" % [
 		NumberFormatter.format_power(float(request["continuous_demand"]), session.settings.number_notation),
 		NumberFormatter.format_power(float(request["peak"]), session.settings.number_notation),
@@ -137,13 +144,13 @@ func open_request_modal() -> void:
 		forecast_text += "\nRESERVE %s" % NumberFormatter.format_energy(float(request["recommended_reserve"]), session.settings.number_notation)
 	if bool(request.get("detailed_forecast_unlocked", false)):
 		forecast_text += "  •  PREDICTED SERVICE %.0f%%" % (float(request["service_ratio"]) * 100.0)
-	_add_modal_label(forecast_text, 17, Color.WHITE)
+	_add_modal_label(forecast_text, 17, SkinTokens.COLOR_IVORY)
 	var authorize := _button("Authorize Request", "AuthorizeButton")
 	authorize.pressed.connect(_authorize_from_modal)
 	modal_content.add_child(authorize)
 	if bool(request["underprepared"]):
-		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, Color(1.0, 0.62, 0.3))
-	_add_modal_label("BEST NEXT STEP  •  %s" % _recommendation(str(request["bottleneck"])), 16, Color(0.62, 0.94, 0.72))
+		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, SkinTokens.COLOR_WARNING)
+	_add_modal_label("BEST NEXT STEP  •  %s" % _recommendation(str(request["bottleneck"])), 16, SkinTokens.COLOR_SUCCESS)
 	if not bool(request.get("required", true)):
 		var skip := _button("Skip Optional Request", "SkipRequestButton")
 		skip.pressed.connect(_skip_optional_from_modal)
@@ -159,8 +166,8 @@ func open_report_modal(request_id: String) -> void:
 	_last_report_modal_id = request_id
 	_open_modal("performance_report", "PERFORMANCE REPORT")
 	var data := view_model.report_snapshot(report)
-	_add_modal_label("GRADE %s  •  %.1f" % [data["grade"], data["score"]], 32, Color(1.0, 0.89, 0.35))
-	_add_modal_label(str(data["title"]), 22, Color(0.3, 0.78, 1.0))
+	_add_modal_label("GRADE %s  •  %.1f" % [data["grade"], data["score"]], 32, SkinTokens.COLOR_GENERATION)
+	_add_modal_label(str(data["title"]), 22, SkinTokens.COLOR_WATT_REBOOT)
 	_add_modal_label("TIME %s  •  SERVICE %.1f%%\nPEAK %s / %s SERVED\nBROWNOUT %s  •  EARNED %s\nUNLOCKS %s" % [
 		NumberFormatter.format_duration(float(data["completion_seconds"])),
 		float(data["service_ratio"]) * 100.0,
@@ -169,9 +176,9 @@ func open_report_modal(request_id: String) -> void:
 		NumberFormatter.format_duration(float(data["brownout_seconds"])),
 		NumberFormatter.format_energy(float(data["stored_energy"]), session.settings.number_notation),
 		"None" if (data["unlock_ids"] as Array).is_empty() else ", ".join(data["unlock_ids"]),
-	], 17, Color.WHITE)
-	_add_modal_label(str(data["completion"]), 18, Color(0.75, 0.9, 1.0))
-	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, Color(0.62, 0.94, 0.72))
+	], 17, SkinTokens.COLOR_IVORY)
+	_add_modal_label(str(data["completion"]), 18, SkinTokens.COLOR_IVORY)
+	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, SkinTokens.COLOR_SUCCESS)
 	var report_state := session.requests.get_request_state(request_id)
 	var acknowledge := _button("Continue" if report_state.status == RequestRunState.COMPLETED else "Back to Reports", "AcknowledgeButton")
 	acknowledge.pressed.connect(func() -> void:
@@ -247,8 +254,8 @@ func open_settings_modal() -> void:
 			roundi(logical_size.x),
 			roundi(logical_size.y),
 			float(ui_scale_diagnostics.get("content_scale_factor", 1.0)),
-		], 15, Color(0.62, 0.82, 0.94))
-	_add_modal_label("ONE MORE WATT • v%s\nBUILD %s • Prototype by Ferro AI" % [ProjectSettings.get_setting("application/config/version", "unknown"), ProjectSettings.get_setting("application/config/build_commit", "unknown")], 15, Color(0.6, 0.68, 0.8))
+		], 15, SkinTokens.COLOR_IVORY_DIM)
+	_add_modal_label("ONE MORE WATT • v%s\nBUILD %s • Prototype by Ferro AI" % [ProjectSettings.get_setting("application/config/version", "unknown"), ProjectSettings.get_setting("application/config/build_commit", "unknown")], 15, SkinTokens.COLOR_IVORY_DIM)
 	_add_modal_back_button("Close Settings")
 	_apply_text_scale()
 
@@ -267,7 +274,7 @@ func refresh_now(rebuild_screen: bool = false) -> void:
 func open_offline_report(report: OfflineReport, recovery_note: String = "") -> void:
 	_open_modal("offline_report", "OFFLINE RETURN")
 	var earned := report.stored_energy_after - report.stored_energy_before
-	_add_modal_label("WELCOME BACK", 26, Color(0.3, 0.78, 1.0))
+	_add_modal_label("WELCOME BACK", 26, SkinTokens.COLOR_WATT_REBOOT)
 	_add_modal_label("AWAY %s  •  RECOGNIZED %s\nEFFICIENCY %.0f%%  •  EFFECTIVE %s\nCAP %s%s\nSTORED ENERGY %+.1f  •  BROWNOUT %s" % [
 		NumberFormatter.format_duration(maxf(report.raw_elapsed, 0.0)),
 		NumberFormatter.format_duration(report.recognized_elapsed),
@@ -277,19 +284,19 @@ func open_offline_report(report: OfflineReport, recovery_note: String = "") -> v
 		" • CAP APPLIED" if report.capped else "",
 		earned,
 		NumberFormatter.format_duration(report.brownout_seconds),
-	], 17, Color.WHITE)
+	], 17, SkinTokens.COLOR_IVORY)
 	if report.feature_locked:
-		_add_modal_label("Offline progress unlocks during Bedroom Assistant. No away-time progress was applied yet.", 16, Color(1.0, 0.72, 0.36))
+		_add_modal_label("Offline progress unlocks during Bedroom Assistant. No away-time progress was applied yet.", 16, SkinTokens.COLOR_WARNING)
 	if not report.request_id.is_empty():
-		_add_modal_label("REQUEST %.1f%% → %.1f%%\nCOMPLETED %s" % [report.progress_before * 100.0, report.progress_after * 100.0, "None" if report.completed_request_ids.is_empty() else ", ".join(report.completed_request_ids)], 17, Color(0.62, 0.94, 0.72))
+		_add_modal_label("REQUEST %.1f%% → %.1f%%\nCOMPLETED %s" % [report.progress_before * 100.0, report.progress_after * 100.0, "None" if report.completed_request_ids.is_empty() else ", ".join(report.completed_request_ids)], 17, SkinTokens.COLOR_SUCCESS)
 	if report.clock_backward:
-		_add_modal_label("Clock moved backward. No negative progress was applied.", 16, Color(1.0, 0.72, 0.36))
+		_add_modal_label("Clock moved backward. No negative progress was applied.", 16, SkinTokens.COLOR_WARNING)
 	elif report.far_forward:
-		_add_modal_label("Large clock jump detected. The normal offline cap was applied.", 16, Color(1.0, 0.72, 0.36))
+		_add_modal_label("Large clock jump detected. The normal offline cap was applied.", 16, SkinTokens.COLOR_WARNING)
 	if report.stopped_for_input:
-		_add_modal_label("Offline progress paused because WATT is waiting for your authorization.", 16, Color(1.0, 0.72, 0.36))
+		_add_modal_label("Offline progress paused because WATT is waiting for your authorization.", 16, SkinTokens.COLOR_WARNING)
 	if not recovery_note.is_empty():
-		_add_modal_label(recovery_note, 16, Color(1.0, 0.89, 0.35))
+		_add_modal_label(recovery_note, 16, SkinTokens.COLOR_GENERATION)
 	var continue_button := _button("Continue", "OfflineContinueButton")
 	continue_button.pressed.connect(close_top_modal)
 	modal_content.add_child(continue_button)
@@ -302,9 +309,9 @@ func open_era_transition_modal(era_id: String) -> void:
 		return
 	_last_era_transition_modal_id = era_id
 	_open_modal("era_transition", "ERA %d UNLOCKED" % era.get_number())
-	_add_modal_label(session.repository.localize(str(era.get_value("name_key", ""))), 28, Color(1.0, 0.89, 0.35))
-	_add_modal_label(session.repository.localize(str(era.get_value("description_key", ""))), 18, Color(0.84, 0.92, 1.0))
-	_add_modal_label(session.repository.localize("dialogue.era.%02d.transition" % era.get_number()), 18, Color(0.62, 0.94, 0.72))
+	_add_modal_label(session.repository.localize(str(era.get_value("name_key", ""))), 28, SkinTokens.COLOR_GENERATION)
+	_add_modal_label(session.repository.localize(str(era.get_value("description_key", ""))), 18, SkinTokens.COLOR_IVORY)
+	_add_modal_label(session.repository.localize("dialogue.era.%02d.transition" % era.get_number()), 18, SkinTokens.COLOR_SUCCESS)
 	var continue_button := _button("Enter %s" % session.repository.localize(str(era.get_value("scale_key", ""))), "EraContinueButton")
 	continue_button.pressed.connect(func() -> void:
 		session.acknowledge_era_transition()
@@ -317,7 +324,7 @@ func open_era_transition_modal(era_id: String) -> void:
 
 func _open_corrupt_save_modal() -> void:
 	_open_modal("save_recovery", "SAVE RECOVERY REQUIRED")
-	_add_modal_label("The main save and both backups could not be validated. The files were preserved for diagnostics. Start a new local game only if you want to continue.", 18, Color(1.0, 0.72, 0.36))
+	_add_modal_label("The main save and both backups could not be validated. The files were preserved for diagnostics. Start a new local game only if you want to continue.", 18, SkinTokens.COLOR_WARNING)
 	var confirm := _button("Start New Game", "ConfirmNewGameButton")
 	confirm.pressed.connect(func() -> void:
 		if persistence.confirm_new_game(int(Time.get_unix_time_from_system())).get("ok", false):
@@ -329,53 +336,67 @@ func _open_corrupt_save_modal() -> void:
 
 func _build_interface() -> void:
 	set_process(false)
+	(get_node("Background") as ColorRect).color = SkinTokens.COLOR_ENVIRONMENT_DEEP
 	var shell := get_node("SafeArea/AppShell") as PanelContainer
+	shell.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_GRAPHITE, SkinTokens.COLOR_AGED_METAL, SkinTokens.RADIUS_LARGE, SkinTokens.SPACE_2))
 	var layout := VBoxContainer.new()
 	layout.name = "MainLayout"
-	layout.add_theme_constant_override("separation", 4)
+	layout.add_theme_constant_override("separation", SkinTokens.SPACE_1)
 	shell.add_child(layout)
 
 	var status := HBoxContainer.new()
 	status.name = "StatusBand"
-	status.custom_minimum_size.y = 42
+	status.custom_minimum_size.y = SkinTokens.TOUCH_MINIMUM
 	layout.add_child(status)
-	status_era_label = _label("COLD BOOT", 14, Color(0.3, 0.78, 1.0))
+	status_era_label = _label("COLD BOOT", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
 	status_era_label.name = "EraLabel"
 	status_era_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status.add_child(status_era_label)
-	status_energy_label = _label("0 SE", 16, Color(1.0, 0.89, 0.35))
+	status_energy_label = _label("0 SE", SkinTokens.TYPE_NUMERIC, SkinTokens.COLOR_GENERATION)
+	status_energy_label.theme_type_variation = &"NumericLabel"
 	status_energy_label.name = "StoredEnergyLabel"
 	status_energy_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	status_energy_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status.add_child(status_energy_label)
-	status_power_label = _label("5 W", 14, Color(0.74, 0.9, 1.0))
+	status_power_label = _label("5 W", SkinTokens.TYPE_NUMERIC, SkinTokens.COLOR_IVORY)
+	status_power_label.theme_type_variation = &"NumericLabel"
 	status_power_label.name = "AggregatePowerLabel"
 	status_power_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	status_power_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status.add_child(status_power_label)
 	var settings_button := _button("⚙", "SettingsButton")
-	settings_button.custom_minimum_size = Vector2(48, 48)
-	settings_button.add_theme_font_size_override("font_size", 18)
+	settings_button.custom_minimum_size = Vector2(SkinTokens.TOUCH_MINIMUM, SkinTokens.TOUCH_MINIMUM)
+	settings_button.add_theme_font_size_override("font_size", SkinTokens.TYPE_NUMERIC)
 	settings_button.tooltip_text = "Settings"
 	settings_button.pressed.connect(open_settings_modal)
 	status.add_child(settings_button)
 
+	environment_frame = PanelContainer.new()
+	environment_frame.name = "EnvironmentStage"
+	environment_frame.custom_minimum_size.y = 176
+	environment_frame.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	environment_frame.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_ENVIRONMENT_DEEP, SkinTokens.COLOR_AGED_METAL, SkinTokens.RADIUS_SMALL, 0))
+	layout.add_child(environment_frame)
+	environment_view = ERA_ENVIRONMENT_SCENE.instantiate() as EraEnvironmentView
+	environment_view.name = "LiveEraEnvironment"
+	environment_frame.add_child(environment_view)
+
 	focal_panel = PanelContainer.new()
 	focal_panel.name = "WattRequestPanel"
 	focal_panel.custom_minimum_size.y = 154
-	focal_panel.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.105, 0.16), Color(0.19, 0.73, 1.0), 12, 10))
+	focal_panel.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_IVORY, SkinTokens.COLOR_INK, SkinTokens.RADIUS_SMALL, SkinTokens.SPACE_3, SkinTokens.BORDER_FOCUS))
 	layout.add_child(focal_panel)
 	var focal_row := HBoxContainer.new()
-	focal_row.add_theme_constant_override("separation", 10)
+	focal_row.add_theme_constant_override("separation", SkinTokens.SPACE_3)
 	focal_panel.add_child(focal_row)
 	var watt_column := VBoxContainer.new()
 	watt_column.custom_minimum_size.x = 76
 	focal_row.add_child(watt_column)
-	watt_core = _label("◉‿◉", 26, Color(0.25, 0.88, 1.0))
+	watt_core = _label("◉‿◉", SkinTokens.TYPE_WATT, SkinTokens.COLOR_WATT)
 	watt_core.name = "WattCore"
 	watt_core.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	watt_column.add_child(watt_core)
-	environment_label = _label("OLD MONITOR\n1 OUTLET", 11, Color(0.58, 0.67, 0.78))
+	environment_label = _label("OLD MONITOR\n1 OUTLET", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_INK)
 	environment_label.name = "EnvironmentLabel"
 	environment_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	watt_column.add_child(environment_label)
@@ -383,16 +404,16 @@ func _build_interface() -> void:
 	request_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	request_column.add_theme_constant_override("separation", 2)
 	focal_row.add_child(request_column)
-	dialogue_label = _label("WATT is booting.", 16, Color(0.84, 0.92, 1.0))
+	dialogue_label = _label("WATT is booting.", SkinTokens.TYPE_BODY, SkinTokens.COLOR_INK)
 	dialogue_label.name = "DialogueLabel"
 	dialogue_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	dialogue_label.max_lines_visible = 2
 	request_column.add_child(dialogue_label)
-	request_title_label = _label("Finish Booting", 19, Color(1.0, 0.89, 0.35))
+	request_title_label = _label("Finish Booting", SkinTokens.TYPE_REQUEST, SkinTokens.COLOR_INK)
 	request_title_label.name = "RequestTitleLabel"
 	request_title_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	request_column.add_child(request_title_label)
-	request_meta_label = _label("CAPACITY • ANNOUNCED", 12, Color(0.55, 0.75, 0.92))
+	request_meta_label = _label("CAPACITY • ANNOUNCED", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_TRANSMISSION)
 	request_meta_label.name = "RequestMetaLabel"
 	request_meta_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	request_column.add_child(request_meta_label)
@@ -401,19 +422,19 @@ func _build_interface() -> void:
 	request_progress.custom_minimum_size.y = 12
 	request_progress.show_percentage = false
 	request_column.add_child(request_progress)
-	forecast_label = _label("Forecast ready", 12, Color(0.65, 0.75, 0.86))
+	forecast_label = _label("Forecast ready", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_INK)
 	forecast_label.name = "ForecastLabel"
 	forecast_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	request_column.add_child(forecast_label)
 	request_action_button = _button("Review Request", "RequestActionButton")
 	request_action_button.custom_minimum_size.y = 48
-	request_action_button.add_theme_font_size_override("font_size", 16)
+	request_action_button.add_theme_font_size_override("font_size", SkinTokens.TYPE_BUTTON)
 	request_action_button.pressed.connect(open_request_modal)
 	request_column.add_child(request_action_button)
 
-	var vital_grid := HBoxContainer.new()
+	vital_grid = HBoxContainer.new()
 	vital_grid.name = "VitalCards"
-	vital_grid.add_theme_constant_override("separation", 5)
+	vital_grid.add_theme_constant_override("separation", SkinTokens.SPACE_1)
 	layout.add_child(vital_grid)
 	for vital_id: String in ["generation", "transmission", "reserve"]:
 		var card := VITAL_CARD_SCENE.instantiate() as VitalCard
@@ -421,7 +442,7 @@ func _build_interface() -> void:
 		vital_grid.add_child(card)
 		vital_cards[vital_id] = card
 
-	var allocation_box := VBoxContainer.new()
+	allocation_box = VBoxContainer.new()
 	allocation_box.name = "AllocationControl"
 	allocation_box.add_theme_constant_override("separation", 1)
 	layout.add_child(allocation_box)
@@ -435,25 +456,25 @@ func _build_interface() -> void:
 		var button := _button(str(data["label"]), "%sAllocationButton" % str(data["id"]).to_pascal_case())
 		button.toggle_mode = true
 		button.custom_minimum_size.y = 48
-		button.add_theme_font_size_override("font_size", 13)
+		button.add_theme_font_size_override("font_size", SkinTokens.TYPE_CAPTION)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.pressed.connect(_set_allocation.bind(str(data["id"])))
 		allocation_row.add_child(button)
 		allocation_buttons[data["id"]] = button
-	allocation_label = _label("Balanced", 12, Color(0.62, 0.82, 0.94))
+	allocation_label = _label("Balanced", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
 	allocation_label.name = "AllocationSummaryLabel"
 	allocation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	allocation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	allocation_box.add_child(allocation_label)
 
-	var screen_panel := PanelContainer.new()
+	screen_panel = PanelContainer.new()
 	screen_panel.name = "ScreenPanel"
 	screen_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
-	screen_panel.add_theme_stylebox_override("panel", _panel_style(Color(0.04, 0.055, 0.09), Color(0.14, 0.24, 0.36), 10, 7))
+	screen_panel.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_INK, SkinTokens.COLOR_AGED_METAL, SkinTokens.RADIUS_MEDIUM, SkinTokens.SPACE_2))
 	layout.add_child(screen_panel)
 	var screen_layout := VBoxContainer.new()
 	screen_panel.add_child(screen_layout)
-	screen_title_label = _label("GRID", 14, Color(0.3, 0.78, 1.0))
+	screen_title_label = _label("GRID", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
 	screen_title_label.name = "ScreenTitleLabel"
 	screen_layout.add_child(screen_title_label)
 	var scroll := ScrollContainer.new()
@@ -474,24 +495,25 @@ func _build_interface() -> void:
 		var nav := _button(tab.capitalize(), "%sTabButton" % tab.capitalize())
 		nav.toggle_mode = true
 		nav.custom_minimum_size.y = 48
-		nav.add_theme_font_size_override("font_size", 14)
+		nav.add_theme_font_size_override("font_size", SkinTokens.TYPE_NAVIGATION)
 		nav.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		nav.pressed.connect(select_tab.bind(tab))
 		navigation_bar.add_child(nav)
 		nav_buttons[tab] = nav
-	feedback_label = _label("GRID ONLINE", 11, Color(0.5, 0.62, 0.76))
+	feedback_label = _label("GRID ONLINE", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
 	feedback_label.name = "FeedbackLabel"
 	feedback_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	layout.add_child(feedback_label)
 
 	_build_modal_layer()
+	_apply_responsive_layout()
 
 
 func _build_modal_layer() -> void:
 	modal_overlay = ColorRect.new()
 	modal_overlay.name = "ModalOverlay"
 	modal_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	modal_overlay.color = Color(0.01, 0.015, 0.025, 0.92)
+	modal_overlay.color = SkinTokens.COLOR_MODAL_SCRIM
 	modal_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	modal_overlay.visible = false
 	add_child(modal_overlay)
@@ -504,11 +526,11 @@ func _build_modal_layer() -> void:
 	modal_overlay.add_child(margin)
 	var panel := PanelContainer.new()
 	panel.name = "ModalPanel"
-	panel.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.075, 0.12), Color(0.19, 0.73, 1.0), 16, 14))
+	panel.add_theme_stylebox_override("panel", SkinTokens.panel(SkinTokens.COLOR_GRAPHITE, SkinTokens.COLOR_WATT, SkinTokens.RADIUS_LARGE, SkinTokens.SPACE_4, SkinTokens.BORDER_FOCUS))
 	margin.add_child(panel)
 	var modal_layout := VBoxContainer.new()
 	panel.add_child(modal_layout)
-	modal_title = _label("MODAL", 18, Color(0.3, 0.78, 1.0))
+	modal_title = _label("MODAL", SkinTokens.TYPE_HEADING, SkinTokens.COLOR_WATT_REBOOT)
 	modal_title.name = "ModalTitle"
 	modal_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	modal_layout.add_child(modal_title)
@@ -562,6 +584,10 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	environment_label.text = str(environment["badge"])
 	watt_core.text = str(environment["core"])
 	watt_core.add_theme_color_override("font_color", environment["accent"])
+	if environment_view != null:
+		environment_view.set_skin(EraSkinRegistry.skin_for_era(int(status["era_number"])))
+		environment_view.set_reduced_motion(session.settings.reduced_motion)
+		environment_view.set_runtime_state(session.economy.state.owned, live_result.deliverable_power > 0.000001, str(request["status"]) == RequestRunState.ANNOUNCED)
 	if rebuild_screen:
 		_rebuild_screen()
 
@@ -601,17 +627,17 @@ func _rebuild_screen() -> void:
 func _build_grid_screen() -> void:
 	var request := view_model.request_snapshot()
 	var environment_data := view_model.environment_snapshot()
-	var environment := _label(str(environment_data["summary"]), 15, Color(0.74, 0.84, 0.94))
+	var environment := _label(str(environment_data["summary"]), 15, SkinTokens.COLOR_IVORY)
 	environment.name = "EnvironmentSummary"
 	environment.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	screen_content.add_child(environment)
 	var action_text := "PROTOTYPE COMPLETE  •  WATT's larger network is not part of this build yet." if request["status"] == "prototype_complete" else "RECOMMENDED  •  %s" % _recommendation(str(request.get("bottleneck", "none")))
-	var action := _label(action_text, 15, Color(0.62, 0.94, 0.72))
+	var action := _label(action_text, 15, SkinTokens.COLOR_SUCCESS)
 	action.name = "RecommendedActionLabel"
 	action.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	screen_content.add_child(action)
 	if not str(request.get("tutorial", "")).is_empty():
-		var tutorial := _label("TUTORIAL  •  %s" % request["tutorial"], 15, Color(1.0, 0.89, 0.35))
+		var tutorial := _label("TUTORIAL  •  %s" % request["tutorial"], 15, SkinTokens.COLOR_GENERATION)
 		tutorial.name = "TutorialPrompt"
 		tutorial.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		screen_content.add_child(tutorial)
@@ -649,7 +675,7 @@ func _build_shop_screen(cards: Array[Dictionary]) -> void:
 func _build_reports_screen() -> void:
 	var reports := view_model.reports()
 	if reports.is_empty():
-		var empty := _label("Completed request reports will appear here. WATT has not filed any paperwork yet.", 16, Color(0.68, 0.76, 0.86))
+		var empty := _label("Completed request reports will appear here. WATT has not filed any paperwork yet.", 16, SkinTokens.COLOR_IVORY_DIM)
 		empty.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		screen_content.add_child(empty)
 		return
@@ -669,7 +695,7 @@ func _request_purchase(content_id: String, family: String) -> void:
 	if session.settings.confirm_large_purchases and preview.cost >= session.requests.grid.state.stored_energy * 0.5:
 		_pending_purchase = {"id": content_id, "family": family}
 		_open_modal("purchase_confirmation", "CONFIRM PURCHASE")
-		_add_modal_label("Spend %s?\nThe predicted effect shown on the card will be applied immediately." % NumberFormatter.format_energy(preview.cost, session.settings.number_notation), 18, Color.WHITE)
+		_add_modal_label("Spend %s?\nThe predicted effect shown on the card will be applied immediately." % NumberFormatter.format_energy(preview.cost, session.settings.number_notation), 18, SkinTokens.COLOR_IVORY)
 		var confirm := _button("Confirm Purchase", "ConfirmPurchaseButton")
 		confirm.pressed.connect(_confirm_pending_purchase)
 		modal_content.add_child(confirm)
@@ -799,26 +825,38 @@ func _on_feedback(kind: String) -> void:
 		return
 	if _feedback_tween != null and _feedback_tween.is_valid():
 		_feedback_tween.kill()
-	var accent := Color(0.72, 0.48, 0.48) if kind == "brownout" else (Color(0.66, 0.9, 0.74) if kind in ["request_complete", "era_transition"] else Color(1.0, 0.9, 0.55))
+	var accent := SkinTokens.COLOR_CRITICAL if kind == "brownout" else (SkinTokens.COLOR_SUCCESS if kind in ["request_complete", "era_transition"] else SkinTokens.COLOR_GENERATION)
 	_feedback_tween = create_tween()
 	_feedback_tween.set_parallel(true)
-	_feedback_tween.tween_property(watt_core, "modulate", accent, 0.08)
-	_feedback_tween.tween_property(focal_panel, "modulate", accent, 0.08)
+	_feedback_tween.tween_property(watt_core, "modulate", accent, SkinTokens.MOTION_TAP)
+	_feedback_tween.tween_property(focal_panel, "modulate", accent, SkinTokens.MOTION_TAP)
 	_feedback_tween.chain().set_parallel(true)
-	_feedback_tween.tween_property(watt_core, "modulate", Color.WHITE, 0.18)
-	_feedback_tween.tween_property(focal_panel, "modulate", Color.WHITE, 0.18)
+	_feedback_tween.tween_property(watt_core, "modulate", SkinTokens.COLOR_MODULATE_NEUTRAL, SkinTokens.MOTION_RESPONSE)
+	_feedback_tween.tween_property(focal_panel, "modulate", SkinTokens.COLOR_MODULATE_NEUTRAL, SkinTokens.MOTION_RESPONSE)
 
 
 func _apply_tab_density() -> void:
 	if focal_panel == null:
 		return
 	var compact := navigation.current_tab != "grid"
-	focal_panel.custom_minimum_size.y = 72.0 if compact else 154.0
+	var short_viewport := size.y < 700.0
+	environment_frame.custom_minimum_size.y = 72.0 if compact else (88.0 if short_viewport else 176.0)
+	focal_panel.custom_minimum_size.y = 72.0 if compact else (150.0 if short_viewport else 154.0)
 	dialogue_label.visible = not compact
-	request_meta_label.visible = not compact
+	environment_label.visible = not short_viewport and not compact
+	request_meta_label.visible = not compact and not short_viewport
 	request_progress.visible = not compact
-	forecast_label.visible = not compact
+	forecast_label.visible = not compact and not short_viewport
 	request_action_button.visible = not compact
+	vital_grid.visible = not compact
+	allocation_box.visible = not compact
+	screen_panel.visible = compact
+	feedback_label.visible = not short_viewport
+
+
+func _apply_responsive_layout() -> void:
+	if focal_panel != null:
+		_apply_tab_density()
 
 
 func _show_content_error() -> void:
@@ -910,16 +948,3 @@ static func _label(text: String, font_size: int, color: Color) -> Label:
 	label.add_theme_font_size_override("font_size", font_size)
 	label.add_theme_color_override("font_color", color)
 	return label
-
-
-static func _panel_style(background: Color, border: Color, radius: int, margin: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = background
-	style.border_color = border
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(radius)
-	style.content_margin_left = margin
-	style.content_margin_top = margin
-	style.content_margin_right = margin
-	style.content_margin_bottom = margin
-	return style

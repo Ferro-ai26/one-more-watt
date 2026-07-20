@@ -210,6 +210,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The package demonstrates the complete tonal journey, preserves the 16-era pacing and Era 6 idle transition, makes operator agency/payoffs legible, establishes reusable visual rules, and gives Phase 12 an implementation-ready composition reference without prematurely treating concept raster art as production assets.
 - Consequences: Phase 11 is complete. `phase_11/cheerful_doomsday/phone_board.png` is the primary visual-composition reference; the full approval board and adjacent specifications are supporting internal references. The locked direction may be implemented through reusable Phase 12 architecture, but generated backgrounds may not be integrated as production art. The user separately authorizes Phase 12 after Phase 11 closure. Phase 13 remains prohibited.
 
+## DEC-029 — Adopt token-driven skin and display-only environment contracts
+
+- Status: Accepted
+- Date: 2026-07-20
+- Decision: Use `SkinTokens` as the single runtime semantic-token authority, package Atkinson Hyperlegible Next/Mono through one base Godot Theme, and represent era presentation with validated `EraSkinDefinition` resources consumed by a display-only environment view. Retain an explicit code-native fallback until manually reconstructed production art replaces it; required fallbacks fail the release-scope asset audit.
+- Reason: Phase 12 must prove the locked phone-board direction in the real game without allowing presentation to own progression, introducing one-off styles, or promoting generated concepts to production assets. A small stable interface lets future era work swap layers, paths, lighting, and WATT presentation while the tested gameplay and save state remain untouched.
+- Consequences: Main Grid and the first Build card set use the reusable system; base, Desk, and Room variants pass state-preservation tests. The retained code-native environment is architecture evidence only. Phase 13 owns final Era 1 art/component production after explicit authorization, Phase 14 owns physical-device visual/performance evidence, and no later phase begins through this decision.
+
 ## Proposed decision template
 
 ```markdown

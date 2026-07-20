@@ -2,6 +2,28 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 12 skin architecture host pass — 2026-07-20
+
+- Build/commit: Phase 11 baseline `d4b611f`; Phase 12 working tree uncommitted during review
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless plus Xvfb/Mesa llvmpipe graphical capture; dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Loaded the packaged Atkinson UI/numeric fonts and live base Theme without missing dependencies.
+- [x] Exercised every reusable component state, reduced motion, and 130% larger text through the Phase 12 harness.
+- [x] Verified base, Desk, and Room skin definitions validate and swap without changing the game-session economy snapshot.
+- [x] Exercised the live first-run Main Grid and Build route at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and 720 × 1280; shell width/height, first Build card, authorization, tabs, and 48-pixel targets passed.
+- [x] Captured and manually inspected the final 393 × 873 Main Grid and Build states against the locked phone-board hierarchy.
+- [x] Verified the environment is the largest routine region, WATT's scratched core remains visible, cyan authored paths spread across a warm practical workshop, and `Review + Authorize` preserves the human-operator role.
+- [x] Verified the Build view retains the environment, compact request plate, first stateful card, predicted effect, status/reason text, button, and four-tab navigation.
+- [x] Found retained pixels in the first compact Build capture, added defensive environment clipping and explicit per-frame regression-viewport clearing, regenerated, and visually reinspected both final baselines.
+- [x] Verified development asset audit warnings and release-scope failure for required fallbacks; no generated concept background is loaded by the runtime.
+- [x] Complete repository regression and headless smoke launch passed on full retry. The first final attempt failed only the unchanged 1,000 ms host guard at 1,064.5 ms; the retry measured 25 Build rebuilds 1,304.8 ms, 500 live refreshes 972.4 ms, 219 UI nodes, and 9,493.6 KiB skin-sample memory delta.
+- [x] Measurement-only debug APK exported at 55,922,875 bytes, +120,797 bytes (+0.216%) over the Phase 10 APK.
+- [ ] Physical Android touch, safe-area, font rasterization, reduced-motion comfort, GPU frame timing, battery/heat, and screenshot review. These remain Phase 14 evidence and are not claimed.
+- [ ] Final painted Era 1 environment and WATT production assets. These remain explicit Phase 13 work and are not claimed.
+
+Result: the reusable system and limited live sample satisfy Phase 12. This was a host graphical/interaction pass, not a physical-device or final-production-art approval. Stop before Phase 13.
+
 ## Phase 11 candidate visual review — 2026-07-20
 
 - Build/commit: Runtime baseline `4c77a30`; Phase 11 documents and concepts uncommitted at review time

@@ -11,5 +11,6 @@ fi
 
 "$godot_bin" --headless --path "$project_dir" --script res://tests/unit/test_main_ui_systems.gd
 "$godot_bin" --headless --path "$project_dir" --script res://tests/integration/test_main_ui.gd
+GODOT_BIN="$godot_bin" "$project_dir/tools/test_skin_system.sh"
 
 echo "Main UI tests passed."

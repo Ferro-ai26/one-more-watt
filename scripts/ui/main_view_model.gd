@@ -16,6 +16,7 @@ func status_snapshot() -> Dictionary:
 		"era": session.repository.localize(str(era.get_value("name_key", ""))),
 		"scale": session.repository.localize(str(era.get_value("scale_key", ""))),
 		"era_id": era.get_id(),
+		"era_number": era.get_number(),
 		"stored_energy": grid.stored_energy,
 		"deliverable_power": minf(grid.generation_rate, grid.transmission_capacity),
 		"generation": grid.generation_rate,
@@ -72,11 +73,11 @@ func environment_snapshot() -> Dictionary:
 	var owned := state.owned
 	match era_number:
 		1:
-			return {"core": "◉‿◉", "badge": "OLD MONITOR\n%d OUTLET%s" % [int(owned.get("wall_outlet", 0)), "S" if int(owned.get("wall_outlet", 0)) != 1 else ""], "summary": session.repository.localize("environment.era01.summary"), "accent": Color(0.25, 0.88, 1.0)}
+			return {"core": "◉‿◉", "badge": "OLD MONITOR\n%d OUTLET%s" % [int(owned.get("wall_outlet", 0)), "S" if int(owned.get("wall_outlet", 0)) != 1 else ""], "summary": session.repository.localize("environment.era01.summary"), "accent": SkinTokens.COLOR_WATT}
 		2:
-			return {"core": "◉◡◉", "badge": "BEDROOM GRID\n%d GENERATOR%s" % [int(owned.get("portable_generator", 0)), "S" if int(owned.get("portable_generator", 0)) != 1 else ""], "summary": session.repository.localize("environment.era02.summary"), "accent": Color(0.38, 0.94, 0.74)}
+			return {"core": "◉◡◉", "badge": "BEDROOM GRID\n%d GENERATOR%s" % [int(owned.get("portable_generator", 0)), "S" if int(owned.get("portable_generator", 0)) != 1 else ""], "summary": session.repository.localize("environment.era02.summary"), "accent": SkinTokens.COLOR_SUCCESS}
 		_:
-			return {"core": "◉▿◉", "badge": "SERVER CLOSET\n%d RACK%s" % [int(owned.get("server_rack", 0)), "S" if int(owned.get("server_rack", 0)) != 1 else ""], "summary": session.repository.localize("environment.era03.summary"), "accent": Color(0.72, 0.58, 1.0)}
+			return {"core": "◉▿◉", "badge": "SERVER CLOSET\n%d RACK%s" % [int(owned.get("server_rack", 0)), "S" if int(owned.get("server_rack", 0)) != 1 else ""], "summary": session.repository.localize("environment.era03.summary"), "accent": SkinTokens.COLOR_TRANSMISSION}
 
 
 func optional_requests() -> Array[Dictionary]:

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "assets": [
+    {"id": "font_ui", "path": "res://assets/fonts/AtkinsonHyperlegibleNext-Variable.ttf", "kind": "font", "phase12_status": "integrated", "release_required": true, "license": "OFL-1.1"},
+    {"id": "font_numeric", "path": "res://assets/fonts/AtkinsonHyperlegibleMono-Variable.ttf", "kind": "font", "phase12_status": "integrated", "release_required": true, "license": "OFL-1.1"},
+    {"id": "theme_base", "path": "res://assets/themes/one_more_watt_theme.tres", "kind": "theme", "phase12_status": "integrated", "release_required": true, "license": "project"},
+    {"id": "app_icon", "path": "res://assets/icons/app_icon.svg", "kind": "icon", "phase12_status": "integrated", "release_required": true, "license": "project"},
+    {"id": "era_base", "path": "res://scenes/components/EraEnvironmentView.tscn", "kind": "code-native-environment", "phase12_status": "integrated", "release_required": true, "license": "project"},
+    {"id": "era01_production", "path": "res://assets/art/environments/era_01/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-manual-production"},
+    {"id": "era02_production", "path": "res://assets/art/environments/era_02/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"},
+    {"id": "era03_production", "path": "res://assets/art/environments/era_03/production_environment.webp", "kind": "raster-environment", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"},
+    {"id": "watt_production", "path": "res://assets/art/watt/scratched_core.webp", "kind": "raster-character", "phase12_status": "fallback", "release_required": true, "license": "pending-manual-production"},
+    {"id": "infrastructure_icons", "path": "res://assets/icons/infrastructure/production_set.tres", "kind": "icon-set", "phase12_status": "fallback", "release_required": true, "license": "pending-phase13"}
+  ]
+}
