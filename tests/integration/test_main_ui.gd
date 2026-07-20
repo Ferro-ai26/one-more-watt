@@ -1,6 +1,6 @@
 extends SceneTree
 
-const TEST_SIZES := [Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800)]
+const TEST_SIZES := [Vector2i(320, 568), Vector2i(360, 640), Vector2i(393, 873), Vector2i(480, 800)]
 
 var _failures: Array[String] = []
 var _checks := 0
@@ -47,6 +47,8 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 	await process_frame
 	_check(main.navigation.top_modal() == "request_detail" and main.modal_overlay.visible, "%s request detail opens as a modal" % test_size)
 	_check(_modal_text(main).contains("LOAD 5 W") and _modal_text(main).contains("REWARD 12 SE"), "%s authorization shows load and reward" % test_size)
+	var authorize_button := main.modal_content.find_child("AuthorizeButton", true, false) as Button
+	_check(authorize_button != null and authorize_button.get_global_rect().end.y <= test_size.y, "%s primary authorization action is visible without scrolling" % test_size)
 	if _capture_layouts:
 		await _capture(viewport, test_size, "authorization")
 	await _press(main.modal_content.find_child("AuthorizeButton", true, false) as Button)
@@ -65,6 +67,7 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 	main.open_request_modal()
 	await _press(main.modal_content.find_child("AuthorizeButton", true, false) as Button)
 	_check((main.allocation_buttons["feed_watt"] as Button).disabled, "%s allocation remains tutorial-locked before language research" % test_size)
+	main.session.requests.grid.state.reserve_stored = 0.0
 	main.session.advance_time(0.25)
 	main.refresh_now()
 	var active := main.session.requests.get_request_state("era01_remember_name")
@@ -87,6 +90,7 @@ func _exercise_size(packed: PackedScene, test_size: Vector2i) -> void:
 	_check(shell.get_combined_minimum_size().x <= test_size.x, "%s Build tab does not widen the shell" % test_size)
 	var wall_card := main.screen_content.find_child("WallOutletCard", true, false) as ShopItemCard
 	_check(wall_card != null, "%s reusable infrastructure card renders" % test_size)
+	_check(wall_card != null and Rect2(Vector2.ZERO, Vector2(test_size)).intersects(wall_card.get_global_rect()), "%s compact secondary header leaves the first Build card visible" % test_size)
 	_check("PREDICTED" in wall_card.effect_label.text and "+5.0" in wall_card.effect_label.text, "%s purchase effect is visible before buying" % test_size)
 	var old_generation := main.session.requests.grid.state.generation_rate
 	await _press(wall_card.buy_button)

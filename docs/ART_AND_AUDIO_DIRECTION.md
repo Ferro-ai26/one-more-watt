@@ -108,3 +108,7 @@ Every asset must have:
 - Android memory consideration
 
 Do not ship temporary AI-generated or web-sourced art without explicit rights review and a recorded decision.
+
+Phase 08 retains the reviewed text/glyph environments and adds restrained focal-panel feedback: amber for purchases/ordinary actions, green for completion and era transition, and a brief muted-red brownout dip. Reduced motion disables the tween while keeping the explicit feedback label and limiting text.
+
+Seven essential cues are synthesized locally as bounded 22.05 kHz mono 16-bit PCM: purchase, request start, request completion, brownout, allocation, era transition, and error. Each semantic cue uses a short attack/release envelope; repeated purchases alternate two small pitch variants, and per-cue cooldowns prevent fatigue. Cues route through the existing SFX bus and respect persisted Master/SFX settings. The generator and all source parameters live in `scripts/ui/feedback_audio.gd`; no licensed or generated external audio asset is shipped. Audible mix review remains pending on hardware with an output device.

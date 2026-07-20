@@ -1,12 +1,12 @@
 # Active Phase
 
-Phase: 07 — Eras 1–3 Vertical Slice
+Phase: 08 — Balance and Prototype Polish
 Status: Complete
 
 Authoritative phase contract:
 
-`docs/phases/PHASE_07_ERAS_1_TO_3_VERTICAL_SLICE.md`
+`docs/phases/PHASE_08_BALANCE_AND_POLISH.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 07 is complete. Do not begin Phase 08 or change this file without explicit user authorization.
+Read `AGENTS.md`, the phase contract above, and `docs/CURRENT_HANDOFF.md`. Phase 08 is complete with a recorded GO recommendation. Do not begin Phase 09 or Android export work without explicit user authorization.

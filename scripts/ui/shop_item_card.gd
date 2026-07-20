@@ -32,7 +32,11 @@ func configure(data: Dictionary, notation: String) -> void:
 	if not locked_reason.is_empty():
 		reason_label.text = "LOCKED  •  %s" % locked_reason
 	elif missing > 0.0:
-		reason_label.text = "NEED %s MORE" % NumberFormatter.format_energy(missing, notation)
+		var wait_seconds := float(data.get("wait_seconds", INF))
+		reason_label.text = "NEED %s MORE%s" % [
+			NumberFormatter.format_energy(missing, notation),
+			"  •  ABOUT %s" % NumberFormatter.format_duration(wait_seconds) if is_finite(wait_seconds) else "",
+		]
 	else:
 		reason_label.text = "Ready to build"
 	match str(data.get("status", "invalid")):

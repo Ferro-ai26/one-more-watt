@@ -95,7 +95,7 @@ func _run_sample(panel: RequestDebugPanel, index: int) -> void:
 		await process_frame
 		_check(not panel.simulation.grid.state.brownout_active, "grid recovers after explicit recovery control")
 	var guard := 0
-	while panel.simulation.get_request_state(request_id).status == RequestRunState.RUNNING and guard < 20:
+	while panel.simulation.get_request_state(request_id).status == RequestRunState.RUNNING and guard < 100:
 		_button(panel, "AdvanceTenButton").emit_signal("pressed")
 		await process_frame
 		guard += 1
@@ -103,6 +103,8 @@ func _run_sample(panel: RequestDebugPanel, index: int) -> void:
 	_check(state.status == RequestRunState.COMPLETED, "%s reaches completed state" % request_id)
 	var report := panel.simulation.get_report(request_id)
 	_check(report != null and report.request_id == request_id, "%s report matches the observed run" % request_id)
+	if report == null:
+		return
 	_check("REPORT %s" % report.grade in panel.report_label.text, "%s report grade is displayed" % request_id)
 	_check(panel.watt_dialogue_label.text == panel._repository.localize(report.completion_key), "%s completion line cannot be replaced by ambient dialogue" % request_id)
 	if index == 1:

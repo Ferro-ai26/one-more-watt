@@ -225,3 +225,9 @@ The prototype requires no account, network connection, contact access, location,
 ## Extension rules
 
 Adding an era should require data and presentation assets, not new core simulation architecture. Add a new system only when the existing Generation/Transmission/Reserve/request model cannot express a meaningful planned decision.
+
+## Phase 08 polish boundary
+
+`FeedbackAudio` is a presentation-only node that converts semantic `FeedbackHooks` events into cached procedural PCM cues on the SFX bus; simulation remains silent and testable. Headless runs generate and validate cue data without opening playback. `MainUI` advances idle grid simulation when no request is active, retains the specified modal pause for active requests, and rebuilds secondary content only on explicit navigation/mutation while normal 5 Hz refreshes update existing controls.
+
+The available-host worst-state budget is tested at the complete endpoint with all Build definitions and reports reachable: 500 non-rebuilding refreshes must complete under one second, 25 full Build rebuilds under 1.5 seconds, and the live tree under 500 UI nodes. These host checks supplement rather than replace the Android memory, launch, and frame budgets.

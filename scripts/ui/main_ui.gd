@@ -12,11 +12,13 @@ var _refresh_accumulator := 0.0
 var _last_report_modal_id := ""
 var _last_era_transition_modal_id := ""
 var _pending_purchase: Dictionary = {}
+var _feedback_tween: Tween
 
 var status_era_label: Label
 var status_energy_label: Label
 var status_power_label: Label
 var watt_core: Label
+var focal_panel: PanelContainer
 var environment_label: Label
 var dialogue_label: Label
 var request_title_label: Label
@@ -34,10 +36,14 @@ var feedback_label: Label
 var modal_overlay: ColorRect
 var modal_title: Label
 var modal_content: VBoxContainer
+var feedback_audio: FeedbackAudio
 
 
 func _ready() -> void:
 	_build_interface()
+	feedback_audio = FeedbackAudio.new()
+	feedback_audio.name = "FeedbackAudio"
+	add_child(feedback_audio)
 	var content_db := get_node_or_null("/root/ContentDB")
 	if content_db == null or not bool(content_db.call("is_loaded")):
 		_show_content_error()
@@ -62,14 +68,17 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 07 vertical slice ready")
+	print("ONE MORE WATT Phase 08 playtest build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
 
 func _process(delta: float) -> void:
+	var simulation_delta := minf(delta, 0.25)
 	if session.requests.get_active_state() != null and navigation.modal_depth() == 0:
-		session.advance_time(minf(delta, 0.25))
+		session.advance_time(simulation_delta)
+	elif session.requests.get_active_state() == null and view_model != null:
+		session.advance_idle_time(simulation_delta)
 	_refresh_accumulator += delta
 	if _refresh_accumulator >= 0.2:
 		_refresh_accumulator = 0.0
@@ -87,6 +96,7 @@ func select_tab(tab: String) -> bool:
 		return false
 	for key: Variant in nav_buttons:
 		(nav_buttons[key] as Button).button_pressed = str(key) == tab
+	_apply_tab_density()
 	_rebuild_screen()
 	return true
 
@@ -125,11 +135,12 @@ func open_request_modal() -> void:
 	if bool(request.get("detailed_forecast_unlocked", false)):
 		forecast_text += "  •  PREDICTED SERVICE %.0f%%" % (float(request["service_ratio"]) * 100.0)
 	_add_modal_label(forecast_text, 17, Color.WHITE)
-	if bool(request["underprepared"]):
-		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, Color(1.0, 0.62, 0.3))
 	var authorize := _button("Authorize Request", "AuthorizeButton")
 	authorize.pressed.connect(_authorize_from_modal)
 	modal_content.add_child(authorize)
+	if bool(request["underprepared"]):
+		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, Color(1.0, 0.62, 0.3))
+	_add_modal_label("BEST NEXT STEP  •  %s" % _recommendation(str(request["bottleneck"])), 16, Color(0.62, 0.94, 0.72))
 	if not bool(request.get("required", true)):
 		var skip := _button("Skip Optional Request", "SkipRequestButton")
 		skip.pressed.connect(_skip_optional_from_modal)
@@ -173,6 +184,7 @@ func open_settings_modal() -> void:
 	var reduced := CheckButton.new()
 	reduced.name = "ReducedMotionCheck"
 	reduced.custom_minimum_size.y = 48
+	reduced.add_theme_font_size_override("font_size", 18)
 	reduced.text = "Reduced motion"
 	reduced.button_pressed = session.settings.reduced_motion
 	reduced.toggled.connect(func(value: bool) -> void: session.settings.reduced_motion = value; _settings_changed())
@@ -186,6 +198,7 @@ func open_settings_modal() -> void:
 	var haptics := CheckButton.new()
 	haptics.name = "HapticsCheck"
 	haptics.custom_minimum_size.y = 48
+	haptics.add_theme_font_size_override("font_size", 18)
 	haptics.text = "Haptics"
 	haptics.button_pressed = session.settings.haptics_enabled
 	haptics.toggled.connect(func(value: bool) -> void: session.settings.haptics_enabled = value; _settings_changed())
@@ -193,6 +206,7 @@ func open_settings_modal() -> void:
 	var confirm := CheckButton.new()
 	confirm.name = "ConfirmLargeCheck"
 	confirm.custom_minimum_size.y = 48
+	confirm.add_theme_font_size_override("font_size", 18)
 	confirm.text = "Confirm large purchases"
 	confirm.button_pressed = session.settings.confirm_large_purchases
 	confirm.toggled.connect(func(value: bool) -> void: session.settings.confirm_large_purchases = value; _settings_changed())
@@ -295,7 +309,7 @@ func _build_interface() -> void:
 	var shell := get_node("SafeArea/AppShell") as PanelContainer
 	var layout := VBoxContainer.new()
 	layout.name = "MainLayout"
-	layout.add_theme_constant_override("separation", 5)
+	layout.add_theme_constant_override("separation", 4)
 	shell.add_child(layout)
 
 	var status := HBoxContainer.new()
@@ -323,14 +337,14 @@ func _build_interface() -> void:
 	settings_button.pressed.connect(open_settings_modal)
 	status.add_child(settings_button)
 
-	var focal := PanelContainer.new()
-	focal.name = "WattRequestPanel"
-	focal.custom_minimum_size.y = 154
-	focal.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.105, 0.16), Color(0.19, 0.73, 1.0), 12, 10))
-	layout.add_child(focal)
+	focal_panel = PanelContainer.new()
+	focal_panel.name = "WattRequestPanel"
+	focal_panel.custom_minimum_size.y = 154
+	focal_panel.add_theme_stylebox_override("panel", _panel_style(Color(0.055, 0.105, 0.16), Color(0.19, 0.73, 1.0), 12, 10))
+	layout.add_child(focal_panel)
 	var focal_row := HBoxContainer.new()
 	focal_row.add_theme_constant_override("separation", 10)
-	focal.add_child(focal_row)
+	focal_panel.add_child(focal_row)
 	var watt_column := VBoxContainer.new()
 	watt_column.custom_minimum_size.x = 76
 	focal_row.add_child(watt_column)
@@ -405,6 +419,7 @@ func _build_interface() -> void:
 	allocation_label = _label("Balanced", 12, Color(0.62, 0.82, 0.94))
 	allocation_label.name = "AllocationSummaryLabel"
 	allocation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	allocation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	allocation_box.add_child(allocation_label)
 
 	var screen_panel := PanelContainer.new()
@@ -500,22 +515,24 @@ func _refresh_all(rebuild_screen: bool) -> void:
 	if request["status"] == "prototype_complete":
 		forecast_label.text = "ERAS 1–3 COMPLETE  •  MORE COMING"
 	else:
-		forecast_label.text = "%s PEAK  •  %s  •  %s" % [
+		forecast_label.text = "%s PEAK  •  %s LIMITS  •  %s\nNEXT  •  %s" % [
 			NumberFormatter.format_power(float(request.get("peak", 0.0)), notation),
 			str(request.get("bottleneck", "none")).to_upper(),
 			NumberFormatter.format_duration(float(request.get("estimated_seconds", INF))),
+			_recommendation_short(str(request.get("bottleneck", "none"))),
 		]
 	_update_request_action(str(request["status"]))
 	var limiting := str(request.get("bottleneck", "none"))
+	var live_result := session.requests.grid.get_last_result()
 	(vital_cards["generation"] as VitalCard).configure("Generation", NumberFormatter.format_power(float(status["generation"]), notation), "PRODUCING", limiting == "generation")
 	(vital_cards["transmission"] as VitalCard).configure("Transmission", NumberFormatter.format_power(float(status["transmission"]), notation), "CAPACITY", limiting == "transmission")
-	(vital_cards["reserve"] as VitalCard).configure("Reserve", "%s/%s" % [NumberFormatter.format_number(float(status["reserve_stored"]), notation), NumberFormatter.format_number(float(status["reserve_capacity"]), notation)], "READY", limiting == "reserve")
+	var reserve_detail := "SUPPORTING ↓" if live_result.reserve_discharge_power > 0.000001 else ("CHARGING ↑" if live_result.reserve_charge_power > 0.000001 else "READY")
+	(vital_cards["reserve"] as VitalCard).configure("Reserve", "%s/%s" % [NumberFormatter.format_number(float(status["reserve_stored"]), notation), NumberFormatter.format_number(float(status["reserve_capacity"]), notation)], reserve_detail, limiting == "reserve")
 	var mode := session.requests.grid.state.allocation_mode
 	var allocation_unlocked := session.has_feature("allocation_modes")
 	for key: Variant in allocation_buttons:
 		(allocation_buttons[key] as Button).button_pressed = str(key) == mode
 		(allocation_buttons[key] as Button).disabled = not allocation_unlocked
-	var live_result := session.requests.grid.get_last_result()
 	allocation_label.text = "%s  •  %s/s Stored Energy" % [mode.replace("_", " ").capitalize(), NumberFormatter.format_number(live_result.stored_energy_rate, notation)] if allocation_unlocked else "Routing controls unlock after WATT's language experiment"
 	var environment := view_model.environment_snapshot()
 	environment_label.text = str(environment["badge"])
@@ -578,6 +595,7 @@ func _build_grid_screen() -> void:
 		automation.name = "ReserveAutomationCheck"
 		automation.text = "Protect Reserve below %.0f%%" % (session.economy.state.reserve_threshold_ratio * 100.0)
 		automation.custom_minimum_size.y = 48
+		automation.add_theme_font_size_override("font_size", 18)
 		automation.button_pressed = session.economy.state.reserve_automation_enabled
 		automation.toggled.connect(func(enabled: bool) -> void:
 			session.configure_reserve_automation(enabled, session.economy.state.reserve_threshold_ratio)
@@ -729,12 +747,33 @@ func _cycle_volume(button: Button, field: String, label: String) -> void:
 
 
 func _on_feedback(kind: String) -> void:
+	if feedback_audio != null:
+		feedback_audio.play(kind)
 	feedback_label.text = kind.replace("_", " ").to_upper()
-	if session.settings.reduced_motion or watt_core == null:
+	if session.settings.reduced_motion or watt_core == null or focal_panel == null:
 		return
-	var tween := create_tween()
-	tween.tween_property(watt_core, "modulate", Color(1.0, 0.9, 0.4), 0.08)
-	tween.tween_property(watt_core, "modulate", Color.WHITE, 0.16)
+	if _feedback_tween != null and _feedback_tween.is_valid():
+		_feedback_tween.kill()
+	var accent := Color(0.72, 0.48, 0.48) if kind == "brownout" else (Color(0.66, 0.9, 0.74) if kind in ["request_complete", "era_transition"] else Color(1.0, 0.9, 0.55))
+	_feedback_tween = create_tween()
+	_feedback_tween.set_parallel(true)
+	_feedback_tween.tween_property(watt_core, "modulate", accent, 0.08)
+	_feedback_tween.tween_property(focal_panel, "modulate", accent, 0.08)
+	_feedback_tween.chain().set_parallel(true)
+	_feedback_tween.tween_property(watt_core, "modulate", Color.WHITE, 0.18)
+	_feedback_tween.tween_property(focal_panel, "modulate", Color.WHITE, 0.18)
+
+
+func _apply_tab_density() -> void:
+	if focal_panel == null:
+		return
+	var compact := navigation.current_tab != "grid"
+	focal_panel.custom_minimum_size.y = 72.0 if compact else 154.0
+	dialogue_label.visible = not compact
+	request_meta_label.visible = not compact
+	request_progress.visible = not compact
+	forecast_label.visible = not compact
+	request_action_button.visible = not compact
 
 
 func _show_content_error() -> void:
@@ -786,6 +825,14 @@ static func _recommendation(bottleneck: String) -> String:
 		_: return "The grid is ready. Review WATT's request forecast."
 
 
+static func _recommendation_short(bottleneck: String) -> String:
+	match bottleneck:
+		"generation": return "ADD GENERATION"
+		"transmission": return "ADD TRANSMISSION"
+		"reserve": return "CHARGE OR BUILD RESERVE"
+		_: return "AUTHORIZE WHEN READY"
+
+
 static func _clear_children(parent: Node) -> void:
 	for child: Node in parent.get_children():
 		parent.remove_child(child)
@@ -797,6 +844,7 @@ static func _button(text: String, name: String) -> Button:
 	button.name = name
 	button.text = text
 	button.custom_minimum_size.y = 48
+	button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	return button
 
 

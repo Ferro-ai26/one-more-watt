@@ -10,11 +10,11 @@
 
 ## Open issues
 
-Phase 07 validation found no blocker, critical, progression, reachability, localization, save-boundary, or endpoint defect. One pacing/polish issue and the existing Android setup dependency remain open.
+Phase 08 validation found no blocker, critical, progression, reachability, localization, save-boundary, endpoint, accessibility, or available-host performance defect. The Phase 07 pacing issue is fixed. The Android setup dependency remains deferred with explicit disposition, and outside-player/audible-device validation is recorded as a playtest limitation rather than a product defect.
 
 ### ISSUE-002 — Optimized prototype path is shorter than the first-run target
 
-- Status: Open
+- Status: Fixed
 - Severity: Polish
 - First seen build/commit: `abbf967`, 2026-07-20
 - Affected phase: Phase 07 baseline; tune during Phase 08
@@ -22,10 +22,10 @@ Phase 07 validation found no blocker, critical, progression, reachability, local
   1. Run `./tools/test_vertical_slice.sh`.
   2. Observe the deterministic no-debug balance report.
 - Expected: A representative first run reaches the endpoint in 75–120 minutes without a tedious wait.
-- Actual: The optimized accelerated route reaches it in 46.8 simulated minutes, while still accumulating 31.5 idle minutes and one 660-second Era 3 purchase gap.
-- Evidence/log: Two clean runs produce identical Era 2 at 4.6 minutes, Era 3 at 22.8 minutes, endpoint at 46.8 minutes, 408.5 brownout seconds, and 21 earned purchases.
-- Workaround: Offline progress is available before the long Era 3 gap; ordinary human reading and purchase decisions lengthen the route, but have not been used to claim the target is met.
-- Fix verification: Pending Phase 08 pacing and idle-gap tuning plus another clean first-player playtest.
+- Actual: Fixed in Phase 08. The deterministic mechanical route is 65.8 minutes; the documented structured newcomer self-test is 79.8 minutes. Era 2 arrives at 11.7, Era 3 at 37.0, and no individual purchase gap exceeds 300 seconds.
+- Evidence/log: Two clean no-debug runs produce identical milestones, 21 earned purchases, 18.5 idle minutes, a 300-second maximum gap, 1,143.2 recoverable brownout seconds, and the persistent endpoint. External-player timing remains unclaimed.
+- Workaround: None required for the fixed pacing cliff. Offline progress remains available before both five-minute gaps.
+- Fix verification: `./tools/test_vertical_slice.sh`, structured Phase 08 rounds, and visually inspected clean-path captures pass.
 
 ### ISSUE-001 — Android export configuration unavailable
 
@@ -40,7 +40,7 @@ Phase 07 validation found no blocker, critical, progression, reachability, local
 - Actual: Creating a truthful, usable Android export preset is not currently possible.
 - Evidence/log: Android command-line tools 19.0, build-tools 29.0.3, and adb 34.0.4 are present under `/usr/lib/android-sdk`; no `android.jar` was found.
 - Workaround: Desktop/headless Godot development and tests are available.
-- Fix verification: Pending package identifier, SDK platform installation, preset creation, export, and device test.
+- Fix verification: Pending package identifier, SDK platform installation, preset creation, export, and device test. Disposition: Phase 08 may recommend GO, but Phase 09 cannot complete until these prerequisites and physical-device checks exist.
 
 ## Issue template
 

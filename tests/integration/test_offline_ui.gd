@@ -51,7 +51,7 @@ func _run() -> void:
 	main.close_top_modal()
 
 	controller.background(10012)
-	var completion_report := controller.resume(10022)
+	var completion_report := controller.resume(10032)
 	_check("era01_finish_booting" in completion_report.completed_request_ids, "request completes across offline boundary")
 	var currency := main.session.requests.grid.state.stored_energy
 	_check(main.session.requests.get_request_state("era01_finish_booting").reward_granted, "offline completion grants reward once")
@@ -61,7 +61,7 @@ func _run() -> void:
 	recovered_session.configure(main.session.repository)
 	var recovery_controller := PersistenceController.new()
 	recovery_controller.configure(recovered_session, SaveManager.new(_root, main.session.repository.get_content_version()))
-	var recovery := recovery_controller.bootstrap(10022)
+	var recovery := recovery_controller.bootstrap(10032)
 	_check(recovery.get("ok", false) and recovery.get("recovered", false), "invalid main restores Backup 1 through bootstrap")
 	_check(not recovery_controller.last_load_result.preserved_corrupt_path.is_empty(), "recovery preserves invalid main evidence")
 	_check(recovered_session.requests.grid.state.stored_energy <= currency + 0.000001, "recovery cannot duplicate more currency than completed state")
@@ -73,6 +73,7 @@ func _run() -> void:
 
 	_cleanup_tree(_root)
 	viewport.queue_free()
+	await process_frame
 	if _failures.is_empty():
 		print("OFFLINE UI TESTS PASSED: %d checks" % _checks)
 		quit(0)

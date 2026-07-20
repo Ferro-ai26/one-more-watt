@@ -29,14 +29,17 @@ var _checks := 0
 var _elapsed := 0.0
 var _idle_elapsed := 0.0
 var _max_idle_gap := 0.0
+var _early_idle_max := 0.0
+var _idle_gaps: Dictionary = {}
+var _purchase_times: Dictionary = {}
 var _save_root := ""
 
 
 func _init() -> void:
-	_save_root = "user://phase07_vertical_%d" % Time.get_ticks_usec()
+	_save_root = "user://phase08_balance_%d" % Time.get_ticks_usec()
 	_repository = ContentRepository.new()
 	var loaded := _repository.load_from_manifest()
-	_check(loaded.is_ok(), "canonical Phase 07 content loads")
+	_check(loaded.is_ok(), "canonical Phase 08 content loads")
 	if loaded.is_ok():
 		_test_catalog_and_localization()
 		var first := _run_clean_path(true)
@@ -68,9 +71,13 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 	_elapsed = 0.0
 	_idle_elapsed = 0.0
 	_max_idle_gap = 0.0
+	_early_idle_max = 0.0
+	_idle_gaps.clear()
+	_purchase_times.clear()
 	var session := GameSession.new()
 	_check(session.configure(_repository), "clean vertical-slice session configures")
 	var milestones: Dictionary = {}
+	var request_seconds: Dictionary = {}
 	var purchases: Array[String] = []
 	var total_brownout_seconds := 0.0
 	var era2_saved := false
@@ -91,7 +98,7 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 		_check(session.current_request_id() == request_id, "%s becomes the selected required request" % request_id)
 		var definition := _repository.get_request(request_id)
 		var research_cost := float(definition.get_value("research_cost", 0.0))
-		_earn_until(session, research_cost)
+		_earn_until(session, research_cost, "%s research" % request_id)
 		_check(session.authorize_current_request(), "%s authorizes without injected currency" % request_id)
 		var state := session.requests.get_request_state(request_id)
 		var guard := 0
@@ -105,6 +112,7 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 		_check(report != null and state.reward_granted, "%s produces one rewarded report" % request_id)
 		if report != null:
 			total_brownout_seconds += report.brownout_seconds
+			request_seconds[request_id] = report.completion_seconds
 		milestones[request_id] = _elapsed
 		if not session.economy.state.pending_era_transition_id.is_empty():
 			var transition_id := session.economy.state.pending_era_transition_id
@@ -139,6 +147,10 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 		"elapsed": _elapsed,
 		"idle_elapsed": _idle_elapsed,
 		"max_idle_gap": _max_idle_gap,
+		"idle_gaps": _idle_gaps.duplicate(true),
+		"early_idle_max": _early_idle_max,
+		"purchase_times": _purchase_times.duplicate(true),
+		"request_seconds": request_seconds,
 		"milestones": milestones,
 		"purchases": purchases,
 		"brownout_seconds": total_brownout_seconds,
@@ -186,22 +198,26 @@ func _prepare_for_request(session: GameSession, request_id: String, purchases: A
 func _buy_infrastructure(session: GameSession, id: String, purchases: Array[String]) -> void:
 	var preview := session.preview_infrastructure(id)
 	_check(preview.status != EconomyPreview.LOCKED, "%s is reachable before purchase" % id)
-	_earn_until(session, preview.cost)
+	_earn_until(session, preview.cost, id)
 	_check(session.purchase_infrastructure(id), "%s purchases with earned Stored Energy" % id)
 	purchases.append(id)
+	if not _purchase_times.has(id):
+		_purchase_times[id] = _elapsed
 
 
 func _buy_upgrade(session: GameSession, id: String, purchases: Array[String]) -> void:
 	var preview := session.preview_upgrade(id)
 	_check(preview.status != EconomyPreview.LOCKED, "%s is reachable before purchase" % id)
-	_earn_until(session, preview.cost)
+	_earn_until(session, preview.cost, id)
 	_check(session.purchase_upgrade(id), "%s purchases with earned Stored Energy" % id)
 	purchases.append(id)
+	_purchase_times[id] = _elapsed
 
 
-func _earn_until(session: GameSession, target: float) -> void:
+func _earn_until(session: GameSession, target: float, label: String) -> void:
 	var guard := 0
 	var gap := 0.0
+	var gap_started := _elapsed
 	while session.requests.grid.state.stored_energy + 0.000001 < target and guard < 10000:
 		_check(session.advance_idle_time(10.0), "idle grid earns through normal conversion")
 		_elapsed += 10.0
@@ -209,6 +225,10 @@ func _earn_until(session: GameSession, target: float) -> void:
 		gap += 10.0
 		guard += 1
 	_max_idle_gap = maxf(_max_idle_gap, gap)
+	if gap_started < 300.0:
+		_early_idle_max = maxf(_early_idle_max, minf(_elapsed, 300.0) - gap_started)
+	if gap > 0.0:
+		_idle_gaps[label] = gap
 	_check(session.requests.grid.state.stored_energy + 0.000001 >= target, "earned Stored Energy reaches %.1f" % target)
 
 
@@ -232,8 +252,25 @@ func _compare_runs(first: Dictionary, second: Dictionary) -> void:
 	_check(is_equal_approx(float(first["stored_energy"]), float(second["stored_energy"])), "final currency is deterministic")
 	_check(first["owned"] == second["owned"], "final ownership is deterministic")
 	_check(is_equal_approx(float(first["idle_elapsed"]), float(second["idle_elapsed"])), "idle-time total is deterministic")
-	print("PHASE 07 BALANCE REPORT: elapsed %.1f minutes, Era 2 %.1f, Era 3 %.1f, idle %.1f minutes, longest idle gap %.1fs, brownout %.1fs, purchases %d" % [
+	_check(first["idle_gaps"] == second["idle_gaps"], "individual idle gaps are deterministic")
+	_check(first["request_seconds"] == second["request_seconds"], "individual request durations are deterministic")
+	var era2_seconds := float(first["milestones"].get("era_02_bedroom_assistant", 0.0))
+	var era3_seconds := float(first["milestones"].get("era_03_home_server_closet", 0.0))
+	var mechanical_seconds := float(first["elapsed"])
+	var structured_seconds := mechanical_seconds + MAIN_REQUEST_IDS.size() * 40.0 + (first["purchases"] as Array).size() * 10.0 + 30.0
+	_check(float(first["request_seconds"].get("era01_finish_booting", 0.0)) >= 20.0 and float(first["request_seconds"].get("era01_finish_booting", 0.0)) <= 30.0, "first request completes in the documented 20–30 second range")
+	_check(float(first["purchase_times"].get("wall_outlet", INF)) < 60.0, "first infrastructure purchase is reachable under 60 seconds")
+	_check(era2_seconds >= 600.0 and era2_seconds <= 900.0, "Era 2 arrives in the documented 10–15 minute range")
+	_check(era3_seconds >= 1800.0 and era3_seconds <= 2700.0, "Era 3 arrives in the documented 30–45 minute range")
+	_check(float(first["early_idle_max"]) <= 30.0, "the first five minutes contain no unexplained idle wait over 30 seconds")
+	_check(float(first["max_idle_gap"]) <= 300.0, "no required purchase creates a dead-time gap over five minutes")
+	for era3_id: String in ["era03_sort_photo_archive", "era03_predict_package_arrival", "era03_write_grocery_list", "era03_leftovers_edible"]:
+		var duration := float(first["request_seconds"].get(era3_id, 0.0))
+		_check(duration >= 180.0 and duration <= 360.0, "%s takes 3–6 prepared-route minutes" % era3_id)
+	_check(structured_seconds >= 4500.0 and structured_seconds <= 7200.0, "structured newcomer self-test cadence reaches the 75–120 minute target")
+	print("PHASE 08 BALANCE REPORT: mechanical %.1f minutes, structured %.1f, Era 2 %.1f, Era 3 %.1f, idle %.1f minutes, longest gap %.1fs, brownout %.1fs, purchases %d" % [
 		float(first["elapsed"]) / 60.0,
+		structured_seconds / 60.0,
 		float(first["milestones"].get("era_02_bedroom_assistant", 0.0)) / 60.0,
 		float(first["milestones"].get("era_03_home_server_closet", 0.0)) / 60.0,
 		float(first["idle_elapsed"]) / 60.0,
@@ -241,6 +278,8 @@ func _compare_runs(first: Dictionary, second: Dictionary) -> void:
 		float(first["brownout_seconds"]),
 		(first["purchases"] as Array).size(),
 	])
+	print("PHASE 08 REQUEST SECONDS: %s" % first["request_seconds"])
+	print("PHASE 08 IDLE GAPS: %s" % first["idle_gaps"])
 
 
 func _cleanup_tree(path: String) -> void:
@@ -263,11 +302,11 @@ func _cleanup_tree(path: String) -> void:
 
 func _finish() -> void:
 	if _failures.is_empty():
-		print("PHASE 07 VERTICAL SLICE TESTS PASSED: %d checks" % _checks)
+		print("PHASE 08 BALANCE AND REACHABILITY TESTS PASSED: %d checks" % _checks)
 		quit(0)
 		return
 	for failure: String in _failures:
-		printerr("PHASE 07 TEST FAILED: %s" % failure)
+		printerr("PHASE 08 TEST FAILED: %s" % failure)
 	quit(1)
 
 

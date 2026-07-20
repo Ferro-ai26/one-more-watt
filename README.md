@@ -34,13 +34,13 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phase 07 delivers the complete Eras 1–3 vertical slice: 18 reviewed requests, three environment states, embedded tutorials, allocation/offline/forecast/automation unlocks, persistent era transitions, three optional vanity requests, and an explicit Home Server Closet endpoint. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phase 08 delivers the external-playtest prototype: a tuned 79.8-minute structured newcomer route, 20–30 second first request, target-window era arrivals, no purchase gap over five minutes, clearer forecasts, automatic online idle generation, compact 320-pixel secondary screens, era-specific brownout dialogue, restrained feedback animation, procedural sound cues, and worst-state performance coverage. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the accelerated full prototype path with `./tools/test_vertical_slice.sh`. Era 4, prestige, cloud accounts, final art/music, and production store assets remain intentionally deferred.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. Android export/device work, Era 4, prestige, cloud accounts, final production art/music, and store assets remain intentionally deferred.
 
 ## Scope policy
 

@@ -120,6 +120,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: Phase 07 needs cross-system gates based on requests, ownership, upgrades, and report quality without introducing a second authoritative progression store or embedding stable content IDs in presentation scripts.
 - Consequences: Request reports reconcile into economy progression before availability refresh; all new fields round-trip through format version 2 with safe defaults; additive `0.6.0` saves may load into `0.7.0`; and future conditions must remain enumerated, data-driven, and reachability-tested.
 
+## DEC-018 — Put prototype pacing into visible work, not purchase cliffs
+
+- Status: Proposed
+- Date: 2026-07-20
+- Decision: Tune the Eras 1–3 first run around a 65.8-minute mechanical earned-currency route plus conservative newcomer interaction time, producing a 79.8-minute structured self-test. Lengthen authored requests while lowering Portable Generator to 425 Stored Energy and Reinforced Wiring to 41,000 so no required purchase gap exceeds five minutes.
+- Reason: The Phase 07 route reached the endpoint in 46.8 minutes but hid 660 seconds behind one late purchase. Continuously moving request progress is legible and character-bearing; an unchanging affordability wait is not.
+- Consequences: The first request remains 25 seconds, Era 2 and Era 3 move to 11.7 and 37.0 minutes, all four prepared-route Era 3 requests take 3–6 minutes, and the structured route lands at 79.8 minutes. This is deterministic self-test evidence, not an external-player timing claim; an unfamiliar-player pass remains required when a tester is available.
+
 ## Proposed decision template
 
 ```markdown

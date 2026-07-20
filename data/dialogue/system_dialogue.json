@@ -26,6 +26,62 @@
       "tags": ["reaction", "unseen_priority"]
     },
     {
+      "id": "brownout_cold_boot_third",
+      "context": "brownout",
+      "era_id": "era_01_cold_boot",
+      "text_key": "dialogue.brownout.cold_boot_third",
+      "required_placeholders": [],
+      "tags": ["reaction", "reassurance"]
+    },
+    {
+      "id": "brownout_bedroom_first",
+      "context": "brownout",
+      "era_id": "era_02_bedroom_assistant",
+      "text_key": "dialogue.brownout.bedroom_first",
+      "required_placeholders": [],
+      "tags": ["reaction", "household"]
+    },
+    {
+      "id": "brownout_bedroom_tuesday",
+      "context": "brownout",
+      "era_id": "era_02_bedroom_assistant",
+      "text_key": "dialogue.brownout.bedroom_tuesday",
+      "required_placeholders": [],
+      "tags": ["reaction", "callback"]
+    },
+    {
+      "id": "brownout_bedroom_dinner",
+      "context": "brownout",
+      "era_id": "era_02_bedroom_assistant",
+      "text_key": "dialogue.brownout.bedroom_dinner",
+      "required_placeholders": [],
+      "tags": ["reaction", "callback"]
+    },
+    {
+      "id": "brownout_closet_first",
+      "context": "brownout",
+      "era_id": "era_03_home_server_closet",
+      "text_key": "dialogue.brownout.closet_first",
+      "required_placeholders": [],
+      "tags": ["reaction", "household"]
+    },
+    {
+      "id": "brownout_closet_ceiling",
+      "context": "brownout",
+      "era_id": "era_03_home_server_closet",
+      "text_key": "dialogue.brownout.closet_ceiling",
+      "required_placeholders": [],
+      "tags": ["reaction", "callback"]
+    },
+    {
+      "id": "brownout_closet_leftovers",
+      "context": "brownout",
+      "era_id": "era_03_home_server_closet",
+      "text_key": "dialogue.brownout.closet_leftovers",
+      "required_placeholders": [],
+      "tags": ["reaction", "callback"]
+    },
+    {
       "id": "tutorial_authorize",
       "context": "tutorial",
       "era_id": "era_01_cold_boot",

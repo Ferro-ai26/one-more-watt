@@ -176,3 +176,5 @@ Approve a line only if:
 - It fits on the target mobile dialogue surface.
 
 Phase 07 authors and reviews one announcement and completion line for each of the 18 prototype requests. Cold Boot remains tentative and permission-seeking, Bedroom Assistant becomes enthusiastic and questionably helpful, and Home Server Closet uses confident household-optimization language. The one-pass clean route contains no repeated request line; brownout selection retains unseen-first ordering and a 60-second cooldown.
+
+Phase 08 expands brownout reactions from two global lines to three reviewed lines per era. Selection is restricted to the active request's era, preserves the 60-second cooldown and ten-event recent history, and adds restrained callbacks to Tuesday, dinner, the ceiling photograph, and leftovers. When all three era lines are recent, WATT remains silent instead of repeating obvious spam.

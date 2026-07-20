@@ -188,6 +188,7 @@ func configure_reserve_automation(enabled: bool, threshold_ratio: float) -> bool
 func acknowledge_era_transition() -> bool:
 	if not economy.acknowledge_era_transition():
 		return false
+	feedback.request("era_transition", true)
 	mutation_committed.emit("era_transition")
 	return true
 

@@ -32,6 +32,8 @@ func _run() -> void:
 	_check(main.dialogue_label.text.contains("almost awake"), "WATT's role and first request are immediately visible")
 	_check(main.screen_content.find_child("TutorialPrompt", true, false) is Label, "embedded authorization tutorial appears before the first action")
 	_check((main.allocation_buttons["feed_watt"] as Button).disabled, "allocation controls begin locked")
+	_check(main.forecast_label.text.contains("NEXT"), "compact forecast names the next useful action")
+	_check(main.feedback_audio != null, "essential feedback audio player is present")
 	if _capture_layouts:
 		await _capture(viewport, "cold_boot")
 
@@ -82,15 +84,32 @@ func _run() -> void:
 		_check(main.session.economy.state.reserve_automation_enabled, "Reserve protection can be enabled from the Grid screen")
 	if _capture_layouts:
 		await _capture(viewport, "prototype_complete")
+	main.select_tab("build")
+	await process_frame
+	var performance_started := Time.get_ticks_usec()
+	for index: int in 25:
+		main.refresh_now(true)
+	var rebuild_msec := float(Time.get_ticks_usec() - performance_started) / 1000.0
+	_check(rebuild_msec < 1500.0, "worst-state Build screen rebuilds 25 times inside the 1500ms host budget (%.1fms)" % rebuild_msec)
+	performance_started = Time.get_ticks_usec()
+	for index: int in 500:
+		main.refresh_now(false)
+	var refresh_msec := float(Time.get_ticks_usec() - performance_started) / 1000.0
+	_check(refresh_msec < 1000.0, "worst-state presentation refreshes 500 times inside the 1000ms host budget (%.1fms)" % refresh_msec)
+	var worst_state_nodes := main.find_children("*", "Node", true, false).size()
+	_check(worst_state_nodes < 500, "worst representative UI state remains below 500 nodes")
+	print("PHASE 08 PERFORMANCE REPORT: 25 full Build rebuilds %.1fms, 500 live refreshes %.1fms, %d UI nodes" % [rebuild_msec, refresh_msec, worst_state_nodes])
+	main.session.feedback.request("error")
+	_check(main.feedback_audio.last_played == "error", "semantic feedback produces a mixed procedural sound cue")
 
 	viewport.queue_free()
 	await process_frame
 	if _failures.is_empty():
-		print("PHASE 07 UI PATH TESTS PASSED: %d checks" % _checks)
+		print("PHASE 08 UI AND PERFORMANCE TESTS PASSED: %d checks" % _checks)
 		quit(0)
 		return
 	for failure: String in _failures:
-		printerr("PHASE 07 UI TEST FAILED: %s" % failure)
+		printerr("PHASE 08 UI TEST FAILED: %s" % failure)
 	quit(1)
 
 
@@ -179,10 +198,10 @@ func _press(button: Button) -> void:
 func _capture(viewport: SubViewport, name: String) -> void:
 	await process_frame
 	await process_frame
-	var path := "user://phase07_%s.png" % name
+	var path := "user://phase08_%s.png" % name
 	var error := viewport.get_texture().get_image().save_png(path)
 	_check(error == OK, "%s capture saves" % name)
-	print("PHASE 07 UI CAPTURE: %s" % ProjectSettings.globalize_path(path))
+	print("PHASE 08 UI CAPTURE: %s" % ProjectSettings.globalize_path(path))
 
 
 func _check(value: bool, failure: String) -> void:

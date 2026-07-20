@@ -15,7 +15,7 @@ func _init() -> void:
 	var counts := repository.get_counts()
 	var expected_counts := {
 		"balance": 1, "eras": 3, "infrastructure": 18, "upgrades": 3,
-		"requests": 18, "demand_profiles": 9, "dialogue": 4,
+		"requests": 18, "demand_profiles": 9, "dialogue": 11,
 		"incidents": 2, "achievements": 1, "localization": 1,
 	}
 	for family: String in expected_counts:
@@ -30,7 +30,7 @@ func _init() -> void:
 	_check(infrastructure is InfrastructureDefinition and infrastructure.get_category() == "generation", "typed infrastructure lookup should work")
 	_check(upgrade is UpgradeDefinition and upgrade.get_effects().size() == 1, "typed upgrade lookup should work")
 	_check(repository.get_upgrade("outlet_calibration") is UpgradeDefinition, "leveled upgrade lookup should work")
-	_check(request is RequestDefinition and request.get_required_energy() == 75.0, "typed request lookup should work")
+	_check(request is RequestDefinition and request.get_required_energy() == 125.0, "typed request lookup should work")
 	_check(profile is DemandProfileDefinition and profile.get_duration_seconds() == 15.0, "typed demand profile lookup should work")
 	_check(repository.get_dialogue("content_ready") is DialogueDefinition, "typed dialogue lookup should work")
 	_check(repository.get_incident("helpful_cool_breeze") is IncidentDefinition, "typed incident lookup should work")
@@ -43,7 +43,7 @@ func _init() -> void:
 
 	var exported := request.to_dictionary()
 	exported["required_energy"] = 999
-	_check(request.get_required_energy() == 75.0, "exported dictionaries must not mutate definitions")
+	_check(request.get_required_energy() == 125.0, "exported dictionaries must not mutate definitions")
 	var request_list := repository.get_all("requests")
 	request_list.clear()
 	_check(repository.get_counts()["requests"] == 18, "returned arrays must not mutate repository indices")

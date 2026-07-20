@@ -86,7 +86,7 @@ Starting state:
 | Tiny Desk Fan | Support | 100 | 1.18 | +10% request efficiency for Cold Boot |
 | Extension Cord | Transmission | 180 | 1.16 | +75 W transmission |
 
-Era 1 should contain five main requests and one optional vanity request. Main-request energy requirements should rise from approximately 75 to 1,500 energy units.
+Era 1 contains six required requests and one optional vanity request. The tuned required-request energy curve rises from 125 to 4,500 energy units.
 
 The Phase 05 `Finish Booting` sample awards 12 Stored Energy. With one starting Wall Outlet, the exact next-outlet cost is 11, leaving one Stored Energy after the first purchase and satisfying the onboarding requirement that the first completion funds a visible improvement.
 
@@ -97,13 +97,13 @@ Era 2 unlock rule: complete the Era 1 capstone request `Understand Tuesdays` and
 | Infrastructure | Category | Base cost | Growth | Base effect |
 | --- | --- | ---: | ---: | --- |
 | Upgraded Breaker | Transmission | 450 | 1.17 | +250 W transmission |
-| Portable Generator | Generation | 700 | 1.16 | +120 W generation |
+| Portable Generator | Generation | 425 | 1.16 | +120 W generation |
 | Rooftop Solar Panel | Generation/Solar | 1,100 | 1.15 | +180 W generation |
 | Home Battery | Reserve | 1,800 | 1.18 | +700 reserve, +150 W discharge |
 | Second Questionable Power Strip | Transmission | 2,400 | 1.17 | +900 W transmission |
 | Gaming GPU | Generation/Compute | 4,000 | 1.20 | +650 W generation; increases WATT demand by 5% while active |
 
-Era 2 introduces automatic production, allocation control, reserve spikes, and the first brownout. Main request requirements should range from approximately 3,000 to 45,000 energy units.
+Era 2 introduces automatic production, allocation control, reserve spikes, and the first brownout. The tuned required-request range is 18,000 to 180,000 energy units.
 
 Era 3 unlock rule: complete `Improve Loading Animation`, reach 85% or greater service on one Stability request, and purchase the Dedicated Circuit research upgrade.
 
@@ -116,10 +116,10 @@ Era 3 unlock rule: complete `Improve Loading Animation`, reach 85% or greater se
 | Backup Generator | Generation | 30,000 | 1.17 | +7 kW generation |
 | Smart Meter | Automation | 45,000 | 1.22 | Unlock forecast detail and reserve thresholds |
 | Dedicated Cooling | Support | 65,000 | 1.19 | +20% Compute output |
-| Reinforced Wiring | Transmission | 90,000 | 1.18 | +30 kW transmission |
+| Reinforced Wiring | Transmission | 41,000 | 1.18 | +30 kW transmission |
 | Outdoor Transformer | Transmission | 160,000 | 1.20 | +85 kW transmission |
 
-Era 3 main request requirements should range from approximately 150,000 to 2,500,000 energy units and take 3–6 minutes when reasonably prepared.
+Era 3 required requests range from 350,000 to 4,500,000 energy units and take 3–6 minutes on the canonical prepared route.
 
 Prototype completion rule: complete the Era 3 capstone `Determine Whether Leftovers Remain Edible` and view its performance report.
 
@@ -219,3 +219,11 @@ Until analytics is explicitly approved, balance through deterministic simulation
 The canonical no-debug accelerated route completes all 15 required requests with 21 earned purchases in 46.8 simulated minutes: Era 2 at 4.6 minutes, Era 3 at 22.8 minutes, 31.5 minutes of total idle earning, a longest 660-second Era 3 purchase gap, and 408.5 seconds of recoverable brownout. Two identical runs produce the same milestones, ownership, currency, and brownout summary.
 
 This is an optimized simulation result, not a claim that the 75–120 minute first-player pacing target has been met. Phase 08 should lengthen or reshape the interactive route while reducing the single long Era 3 idle gap, preserving the strong first-five-minute activity and avoiding artificial progress loss.
+
+## Phase 08 tuned prototype baseline
+
+The canonical earned-currency route now takes 65.8 mechanical minutes before reading or decision time. A structured newcomer self-test adds 40 seconds per request review/report, 10 seconds per purchase, and 15 seconds per era transition, producing a conservative 79.8-minute first-run estimate. This cadence is an explicit self-test model, not external-player evidence.
+
+The first request completes at 25 seconds and its reward funds the first purchase before 60 seconds. Era 2 arrives at 11.7 minutes and Era 3 at 37.0 minutes. The four Era 3 requests take 302.25, 288.25, 246.0, and 344.25 seconds on the canonical prepared route. Total idle earning falls to 18.5 minutes, and the longest individual purchase gap is capped at 300 seconds.
+
+Phase 08 shifts waiting into continuously visible request progress by increasing required work across all three eras. Portable Generator costs 425 Stored Energy and Reinforced Wiring costs 41,000 Stored Energy to remove the former 490- and 660-second cliffs. These prototype-specific values supersede their earlier table entries; the stable formulas, outputs, growth rates, non-punitive failure rules, and authored purchase path remain unchanged.

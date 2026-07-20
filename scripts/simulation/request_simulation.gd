@@ -496,7 +496,15 @@ func _set_status(state: RequestRunState, status: String) -> void:
 
 
 func _show_brownout_dialogue(request_id: String) -> void:
-	var selected := _dialogue_selector.select(_repository.get_all("dialogue"), "brownout", grid.state.elapsed_seconds)
+	var request := _repository.get_request(request_id)
+	if request == null:
+		return
+	var candidates: Array = []
+	for candidate_value: Variant in _repository.get_all("dialogue"):
+		var candidate := candidate_value as DialogueDefinition
+		if candidate != null and str(candidate.get_value("era_id", "")) == str(request.get_value("era_id", "")):
+			candidates.append(candidate)
+	var selected := _dialogue_selector.select(candidates, "brownout", grid.state.elapsed_seconds)
 	if selected == null:
 		return
 	current_dialogue = _repository.localize(selected.get_text_key())

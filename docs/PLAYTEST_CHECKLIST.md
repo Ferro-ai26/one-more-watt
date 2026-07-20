@@ -2,6 +2,56 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 08 balance and prototype-polish rounds — 2026-07-20
+
+- Build/commit: Uncommitted Phase 08 working tree based on `0fef542`
+- Platform/device: Ubuntu 24.04 ARM64 VPS, Xvfb with Mesa llvmpipe and dummy audio
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- External tester: Unavailable. No unfamiliar-player result is claimed; the required fallback is a documented structured self-test.
+
+### Round 1 — Developer clean-save baseline
+
+- Reproduced the Phase 07 no-debug route: 46.8 mechanical minutes, Era 2 at 4.6, Era 3 at 22.8, 31.5 idle minutes, and a 660-second Reinforced Wiring gap.
+- Earliest pacing defect: era arrivals were much earlier than their documented windows. First frustration: the single 11-minute late affordability wait.
+- Core comprehension, reachability, save boundaries, and WATT tone remained sound, so the revision target stayed balance/presentation rather than core-loop rework.
+
+### Round 2 — Structured unfamiliar-player substitute
+
+- Used only ordinary request, purchase, allocation, transition, report, idle-generation, and save commands with no currency/ownership injection.
+- Applied a conservative interaction cadence of 40 seconds per request review/report, 10 seconds per purchase, and 15 seconds per era transition. The tuned 65.8-minute mechanical route therefore measures 79.8 structured minutes.
+- Milestones: first request 25 seconds; first funded purchase before 60 seconds; Era 2 at 11.7 minutes; Era 3 at 37.0 minutes; endpoint at 65.8 mechanical/79.8 structured minutes.
+- The first five minutes contain continuously changing request progress, reports, and purchasing with zero unexplained idle wait over 30 seconds.
+
+### Round 3 — Earliest-confusion revision
+
+- Increased authored request work so time is visible in WATT progress rather than an inert currency gate; reduced Portable Generator to 425 Stored Energy and Reinforced Wiring to 41,000.
+- Added exact next-action forecast copy, approximate affordability time, Reserve direction text/arrows, automatic online idle generation, era-specific brownout callbacks, local focal feedback, and seven short procedural sound cues.
+- The first 320 × 568 graphical pass exposed two UI defects: authorization required an initial scroll and secondary screens had almost no content area. Authorization now precedes supporting advice, and secondary tabs use a compact WATT header that reveals the first card while keeping the character visible.
+
+### Round 4 — Regression clean-save pass
+
+- [x] Two clean deterministic paths produced the same 65.8-minute mechanical route, 79.8-minute structured cadence, request milestones, 21 earned purchases, 18.5 idle minutes, 1,143.2 recoverable brownout seconds, ownership, currency, and endpoint.
+- [x] The longest gaps are exactly 300 seconds for Portable Generator and Reinforced Wiring; every other recorded gap is 220 seconds or less.
+- [x] Prepared-route Era 3 requests take 302.25, 288.25, 246.0, and 344.25 seconds, all within the 3–6 minute target.
+- [x] Frame-size independence, content/localization validation, old-save compatibility, and both era-boundary save/load checks pass.
+- [x] All core screens fit 320 × 568 through 480 × 800; authorization is initially visible, the first Build card is visible, 48-pixel targets remain, and reduced motion retains semantic feedback.
+- [x] Cold Boot, both transitions, endpoint, 320-pixel authorization, Build, brownout, and accessibility/settings captures were visually inspected after the revision.
+- [x] Worst endpoint state stays under the available-host budgets: graphical run measured 25 full Build rebuilds at 921.1 ms, 500 live refreshes at 904.0 ms, and 217 UI nodes.
+- [ ] Audible mix listened to on speakers/headphones (host exposes only dummy audio; cue generation, bus routing, variants, cooldowns, and settings integration are tested).
+- [ ] A player unfamiliar with the design completed the run (outside tester unavailable; structured fallback above is not represented as external evidence).
+- [ ] Physical Android touch, safe-area, lifecycle, haptic, audio, storage, performance, and clock behavior verified (Phase 09 prerequisites remain unavailable).
+
+Strongest moment: the absurd escalation remains legible because WATT stays visible while the grid grows, and the Home Server Closet requests now have enough time for their jokes and systems to register.
+
+Most confusing moment: the first 320-pixel authorization and Build layouts buried their primary actions. Both were corrected during Round 3 and verified in Round 4.
+
+First boring or frustrating moment: the Phase 07 660-second Reinforced Wiring wait. The tuned route caps it at 300 seconds with ongoing offline capability already taught.
+
+Requested improvement: obtain one unfamiliar human timing/comprehension pass and an audible/device mix pass as soon as suitable testers and hardware are available.
+
+Prototype verdict: GO recommended for Phase 09 Android verification, conditional on explicit user authorization and resolution of `ISSUE-001`. Do not expand content or begin Android work automatically.
+
 ## Phase 07 clean Eras 1–3 playthrough — 2026-07-20
 
 - Build/commit: `abbf967`

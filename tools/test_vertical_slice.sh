@@ -11,4 +11,4 @@ fi
 
 "$godot_bin" --headless --path "$project_dir" --script res://tests/integration/test_vertical_slice.gd
 "$godot_bin" --headless --path "$project_dir" --script res://tests/integration/test_vertical_slice_ui.gd
-echo "Phase 07 vertical-slice tests passed."
+echo "Phase 08 balance, reachability, UI, and performance tests passed."

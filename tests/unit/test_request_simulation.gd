@@ -63,7 +63,7 @@ func _test_state_transitions_and_four_kinds() -> void:
 		_check(simulation.get_request_state(request_id).status == RequestRunState.RUNNING, "%s stores running state" % request_id)
 		if index == 3:
 			_check(simulation.set_allocation_mode("feed_watt"), "allocation can change mid-request")
-		_check(simulation.advance_time(120.0), "%s advances to completion" % request_id)
+		_check(simulation.advance_time(600.0), "%s advances to completion" % request_id)
 		var state := simulation.get_request_state(request_id)
 		_check(state.status == RequestRunState.COMPLETED and is_equal_approx(state.progress, 1.0), "%s completes monotonically" % request_id)
 		var report := simulation.get_report(request_id)
@@ -251,7 +251,7 @@ func _run_to_reported(simulation: RequestSimulation, request_id: String) -> void
 	_check(simulation.announce_request(request_id), "%s announces in helper" % request_id)
 	_check(simulation.authorize_request(request_id), "%s authorizes in helper" % request_id)
 	_check(simulation.start_request(request_id), "%s starts in helper" % request_id)
-	_check(simulation.advance_time(120.0), "%s advances in helper" % request_id)
+	_check(simulation.advance_time(600.0), "%s advances in helper" % request_id)
 	_check(simulation.acknowledge_report(request_id), "%s acknowledges in helper" % request_id)
 	simulation.drain_events()
 

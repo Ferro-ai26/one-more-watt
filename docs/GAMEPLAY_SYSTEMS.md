@@ -199,6 +199,8 @@ The Phase 04 prototype implements an explicit low-Reserve throttle. It is disabl
 
 Phase 07 unlocks allocation through `Make Thanks Sound Friendlier`, offline/automatic operation through `Organize Photographs`, Reserve forecasting through `Recommend Dinner`, detailed service forecasting through `Predict Package Arrival`, and Smart Meter Reserve protection through `Write a Grocery List`. These flags derive from completed authored rewards and persist with economy state. Optional vanity requests may be selected or skipped without displacing the required path permanently.
 
+Phase 08 corrects online idle operation: when no request is running, the zero-demand grid continues charging Reserve and converting surplus through the current allocation using the same fixed-step rules as the deterministic balance harness. Active requests still pause under blocking local modals, and background time continues to use the bounded offline path. No tapping income or new automation currency is introduced.
+
 Era 2 requires the `Understand Tuesdays` capstone plus a Laptop Battery. Era 3 requires `Improve Loading Animation`, at least 85% service on a Stability report, and Dedicated Circuit Research. Viewing the `Determine Whether Leftovers Remain Edible` report marks the prototype complete; no Era 4 request is synthesized.
 
 ## Prestige: retraining WATT

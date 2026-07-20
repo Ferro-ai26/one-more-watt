@@ -233,3 +233,7 @@ The validation tool must detect:
 - Era sequences that have no reachable main path
 
 Content validation is required in every phase that edits data.
+
+## Phase 08 content baseline
+
+Canonical content version `0.8.0` preserves all Phase 07 stable IDs and expands the dialogue family from four to eleven records. Seven new localized brownout reactions provide three era-specific choices per era when combined with the existing Cold Boot lines. Request energy values and two infrastructure costs are tuned in source JSON; schema version 1 and all validated vocabularies remain unchanged. Additive `0.7.0` and `0.6.0` saves remain compatible.

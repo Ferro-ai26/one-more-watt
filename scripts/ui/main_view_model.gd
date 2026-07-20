@@ -162,6 +162,7 @@ func _economy_card(definition: ContentDefinition, preview: EconomyPreview, famil
 		for key: Variant in definition.get_value("base_effects", {}):
 			effect_parts.append("%s +%s each" % [_friendly_key(str(key)), NumberFormatter.format_number(float(definition.get_value("base_effects", {})[key]))])
 	var unmet: Array = preview.unmet_conditions
+	var income_rate := session.requests.grid.get_last_result().stored_energy_rate
 	return {
 		"id": definition.get_id(),
 		"family": family,
@@ -171,6 +172,7 @@ func _economy_card(definition: ContentDefinition, preview: EconomyPreview, famil
 		"status": preview.status,
 		"cost": preview.cost,
 		"missing": preview.missing_currency,
+		"wait_seconds": preview.missing_currency / income_rate if preview.missing_currency > 0.0 and income_rate > 0.000001 else INF,
 		"effect": "No immediate grid change" if effect_parts.is_empty() else " • ".join(effect_parts),
 		"locked_reason": "" if unmet.is_empty() else _friendly_conditions(unmet),
 		"can_purchase": preview.can_purchase(),

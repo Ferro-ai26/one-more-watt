@@ -1,7 +1,7 @@
 class_name SaveManager
 extends RefCounted
 
-const CONTENT_COMPATIBILITY := {"0.7.0": ["0.6.0"]}
+const CONTENT_COMPATIBILITY := {"0.8.0": ["0.7.0", "0.6.0"], "0.7.0": ["0.6.0"]}
 
 const MAIN_NAME := "save_main.json"
 const BACKUP_1_NAME := "save_backup_1.json"

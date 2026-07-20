@@ -17,7 +17,7 @@ func _init() -> void:
 		_test_purchase_boundary_round_trip()
 		_test_backup_recovery_and_all_failure()
 		_test_migration()
-		_test_phase06_content_compatibility()
+		_test_additive_content_compatibility()
 		_test_offline_boundaries_and_equivalence()
 		_test_autosave_debounce()
 	_cleanup_tree(_root)
@@ -141,7 +141,7 @@ func _test_migration() -> void:
 	_check(not loaded.ok, "unknown future schema fails safely")
 
 
-func _test_phase06_content_compatibility() -> void:
+func _test_additive_content_compatibility() -> void:
 	var path := _case_path("phase06_compatibility")
 	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(path))
 	var old_session := _session(false).snapshot()
@@ -165,11 +165,15 @@ func _test_phase06_content_compatibility() -> void:
 		"payload": {"session": old_session},
 	}
 	_write_text("%s/%s" % [path, SaveManager.MAIN_NAME], SaveCodec.encode(old))
-	var loaded := SaveManager.new(path, "0.7.0").load()
-	_check(loaded.ok, "Phase 06 content save is explicitly compatible with additive Phase 07 content: %s" % loaded.diagnostics)
+	var loaded := SaveManager.new(path, "0.8.0").load()
+	_check(loaded.ok, "Phase 06 content save is explicitly compatible with additive Phase 08 content: %s" % loaded.diagnostics)
 	if loaded.ok:
 		var restored := _session(false)
 		_check(restored.restore(loaded.envelope["payload"]["session"], _repository), "Phase 06 session defaults new progression fields safely")
+	old["content_version"] = "0.7.0"
+	_write_text("%s/%s" % [path, SaveManager.MAIN_NAME], SaveCodec.encode(old))
+	loaded = SaveManager.new(path, "0.8.0").load()
+	_check(loaded.ok, "Phase 07 content save is explicitly compatible with balance-only Phase 08 content: %s" % loaded.diagnostics)
 
 
 func _test_offline_boundaries_and_equivalence() -> void:

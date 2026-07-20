@@ -1,48 +1,49 @@
 # Current Handoff
 
 Updated: 2026-07-20
-Active phase: Phase 07 — Eras 1–3 Vertical Slice
+Active phase: Phase 08 — Balance and Prototype Polish
 
 ## Current state
 
-Phase 07 is implemented, validated, committed as `abbf967`, and pushed to `origin/main`. Canonical content version `0.7.0` contains all 18 reviewed requests, and a fresh no-debug session can reach the persistent Home Server Closet endpoint through both era gates. Allocation, offline progress, forecasts, and Reserve automation unlock at authored beats; optional vanity requests do not block the required path. Phase 08 remains gated on explicit user authorization.
+Phase 08 is implemented and in final validation in the working tree. Canonical content version `0.8.0` preserves all 18 request IDs while tuning the structured first run to 79.8 minutes, eliminating purchase gaps over five minutes, polishing small-screen comprehension, adding reviewed dialogue variety and procedural feedback audio, and measuring the worst representative endpoint state. Phase 09 remains gated on explicit user authorization.
 
 ## Completed
 
-- Committed and pushed the Phase 07 implementation as `abbf967` to `origin/main`.
-- Authored seven Cold Boot, six Bedroom Assistant, and five Home Server Closet requests, including all four required request types and three optional vanity requests.
-- Added tutorial text/feature rewards, cross-domain request availability, the 85% Stability condition, report-driven era changes, and explicit prototype completion after viewing the leftovers report.
-- Added distinct desk/bedroom/server-closet placeholder environments, WATT evolution, transition modals, optional selection/skip, progressive forecast disclosure, and Smart Meter Reserve protection.
-- Preserved save format 2, added safe progression defaults, reconciled report history, and explicitly allowed additive `0.6.0` saves into `0.7.0`.
-- Added deterministic full-path and graphical progression suites and preserved all earlier domain, UI, persistence, diagnostic, and portrait tests.
+- Shifted pacing from idle cliffs into visible request progress: 25-second first request, first purchase before 60 seconds, Era 2 at 11.7 minutes, Era 3 at 37.0, and four Era 3 requests at 3–6 minutes.
+- Reduced Portable Generator to 425 Stored Energy and Reinforced Wiring to 41,000; the 660-second late gap is now 300 seconds and total idle earning falls from 31.5 to 18.5 minutes.
+- Corrected production online idle generation while preserving active-request modal pause and deterministic offline behavior.
+- Added concise next-step forecasts, live affordability estimates, Reserve direction labels/arrows, compact secondary WATT headers, initially visible authorization, wrapped controls, and verified 320 × 568 support.
+- Added era-specific brownout dialogue/callbacks, fatigue-safe 60-second selection, restrained/reduced-motion-compatible focal feedback, and seven cached procedural PCM cues routed through SFX.
+- Extended compatibility so format-2 content `0.8.0` accepts `0.7.0` and `0.6.0` saves.
+- Added explicit balance-target, newcomer-cadence, idle-gap, small-screen-action, audio-data, and worst-state performance checks.
 
 ## Next action
 
-Review Phase 07 evidence and proposed `DEC-017`. Do not begin Phase 08 until the user explicitly advances `docs/ACTIVE_PHASE.md`. Phase 08 should address `ISSUE-002` by reshaping the 46.8-minute optimized route and 660-second Era 3 idle gap toward a measured 75–120 minute first-player run.
+Review the Phase 08 evidence and GO recommendation. Do not begin Phase 09 or change `docs/ACTIVE_PHASE.md` without explicit user authorization. Before Phase 09 can complete, resolve `ISSUE-001` by supplying an approved package identifier and Android SDK platform, then perform real export/device checks.
 
 ## Known blockers
 
-- No Phase 07 blocker or critical issue remains.
+- No Phase 08 blocker, critical, or major product defect remains.
 - Android package identifier/publisher identity and an installed Android SDK platform remain unavailable.
-- Physical Android lifecycle, touch, safe-area, haptic, audio, storage, and clock behavior remain unverified.
+- An unfamiliar outside tester and audible output device were unavailable; structured self-tests and audio generation/routing checks were used without claiming external or audible validation.
+- Physical Android lifecycle, touch, safe-area, haptic, audio, storage, performance, and clock behavior remain unverified.
 
 ## Test evidence
 
-- `./tools/validate.sh` — passed: clean import, 51 foundation, 30 content/API, 12 invalid fixtures, 178 grid, 187 request, 93 economy, 40 UI/domain, 151 main-interface, 80 persistence/offline, 14 offline-UI, 917 Phase 07 full-path, 105 progression-UI, three portrait layouts, 18/59/42 diagnostic-panel checks, and headless smoke launch.
-- `./tools/test_vertical_slice.sh` — passed independently: two identical clean no-debug paths, all 15 required requests, 21 earned purchases, six feature unlocks, three reachable vanity requests, both era-boundary save/loads, endpoint persistence, deterministic balance, and headless progression UI.
-- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_vertical_slice_ui.gd -- --capture-layouts` — passed with 109 checks and four captures at 393 × 873.
-- Cold Boot, both era transitions, and the final endpoint were visually inspected after correcting the endpoint copy/forecast. Xvfb's expected unsupported V-Sync warning is the only graphical-run warning.
-- Android export/device test — not run; prerequisites remain unavailable and are outside Phase 07.
+- `./tools/validate.sh` — passed: clean import, 51 foundation, 30 content/API, 12 invalid fixtures, 178 grid, 187 request, 93 economy, 42 UI/domain, 209 main-interface, 81 persistence/offline, 14 offline-UI, 908 Phase 08 balance/reachability, 111 progression-UI/performance, four portrait layouts, 18/59/42 diagnostic-panel checks, and headless smoke launch.
+- `./tools/test_vertical_slice.sh` — passes two identical earned-currency paths, 15 required requests, 21 purchases, era/save boundaries, endpoint persistence, target milestone windows, 300-second maximum gap, structured 79.8-minute cadence, and worst-state UI budgets.
+- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_vertical_slice_ui.gd -- --capture-layouts` — passed with 115 checks and four 393 × 873 progression captures; 25 full Build rebuilds took 921.1 ms, 500 live refreshes 904.0 ms, and the endpoint tree held 217 UI nodes.
+- `xvfb-run -a godot4 --audio-driver Dummy --path . --script res://tests/integration/test_main_ui.gd -- --capture-layouts` — passed with 237 checks and 28 captures across 320 × 568, 360 × 640, 393 × 873, and 480 × 800.
+- Cold Boot, both transitions, endpoint, and the 320-pixel authorization, brownout, Build, and Settings states were visually inspected. The initially buried authorization/Build actions were corrected and recaptured. Xvfb's unsupported V-Sync warning is expected.
+- Audible listening and Android export/device tests were not run because the required hardware/tooling/identity are unavailable.
 
 ## Files changed
 
-- Content: manifest/balance/eras/upgrades, nine deterministic demand profiles, three era request files, and complete English localization
-- Progression: economy state/events/evaluator, request availability/selection, session coordination, era efficiency, optional path, and endpoint
-- Persistence: progression reconciliation, Phase 06 content compatibility, and pre-Era-2 offline gating
-- UI: tutorials, feature gates, era/environment presentation, transition/endpoint states, optional requests, and Reserve automation
-- Tests/tools: expanded regressions, `test_vertical_slice.gd`, `test_vertical_slice_ui.gd`, `tools/test_vertical_slice.sh`, and full validation integration
-- Documentation: permanent implementation baselines, proposed decision, balance evidence, playtest, issue, README, active phase, and living handoff/progress
+- Balance/content: request work, Portable Generator/Reinforced Wiring costs, content version, eleven-dialogue catalog, localization, and save compatibility
+- Runtime/presentation: online idle advance, contextual dialogue selection, live forecasts/affordability, Reserve direction, compact secondary layout, focal feedback, and procedural cue player
+- Tests/tools: deterministic Phase 08 target assertions, performance measurements, 320-pixel interaction/layout coverage, audio PCM checks, compatibility regressions, and Phase 08 command output
+- Documentation: decision, permanent baselines, four playtest rounds, fixed pacing issue, GO recommendation, README, active phase, progress, and handoff
 
 ## Remaining acceptance criteria
 
-All Phase 07 functional acceptance criteria pass locally: WATT is immediately clear, the first five minutes contain multiple requests/changes, all 18 requests are authored/reviewed, all grid constraints matter, era transitions persist, the endpoint is reachable without debug tools, and no blocker/critical issue is open. A measured human 75–120 minute run remains a Phase 08 tuning target under `ISSUE-002`; physical Android verification remains deferred to Phase 09.
+All Phase 08 acceptance criteria pass in the available environment: first request and both era arrivals meet target windows; no first-five-minute unexplained wait exceeds 30 seconds; systems teach before penalties; repetition controls prevent spam; four portrait sizes pass; worst-state host budgets pass; no blocker/critical issue is open; and the Android-verification GO recommendation is recorded. The contract-approved structured fallback does not replace a future unfamiliar-player pass, audible mix review, or Phase 09 physical Android validation.
