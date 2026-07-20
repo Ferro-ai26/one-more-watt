@@ -10,7 +10,7 @@
 | 03 — Request and WATT System | Complete | Commit `2bd30ac`; 143 request-domain checks; 58 headless panel checks; four lifecycle captures; headless smoke launch |
 | 04 — Infrastructure and Upgrades | Complete | Commit `ca56a35`; 93 economy checks; 42 headless shop checks; four portrait scenario captures; headless smoke launch |
 | 05 — Main UI and Feedback | Complete | Commit `6ae86ac`; 40 UI/domain checks; 154 headless interaction checks; 21 three-resolution captures; headless smoke launch |
-| 06 — Save and Offline Progress | Complete | 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
+| 06 — Save and Offline Progress | Complete | Commit `143ccf9`; 74 persistence/offline checks; 14 headless offline-UI checks; two recovery/return captures; headless smoke launch |
 | 07 — Eras 1–3 Vertical Slice | Not started | — |
 | 08 — Balance and Polish | Not started | — |
 | 09 — Android Prototype | Not started | — |
@@ -20,6 +20,7 @@
 
 ### 2026-07-20 — Phase 06 save and offline progress
 
+- Committed and pushed the implementation as `143ccf9` to `origin/main`.
 - Added complete domain snapshots/restores for economy, requests, grid statistics, reports, deterministic incident/dialogue state, accessibility/settings, and extensible prestige/lifetime/tutorial namespaces.
 - Added canonical SHA-256 save envelopes, format version 2, atomic temporary replacement, two known-good backups, timestamped corrupt evidence, safe candidate recovery, and sequential migration with an explicit stable-ID compatibility map.
 - Added lifecycle/periodic autosaves, one-second purchase debounce, non-decreasing trusted UTC, background/resume handling, and domain-restorable validation before rotation.

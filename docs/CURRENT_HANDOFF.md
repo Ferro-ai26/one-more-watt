@@ -5,10 +5,11 @@ Active phase: Phase 06 — Save and Offline Progress
 
 ## Current state
 
-Phase 06 is implemented and validated in the working tree. All implemented player/session state now round-trips through save format version 2, derived grid values rebuild after load, corrupt main files recover from two rotating known-good backups without destroying evidence, and bounded deterministic offline progress is saved before a truthful return report appears. Canonical content version is `0.6.0`. Phase 07 remains gated on explicit user authorization.
+Phase 06 is implemented, validated, committed as `143ccf9`, and pushed to `origin/main`. All implemented player/session state now round-trips through save format version 2, derived grid values rebuild after load, corrupt main files recover from two rotating known-good backups without destroying evidence, and bounded deterministic offline progress is saved before a truthful return report appears. Canonical content version is `0.6.0`. Phase 07 remains gated on explicit user authorization.
 
 ## Completed
 
+- Committed and pushed the Phase 06 implementation as `143ccf9` to `origin/main`.
 - Added complete snapshots/restores for economy, grid/request runtime and reports, seed/incident/dialogue position, runtime settings, and extensible future namespaces.
 - Added canonical SHA-256 integrity, temporary validated writes, non-destructive backup rotation, UTC/sequence metadata, content compatibility checks, and safe corrupt-all refusal.
 - Added sequential v1→v2 migration with prestige namespace creation and explicit `starter_outlet`→`wall_outlet` fixture compatibility.
