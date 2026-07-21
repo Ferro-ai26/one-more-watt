@@ -4,60 +4,52 @@ Updated: 2026-07-21
 
 Active gate: Gameplay Gate G01 — Core Gameplay and Fun Validation
 
-Status: Ready — Awaiting Explicit Authorization
+Status: Active — Awaiting Informed Android Baseline
 
 ## Exact result achieved
 
-Phase 16 — Neighborhood Microgrid: Era 5 is closed accurately under `DEC-039`.
-
-- Era 5 remains implemented and host validated at implementation commit `cc51fbf883e6c50dbe2e2229b103693d69270a78`; its APK/static gate record was already pushed at `a801c87adba67b672ede67056144cb4cb50f4dfd`.
-- The physical-phone checklist was not performed. Every corresponding row remains unchecked, no Android result is inferred, and `ISSUE-011` is closed only by the user's accepted verification limitation. The matrix is deferred to Phase 18 and later release QA.
-- `DEC-040` sets City Data Center/Era 6 as the final content era of base game v1.0. Base v1.0 must include the City idle transition and the first complete Model Retraining/Prestige loop.
-- The authoritative 16-era ladder remains intact. Eras 7–16 are preserved as post-launch expansion-sized updates and are not base-v1 release prerequisites.
-- Inserted `docs/phases/GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md` between Phase 16 and Phase 17 without renumbering or changing any existing Phase 17–26 contract.
-- G01 covers first-30/60-minute fun and pacing, mechanically distinct request categories, meaningful Generation/Transmission/Reserve/Stored Energy/purchase/allocation decisions, multiple viable preparation approaches, anti-highlight-and-wait design, environmental/report/WATT feedback, a focused Eras 1–5 dialogue pass, measured behavior, fresh-player tests, and an explicit proceed/revise/stop decision.
-- `docs/ACTIVE_PHASE.md` is set to `Gameplay Gate G01 — Core Gameplay and Fun Validation` / `Status: Ready — Awaiting Explicit Authorization`.
-- Closeout documentation commit `e5817765bd3c9536e18199679367a89f05dd9cc9` is pushed to `origin/main`.
-- No gameplay, balance, content-data, save, scene, asset, audio, or runtime code changed in this closeout. Phase 17 did not begin.
+- The user authorized G01 and the reduced baseline-evidence checkpoint under `DEC-041` over the implemented Eras 1–5 baseline.
+- Added a minimal debug-only local recorder, isolated playtest profile, complete/compact/human summaries, factual timing categories, and automatic 10/30/60-minute mechanical snapshots.
+- Normal debug launch behavior and normal format-2 saves remain unchanged. G01 initializes only `user://g01_playtests/<session_id>/`; the isolation suite keeps an ordinary-save sentinel byte-for-byte unchanged.
+- Added the deterministic baseline audit, request-category matrix, evidence protocol, and structured observation worksheet.
+- Corrected the G01 evidence gate: informed self-play may support the next tuning proposal but is never fresh-player evidence; final confidence targets three unfamiliar-player sessions across more than one device where practical, or an explicit accepted limitation.
+- Committed the implementation at `1f7a5231e062847d6b182f56e5ec1e7b87154798` and produced a verified G01 APK from that exact clean commit.
+- No balance, dialogue, request mechanic, content data, production art, normal save field, Era 6, or Prestige behavior changed. Phase 17 did not begin.
 
 ## Files changed
 
-- Gate/roadmap/index: `docs/phases/GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md`, `docs/ROADMAP_V2.md`, `docs/ACTIVE_PHASE.md`, `docs/DOCUMENT_INDEX.md`, and `README.md`.
-- Product/release authority: `docs/GAME_VISION.md` and `docs/RELEASE_READINESS_DEFINITION.md`.
-- Phase 16 closure/evidence: `docs/phases/PHASE_16_NEIGHBORHOOD_MICROGRID_ERA_5.md`, `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md`, `docs/phase_16/IMPLEMENTATION_RECORD.md`, `docs/phase_16/VISUAL_QA_RECORD.md`, `docs/ANDROID_BUILD_RECORD.md`, `docs/ANDROID_DEVICE_TEST.md`, and `docs/PLAYTEST_CHECKLIST.md`.
-- Living records: `docs/DECISION_LOG.md`, `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, and this handoff.
-- The unrelated untracked `temp instructions.txt` was not read, modified, staged, deleted, or committed.
+- Runtime/test tooling: `scripts/playtest/`, the G01-only integration points in `scripts/ui/main_ui.gd`, dedicated export preset/build wrapper, and 42 proportional G01 checks.
+- Gate/evidence documentation: `docs/phases/GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md`, `docs/g01/`, `docs/ACTIVE_PHASE.md`, and `docs/DECISION_LOG.md`.
+- Living records: `docs/PROGRESS.md`, `docs/KNOWN_ISSUES.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/ANDROID_BUILD_RECORD.md`, and this handoff.
+- The untracked user file `temp instructions.txt` remains untouched and uncommitted.
 
 ## Commands/tests run and results
 
-- Entry state: `main` and `origin/main` both resolved to `a801c87adba67b672ede67056144cb4cb50f4dfd`; only unrelated untracked `temp instructions.txt` was present.
-- Documentation consistency assertions passed for the exact ACTIVE_PHASE lines, G01 contract path, `DEC-039`/`DEC-040` entries, base-v1 scope cross-references, and the new gate index entry.
-- SHA-256 verification confirmed all existing Phase 17–26 contracts remained byte-for-byte unchanged from entry.
-- `git diff --check`: passed before commit.
-- `./tools/validate.sh`: passed the complete repository suite through Phase 16 and final headless launch. This included 55 foundation, 24 Android configuration, 32 content plus 12 invalid-fixture, 178 grid, 187 request, 93 economy, 48 Main-UI system, 426 Main-UI integration, 85 skin-system, 51 production-skin, 81 persistence/offline plus 14 offline-UI, 1,393 balance/reachability plus 113 UI/performance, 89+24 Phase 15, 110+23 Phase 16, five portrait layouts, and 18/59/42 debug-panel checks.
-- Final validation performance sample: 860.4 ms for 25 full Build rebuilds, 678.6 ms for 500 live refreshes, and 463 UI nodes.
-- `git push origin main`: pushed `e5817765bd3c9536e18199679367a89f05dd9cc9`; local `main` and `origin/main` matched immediately after the push.
+- `./tools/test_g01.sh`: passed 32 recorder/profile and 10 isolated G01 UI checks.
+- `./tools/validate.sh`: passed the complete repository regression and final headless launch. This includes 55 foundation, 36 Android configuration, 32 content plus 12 invalid fixtures, 178 grid, 187 request, 93 economy, 48 UI-system, 426 Main-UI, 85 skin-system, 51 production-skin, 81 persistence plus 14 offline-UI, 1,393 balance/reachability plus 113 UI/performance, 89+24 Phase 15, 110+23 Phase 16, the new 32+10 G01 checks, five portrait layouts, and 18/59/42 debug-panel checks.
+- Final host performance sample: 893.5 ms for 25 full Build rebuilds, 590.5 ms for 500 live refreshes, and 463 UI nodes.
+- `./tools/build_g01_android_debug.sh` from clean detached commit `1f7a5231e062`: passed export and static verification. The copied APK is 56,046,438 bytes with SHA-256 `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`; API 24/35, arm64/x86_64, G01 feature, build ID, VIBRATE-only permissions, and v2/v3 signatures pass.
+- `./tools/android_device_smoke.sh build/android/one_more_watt_g01_debug.apk`: exited 2 because no ready device is attached; no install was attempted.
+- One outer worktree-cleanup command returned nonzero only after attempting to remove an already removed temporary directory. The export script itself passed, the artifact had already been copied, no worktree remains, and independent checksum/signature checks passed.
 
 ## Manual verification
 
-No new gameplay playtest, fresh-player session, physical Android test, device screenshot, audible-speaker review, haptic check, or heat/battery observation occurred in this documentation-only session. No such pass is claimed.
-
-The prior Phase 16 host-rendered contextual evidence remains valid. It is not reclassified as physical-device evidence.
+No physical Android install, gameplay session, screen recording, device screenshot, audible-speaker review, haptic check, heat/battery observation, or player-experience assessment occurred. No such pass is claimed.
 
 ## Remaining acceptance criteria
 
-- G01 has not been authorized or executed. Every criterion in its contract remains pending.
-- Fresh-player sessions, first-30/60-minute measurements, mechanic/tuning revisions, contextual evidence, and the proceed/revise/stop decision belong to a future explicitly authorized G01 session.
-- Phase 17 remains unauthorized even if G01 later recommends `PROCEED`; it requires a separate explicit user instruction.
-- The deferred Phase 16 phone matrix remains unperformed for later combined Eras 1–6 Android QA.
+- The user must run the G01 APK for 60 foreground minutes or an honest early stop, complete observations at 10/30/60 minutes, and return the compact plus human-readable summaries. A screen recording of the first 10–15 minutes is recommended but optional.
+- After evidence returns, identify exactly five highest-priority gameplay problems, supporting evidence, proposed changes, and the next controlled tuning checkpoint before changing gameplay.
+- Later G01 work owns evidence-supported tuning, distinct request decisions, multiple viable approaches, feedback/report/dialogue revisions, and the final proceed/revise/stop decision.
+- Seek three unfamiliar-player sessions across more than one device where reasonably obtainable; otherwise obtain an explicit accepted evidence limitation. Never relabel the informed user session.
+- Phase 17 remains unauthorized regardless of G01 progress until a separate user instruction.
 
 ## Known blockers
 
-- Authorization boundary: G01 is Ready — Awaiting Explicit Authorization, so no gameplay work may begin yet.
-- Evidence dependency after authorization: G01 cannot honestly return `PROCEED` without the contract-required fresh-player evidence.
-- `ISSUE-007` remains open for the later gold-standard visual-production pass and is outside G01's broad-polish scope.
-- `ISSUE-011` is closed by accepted limitation, not by a device pass; its verification debt remains deferred rather than blocking G01 authorization.
+- `ISSUE-012`: no player session has occurred, so fun, comprehension, perceived agency, and continuation intent remain unknown.
+- `ISSUE-007` remains outside this baseline checkpoint as the later gold-standard production-art pass.
+- Deferred Phase 15/16 phone matrices remain historical verification debt for later full Android QA, not G01 passes.
 
 ## Recommended next action inside the current gate
 
-Start a new Codex session, read `AGENTS.md`, `docs/ACTIVE_PHASE.md`, the complete G01 contract, this handoff, and the named permanent specifications. Obtain explicit authorization before making any G01 gameplay or tuning change. Once authorized, begin with the baseline first-30/60-minute audit and measurement design. Do not begin Phase 17.
+Install `build/android/one_more_watt_g01_debug.apk`, choose **Begin fresh isolated G01 session**, play toward 60 minutes without coaching/debug intervention, complete `docs/g01/OBSERVATION_WORKSHEET.md` at 10/30/60 minutes, then use Settings → Diagnostics to finalize and copy the compact summary. Return the compact JSON, human-readable summary, and worksheet for the five-problem evidence review. Do not begin Phase 17.

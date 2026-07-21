@@ -1,7 +1,7 @@
 # G01 Baseline Evidence Implementation Record
 
 Date: 2026-07-21
-Status: Host implementation complete; Android artifact and informed session pending
+Status: Host implementation and clean G01 artifact complete; informed session pending
 
 ## Implemented
 
@@ -24,3 +24,11 @@ Content remains `0.10.0`, normal saves remain format 2, and no balance, request 
 - Deterministic route remains 115.4 mechanical / 135.5 structured minutes through Era 4, with Era 2 at 11.7 minutes, Era 3 at 37.0 minutes, 22.3 idle minutes, a 300-second longest modeled purchase gap, and 1,625.2 brownout seconds.
 
 No physical Android run, visual screen inspection, or player-experience observation occurred in this host implementation record.
+
+## Android artifact
+
+- Clean source commit/build ID: `1f7a5231e062847d6b182f56e5ec1e7b87154798` / `1f7a5231e062`
+- Artifact: `build/android/one_more_watt_g01_debug.apk`
+- Bytes: 56,046,438
+- SHA-256: `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`
+- Static result: package/version/API/architectures/G01 feature/VIBRATE-only permissions/build ID/v2-v3 signature passed; no Internet or network-state permission

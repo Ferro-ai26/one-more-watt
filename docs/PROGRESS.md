@@ -33,7 +33,8 @@
 - Added a separately flagged G01 debug mode while leaving normal debug onboarding unchanged. G01 creates only `user://g01_playtests/<session_id>/`, uses an isolated format-2 save, and records complete/compact/human summaries locally with no network permission or production analytics.
 - Added factual event/timing aggregation through the central `GameSession` signal plus centralized report/maintenance/lifecycle boundaries. The record distinguishes foreground interaction gaps, forced stalls, report/dialogue viewing, unknown inactivity, and background/offline time, with 10/30/60-minute mechanical snapshots.
 - Added the deterministic baseline audit, category matrix, evidence protocol, and structured 10/30/60-minute observation worksheet. No balance, dialogue, gameplay mechanic, content, production art, Era 6, or Prestige data changed.
-- Added 32 recorder/profile checks and 10 G01 UI checks. The complete repository regression and headless launch pass, including 36 Android-config checks and all prior Phase 16 suites. The G01 Android APK and user session remain pending at this point in the record.
+- Added 32 recorder/profile checks and 10 G01 UI checks. The complete repository regression and headless launch pass, including 36 Android-config checks and all prior Phase 16 suites.
+- Clean source commit `1f7a5231e062` exported `build/android/one_more_watt_g01_debug.apk`: 56,046,438 bytes, SHA-256 `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`. Package/version/API/architectures/G01 feature/VIBRATE-only permissions/build ID/v2-v3 signature checks pass. No physical execution or player evidence is claimed.
 
 ### 2026-07-21 — Phase 16 closed accurately; Gameplay Gate G01 inserted
 

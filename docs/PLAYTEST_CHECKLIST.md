@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## G01 baseline instrumentation host pass — 2026-07-21
 
-- Build/commit: working tree before clean G01 artifact commit/export
+- Build/commit: `1f7a5231e062847d6b182f56e5ec1e7b87154798`; APK build ID `1f7a5231e062`
 - Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless; no attached Android device
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex
@@ -16,11 +16,11 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Foreground interaction gaps, system-imposed forced stalls, report/dialogue viewing, unknown inactivity, background/offline time, and the ten-minute snapshot remain distinct.
 - [x] 32 recorder/profile checks and 10 isolated G01 UI checks pass.
 - [x] Complete repository regression and headless launch pass; all existing Eras 1–5 gameplay/save/layout behavior remains green.
-- [ ] Clean G01 APK export and static inspection recorded.
+- [x] Clean G01 APK/static inspection pass: 56,046,438 bytes, SHA-256 `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`, API 24/35, both architectures, explicit G01 feature, VIBRATE only, v2/v3 signatures.
 - [ ] User Android 60-minute informed self-play or honest early stop, 10/30/60-minute worksheet, optional first-10–15-minute recording, compact summary, and human-readable summary returned.
 - [ ] Unfamiliar-player sessions. None occurred; informed self-play will not be relabeled.
 
-Result: temporary instrumentation and isolation pass on the host. No Android execution, player-experience conclusion, or tuning authorization is claimed yet.
+Result: temporary instrumentation, isolation, full host regression, and clean static APK checks pass. No Android execution, player-experience conclusion, or tuning revision is claimed yet.
 
 ## Phase 16 Neighborhood Microgrid host pass — 2026-07-21
 

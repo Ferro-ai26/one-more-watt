@@ -1,5 +1,35 @@
 # Android Build Records
 
+## G01 baseline evidence build
+
+Status: Clean source build/static inspection passed; informed Android session pending
+Build UTC: 2026-07-21T02:07:57Z
+
+### Source and artifact
+
+- Source commit: `1f7a5231e062847d6b182f56e5ec1e7b87154798`
+- In-app build identifier: `1f7a5231e062`
+- Artifact: `build/android/one_more_watt_g01_debug.apk`
+- Bytes: 56,046,438
+- SHA-256: `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`
+- Export command: `./tools/build_g01_android_debug.sh` from a clean detached worktree at the exact commit; artifact copied back unchanged
+
+### Verified artifact properties
+
+- Export preset/feature: `Android G01 Debug` / `g01_playtest`
+- Package/label: `com.ferroai.onemorewatt` / `ONE MORE WATT`
+- Version: code 10, name `0.10.0-dev`
+- Minimum/target SDK: API 24 / API 35
+- Native architectures: arm64-v8a and x86_64
+- Permissions: `android.permission.VIBRATE` only; no Internet or network-state permission
+- Signature: APK Signature Scheme v2 and v3 verified
+- Embedded project metadata contains build identifier `1f7a5231e062` and the explicit G01 feature
+- Export log contained no Godot `ERROR:` line
+
+### Device boundary
+
+The artifact was not installed or launched on a physical device in this session. Static verification is not player evidence. The next action is the user's informed 60-minute Android baseline or honest early stop using the isolated profile and `docs/g01/OBSERVATION_WORKSHEET.md`.
+
 ## Phase 16 Neighborhood Microgrid build
 
 Status: Clean source build/static inspection passed; physical phone gate unperformed and closed by accepted limitation under `DEC-039`
