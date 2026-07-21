@@ -4,7 +4,7 @@ set -euo pipefail
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 OMW_ADB="${ADB_EXECUTABLE:-/usr/lib/android-sdk/platform-tools/adb}"
 OMW_AAPT="${AAPT_EXECUTABLE:-/usr/lib/android-sdk/build-tools/debian/aapt}"
-OMW_APK="${1:-$PROJECT_ROOT/build/android/one_more_watt_phase15_debug.apk}"
+OMW_APK="${1:-$PROJECT_ROOT/build/android/one_more_watt_phase16_debug.apk}"
 OMW_PACKAGE="com.ferroai.onemorewatt"
 
 if [[ ! -f "$OMW_APK" ]]; then

@@ -274,6 +274,22 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: Phase 15's only remaining criterion requires external physical hardware unavailable on the host, and that limitation was disclosed before the user explicitly authorized the next phase. The Phase 16 contract independently requires an approved appendix before coding, so phase authorization cannot bypass that product decision gate.
 - Consequences: No missing Phase 15 device check is converted into a pass; `ISSUE-010` closes by accepted disposition and its unverified matrix remains historical evidence. `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` may be proposed, validated, committed, and pushed. No Era 5 data, automation, save, runtime, or asset work begins until explicit appendix approval. City Data Center/Era 6, Prestige, Phase 17, and release publication remain prohibited.
 
+## DEC-037 — Approve the Era 5 Neighborhood Microgrid appendix
+
+- Status: Accepted
+- Date: 2026-07-21
+- Decision: Approve `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` as written and authorize implementation of Phase 16 only. Introduce forecasting, Reserve policy, routine automation, and one-request scheduling sequentially through the approved request route. Keep WATT and the evolving neighborhood as the primary experience, with management controls in contextual drawers. Treat all current dialogue as provisional functional copy for a later dedicated WATT writing pass.
+- Reason: The appendix defines the complete Era 5 content, operator safeguards, deterministic automation/offline boundaries, production presentation, migration, tuning, evidence, and locked City endpoint required by the Phase 16 pre-code gate.
+- Consequences: Phase 16 data, simulation, save/offline, contextual UI, Neighborhood production-functional presentation, tests, evidence, documentation, commit, and push may proceed. No system may unlock before its authored request reward, scheduling remains one explicitly preauthorized request, and no dashboard-first redesign is permitted. City Data Center/Era 6, Prestige, Phase 17, release publication, and a broad final-art pass remain prohibited.
+
+## DEC-038 — Bound Neighborhood automation to explicit operator policy
+
+- Status: Accepted
+- Date: 2026-07-21
+- Decision: Implement Era 5 forecasting as deterministic coverage states; apply Reserve protection prospectively without changing allocation; automate only single-safe-option routine maintenance within the operator's Stored Energy cap; and permit exactly one explicitly authorized scheduled request to start under its saved condition. Persist ordered explanations and stop offline simulation at report, strategic-input, blocked-routine, or elapsed-time boundaries.
+- Reason: This is the smallest additive implementation of the approved appendix that keeps the player indispensable, makes WATT genuinely useful, prevents hidden autonomy/spending, and preserves deterministic save/offline behavior.
+- Consequences: Content advances to `0.10.0` while save format remains 2. Era 4 strategic maintenance remains manual. Scheduling pays normal authorization cost once and cannot discover, buy, authorize, or chain another request. Phase 16 host acceptance may pass independently, but its physical-phone criterion remains a separate observed gate. Phase 17 is not authorized.
+
 ## Proposed decision template
 
 ```markdown

@@ -16,6 +16,23 @@ Phase 13's first Moto G (2025) pass confirmed install/cold launch and found one 
 
 Phase 15 host implementation, deterministic migration/save coverage, graphical layout checks, and manual screenshot review pass. The current host still has no attached ADB device or usable emulator, so the Phase 15 update-install/lifecycle/device-performance matrix remains unverified under `ISSUE-010`. The user authorized Phase 16 with that limitation disclosed; it is closed by accepted disposition rather than reported as a pass.
 
+Phase 16 implementation, deterministic tuning, save/offline tests, full host regression, and eight contextual phone-resolution captures pass. The contract separately requires a physical-phone pass. No device is attached to the current host, so `ISSUE-011` remains the only Phase 16 completion-gate limitation; none of its hardware checks is inferred from host evidence.
+
+### ISSUE-011 — Phase 16 physical-phone gate is unavailable on the current host
+
+- Status: Open — External Device Required
+- Severity: Phase completion verification limitation; no runtime defect currently reproduced
+- First seen build/commit: Phase 16 working tree, 2026-07-21
+- Affected phase: Phase 16 Android/manual completion gate
+- Reproduction:
+  1. Run `/usr/lib/android-sdk/platform-tools/adb devices -l` on the current ARM64 VPS.
+  2. Observe no ready Android device; no usable local emulator/KVM path is available.
+- Expected: Install the exact clean Phase 16 APK on a physical phone and verify the Era 5 route, 10–25 minute away returns, contextual drawers, safe areas/text sizes/touch scrolling, Back, warm resume/offline report, save idempotency, audio/haptics, FPS/memory, heat, and battery.
+- Actual: Domain, migration, offline, UI, narrow-layout, contextual-render, performance, and static APK checks can run on the host. Physical execution cannot be observed locally.
+- Evidence/log: `docs/phase_16/IMPLEMENTATION_RECORD.md`, `docs/phase_16/VISUAL_QA_RECORD.md`, `docs/ANDROID_DEVICE_TEST.md`, and the Phase 16 handoff.
+- Workaround: Run `./tools/android_device_smoke.sh build/android/one_more_watt_phase16_debug.apk` with a ready device, then complete the Phase 16 checklist without converting unperformed items into passes.
+- Fix verification: Pending actual device evidence or a separate explicit user acceptance of this disclosed limitation. Phase 17 remains unauthorized either way until the user separately authorizes it.
+
 ### ISSUE-010 — Phase 15 physical Android regression is unavailable on the current host
 
 - Status: Closed — User Accepted Phase 15 Verification Limitation (`DEC-036`)

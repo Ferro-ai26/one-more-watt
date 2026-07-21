@@ -26,6 +26,10 @@ var _predictive_guard_enabled := false
 var _predictive_guard_target_ratio := 0.75
 var predictive_guard_active := false
 var predictive_guard_seconds_to_peak := INF
+var _reserve_policy_enabled := false
+var _reserve_policy_floor_ratio := 0.35
+var reserve_policy_throttle_active := false
+var _reserve_policy_throttle_started_at := 0.0
 
 
 func configure(repository: ContentRepository, balance_id: String = "prototype_balance", simulation_seed: int = 1) -> bool:
@@ -52,6 +56,10 @@ func configure(repository: ContentRepository, balance_id: String = "prototype_ba
 	_predictive_guard_target_ratio = 0.75
 	predictive_guard_active = false
 	predictive_guard_seconds_to_peak = INF
+	_reserve_policy_enabled = false
+	_reserve_policy_floor_ratio = 0.35
+	reserve_policy_throttle_active = false
+	_reserve_policy_throttle_started_at = 0.0
 	for request_value: Variant in repository.get_all("requests"):
 		var request := request_value as RequestDefinition
 		if request != null:
@@ -122,12 +130,14 @@ func refresh_availability(progression_state: EconomyState = null) -> void:
 	_refresh_availability(true)
 
 
-func configure_runtime_modifiers(request_demand_multiplier: float, predictive_guard_enabled: bool, predictive_guard_target_ratio: float) -> bool:
-	if not is_finite(request_demand_multiplier) or request_demand_multiplier < 0.0 or not is_finite(predictive_guard_target_ratio) or predictive_guard_target_ratio < 0.0 or predictive_guard_target_ratio > 1.0:
+func configure_runtime_modifiers(request_demand_multiplier: float, predictive_guard_enabled: bool, predictive_guard_target_ratio: float, reserve_policy_enabled: bool = false, reserve_policy_floor_ratio: float = 0.35) -> bool:
+	if not is_finite(request_demand_multiplier) or request_demand_multiplier < 0.0 or not is_finite(predictive_guard_target_ratio) or predictive_guard_target_ratio < 0.0 or predictive_guard_target_ratio > 1.0 or not is_finite(reserve_policy_floor_ratio) or reserve_policy_floor_ratio < 0.0 or reserve_policy_floor_ratio > 1.0:
 		return false
 	_request_demand_multiplier = request_demand_multiplier
 	_predictive_guard_enabled = predictive_guard_enabled
 	_predictive_guard_target_ratio = predictive_guard_target_ratio
+	_reserve_policy_enabled = reserve_policy_enabled
+	_reserve_policy_floor_ratio = reserve_policy_floor_ratio
 	return true
 
 
@@ -183,6 +193,20 @@ func build_preview(request_id: String) -> RequestPreview:
 	var useful := minf(float(request.get_value("max_useful_power", 0.0)), base_served + watt_power)
 	if useful > EPSILON:
 		preview.estimated_seconds = float(request.get_value("required_energy", 0.0)) / useful
+	preview.seconds_until_peak = DemandProfileSampler.seconds_until_next_peak(profile, 0.0)
+	preview.projected_minimum_reserve = maxf(grid.state.reserve_stored - maxf(preview.predicted_peak - deliverable, 0.0) * minf(preview.estimated_seconds, 60.0), 0.0)
+	preview.estimated_seconds_low = preview.estimated_seconds * 0.90
+	preview.estimated_seconds_high = preview.estimated_seconds * 1.25
+	if _progression_state != null and _progression_state.unlocked_features.has("neighborhood_forecast"):
+		preview.forecast_confidence = "modeled"
+		preview.forecast_reason = "profile_known_policy_variable"
+		preview.estimated_seconds_low = preview.estimated_seconds * 0.96
+		preview.estimated_seconds_high = preview.estimated_seconds * 1.10
+	if _progression_state != null and _progression_state.scheduled_request_id == request_id:
+		preview.forecast_confidence = "verified"
+		preview.forecast_reason = "scheduled_conditions_known"
+		preview.estimated_seconds_low = preview.estimated_seconds
+		preview.estimated_seconds_high = preview.estimated_seconds * 1.03
 	preview.likely_bottleneck = _preview_bottleneck(preview.predicted_peak)
 	preview.underprepared = preview.predicted_service_ratio < 1.0 - EPSILON or grid.state.reserve_stored + EPSILON < preview.recommended_reserve
 	if preview.underprepared:
@@ -199,14 +223,24 @@ func authorize_request(request_id: String) -> bool:
 	if state == null or request == null or state.status != RequestRunState.ANNOUNCED:
 		return false
 	var research_cost := float(request.get_value("research_cost", 0.0))
-	if str(request.get_value("kind", "")) == "research" and grid.state.stored_energy + EPSILON < research_cost:
+	if str(request.get_value("kind", "")) == "research" and not state.research_cost_paid and grid.state.stored_energy + EPSILON < research_cost:
 		return false
-	if research_cost > 0.0:
+	if research_cost > 0.0 and not state.research_cost_paid:
 		grid.state.stored_energy -= research_cost
 		state.research_cost_paid = true
 	var preview := build_preview(request_id)
 	state.underprepared_warning = preview.underprepared
 	_set_status(state, RequestRunState.AUTHORIZED)
+	return true
+
+
+func cancel_authorization(request_id: String) -> bool:
+	if not _active_id.is_empty():
+		return false
+	var state := get_request_state(request_id)
+	if state == null or state.status != RequestRunState.AUTHORIZED:
+		return false
+	_set_status(state, RequestRunState.ANNOUNCED)
 	return true
 
 
@@ -216,6 +250,7 @@ func start_request(request_id: String) -> bool:
 		return false
 	_active_id = request_id
 	state.starting_stored_energy = grid.state.stored_energy
+	state.automation_sequence_at_start = _progression_state.automation_action_sequence if _progression_state != null else 0
 	_incident_timeline.configure(request_id, _repository.get_all("incidents"), seed)
 	_set_status(state, RequestRunState.RUNNING)
 	return true
@@ -363,6 +398,17 @@ func _process_step(active: RequestRunState, delta_seconds: float, offline: bool 
 	var reserve_ratio := 0.0 if grid.state.reserve_capacity <= EPSILON else grid.state.reserve_stored / grid.state.reserve_capacity
 	predictive_guard_active = _predictive_guard_enabled and predictive_guard_seconds_to_peak <= 30.0 and reserve_ratio + EPSILON < _predictive_guard_target_ratio
 	grid.set_allocation_override("expand_grid" if predictive_guard_active else "")
+	var was_throttled := reserve_policy_throttle_active
+	reserve_policy_throttle_active = _reserve_policy_enabled and reserve_ratio + EPSILON < _reserve_policy_floor_ratio and demand_rate > minf(grid.state.generation_rate, grid.state.transmission_capacity) + EPSILON
+	if reserve_policy_throttle_active:
+		demand_rate = minf(demand_rate, minf(grid.state.generation_rate, grid.state.transmission_capacity))
+		active.safe_throttle_seconds += delta_seconds
+		if not was_throttled:
+			active.safe_throttle_events += 1
+			_reserve_policy_throttle_started_at = active.elapsed_seconds
+			_record_policy_action(active.request_id, "started", {"threshold_ratio": _reserve_policy_floor_ratio, "requested_demand": float(request.get_value("continuous_demand", 0.0)) * demand_multiplier * _request_demand_multiplier, "applied_demand": demand_rate})
+	elif was_throttled:
+		_record_policy_action(active.request_id, "stopped", {"threshold_ratio": _reserve_policy_floor_ratio, "duration_seconds": maxf(active.elapsed_seconds - _reserve_policy_throttle_started_at, 0.0)})
 	grid.set_demand_rate(demand_rate)
 	grid.advance_time(delta_seconds)
 	grid.set_allocation_override("")
@@ -404,6 +450,9 @@ func _process_incidents(active: RequestRunState, previous_elapsed: float, curren
 
 
 func _complete_request(state: RequestRunState, request: RequestDefinition) -> void:
+	if reserve_policy_throttle_active:
+		_record_policy_action(state.request_id, "stopped", {"threshold_ratio": _reserve_policy_floor_ratio, "duration_seconds": maxf(state.elapsed_seconds - _reserve_policy_throttle_started_at, 0.0), "reason": "request_completed"})
+		reserve_policy_throttle_active = false
 	state.progress = 1.0
 	_active_id = ""
 	_completed[state.request_id] = true
@@ -442,7 +491,18 @@ func _build_report(state: RequestRunState, request: RequestDefinition, unlock_id
 	report.grade = grade_for_score(report.stability_score)
 	report.completion_key = str(request.get_value("completion_key", ""))
 	report.suggestion_key = _report_suggestion_key(report)
+	report.safe_throttle_seconds = state.safe_throttle_seconds
+	report.safe_throttle_events = state.safe_throttle_events
+	if _progression_state != null:
+		report.automation_actions = _progression_state.automation_actions_since(state.automation_sequence_at_start)
 	return report
+
+
+func _record_policy_action(request_id: String, outcome: String, details: Dictionary) -> void:
+	if _progression_state != null:
+		var recorded_details := details.duplicate(true)
+		recorded_details["simulation_seconds"] = grid.state.elapsed_seconds
+		_progression_state.record_automation_action("reserve_safe_throttle", request_id, outcome, recorded_details)
 
 
 static func grade_for_score(score: float) -> String:

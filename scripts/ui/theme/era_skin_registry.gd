@@ -6,6 +6,7 @@ const ERA_01_ID := "era_01_desk"
 const ERA_02_ID := "era_02_room"
 const ERA_03_ID := "era_03_house"
 const ERA_04_ID := "era_04_building"
+const ERA_05_ID := "era_05_neighborhood"
 
 
 static func get_skin(skin_id: String) -> EraSkinDefinition:
@@ -14,11 +15,14 @@ static func get_skin(skin_id: String) -> EraSkinDefinition:
 		ERA_02_ID: return _room()
 		ERA_03_ID: return _house()
 		ERA_04_ID: return _building()
+		ERA_05_ID: return _neighborhood()
 		_: return _base()
 
 
 static func skin_for_era(era_number: int) -> EraSkinDefinition:
-	if era_number >= 4:
+	if era_number >= 5:
+		return get_skin(ERA_05_ID)
+	if era_number == 4:
 		return get_skin(ERA_04_ID)
 	if era_number == 3:
 		return get_skin(ERA_03_ID)
@@ -26,7 +30,7 @@ static func skin_for_era(era_number: int) -> EraSkinDefinition:
 
 
 static func required_sample_ids() -> PackedStringArray:
-	return PackedStringArray([BASE_ID, ERA_01_ID, ERA_02_ID, ERA_03_ID, ERA_04_ID])
+	return PackedStringArray([BASE_ID, ERA_01_ID, ERA_02_ID, ERA_03_ID, ERA_04_ID, ERA_05_ID])
 
 
 static func _base() -> EraSkinDefinition:
@@ -119,6 +123,28 @@ static func _building() -> EraSkinDefinition:
 	skin.ambient_animation = "building_riser_load_cycle"
 	skin.lighting_treatment = "dim_shared_floors_cyan_riser_amber_emergency"
 	skin.estimated_memory_kib = 48
+	return skin
+
+
+static func _neighborhood() -> EraSkinDefinition:
+	var skin := EraSkinDefinition.new()
+	skin.skin_id = ERA_05_ID
+	skin.era_number = 5
+	skin.scale_label = "NEIGHBORHOOD GRID • OPERATOR LINK 05"
+	skin.environment_label = "BLUE-HOUR MICROGRID / LATERAL ANNEXATION"
+	skin.background_color = SkinTokens.COLOR_ERA_05_BACKGROUND
+	skin.wall_color = SkinTokens.COLOR_ERA_05_BLOCK
+	skin.surface_color = SkinTokens.COLOR_ERA_05_STREET
+	skin.ambient_color = SkinTokens.COLOR_EMERGENCY_LIGHT
+	skin.infrastructure_slots = PackedStringArray(["nested_building", "substation", "solar_field", "battery_warehouse", "water_channel", "underground_route", "boundary_link"])
+	skin.power_flow_paths = [
+		_path([Vector2(0.05, 0.62), Vector2(0.23, 0.62), Vector2(0.42, 0.53), Vector2(0.58, 0.53), Vector2(0.78, 0.35), Vector2(0.97, 0.35)]),
+		_path([Vector2(0.42, 0.53), Vector2(0.42, 0.76), Vector2(0.68, 0.76), Vector2(0.90, 0.83)]),
+		_path([Vector2(0.58, 0.53), Vector2(0.70, 0.20), Vector2(0.88, 0.12)]),
+	]
+	skin.ambient_animation = "neighborhood_feeder_cycle"
+	skin.lighting_treatment = "dim_homes_bright_substation_cyan_routes_amber_service"
+	skin.estimated_memory_kib = 56
 	return skin
 
 

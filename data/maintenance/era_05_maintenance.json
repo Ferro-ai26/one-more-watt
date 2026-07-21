@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "maintenance": [
+    {
+      "id": "era05_feeder_relay_reset",
+      "era_id": "era_05_neighborhood_microgrid",
+      "trigger_request_id": "era05_coordinate_community_solar",
+      "kind": "routine",
+      "automation_eligible": true,
+      "safe_option_id": "service",
+      "title_key": "maintenance.era05_feeder_relay_reset.title",
+      "description_key": "maintenance.era05_feeder_relay_reset.description",
+      "options": [
+        {
+          "id": "service", "label_key": "maintenance.option.service.label", "description_key": "maintenance.feeder.service.description",
+          "stored_energy_cost": 300000, "grant_upgrade_id": null, "next_request_effects": []
+        }
+      ]
+    },
+    {
+      "id": "era05_battery_filter_service",
+      "era_id": "era_05_neighborhood_microgrid",
+      "trigger_request_id": "era05_automate_routine_switchovers",
+      "kind": "routine",
+      "automation_eligible": true,
+      "safe_option_id": "service",
+      "title_key": "maintenance.era05_battery_filter_service.title",
+      "description_key": "maintenance.era05_battery_filter_service.description",
+      "options": [
+        {
+          "id": "service", "label_key": "maintenance.option.service.label", "description_key": "maintenance.battery_filter.service.description",
+          "stored_energy_cost": 800000, "grant_upgrade_id": null, "next_request_effects": []
+        }
+      ]
+    }
+  ]
+}

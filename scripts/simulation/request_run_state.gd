@@ -25,6 +25,9 @@ var underprepared_warning := false
 var reward_granted := false
 var research_cost_paid := false
 var incident_ids: Array[String] = []
+var safe_throttle_seconds := 0.0
+var safe_throttle_events := 0
+var automation_sequence_at_start := 0
 
 
 func _init(id: String = "") -> void:
@@ -48,6 +51,9 @@ func snapshot() -> Dictionary:
 		"reward_granted": reward_granted,
 		"research_cost_paid": research_cost_paid,
 		"incident_ids": incident_ids.duplicate(),
+		"safe_throttle_seconds": safe_throttle_seconds,
+		"safe_throttle_events": safe_throttle_events,
+		"automation_sequence_at_start": automation_sequence_at_start,
 	}
 
 
@@ -71,4 +77,7 @@ func restore(data: Dictionary) -> bool:
 	incident_ids.clear()
 	for value: Variant in data.get("incident_ids", []):
 		incident_ids.append(str(value))
+	safe_throttle_seconds = clampf(float(data.get("safe_throttle_seconds", 0.0)), 0.0, elapsed_seconds)
+	safe_throttle_events = maxi(int(data.get("safe_throttle_events", 0)), 0)
+	automation_sequence_at_start = maxi(int(data.get("automation_sequence_at_start", 0)), 0)
 	return true

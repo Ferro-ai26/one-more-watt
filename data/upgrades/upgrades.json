@@ -96,6 +96,66 @@
       "effects": [{"operation": "multiply", "target": "global_output", "value": 1.10}],
       "permanent": false,
       "max_level": 1
+    },
+    {
+      "id": "neighborhood_load_model",
+      "era_id": "era_05_neighborhood_microgrid",
+      "name_key": "upgrade.neighborhood_load_model.name",
+      "description_key": "upgrade.neighborhood_load_model.description",
+      "cost": {"stored_energy": 4500000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_restore_evening_service"}],
+      "effects": [{"operation": "multiply", "target": "request_demand_multiplier", "value": 0.96}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "reserve_policy_console",
+      "era_id": "era_05_neighborhood_microgrid",
+      "name_key": "upgrade.reserve_policy_console.name",
+      "description_key": "upgrade.reserve_policy_console.description",
+      "cost": {"stored_energy": 8000000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_prepare_overnight_reserve"}],
+      "effects": [{"operation": "add", "target": "automation_capacity", "value": 1.0}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "routine_service_authority",
+      "era_id": "era_05_neighborhood_microgrid",
+      "name_key": "upgrade.routine_service_authority.name",
+      "description_key": "upgrade.routine_service_authority.description",
+      "cost": {"stored_energy": 12000000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_automate_routine_switchovers"}],
+      "effects": [{"operation": "add", "target": "automation_capacity", "value": 1.0}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "first_request_scheduler",
+      "era_id": "era_05_neighborhood_microgrid",
+      "name_key": "upgrade.first_request_scheduler.name",
+      "description_key": "upgrade.first_request_scheduler.description",
+      "cost": {"stored_energy": 18000000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_route_underground_distribution"}],
+      "effects": [{"operation": "add", "target": "automation_capacity", "value": 1.0}],
+      "permanent": false,
+      "max_level": 1
+    },
+    {
+      "id": "underground_feeder_balancing",
+      "era_id": "era_05_neighborhood_microgrid",
+      "name_key": "upgrade.underground_feeder_balancing.name",
+      "description_key": "upgrade.underground_feeder_balancing.description",
+      "cost": {"stored_energy": 26000000},
+      "cost_growth": 1.0,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_route_underground_distribution"}],
+      "effects": [{"operation": "multiply", "target": "transmission_capacity", "value": 1.15}],
+      "permanent": false,
+      "max_level": 1
     }
   ]
 }

@@ -1,6 +1,6 @@
 # Era 5 Content and Visual Appendix — Neighborhood Microgrid
 
-Status: Proposed for explicit approval; no Phase 16 implementation is authorized by this document alone
+Status: Approved as written under `DEC-037`; Phase 16 implementation authorized
 
 Date: 2026-07-20
 

@@ -115,6 +115,36 @@
       ],
       "visual_state_id": "building_network_initial",
       "unit_display_floor": "kW"
+    },
+    {
+      "id": "era_05_neighborhood_microgrid",
+      "number": 5,
+      "name_key": "era.05.name",
+      "scale_key": "era.05.scale",
+      "description_key": "era.05.description",
+      "unlock_conditions": [
+        {"type": "request_completed", "request_id": "era04_standardize_building_power"}
+      ],
+      "infrastructure_ids": [
+        "neighborhood_substation",
+        "community_solar_farm",
+        "municipal_generator",
+        "battery_warehouse",
+        "small_hydroelectric_plant",
+        "underground_distribution",
+        "borrowed_utility_connection"
+      ],
+      "request_ids": [
+        "era05_restore_evening_service",
+        "era05_coordinate_community_solar",
+        "era05_prepare_overnight_reserve",
+        "era05_automate_routine_switchovers",
+        "era05_route_underground_distribution",
+        "era05_unify_neighborhood_service",
+        "era05_synchronize_porches"
+      ],
+      "visual_state_id": "neighborhood_microgrid_initial",
+      "unit_display_floor": "MW"
     }
   ]
 }

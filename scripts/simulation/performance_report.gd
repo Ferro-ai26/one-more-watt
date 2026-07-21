@@ -21,6 +21,9 @@ var incident_ids: Array[String] = []
 var unlock_ids: Array[String] = []
 var completion_key := ""
 var suggestion_key := ""
+var safe_throttle_seconds := 0.0
+var safe_throttle_events := 0
+var automation_actions: Array = []
 
 
 func snapshot() -> Dictionary:
@@ -45,6 +48,9 @@ func snapshot() -> Dictionary:
 		"unlock_ids": unlock_ids.duplicate(),
 		"completion_key": completion_key,
 		"suggestion_key": suggestion_key,
+		"safe_throttle_seconds": safe_throttle_seconds,
+		"safe_throttle_events": safe_throttle_events,
+		"automation_actions": automation_actions.duplicate(true),
 	}
 
 
@@ -71,4 +77,10 @@ func restore(data: Dictionary) -> bool:
 	unlock_ids.assign(data.get("unlock_ids", []))
 	completion_key = str(data.get("completion_key", ""))
 	suggestion_key = str(data.get("suggestion_key", ""))
+	safe_throttle_seconds = clampf(float(data.get("safe_throttle_seconds", 0.0)), 0.0, completion_seconds)
+	safe_throttle_events = maxi(int(data.get("safe_throttle_events", 0)), 0)
+	automation_actions = (data.get("automation_actions", []) as Array).duplicate(true)
+	for action_value: Variant in automation_actions:
+		if not action_value is Dictionary:
+			return false
 	return true

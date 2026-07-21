@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "content_version": "0.9.0",
+  "content_version": "0.10.0",
   "files": [
     {"family": "balance", "path": "res://data/balance/constants.json", "root": "balance"},
     {"family": "eras", "path": "res://data/eras/eras.json", "root": "eras"},
@@ -10,8 +10,10 @@
     {"family": "requests", "path": "res://data/requests/era_02_requests.json", "root": "requests"},
     {"family": "requests", "path": "res://data/requests/era_03_requests.json", "root": "requests"},
     {"family": "requests", "path": "res://data/requests/era_04_requests.json", "root": "requests"},
+    {"family": "requests", "path": "res://data/requests/era_05_requests.json", "root": "requests"},
     {"family": "demand_profiles", "path": "res://data/requests/demand_profiles.json", "root": "demand_profiles"},
     {"family": "maintenance", "path": "res://data/maintenance/era_04_maintenance.json", "root": "maintenance"},
+    {"family": "maintenance", "path": "res://data/maintenance/era_05_maintenance.json", "root": "maintenance"},
     {"family": "dialogue", "path": "res://data/dialogue/system_dialogue.json", "root": "dialogue"},
     {"family": "incidents", "path": "res://data/incidents/incidents.json", "root": "incidents"},
     {"family": "achievements", "path": "res://data/achievements/achievements.json", "root": "achievements"},

@@ -264,7 +264,7 @@ func mark_report_viewed(request_id: String) -> bool:
 		state.prototype_complete = true
 		_events.append(EconomyEvent.new(EconomyEvent.PROTOTYPE_COMPLETED, request_id))
 		endpoint_reached = true
-	if "phase15_capstone" in tags:
+	if "phase15_capstone" in tags or "phase16_capstone" in tags:
 		endpoint_reached = true
 	return endpoint_reached
 

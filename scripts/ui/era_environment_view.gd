@@ -103,6 +103,7 @@ func _draw() -> void:
 		2: _draw_room(area)
 		3: _draw_house(area)
 		4: _draw_building(area)
+		5: _draw_neighborhood(area)
 		_: _draw_desk(area)
 	_draw_power_paths(area)
 	_draw_watt(area)
@@ -226,6 +227,71 @@ func _draw_building(area: Rect2) -> void:
 	draw_line(Vector2(area.size.x * 0.15, area.size.y * 0.66), Vector2(area.size.x * 0.18, area.size.y * 0.70), SkinTokens.COLOR_IVORY_DIM, 1.5)
 
 
+func _draw_neighborhood(area: Rect2) -> void:
+	# Blue-hour representative blocks; the earlier Building remains a nested node at left.
+	draw_rect(Rect2(0.0, area.size.y * 0.68, area.size.x, area.size.y * 0.32), SkinTokens.COLOR_ERA_05_STREET)
+	for block: Rect2 in [
+		Rect2(area.size.x * 0.03, area.size.y * 0.12, area.size.x * 0.25, area.size.y * 0.48),
+		Rect2(area.size.x * 0.31, area.size.y * 0.20, area.size.x * 0.20, area.size.y * 0.32),
+		Rect2(area.size.x * 0.73, area.size.y * 0.18, area.size.x * 0.22, area.size.y * 0.36),
+	]:
+		draw_rect(block, SkinTokens.COLOR_ERA_05_BLOCK)
+		draw_rect(block, SkinTokens.COLOR_AGED_METAL, false, 2.0)
+		for row: int in 2:
+			for column: int in 3:
+				var window := Rect2(block.position + Vector2(7.0 + column * block.size.x * 0.27, 10.0 + row * block.size.y * 0.30), Vector2(block.size.x * 0.12, block.size.y * 0.12))
+				var warm := row == 0 and column == 0 and not brownout_active
+				draw_rect(window, SkinTokens.COLOR_WARM_LIGHT if warm else SkinTokens.COLOR_GLASS_DARK)
+	# Nested Building Network: vertical cyan riser survives at the left edge.
+	var nested := Rect2(area.size.x * 0.055, area.size.y * 0.17, area.size.x * 0.18, area.size.y * 0.39)
+	for floor_index: int in 4:
+		var y := nested.position.y + float(floor_index) * nested.size.y / 4.0
+		draw_line(Vector2(nested.position.x, y), Vector2(nested.end.x, y), SkinTokens.COLOR_SHADOW, 2.0)
+	draw_line(Vector2(nested.position.x + nested.size.x * 0.65, nested.position.y), Vector2(nested.position.x + nested.size.x * 0.65, nested.end.y), SkinTokens.COLOR_WATT, 3.0)
+	# Dominant civic substation and distributed WATT terminal.
+	var substation := Rect2(area.size.x * 0.42, area.size.y * 0.32, area.size.x * 0.24, area.size.y * 0.28)
+	draw_rect(substation, SkinTokens.COLOR_GRAPHITE_RAISED)
+	draw_rect(substation, SkinTokens.COLOR_TRANSMISSION, false, 3.0)
+	for coil_x: float in [0.46, 0.52, 0.58]:
+		draw_circle(Vector2(area.size.x * coil_x, area.size.y * 0.52), 6.0, SkinTokens.COLOR_CERAMIC_SHADOW)
+	var civic_display := Rect2(area.size.x * 0.49, area.size.y * 0.35, area.size.x * 0.11, area.size.y * 0.09)
+	draw_rect(civic_display, SkinTokens.COLOR_GLASS_DARK)
+	draw_rect(civic_display, SkinTokens.COLOR_WATT, false, 2.0)
+	for eye_x: float in [0.52, 0.57]:
+		draw_circle(Vector2(area.size.x * eye_x, area.size.y * 0.395), 3.0, SkinTokens.COLOR_WATT_REBOOT)
+	# Solar/generation and Reserve clusters stay readable without per-unit rendering.
+	if int(owned_counts.get("community_solar_farm", 0)) > 0:
+		for index: int in 3:
+			var start := Vector2(area.size.x * (0.70 + index * 0.075), area.size.y * (0.20 + index * 0.008))
+			draw_line(start, start + Vector2(area.size.x * 0.06, -area.size.y * 0.045), SkinTokens.COLOR_GENERATION, 5.0)
+	if int(owned_counts.get("municipal_generator", 0)) > 0:
+		_draw_generator(Rect2(area.size.x * 0.69, area.size.y * 0.55, area.size.x * 0.13, area.size.y * 0.12), true)
+	if int(owned_counts.get("battery_warehouse", 0)) > 0:
+		var warehouse := Rect2(area.size.x * 0.82, area.size.y * 0.56, area.size.x * 0.15, area.size.y * 0.12)
+		draw_rect(warehouse, SkinTokens.COLOR_GRAPHITE)
+		draw_rect(warehouse, SkinTokens.COLOR_RESERVE, false, 2.0)
+		for bay: int in 3:
+			draw_rect(Rect2(warehouse.position + Vector2(5.0 + bay * warehouse.size.x * 0.29, 6.0), Vector2(warehouse.size.x * 0.18, warehouse.size.y * 0.42)), SkinTokens.COLOR_WATT if power_online else SkinTokens.COLOR_DISABLED)
+	# Underground authored path and edge water turbine.
+	draw_line(Vector2(0.0, area.size.y * 0.80), Vector2(area.size.x, area.size.y * 0.80), SkinTokens.COLOR_AGED_METAL, 2.0)
+	if int(owned_counts.get("underground_distribution", 0)) > 0:
+		draw_line(Vector2(area.size.x * 0.12, area.size.y * 0.84), Vector2(area.size.x * 0.88, area.size.y * 0.84), SkinTokens.COLOR_WATT, 4.0)
+	for node_x: float in [0.18, 0.48, 0.78]:
+		draw_circle(Vector2(area.size.x * node_x, area.size.y * 0.84), 4.0, SkinTokens.COLOR_AGED_METAL)
+	if int(owned_counts.get("small_hydroelectric_plant", 0)) > 0:
+		draw_line(Vector2(area.size.x * 0.78, area.size.y * 0.92), Vector2(area.size.x, area.size.y * 0.90), SkinTokens.COLOR_TRANSMISSION, 7.0)
+		_draw_fan(area, Vector2(area.size.x * 0.90, area.size.y * 0.86), 0.035, true)
+	# Temporary-looking boundary clamp advertises the absurd external connection.
+	if int(owned_counts.get("borrowed_utility_connection", 0)) > 0:
+		draw_line(Vector2(area.size.x, area.size.y * 0.35), Vector2(area.size.x * 0.91, area.size.y * 0.35), SkinTokens.COLOR_WATT, 8.0)
+		draw_rect(Rect2(area.size.x * 0.88, area.size.y * 0.31, area.size.x * 0.06, area.size.y * 0.08), SkinTokens.COLOR_EMERGENCY_LIGHT, false, 3.0)
+	# Tiny ordinary-life remnants: bicycle and official porch priority label.
+	draw_circle(Vector2(area.size.x * 0.32, area.size.y * 0.64), 4.0, SkinTokens.COLOR_IVORY_DIM, false, 1.5)
+	draw_circle(Vector2(area.size.x * 0.37, area.size.y * 0.64), 4.0, SkinTokens.COLOR_IVORY_DIM, false, 1.5)
+	draw_line(Vector2(area.size.x * 0.32, area.size.y * 0.64), Vector2(area.size.x * 0.345, area.size.y * 0.60), SkinTokens.COLOR_IVORY_DIM, 1.5)
+	draw_string(get_theme_default_font(), Vector2(area.size.x * 0.67, area.size.y * 0.66), "PORCH PRIORITY 04", HORIZONTAL_ALIGNMENT_LEFT, area.size.x * 0.25, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_EMERGENCY_LIGHT)
+
+
 func _draw_shell(area: Rect2, surface_y: float) -> void:
 	draw_rect(Rect2(0.0, 0.0, area.size.x, area.size.y * surface_y), skin.wall_color)
 	draw_rect(Rect2(0.0, area.size.y * surface_y, area.size.x, area.size.y * (1.0 - surface_y)), skin.surface_color)
@@ -334,7 +400,7 @@ func _draw_operator_plate(area: Rect2) -> void:
 	draw_rect(plate, SkinTokens.COLOR_INK)
 	draw_rect(plate, SkinTokens.COLOR_WATT if authorization_ready else SkinTokens.COLOR_DISABLED, false, 1.0)
 	var state_text := "OPERATOR READY" if authorization_ready else "OPERATOR HOLD"
-	var scale_text: String = str({1: "DESK", 2: "ROOM", 3: "HOUSE", 4: "BUILDING"}.get(skin.era_number, "WORKSHOP"))
+	var scale_text: String = str({1: "DESK", 2: "ROOM", 3: "HOUSE", 4: "BUILDING", 5: "NEIGHBORHOOD"}.get(skin.era_number, "WORKSHOP"))
 	var copy := "%s  •  %s  •  %s" % [scale_text, representative_state().to_upper(), state_text]
 	draw_string(get_theme_default_font(), plate.position + Vector2(8.0, plate.size.y * 0.68), copy, HORIZONTAL_ALIGNMENT_LEFT, plate.size.x - 16.0, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY)
 
@@ -368,8 +434,16 @@ func _draw_transition(area: Rect2) -> void:
 		if skin.era_number == 4:
 			for x_fraction: float in [0.03, 0.80]:
 				draw_rect(Rect2(area.size.x * x_fraction, area.size.y * 0.20, area.size.x * 0.17, area.size.y * 0.60), SkinTokens.COLOR_ERA_04_DIM_FLOOR, false, 3.0)
+		elif skin.era_number == 5:
+			for x_fraction: float in [0.05, 0.28, 0.52, 0.75]:
+				draw_rect(Rect2(area.size.x * x_fraction, area.size.y * 0.20, area.size.x * 0.16, area.size.y * 0.55), SkinTokens.COLOR_ERA_05_DIM_HOME, false, 3.0)
+			draw_rect(Rect2(area.size.x * 0.64, area.size.y * 0.10, area.size.x * 0.28, area.size.y * 0.22), SkinTokens.COLOR_WATT, false, 3.0)
 		draw_string(get_theme_default_font(), Vector2(area.size.x * 0.20, area.size.y * 0.10), _transition_label(), HORIZONTAL_ALIGNMENT_CENTER, area.size.x * 0.60, SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
 
 
 func _transition_label() -> String:
-	return "NEIGHBORHOOD MICROGRID • MORE COMING" if skin != null and skin.era_number == 4 else "SCALE REVEAL"
+	if skin != null and skin.era_number == 4:
+		return "NEIGHBORHOOD MICROGRID • OPERATOR LINK 05"
+	if skin != null and skin.era_number == 5:
+		return "CITY DATA CENTER • ERA 6 LOCKED"
+	return "SCALE REVEAL"

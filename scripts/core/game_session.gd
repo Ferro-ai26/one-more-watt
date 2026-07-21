@@ -195,6 +195,101 @@ func configure_reserve_automation(enabled: bool, threshold_ratio: float) -> bool
 	return true
 
 
+func configure_reserve_policy(preset: String, enabled: bool = true) -> bool:
+	if not has_feature("reserve_policy") or preset not in ["conservative", "balanced", "max_throughput"]:
+		return false
+	var settings_by_preset := {
+		"conservative": {"floor": 0.60, "start": 0.85},
+		"balanced": {"floor": 0.35, "start": 0.70},
+		"max_throughput": {"floor": 0.15, "start": 0.40},
+	}
+	var policy: Dictionary = settings_by_preset[preset]
+	economy.state.reserve_policy_preset = preset
+	economy.state.reserve_automation_enabled = enabled
+	economy.state.reserve_threshold_ratio = float(policy["floor"])
+	economy.state.request_start_target_ratio = float(policy["start"])
+	_sync_runtime_modifiers()
+	economy.state.record_automation_action("reserve_policy", preset, "configured", {"enabled": enabled, "floor_ratio": policy["floor"], "start_target_ratio": policy["start"]})
+	feedback.request("automation_changed")
+	mutation_committed.emit("automation_changed")
+	return true
+
+
+func configure_reserve_policy_custom(enabled: bool, floor_ratio: float, start_target_ratio: float) -> bool:
+	if not has_feature("reserve_policy") or not is_finite(floor_ratio) or floor_ratio < 0.0 or floor_ratio > 1.0 or not is_finite(start_target_ratio) or start_target_ratio < 0.0 or start_target_ratio > 1.0:
+		return false
+	economy.state.reserve_policy_preset = "custom"
+	economy.state.reserve_automation_enabled = enabled
+	economy.state.reserve_threshold_ratio = floor_ratio
+	economy.state.request_start_target_ratio = start_target_ratio
+	_sync_runtime_modifiers()
+	economy.state.record_automation_action("reserve_policy", "custom", "configured", {"enabled": enabled, "floor_ratio": floor_ratio, "start_target_ratio": start_target_ratio})
+	mutation_committed.emit("automation_changed")
+	return true
+
+
+func configure_routine_automation(enabled: bool, maximum_cost: float) -> bool:
+	if not has_feature("routine_maintenance_automation") or not is_finite(maximum_cost) or maximum_cost < 0.0:
+		return false
+	economy.state.routine_automation_enabled = enabled
+	economy.state.routine_automation_max_cost = maximum_cost
+	economy.state.record_automation_action("routine_automation", "maintenance", "configured", {"enabled": enabled, "maximum_cost": maximum_cost})
+	try_resolve_routine_maintenance()
+	mutation_committed.emit("automation_changed")
+	return true
+
+
+func schedule_current_request(rule: String) -> bool:
+	if not has_feature("request_scheduling") or rule not in ["reserve_target", "next_return_safe"] or has_pending_maintenance() or not economy.state.scheduled_request_id.is_empty():
+		return false
+	var request_id := current_request_id()
+	var state := requests.get_request_state(request_id)
+	if request_id.is_empty() or state == null or state.status not in [RequestRunState.ANNOUNCED, RequestRunState.AUTHORIZED]:
+		return false
+	if state.status == RequestRunState.ANNOUNCED and not requests.authorize_request(request_id):
+		return false
+	economy.state.scheduled_request_id = request_id
+	economy.state.scheduled_start_rule = rule
+	economy.state.scheduled_target_ratio = economy.state.request_start_target_ratio
+	economy.state.record_automation_action("request_schedule", request_id, "armed", {"rule": rule, "target_ratio": economy.state.scheduled_target_ratio})
+	feedback.request("request_scheduled", true)
+	mutation_committed.emit("request_scheduled")
+	return true
+
+
+func cancel_scheduled_request() -> bool:
+	var request_id := economy.state.scheduled_request_id
+	if request_id.is_empty() or not requests.cancel_authorization(request_id):
+		return false
+	economy.state.scheduled_request_id = ""
+	economy.state.scheduled_start_rule = ""
+	economy.state.record_automation_action("request_schedule", request_id, "cancelled")
+	mutation_committed.emit("request_schedule_cancelled")
+	return true
+
+
+func try_start_scheduled_request() -> bool:
+	var request_id := economy.state.scheduled_request_id
+	if request_id.is_empty() or has_pending_maintenance() or requests.get_active_state() != null:
+		return false
+	var reserve_ratio := 1.0 if requests.grid.state.reserve_capacity <= 0.000000001 else requests.grid.state.reserve_stored / requests.grid.state.reserve_capacity
+	var ready := reserve_ratio + 0.000000001 >= economy.state.scheduled_target_ratio
+	if economy.state.scheduled_start_rule == "next_return_safe":
+		ready = not requests.build_preview(request_id).underprepared
+	if not ready or not requests.start_request(request_id):
+		return false
+	economy.state.scheduled_request_id = ""
+	economy.state.scheduled_start_rule = ""
+	economy.state.record_automation_action("request_schedule", request_id, "started", {"reserve_ratio": reserve_ratio})
+	feedback.request("request_started", true)
+	mutation_committed.emit("scheduled_request_started")
+	return true
+
+
+func automation_actions_since(sequence: int) -> Array:
+	return economy.state.automation_actions_since(sequence)
+
+
 func configure_predictive_reserve_guard(enabled: bool, target_ratio: float) -> bool:
 	if not has_feature("predictive_reserve_guard") or not economy.configure_predictive_reserve_guard(enabled, target_ratio):
 		return false
@@ -235,6 +330,10 @@ func choose_maintenance(option_id: String) -> bool:
 	var maintenance := repository.get_maintenance(economy.state.pending_maintenance_id)
 	if maintenance == null or economy.state.maintenance_choices.has(maintenance.get_id()):
 		return false
+	return _resolve_maintenance(maintenance, option_id, false)
+
+
+func _resolve_maintenance(maintenance: MaintenanceDefinition, option_id: String, automated: bool) -> bool:
 	var option := maintenance.get_option(option_id)
 	if option.is_empty():
 		return false
@@ -257,6 +356,10 @@ func choose_maintenance(option_id: String) -> bool:
 	_announce_next_required_if_needed()
 	feedback.request("maintenance_decision", true)
 	mutation_committed.emit("maintenance_choice")
+	if automated:
+		var action := economy.state.record_automation_action("routine_maintenance", maintenance.get_id(), "resolved", {"option_id": option_id, "cost": cost, "reason": "authored_safe_action_within_operator_cap", "simulation_seconds": requests.grid.state.elapsed_seconds})
+		_append_maintenance_action_to_report(maintenance, action)
+		feedback.request("automation_action", true)
 	return true
 
 
@@ -303,6 +406,7 @@ func restore(data: Dictionary, content_repository: ContentRepository) -> bool:
 	last_report_id = str(data.get("last_report_id", ""))
 	if not _validate_maintenance_state():
 		return false
+	_validate_operator_state()
 	_sync_request_grid_from_economy()
 	requests.refresh_availability(economy.state)
 	economy.drain_events()
@@ -332,7 +436,7 @@ func _sync_request_grid_from_economy() -> void:
 	requests.grid.set_grid_values(values)
 	requests.grid.state.reserve_stored = minf(reserve_stored, requests.grid.state.reserve_capacity)
 	requests.grid.state.stored_energy = economy.state.stored_energy
-	requests.configure_runtime_modifiers(demand_multiplier, economy.state.predictive_reserve_guard_enabled, economy.state.predictive_reserve_target_ratio)
+	requests.configure_runtime_modifiers(demand_multiplier, economy.state.predictive_reserve_guard_enabled, economy.state.predictive_reserve_target_ratio, economy.state.reserve_automation_enabled and has_feature("reserve_policy"), economy.state.reserve_threshold_ratio)
 
 
 func _sync_runtime_modifiers() -> void:
@@ -354,7 +458,44 @@ func _activate_maintenance_for_request(request_id: String) -> void:
 		var maintenance := maintenance_value as MaintenanceDefinition
 		if maintenance != null and maintenance.get_trigger_request_id() == request_id and not economy.state.maintenance_choices.has(maintenance.get_id()):
 			economy.state.pending_maintenance_id = maintenance.get_id()
+			try_resolve_routine_maintenance()
 			return
+
+
+func try_resolve_routine_maintenance() -> bool:
+	if not has_pending_maintenance() or not economy.state.routine_automation_enabled:
+		return false
+	var maintenance := repository.get_maintenance(economy.state.pending_maintenance_id)
+	if maintenance == null or not maintenance.is_automation_eligible():
+		_record_automation_block_once(economy.state.pending_maintenance_id, "strategic_or_ineligible")
+		return false
+	var option_id := maintenance.get_safe_option_id()
+	var option := maintenance.get_option(option_id)
+	var cost := float(option.get("stored_energy_cost", INF))
+	if cost > economy.state.routine_automation_max_cost + 0.000000001:
+		_record_automation_block_once(maintenance.get_id(), "operator_cost_cap")
+		return false
+	if requests.grid.state.stored_energy + 0.000000001 < cost:
+		_record_automation_block_once(maintenance.get_id(), "insufficient_stored_energy")
+		return false
+	return _resolve_maintenance(maintenance, option_id, true)
+
+
+func _record_automation_block_once(target_id: String, reason: String) -> void:
+	if not economy.state.automation_history.is_empty():
+		var latest: Dictionary = economy.state.automation_history[-1]
+		if str(latest.get("type", "")) == "routine_maintenance" and str(latest.get("target_id", "")) == target_id and str(latest.get("outcome", "")) == "blocked" and str(latest.get("reason", "")) == reason:
+			return
+	var action := economy.state.record_automation_action("routine_maintenance", target_id, "blocked", {"reason": reason, "simulation_seconds": requests.grid.state.elapsed_seconds})
+	var maintenance := repository.get_maintenance(target_id)
+	if maintenance != null:
+		_append_maintenance_action_to_report(maintenance, action)
+
+
+func _append_maintenance_action_to_report(maintenance: MaintenanceDefinition, action: Dictionary) -> void:
+	var report := requests.get_report(maintenance.get_trigger_request_id())
+	if report != null:
+		report.automation_actions.append(action.duplicate(true))
 
 
 func _validate_maintenance_state() -> bool:
@@ -367,3 +508,15 @@ func _validate_maintenance_state() -> bool:
 	if not economy.state.temporary_effect_request_id.is_empty() and repository.get_request(economy.state.temporary_effect_request_id) == null:
 		return false
 	return true
+
+
+func _validate_operator_state() -> void:
+	var scheduled_id := economy.state.scheduled_request_id
+	if scheduled_id.is_empty():
+		return
+	var scheduled_state := requests.get_request_state(scheduled_id)
+	if repository.get_request(scheduled_id) != null and scheduled_state != null and scheduled_state.status == RequestRunState.AUTHORIZED:
+		return
+	economy.state.scheduled_request_id = ""
+	economy.state.scheduled_start_rule = ""
+	economy.state.record_automation_action("request_schedule", scheduled_id, "invalidated", {"reason": "saved_reference_unavailable"})

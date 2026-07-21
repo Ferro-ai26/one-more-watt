@@ -14,6 +14,12 @@ var warning_key := ""
 var research_cost := 0.0
 var reward_stored_energy := 0.0
 var unlock_ids: Array[String] = []
+var forecast_confidence := "limited"
+var forecast_reason := "missing_model"
+var estimated_seconds_low := INF
+var estimated_seconds_high := INF
+var seconds_until_peak := INF
+var projected_minimum_reserve := 0.0
 
 
 func snapshot() -> Dictionary:
@@ -31,4 +37,10 @@ func snapshot() -> Dictionary:
 		"research_cost": research_cost,
 		"reward_stored_energy": reward_stored_energy,
 		"unlock_ids": unlock_ids.duplicate(),
+		"forecast_confidence": forecast_confidence,
+		"forecast_reason": forecast_reason,
+		"estimated_seconds_low": estimated_seconds_low,
+		"estimated_seconds_high": estimated_seconds_high,
+		"seconds_until_peak": seconds_until_peak,
+		"projected_minimum_reserve": projected_minimum_reserve,
 	}

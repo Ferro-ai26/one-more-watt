@@ -24,8 +24,8 @@ const BASE_EFFECT_TARGETS := [
 ]
 const INCIDENT_SEVERITIES := ["cosmetic", "minor", "major"]
 const CONDITION_TYPES := ["default", "request_completed", "infrastructure_owned", "upgrade_owned", "era_unlocked", "stability_service_at_least", "maintenance_choice"]
-const FEATURE_IDS := ["allocation_modes", "automatic_generation", "offline_progress", "reserve_forecast", "detailed_forecast", "reserve_thresholds", "predictive_reserve_guard"]
-const MAINTENANCE_OPTION_IDS := ["repair", "replace", "overclock"]
+const FEATURE_IDS := ["allocation_modes", "automatic_generation", "offline_progress", "reserve_forecast", "detailed_forecast", "reserve_thresholds", "predictive_reserve_guard", "neighborhood_forecast", "reserve_policy", "routine_maintenance_automation", "request_scheduling"]
+const MAINTENANCE_OPTION_IDS := ["repair", "replace", "overclock", "service"]
 
 var _id_regex := RegEx.new()
 
@@ -222,6 +222,12 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 			_validate_demand_profile(record, path, record_id, issues)
 		"maintenance":
 			_require_fields(record, {"era_id": "string", "trigger_request_id": "string", "title_key": "string", "description_key": "string", "options": "array"}, path, record_id, issues)
+			var maintenance_kind := str(record.get("kind", "strategic"))
+			_validate_enum(maintenance_kind, ["strategic", "routine"], "UNSUPPORTED_MAINTENANCE_KIND", path, record_id, "maintenance kind", issues)
+			if record.has("automation_eligible") and not record.get("automation_eligible") is bool:
+				_add_issue(issues, "INVALID_TYPE", path, record_id, "automation_eligible must be a boolean")
+			if maintenance_kind == "strategic" and bool(record.get("automation_eligible", false)):
+				_add_issue(issues, "UNSAFE_MAINTENANCE_AUTOMATION", path, record_id, "strategic maintenance cannot be automation eligible")
 			var option_ids: Dictionary = {}
 			var options: Variant = record.get("options", [])
 			if options is Array:
@@ -238,9 +244,13 @@ func _validate_family_record(family: String, record: Dictionary, path: String, r
 					option_ids[option_id] = true
 					_validate_nonnegative(option, ["stored_energy_cost"], path, record_id, issues)
 					_validate_effects(option.get("next_request_effects", []), path, record_id, issues)
-			for required_option: String in MAINTENANCE_OPTION_IDS:
+			var required_options: Array = ["service"] if maintenance_kind == "routine" else ["repair", "replace", "overclock"]
+			for required_option: String in required_options:
 				if not option_ids.has(required_option):
 					_add_issue(issues, "MISSING_MAINTENANCE_OPTION", path, record_id, "maintenance record requires '%s'" % required_option)
+			var safe_option_id := str(record.get("safe_option_id", "service" if maintenance_kind == "routine" else "repair"))
+			if not option_ids.has(safe_option_id):
+				_add_issue(issues, "UNKNOWN_SAFE_MAINTENANCE_OPTION", path, record_id, "safe_option_id must reference an option in this record")
 		"dialogue":
 			_require_fields(record, {"context": "string", "era_id": "string", "text_key": "string", "required_placeholders": "array", "tags": "array"}, path, record_id, issues)
 		"incidents":

@@ -2,6 +2,27 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## Phase 16 Neighborhood Microgrid host pass — 2026-07-21
+
+- Build/commit: Phase 16 working tree during host review; clean APK commit recorded separately after export
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless plus Xvfb/Mesa llvmpipe; dummy audio; no ADB device
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Approved appendix recorded before implementation; current Era 5 dialogue remains explicitly provisional.
+- [x] Fresh/migrated fixtures reach authoritative Era 5 without replaying Era 4 or losing Stored Energy/ownership; Era 6 is absent.
+- [x] Six required requests each complete in 10–25 minutes on the prepared deterministic route; total route is 95–135 minutes.
+- [x] Forecast progresses `Limited` → `Modeled` → `Verified` from disclosed deterministic coverage and displays range, peak, minimum Reserve, service, and bottleneck data.
+- [x] Reserve presets/advanced ratios, safe throttle, and Predictive Guard preserve the player-selected allocation mode and record explanatory actions.
+- [x] Routine automation handles only eligible single-safe-action records within the operator cap; disabled, strategic, capped, and unaffordable boundaries stop for input and explain why.
+- [x] Exactly one named request can be preauthorized, canceled, restored, or started offline; no purchase, discovery, second authorization, chain, duplicate cost, or duplicate reward occurs.
+- [x] Save migration and offline intervals/report boundaries pass; ordered actions appear in online/offline reports.
+- [x] Neighborhood world, scratched core, civic face, dim-home/bright-grid contradiction, seven integrated icons, contextual controls, report, and locked City pullback pass host automation.
+- [x] Eight final captures under `docs/phase_16/evidence/` were manually inspected at original resolution, including 320 × 568 at 130% text.
+- [x] Complete repository regression and headless launch pass; final performance/API evidence is recorded in the implementation/visual-QA records.
+- [ ] Physical update/fresh install, Era 5 touch route, 10–25 minute background returns, safe areas, font comfort, scrolling, Back, audible mix, haptics, device FPS/memory, heat, and battery. No device is attached; not claimed (`ISSUE-011`).
+
+Result: Phase 16 implementation and host/manual evidence pass. Physical-phone completion remains pending. Phase 17 is not authorized.
+
 ## Phase 15 Building Network host pass — 2026-07-20
 
 - Build/commit: Phase 15 working tree during host review; clean APK commit recorded separately after export

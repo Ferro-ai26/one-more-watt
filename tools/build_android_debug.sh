@@ -5,7 +5,7 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GODOT_EXECUTABLE="${GODOT_EXECUTABLE:-godot4}"
 OMW_ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/home/ubuntu/.local/share/android-sdk}}"
 OMW_BUILD_ROOT="$PROJECT_ROOT/build/android"
-OMW_APK_PATH="$OMW_BUILD_ROOT/one_more_watt_phase15_debug.apk"
+OMW_APK_PATH="$OMW_BUILD_ROOT/one_more_watt_phase16_debug.apk"
 OMW_EXPORT_LOG="$OMW_BUILD_ROOT/export.log"
 OMW_MANIFEST="$OMW_BUILD_ROOT/build_manifest.txt"
 OMW_PROJECT_FILE="$PROJECT_ROOT/project.godot"
@@ -47,7 +47,7 @@ trap restore_project_file EXIT
 sed -i "s/config\/build_commit=\"[^\"]*\"/config\/build_commit=\"$OMW_COMMIT_SHORT\"/" "$OMW_PROJECT_FILE"
 
 {
-	echo "ONE MORE WATT Phase 15 Android debug export"
+	echo "ONE MORE WATT Phase 16 Android debug export"
 	echo "UTC: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 	echo "Commit: $OMW_COMMIT"
 	echo "Godot: $($GODOT_EXECUTABLE --version)"

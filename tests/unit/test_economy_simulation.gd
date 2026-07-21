@@ -41,8 +41,8 @@ func _test_all_definitions_interpretable() -> void:
 		var upgrade := upgrade_value as UpgradeDefinition
 		levels[upgrade.get_id()] = int(upgrade.get_value("max_level", 1))
 	var result := InfrastructureAggregator.rebuild(owned, _repository, {}, _repository.get_balance("prototype_balance"), levels)
-	_check(_repository.get_counts()["infrastructure"] == 25, "all twenty-five Eras 1-4 infrastructure definitions load")
-	_check(bool(result["ok"]), "all Eras 1-4 infrastructure and upgrade effects are interpretable")
+	_check(_repository.get_counts()["infrastructure"] == 32, "all thirty-two Eras 1-5 infrastructure definitions load")
+	_check(bool(result["ok"]), "all Eras 1-5 infrastructure and upgrade effects are interpretable")
 	_check(float(result["values"]["generation_rate"]) > 0.0, "cross-era rebuild produces Generation")
 	_check(float(result["values"]["transmission_capacity"]) > 0.0, "cross-era rebuild produces Transmission")
 	_check(float(result["values"]["reserve_capacity"]) > 0.0, "cross-era rebuild produces Reserve")

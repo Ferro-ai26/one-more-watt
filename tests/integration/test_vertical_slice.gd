@@ -57,7 +57,7 @@ func _init() -> void:
 
 
 func _test_catalog_and_localization() -> void:
-	_check(_repository.get_counts()["requests"] == 25, "all twenty-five Eras 1–4 requests are authored")
+	_check(_repository.get_counts()["requests"] == 32, "all thirty-two Eras 1–5 requests are authored")
 	var kinds: Dictionary = {}
 	for request_value: Variant in _repository.get_all("requests"):
 		var request := request_value as RequestDefinition
@@ -142,9 +142,9 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 			_earn_until(session, replace_cost, "%s replace" % pending.get("id", "maintenance"))
 			_check(session.choose_maintenance("replace"), "%s replacement choice applies" % pending.get("id", "maintenance"))
 	_check(session.economy.state.prototype_complete, "leftovers report reaches the explicit prototype endpoint")
-	_check(session.current_request_id().is_empty(), "Phase 15 endpoint does not invent an Era 5 request")
+	_check(session.current_request_id() == "era05_restore_evening_service", "historical Era 4 route now hands off to the authored Era 5 request")
 	_check(session.available_optional_request_ids().size() == 4, "all four vanity requests remain reachable without blocking the endpoint")
-	_check(session.economy.state.current_era_id == "era_04_building_network", "final current era is Building Network")
+	_check(session.economy.state.current_era_id == "era_05_neighborhood_microgrid", "final current era advances through the explicit Neighborhood transition")
 	_check(session.economy.state.completed_eras.has("era_04_building_network"), "Building Network capstone records Era 4 completion")
 	_check(session.economy.state.best_stability_service_ratio >= 0.85, "a Stability request reaches the documented 85% gate")
 	_check(session.has_feature("allocation_modes"), "allocation unlock is reachable")
@@ -155,7 +155,7 @@ func _run_clean_path(verify_boundary_saves: bool) -> Dictionary:
 	_check(session.has_feature("reserve_thresholds"), "Reserve threshold unlock is reachable")
 	_check(session.has_feature("predictive_reserve_guard"), "Predictive Reserve Guard unlock is reachable")
 	_check(session.configure_reserve_automation(true, 0.25), "Smart Meter Reserve protection operates after its feature unlock")
-	_check(is_equal_approx(session.requests.grid.conversion_efficiency, 0.85), "Era 4 Stored Energy efficiency comes from authored balance")
+	_check(is_equal_approx(session.requests.grid.conversion_efficiency, 0.80), "Era 5 Stored Energy efficiency comes from authored balance after handoff")
 	if verify_boundary_saves:
 		_check(era2_saved and era3_saved, "both era transitions were saved and restored")
 		session = _round_trip(session, "prototype_endpoint")

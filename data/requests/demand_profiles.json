@@ -135,6 +135,54 @@
         {"time_seconds": 125, "multiplier": 1.35},
         {"time_seconds": 150, "multiplier": 0.65}
       ]
+    },
+    {
+      "id": "neighborhood_evening_wave",
+      "duration_seconds": 180,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.65},
+        {"time_seconds": 45, "multiplier": 0.90},
+        {"time_seconds": 105, "multiplier": 1.85},
+        {"time_seconds": 145, "multiplier": 1.20},
+        {"time_seconds": 180, "multiplier": 0.65}
+      ]
+    },
+    {
+      "id": "neighborhood_daylight_load",
+      "duration_seconds": 210,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.72},
+        {"time_seconds": 70, "multiplier": 1.05},
+        {"time_seconds": 130, "multiplier": 1.55},
+        {"time_seconds": 175, "multiplier": 1.00},
+        {"time_seconds": 210, "multiplier": 0.72}
+      ]
+    },
+    {
+      "id": "neighborhood_reserve_burst",
+      "duration_seconds": 240,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.50},
+        {"time_seconds": 145, "multiplier": 0.75},
+        {"time_seconds": 170, "multiplier": 3.40},
+        {"time_seconds": 205, "multiplier": 3.40},
+        {"time_seconds": 240, "multiplier": 0.50}
+      ]
+    },
+    {
+      "id": "neighborhood_capstone",
+      "duration_seconds": 300,
+      "loop": true,
+      "keyframes": [
+        {"time_seconds": 0, "multiplier": 0.60},
+        {"time_seconds": 90, "multiplier": 0.95},
+        {"time_seconds": 190, "multiplier": 2.60},
+        {"time_seconds": 245, "multiplier": 1.35},
+        {"time_seconds": 300, "multiplier": 0.60}
+      ]
     }
   ]
 }

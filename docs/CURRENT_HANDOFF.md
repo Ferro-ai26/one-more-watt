@@ -1,68 +1,61 @@
 # Current Handoff
 
-Updated: 2026-07-20
+Updated: 2026-07-21
 
 Active phase: Phase 16 — Neighborhood Microgrid: Era 5
 
-Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
+Status: Implementation and host acceptance complete; physical-phone gate pending
 
 ## Exact result achieved
 
-The user explicitly authorized Phase 16 after the Phase 15 physical-device limitation was disclosed. `DEC-036` closes Phase 15 with that limitation accepted—not passed—and opens only the Phase 16 appendix gate.
+The approved Era 5 Neighborhood Microgrid route is implemented under `DEC-037` and `DEC-038` without starting Era 6 or Phase 17.
 
-The required `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` is now proposed. It defines:
-
-- a blue-hour neighborhood cutaway whose dominant motif is lateral annexation, with dim ordinary blocks, a bright substation, authored overhead/underground cyan routes, tiny human-life remnants, and the completed Building nested as one feeder;
-- the same selectable scratched WATT core in the Building service kiosk plus distributed substation/municipal faces, without anger, monster imagery, or replacement of the core;
-- six required 10–25 minute requests and one optional vanity request, each main request promising an implemented operator payoff and all proposed dialogue remaining provisional;
-- Community Solar Farm, Municipal Generator, Neighborhood Substation, Battery Warehouse, Small Hydroelectric Plant, Underground Distribution, and Borrowed Utility Connection silhouettes;
-- truthful `Limited` / `Modeled` / `Verified` forecast confidence based on deterministic coverage rather than fabricated randomness;
-- operator-configured Reserve/start thresholds, safe throttling, and automatic handling only for explicitly authored non-strategic routine maintenance;
-- exactly one named request that the human may preauthorize and schedule; WATT cannot purchase, discover, authorize, or chain requests offline;
-- ordered automation explanations in online/offline reports, additive `0.9.0`→`0.10.0` content/save migration, an era-complete production/reuse plan, and a locked City Data Center/Era 6 preview.
-
-No Era 5 data, mechanics, migration, runtime scene, asset, audio, or test implementation has started. Era 6, City Data Center, idle systems, Prestige, Phase 17, and release work remain prohibited.
+- Canonical content is `0.10.0`: six required requests plus one vanity request, seven infrastructure definitions/icons, five upgrades, four demand profiles, two routine maintenance records, sequential feature rewards, concrete operator payoffs, and explicitly provisional dialogue.
+- Deterministic forecasting now exposes truthful `Limited`, `Modeled`, and `Verified` coverage; Reserve policy provides presets plus advanced floor/start ratios; safe throttle preserves the selected allocation mode and records explanations.
+- Automation acts only on authored routine/safe maintenance within the operator's Stored Energy cap. Strategic, ineligible, unaffordable, or capped actions stop for input and record why.
+- The human may preauthorize exactly one named request. Its stable ID, normal authorization state, rule, target, and action order persist. Offline simulation may start only that request, cannot buy/discover/authorize/chain another, and stops at the completion/report boundary.
+- Save format remains 2 with additive fields and supported `0.9.0` through `0.6.0` compatibility.
+- The blue-hour Neighborhood is a world-first, project-original code-native diorama with the nested Building, persistent scratched core, civic WATT display, lateral/underground cyan routes, dim-home/bright-substation contradiction, seven silhouette icons, contextual operator drawer, takeover report, and `CITY DATA CENTER — ERA 6 LOCKED` pullback.
+- The prepared route places all six requests inside 10–25 minutes and the full route inside 95–135 minutes.
+- Eight contextual host captures were manually inspected at 393 × 873 and 320 × 568/130% text. `ISSUE-007` remains explicit: production-functional presentation is not final tactile painted-art approval.
 
 ## Files changed
 
-- Added `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md`.
-- Advanced phase/gate documentation in `docs/ACTIVE_PHASE.md`, `docs/phases/PHASE_15_BUILDING_NETWORK_ERA_4.md`, and `docs/phases/PHASE_16_NEIGHBORHOOD_MICROGRID_ERA_5.md`.
-- Recorded the advancement and accepted verification disposition in `docs/DECISION_LOG.md`, `docs/PROGRESS.md`, and `docs/KNOWN_ISSUES.md`.
-- Updated this handoff.
-- No runtime, data, asset, test, Android, gameplay-formula, or save-system file changed.
+- Content/data: `data/manifest.json`, Era 5 era/request/demand/maintenance/infrastructure/upgrade/dialogue/localization/balance records.
+- Domain/persistence: content validation/definitions, economy/request state and simulation, performance/offline reports, offline scheduler, GameSession orchestration, and save compatibility.
+- Presentation: skin tokens/registry, Neighborhood environment rendering, Main UI/view model contextual controls/reports, procedural feedback cues, seven SVG icons, and asset inventory.
+- Tests/tooling: Phase 16 domain/UI suites, updated canonical historical fixtures/counts, full validator integration, Android artifact/smoke defaults, and generated Godot import metadata.
+- Evidence/docs: `docs/phase_16/IMPLEMENTATION_RECORD.md`, `docs/phase_16/VISUAL_QA_RECORD.md`, eight PNGs under `docs/phase_16/evidence/`, and the required living documents.
+- An unrelated untracked empty file, `temp instructions.txt`, appeared during the session and was preserved/excluded rather than deleted or committed.
 
 ## Commands/tests run and results
 
-- Entry `git status --short --branch`: clean `main`, synchronized with `origin/main` at `8f217c88db8df647a420d5a8cafcab9a8a5930b5`.
-- Entry `git diff --check`: passed.
-- Entry `./tools/validate.sh`: passed every repository suite through Phase 15 and the headless launch. This included 32 canonical/12 invalid content checks, 178 grid checks, 187 request checks, 93 economy checks, 474 Main-UI checks, 83 Phase 12 skin checks, 51 Phase 13 skin checks, 95 persistence/offline checks, 1,354 balance/reachability checks, 113 vertical-slice UI/performance checks, 113 Phase 15 checks, five layout checks, debug panels, skin checks, and smoke launch.
-- Entry performance sample: 807.1 ms for 25 Build rebuilds, 550.2 ms for 500 live refreshes, 378 nodes, and approximately 11.47 MiB isolated skin-memory delta.
-- The locked `phone_board.png` and Phase 15 Neighborhood pullback evidence were visually inspected at original resolution.
-- Final proposal `./tools/validate.sh`: passed every repository suite through Phase 15 and headless launch after the documentation changes. The final performance sample was 811.5 ms for 25 Build rebuilds, 548.7 ms for 500 live refreshes, and 378 nodes.
-- Final `git diff --check`: passed.
-- Proposal commit `65dae8507d7f95c96472ce46f7448df4ab2048b3` (`Phase 16: propose Era 5 design appendix`) pushed successfully; local and `origin/main` matched that commit before this handoff-only record.
+- Entry repository baseline: clean/synchronized `main` at `b6d62809`; `./tools/validate.sh` passed all Phase 15 suites before implementation.
+- `./tools/validate_content.sh`: 32 canonical and 12 invalid-fixture checks pass.
+- `./tools/test_phase16_neighborhood.sh`: 110 deterministic domain checks and 23 contextual UI checks pass.
+- Graphical Phase 16 run under Xvfb: 39 checks pass and eight PNGs save; all eight were inspected at original resolution. Header/phone-density evidence was corrected and recaptured.
+- Historical Phase 15 suite: 89 domain plus 24 UI checks pass against the expanded canonical catalog.
+- Economy and vertical-slice regression: 93 economy and 1,393 balance/reachability checks pass; performance sample approximately 848 ms/25 Build rebuilds, 697 ms/500 refreshes, 463 nodes.
+- Complete `./tools/validate.sh`: passed through the Phase 16 suites and headless launch after implementation. Godot's ARM64 editor probe still emits the known non-blocking `x86_64-binfmt-P` helper message.
+- Clean Android export/static inspection and device-smoke results are recorded in the artifact section below after the source commit is created.
 
 ## Manual verification
 
-The locked Phase 11 phone board was inspected directly, especially its Era 5 Neighborhood composition: world-first scale, WATT/substation focal point, dim homes around bright cyan infrastructure, compact top rail, attached authorization plate, and contextual bottom navigation. The Phase 15 Building-to-Neighborhood pullback was also inspected to ensure the proposal grows laterally from the actual current implementation instead of inventing an unrelated scene.
+Host-rendered evidence confirms the world remains primary; management stays in a contextual drawer; feature controls appear sequentially; WATT's scratched core and cyan identity persist; ordinary blocks visibly dim beside WATT's bright infrastructure; 130% narrow content scrolls vertically; and takeover/pullback states remain screenshot-ready without rapid flashing or horror imagery.
 
-No new runtime visual, APK, physical-device test, audio test, haptic test, or playtest occurred in this appendix-only step.
+No physical device, audible-speaker mix, haptic response, real safe-area, heat, or battery test occurred. No such pass is claimed.
 
 ## Remaining acceptance criteria
 
-- Obtain explicit user approval of the complete Era 5 appendix before coding.
-- After approval, implement and test all Phase 16 content, forecast, automation, scheduling, offline, reporting, migration, production presentation, motion/audio, and locked Era 6 endpoint requirements.
-- Tune every required Era 5 request to 10–25 minutes on prepared deterministic routes.
-- Produce and manually inspect contextual evidence against the locked phone board.
-- Complete the required physical-phone readability/performance/offline playtest, or stop for an explicit limitation disposition if external hardware remains unavailable.
-- Update permanent specifications and living documents, commit/push the approved implementation, and stop at the Phase 16 completion gate.
+- Export and statically verify the exact clean-commit Phase 16 APK.
+- Run the Phase 16 checklist on a physical phone: install/update migration, cold launch, Era 5 route, 10–25 minute away returns, touch scrolling, text sizes/safe areas, Android Back, warm resume/offline report, save idempotency, audio/haptics, FPS/memory, heat, and battery.
+- Record that observed result, then close Phase 16 only if the phone gate passes or the user explicitly accepts the disclosed limitation.
 
 ## Known blockers
 
-- Approval gate: the proposed Era 5 appendix requires explicit user approval before any implementation.
-- `ISSUE-007`: the later cross-game tactile painted gold-standard environment/WATT/infrastructure pass remains open. Phase 16 still requires a complete, project-original production-functional Neighborhood presentation and cannot use the issue as permission for permanent gray box art.
-- Physical phone hardware is not attached to the current host. This does not block appendix approval work, but the Phase 16 contract's phone-playtest criterion cannot be claimed from host evidence.
+- `ISSUE-011`: no ready Android device is attached to the current VPS, so the required physical-phone gate cannot be executed locally.
+- `ISSUE-007`: the later cross-game gold-standard painted visual pass remains deferred; it does not invalidate Phase 16's approved production-functional layer.
 
 ## Recommended next action inside Phase 16
 
-Review `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` and explicitly approve it as written or request targeted changes. Do not implement Era 5 and do not begin Phase 17 before that approval.
+Install `build/android/one_more_watt_phase16_debug.apk` on the Motorola Moto G (2025) or another physical phone and complete the Phase 16 section in `docs/ANDROID_DEVICE_TEST.md`. Do not begin Phase 17 without separate user authorization.

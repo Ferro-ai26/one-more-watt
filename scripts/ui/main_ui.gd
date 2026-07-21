@@ -48,6 +48,8 @@ var modal_scroll: ScrollContainer
 var modal_content: VBoxContainer
 var feedback_audio: FeedbackAudio
 var ui_scale_diagnostics: Dictionary = {}
+var operator_controls_button: Button
+var _operator_drawer_open := false
 
 
 func _ready() -> void:
@@ -82,7 +84,7 @@ func _ready() -> void:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
 	set_process(true)
-	print("ONE MORE WATT Phase 15 Building Network build ready")
+	print("ONE MORE WATT Phase 16 Neighborhood Microgrid build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -92,7 +94,10 @@ func _process(delta: float) -> void:
 	if session.requests.get_active_state() != null and navigation.modal_depth() == 0:
 		session.advance_time(simulation_delta)
 	elif session.requests.get_active_state() == null and view_model != null:
-		session.advance_idle_time(simulation_delta)
+		if session.economy.state.scheduled_start_rule == "reserve_target":
+			session.try_start_scheduled_request()
+		if session.requests.get_active_state() == null:
+			session.advance_idle_time(simulation_delta)
 	_refresh_accumulator += delta
 	if _refresh_accumulator >= 0.2:
 		_refresh_accumulator = 0.0
@@ -111,6 +116,7 @@ func select_tab(tab: String) -> bool:
 	var tab_changed := navigation.current_tab != tab
 	if not navigation.select_tab(tab):
 		return false
+	_operator_drawer_open = false
 	if feedback_audio != null and tab != "grid":
 		feedback_audio.play("drawer_open")
 	for key: Variant in nav_buttons:
@@ -126,6 +132,9 @@ func handle_back() -> bool:
 	if navigation.modal_depth() > 0:
 		close_top_modal()
 		return true
+	if _operator_drawer_open:
+		_close_operator_drawer()
+		return true
 	if navigation.current_tab != "grid":
 		select_tab("grid")
 		return true
@@ -139,6 +148,9 @@ func open_request_modal() -> void:
 		return
 	if request.get("status") == RequestRunState.COMPLETED:
 		open_report_modal(str(request["id"]))
+		return
+	if request.get("status") == RequestRunState.AUTHORIZED:
+		_open_operator_drawer()
 		return
 	if request.get("status") != RequestRunState.ANNOUNCED:
 		return
@@ -158,12 +170,24 @@ func open_request_modal() -> void:
 		forecast_text += "\nRESERVE %s" % NumberFormatter.format_energy(float(request["recommended_reserve"]), session.settings.number_notation)
 	if bool(request.get("detailed_forecast_unlocked", false)):
 		forecast_text += "  •  PREDICTED SERVICE %.0f%%" % (float(request["service_ratio"]) * 100.0)
+	if bool(request.get("neighborhood_forecast_unlocked", false)):
+		forecast_text += "\n%s CONFIDENCE  •  %s–%s\nNEXT PEAK %s  •  MIN RESERVE %s" % [
+			str(request.get("forecast_confidence", "limited")).to_upper(),
+			NumberFormatter.format_duration(float(request.get("estimated_seconds_low", INF))),
+			NumberFormatter.format_duration(float(request.get("estimated_seconds_high", INF))),
+			NumberFormatter.format_duration(float(request.get("seconds_until_peak", INF))),
+			NumberFormatter.format_energy(float(request.get("projected_minimum_reserve", 0.0)), session.settings.number_notation),
+		]
 	_add_modal_label(forecast_text, 17, SkinTokens.COLOR_IVORY)
 	if not str(request.get("operator_payoff", "")).is_empty():
 		_add_modal_label("OPERATOR PAYOFF  •  %s" % request["operator_payoff"], 16, SkinTokens.COLOR_WATT_REBOOT)
 	var authorize := _button("Authorize Connection", "AuthorizeButton")
 	authorize.pressed.connect(_authorize_from_modal)
 	modal_content.add_child(authorize)
+	if session.has_feature("request_scheduling") and bool(request.get("required", true)):
+		var schedule := _button("Review Safe-Start Schedule", "ReviewScheduleButton")
+		schedule.pressed.connect(func() -> void: close_top_modal(); _open_operator_drawer())
+		modal_content.add_child(schedule)
 	if bool(request["underprepared"]):
 		_add_modal_label("! %s\nAuthorization remains available." % request["warning"], 17, SkinTokens.COLOR_WARNING)
 	_add_modal_label("BEST NEXT STEP  •  %s" % _recommendation(str(request["bottleneck"])), 16, SkinTokens.COLOR_SUCCESS)
@@ -205,11 +229,22 @@ func open_report_modal(request_id: String) -> void:
 			str(takeover.get("inconvenience", "Unreported")),
 			str(takeover.get("consequence", "")),
 		], 17, SkinTokens.COLOR_EMERGENCY_LIGHT)
+	if float(data.get("safe_throttle_seconds", 0.0)) > 0.0:
+		_add_modal_label("SAFE THROTTLE  •  %d event%s  •  %s\nReserve floor was protected without changing the operator allocation mode." % [int(data.get("safe_throttle_events", 0)), "" if int(data.get("safe_throttle_events", 0)) == 1 else "s", NumberFormatter.format_duration(float(data.get("safe_throttle_seconds", 0.0)))], 16, SkinTokens.COLOR_WARNING)
+	var report_actions: Array = data.get("automation_actions", [])
+	if report_actions.is_empty():
+		_add_modal_label("AUTOMATION ACTIONS  •  None needed", 16, SkinTokens.COLOR_IVORY_DIM)
+	else:
+		_add_modal_label("AUTOMATION ACTIONS", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+		for action_value: Variant in report_actions:
+			var action: Dictionary = action_value
+			_add_modal_label("#%d  %s  •  %s\n%s  •  %s" % [int(action.get("sequence", 0)), str(action.get("type", "action")).replace("_", " ").to_upper(), str(action.get("outcome", "recorded")).to_upper(), str(action.get("target_id", "")), str(action.get("reason", "policy_record"))], 15, SkinTokens.COLOR_IVORY)
 	_add_modal_label("NEXT TIME  •  %s" % data["suggestion"], 16, SkinTokens.COLOR_SUCCESS)
 	var report_state := session.requests.get_request_state(request_id)
 	var acknowledge := _button("Continue" if report_state.status == RequestRunState.COMPLETED else "Back to Reports", "AcknowledgeButton")
 	acknowledge.pressed.connect(func() -> void:
-		var capstone: bool = "phase15_capstone" in session.repository.get_request(request_id).get_value("tags", [])
+		var tags: Array = session.repository.get_request(request_id).get_value("tags", [])
+		var capstone: bool = "phase15_capstone" in tags or "phase16_capstone" in tags
 		if report_state.status == RequestRunState.COMPLETED:
 			session.acknowledge_report(request_id)
 		close_top_modal()
@@ -323,7 +358,14 @@ func open_offline_report(report: OfflineReport, recovery_note: String = "") -> v
 	elif report.far_forward:
 		_add_modal_label("Large clock jump detected. The normal offline cap was applied.", 16, SkinTokens.COLOR_WARNING)
 	if report.stopped_for_input:
-		_add_modal_label("Offline progress paused because WATT is waiting for your authorization.", 16, SkinTokens.COLOR_WARNING)
+		_add_modal_label("OFFLINE STOP  •  %s" % report.stop_reason.replace("_", " ").to_upper(), 16, SkinTokens.COLOR_WARNING)
+	if report.automation_actions.is_empty():
+		_add_modal_label("AUTOMATION ACTIONS  •  None needed", 16, SkinTokens.COLOR_IVORY_DIM)
+	else:
+		_add_modal_label("AUTOMATION ACTIONS", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_WATT_REBOOT)
+		for action_value: Variant in report.automation_actions:
+			var action: Dictionary = action_value
+			_add_modal_label("#%d  %s  •  %s\n%s" % [int(action.get("sequence", 0)), str(action.get("type", "action")).replace("_", " ").to_upper(), str(action.get("outcome", "recorded")).to_upper(), str(action.get("target_id", ""))], 15, SkinTokens.COLOR_IVORY)
 	if not recovery_note.is_empty():
 		_add_modal_label(recovery_note, 16, SkinTokens.COLOR_GENERATION)
 	var continue_button := _button("Continue", "OfflineContinueButton")
@@ -525,6 +567,11 @@ func _build_interface() -> void:
 	allocation_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	allocation_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	allocation_box.add_child(allocation_label)
+	operator_controls_button = _button("Operator Controls", "OperatorControlsButton")
+	operator_controls_button.add_theme_font_size_override("font_size", SkinTokens.TYPE_CAPTION)
+	operator_controls_button.visible = false
+	operator_controls_button.pressed.connect(_open_operator_drawer)
+	allocation_box.add_child(operator_controls_button)
 
 	screen_panel = PanelContainer.new()
 	screen_panel.name = "ScreenPanel"
@@ -634,6 +681,8 @@ func _refresh_all(rebuild_screen: bool) -> void:
 		forecast_label.text = "ERAS 1–3 COMPLETE  •  MORE COMING"
 	elif request["status"] == "phase15_complete":
 		forecast_label.text = "BUILDING SECURED  •  NEIGHBORHOOD MICROGRID LOCKED"
+	elif request["status"] == "phase16_complete":
+		forecast_label.text = "NEIGHBORHOOD SECURED  •  CITY DATA CENTER LOCKED"
 	elif request["status"] == "maintenance_pending":
 		forecast_label.text = "OPERATOR DECISION REQUIRED  •  IDLE GENERATION CONTINUES"
 	else:
@@ -656,6 +705,8 @@ func _refresh_all(rebuild_screen: bool) -> void:
 		(allocation_buttons[key] as Button).button_pressed = str(key) == mode
 		(allocation_buttons[key] as Button).disabled = not allocation_unlocked
 	allocation_label.text = "%s  •  %s/s Stored Energy" % [mode.replace("_", " ").capitalize(), NumberFormatter.format_number(live_result.stored_energy_rate, notation)] if allocation_unlocked else "Routing controls unlock after WATT's language experiment"
+	if operator_controls_button != null:
+		operator_controls_button.visible = bool(view_model.operator_controls_snapshot().get("visible", false))
 	var environment := view_model.environment_snapshot()
 	environment_label.text = str(environment["badge"])
 	watt_core.text = str(environment["core"])
@@ -686,6 +737,9 @@ func _update_request_action(status: String) -> void:
 		RequestRunState.RUNNING:
 			request_action_button.text = "Request Running"
 			request_action_button.disabled = true
+		RequestRunState.AUTHORIZED:
+			request_action_button.text = "Scheduled • Review"
+			request_action_button.disabled = false
 		RequestRunState.COMPLETED:
 			request_action_button.text = "View Report"
 			request_action_button.disabled = false
@@ -698,6 +752,9 @@ func _update_request_action(status: String) -> void:
 		"phase15_complete":
 			request_action_button.text = "Neighborhood Locked"
 			request_action_button.disabled = true
+		"phase16_complete":
+			request_action_button.text = "City Data Center Locked"
+			request_action_button.disabled = true
 		_:
 			request_action_button.text = "Waiting for WATT"
 			request_action_button.disabled = true
@@ -706,7 +763,7 @@ func _update_request_action(status: String) -> void:
 func _rebuild_screen() -> void:
 	if screen_content == null or view_model == null:
 		return
-	screen_title_label.text = navigation.current_tab.to_upper()
+	screen_title_label.text = "OPERATOR CONTROLS" if _operator_drawer_open else navigation.current_tab.to_upper()
 	drawer_context_label.text = "%s • LIVE" % environment_view.skin.scale_label if environment_view != null and environment_view.skin != null else "WORLD REMAINS LIVE"
 	var shop_cards: Array[Dictionary] = []
 	if navigation.current_tab == "build":
@@ -718,7 +775,7 @@ func _rebuild_screen() -> void:
 		return
 	_clear_children(screen_content)
 	match navigation.current_tab:
-		"grid": _build_grid_screen()
+		"grid": _build_operator_controls_screen() if _operator_drawer_open else _build_grid_screen()
 		"build", "upgrades": _build_shop_screen(shop_cards)
 		"reports": _build_reports_screen()
 	_apply_text_scale()
@@ -799,6 +856,92 @@ func _build_grid_screen() -> void:
 		screen_content.add_child(optional_button)
 
 
+func _build_operator_controls_screen() -> void:
+	var controls := view_model.operator_controls_snapshot()
+	var request := view_model.request_snapshot()
+	var close := _button("Close • Return to Neighborhood", "CloseOperatorControlsButton")
+	close.pressed.connect(_close_operator_drawer)
+	screen_content.add_child(close)
+	if bool(controls["forecast_unlocked"]):
+		var forecast := _label("LOAD FORECAST  •  %s CONFIDENCE\n%s–%s modeled completion\nPeak in %s  •  minimum Reserve %s\nReason: %s" % [
+			str(request.get("forecast_confidence", "limited")).to_upper(),
+			NumberFormatter.format_duration(float(request.get("estimated_seconds_low", INF))),
+			NumberFormatter.format_duration(float(request.get("estimated_seconds_high", INF))),
+			NumberFormatter.format_duration(float(request.get("seconds_until_peak", INF))),
+			NumberFormatter.format_energy(float(request.get("projected_minimum_reserve", 0.0)), session.settings.number_notation),
+			str(request.get("forecast_reason", "missing_model")).replace("_", " "),
+		], 16, SkinTokens.COLOR_IVORY)
+		forecast.name = "NeighborhoodForecastDetail"
+		forecast.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(forecast)
+	if bool(controls["reserve_policy_unlocked"]):
+		var policy_heading := _label("RESERVE POLICY  •  %s\nSafe throttling protects ordinary service without changing your allocation mode." % str(controls["reserve_policy_preset"]).replace("_", " ").to_upper(), 16, SkinTokens.COLOR_WATT_REBOOT)
+		policy_heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(policy_heading)
+		for preset_data: Dictionary in [{"id": "conservative", "label": "Conservative • 60% floor / 85% start"}, {"id": "balanced", "label": "Balanced • 35% floor / 70% start"}, {"id": "max_throughput", "label": "Maximum Throughput • 15% floor / 40% start"}]:
+			var preset := _button(str(preset_data["label"]), "%sPolicyButton" % str(preset_data["id"]).to_pascal_case())
+			preset.disabled = str(controls["reserve_policy_preset"]) == str(preset_data["id"]) and bool(controls["reserve_policy_enabled"])
+			preset.pressed.connect(_set_reserve_policy.bind(str(preset_data["id"])))
+			screen_content.add_child(preset)
+		var floor_button := _button("Advanced Reserve floor • %.0f%%" % (float(controls["reserve_floor_ratio"]) * 100.0), "ReserveFloorButton")
+		floor_button.pressed.connect(_cycle_reserve_floor)
+		screen_content.add_child(floor_button)
+		var target_button := _button("Advanced request-start target • %.0f%%" % (float(controls["request_start_target_ratio"]) * 100.0), "RequestStartTargetButton")
+		target_button.pressed.connect(_cycle_request_start_target)
+		screen_content.add_child(target_button)
+		var predictive := view_model.predictive_guard_snapshot()
+		if bool(predictive["unlocked"]):
+			var guard := CheckButton.new()
+			guard.name = "OperatorPredictiveReserveGuardCheck"
+			guard.text = "Predictive peak guard • %s • target %.0f%%" % ["ACTIVE" if bool(predictive["active"]) else ("ARMED" if bool(predictive["enabled"]) else "OFF"), float(predictive["target_ratio"]) * 100.0]
+			guard.custom_minimum_size.y = 48
+			guard.add_theme_font_size_override("font_size", 16)
+			guard.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			guard.button_pressed = bool(predictive["enabled"])
+			guard.toggled.connect(func(enabled: bool) -> void: session.configure_predictive_reserve_guard(enabled, float(predictive["target_ratio"])); _refresh_all(true))
+			screen_content.add_child(guard)
+	if bool(controls["routine_automation_unlocked"]):
+		var routine := CheckButton.new()
+		routine.name = "RoutineAutomationCheck"
+		routine.text = "Routine maintenance automation • %s\nSafe authored action only • cap %s" % ["ON" if bool(controls["routine_automation_enabled"]) else "OFF", NumberFormatter.format_energy(float(controls["routine_automation_max_cost"]), session.settings.number_notation)]
+		routine.custom_minimum_size.y = 64
+		routine.add_theme_font_size_override("font_size", 16)
+		routine.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		routine.button_pressed = bool(controls["routine_automation_enabled"])
+		routine.toggled.connect(_toggle_routine_automation)
+		screen_content.add_child(routine)
+		var cap := _button("Cycle routine spend cap", "RoutineAutomationCapButton")
+		cap.pressed.connect(_cycle_routine_cap)
+		screen_content.add_child(cap)
+	if bool(controls["scheduling_unlocked"]):
+		var schedule_heading := _label("ONE-REQUEST SCHEDULING\nHuman authorization is paid now. WATT cannot select, buy, or chain another request.", 16, SkinTokens.COLOR_EMERGENCY_LIGHT)
+		schedule_heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(schedule_heading)
+		if not str(controls["scheduled_request_id"]).is_empty():
+			var scheduled := _label("SCHEDULED  •  %s\nRULE  •  %s" % [str(controls["scheduled_request_id"]).replace("_", " ").to_upper(), str(controls["scheduled_start_rule"]).replace("_", " ").to_upper()], 16, SkinTokens.COLOR_SUCCESS)
+			scheduled.name = "ScheduledRequestStatus"
+			scheduled.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			screen_content.add_child(scheduled)
+			var cancel := _button("Cancel Schedule • Authorization Cost Remains Paid", "CancelScheduleButton")
+			cancel.pressed.connect(_cancel_schedule)
+			screen_content.add_child(cancel)
+		elif request.get("status") == RequestRunState.ANNOUNCED and bool(request.get("required", true)):
+			var at_reserve := _button("Authorize • Start at Reserve Target", "ScheduleReserveTargetButton")
+			at_reserve.pressed.connect(_schedule_request.bind("reserve_target"))
+			screen_content.add_child(at_reserve)
+			var on_return := _button("Authorize • Start Next Return if Safe", "ScheduleNextReturnButton")
+			on_return.pressed.connect(_schedule_request.bind("next_return_safe"))
+			screen_content.add_child(on_return)
+	if controls["actions"].is_empty():
+		screen_content.add_child(_label("AUTOMATION LOG  •  No actions recorded", 15, SkinTokens.COLOR_IVORY_DIM))
+	else:
+		var latest: Dictionary = controls["actions"][-1]
+		var log := _label("LATEST ACTION  •  #%d %s\n%s  •  %s" % [int(latest.get("sequence", 0)), str(latest.get("type", "action")).replace("_", " ").to_upper(), str(latest.get("target_id", "")), str(latest.get("outcome", "recorded")).to_upper()], 15, SkinTokens.COLOR_IVORY_DIM)
+		log.name = "OperatorActionLog"
+		log.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		screen_content.add_child(log)
+
+
 func _build_shop_screen(cards: Array[Dictionary]) -> void:
 	var instruction := _label("SELECT A CONNECTION  •  WATT will install it at an authored world anchor.", SkinTokens.TYPE_CAPTION, SkinTokens.COLOR_IVORY_DIM)
 	instruction.name = "ContextBuildInstruction"
@@ -863,6 +1006,67 @@ func _choose_optional_request(request_id: String) -> void:
 func _choose_maintenance(option_id: String) -> void:
 	if session.choose_maintenance(option_id):
 		close_top_modal()
+		_refresh_all(true)
+
+
+func _open_operator_drawer() -> void:
+	if view_model == null or not bool(view_model.operator_controls_snapshot().get("visible", false)):
+		return
+	_operator_drawer_open = true
+	navigation.select_tab("grid")
+	for key: Variant in nav_buttons:
+		(nav_buttons[key] as Button).button_pressed = str(key) == "grid"
+	if feedback_audio != null:
+		feedback_audio.play("drawer_open")
+	_apply_tab_density()
+	_rebuild_screen()
+	if screen_scroll != null:
+		screen_scroll.scroll_vertical = 0
+
+
+func _close_operator_drawer() -> void:
+	_operator_drawer_open = false
+	_apply_tab_density()
+	_rebuild_screen()
+
+
+func _set_reserve_policy(preset: String) -> void:
+	session.configure_reserve_policy(preset, true)
+	_refresh_all(true)
+
+
+func _cycle_reserve_floor() -> void:
+	var next := fmod(session.economy.state.reserve_threshold_ratio + 0.05, 1.05)
+	session.configure_reserve_policy_custom(session.economy.state.reserve_automation_enabled, next, session.economy.state.request_start_target_ratio)
+	_refresh_all(true)
+
+
+func _cycle_request_start_target() -> void:
+	var next := fmod(session.economy.state.request_start_target_ratio + 0.05, 1.05)
+	session.configure_reserve_policy_custom(session.economy.state.reserve_automation_enabled, session.economy.state.reserve_threshold_ratio, next)
+	_refresh_all(true)
+
+
+func _toggle_routine_automation(enabled: bool) -> void:
+	session.configure_routine_automation(enabled, session.economy.state.routine_automation_max_cost)
+	_refresh_all(true)
+
+
+func _cycle_routine_cap() -> void:
+	var caps := [0.0, 1000000.0, 5000000.0, 25000000.0]
+	var current_index := caps.find(session.economy.state.routine_automation_max_cost)
+	var next: float = caps[(current_index + 1) % caps.size()]
+	session.configure_routine_automation(session.economy.state.routine_automation_enabled, next)
+	_refresh_all(true)
+
+
+func _schedule_request(rule: String) -> void:
+	if session.schedule_current_request(rule):
+		_refresh_all(true)
+
+
+func _cancel_schedule() -> void:
+	if session.cancel_scheduled_request():
 		_refresh_all(true)
 
 
@@ -977,7 +1181,7 @@ func _on_feedback(kind: String) -> void:
 func _apply_tab_density() -> void:
 	if focal_panel == null:
 		return
-	var compact := navigation.current_tab != "grid"
+	var compact := navigation.current_tab != "grid" or _operator_drawer_open
 	var short_viewport := size.y < 700.0
 	environment_frame.custom_minimum_size.y = clampf(size.y * 0.39, 206.0, 340.0) if compact else (88.0 if short_viewport else 176.0)
 	focal_panel.visible = not compact
@@ -992,8 +1196,8 @@ func _apply_tab_density() -> void:
 	allocation_box.visible = not compact
 	screen_panel.visible = compact
 	feedback_label.visible = not short_viewport
-	drawer_context_label.visible = size.x >= 360.0
-	status_era_label.visible = size.x >= 360.0
+	drawer_context_label.visible = size.x >= 480.0
+	status_era_label.visible = size.x >= 480.0
 	vital_grid.columns = 2 if session.settings.get_text_scale() >= 1.3 else 3
 	if nav_buttons.has("upgrades"):
 		(nav_buttons["upgrades"] as Button).text = "Upgrade" if size.x < 360.0 else "Upgrades"

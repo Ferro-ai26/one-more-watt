@@ -34,6 +34,8 @@ func request_snapshot() -> Dictionary:
 		return {"id": "", "status": "maintenance_pending", "title": str(maintenance.get("title", "Maintenance Review")), "dialogue": str(maintenance.get("description", "Operator decision required."))}
 	var request_id := session.current_request_id()
 	if request_id.is_empty():
+		if session.economy.state.completed_eras.has("era_05_neighborhood_microgrid"):
+			return {"id": "", "status": "phase16_complete", "title": session.repository.localize("phase16.complete.title"), "dialogue": session.repository.localize("phase16.complete.dialogue")}
 		if session.economy.state.completed_eras.has("era_04_building_network"):
 			return {"id": "", "status": "phase15_complete", "title": session.repository.localize("phase15.complete.title"), "dialogue": session.repository.localize("phase15.complete.dialogue")}
 		if session.economy.state.prototype_complete:
@@ -69,6 +71,15 @@ func request_snapshot() -> Dictionary:
 		"tutorial": session.repository.localize(str(definition.get_value("tutorial_text_key", ""))) if not str(definition.get_value("tutorial_text_key", "")).is_empty() else "",
 		"reserve_forecast_unlocked": session.has_feature("reserve_forecast"),
 		"detailed_forecast_unlocked": session.has_feature("detailed_forecast"),
+		"neighborhood_forecast_unlocked": session.has_feature("neighborhood_forecast"),
+		"forecast_confidence": preview.forecast_confidence,
+		"forecast_reason": preview.forecast_reason,
+		"estimated_seconds_low": preview.estimated_seconds_low,
+		"estimated_seconds_high": preview.estimated_seconds_high,
+		"seconds_until_peak": preview.seconds_until_peak,
+		"projected_minimum_reserve": preview.projected_minimum_reserve,
+		"scheduled": session.economy.state.scheduled_request_id == request_id,
+		"schedule_rule": session.economy.state.scheduled_start_rule,
 	}
 
 
@@ -84,8 +95,10 @@ func environment_snapshot() -> Dictionary:
 			return {"core": "◉◡◉", "badge": "BEDROOM GRID\n%d GENERATOR%s" % [int(owned.get("portable_generator", 0)), "S" if int(owned.get("portable_generator", 0)) != 1 else ""], "summary": session.repository.localize("environment.era02.summary"), "accent": SkinTokens.COLOR_SUCCESS}
 		3:
 			return {"core": "◉▿◉", "badge": "SERVER CLOSET\n%d RACK%s" % [int(owned.get("server_rack", 0)), "S" if int(owned.get("server_rack", 0)) != 1 else ""], "summary": session.repository.localize("environment.era03.summary"), "accent": SkinTokens.COLOR_TRANSMISSION}
-		_:
+		4:
 			return {"core": "◉⌁◉", "badge": "BUILDING GRID\n%d SHARED LINK%s" % [int(owned.get("building_transformer", 0)), "S" if int(owned.get("building_transformer", 0)) != 1 else ""], "summary": session.repository.localize("environment.era04.summary"), "accent": SkinTokens.COLOR_WATT_REBOOT}
+		_:
+			return {"core": "◉⌁◉", "badge": "NEIGHBORHOOD GRID\n%d SUBSTATION%s" % [int(owned.get("neighborhood_substation", 0)), "S" if int(owned.get("neighborhood_substation", 0)) != 1 else ""], "summary": session.repository.localize("environment.era05.summary"), "accent": SkinTokens.COLOR_WATT_REBOOT}
 
 
 func maintenance_snapshot() -> Dictionary:
@@ -99,6 +112,26 @@ func predictive_guard_snapshot() -> Dictionary:
 		"target_ratio": session.economy.state.predictive_reserve_target_ratio,
 		"active": session.requests.predictive_guard_active,
 		"seconds_to_peak": session.requests.predictive_guard_seconds_to_peak,
+	}
+
+
+func operator_controls_snapshot() -> Dictionary:
+	var state := session.economy.state
+	return {
+		"visible": session.has_feature("neighborhood_forecast") or session.has_feature("reserve_policy") or session.has_feature("routine_maintenance_automation") or session.has_feature("request_scheduling"),
+		"forecast_unlocked": session.has_feature("neighborhood_forecast"),
+		"reserve_policy_unlocked": session.has_feature("reserve_policy"),
+		"reserve_policy_preset": state.reserve_policy_preset,
+		"reserve_policy_enabled": state.reserve_automation_enabled,
+		"reserve_floor_ratio": state.reserve_threshold_ratio,
+		"request_start_target_ratio": state.request_start_target_ratio,
+		"routine_automation_unlocked": session.has_feature("routine_maintenance_automation"),
+		"routine_automation_enabled": state.routine_automation_enabled,
+		"routine_automation_max_cost": state.routine_automation_max_cost,
+		"scheduling_unlocked": session.has_feature("request_scheduling"),
+		"scheduled_request_id": state.scheduled_request_id,
+		"scheduled_start_rule": state.scheduled_start_rule,
+		"actions": state.automation_history.duplicate(true),
 	}
 
 
@@ -168,6 +201,9 @@ func report_snapshot(report: PerformanceReport) -> Dictionary:
 		"completion": session.repository.localize(report.completion_key),
 		"suggestion": session.repository.localize(report.suggestion_key),
 		"takeover_report": (definition.get_value("takeover_report", {}) as Dictionary).duplicate(true),
+		"safe_throttle_seconds": report.safe_throttle_seconds,
+		"safe_throttle_events": report.safe_throttle_events,
+		"automation_actions": report.automation_actions.duplicate(true),
 	}
 
 

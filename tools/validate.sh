@@ -25,6 +25,7 @@ GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_ui.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_persistence.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_vertical_slice.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_phase15_building.sh"
+GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_phase16_neighborhood.sh"
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_portrait_layout.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_grid_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_request_debug_panel.gd
@@ -33,4 +34,4 @@ GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_skin_system.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_phase13_skin.sh"
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" -- --smoke-test
 
-printf 'Repository validation passed through Phase 15.\n'
+printf 'Repository validation passed through Phase 16.\n'

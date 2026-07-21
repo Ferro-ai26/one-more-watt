@@ -6,7 +6,7 @@ Run all repository validation from the repository root:
 ./tools/validate.sh
 ```
 
-After the approved Android package identifier and export preset are committed, build the provenance-checked current Phase 15 debug APK with:
+After the approved Android package identifier and export preset are committed, build the provenance-checked current Phase 16 debug APK with:
 
 ```bash
 ./tools/build_android_debug.sh
@@ -83,3 +83,11 @@ Phase 15 Building Network domain and graphical regressions run with:
 ```
 
 On a graphical Linux host, append `--capture-phase15` to the Phase 15 UI test command recorded in `docs/phase_15/VISUAL_QA_RECORD.md` to regenerate the reviewed Building, maintenance, brownout, report, and pullback evidence.
+
+Phase 16 Neighborhood Microgrid domain and contextual-UI regressions run with:
+
+```bash
+./tools/test_phase16_neighborhood.sh
+```
+
+On a graphical Linux host, run the Phase 16 UI test through Xvfb with `--capture-phase16` to regenerate the eight reviewed Neighborhood, operator-control, report, and locked-City captures recorded in `docs/phase_16/VISUAL_QA_RECORD.md`.

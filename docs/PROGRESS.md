@@ -20,10 +20,19 @@
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
 | 15 — Building Network: Era 4 | Complete — accepted device-verification limitation | DEC-034–036; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; unavailable physical matrix retained as unverified |
-| 16 — Neighborhood Microgrid: Era 5 | Appendix proposed — awaiting explicit approval before coding | DEC-036; blue-hour Neighborhood, six-request route, seven infrastructure silhouettes, truthful forecast confidence, bounded automation/scheduling, locked Era 6 endpoint |
+| 16 — Neighborhood Microgrid: Era 5 | Implementation/host acceptance complete — physical phone gate pending | DEC-037–038; 110 domain + 23 headless UI + 39 capture checks; eight reviewed captures; tuned 10–25 minute requests; locked Era 6 endpoint |
 | 17–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
 
 ## Chronological log
+
+### 2026-07-21 — Phase 16 implementation and host evidence complete; phone gate pending
+
+- Recorded appendix approval under `DEC-037` before implementation and preserved all current dialogue as `provisional_copy`.
+- Added content `0.10.0`, Era 5, six required requests plus one vanity request, seven infrastructure records/icons, five upgrades, four demand profiles, two routine maintenance records, and no Era 6 content.
+- Added truthful deterministic forecast confidence, operator Reserve floor/start policies, safe-throttle logs, policy-bounded routine maintenance, exactly-one request scheduling, offline stop rules, and additive format-2 persistence.
+- Added the world-first blue-hour Neighborhood, nested Building/scratched core, civic WATT terminal, dim-home/bright-grid contradiction, contextual operator drawer, takeover report, procedural cues, and locked City Data Center pullback. `ISSUE-007` remains open.
+- Phase 16 tests pass 110 domain and 23 headless UI checks. A graphical run passed 39 checks; eight 393 × 873 / 320 × 568 captures were manually inspected. The prepared route places each request at 10–25 minutes and the total route at 95–135 minutes.
+- Full regression and clean Android artifact/static inspection are required before final commit/push. No physical device is attached, so the contract phone gate remains unperformed under `ISSUE-011`; Phase 17 remains prohibited.
 
 ### 2026-07-20 — Phase 16 authorized; Era 5 appendix proposed
 

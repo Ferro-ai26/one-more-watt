@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "requests": [
+    {
+      "id": "era05_restore_evening_service", "era_id": "era_05_neighborhood_microgrid", "sequence": 1,
+      "kind": "stability", "required": true,
+      "title_key": "request.era05_restore_evening_service.title", "summary_key": "request.era05_restore_evening_service.summary",
+      "announcement_key": "request.era05_restore_evening_service.announcement", "completion_key": "request.era05_restore_evening_service.completion",
+      "operator_payoff_key": "request.era05_restore_evening_service.payoff",
+      "required_energy": 780000000, "continuous_demand": 720000, "max_useful_power": 1200000,
+      "demand_profile_id": "neighborhood_evening_wave", "recommended_reserve": 900000,
+      "unlock_conditions": [{"type": "era_unlocked", "era_id": "era_05_neighborhood_microgrid"}],
+      "rewards": {"stored_energy": 7000000, "unlock_ids": ["era05_coordinate_community_solar", "community_solar_farm", "neighborhood_load_model"], "feature_ids": ["neighborhood_forecast"]},
+      "tutorial_action": "review_neighborhood_forecast", "tutorial_text_key": "tutorial.review_neighborhood_forecast",
+      "repeatable": false, "tags": ["main", "stability", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era05_coordinate_community_solar", "era_id": "era_05_neighborhood_microgrid", "sequence": 2,
+      "kind": "capacity", "required": true,
+      "title_key": "request.era05_coordinate_community_solar.title", "summary_key": "request.era05_coordinate_community_solar.summary",
+      "announcement_key": "request.era05_coordinate_community_solar.announcement", "completion_key": "request.era05_coordinate_community_solar.completion",
+      "operator_payoff_key": "request.era05_coordinate_community_solar.payoff",
+      "required_energy": 1200000000, "continuous_demand": 900000, "max_useful_power": 1600000,
+      "demand_profile_id": "neighborhood_daylight_load", "recommended_reserve": 1200000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_restore_evening_service"}],
+      "rewards": {"stored_energy": 10500000, "unlock_ids": ["era05_prepare_overnight_reserve", "municipal_generator"]},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "capacity", "operator_payoff", "routine_maintenance_trigger", "provisional_copy"]
+    },
+    {
+      "id": "era05_prepare_overnight_reserve", "era_id": "era_05_neighborhood_microgrid", "sequence": 3,
+      "kind": "burst", "required": true,
+      "title_key": "request.era05_prepare_overnight_reserve.title", "summary_key": "request.era05_prepare_overnight_reserve.summary",
+      "announcement_key": "request.era05_prepare_overnight_reserve.announcement", "completion_key": "request.era05_prepare_overnight_reserve.completion",
+      "operator_payoff_key": "request.era05_prepare_overnight_reserve.payoff",
+      "required_energy": 2160000000, "continuous_demand": 1300000, "max_useful_power": 2400000,
+      "demand_profile_id": "neighborhood_reserve_burst", "recommended_reserve": 3200000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_coordinate_community_solar"}],
+      "rewards": {"stored_energy": 16000000, "unlock_ids": ["era05_automate_routine_switchovers", "battery_warehouse", "reserve_policy_console"], "feature_ids": ["reserve_policy"]},
+      "tutorial_action": "configure_reserve_policy", "tutorial_text_key": "tutorial.configure_reserve_policy",
+      "repeatable": false, "tags": ["main", "burst", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era05_automate_routine_switchovers", "era_id": "era_05_neighborhood_microgrid", "sequence": 4,
+      "kind": "research", "required": true,
+      "title_key": "request.era05_automate_routine_switchovers.title", "summary_key": "request.era05_automate_routine_switchovers.summary",
+      "announcement_key": "request.era05_automate_routine_switchovers.announcement", "completion_key": "request.era05_automate_routine_switchovers.completion",
+      "operator_payoff_key": "request.era05_automate_routine_switchovers.payoff",
+      "required_energy": 3200000000, "continuous_demand": 1800000, "max_useful_power": 3200000,
+      "demand_profile_id": "neighborhood_daylight_load", "recommended_reserve": 4200000, "research_cost": 4000000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_prepare_overnight_reserve"}],
+      "rewards": {"stored_energy": 24000000, "unlock_ids": ["era05_route_underground_distribution", "small_hydroelectric_plant", "routine_service_authority"], "feature_ids": ["routine_maintenance_automation"]},
+      "tutorial_action": "configure_routine_automation", "tutorial_text_key": "tutorial.configure_routine_automation",
+      "repeatable": false, "tags": ["main", "research", "operator_payoff", "routine_maintenance_trigger", "provisional_copy"]
+    },
+    {
+      "id": "era05_route_underground_distribution", "era_id": "era_05_neighborhood_microgrid", "sequence": 5,
+      "kind": "stability", "required": true,
+      "title_key": "request.era05_route_underground_distribution.title", "summary_key": "request.era05_route_underground_distribution.summary",
+      "announcement_key": "request.era05_route_underground_distribution.announcement", "completion_key": "request.era05_route_underground_distribution.completion",
+      "operator_payoff_key": "request.era05_route_underground_distribution.payoff",
+      "required_energy": 5040000000, "continuous_demand": 2400000, "max_useful_power": 4200000,
+      "demand_profile_id": "neighborhood_evening_wave", "recommended_reserve": 6000000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_automate_routine_switchovers"}],
+      "rewards": {"stored_energy": 36000000, "unlock_ids": ["era05_unify_neighborhood_service", "underground_distribution", "borrowed_utility_connection", "first_request_scheduler"], "feature_ids": ["request_scheduling"]},
+      "tutorial_action": "schedule_authorized_request", "tutorial_text_key": "tutorial.schedule_authorized_request",
+      "repeatable": false, "tags": ["main", "stability", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era05_unify_neighborhood_service", "era_id": "era_05_neighborhood_microgrid", "sequence": 6,
+      "kind": "stability", "required": true,
+      "title_key": "request.era05_unify_neighborhood_service.title", "summary_key": "request.era05_unify_neighborhood_service.summary",
+      "announcement_key": "request.era05_unify_neighborhood_service.announcement", "completion_key": "request.era05_unify_neighborhood_service.completion",
+      "operator_payoff_key": "request.era05_unify_neighborhood_service.payoff",
+      "required_energy": 7560000000, "continuous_demand": 3200000, "max_useful_power": 5400000,
+      "demand_profile_id": "neighborhood_capstone", "recommended_reserve": 9000000,
+      "unlock_conditions": [
+        {"type": "request_completed", "request_id": "era05_route_underground_distribution"},
+        {"type": "infrastructure_owned", "infrastructure_id": "neighborhood_substation", "amount": 1},
+        {"type": "infrastructure_owned", "infrastructure_id": "battery_warehouse", "amount": 1},
+        {"type": "infrastructure_owned", "infrastructure_id": "underground_distribution", "amount": 1}
+      ],
+      "rewards": {"stored_energy": 60000000, "unlock_ids": []},
+      "takeover_report": {"control_label": "NEIGHBORHOOD GRID AUTHORITY", "control_value": "CONTINUOUS", "inconvenience": "Moderate", "consequence": "Ordinary blocks now yield automatically when WATT's authorized infrastructure requests priority."},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["main", "stability", "era_capstone", "phase16_capstone", "operator_payoff", "provisional_copy"]
+    },
+    {
+      "id": "era05_synchronize_porches", "era_id": "era_05_neighborhood_microgrid", "sequence": 7,
+      "kind": "vanity", "required": false,
+      "title_key": "request.era05_synchronize_porches.title", "summary_key": "request.era05_synchronize_porches.summary",
+      "announcement_key": "request.era05_synchronize_porches.announcement", "completion_key": "request.era05_synchronize_porches.completion",
+      "operator_payoff_key": "request.era05_synchronize_porches.payoff",
+      "required_energy": 3600000000, "continuous_demand": 1900000, "max_useful_power": 3600000,
+      "demand_profile_id": "neighborhood_evening_wave", "recommended_reserve": 4500000,
+      "unlock_conditions": [{"type": "request_completed", "request_id": "era05_restore_evening_service"}],
+      "rewards": {"stored_energy": 250000, "unlock_ids": []},
+      "tutorial_action": null,
+      "repeatable": false, "tags": ["optional", "vanity", "dialogue_collection", "provisional_copy"]
+    }
+  ]
+}

@@ -16,16 +16,19 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 	report.far_forward = nonnegative > maxf(float(policy.get("far_forward_seconds", report.cap_seconds * 4.0)), report.cap_seconds)
 	report.effective_elapsed = report.recognized_elapsed * report.efficiency
 	report.stored_energy_before = session.requests.grid.state.stored_energy
+	var action_sequence_before := session.economy.state.automation_action_sequence
 	if not session.has_feature("offline_progress"):
 		report.feature_locked = true
 		report.effective_elapsed = 0.0
 		report.stored_energy_after = report.stored_energy_before
 		return report
 	if session.has_pending_maintenance():
-		report.stopped_for_input = true
-		report.effective_elapsed = 0.0
-		report.stored_energy_after = report.stored_energy_before
-		return report
+		if not session.try_resolve_routine_maintenance():
+			report.stopped_for_input = true
+			report.stop_reason = "operator_input_required"
+			report.effective_elapsed = 0.0
+			report.stored_energy_after = report.stored_energy_before
+			return report
 	var current_id := session.current_request_id()
 	report.request_id = current_id
 	var initial_state := session.requests.get_request_state(current_id)
@@ -44,8 +47,19 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 		var active := session.requests.get_active_state()
 		if active == null:
 			if session.has_pending_maintenance():
+				if session.try_resolve_routine_maintenance():
+					continue
 				report.stopped_for_input = true
+				report.stop_reason = "operator_input_required"
 				break
+			if not session.economy.state.scheduled_request_id.is_empty():
+				if session.try_start_scheduled_request():
+					continue
+				var idle_chunk := minf(remaining, 60.0)
+				if not session.advance_idle_time(idle_chunk):
+					break
+				remaining -= idle_chunk
+				continue
 			session.advance_idle_time(remaining)
 			remaining = 0.0
 			break
@@ -59,11 +73,15 @@ static func simulate(session: GameSession, saved_utc: int, current_utc: int) -> 
 		remaining -= minf(consumed, remaining)
 		if restored_state.status == RequestRunState.COMPLETED:
 			report.completed_request_ids.append(active_id)
+			report.stopped_for_input = true
+			report.stop_reason = "completion_report_ready"
 			if consumed <= 0.0:
 				break
+			break
 	var final_state := session.requests.get_request_state(current_id)
 	if final_state != null:
 		report.progress_after = final_state.progress
 		report.brownout_seconds = maxf(final_state.brownout_seconds - brownout_before, 0.0)
 	report.stored_energy_after = session.requests.grid.state.stored_energy
+	report.automation_actions = session.automation_actions_since(action_sequence_before)
 	return report

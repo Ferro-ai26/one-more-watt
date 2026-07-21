@@ -112,6 +112,30 @@
       "text_key": "dialogue.brownout.building_backup",
       "required_placeholders": [],
       "tags": ["reaction", "backup", "provisional_copy"]
+    },
+    {
+      "id": "brownout_neighborhood_first",
+      "context": "brownout",
+      "era_id": "era_05_neighborhood_microgrid",
+      "text_key": "dialogue.brownout.neighborhood_first",
+      "required_placeholders": [],
+      "tags": ["reaction", "neighborhood", "provisional_copy"]
+    },
+    {
+      "id": "brownout_neighborhood_porches",
+      "context": "brownout",
+      "era_id": "era_05_neighborhood_microgrid",
+      "text_key": "dialogue.brownout.neighborhood_porches",
+      "required_placeholders": [],
+      "tags": ["reaction", "porches", "provisional_copy"]
+    },
+    {
+      "id": "brownout_neighborhood_substation",
+      "context": "brownout",
+      "era_id": "era_05_neighborhood_microgrid",
+      "text_key": "dialogue.brownout.neighborhood_substation",
+      "required_placeholders": [],
+      "tags": ["reaction", "substation", "provisional_copy"]
     }
   ]
 }

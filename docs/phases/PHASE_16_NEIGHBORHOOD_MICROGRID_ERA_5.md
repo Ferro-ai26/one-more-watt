@@ -1,6 +1,6 @@
 # Phase 16 — Neighborhood Microgrid: Era 5
 
-Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
+Status: Implementation and Host Acceptance Complete — Physical Phone Gate Pending
 
 ## Objective
 
@@ -31,13 +31,13 @@ The player operates several city blocks, forecasts 10–25 minute requests, and 
 
 ## Acceptance criteria
 
-- [ ] Era 5 appendix approved
-- [ ] Player can prepare the grid and safely leave during a request
-- [ ] Automation explains its actions in reports
-- [ ] Requests fit 10–25 minute targets when prepared
-- [ ] All required pre-idle tools unlock before Era 6
-- [ ] Era 5 production presentation is complete
-- [ ] Save migration and offline regression pass
+- [x] Era 5 appendix approved
+- [x] Player can prepare the grid and safely leave during a request
+- [x] Automation explains its actions in reports
+- [x] Requests fit 10–25 minute targets when prepared
+- [x] All required pre-idle tools unlock before Era 6
+- [x] Era 5 production presentation is complete
+- [x] Save migration and offline regression pass
 - [ ] Phone playtest confirms readability and performance
 
 ## Stop condition

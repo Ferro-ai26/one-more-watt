@@ -1,7 +1,7 @@
 # Active Phase
 
 Phase: 16 — Neighborhood Microgrid: Era 5
-Status: Appendix Proposed — Awaiting Explicit Approval Before Coding
+Status: Implementation and Host Gates Complete — Physical Phone Gate Pending
 
 Authoritative phase contract:
 
@@ -11,7 +11,7 @@ Authoritative phase contract:
 
 Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, the approved permanent gameplay/content/save/visual specifications, and the proposed `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` before editing. Use `docs/phase_11/cheerful_doomsday/phone_board.png` and the approved 16-era escalation plan as composition authority. Preserve the human-operator role, persistent scratched WATT core, and Cheerful Electrical Doomsday direction.
 
-Phase 16 is explicitly authorized under `DEC-036`, which also accepts Phase 15's disclosed physical-device verification limitation without marking those checks passed. The mandatory Era 5 pre-code appendix is now proposed but not approved. Do not add Era 5 data, automation, save changes, runtime presentation, or assets until the user explicitly approves the appendix.
+Phase 16 is explicitly authorized under `DEC-036`, and the mandatory Era 5 appendix is approved as written under `DEC-037`. Implement only the approved Neighborhood route. Introduce forecasting, Reserve policy, routine automation, and one-request scheduling sequentially through their authored request rewards. Keep the neighborhood and WATT primary; expose management controls through contextual drawers rather than a dashboard. All current dialogue remains provisional functional copy for a later dedicated writing pass.
 
 Do not integrate generated concept backgrounds as production art, add City Data Center/Era 6 content, create degradation chores or resident simulation, add wire placement, introduce hidden offline decisions, perform a major visual-direction change, begin Phase 17, or advance beyond the Phase 16 completion gate without explicit authorization.
 
@@ -25,4 +25,6 @@ Phase 13 is closed under `DEC-032`; its targeted Motorola Moto G (2025) scrollin
 
 Phase 15 is closed under `DEC-036` with its unavailable physical Android matrix retained as an accepted limitation, not a pass. The complete Building route, host/manual evidence, clean APK/static inspection, and approved provisional-copy boundary remain authoritative.
 
-The proposed Phase 16 appendix defines the Neighborhood blue-hour mood, lateral-annexation motif, persistent scratched core plus distributed civic faces, six main requests plus one vanity request, seven infrastructure silhouettes, truthful forecast confidence/detail, policy-bounded routine maintenance, Reserve/safe-throttle policy, exactly one preauthorized scheduled request, offline action reporting, Building-to-Neighborhood pullback, and locked City Data Center endpoint. Implementation awaits explicit approval. Phase 17 is not authorized.
+The approved Phase 16 appendix defines the Neighborhood blue-hour mood, lateral-annexation motif, persistent scratched core plus distributed civic faces, six main requests plus one vanity request, seven infrastructure silhouettes, truthful forecast confidence/detail, policy-bounded routine maintenance, Reserve/safe-throttle policy, exactly one preauthorized scheduled request, offline action reporting, Building-to-Neighborhood pullback, and locked City Data Center endpoint. Phase 17 is not authorized.
+
+Phase 16 implementation, deterministic tuning, complete host regression, and eight contextual captures pass under `DEC-038`. The required physical-phone checklist has not run because no device is attached to the host. Do not mark Phase 16 complete or authorize Phase 17 unless that gate is executed or the user explicitly accepts a documented limitation.

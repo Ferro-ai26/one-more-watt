@@ -32,9 +32,9 @@ func _init() -> void:
 
 
 func _test_catalog_and_migration() -> void:
-	_check(_repository.get_content_version() == "0.9.0", "canonical content advances to 0.9.0")
+	_check(_repository.get_content_version() in ["0.9.0", "0.10.0"], "canonical content retains Phase 15 compatibility")
 	_check(_repository.get_era("era_04_building_network").get_number() == 4, "Building Network preserves authoritative Era 4 numbering")
-	_check(_repository.get_era("era_05_neighborhood_microgrid") == null, "Phase 15 does not create Era 5")
+	_check(_repository.get_era("era_05_neighborhood_microgrid").get_number() == 5, "later canonical content preserves the authoritative post-Phase-15 Era 5 boundary")
 	for id: String in ERA4_REQUEST_IDS:
 		var request := _repository.get_request(id)
 		_check(request != null and bool(request.get_value("required", false)), "%s is a required Era 4 request" % id)
@@ -143,7 +143,7 @@ func _test_endpoint_and_assets() -> void:
 		session.economy.state.completed_requests[id] = true
 	session.economy.mark_report_viewed("era04_standardize_building_power")
 	_check(session.economy.state.completed_eras.has("era_04_building_network"), "capstone marks Building Network complete")
-	_check(_repository.get_era("era_05_neighborhood_microgrid") == null, "completion remains a locked Neighborhood preview, not playable Era 5")
+	_check(_repository.get_era("era_06_city_data_center") == null, "historical Phase 15 completion remains before the unimplemented City Data Center boundary")
 
 
 func _pending_transformer_session() -> GameSession:

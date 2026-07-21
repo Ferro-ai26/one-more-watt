@@ -11,6 +11,9 @@ const CUES := {
 	"drawer_open": {"start": 280.0, "end": 360.0, "duration": 0.07, "cooldown_ms": 70},
 	"era_transition": {"start": 440.0, "end": 880.0, "duration": 0.32, "cooldown_ms": 500},
 	"maintenance_decision": {"start": 310.0, "end": 620.0, "duration": 0.18, "cooldown_ms": 300},
+	"request_scheduled": {"start": 260.0, "end": 540.0, "duration": 0.16, "cooldown_ms": 200},
+	"automation_action": {"start": 390.0, "end": 610.0, "duration": 0.14, "cooldown_ms": 250},
+	"automation_changed": {"start": 330.0, "end": 470.0, "duration": 0.09, "cooldown_ms": 100},
 	"error": {"start": 150.0, "end": 120.0, "duration": 0.13, "cooldown_ms": 250},
 }
 
