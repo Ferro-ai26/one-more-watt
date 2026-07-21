@@ -14,6 +14,7 @@ Status: Active — Awaiting Informed Android Baseline
 - Added the deterministic baseline audit, request-category matrix, evidence protocol, and structured observation worksheet.
 - Corrected the G01 evidence gate: informed self-play may support the next tuning proposal but is never fresh-player evidence; final confidence targets three unfamiliar-player sessions across more than one device where practical, or an explicit accepted limitation.
 - Committed the implementation at `1f7a5231e062847d6b182f56e5ec1e7b87154798` and produced a verified G01 APK from that exact clean commit.
+- Pushed the G01 implementation and artifact-handoff commits to `origin/main`; local `main` and `origin/main` were confirmed synchronized.
 - No balance, dialogue, request mechanic, content data, production art, normal save field, Era 6, or Prestige behavior changed. Phase 17 did not begin.
 
 ## Files changed
@@ -31,6 +32,7 @@ Status: Active — Awaiting Informed Android Baseline
 - `./tools/build_g01_android_debug.sh` from clean detached commit `1f7a5231e062`: passed export and static verification. The copied APK is 56,046,438 bytes with SHA-256 `c598fa084d53bc570fed2f4e884e803e48840ab2a1c2480672a8b88d26e2934f`; API 24/35, arm64/x86_64, G01 feature, build ID, VIBRATE-only permissions, and v2/v3 signatures pass.
 - `./tools/android_device_smoke.sh build/android/one_more_watt_g01_debug.apk`: exited 2 because no ready device is attached; no install was attempted.
 - One outer worktree-cleanup command returned nonzero only after attempting to remove an already removed temporary directory. The export script itself passed, the artifact had already been copied, no worktree remains, and independent checksum/signature checks passed.
+- `git push origin main`: pushed the G01 checkpoint and confirmed local/remote synchronization.
 
 ## Manual verification
 
