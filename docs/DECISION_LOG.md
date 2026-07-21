@@ -290,6 +290,22 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: This is the smallest additive implementation of the approved appendix that keeps the player indispensable, makes WATT genuinely useful, prevents hidden autonomy/spending, and preserves deterministic save/offline behavior.
 - Consequences: Content advances to `0.10.0` while save format remains 2. Era 4 strategic maintenance remains manual. Scheduling pays normal authorization cost once and cannot discover, buy, authorize, or chain another request. Phase 16 host acceptance may pass independently, but its physical-phone criterion remains a separate observed gate. Phase 17 is not authorized.
 
+## DEC-039 — Close Phase 16 with an accepted physical-device verification limitation
+
+- Status: Accepted
+- Date: 2026-07-21
+- Decision: Close Phase 16 on its implemented Era 5 route, deterministic host validation, reviewed contextual evidence, verified APK/static inspection, committed source, and confirmed push. Accept the remaining physical-phone checklist as an explicit verification limitation. Do not mark any unperformed Android item as passed; close `ISSUE-011` by accepted disposition and defer its matrix to the later full Android QA gate.
+- Reason: The current host has no attached physical device or usable emulator, every available host gate passed, and the user explicitly accepted the disclosed limitation and directed an accurate closeout.
+- Consequences: Phase 16 is complete at commits `cc51fbf883e6c50dbe2e2229b103693d69270a78` and `a801c87adba67b672ede67056144cb4cb50f4dfd`. The unchecked Phase 16 rows in `ANDROID_DEVICE_TEST.md` and `PLAYTEST_CHECKLIST.md` remain historical unperformed evidence. `ISSUE-011` is not “fixed” by a runtime test; it is closed as a user-accepted verification limitation and re-enters the combined Eras 1–6 Android matrix at Phase 18/release QA. This decision does not authorize Phase 17.
+
+## DEC-040 — Set the base-v1 content boundary and insert Gameplay Gate G01
+
+- Status: Accepted
+- Date: 2026-07-21
+- Decision: Make City Data Center/Era 6 the final content era of base game v1.0. Base v1.0 must include the City idle transition and the first complete Model Retraining/Prestige loop. Preserve Eras 7–16 as post-launch expansion-sized updates. Insert the unnumbered `GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md` after Phase 16 and before the existing Phase 17 contract.
+- Reason: The completed Eras 1–5 need dedicated evidence that their first 30–60 minutes are varied, decision-rich, understandable, and fun before additional era production. A focused gate reduces the risk of carrying “buy the highlighted stat and wait” play into the City idle transition, while Era 6 plus first Prestige forms a coherent base-v1 capstone.
+- Consequences: G01 becomes the active control gate with status Ready — Awaiting Explicit Authorization. Phase 17 remains numbered and preserved as the future Era 6 implementation phase, but cannot begin until G01 records an explicit proceed/revise/stop decision and the user separately authorizes Phase 17. Existing Phase 18–26 contracts are neither renumbered nor overwritten. Phase 18 supplies the base-v1 Android/retention checkpoint; Phase 22–26 release work is interpreted against the applicable Eras 1–6 base-v1 scope; and Phase 19–21 remain preserved for a separately approved post-launch schedule. No gameplay change is authorized by this documentation decision alone.
+
 ## Proposed decision template
 
 ```markdown

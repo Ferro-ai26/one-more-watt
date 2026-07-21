@@ -1,6 +1,6 @@
 # Era 5 Content and Visual Appendix — Neighborhood Microgrid
 
-Status: Approved as written under `DEC-037`; Phase 16 implementation authorized
+Status: Approved and implemented; Phase 16 closed under `DEC-039`
 
 Date: 2026-07-20
 
@@ -17,6 +17,8 @@ The Phase 16 sequence is:
 3. Implement and tune the complete Era 5 route.
 4. Integrate the authored Neighborhood presentation, WATT evolution, icons, effects, motion, and audio.
 5. Capture, inspect, complete the required phone playtest, commit/push the approved result, and stop before Era 6.
+
+Closure disposition: implementation, tuning, host regression, contextual evidence, and the verified APK passed and were pushed. The physical-phone playtest did not occur; the user accepted that disclosed limitation under `DEC-039`. Its checklist remains unchecked and deferred, not passed. Gameplay Gate G01 now precedes the still-unauthorized Phase 17.
 
 ## Era purpose
 

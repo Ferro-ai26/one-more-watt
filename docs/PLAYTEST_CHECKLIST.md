@@ -22,7 +22,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Clean APK/static inspection pass: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`, API 24/35, both architectures, `VIBRATE` only, v2/v3 signatures.
 - [ ] Physical update/fresh install, Era 5 touch route, 10–25 minute background returns, safe areas, font comfort, scrolling, Back, audible mix, haptics, device FPS/memory, heat, and battery. No device is attached; not claimed (`ISSUE-011`).
 
-Result: Phase 16 implementation and host/manual evidence pass. Physical-phone completion remains pending. Phase 17 is not authorized.
+Result: Phase 16 implementation and host/manual evidence pass. The physical-phone row was not performed and remains unchecked. The user accepted this explicit limitation under `DEC-039`, closing Phase 16 by disposition and deferring the device matrix to later full Android QA. No phone pass is claimed. Gameplay Gate G01 is awaiting authorization; Phase 17 is not authorized.
 
 ## Phase 15 Building Network host pass — 2026-07-20
 

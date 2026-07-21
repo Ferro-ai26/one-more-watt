@@ -20,10 +20,21 @@
 | 13 — Eras 1–3 Production Skin | Complete — accepted device-verification limitation | DEC-030–032; host production skin and targeted Moto retest pass; remaining playtest explicitly skipped/unverified; ISSUE-007 retained |
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
 | 15 — Building Network: Era 4 | Complete — accepted device-verification limitation | DEC-034–036; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; unavailable physical matrix retained as unverified |
-| 16 — Neighborhood Microgrid: Era 5 | Implementation/host acceptance complete — physical phone gate pending | DEC-037–038; 110 domain + 23 headless UI + 39 capture checks; eight reviewed captures; tuned 10–25 minute requests; locked Era 6 endpoint |
-| 17–26 — Post-prototype Production and Release | Gated | Revised contracts installed; every phase requires evidence and explicit authorization |
+| 16 — Neighborhood Microgrid: Era 5 | Complete — accepted physical-device verification limitation | DEC-037–039; 110 domain + 23 headless UI + 39 capture checks; eight reviewed captures; exact physical matrix remains unchecked/deferred |
+| G01 — Core Gameplay and Fun Validation | Ready — Awaiting Explicit Authorization | Inserted under DEC-040; first 30–60-minute fun/decision gate over Eras 1–5; no gameplay work begun |
+| 17 — City Data Center and First Prestige: Era 6 | Future — Not Authorized | Preserved contract; final base-v1 content era, City idle transition, and first complete Model Retraining/Prestige loop |
+| 18–26 — Checkpoints, post-launch expansions, and release | Gated | Phase 18 is the base-v1 Android/retention checkpoint; Eras 7–16 in Phases 19–21 are post-launch; every contract remains preserved and separately authorized |
 
 ## Chronological log
+
+### 2026-07-21 — Phase 16 closed accurately; Gameplay Gate G01 inserted
+
+- The user accepted Phase 16's disclosed physical-device verification limitation under `DEC-039`. Era 5 remains implemented and host validated at `cc51fbf883e6c50dbe2e2229b103693d69270a78`, with artifact/gate records at pushed commit `a801c87adba67b672ede67056144cb4cb50f4dfd`.
+- No physical-phone check was performed or marked passed. The Phase 16 rows in `ANDROID_DEVICE_TEST.md` and `PLAYTEST_CHECKLIST.md` remain unchecked. `ISSUE-011` closes by accepted disposition and defers the combined lifecycle/readability/audio/haptic/performance/heat/battery matrix to Phase 18 and later release QA.
+- Recorded `DEC-040`: City Data Center/Era 6 is the final base-v1 content era and must include the City idle transition plus the first complete Model Retraining/Prestige loop. The 16-era ladder remains authoritative; Eras 7–16 are preserved as post-launch expansion-sized updates.
+- Inserted unnumbered `GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md` between Phase 16 and Phase 17. G01 covers the first 30–60 minutes, request-category distinction, core-grid decisions, multiple viable approaches, anti-wait design, environmental/report/WATT feedback, focused early dialogue, measured behavior, fresh-player sessions, and an explicit proceed/revise/stop decision.
+- Preserved every existing Phase 17–26 contract unchanged. Phase 17 remains the future Era 6 contract and is not authorized. No gameplay, content, save, scene, asset, or runtime file changed in this closeout.
+- Documentation consistency assertions passed for the exact ACTIVE_PHASE text, G01 path, DEC-039/040 references, v1-scope cross-references, and unchanged Phase 17–26 hashes. `git diff --check` passed. `./tools/validate.sh` passed the complete repository suite through Phase 16 and the final headless launch; observed performance was 860.4 ms/25 Build rebuilds, 678.6 ms/500 live refreshes, and 463 UI nodes.
 
 ### 2026-07-21 — Phase 16 implementation and host evidence complete; phone gate pending
 

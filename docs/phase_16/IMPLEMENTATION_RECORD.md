@@ -2,7 +2,7 @@
 
 Date: 2026-07-21
 
-Status: Implementation, deterministic tuning, host acceptance, and contextual evidence complete; physical Android gate pending
+Status: Complete — implementation and host acceptance passed; physical Android gate closed by accepted limitation under `DEC-039`
 
 ## Delivered boundary
 
@@ -31,4 +31,4 @@ The prepared six-request route completes every request within 600–1,500 second
 
 All seven new icons, environment forms, paths, state graphics, motion, and procedural cue definitions are project-original/code-authored. Generated Phase 11 concept imagery is not integrated. This is the required production-functional Era 5 presentation, not closure of the later tactile painted gold-standard pass; `ISSUE-007` remains explicit.
 
-Clean source commit `cc51fbf883e6` exported `build/android/one_more_watt_phase16_debug.apk`: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`. Package/API/architectures/VIBRATE-only permission/embedded-ID/v2-v3 signature inspection passed. No physical Android device is attached to the current host. Physical install, safe-area, touch, lifecycle, audible mix, haptics, FPS, heat, and battery cannot be claimed until the phone gate is executed or the user explicitly dispositions that limitation.
+Clean source commit `cc51fbf883e6` exported `build/android/one_more_watt_phase16_debug.apk`: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`. Package/API/architectures/VIBRATE-only permission/embedded-ID/v2-v3 signature inspection passed. No physical Android device was attached to the host, so physical install, safe-area, touch, lifecycle, audible mix, haptics, FPS, heat, and battery were not observed. Under `DEC-039`, the user accepted this disclosed limitation and closed Phase 16 by disposition. The unchecked matrix is deferred to later full Android QA; no device pass is claimed.

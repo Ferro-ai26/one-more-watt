@@ -43,8 +43,12 @@
 - Phase 10: targeted prototype stabilization; Complete — accepted device-verification limitation transferred to Phase 14
 - Phase 11: theme and art direction; Complete — Cheerful Electrical Doomsday approved and locked under DEC-028
 - Phases 12–14: reusable skin architecture, production skinning, and visual/mobile QA
-- Phases 15–21: era-integrated game and art production through the Multiverse
-- Phases 22–26: content lock, final audiovisual production, stabilization, closed testing/store preparation, and separately authorized production release
+- Phases 15–16: completed era-integrated production through Neighborhood Microgrid/Era 5
+- `phases/GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md`: inserted pre-Era-6 gameplay/fun gate; not numbered and currently awaiting explicit authorization
+- Phase 17: future City Data Center/Era 6, the base-v1 final content era, City idle transition, and first complete Prestige loop
+- Phase 18: future Eras 1–6 Android/retention checkpoint and deferred full-device evidence gate
+- Phases 19–21: preserved post-launch expansion-sized updates for Eras 7–16; not base-v1 release prerequisites
+- Phases 22–26: release-version content lock, final audiovisual production, stabilization, closed testing/store preparation, and separately authorized production release; base-v1 scope is Eras 1–6 under `DEC-040`
 - `phases/legacy_v1/`: superseded, unstarted v1 Phase 10–16 contracts retained for history only
 
 ## Authority reminder

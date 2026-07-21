@@ -1,6 +1,6 @@
 # Android Device Tests
 
-## Phase 16 Neighborhood Microgrid gate — Awaiting physical device
+## Phase 16 Neighborhood Microgrid gate — Closed by accepted limitation; unperformed matrix deferred
 
 ### Artifact identity
 
@@ -42,7 +42,7 @@ adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 
 - [ ] Force-close/relaunch and warm resume preserve policy, schedule, maintenance history, action order, request progress, and rewards without duplication.
 - [ ] Record manufacturer/model, Android/API, display/density/effective UI, screenshots/video, FPS/memory, and representative 30-minute heat/battery notes.
 
-Current host result: clean export/static inspection passed. `./tools/android_device_smoke.sh` found no attached device and performed no installation. Every checkbox remains unverified under `ISSUE-011`; none is inferred from host captures.
+Current host result: clean export/static inspection passed. `./tools/android_device_smoke.sh` found no attached device and performed no installation. Every checkbox remains unverified; none is inferred from host captures. Under `DEC-039`, the user accepted this disclosed limitation and Phase 16 closed by disposition. Preserve this matrix for the combined Eras 1–6 Android gate in Phase 18/release QA rather than retroactively checking any row.
 
 ## Phase 15 Building Network regression — Awaiting external device
 

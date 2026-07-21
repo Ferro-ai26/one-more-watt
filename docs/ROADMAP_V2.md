@@ -1,8 +1,14 @@
 # ONE MORE WATT — Development Roadmap v2
 
-Status: Accepted post-Phase-09 roadmap
+Status: Accepted post-Phase-09 roadmap; base-v1 scope revised under `DEC-040`
 Effective after: Phase 09 Android Prototype closure
 Phase 09 decision: Continue with targeted revisions
+
+## Base game v1.0 scope decision
+
+City Data Center/Era 6 is the final content era of base game v1.0. The base release must include the City idle transition and the first complete Model Retraining/Prestige loop. The authoritative 16-era ladder is preserved, but Eras 7–16 are post-launch expansion-sized updates rather than base-v1 release requirements.
+
+Gameplay Gate G01 is inserted after Phase 16 and before Phase 17. It validates and improves the completed Eras 1–5 first 30–60 minutes before any City implementation. The gate does not renumber, delete, overwrite, authorize, or begin an existing numbered phase.
 
 ## Why the roadmap changed
 
@@ -29,16 +35,29 @@ This prevents the game from accumulating many gray-box eras and leaving an unman
 | 14 | Visual, Mobile, and Accessibility QA | Production-skinned prototype passes device review |
 | 15 | Building Network — Era 4 | Era 4 complete in established visual system |
 | 16 | Neighborhood Microgrid — Era 5 | All pre-idle automation complete |
-| 17 | City Data Center and First Prestige — Era 6 | Idle transition and retraining proven |
-| 18 | Era 6 Android and Retention Checkpoint | Go/no-go for long-game production |
-| 19 | Metro through Continent — Eras 7–10 | Regional long-game arc complete |
-| 20 | Planet through Solar System — Eras 11–13 | Day-scale idle arc complete |
-| 21 | Galactic through Multiverse — Eras 14–16 | Cosmic/endless arc complete |
-| 22 | Full-Game Content and Balance Pass | Release scope content-locked |
-| 23 | Final Production Art, Animation, and Audio | All release-scope presentation complete |
-| 24 | Release-Candidate Stabilization | RC quality bar passed |
+| G01 | Core Gameplay and Fun Validation | Eras 1–5 first 30–60 minutes earn explicit proceed/revise/stop decision |
+| 17 | City Data Center and First Prestige — Era 6 | Base-v1 content capstone, idle transition, and first retraining loop proven |
+| 18 | Era 6 Android and Retention Checkpoint | Base-v1 active-to-idle arc receives device/retention go/revise/stop evidence |
+| 19 | Metro through Continent — Eras 7–10 | Preserved post-launch expansion-sized regional arc |
+| 20 | Planet through Solar System — Eras 11–13 | Preserved post-launch expansion-sized day-scale arc |
+| 21 | Galactic through Multiverse — Eras 14–16 | Preserved post-launch expansion-sized cosmic/endless arc |
+| 22 | Full-Game Content and Balance Pass | Applicable release-version scope content-locked |
+| 23 | Final Production Art, Animation, and Audio | All applicable release-scope presentation complete |
+| 24 | Release-Candidate Stabilization | RC quality bar passed for the applicable release scope |
 | 25 | Closed Testing and Store Preparation | External release evidence and store package complete |
 | 26 | Production Release | Explicit publisher authorization required |
+
+## Scheduling after the scope decision
+
+The numbered contracts remain preserved at their existing paths and numbers. Their scheduling is now interpreted as follows:
+
+1. Complete G01 and record an explicit proceed/revise/stop decision.
+2. If separately authorized, Phase 17 implements the final base-v1 content era and first complete Prestige loop.
+3. Phase 18 validates the Eras 1–6 active-to-idle product and supplies the deferred full Android/retention checkpoint.
+4. Base-v1 content lock, final production, release-candidate, closed-test/store, and publication gates use the approved Eras 1–6 release scope. Existing Phase 22–26 contract wording is release-version scoped; it does not pull Eras 7–16 back into base v1.0.
+5. Phases 19–21 remain intact as post-launch expansion-sized scope. They require a separately approved post-launch schedule and explicit authorization; they are not prerequisites for base-v1 release readiness.
+
+This scheduling note supersedes the former assumption that Eras 7–16 had to be produced before the first production release. It does not silently authorize, execute, or edit any Phase 17–26 contract.
 
 ## Visual-production cadence
 
@@ -52,9 +71,11 @@ Decide the rules: visual premise, WATT design, palette, typography, shape langua
 
 Build reusable Godot theme/components, apply them to Eras 1–3, and verify the result on a phone.
 
-### Continuous era production — Phases 15–21
+### Continuous era production — Phases 15–17 and post-launch Phases 19–21
 
 Every new era ships with its environment, WATT evolution, infrastructure presentation, icons, effects, and audio additions. No phase may claim completion with permanent gray-box presentation.
+
+For base v1.0, this cadence ends with City Data Center/Era 6 in Phase 17. The same production rule remains attached to the preserved Eras 7–16 post-launch expansion contracts.
 
 Phase 23 is a final consistency and quality pass, not the first time art is applied.
 
@@ -71,6 +92,8 @@ Phase 23 is a final consistency and quality pass, not the first time art is appl
 - Store disclosures and assets
 - Signed, reproducible artifact
 - Explicit publisher approval
+
+For base v1.0, “complete approved content scope” means Eras 1–6 plus the City idle transition and first complete Model Retraining/Prestige loop. G01 must reach an explicit proceed decision before Era 6 work can be authorized.
 
 ## Phase advancement
 

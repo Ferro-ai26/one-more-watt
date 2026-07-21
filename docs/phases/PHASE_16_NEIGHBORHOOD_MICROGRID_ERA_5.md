@@ -1,6 +1,6 @@
 # Phase 16 — Neighborhood Microgrid: Era 5
 
-Status: Implementation and Host Acceptance Complete — Physical Phone Gate Pending
+Status: Complete — Host Validated; Physical Phone Gate Closed by Accepted Limitation
 
 ## Objective
 
@@ -38,7 +38,11 @@ The player operates several city blocks, forecasts 10–25 minute requests, and 
 - [x] All required pre-idle tools unlock before Era 6
 - [x] Era 5 production presentation is complete
 - [x] Save migration and offline regression pass
-- [ ] Phone playtest confirms readability and performance
+- [ ] Phone playtest confirms readability and performance. Not performed; the user accepted this disclosed limitation under `DEC-039`, and the unchecked matrix is deferred to the later full Android QA gate rather than counted as a pass.
+
+## Closure disposition
+
+Phase 16 closed on 2026-07-21 with Era 5 implemented, host validated, committed, and pushed. The required physical-phone checks did not occur because no device was attached. Their absence is preserved in `ANDROID_DEVICE_TEST.md`, `PLAYTEST_CHECKLIST.md`, and closed `ISSUE-011`; it is not evidence of a device pass. Gameplay Gate G01 is inserted before Phase 17, which remains unauthorized.
 
 ## Stop condition
 

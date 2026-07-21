@@ -22,6 +22,14 @@ The core promise remains simple: **WATT always has another request.** The early 
 - Audience: Players who enjoy number growth, visible transformation, light management, collectible jokes, and long-term optimization
 - Business model: Undecided; no monetization systems belong in the prototype
 
+## Base game v1.0 scope
+
+Base game v1.0 contains Eras 1–6, ending at City Data Center. It must deliver the complete active-to-idle transition and the first complete optional Model Retraining/Prestige loop. This is the first production-release content boundary, not a change to the long-form fictional or progression plan.
+
+The 16-era ladder remains authoritative. Eras 7–16—Metropolitan through Multiversal—are preserved as post-launch expansion-sized updates. Their mechanics, environments, WATT arc, and cosmic payoff remain part of the long-term product vision, but they are not required for base-v1 content completeness or release readiness.
+
+Before Era 6 implementation, Gameplay Gate G01 validates and improves the completed Eras 1–5 first 30–60 minutes. Era production may proceed only after an explicit G01 proceed/revise/stop decision and separate Phase 17 authorization.
+
 ## Player fantasy
 
 The player is WATT's human operator: the one person who understands the improvised system well enough to authorize, connect, and safely direct its physical expansion. WATT cannot simply annex new infrastructure alone. The player becomes increasingly influential and indispensable as the grid grows, and increasingly complicit as the visible consequences become impossible to ignore.
@@ -139,6 +147,12 @@ The vertical slice includes Eras 1–3 and must prove:
 - Save and conservative offline progress are reliable.
 
 The prototype contains 12–18 authored requests, four request types, three allocation modes, one home-scale visual transformation, and enough infrastructure to reach the Home Server Closet.
+
+## Core gameplay validation commitment
+
+The completed Eras 1–5 are subject to a dedicated pre-City validation gate. The first 30–60 minutes must make Capacity, Stability, Burst, Research, and optional Vanity requests mechanically distinct; require meaningful decisions across Generation, Transmission, Reserve, Stored Energy, purchases, and allocation; and support more than one viable preparation approach.
+
+The intended experience is not “buy the highlighted stat and wait.” Recommendations may teach, but environmental feedback, performance reports, WATT reactions, and request outcomes must help the player understand tradeoffs and take ownership of the result. Fresh-player evidence—not deterministic reachability alone—must support the decision to proceed to City Data Center.
 
 ## Non-goals
 

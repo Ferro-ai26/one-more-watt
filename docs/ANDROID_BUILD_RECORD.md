@@ -2,7 +2,7 @@
 
 ## Phase 16 Neighborhood Microgrid build
 
-Status: Clean source build/static inspection passed; physical phone gate pending
+Status: Clean source build/static inspection passed; physical phone gate unperformed and closed by accepted limitation under `DEC-039`
 Build UTC: 2026-07-21T01:05:53Z
 
 ### Source and artifact
@@ -29,7 +29,7 @@ Build UTC: 2026-07-21T01:05:53Z
 
 ### Device boundary
 
-`./tools/android_device_smoke.sh build/android/one_more_watt_phase16_debug.apk` found no ready ADB device and performed no installation. This artifact is not claimed as physical Android runtime evidence. `ISSUE-011` remains open for the contract-required phone gate.
+`./tools/android_device_smoke.sh build/android/one_more_watt_phase16_debug.apk` found no ready ADB device and performed no installation. This artifact is not claimed as physical Android runtime evidence. `ISSUE-011` closed by the user's accepted verification limitation under `DEC-039`; its unchecked matrix is deferred to the later combined Eras 1–6 Android QA gate.
 
 ## Phase 15 Building Network build
 

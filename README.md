@@ -4,6 +4,7 @@ Version: 2.0
 Target: Android-first Godot incremental/idle game  
 Prototype scope: Eras 1–3  
 First major product checkpoint: Era 6 and first prestige
+Base game v1.0 content scope: Eras 1–6, including the City idle transition and first complete Model Retraining/Prestige loop
 
 ## Purpose
 
@@ -34,17 +35,17 @@ If documents conflict, use this order:
 
 ## Current repository
 
-Phases 00–11 are closed. Phase 10 added Android density-aware canvas scaling while preserving the verified minimum layout and repaired the larger-text path. Its revised APK and complete host regression passed; the user accepted deferral of the remaining Moto verification to Phase 14. Phase 11 locked Cheerful Electrical Doomsday under `DEC-028`; the phone board is the primary composition reference and generated concepts remain non-production reference. No runtime skinning began in Phase 11. The user authorized Phase 12 after the Phase 11 closure commit/push. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
+Phases 00–16 are closed. Phase 16 delivered Neighborhood Microgrid/Era 5 and passed the complete host gate; its physical-phone matrix remains unperformed and was closed by the user's explicit accepted limitation under `DEC-039`, not marked as passed. Gameplay Gate G01 is inserted before Phase 17 and is Ready — Awaiting Explicit Authorization. Under `DEC-040`, City Data Center/Era 6 is the final base-v1 content era and must include the idle transition and first complete Model Retraining/Prestige loop. Eras 7–16 remain preserved post-launch expansion scope. With Godot 4.6.2 available as `godot4`, run the complete repository check from this directory:
 
 ```bash
 ./tools/validate.sh
 ```
 
-Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. `./tools/build_android_debug.sh` produces and verifies the debug APK from a clean commit; `./tools/android_device_smoke.sh` installs and cold-launches it when a device is attached. Era 4, prestige, cloud accounts, final production art/music, store rollout, and release signing remain deferred.
+Run content validation alone with `./tools/validate_content.sh`, grid tests with `./tools/test_simulation.sh`, request-domain tests with `./tools/test_requests.sh`, economy tests with `./tools/test_economy.sh`, main-interface tests with `./tools/test_ui.sh`, persistence/offline tests with `./tools/test_persistence.sh`, and the balance/reachability/performance path with `./tools/test_vertical_slice.sh`. `./tools/build_android_debug.sh` produces and verifies the debug APK from a clean commit; `./tools/android_device_smoke.sh` installs and cold-launches it when a device is attached. G01, Era 6/Prestige, post-launch eras, cloud accounts, final production art/music, store rollout, and release signing remain deferred until their explicit gates.
 
 ## Scope policy
 
-Phases 00–10 are completed history. Phase 11 is the active visual-direction phase. `docs/ROADMAP_V2.md` and the revised Phase 10–26 contracts govern post-prototype work. The superseded, unstarted v1 Phase 10–16 contracts are retained under `docs/phases/legacy_v1/` for history only and must not be executed.
+Phases 00–16 are completed history. Gameplay Gate G01 is the active control gate but has not been authorized. `docs/ROADMAP_V2.md`, G01, and the preserved Phase 10–26 contracts govern post-prototype work. Phase 17 remains the future Era 6 implementation phase. The superseded, unstarted legacy-v1 Phase 10–16 contracts remain under `docs/phases/legacy_v1/` for history only and must not be executed.
 
 The numerical values in `PROGRESSION_AND_BALANCE.md` are initial tuning values, not promises. Change them through recorded balance decisions and data files, never by scattering constants through scripts.
 

@@ -31,4 +31,4 @@ Scope: Era 5 production-functional presentation and host phone-resolution review
 
 ## Limitations
 
-These are host-rendered captures, not physical-device screenshots. Real safe areas, touch comfort, Android Back, font rasterization, audible cue repetition/audio focus, haptics, warm resume, offline return, device FPS, heat, and battery remain unverified at the phone gate.
+These are host-rendered captures, not physical-device screenshots. Real safe areas, touch comfort, Android Back, font rasterization, audible cue repetition/audio focus, haptics, warm resume, offline return, device FPS, heat, and battery were not verified. The user accepted this disclosed Phase 16 limitation under `DEC-039`; those checks remain unperformed and deferred to later full Android QA rather than counted as passes.

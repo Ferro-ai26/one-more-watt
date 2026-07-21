@@ -1,30 +1,26 @@
 # Active Phase
 
-Phase: 16 — Neighborhood Microgrid: Era 5
-Status: Implementation and Host Gates Complete — Physical Phone Gate Pending
+Gameplay Gate G01 — Core Gameplay and Fun Validation
+Status: Ready — Awaiting Explicit Authorization
 
-Authoritative phase contract:
+Authoritative gate contract:
 
-`docs/phases/PHASE_16_NEIGHBORHOOD_MICROGRID_ERA_5.md`
+`docs/phases/GATE_G01_CORE_GAMEPLAY_AND_FUN_VALIDATION.md`
 
 ## Session instruction
 
-Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the phase contract above, `docs/CURRENT_HANDOFF.md`, the approved permanent gameplay/content/save/visual specifications, and the proposed `docs/phase_16/ERA_05_NEIGHBORHOOD_MICROGRID_APPENDIX.md` before editing. Use `docs/phase_11/cheerful_doomsday/phone_board.png` and the approved 16-era escalation plan as composition authority. Preserve the human-operator role, persistent scratched WATT core, and Cheerful Electrical Doomsday direction.
+Read `AGENTS.md`, `docs/ROADMAP_V2.md`, the gate contract above, `docs/CURRENT_HANDOFF.md`, and the permanent gameplay, progression, character, content, UI, save/offline, visual, and release-readiness specifications before editing.
 
-Phase 16 is explicitly authorized under `DEC-036`, and the mandatory Era 5 appendix is approved as written under `DEC-037`. Implement only the approved Neighborhood route. Introduce forecasting, Reserve policy, routine automation, and one-request scheduling sequentially through their authored request rewards. Keep the neighborhood and WATT primary; expose management controls through contextual drawers rather than a dashboard. All current dialogue remains provisional functional copy for a later dedicated writing pass.
+Phase 16 is closed under `DEC-039`: Era 5 is implemented, validated on the host, committed, and pushed. Its physical-phone matrix was not performed and remains unchecked. The user accepted that disclosed verification limitation; no Android result was inferred or promoted to a pass. `ISSUE-011` is closed by accepted disposition and deferred to the later full Android QA gate.
 
-Do not integrate generated concept backgrounds as production art, add City Data Center/Era 6 content, create degradation chores or resident simulation, add wire placement, introduce hidden offline decisions, perform a major visual-direction change, begin Phase 17, or advance beyond the Phase 16 completion gate without explicit authorization.
+`DEC-040` establishes City Data Center/Era 6 as the final content era of base game v1.0. Base v1.0 must include the City idle transition and the first complete Model Retraining/Prestige loop. Eras 7–16 remain preserved as post-launch expansion-sized updates.
+
+G01 is inserted before Phase 17 without renumbering or overwriting any existing Phase 17–26 contract. It is ready but not authorized. Do not make gameplay changes until the user explicitly authorizes G01. Do not begin Phase 17, Era 6, Prestige, Phase 18+, or post-launch content.
 
 ## Inherited state
 
-Phase 11 is closed and pushed at commit `d4b611f`. Every Phase 11 acceptance criterion passed, the phone-board composition/core direction is locked, and generated imagery remains reference-only. The runtime remains the validated Phase 10 functional baseline. `ISSUE-004` physical Android verification remains deferred to Phase 14.
-
-Phase 12 is closed and pushed at commit `ae61a94`. It proves the reusable system with a live Main Grid/Build sample, base/Desk/Room environment variants, packaged Atkinson fonts, asset validation, scene baselines, complete host regression, and measured APK/memory/node impact. Phase 13 preserved those technical contracts while manually reconstructing the Eras 1–3 presentation in code-native/project-original form. Production-painted environment/WATT art remains an explicit later fallback under `ISSUE-007`; generated Phase 11 imagery remains reference-only.
-
-Phase 13 is closed under `DEC-032`; its targeted Motorola Moto G (2025) scrolling/purchase retest passed and `ISSUE-009` is fixed. Phase 14 is closed under `DEC-033` as Approved with targeted revisions: the full host baseline passed, no blocker/critical issue was found, and the user recorded GO for content expansion. Device-only gaps remain accepted limitations; `ISSUE-004` is deferred rather than fixed. `ISSUE-007` remains open.
-
-Phase 15 is closed under `DEC-036` with its unavailable physical Android matrix retained as an accepted limitation, not a pass. The complete Building route, host/manual evidence, clean APK/static inspection, and approved provisional-copy boundary remain authoritative.
-
-The approved Phase 16 appendix defines the Neighborhood blue-hour mood, lateral-annexation motif, persistent scratched core plus distributed civic faces, six main requests plus one vanity request, seven infrastructure silhouettes, truthful forecast confidence/detail, policy-bounded routine maintenance, Reserve/safe-throttle policy, exactly one preauthorized scheduled request, offline action reporting, Building-to-Neighborhood pullback, and locked City Data Center endpoint. Phase 17 is not authorized.
-
-Phase 16 implementation, deterministic tuning, complete host regression, and eight contextual captures pass under `DEC-038`. The required physical-phone checklist has not run because no device is attached to the host. Do not mark Phase 16 complete or authorize Phase 17 unless that gate is executed or the user explicitly accepts a documented limitation.
+- The locked Cheerful Electrical Doomsday direction, phone-board composition, human-operator role, persistent scratched WATT core, and world-first contextual interface remain authoritative.
+- Eras 1–5, deterministic simulation, additive format-2 saves, content `0.10.0`, and the reusable production-functional presentation layer are the current playable baseline.
+- Existing Phase 16 dialogue is provisional functional copy. G01 owns a focused Eras 1–5 writing pass only after authorization.
+- `ISSUE-007` remains open for a later gold-standard visual-production pass. G01 must not become a broad final-art phase.
+- `ISSUE-004` and the unchecked Phase 15/16 device matrices remain historical/deferred verification limits for later full Android QA; none is a passed device test.

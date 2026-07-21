@@ -4,18 +4,23 @@
 
 Release readiness is a chain of evidence, not the existence of a working APK or the completion of the last content era.
 
+For base game v1.0, the approved content scope is Eras 1–6. City Data Center is the final base-v1 content era and must include the active-to-idle transition plus the first complete Model Retraining/Prestige loop. Eras 7–16 are preserved post-launch expansion scope and are not prerequisites for base-v1 release readiness.
+
 ## Gates
 
 ### Scope lock
 
-- Version 1.0 era/content scope explicitly approved
+- Version 1.0 era/content scope explicitly approved as Eras 1–6 under `DEC-040`
+- City idle transition and first complete Model Retraining/Prestige loop included
+- Eras 7–16 identified as deferred post-launch expansion-sized updates
+- Gameplay Gate G01 records an explicit proceed decision before Phase 17 implementation begins
 - No unresolved major design dependency
 - Deferred features documented
 
 ### Content complete
 
-- All required requests, upgrades, infrastructure, WATT dialogue, tutorials, achievements, and reports present
-- Full-game reachability validated
+- All required Eras 1–6 requests, upgrades, infrastructure, WATT dialogue, tutorials, achievements, reports, City idle behavior, and first Prestige content present
+- Base-v1 fresh-run and first-Prestige reachability validated
 - No placeholder release content
 
 ### Presentation complete
@@ -35,7 +40,8 @@ Release readiness is a chain of evidence, not the existence of a working APK or 
 ### External testing
 
 - Closed test includes multiple devices and testers
-- Onboarding, retention/pacing, device compatibility, and store installation are evaluated
+- G01 fresh-player first-30/60-minute evidence and the later full Android QA matrix are complete
+- Onboarding, retention/pacing, device compatibility, City idle returns, first Prestige, and store installation are evaluated
 - Feedback is triaged and resolved or deferred explicitly
 
 ### Store readiness
