@@ -1,5 +1,36 @@
 # Android Build Records
 
+## Phase 16 Neighborhood Microgrid build
+
+Status: Clean source build/static inspection passed; physical phone gate pending
+Build UTC: 2026-07-21T01:05:53Z
+
+### Source and artifact
+
+- Source commit: `cc51fbf883e6c50dbe2e2229b103693d69270a78`
+- In-app build identifier: `cc51fbf883e6`
+- Artifact: `build/android/one_more_watt_phase16_debug.apk`
+- Bytes: 56,025,572
+- SHA-256: `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`
+- Size delta from Phase 15: +42,871 bytes / +0.077%
+- Export command: `./tools/build_android_debug.sh` from a clean detached worktree at the exact commit; artifact copied back unchanged
+
+### Verified artifact properties
+
+- Package/label: `com.ferroai.onemorewatt` / `ONE MORE WATT`
+- Version: code 10, name `0.10.0-dev`
+- Minimum/target SDK: API 24 / API 35
+- Native architectures: arm64-v8a and x86_64
+- Permissions: `android.permission.VIBRATE` only; no Internet or network-state permission
+- Signature: APK Signature Scheme v2 and v3 verified
+- Debug certificate SHA-256: `dc02e125341858dd653149c58e1c3fa42da24f0210b2001054fa5d60cfe9192f`
+- Embedded project metadata contains build identifier `cc51fbf883e6`
+- Export log contained no Godot `ERROR:` line
+
+### Device boundary
+
+`./tools/android_device_smoke.sh build/android/one_more_watt_phase16_debug.apk` found no ready ADB device and performed no installation. This artifact is not claimed as physical Android runtime evidence. `ISSUE-011` remains open for the contract-required phone gate.
+
 ## Phase 15 Building Network build
 
 Status: Clean source build/static inspection passed; physical runtime matrix unavailable on current host

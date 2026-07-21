@@ -36,8 +36,9 @@ The approved Era 5 Neighborhood Microgrid route is implemented under `DEC-037` a
 - Graphical Phase 16 run under Xvfb: 39 checks pass and eight PNGs save; all eight were inspected at original resolution. Header/phone-density evidence was corrected and recaptured.
 - Historical Phase 15 suite: 89 domain plus 24 UI checks pass against the expanded canonical catalog.
 - Economy and vertical-slice regression: 93 economy and 1,393 balance/reachability checks pass; performance sample approximately 848 ms/25 Build rebuilds, 697 ms/500 refreshes, 463 nodes.
-- Complete `./tools/validate.sh`: passed through the Phase 16 suites and headless launch after implementation. Godot's ARM64 editor probe still emits the known non-blocking `x86_64-binfmt-P` helper message.
-- Clean Android export/static inspection and device-smoke results are recorded in the artifact section below after the source commit is created.
+- Complete repository suites passed through Phase 16 and headless launch after implementation. Godot's ARM64 editor probe still emits the known non-blocking `x86_64-binfmt-P` helper message.
+- Implementation commit `cc51fbf883e6c50dbe2e2229b103693d69270a78` produced `build/android/one_more_watt_phase16_debug.apk`: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`. Package/API/architectures/VIBRATE-only permission/build-ID/v2-v3 signature checks pass.
+- `./tools/android_device_smoke.sh build/android/one_more_watt_phase16_debug.apk`: no ready device; no installation attempted.
 
 ## Manual verification
 
@@ -47,7 +48,6 @@ No physical device, audible-speaker mix, haptic response, real safe-area, heat, 
 
 ## Remaining acceptance criteria
 
-- Export and statically verify the exact clean-commit Phase 16 APK.
 - Run the Phase 16 checklist on a physical phone: install/update migration, cold launch, Era 5 route, 10–25 minute away returns, touch scrolling, text sizes/safe areas, Android Back, warm resume/offline report, save idempotency, audio/haptics, FPS/memory, heat, and battery.
 - Record that observed result, then close Phase 16 only if the phone gate passes or the user explicitly accepts the disclosed limitation.
 

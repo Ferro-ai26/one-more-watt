@@ -25,10 +25,10 @@ The prepared six-request route completes every request within 600–1,500 second
 - `./tools/test_phase16_neighborhood.sh`: 110 domain checks plus 23 headless contextual-UI checks.
 - `xvfb-run -a godot4 --path . --script res://tests/integration/test_phase16_neighborhood_ui.gd -- --capture-phase16`: 39 graphical checks and eight reviewed phone captures.
 - `./tools/validate.sh`: complete repository regression through Phase 16 and headless launch.
-- Final observed host guard: approximately 848 ms for 25 full Build rebuilds, 697 ms for 500 live refreshes, 463 UI nodes, and approximately 12.65 MiB isolated skin-harness memory delta.
+- Final observed host guard: 824.0 ms for 25 full Build rebuilds, 595.5 ms for 500 live refreshes, 463 UI nodes, and approximately 12.65 MiB isolated skin-harness memory delta.
 
 ## Provenance and limitations
 
 All seven new icons, environment forms, paths, state graphics, motion, and procedural cue definitions are project-original/code-authored. Generated Phase 11 concept imagery is not integrated. This is the required production-functional Era 5 presentation, not closure of the later tactile painted gold-standard pass; `ISSUE-007` remains explicit.
 
-No physical Android device is attached to the current host. APK/static evidence and the exact phone checklist are recorded separately after clean-commit export. Physical install, safe-area, touch, lifecycle, audible mix, haptics, FPS, heat, and battery cannot be claimed until the phone gate is executed or the user explicitly dispositions that limitation.
+Clean source commit `cc51fbf883e6` exported `build/android/one_more_watt_phase16_debug.apk`: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`. Package/API/architectures/VIBRATE-only permission/embedded-ID/v2-v3 signature inspection passed. No physical Android device is attached to the current host. Physical install, safe-area, touch, lifecycle, audible mix, haptics, FPS, heat, and battery cannot be claimed until the phone gate is executed or the user explicitly dispositions that limitation.

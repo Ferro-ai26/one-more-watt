@@ -32,7 +32,7 @@
 - Added truthful deterministic forecast confidence, operator Reserve floor/start policies, safe-throttle logs, policy-bounded routine maintenance, exactly-one request scheduling, offline stop rules, and additive format-2 persistence.
 - Added the world-first blue-hour Neighborhood, nested Building/scratched core, civic WATT terminal, dim-home/bright-grid contradiction, contextual operator drawer, takeover report, procedural cues, and locked City Data Center pullback. `ISSUE-007` remains open.
 - Phase 16 tests pass 110 domain and 23 headless UI checks. A graphical run passed 39 checks; eight 393 × 873 / 320 × 568 captures were manually inspected. The prepared route places each request at 10–25 minutes and the total route at 95–135 minutes.
-- Full regression and clean Android artifact/static inspection are required before final commit/push. No physical device is attached, so the contract phone gate remains unperformed under `ISSUE-011`; Phase 17 remains prohibited.
+- Implementation commit `cc51fbf883e6` exported a 56,025,572-byte verified APK with SHA-256 `1a934d52…5f37`; static package/API/architecture/permission/signature/build-ID checks pass. No physical device is attached, so the contract phone gate remains unperformed under `ISSUE-011`; Phase 17 remains prohibited.
 
 ### 2026-07-20 — Phase 16 authorized; Era 5 appendix proposed
 

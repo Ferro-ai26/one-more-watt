@@ -4,7 +4,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 
 ## Phase 16 Neighborhood Microgrid host pass — 2026-07-21
 
-- Build/commit: Phase 16 working tree during host review; clean APK commit recorded separately after export
+- Build/commit: `cc51fbf883e6c50dbe2e2229b103693d69270a78`; APK build ID `cc51fbf883e6`
 - Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless plus Xvfb/Mesa llvmpipe; dummy audio; no ADB device
 - Godot version: 4.6.2.stable.official.71f334935
 - Tester: Codex
@@ -19,6 +19,7 @@ Record build identifier, device/platform, tester, date, and notes for every form
 - [x] Neighborhood world, scratched core, civic face, dim-home/bright-grid contradiction, seven integrated icons, contextual controls, report, and locked City pullback pass host automation.
 - [x] Eight final captures under `docs/phase_16/evidence/` were manually inspected at original resolution, including 320 × 568 at 130% text.
 - [x] Complete repository regression and headless launch pass; final performance/API evidence is recorded in the implementation/visual-QA records.
+- [x] Clean APK/static inspection pass: 56,025,572 bytes, SHA-256 `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`, API 24/35, both architectures, `VIBRATE` only, v2/v3 signatures.
 - [ ] Physical update/fresh install, Era 5 touch route, 10–25 minute background returns, safe areas, font comfort, scrolling, Back, audible mix, haptics, device FPS/memory, heat, and battery. No device is attached; not claimed (`ISSUE-011`).
 
 Result: Phase 16 implementation and host/manual evidence pass. Physical-phone completion remains pending. Phase 17 is not authorized.

@@ -27,6 +27,7 @@ Scope: Era 5 production-functional presentation and host phone-resolution review
 - Accessibility/layout: pass in host evidence at 393 × 873 and 320 × 568/130% text. Frequent controls retain 48 logical pixels, drawers scroll vertically, status is text/shape redundant, and the live environment remains visible.
 - Tone/copy: pass as provisional functional copy only. No final dialogue approval is inferred.
 - Asset boundary: pass. New work is project-original; no generated concept raster or undeclared fallback is loaded. `ISSUE-007` remains open.
+- Performance/APK: pass on host/static gates. Final measurement was 824.0 ms/25 Build rebuilds, 595.5 ms/500 refreshes, 463 nodes, and ~12.65 MiB isolated skin memory. The 56,025,572-byte APK is +0.077% over Phase 15 and passes package/API/architecture/permission/signature/build-ID inspection.
 
 ## Limitations
 

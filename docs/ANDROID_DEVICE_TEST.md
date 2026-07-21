@@ -1,5 +1,49 @@
 # Android Device Tests
 
+## Phase 16 Neighborhood Microgrid gate — Awaiting physical device
+
+### Artifact identity
+
+- Source commit: `cc51fbf883e6c50dbe2e2229b103693d69270a78`
+- Settings version/build: `0.10.0-dev` / `cc51fbf883e6`
+- Package: `com.ferroai.onemorewatt`
+- APK: `build/android/one_more_watt_phase16_debug.apk`
+- Bytes: 56,025,572
+- SHA-256: `1a934d52355bfaa758f2fb6b0076215145e0cb097f330fa9cb53bf438ac85f37`
+- Static inspection: API 24/35; arm64-v8a and x86_64; `VIBRATE` only; no network permission; v2/v3 signatures and embedded build ID pass
+
+Prefer an update install over the existing Moto save; do not uninstall unless intentionally starting the separate clean-install pass:
+
+```bash
+sha256sum build/android/one_more_watt_phase16_debug.apk
+adb install -r build/android/one_more_watt_phase16_debug.apk
+adb shell am force-stop com.ferroai.onemorewatt
+adb shell monkey -p com.ferroai.onemorewatt -c android.intent.category.LAUNCHER 1
+```
+
+### Required Phase 16 checks
+
+- [ ] Hash matches; update install preserves the existing save, Stored Energy, ownership, reports, and settings.
+- [ ] Cold launch succeeds; Settings shows `0.10.0-dev` / `cc51fbf883e6`.
+- [ ] Era 4 completion offers explicit Neighborhood authorization without replay or auto-spend.
+- [ ] Neighborhood, nested Building, scratched core, civic face, lateral cyan routes, dim ordinary homes, generation/Reserve clusters, and ordinary-life remnants render correctly.
+- [ ] Six required requests and one vanity request are reachable; prepared requests fit approximately 10–25 minutes and City Data Center remains locked.
+- [ ] Forecast-only, Reserve-policy, routine-automation, and one-request-scheduling controls appear sequentially through the request route rather than all at once.
+- [ ] Operator controls remain contextual over the live Neighborhood and scroll by touch; Build, Upgrades, Reports, Settings, maintenance, request, offline, and report content also scroll.
+- [ ] `Limited` / `Modeled` / `Verified`, scheduled, throttled, blocked, and completed states are legible without relying on color.
+- [ ] Reserve presets/advanced ratios and safe throttle do not change the selected allocation mode; online/offline reports explain actions.
+- [ ] Routine automation handles only safe eligible service within its cap; strategic/capped/unaffordable actions stop for input.
+- [ ] Exactly one preauthorized request can start on return; cancellation, save/relaunch, completion boundary, cost, and reward are idempotent; no second request chains.
+- [ ] Background during a prepared request for representative 10–25 minute intervals produces one truthful bounded return report; two-hour cap/80% efficiency and clock guards remain correct.
+- [ ] Default, 115%, and 130% text, physical safe areas, gesture/navigation insets, and 48 dp frequent controls remain comfortable without horizontal clipping.
+- [ ] Android Back closes modal, then operator drawer, then returns a secondary tab to Grid, then exits from Grid.
+- [ ] Brownout and capstone pullback avoid rapid flashing; reduced motion retains labels/state changes; muted audio loses no meaning.
+- [ ] Audible relay/schedule/automation/pullback cues are comfortable; audio focus and haptics follow Settings.
+- [ ] Force-close/relaunch and warm resume preserve policy, schedule, maintenance history, action order, request progress, and rewards without duplication.
+- [ ] Record manufacturer/model, Android/API, display/density/effective UI, screenshots/video, FPS/memory, and representative 30-minute heat/battery notes.
+
+Current host result: clean export/static inspection passed. `./tools/android_device_smoke.sh` found no attached device and performed no installation. Every checkbox remains unverified under `ISSUE-011`; none is inferred from host captures.
+
 ## Phase 15 Building Network regression — Awaiting external device
 
 ### Artifact identity
