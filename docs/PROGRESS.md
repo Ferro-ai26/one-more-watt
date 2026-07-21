@@ -21,11 +21,19 @@
 | 14 — Visual, Mobile, and Accessibility QA | Closed — approved with targeted revisions | DEC-033; host baseline green; content expansion GO; device-only gaps accepted/deferred; ISSUE-004 not fixed |
 | 15 — Building Network: Era 4 | Complete — accepted device-verification limitation | DEC-034–036; complete Era 4 route, 113 Phase 15 checks, seven reviewed captures, clean APK `c82563de…63e6`; unavailable physical matrix retained as unverified |
 | 16 — Neighborhood Microgrid: Era 5 | Complete — accepted physical-device verification limitation | DEC-037–039; 110 domain + 23 headless UI + 39 capture checks; eight reviewed captures; exact physical matrix remains unchecked/deferred |
-| G01 — Core Gameplay and Fun Validation | Ready — Awaiting Explicit Authorization | Inserted under DEC-040; first 30–60-minute fun/decision gate over Eras 1–5; no gameplay work begun |
+| G01 — Core Gameplay and Fun Validation | Active — Baseline Evidence Checkpoint | DEC-041; minimal local recorder and isolated profile implemented; host regression green; informed Android baseline still pending |
 | 17 — City Data Center and First Prestige: Era 6 | Future — Not Authorized | Preserved contract; final base-v1 content era, City idle transition, and first complete Model Retraining/Prestige loop |
 | 18–26 — Checkpoints, post-launch expansions, and release | Gated | Phase 18 is the base-v1 Android/retention checkpoint; Eras 7–16 in Phases 19–21 are post-launch; every contract remains preserved and separately authorized |
 
 ## Chronological log
+
+### 2026-07-21 — G01 baseline evidence checkpoint implemented on host
+
+- Recorded G01 authorization and its corrected evidence boundary under `DEC-041`: objective actions are not labeled meaningful, inactivity is not interpreted as boredom, informed self-play is not fresh-player evidence, evidence-supported tuning may follow baseline review, and the practical external target is three unfamiliar-player sessions across more than one device or an explicit accepted limitation.
+- Added a separately flagged G01 debug mode while leaving normal debug onboarding unchanged. G01 creates only `user://g01_playtests/<session_id>/`, uses an isolated format-2 save, and records complete/compact/human summaries locally with no network permission or production analytics.
+- Added factual event/timing aggregation through the central `GameSession` signal plus centralized report/maintenance/lifecycle boundaries. The record distinguishes foreground interaction gaps, forced stalls, report/dialogue viewing, unknown inactivity, and background/offline time, with 10/30/60-minute mechanical snapshots.
+- Added the deterministic baseline audit, category matrix, evidence protocol, and structured 10/30/60-minute observation worksheet. No balance, dialogue, gameplay mechanic, content, production art, Era 6, or Prestige data changed.
+- Added 32 recorder/profile checks and 10 G01 UI checks. The complete repository regression and headless launch pass, including 36 Android-config checks and all prior Phase 16 suites. The G01 Android APK and user session remain pending at this point in the record.
 
 ### 2026-07-21 — Phase 16 closed accurately; Gameplay Gate G01 inserted
 

@@ -16,6 +16,14 @@ The full validation entry point also checks the permanent package name, version,
 
 When a physical Android device is attached, run `./tools/android_device_smoke.sh` for the non-destructive install/launch/memory preflight, then complete `docs/ANDROID_DEVICE_TEST.md` manually.
 
+Gameplay Gate G01's temporary debug recorder and isolated playtest profile run with:
+
+```bash
+./tools/test_g01.sh
+```
+
+After committing the G01 checkpoint, export the separately flagged local-evidence APK with `./tools/build_g01_android_debug.sh`. The normal `Android Debug` preset and onboarding remain unchanged.
+
 Set `GODOT_BIN` when the executable is not named `godot`. The command imports and parses the project, validates the foundation and content configuration, runs valid and invalid content fixtures, exercises the shell at 320 × 568, 360 × 640, 393 × 873, 480 × 800, and the 720 × 1280 reference, and launches the main scene in smoke-test mode.
 
 Run only deterministic content validation with:

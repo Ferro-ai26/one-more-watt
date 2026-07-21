@@ -2,6 +2,26 @@
 
 Record build identifier, device/platform, tester, date, and notes for every formal pass.
 
+## G01 baseline instrumentation host pass — 2026-07-21
+
+- Build/commit: working tree before clean G01 artifact commit/export
+- Platform/device: Ubuntu 24.04 ARM64 VPS; Godot headless; no attached Android device
+- Godot version: 4.6.2.stable.official.71f334935
+- Tester: Codex
+- [x] Normal debug launch path remains unchanged; G01 requires its explicit export feature/test flag.
+- [x] G01 consent initializes no save manager; explicit start creates only an isolated `user://g01_playtests/<session_id>/save` manager.
+- [x] An ordinary-save sentinel remains byte-for-byte unchanged across isolated recorder start, resume, finalization, and active-pointer removal.
+- [x] Complete local JSON, compact JSON at or below 8 KiB, and human-readable summary write successfully.
+- [x] Objective purchases, authorizations, allocation changes, report views, and maintenance deferral record without a “meaningful” label.
+- [x] Foreground interaction gaps, system-imposed forced stalls, report/dialogue viewing, unknown inactivity, background/offline time, and the ten-minute snapshot remain distinct.
+- [x] 32 recorder/profile checks and 10 isolated G01 UI checks pass.
+- [x] Complete repository regression and headless launch pass; all existing Eras 1–5 gameplay/save/layout behavior remains green.
+- [ ] Clean G01 APK export and static inspection recorded.
+- [ ] User Android 60-minute informed self-play or honest early stop, 10/30/60-minute worksheet, optional first-10–15-minute recording, compact summary, and human-readable summary returned.
+- [ ] Unfamiliar-player sessions. None occurred; informed self-play will not be relabeled.
+
+Result: temporary instrumentation and isolation pass on the host. No Android execution, player-experience conclusion, or tuning authorization is claimed yet.
+
 ## Phase 16 Neighborhood Microgrid host pass — 2026-07-21
 
 - Build/commit: `cc51fbf883e6c50dbe2e2229b103693d69270a78`; APK build ID `cc51fbf883e6`

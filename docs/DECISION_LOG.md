@@ -306,6 +306,14 @@ Accepted decisions are authoritative. New entries must not silently overwrite ol
 - Reason: The completed Eras 1–5 need dedicated evidence that their first 30–60 minutes are varied, decision-rich, understandable, and fun before additional era production. A focused gate reduces the risk of carrying “buy the highlighted stat and wait” play into the City idle transition, while Era 6 plus first Prestige forms a coherent base-v1 capstone.
 - Consequences: G01 becomes the active control gate with status Ready — Awaiting Explicit Authorization. Phase 17 remains numbered and preserved as the future Era 6 implementation phase, but cannot begin until G01 records an explicit proceed/revise/stop decision and the user separately authorizes Phase 17. Existing Phase 18–26 contracts are neither renumbered nor overwritten. Phase 18 supplies the base-v1 Android/retention checkpoint; Phase 22–26 release work is interpreted against the applicable Eras 1–6 base-v1 scope; and Phase 19–21 remain preserved for a separately approved post-launch schedule. No gameplay change is authorized by this documentation decision alone.
 
+## DEC-041 — Authorize a minimal G01 baseline-evidence checkpoint
+
+- Status: Accepted
+- Date: 2026-07-21
+- Decision: Authorize G01 over the implemented Eras 1–5 baseline. Begin with a temporary debug-only local recorder, an isolated playtest save, deterministic audits, a structured worksheet, and a separately flagged G01 APK. Record only objective actions and distinct timing categories; subjective meaning, agency, confusion, and boredom belong to observation. Use the user's informed 60-minute self-play as baseline evidence, then stop and propose the five highest-priority gameplay problems and the next controlled tuning checkpoint. Target at least three unfamiliar-player sessions across more than one device when reasonably obtainable; otherwise require an explicit accepted evidence limitation.
+- Reason: The project needs experience evidence before tuning, but a broad analytics framework or a fabricated five-session hard gate would add unnecessary scope and misstate what automated data can prove.
+- Consequences: G01 becomes Active — Baseline Evidence Checkpoint. Normal debug onboarding and normal format-2 saves remain unchanged. G01 uses only `user://g01_playtests/<session_id>/`, content stays `0.10.0`, and no balance, dialogue, mechanic, production-art, Era 6, or Prestige change is authorized in this checkpoint. Informed self-play is never fresh-player evidence. Evidence-supported tuning may be proposed after baseline review, while the final proceed/revise/stop decision remains separately gated and Phase 17 remains unauthorized.
+
 ## Proposed decision template
 
 ```markdown

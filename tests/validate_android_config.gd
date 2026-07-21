@@ -2,6 +2,8 @@ extends SceneTree
 
 const PRESET := "preset.0"
 const OPTIONS := "preset.0.options"
+const G01_PRESET := "preset.1"
+const G01_OPTIONS := "preset.1.options"
 const PACKAGE_ID := "com.ferroai.onemorewatt"
 
 var _failures: Array[String] = []
@@ -16,7 +18,7 @@ func _init() -> void:
 		_finish()
 		return
 
-	_check_equal("single prototype preset", config.get_sections().size(), 2)
+	_check_equal("normal and G01 debug presets", config.get_sections().size(), 4)
 	_check_equal("preset name", config.get_value(PRESET, "name"), "Android Debug")
 	_check_equal("preset platform", config.get_value(PRESET, "platform"), "Android")
 	_check_equal("preset is runnable", config.get_value(PRESET, "runnable"), true)
@@ -39,6 +41,18 @@ func _init() -> void:
 	_check_equal("release keystore absent", config.get_value(OPTIONS, "keystore/release", ""), "")
 	_check_true("tests excluded from APK", "tests/*" in str(config.get_value(PRESET, "exclude_filter")))
 	_check_true("tools excluded from APK", "tools/*" in str(config.get_value(PRESET, "exclude_filter")))
+	_check_equal("G01 preset name", config.get_value(G01_PRESET, "name"), "Android G01 Debug")
+	_check_equal("G01 preset is not the normal runnable preset", config.get_value(G01_PRESET, "runnable"), false)
+	_check_equal("G01 feature is explicit", config.get_value(G01_PRESET, "custom_features"), "g01_playtest")
+	_check_equal("G01 export path", config.get_value(G01_PRESET, "export_path"), "build/android/one_more_watt_g01_debug.apk")
+	_check_equal("G01 package identifier", config.get_value(G01_OPTIONS, "package/unique_name"), PACKAGE_ID)
+	_check_equal("G01 version code", config.get_value(G01_OPTIONS, "version/code"), 10)
+	_check_equal("G01 version name", config.get_value(G01_OPTIONS, "version/name"), ProjectSettings.get_setting("application/config/version"))
+	_check_equal("G01 arm64 included", config.get_value(G01_OPTIONS, "architectures/arm64-v8a"), true)
+	_check_equal("G01 x86_64 included", config.get_value(G01_OPTIONS, "architectures/x86_64"), true)
+	_check_equal("G01 Internet permission excluded", config.get_value(G01_OPTIONS, "permissions/internet"), false)
+	_check_equal("G01 network-state permission excluded", config.get_value(G01_OPTIONS, "permissions/access_network_state"), false)
+	_check_true("G01 tests excluded from APK", "tests/*" in str(config.get_value(G01_PRESET, "exclude_filter")))
 	_finish()
 
 

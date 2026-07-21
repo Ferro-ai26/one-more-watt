@@ -26,6 +26,7 @@ GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_persistence.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_vertical_slice.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_phase15_building.sh"
 GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_phase16_neighborhood.sh"
+GODOT_BIN="$GODOT_EXECUTABLE" "$PROJECT_ROOT/tools/test_g01.sh"
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_portrait_layout.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_grid_debug_panel.gd
 "$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --script res://tests/integration/test_request_debug_panel.gd

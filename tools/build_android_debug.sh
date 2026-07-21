@@ -5,7 +5,10 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 GODOT_EXECUTABLE="${GODOT_EXECUTABLE:-godot4}"
 OMW_ANDROID_SDK_ROOT="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-/home/ubuntu/.local/share/android-sdk}}"
 OMW_BUILD_ROOT="$PROJECT_ROOT/build/android"
-OMW_APK_PATH="$OMW_BUILD_ROOT/one_more_watt_phase16_debug.apk"
+OMW_EXPORT_PRESET="${OMW_EXPORT_PRESET:-Android Debug}"
+OMW_BUILD_LABEL="${OMW_BUILD_LABEL:-Phase 16}"
+OMW_APK_PATH="${OMW_APK_PATH:-$OMW_BUILD_ROOT/one_more_watt_phase16_debug.apk}"
+OMW_EXPECT_G01_FEATURE="${OMW_EXPECT_G01_FEATURE:-0}"
 OMW_EXPORT_LOG="$OMW_BUILD_ROOT/export.log"
 OMW_MANIFEST="$OMW_BUILD_ROOT/build_manifest.txt"
 OMW_PROJECT_FILE="$PROJECT_ROOT/project.godot"
@@ -47,7 +50,7 @@ trap restore_project_file EXIT
 sed -i "s/config\/build_commit=\"[^\"]*\"/config\/build_commit=\"$OMW_COMMIT_SHORT\"/" "$OMW_PROJECT_FILE"
 
 {
-	echo "ONE MORE WATT Phase 16 Android debug export"
+	echo "ONE MORE WATT $OMW_BUILD_LABEL Android debug export"
 	echo "UTC: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 	echo "Commit: $OMW_COMMIT"
 	echo "Godot: $($GODOT_EXECUTABLE --version)"
@@ -56,7 +59,7 @@ sed -i "s/config\/build_commit=\"[^\"]*\"/config\/build_commit=\"$OMW_COMMIT_SHO
 	echo "Inspection apksigner: $($OMW_APKSIGNER version 2>&1)"
 } | tee "$OMW_EXPORT_LOG"
 
-"$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --export-debug "Android Debug" "$OMW_APK_PATH" 2>&1 | tee -a "$OMW_EXPORT_LOG"
+"$GODOT_EXECUTABLE" --headless --path "$PROJECT_ROOT" --export-debug "$OMW_EXPORT_PRESET" "$OMW_APK_PATH" 2>&1 | tee -a "$OMW_EXPORT_LOG"
 
 if grep -q '^ERROR:' "$OMW_EXPORT_LOG"; then
 	echo "Godot reported an export error; refusing to accept the APK." >&2
@@ -101,6 +104,11 @@ if ! unzip -p "$OMW_APK_PATH" assets/project.binary | strings | grep -qx "$OMW_C
 	exit 1
 fi
 
+if [[ "$OMW_EXPECT_G01_FEATURE" == "1" ]] && ! unzip -p "$OMW_APK_PATH" assets/project.binary | strings | grep -q "g01_playtest"; then
+	echo "Exported G01 APK does not contain the required playtest feature." >&2
+	exit 1
+fi
+
 "$OMW_APKSIGNER" verify --verbose --print-certs "$OMW_APK_PATH" | tee -a "$OMW_EXPORT_LOG"
 OMW_SHA256="$(sha256sum "$OMW_APK_PATH" | awk '{print $1}')"
 OMW_SIZE="$(stat -c '%s' "$OMW_APK_PATH")"
@@ -111,6 +119,8 @@ OMW_SIZE="$(stat -c '%s' "$OMW_APK_PATH")"
 	echo "bytes=$OMW_SIZE"
 	echo "commit=$OMW_COMMIT"
 	echo "build_identifier=$OMW_COMMIT_SHORT"
+	echo "export_preset=$OMW_EXPORT_PRESET"
+	echo "g01_playtest=$OMW_EXPECT_G01_FEATURE"
 	echo "package=$OMW_PACKAGE"
 	echo "permissions=android.permission.VIBRATE"
 	echo "architectures=arm64-v8a,x86_64"

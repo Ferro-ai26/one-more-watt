@@ -50,9 +50,13 @@ var feedback_audio: FeedbackAudio
 var ui_scale_diagnostics: Dictionary = {}
 var operator_controls_button: Button
 var _operator_drawer_open := false
+var g01_profile: G01PlaytestProfile
+var g01_recorder: G01SessionRecorder
+var _g01_mode := false
 
 
 func _ready() -> void:
+	_g01_mode = G01PlaytestProfile.feature_enabled()
 	ui_scale_diagnostics = MobileUIScaler.apply_to_window(get_window())
 	_build_interface()
 	resized.connect(_apply_responsive_layout)
@@ -69,22 +73,25 @@ func _ready() -> void:
 		return
 	var bootstrap_result: Dictionary = {"ok": true, "status": "disabled"}
 	var persistence_disabled := bool(ProjectSettings.get_setting("one_more_watt/testing/disable_persistence", false)) or "--smoke-test" in OS.get_cmdline_user_args()
-	if not persistence_disabled:
+	if not persistence_disabled and not _g01_mode:
 		persistence = PersistenceController.new()
 		persistence.configure(session, SaveManager.new("user://", repository.get_content_version()))
 		bootstrap_result = persistence.bootstrap(int(Time.get_unix_time_from_system()))
 	view_model = MainViewModel.new(session)
 	_apply_text_scale()
-	session.feedback.feedback_requested.connect(_on_feedback)
+	_connect_session_feedback()
 	select_tab("grid")
 	_refresh_all(true)
-	if bootstrap_result.get("status") == "corrupt_all":
+	if _g01_mode:
+		g01_profile = G01PlaytestProfile.new(str(ProjectSettings.get_setting("one_more_watt/testing/g01_root", G01PlaytestProfile.DEFAULT_ROOT)))
+		call_deferred("_open_g01_start_modal")
+	elif bootstrap_result.get("status") == "corrupt_all":
 		call_deferred("_open_corrupt_save_modal")
 	elif bootstrap_result.get("offline_report") is OfflineReport:
 		var recovery_note := "Recovered from %s." % persistence.last_load_result.source if bool(bootstrap_result.get("recovered", false)) else ""
 		call_deferred("open_offline_report", bootstrap_result["offline_report"], recovery_note)
-	set_process(true)
-	print("ONE MORE WATT Phase 16 Neighborhood Microgrid build ready")
+	set_process(not _g01_mode)
+	print("ONE MORE WATT G01 playtest build ready" if _g01_mode else "ONE MORE WATT Phase 16 Neighborhood Microgrid build ready")
 	if "--smoke-test" in OS.get_cmdline_user_args():
 		get_tree().quit(0)
 
@@ -104,6 +111,8 @@ func _process(delta: float) -> void:
 		_refresh_all(false)
 	if persistence != null:
 		persistence.tick(delta, int(Time.get_unix_time_from_system()))
+	if g01_recorder != null:
+		g01_recorder.tick(delta, navigation.top_modal())
 	if not session.last_report_id.is_empty() and session.last_report_id != _last_report_modal_id and navigation.modal_depth() == 0:
 		open_report_modal(session.last_report_id)
 	elif not session.economy.state.pending_era_transition_id.is_empty() and session.economy.state.pending_era_transition_id != _last_era_transition_modal_id and navigation.modal_depth() == 0:
@@ -203,6 +212,8 @@ func open_report_modal(request_id: String) -> void:
 	var report := session.requests.get_report(request_id)
 	if report == null:
 		return
+	if g01_recorder != null:
+		g01_recorder.record_report_view(request_id)
 	_last_report_modal_id = request_id
 	_open_modal("performance_report", "OPERATOR PERFORMANCE REPORT")
 	var data := view_model.report_snapshot(report)
@@ -304,6 +315,18 @@ func open_settings_modal() -> void:
 			diagnostic.text = "%s • save %d • main %s • B1 %s • B2 %s" % [build_text, details["sequence"], details["main_exists"], details["backup_1_exists"], details["backup_2_exists"]]
 	)
 	modal_content.add_child(diagnostic)
+	if _g01_mode and g01_recorder != null:
+		_add_modal_label("G01 LOCAL PLAYTEST  •  %s\n%s foreground" % [g01_recorder.status.to_upper(), NumberFormatter.format_duration(g01_recorder.foreground_seconds)], 15, SkinTokens.COLOR_WATT_REBOOT)
+		var compact := _button("Copy compact G01 summary", "G01CopyCompactButton")
+		compact.pressed.connect(_copy_g01_compact.bind(compact))
+		modal_content.add_child(compact)
+		var human := _button("Show human-readable G01 summary", "G01HumanSummaryButton")
+		human.pressed.connect(_open_g01_human_summary)
+		modal_content.add_child(human)
+		if g01_recorder.status == "active":
+			var finalize := _button("Finalize G01 session", "G01FinalizeButton")
+			finalize.pressed.connect(_open_g01_finalize_modal)
+			modal_content.add_child(finalize)
 	if bool(ui_scale_diagnostics.get("applied", false)):
 		var logical_size: Vector2 = ui_scale_diagnostics.get("effective_logical_size", Vector2.ZERO)
 		_add_modal_label("DISPLAY %d×%d px  •  %d dpi\nEFFECTIVE UI %d×%d  •  SCALE %.2f×" % [
@@ -320,6 +343,9 @@ func open_settings_modal() -> void:
 
 
 func close_top_modal() -> void:
+	var closing_id := navigation.top_modal()
+	if closing_id == "maintenance_choice" and g01_recorder != null and session.has_pending_maintenance():
+		g01_recorder.record_maintenance_deferral(session.economy.state.pending_maintenance_id)
 	if navigation.pop_modal().is_empty():
 		return
 	modal_overlay.visible = false
@@ -1229,11 +1255,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func _notification(what: int) -> void:
 	var now := int(Time.get_unix_time_from_system())
 	if what == NOTIFICATION_APPLICATION_PAUSED:
+		if g01_recorder != null:
+			g01_recorder.background()
 		if feedback_audio != null:
 			feedback_audio.set_application_paused(true)
 		if persistence != null:
 			persistence.background(now)
 	elif what == NOTIFICATION_APPLICATION_RESUMED:
+		if g01_recorder != null:
+			g01_recorder.foreground()
 		if feedback_audio != null:
 			feedback_audio.set_application_paused(false)
 		if persistence != null:
@@ -1243,10 +1273,111 @@ func _notification(what: int) -> void:
 			return
 		if persistence != null:
 			persistence.save_now("android_back_exit", now)
+		if g01_recorder != null:
+			g01_recorder.write_record()
 		get_tree().quit()
 	elif what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if persistence != null:
 			persistence.save_now("clean_quit", now)
+		if g01_recorder != null:
+			g01_recorder.write_record()
+
+
+func _open_g01_start_modal() -> void:
+	_open_modal("g01_start", "G01 LOCAL PLAYTEST")
+	_add_modal_label("This debug build records objective gameplay events locally. It uses an isolated save and never opens the normal game save.", 18, SkinTokens.COLOR_IVORY)
+	_add_modal_label("Timing begins only after you explicitly start or resume. No network analytics or personal notes are collected.", 16, SkinTokens.COLOR_IVORY_DIM)
+	var active_id := g01_profile.active_session_id()
+	if not active_id.is_empty():
+		var resume_button := _button("Resume isolated G01 session", "G01ResumeButton")
+		resume_button.pressed.connect(_start_g01_session.bind(true))
+		modal_content.add_child(resume_button)
+	var fresh_button := _button("Begin fresh isolated G01 session", "G01BeginButton")
+	fresh_button.pressed.connect(_start_g01_session.bind(false))
+	modal_content.add_child(fresh_button)
+	_apply_text_scale()
+
+
+func _start_g01_session(resume_existing: bool) -> void:
+	var session_id := g01_profile.active_session_id() if resume_existing else g01_profile.create_fresh_session()
+	if session_id.is_empty():
+		return
+	var content_db := get_node_or_null("/root/ContentDB")
+	if content_db == null:
+		return
+	var repository: ContentRepository = content_db.get("repository")
+	var replacement := GameSession.new()
+	if not replacement.configure(repository):
+		return
+	session = replacement
+	persistence = PersistenceController.new()
+	persistence.configure(session, SaveManager.new(g01_profile.save_root(session_id), repository.get_content_version()))
+	var bootstrap_result := persistence.bootstrap(int(Time.get_unix_time_from_system()))
+	if not bool(bootstrap_result.get("ok", false)):
+		return
+	view_model = MainViewModel.new(session)
+	_connect_session_feedback()
+	g01_recorder = G01SessionRecorder.new()
+	var recorder_ready := g01_recorder.resume(session, session_id, g01_profile.session_root(session_id)) if resume_existing else g01_recorder.start_new(session, session_id, g01_profile.session_root(session_id))
+	if not recorder_ready:
+		g01_recorder = null
+		return
+	close_top_modal()
+	select_tab("grid")
+	_refresh_all(true)
+	set_process(true)
+	if bootstrap_result.get("offline_report") is OfflineReport:
+		call_deferred("open_offline_report", bootstrap_result["offline_report"], "Resumed isolated G01 profile.")
+
+
+func _connect_session_feedback() -> void:
+	if not session.feedback.feedback_requested.is_connected(_on_feedback):
+		session.feedback.feedback_requested.connect(_on_feedback)
+
+
+func _copy_g01_compact(button: Button = null) -> void:
+	if g01_recorder == null:
+		return
+	var compact := g01_recorder.compact_summary()
+	DisplayServer.clipboard_set(compact)
+	if button != null:
+		button.text = "Copied %d-byte G01 summary" % compact.to_utf8_buffer().size()
+
+
+func _open_g01_human_summary() -> void:
+	if g01_recorder == null:
+		return
+	_open_modal("g01_human_summary", "G01 HUMAN-READABLE SUMMARY")
+	_add_modal_label(g01_recorder.human_summary(), 16, SkinTokens.COLOR_IVORY)
+	var copy := _button("Copy compact JSON", "G01SummaryCopyButton")
+	copy.pressed.connect(_copy_g01_compact.bind(copy))
+	modal_content.add_child(copy)
+	_add_modal_back_button("Close Summary")
+	_apply_text_scale()
+
+
+func _open_g01_finalize_modal() -> void:
+	if g01_recorder == null or g01_recorder.status != "active":
+		return
+	_open_modal("g01_finalize", "FINALIZE G01 SESSION")
+	_add_modal_label("Finalize after 60 minutes, or stop honestly whenever you no longer want to continue. An early stop is evidence, not a failure.", 17, SkinTokens.COLOR_IVORY)
+	var confirm := _button("Finalize and stop recording", "G01FinalizeConfirmButton")
+	confirm.pressed.connect(_finalize_g01_session)
+	modal_content.add_child(confirm)
+	_add_modal_back_button("Continue Session")
+	_apply_text_scale()
+
+
+func _finalize_g01_session() -> void:
+	if g01_recorder == null:
+		return
+	if persistence != null:
+		persistence.save_now("g01_finalized", int(Time.get_unix_time_from_system()))
+	if not g01_recorder.finalize():
+		return
+	g01_profile.clear_active(g01_recorder.session_id)
+	set_process(false)
+	_open_g01_human_summary()
 
 
 func _settings_changed() -> void:

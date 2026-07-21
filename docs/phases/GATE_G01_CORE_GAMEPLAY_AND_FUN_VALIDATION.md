@@ -1,6 +1,6 @@
 # Gameplay Gate G01 — Core Gameplay and Fun Validation
 
-Status: Ready — Awaiting Explicit Authorization
+Status: Active — Baseline Evidence Checkpoint
 
 ## Purpose
 
@@ -23,9 +23,9 @@ Improve and validate the first 30–60 minutes so the player makes legible prepa
 
 ### Baseline observation and measurement
 
-- Define a local, privacy-preserving session log or manual observation sheet for G01 evidence. Do not add remote analytics, accounts, or network services.
+- Define a minimal, debug-only, local, privacy-preserving session record plus manual observation sheet for G01 evidence. Reuse central session/simulation events; do not create production analytics or scatter invasive UI logging. Do not add remote analytics, accounts, or network services.
 - Measure time to first authorization, first purchase, allocation unlock, each early-era transition, first brownout, and the 30- and 60-minute marks.
-- Measure active decision count, uninterrupted waiting time, longest stall, purchase timing/category, limiting-resource history, allocation-mode changes and dwell time, Reserve use, request preparation, brownouts, recoveries, report views, and abandoned or deferred choices.
+- Record objective decision actions—purchases, upgrades, authorizations, allocation changes, maintenance choices/deferrals, report views, and relevant automation configuration—without labeling their count meaningful. Measure foreground interaction gaps, system-imposed forced stalls, report/dialogue viewing, unknown inactivity, background/offline time, purchase timing/category, limiting-resource history, allocation-mode changes and dwell time, Reserve use, request preparation, brownouts, and recoveries. Never infer boredom or perceived agency from inactivity telemetry.
 - Separate deterministic simulation evidence from observed fresh-player behavior. Never present a scripted route as player evidence.
 
 ### Mechanically distinct request categories
@@ -58,11 +58,11 @@ Category identity must come from mechanics, forecasts, decisions, and reports—
 
 ### Fresh-player validation
 
-- Run fresh-player sessions that begin without inherited saves, debug intervention, coaching through the intended answer, or prior knowledge of the optimal route.
-- Target at least five complete 30–60 minute sessions across more than one tester where practical. Record tester context, platform/device, session length, reached era/request, assistance given, and incomplete sessions truthfully.
+- Run unfamiliar-player sessions that begin without inherited saves, debug intervention, coaching through the intended answer, or prior knowledge of the optimal route. Keep informed developer/publisher self-play explicitly separate.
+- Target at least three unfamiliar-player 30–60 minute sessions across more than one device when reasonably obtainable. Record tester context, platform/device, session length, reached era/request, assistance given, and incomplete sessions truthfully.
 - Ask players what WATT wants, what is limiting progress, why they made their last purchase, what allocation mode does, how Reserve differs from Stored Energy, and whether they want to authorize the next request.
 - Record confusion, compelling moments, idle/wait frustration, perceived agency, strategy used, report usefulness, WATT appeal, and desire to continue.
-- If the minimum fresh-player evidence cannot be obtained, the gate cannot return `PROCEED`; it must return `REVISE` or `STOP` with the limitation disclosed.
+- Evidence-supported tuning may begin after the first informed baseline session is reviewed; it does not wait for external sessions. If unfamiliar-player evidence is unavailable, disclose the limitation and obtain an explicit user disposition before the final G01 decision. Never relabel informed self-play as fresh-player evidence.
 
 ## Required deliverables
 
@@ -88,7 +88,7 @@ Category identity must come from mechanics, forecasts, decisions, and reports—
 - [ ] Performance reports explain outcomes and support a useful next decision.
 - [ ] WATT reactions and the focused Eras 1–5 dialogue pass preserve the locked character/operator direction.
 - [ ] Pacing, stalls, waiting, purchases, Reserve use, and allocation behavior are recorded and analyzed.
-- [ ] At least five truthful fresh-player 30–60 minute sessions are recorded, or the gate explicitly cannot return `PROCEED`.
+- [ ] At least three truthful unfamiliar-player 30–60 minute sessions across more than one device are recorded where reasonably obtainable, or the user explicitly accepts the disclosed external-evidence limitation before the final decision.
 - [ ] Save/offline compatibility, deterministic simulation, accessibility layouts, headless launch, and the complete repository regression pass after any approved changes.
 - [ ] Contextual manual evidence is reviewed; any physical-device checks actually performed are recorded, and none are inferred.
 - [ ] An explicit user-approved `PROCEED`, `REVISE`, or `STOP` decision is recorded before Phase 17.
@@ -105,7 +105,7 @@ Category identity must come from mechanics, forecasts, decisions, and reports—
 
 ## Decision standard
 
-- **PROCEED:** The evidence supports the first 30–60 minutes as understandable, varied, and sufficiently engaging; remaining issues have accepted scope; Phase 17 may be proposed for separate explicit authorization.
+- **PROCEED:** The available evidence supports the first 30–60 minutes as understandable, varied, and sufficiently engaging; any unavailable external-evidence limitation is explicitly accepted; remaining issues have accepted scope; Phase 17 may be proposed for separate explicit authorization.
 - **REVISE:** The core has promise, but one or more acceptance criteria require another bounded G01 iteration. G01 remains active; Phase 17 stays prohibited.
 - **STOP:** Evidence does not justify further era production without a material product rethink. Record the reasons and do not begin Phase 17.
 
@@ -114,5 +114,5 @@ The recommendation is not phase authorization. Even a user-approved `PROCEED` re
 ## Stop conditions
 
 - Stop and request a product decision if a proposed mechanic would materially change the three-variable grid model, request lifecycle, player currency structure, save guarantees, human-operator role, or locked visual direction.
-- Stop if fresh-player evidence is unavailable rather than fabricating a fun/retention conclusion.
+- Stop for an explicit evidence-limitation disposition if unfamiliar-player evidence is unavailable rather than fabricating or relabeling a fun/retention conclusion.
 - Do not begin Phase 17, Era 6, Prestige, or any later phase during G01.

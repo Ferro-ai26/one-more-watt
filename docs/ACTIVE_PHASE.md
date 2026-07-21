@@ -1,7 +1,7 @@
 # Active Phase
 
 Gameplay Gate G01 — Core Gameplay and Fun Validation
-Status: Ready — Awaiting Explicit Authorization
+Status: Active — Baseline Evidence Checkpoint
 
 Authoritative gate contract:
 
@@ -15,7 +15,7 @@ Phase 16 is closed under `DEC-039`: Era 5 is implemented, validated on the host,
 
 `DEC-040` establishes City Data Center/Era 6 as the final content era of base game v1.0. Base v1.0 must include the City idle transition and the first complete Model Retraining/Prestige loop. Eras 7–16 remain preserved as post-launch expansion-sized updates.
 
-G01 is inserted before Phase 17 without renumbering or overwriting any existing Phase 17–26 contract. It is ready but not authorized. Do not make gameplay changes until the user explicitly authorizes G01. Do not begin Phase 17, Era 6, Prestige, Phase 18+, or post-launch content.
+G01 is inserted before Phase 17 without renumbering or overwriting any existing Phase 17–26 contract. The user authorized G01 and its minimal baseline-evidence checkpoint under `DEC-041`. The checkpoint may add only the local debug recorder, isolated playtest profile, audits, worksheet, documentation, proportional tests, and G01 APK. It must not change balance, dialogue, mechanics, production art, Era 6, or Prestige. Do not begin Phase 17, Era 6, Prestige, Phase 18+, or post-launch content.
 
 ## Inherited state
 

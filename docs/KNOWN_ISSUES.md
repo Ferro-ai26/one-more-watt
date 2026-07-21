@@ -18,6 +18,23 @@ Phase 15 host implementation, deterministic migration/save coverage, graphical l
 
 Phase 16 implementation, deterministic tuning, save/offline tests, full host regression, and eight contextual phone-resolution captures pass. The contract separately required a physical-phone pass, but no device was attached. Under `DEC-039`, the user accepted that disclosed limitation and closed Phase 16 without converting any hardware check into a pass. `ISSUE-011` is closed by accepted disposition and its unchecked matrix is deferred to the later combined Eras 1–6 Android QA gate.
 
+G01 is active with its local evidence build implemented on the host. No informed Android baseline or unfamiliar-player session has occurred yet, so gameplay quality, perceived agency, confusion, and continuation intent remain unmeasured under `ISSUE-012`.
+
+### ISSUE-012 — G01 observed gameplay evidence is pending
+
+- Status: Open — Evidence Dependency
+- Severity: Active-gate evidence dependency; no runtime defect currently reproduced
+- First seen build/commit: G01 baseline checkpoint, 2026-07-21
+- Affected phase: Gameplay Gate G01
+- Reproduction:
+  1. Review the current G01 evidence directory before the first Android session.
+  2. Observe deterministic route evidence and host recorder tests, but no completed player worksheet or returned session summary.
+- Expected: The user completes an informed 60-minute session or honest early stop with 10/30/60-minute observations; later, at least three unfamiliar-player sessions across more than one device are sought where reasonably obtainable.
+- Actual: Only deterministic and automated host evidence exists. It cannot establish fun, boredom, perceived agency, comprehension, or desire to continue.
+- Evidence/log: `docs/g01/BASELINE_AUDIT.md`, `docs/g01/EVIDENCE_PROTOCOL.md`, and `docs/g01/OBSERVATION_WORKSHEET.md`.
+- Workaround: None. Do not infer subjective conclusions from objective events or interaction gaps.
+- Fix verification: Review the returned informed baseline, produce exactly five evidence-backed priority problems and the next controlled tuning checkpoint, then gather unfamiliar-player evidence or obtain an explicit accepted limitation before the final G01 decision.
+
 ### ISSUE-011 — Phase 16 physical-phone gate is unavailable on the current host
 
 - Status: Closed — User Accepted Phase 16 Verification Limitation (`DEC-039`); Deferred to Later Full Android QA
